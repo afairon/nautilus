@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "./pb";
+
+enum AccountType {
+    ADMIN = 0;
+    AGENCY = 1;
+    DIVER = 2;
+}
+
+enum Level {
+    INSTRUCTOR = 0;
+    MASTER = 1;
+    RESCUE = 2;
+    ADVANCED = 3;
+    OPEN = 4;
+}
