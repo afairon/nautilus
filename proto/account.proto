@@ -11,6 +11,7 @@ option go_package = "./pb";
 
 service Account {
     rpc Create(AccountRequest) returns (google.protobuf.Empty);
+    rpc Login(LoginRequest) returns (google.protobuf.Empty);
 }
 
 message AccountRequest {
@@ -21,4 +22,9 @@ message AccountRequest {
     string email = 10;
     string username = 11;
     string password = 12;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
 }

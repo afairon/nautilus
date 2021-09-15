@@ -14,3 +14,7 @@ type AccountService struct{}
 func (s *AccountService) Create(ctx context.Context, req *pb.AccountRequest) (*empty.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "Create unimplemented")
 }
+
+func (s *AccountService) Login(ctx context.Context, req *pb.LoginRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "Login unimplemented")
+}
