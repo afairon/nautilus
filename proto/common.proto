@@ -17,3 +17,12 @@ enum Level {
     ADVANCED = 3;
     OPEN = 4;
 }
+
+message Address {
+    string country = 1;
+    string region = 2;
+    string city = 3;
+    string addres_line_1 = 4;
+    string addres_line_2 = 5;
+    string postal_code = 6;
+}
