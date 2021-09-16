@@ -25,4 +25,5 @@ func CreateGRPCServer() *grpc.Server {
 
 func registerServices(server *grpc.Server) {
 	pb.RegisterAccountServer(server, &service.AccountService{})
+	pb.RegisterAgencyServiceServer(server, &service.AgencyService{})
 }
