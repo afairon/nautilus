@@ -2,7 +2,6 @@ package server
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/afairon/nautilus/pb"
@@ -23,7 +22,7 @@ func CreateGRPCServer() *grpc.Server {
 	server := grpc.NewServer(opts...)
 
 	registerServices(server)
-	NewServer()
+	NewDB()
 
 	return server
 }
@@ -32,9 +31,9 @@ func registerServices(server *grpc.Server) {
 	pb.RegisterAccountServer(server, &service.AccountService{})
 }
 
-func NewServer() {
+func NewDB() {
 	const (
-		host     = "nautilus"
+		host     = "139.59.101.136"
 		port     = 5432
 		user     = "boss"
 		password = "IAmNewToLinux1@8259"
@@ -48,12 +47,11 @@ func NewServer() {
 	db, err := sql.Open("postgres", psqlInfo)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
-
 }
