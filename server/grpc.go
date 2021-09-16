@@ -5,6 +5,7 @@ import (
 
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
+	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
 )
 

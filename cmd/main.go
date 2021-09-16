@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/afairon/nautilus/db"
 	"github.com/afairon/nautilus/server"
 )
 
@@ -22,9 +23,33 @@ func main() {
 	flagHTTPAddr := flag.String("http_addr", "127.0.0.1", "http address to bind the server to")
 	flagHTTPPort := flag.Int("http_port", 8080, "http port to listen on")
 
+	flagPGHost := flag.String("pg_host", "127.0.0.1", "postgres host")
+	flagPGPort := flag.Int("pg_port", 5432, "postgres port")
+	flagPGUser := flag.String("pg_user", "", "the user to be connected to the database")
+	flagPGPassword := flag.String("pg_password", "", "the password of the user")
+	flagPGDBName := flag.String("pg_dbname", "", "the name of the database to be connected")
+
 	flag.Parse()
 
 	fmt.Printf("Nautilus Server\nCheckout: %s\nBuilt Time: %s\n", Checkout, Time)
+
+	if *flagPGUser == "" {
+		log.Fatal("error: postgres user not provided")
+	}
+
+	if *flagPGPassword == "" {
+		log.Fatal("error: postgres password not provided")
+	}
+
+	if *flagPGDBName == "" {
+		log.Fatal("error: postgres database name not provided")
+	}
+
+	err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
 	addr := fmt.Sprintf("%s:%d", *flagBindAddr, *flagGRPCPort)
 	lis, err := net.Listen("tcp", addr)
