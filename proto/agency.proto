@@ -5,12 +5,15 @@ package agency;
 import "common.proto";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "./pb";
 
 service AgencyService {
     rpc AddDiveMaster(AddDiveMasterRequest) returns (google.protobuf.Empty);
     rpc AddStaff(AddStaffRequest) returns (google.protobuf.Empty);
+    rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
+    rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
 }
 
 message Agency {
@@ -41,4 +44,20 @@ message Staff {
 message AddStaffRequest {
     Staff staff = 1;
     string agency_name = 2;
+}
+
+message TripTemplate {
+    string name = 1;
+    string description = 2;
+}
+
+message Trip {
+    int32 max_capacity = 1;
+    google.protobuf.Timestamp from = 2;
+    google.protobuf.Timestamp to = 3;
+}
+
+message AddTripTemplateRequest {
+    TripTemplate trip_template = 1;
+    string agency_name = 3;
 }
