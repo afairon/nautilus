@@ -11,6 +11,7 @@ import (
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -324,48 +325,259 @@ func (m *AddStaffRequest) GetAgencyName() string {
 	return ""
 }
 
+type TripTemplate struct {
+	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+}
+
+func (m *TripTemplate) Reset()      { *m = TripTemplate{} }
+func (*TripTemplate) ProtoMessage() {}
+func (*TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{5}
+}
+func (m *TripTemplate) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TripTemplate.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TripTemplate.Merge(m, src)
+}
+func (m *TripTemplate) XXX_Size() int {
+	return m.Size()
+}
+func (m *TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_TripTemplate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TripTemplate proto.InternalMessageInfo
+
+func (m *TripTemplate) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *TripTemplate) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+type Trip struct {
+	// google.protobuf.Timestamp from = 1;
+	// google.protobuf.Timestamp to = 2;
+	MaxCapacity     int32 `protobuf:"varint,3,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
+	PricePerPserson int32 `protobuf:"varint,4,opt,name=price_per_pserson,json=pricePerPserson,proto3" json:"price_per_pserson,omitempty"`
+}
+
+func (m *Trip) Reset()      { *m = Trip{} }
+func (*Trip) ProtoMessage() {}
+func (*Trip) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{6}
+}
+func (m *Trip) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Trip.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Trip) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Trip.Merge(m, src)
+}
+func (m *Trip) XXX_Size() int {
+	return m.Size()
+}
+func (m *Trip) XXX_DiscardUnknown() {
+	xxx_messageInfo_Trip.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Trip proto.InternalMessageInfo
+
+func (m *Trip) GetMaxCapacity() int32 {
+	if m != nil {
+		return m.MaxCapacity
+	}
+	return 0
+}
+
+func (m *Trip) GetPricePerPserson() int32 {
+	if m != nil {
+		return m.PricePerPserson
+	}
+	return 0
+}
+
+type AddTripTemplateRequest struct {
+	TripTemplate *TripTemplate `protobuf:"bytes,1,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+	AgencyName   string        `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddTripTemplateRequest) Reset()      { *m = AddTripTemplateRequest{} }
+func (*AddTripTemplateRequest) ProtoMessage() {}
+func (*AddTripTemplateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{7}
+}
+func (m *AddTripTemplateRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddTripTemplateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddTripTemplateRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddTripTemplateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTripTemplateRequest.Merge(m, src)
+}
+func (m *AddTripTemplateRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddTripTemplateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTripTemplateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTripTemplateRequest proto.InternalMessageInfo
+
+func (m *AddTripTemplateRequest) GetTripTemplate() *TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+func (m *AddTripTemplateRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddTripRequest struct {
+	Trip *Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+}
+
+func (m *AddTripRequest) Reset()      { *m = AddTripRequest{} }
+func (*AddTripRequest) ProtoMessage() {}
+func (*AddTripRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{8}
+}
+func (m *AddTripRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddTripRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddTripRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddTripRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTripRequest.Merge(m, src)
+}
+func (m *AddTripRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddTripRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTripRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTripRequest proto.InternalMessageInfo
+
+func (m *AddTripRequest) GetTrip() *Trip {
+	if m != nil {
+		return m.Trip
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Agency)(nil), "agency.Agency")
 	proto.RegisterType((*DiveMaster)(nil), "agency.DiveMaster")
 	proto.RegisterType((*AddDiveMasterRequest)(nil), "agency.AddDiveMasterRequest")
 	proto.RegisterType((*Staff)(nil), "agency.Staff")
 	proto.RegisterType((*AddStaffRequest)(nil), "agency.AddStaffRequest")
+	proto.RegisterType((*TripTemplate)(nil), "agency.TripTemplate")
+	proto.RegisterType((*Trip)(nil), "agency.Trip")
+	proto.RegisterType((*AddTripTemplateRequest)(nil), "agency.AddTripTemplateRequest")
+	proto.RegisterType((*AddTripRequest)(nil), "agency.AddTripRequest")
 }
 
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 472 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x92, 0x31, 0x6f, 0xd3, 0x40,
-	0x14, 0xc7, 0x7d, 0x90, 0x84, 0xe4, 0x39, 0xa1, 0xd2, 0x09, 0x81, 0x95, 0xc2, 0x51, 0xdc, 0xa5,
-	0x2c, 0x8e, 0x94, 0x6e, 0x30, 0xa5, 0xa2, 0x4c, 0xd0, 0xc1, 0x1d, 0x90, 0x58, 0xac, 0xb3, 0xef,
-	0x1c, 0x4c, 0x6d, 0x9f, 0xb1, 0x9d, 0x48, 0x6c, 0x7c, 0x04, 0x24, 0xbe, 0x04, 0x7c, 0x13, 0xc6,
-	0x8c, 0x1d, 0x89, 0xb3, 0x30, 0xf6, 0x23, 0xa0, 0xbb, 0xf3, 0x51, 0x23, 0x81, 0x18, 0xba, 0xf9,
-	0xfd, 0xfe, 0x77, 0xf7, 0x7f, 0xff, 0xe7, 0x07, 0x63, 0xba, 0xe4, 0x79, 0xf4, 0xd1, 0x2b, 0x4a,
-	0x51, 0x0b, 0x3c, 0xd0, 0xd5, 0x74, 0x1c, 0x89, 0x2c, 0x13, 0xb9, 0xa6, 0xd3, 0xfd, 0xa5, 0x10,
-	0xcb, 0x94, 0xcf, 0x54, 0x15, 0xae, 0xe2, 0x19, 0xcf, 0x8a, 0xba, 0xbd, 0xe2, 0xbe, 0x87, 0xc1,
-	0x42, 0x5d, 0xc2, 0x18, 0x7a, 0x39, 0xcd, 0xb8, 0x83, 0x0e, 0xd0, 0xd1, 0xc8, 0x57, 0xdf, 0xf8,
-	0x09, 0x8c, 0x8b, 0x77, 0x22, 0xe7, 0x41, 0xbe, 0xca, 0x42, 0x5e, 0x3a, 0xb7, 0x94, 0x66, 0x2b,
-	0x76, 0xa6, 0x10, 0x7e, 0x0a, 0x77, 0x28, 0x63, 0x25, 0xaf, 0x2a, 0xe7, 0xf6, 0x01, 0x3a, 0xb2,
-	0xe7, 0x7b, 0x5e, 0xeb, 0xbe, 0xd0, 0xd8, 0x37, 0xba, 0xfb, 0x0d, 0x01, 0xbc, 0x48, 0xd6, 0xfc,
-	0x35, 0xad, 0x6a, 0x5e, 0xe2, 0x47, 0x00, 0x71, 0x52, 0x56, 0x75, 0xd0, 0xb1, 0x1d, 0x29, 0x72,
-	0x26, 0xbd, 0xf7, 0x61, 0x94, 0x52, 0xa3, 0x6a, 0xe3, 0xa1, 0x04, 0x4a, 0x3c, 0x84, 0x7e, 0xca,
-	0xd7, 0x3c, 0x55, 0x9e, 0x77, 0xe7, 0x13, 0xe3, 0xf9, 0x4a, 0x42, 0x5f, 0x6b, 0xd2, 0x20, 0xa2,
-	0x25, 0x0b, 0xe2, 0x52, 0xe4, 0xb5, 0xd3, 0xd3, 0x06, 0x92, 0xbc, 0x94, 0x40, 0x1a, 0x28, 0x39,
-	0xa4, 0xd1, 0x85, 0xd3, 0xd7, 0x06, 0x12, 0x9c, 0xd0, 0xe8, 0xc2, 0x4d, 0xe1, 0xde, 0x82, 0xb1,
-	0xeb, 0x6e, 0x7d, 0xfe, 0x61, 0xc5, 0xab, 0x1a, 0x1f, 0x83, 0xcd, 0x92, 0x35, 0x0f, 0x32, 0x45,
-	0x55, 0xd7, 0xf6, 0x1c, 0x7b, 0xed, 0x6f, 0xe8, 0x9c, 0x07, 0x76, 0x9d, 0xf4, 0x31, 0xd8, 0xfa,
-	0x40, 0x37, 0x0c, 0x68, 0x24, 0xe3, 0xb8, 0x01, 0xf4, 0xcf, 0x6b, 0x1a, 0xc7, 0x37, 0x9a, 0xc9,
-	0x14, 0x86, 0x85, 0xa8, 0x92, 0x3a, 0x11, 0xb9, 0x1a, 0xcb, 0xc8, 0xff, 0x5d, 0xbb, 0x6f, 0x60,
-	0x6f, 0xc1, 0x98, 0xf2, 0x30, 0x49, 0x0e, 0xa1, 0x5f, 0xc9, 0xba, 0xcd, 0x30, 0x31, 0x19, 0xf4,
-	0x21, 0xad, 0xfd, 0xb7, 0xf3, 0xf9, 0x17, 0x04, 0x13, 0xbd, 0x40, 0xe7, 0xbc, 0x5c, 0x27, 0x11,
-	0xc7, 0xa7, 0x30, 0xf9, 0x63, 0x72, 0xf8, 0xa1, 0x79, 0xf9, 0x6f, 0x03, 0x9d, 0xde, 0xf7, 0xf4,
-	0x7a, 0x7a, 0x66, 0x3d, 0xbd, 0x53, 0xb9, 0x9e, 0xf8, 0x39, 0x0c, 0x4d, 0xc7, 0xf8, 0x41, 0xe7,
-	0x85, 0x6e, 0x86, 0x7f, 0x5d, 0x3e, 0x79, 0xb6, 0xd9, 0x12, 0xeb, 0x72, 0x4b, 0xac, 0xab, 0x2d,
-	0x41, 0x9f, 0x1a, 0x82, 0xbe, 0x36, 0x04, 0x7d, 0x6f, 0x08, 0xda, 0x34, 0x04, 0xfd, 0x68, 0x08,
-	0xfa, 0xd9, 0x10, 0xeb, 0xaa, 0x21, 0xe8, 0xf3, 0x8e, 0x58, 0x9b, 0x1d, 0xb1, 0x2e, 0x77, 0xc4,
-	0x7a, 0xdb, 0xf3, 0x66, 0x45, 0x18, 0x0e, 0xd4, 0x5b, 0xc7, 0xbf, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0xd3, 0xb4, 0x30, 0x5f, 0x5b, 0x03, 0x00, 0x00,
+	// 616 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0x4f, 0x4f, 0xd4, 0x40,
+	0x14, 0xdf, 0xea, 0x2e, 0xb2, 0xaf, 0xbb, 0x10, 0x27, 0x04, 0x37, 0x8b, 0x0e, 0x6b, 0xb9, 0xa0,
+	0x87, 0x92, 0x2c, 0x27, 0xf5, 0xb4, 0x08, 0x9e, 0x94, 0x90, 0x82, 0x31, 0xf1, 0xd2, 0xcc, 0xb6,
+	0x6f, 0xb1, 0xd2, 0x3f, 0xe3, 0x74, 0xd8, 0xc0, 0xcd, 0x8f, 0x60, 0xe2, 0x97, 0xd0, 0x6f, 0xe2,
+	0x91, 0x23, 0x47, 0xe9, 0x5e, 0x3c, 0xf2, 0x11, 0xcc, 0xcc, 0xb4, 0x52, 0x0c, 0x86, 0x83, 0xb7,
+	0xce, 0xef, 0xf7, 0xde, 0xfb, 0xbd, 0xdf, 0x9b, 0x37, 0x85, 0x0e, 0x3b, 0xc4, 0x34, 0x38, 0x75,
+	0xb9, 0xc8, 0x64, 0x46, 0xe6, 0xcc, 0xa9, 0xdf, 0x09, 0xb2, 0x24, 0xc9, 0x52, 0x83, 0xf6, 0x57,
+	0x0e, 0xb3, 0xec, 0x30, 0xc6, 0x0d, 0x7d, 0x1a, 0x1f, 0x4f, 0x36, 0x30, 0xe1, 0xb2, 0x4c, 0xe9,
+	0xaf, 0xfe, 0x4d, 0xca, 0x28, 0xc1, 0x5c, 0xb2, 0x84, 0x9b, 0x00, 0xe7, 0x23, 0xcc, 0x8d, 0x74,
+	0x55, 0x42, 0xa0, 0x99, 0xb2, 0x04, 0x7b, 0xd6, 0xc0, 0x5a, 0x6f, 0x7b, 0xfa, 0x9b, 0x3c, 0x86,
+	0x0e, 0xff, 0x90, 0xa5, 0xe8, 0xa7, 0xc7, 0xc9, 0x18, 0x45, 0xef, 0x8e, 0xe6, 0x6c, 0x8d, 0xed,
+	0x6a, 0x88, 0x3c, 0x81, 0x7b, 0x2c, 0x0c, 0x05, 0xe6, 0x79, 0xef, 0xee, 0xc0, 0x5a, 0xb7, 0x87,
+	0x8b, 0x6e, 0xd9, 0xde, 0xc8, 0xc0, 0x5e, 0xc5, 0x3b, 0xdf, 0x2d, 0x80, 0xed, 0x68, 0x8a, 0x6f,
+	0x58, 0x2e, 0x51, 0x90, 0x47, 0x00, 0x93, 0x48, 0xe4, 0xd2, 0xaf, 0xc9, 0xb6, 0x35, 0xb2, 0xab,
+	0xb4, 0x57, 0xa0, 0x1d, 0xb3, 0x8a, 0x35, 0xc2, 0xf3, 0x0a, 0xd0, 0xe4, 0x1a, 0xb4, 0x62, 0x9c,
+	0x62, 0xac, 0x35, 0x17, 0x86, 0xdd, 0x4a, 0xf3, 0xb5, 0x02, 0x3d, 0xc3, 0x29, 0x81, 0x80, 0x89,
+	0xd0, 0x9f, 0x88, 0x2c, 0x95, 0xbd, 0xa6, 0x11, 0x50, 0xc8, 0x2b, 0x05, 0x28, 0x01, 0x4d, 0x8f,
+	0x59, 0x70, 0xd4, 0x6b, 0x19, 0x01, 0x05, 0x6c, 0xb1, 0xe0, 0xc8, 0x89, 0x61, 0x69, 0x14, 0x86,
+	0x57, 0xdd, 0x7a, 0xf8, 0xe9, 0x18, 0x73, 0x49, 0x36, 0xc1, 0x0e, 0xa3, 0x29, 0xfa, 0x89, 0x46,
+	0x75, 0xd7, 0xf6, 0x90, 0xb8, 0xe5, 0x3d, 0xd5, 0xe2, 0x21, 0xbc, 0x72, 0xba, 0x0a, 0xb6, 0x09,
+	0xa8, 0x9b, 0x01, 0x03, 0x29, 0x3b, 0x8e, 0x0f, 0xad, 0x7d, 0xc9, 0x26, 0x93, 0xff, 0x9a, 0x49,
+	0x1f, 0xe6, 0x79, 0x96, 0x47, 0x32, 0xca, 0x52, 0x3d, 0x96, 0xb6, 0xf7, 0xe7, 0xec, 0xbc, 0x83,
+	0xc5, 0x51, 0x18, 0x6a, 0x8d, 0xca, 0xc9, 0x1a, 0xb4, 0x72, 0x75, 0x2e, 0x3d, 0x74, 0x2b, 0x0f,
+	0x26, 0xc8, 0x70, 0xb7, 0x77, 0xbe, 0x0d, 0x9d, 0x03, 0x11, 0xf1, 0x03, 0x4c, 0x78, 0xcc, 0x24,
+	0xde, 0xb8, 0x45, 0x03, 0xb0, 0x43, 0xcc, 0x03, 0x11, 0x71, 0xdd, 0x5b, 0xb9, 0x44, 0x35, 0xc8,
+	0x79, 0x0b, 0x4d, 0x55, 0x45, 0xed, 0x5b, 0xc2, 0x4e, 0xfc, 0x80, 0x71, 0x16, 0x44, 0xf2, 0x54,
+	0xdb, 0x68, 0x79, 0x76, 0xc2, 0x4e, 0x5e, 0x96, 0x10, 0x79, 0x0a, 0xf7, 0xb9, 0x88, 0x02, 0xf4,
+	0x39, 0x0a, 0x9f, 0xe7, 0x28, 0xf2, 0x2c, 0xd5, 0x77, 0xdb, 0xf2, 0x16, 0x35, 0xb1, 0x87, 0x62,
+	0xcf, 0xc0, 0x8e, 0x84, 0xe5, 0x51, 0x18, 0xd6, 0xfb, 0xab, 0xcc, 0x3f, 0x83, 0xae, 0x14, 0x11,
+	0xf7, 0x65, 0x89, 0x97, 0x43, 0x58, 0xaa, 0x86, 0x70, 0x2d, 0xa7, 0x23, 0xeb, 0x0e, 0x6f, 0x1d,
+	0xc9, 0x10, 0x16, 0x4a, 0xd5, 0x4a, 0x6d, 0x00, 0x4d, 0x55, 0xa2, 0x14, 0xe9, 0xd4, 0x45, 0x3c,
+	0xcd, 0x0c, 0xbf, 0x5a, 0xd0, 0x35, 0xef, 0x70, 0x1f, 0xc5, 0x34, 0x0a, 0x90, 0xec, 0x40, 0xf7,
+	0xda, 0x02, 0x92, 0x87, 0x55, 0xda, 0x4d, 0x7b, 0xd9, 0x5f, 0x76, 0xcd, 0x4b, 0x77, 0xab, 0x97,
+	0xee, 0xee, 0xa8, 0xdf, 0x00, 0x79, 0x01, 0xf3, 0xd5, 0xc5, 0x93, 0x07, 0xb5, 0x0a, 0xf5, 0x55,
+	0xf8, 0x57, 0xf2, 0xd6, 0xf3, 0xb3, 0x0b, 0xda, 0x38, 0xbf, 0xa0, 0x8d, 0xcb, 0x0b, 0x6a, 0x7d,
+	0x2e, 0xa8, 0xf5, 0xad, 0xa0, 0xd6, 0x8f, 0x82, 0x5a, 0x67, 0x05, 0xb5, 0x7e, 0x16, 0xd4, 0xfa,
+	0x55, 0xd0, 0xc6, 0x65, 0x41, 0xad, 0x2f, 0x33, 0xda, 0x38, 0x9b, 0xd1, 0xc6, 0xf9, 0x8c, 0x36,
+	0xde, 0x37, 0xdd, 0x0d, 0x3e, 0x1e, 0xcf, 0xe9, 0x5a, 0x9b, 0xbf, 0x03, 0x00, 0x00, 0xff, 0xff,
+	0x6d, 0x93, 0xbc, 0xd7, 0xc3, 0x04, 0x00, 0x00,
 }
 
 func (this *Agency) Equal(that interface{}) bool {
@@ -518,6 +730,111 @@ func (this *AddStaffRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *TripTemplate) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*TripTemplate)
+	if !ok {
+		that2, ok := that.(TripTemplate)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Name != that1.Name {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	return true
+}
+func (this *Trip) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Trip)
+	if !ok {
+		that2, ok := that.(Trip)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.MaxCapacity != that1.MaxCapacity {
+		return false
+	}
+	if this.PricePerPserson != that1.PricePerPserson {
+		return false
+	}
+	return true
+}
+func (this *AddTripTemplateRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddTripTemplateRequest)
+	if !ok {
+		that2, ok := that.(AddTripTemplateRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddTripRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddTripRequest)
+	if !ok {
+		that2, ok := that.(AddTripRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Trip.Equal(that1.Trip) {
+		return false
+	}
+	return true
+}
 func (this *Agency) GoString() string {
 	if this == nil {
 		return "nil"
@@ -581,6 +898,53 @@ func (this *AddStaffRequest) GoString() string {
 		s = append(s, "Staff: "+fmt.Sprintf("%#v", this.Staff)+",\n")
 	}
 	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *TripTemplate) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.TripTemplate{")
+	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Trip) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.Trip{")
+	s = append(s, "MaxCapacity: "+fmt.Sprintf("%#v", this.MaxCapacity)+",\n")
+	s = append(s, "PricePerPserson: "+fmt.Sprintf("%#v", this.PricePerPserson)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddTripTemplateRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddTripTemplateRequest{")
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddTripRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.AddTripRequest{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -942,6 +1306,153 @@ func (m *AddStaffRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *TripTemplate) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Trip) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Trip) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.PricePerPserson != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.PricePerPserson))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.MaxCapacity != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.MaxCapacity))
+		i--
+		dAtA[i] = 0x18
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddTripTemplateRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddTripTemplateRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddTripTemplateRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddTripRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddTripRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddTripRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Trip != nil {
+		{
+			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintAgency(dAtA []byte, offset int, v uint64) int {
 	offset -= sovAgency(v)
 	base := offset
@@ -1057,6 +1568,68 @@ func (m *AddStaffRequest) Size() (n int) {
 	return n
 }
 
+func (m *TripTemplate) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *Trip) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.MaxCapacity != 0 {
+		n += 1 + sovAgency(uint64(m.MaxCapacity))
+	}
+	if m.PricePerPserson != 0 {
+		n += 1 + sovAgency(uint64(m.PricePerPserson))
+	}
+	return n
+}
+
+func (m *AddTripTemplateRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddTripRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Trip != nil {
+		l = m.Trip.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func sovAgency(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -1119,6 +1692,49 @@ func (this *AddStaffRequest) String() string {
 	s := strings.Join([]string{`&AddStaffRequest{`,
 		`Staff:` + strings.Replace(this.Staff.String(), "Staff", "Staff", 1) + `,`,
 		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TripTemplate) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TripTemplate{`,
+		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Trip) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Trip{`,
+		`MaxCapacity:` + fmt.Sprintf("%v", this.MaxCapacity) + `,`,
+		`PricePerPserson:` + fmt.Sprintf("%v", this.PricePerPserson) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddTripTemplateRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddTripTemplateRequest{`,
+		`TripTemplate:` + strings.Replace(this.TripTemplate.String(), "TripTemplate", "TripTemplate", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddTripRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddTripRequest{`,
+		`Trip:` + strings.Replace(this.Trip.String(), "Trip", "Trip", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1838,6 +2454,412 @@ func (m *AddStaffRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TripTemplate) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Trip) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxCapacity", wireType)
+			}
+			m.MaxCapacity = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxCapacity |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PricePerPserson", wireType)
+			}
+			m.PricePerPserson = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PricePerPserson |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddTripTemplateRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddTripTemplateRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddTripTemplateRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddTripRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddTripRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddTripRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Trip == nil {
+				m.Trip = &Trip{}
+			}
+			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

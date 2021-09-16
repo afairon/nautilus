@@ -7,10 +7,10 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -399,8 +399,8 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AccountClient interface {
-	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type accountClient struct {
@@ -411,8 +411,8 @@ func NewAccountClient(cc *grpc.ClientConn) AccountClient {
 	return &accountClient{cc}
 }
 
-func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/account.Account/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -420,8 +420,8 @@ func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...
 	return out, nil
 }
 
-func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/account.Account/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -431,18 +431,18 @@ func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 
 // AccountServer is the server API for Account service.
 type AccountServer interface {
-	Create(context.Context, *AccountRequest) (*empty.Empty, error)
-	Login(context.Context, *LoginRequest) (*empty.Empty, error)
+	Create(context.Context, *AccountRequest) (*emptypb.Empty, error)
+	Login(context.Context, *LoginRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedAccountServer can be embedded to have forward compatible implementations.
 type UnimplementedAccountServer struct {
 }
 
-func (*UnimplementedAccountServer) Create(ctx context.Context, req *AccountRequest) (*empty.Empty, error) {
+func (*UnimplementedAccountServer) Create(ctx context.Context, req *AccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (*UnimplementedAccountServer) Login(ctx context.Context, req *LoginRequest) (*empty.Empty, error) {
+func (*UnimplementedAccountServer) Login(ctx context.Context, req *LoginRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 

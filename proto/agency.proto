@@ -12,8 +12,8 @@ option go_package = "./pb";
 service AgencyService {
     rpc AddDiveMaster(AddDiveMasterRequest) returns (google.protobuf.Empty);
     rpc AddStaff(AddStaffRequest) returns (google.protobuf.Empty);
-    rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
-    rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
+    // rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
+    // rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
 }
 
 message Agency {
@@ -52,8 +52,8 @@ message TripTemplate {
 }
 
 message Trip {
-    google.protobuf.Timestamp from = 1;
-    google.protobuf.Timestamp to = 2;
+    // google.protobuf.Timestamp from = 1;
+    // google.protobuf.Timestamp to = 2;
     int32 max_capacity = 3;
     int32 price_per_pserson = 4;
 }
