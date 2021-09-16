@@ -6,8 +6,8 @@ import (
 	"log"
 	"net"
 
-	server "github.com/afairon/nautilus/server"
-	"github.com/afairon/nautilus/server/db"
+	"github.com/afairon/nautilus/db"
+	"github.com/afairon/nautilus/server"
 )
 
 var (
@@ -23,21 +23,32 @@ func main() {
 	flagHTTPAddr := flag.String("http_addr", "127.0.0.1", "http address to bind the server to")
 	flagHTTPPort := flag.Int("http_port", 8080, "http port to listen on")
 
-	flagDBHost := flag.String("db_host", "139.59.101.136", "database host")
-	flagDBPort := flag.Int("db_port", 5432, "port of database")
-	flagDBUser := flag.String("db_user", "boss", "the user to be connected to the database")
-	flagDBPassword := flag.String("db_password", "IAmNewToLinux1@8259", "the password of the user")
-	flagDBDBName := flag.String("db_name", "test", "the name of the database to be connected")
+	flagPGHost := flag.String("pg_host", "127.0.0.1", "postgres host")
+	flagPGPort := flag.Int("pg_port", 5432, "postgres port")
+	flagPGUser := flag.String("pg_user", "", "the user to be connected to the database")
+	flagPGPassword := flag.String("pg_password", "", "the password of the user")
+	flagPGDBName := flag.String("pg_dbname", "", "the name of the database to be connected")
 
 	flag.Parse()
 
 	fmt.Printf("Nautilus Server\nCheckout: %s\nBuilt Time: %s\n", Checkout, Time)
 
-	connStr := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=require",
-		*flagDBHost, *flagDBPort, *flagDBUser, *flagDBPassword, *flagDBDBName)
-	db := db.NewDB(connStr)
+	if *flagPGUser == "" {
+		log.Fatal("error: postgres user not provided")
+	}
 
+	if *flagPGPassword == "" {
+		log.Fatal("error: postgres password not provided")
+	}
+
+	if *flagPGDBName == "" {
+		log.Fatal("error: postgres database name not provided")
+	}
+
+	err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
+	if err != nil {
+		panic(err)
+	}
 	defer db.Close()
 
 	addr := fmt.Sprintf("%s:%d", *flagBindAddr, *flagGRPCPort)
