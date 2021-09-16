@@ -52,12 +52,17 @@ message TripTemplate {
 }
 
 message Trip {
-    int32 max_capacity = 1;
-    google.protobuf.Timestamp from = 2;
-    google.protobuf.Timestamp to = 3;
+    google.protobuf.Timestamp from = 1;
+    google.protobuf.Timestamp to = 2;
+    int32 max_capacity = 3;
+    int32 price_per_pserson = 4;
 }
 
 message AddTripTemplateRequest {
     TripTemplate trip_template = 1;
-    string agency_name = 3;
+    string agency_name = 2;
+}
+
+message AddTripRequest {
+    Trip trip = 1;
 }
