@@ -15,6 +15,14 @@ func (s *AgencyService) AddDiveMaster(ctx context.Context, req *pb.AddDiveMaster
 	return nil, status.Error(codes.Unimplemented, "AddDiveMaster unimplemented")
 }
 
-func (s *AgencyService) AddStaff(context.Context, *pb.AddStaffRequest) (*empty.Empty, error) {
+func (s *AgencyService) AddStaff(ctx context.Context, req *pb.AddStaffRequest) (*empty.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "AddStaff unimplemented")
+}
+
+func (s *AgencyService) AddTripTemplate(ctx context.Context, req *pb.AddTripTemplateRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
+}
+
+func (s *AgencyService) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
 }

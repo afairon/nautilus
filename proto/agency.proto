@@ -6,14 +6,15 @@ import "common.proto";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option go_package = "./pb";
 
 service AgencyService {
     rpc AddDiveMaster(AddDiveMasterRequest) returns (google.protobuf.Empty);
     rpc AddStaff(AddStaffRequest) returns (google.protobuf.Empty);
-    // rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
-    // rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
+    rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
+    rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
 }
 
 message Agency {
@@ -30,32 +31,38 @@ message DiveMaster {
     string card_back = 5;
 }
 
-message AddDiveMasterRequest {
-    DiveMaster dive_master = 1;
-    string agency_name = 2;
-}
-
 message Staff {
     string first_name = 1;
     string last_name = 2;
     string position = 3;
 }
 
-message AddStaffRequest {
-    Staff staff = 1;
-    string agency_name = 2;
+message DivingBoat {
+    string boat_model = 1;
+    bytes boat_image = 2;
+}
+
+message Trip {
+    google.protobuf.Timestamp from = 1 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
+    int32 max_capacity = 3;
+    int32 price_per_pserson = 4;
 }
 
 message TripTemplate {
     string name = 1;
     string description = 2;
+    DivingBoat diving_boat = 3;
 }
 
-message Trip {
-    // google.protobuf.Timestamp from = 1;
-    // google.protobuf.Timestamp to = 2;
-    int32 max_capacity = 3;
-    int32 price_per_pserson = 4;
+message AddDiveMasterRequest {
+    DiveMaster dive_master = 1;
+    string agency_name = 2;
+}
+
+message AddStaffRequest {
+    Staff staff = 1;
+    string agency_name = 2;
 }
 
 message AddTripTemplateRequest {
@@ -65,4 +72,6 @@ message AddTripTemplateRequest {
 
 message AddTripRequest {
     Trip trip = 1;
+    TripTemplate trip_template = 2;
+    string agency_name = 3;
 }
