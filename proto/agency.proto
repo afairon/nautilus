@@ -15,6 +15,9 @@ service AgencyService {
     rpc AddStaff(AddStaffRequest) returns (google.protobuf.Empty);
     rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
     rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
+    rpc AddDivingBoat(AddDivingBoatRequest) returns (google.protobuf.Empty);
+    rpc AddHotel(AddHotelRequest) returns (google.protobuf.Empty);
+    rpc AddLiveAboardBoat(AddLiveAboardBoatRequest) returns (google.protobuf.Empty);
 }
 
 message Agency {
@@ -39,6 +42,7 @@ message Staff {
 
 message DivingBoat {
     string boat_model = 1;
+    // Diving boats should have only one image due to the requirement
     bytes boat_image = 2;
 }
 
@@ -74,4 +78,8 @@ message AddTripRequest {
     Trip trip = 1;
     TripTemplate trip_template = 2;
     string agency_name = 3;
+}
+
+message AddDivingBoatRequest {
+    DivingBoat diving_boat = 1;
 }
