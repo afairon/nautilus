@@ -17,7 +17,7 @@ service AgencyService {
     rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
     rpc AddDivingBoat(AddDivingBoatRequest) returns (google.protobuf.Empty);
     rpc AddHotel(AddHotelRequest) returns (google.protobuf.Empty);
-    rpc AddLiveAboardBoat(AddLiveAboardBoatRequest) returns (google.protobuf.Empty);
+    rpc AddLiveaboard(AddLiveaboardRequest) returns (google.protobuf.Empty);
 }
 
 message Agency {
@@ -30,8 +30,8 @@ message DiveMaster {
     string first_name = 1;
     string last_name = 2;
     common.Level level = 3;
-    string card_front = 4;
-    string card_back = 5;
+    string front_image = 4;
+    string back_image = 5;
 }
 
 message Staff {
@@ -42,7 +42,6 @@ message Staff {
 
 message DivingBoat {
     string boat_model = 1;
-    // Diving boats should have only one image due to the requirement
     bytes boat_image = 2;
 }
 
@@ -51,6 +50,28 @@ message Trip {
     google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
     int32 max_capacity = 3;
     int32 price_per_pserson = 4;
+}
+
+message Hotel {
+    string hotel_name = 1;
+    int32 star = 2;
+    // optional highlights when creating a new hotel
+    repeated string highlights = 3;
+    // optional images when creating a new hotel
+    repeated bytes images = 4;
+    // TODO haven't dealt with the rooms yet.
+}
+
+message Liveaboard {
+    string model = 1;
+    string description = 2;
+    float length = 3;
+    float width = 4;
+    // optional highlights when creating a new liveaboard
+    repeated string highlights = 5;
+    // optional images when creating a new liveaboard
+    repeated string images = 6;
+    // TODO haven't dealt with the rooms yet.
 }
 
 message TripTemplate {
@@ -82,4 +103,15 @@ message AddTripRequest {
 
 message AddDivingBoatRequest {
     DivingBoat diving_boat = 1;
+    string agency_name = 2;
+}
+
+message AddHotelRequest {
+    Hotel hotel = 1;
+    string agency_name = 2;
+}
+
+message AddLiveaboardRequest {
+    Liveaboard liveaboard = 1;
+    string agency_name = 2;
 }
