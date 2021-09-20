@@ -170,6 +170,57 @@ func (m *DiveMaster) GetBackImage() string {
 	return ""
 }
 
+type DiveMasterFirstAndLastName struct {
+	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName  string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+}
+
+func (m *DiveMasterFirstAndLastName) Reset()      { *m = DiveMasterFirstAndLastName{} }
+func (*DiveMasterFirstAndLastName) ProtoMessage() {}
+func (*DiveMasterFirstAndLastName) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{2}
+}
+func (m *DiveMasterFirstAndLastName) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DiveMasterFirstAndLastName) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DiveMasterFirstAndLastName.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DiveMasterFirstAndLastName) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiveMasterFirstAndLastName.Merge(m, src)
+}
+func (m *DiveMasterFirstAndLastName) XXX_Size() int {
+	return m.Size()
+}
+func (m *DiveMasterFirstAndLastName) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiveMasterFirstAndLastName.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DiveMasterFirstAndLastName proto.InternalMessageInfo
+
+func (m *DiveMasterFirstAndLastName) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *DiveMasterFirstAndLastName) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
 type Staff struct {
 	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName  string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
@@ -179,7 +230,7 @@ type Staff struct {
 func (m *Staff) Reset()      { *m = Staff{} }
 func (*Staff) ProtoMessage() {}
 func (*Staff) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{2}
+	return fileDescriptor_614a4be5fd9deed0, []int{3}
 }
 func (m *Staff) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -237,7 +288,7 @@ type DivingBoat struct {
 func (m *DivingBoat) Reset()      { *m = DivingBoat{} }
 func (*DivingBoat) ProtoMessage() {}
 func (*DivingBoat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{3}
+	return fileDescriptor_614a4be5fd9deed0, []int{4}
 }
 func (m *DivingBoat) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -280,17 +331,137 @@ func (m *DivingBoat) GetBoatImage() []byte {
 	return nil
 }
 
+type Place struct {
+	Country string `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	City    string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
+}
+
+func (m *Place) Reset()      { *m = Place{} }
+func (*Place) ProtoMessage() {}
+func (*Place) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{5}
+}
+func (m *Place) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Place) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Place.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Place) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Place.Merge(m, src)
+}
+func (m *Place) XXX_Size() int {
+	return m.Size()
+}
+func (m *Place) XXX_DiscardUnknown() {
+	xxx_messageInfo_Place.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Place proto.InternalMessageInfo
+
+func (m *Place) GetCountry() string {
+	if m != nil {
+		return m.Country
+	}
+	return ""
+}
+
+func (m *Place) GetCity() string {
+	if m != nil {
+		return m.City
+	}
+	return ""
+}
+
+type TripTemplate struct {
+	Name        string      `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description string      `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	DivingBoat  *DivingBoat `protobuf:"bytes,3,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
+	Place       *Place      `protobuf:"bytes,4,opt,name=place,proto3" json:"place,omitempty"`
+}
+
+func (m *TripTemplate) Reset()      { *m = TripTemplate{} }
+func (*TripTemplate) ProtoMessage() {}
+func (*TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{6}
+}
+func (m *TripTemplate) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TripTemplate.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TripTemplate.Merge(m, src)
+}
+func (m *TripTemplate) XXX_Size() int {
+	return m.Size()
+}
+func (m *TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_TripTemplate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TripTemplate proto.InternalMessageInfo
+
+func (m *TripTemplate) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *TripTemplate) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *TripTemplate) GetDivingBoat() *DivingBoat {
+	if m != nil {
+		return m.DivingBoat
+	}
+	return nil
+}
+
+func (m *TripTemplate) GetPlace() *Place {
+	if m != nil {
+		return m.Place
+	}
+	return nil
+}
+
 type Trip struct {
 	From            *time.Time `protobuf:"bytes,1,opt,name=from,proto3,stdtime" json:"from,omitempty"`
 	To              *time.Time `protobuf:"bytes,2,opt,name=to,proto3,stdtime" json:"to,omitempty"`
 	MaxCapacity     int32      `protobuf:"varint,3,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
 	PricePerPserson int32      `protobuf:"varint,4,opt,name=price_per_pserson,json=pricePerPserson,proto3" json:"price_per_pserson,omitempty"`
+	// TODO Should I just reuse DiveMaster above?
+	DiveMasters []*DiveMasterFirstAndLastName `protobuf:"bytes,5,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
 }
 
 func (m *Trip) Reset()      { *m = Trip{} }
 func (*Trip) ProtoMessage() {}
 func (*Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{4}
+	return fileDescriptor_614a4be5fd9deed0, []int{7}
 }
 func (m *Trip) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -347,6 +518,13 @@ func (m *Trip) GetPricePerPserson() int32 {
 	return 0
 }
 
+func (m *Trip) GetDiveMasters() []*DiveMasterFirstAndLastName {
+	if m != nil {
+		return m.DiveMasters
+	}
+	return nil
+}
+
 type Hotel struct {
 	HotelName string `protobuf:"bytes,1,opt,name=hotel_name,json=hotelName,proto3" json:"hotel_name,omitempty"`
 	Star      int32  `protobuf:"varint,2,opt,name=star,proto3" json:"star,omitempty"`
@@ -359,7 +537,7 @@ type Hotel struct {
 func (m *Hotel) Reset()      { *m = Hotel{} }
 func (*Hotel) ProtoMessage() {}
 func (*Hotel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{5}
+	return fileDescriptor_614a4be5fd9deed0, []int{8}
 }
 func (m *Hotel) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -430,7 +608,7 @@ type Liveaboard struct {
 func (m *Liveaboard) Reset()      { *m = Liveaboard{} }
 func (*Liveaboard) ProtoMessage() {}
 func (*Liveaboard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{6}
+	return fileDescriptor_614a4be5fd9deed0, []int{9}
 }
 func (m *Liveaboard) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -501,65 +679,6 @@ func (m *Liveaboard) GetImages() []string {
 	return nil
 }
 
-type TripTemplate struct {
-	Name        string      `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description string      `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	DivingBoat  *DivingBoat `protobuf:"bytes,3,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
-}
-
-func (m *TripTemplate) Reset()      { *m = TripTemplate{} }
-func (*TripTemplate) ProtoMessage() {}
-func (*TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{7}
-}
-func (m *TripTemplate) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_TripTemplate.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TripTemplate.Merge(m, src)
-}
-func (m *TripTemplate) XXX_Size() int {
-	return m.Size()
-}
-func (m *TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_TripTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_TripTemplate proto.InternalMessageInfo
-
-func (m *TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *TripTemplate) GetDivingBoat() *DivingBoat {
-	if m != nil {
-		return m.DivingBoat
-	}
-	return nil
-}
-
 type AddDiveMasterRequest struct {
 	DiveMaster *DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
 	AgencyName string      `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
@@ -568,7 +687,7 @@ type AddDiveMasterRequest struct {
 func (m *AddDiveMasterRequest) Reset()      { *m = AddDiveMasterRequest{} }
 func (*AddDiveMasterRequest) ProtoMessage() {}
 func (*AddDiveMasterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{8}
+	return fileDescriptor_614a4be5fd9deed0, []int{10}
 }
 func (m *AddDiveMasterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -619,7 +738,7 @@ type AddStaffRequest struct {
 func (m *AddStaffRequest) Reset()      { *m = AddStaffRequest{} }
 func (*AddStaffRequest) ProtoMessage() {}
 func (*AddStaffRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{9}
+	return fileDescriptor_614a4be5fd9deed0, []int{11}
 }
 func (m *AddStaffRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -670,7 +789,7 @@ type AddTripTemplateRequest struct {
 func (m *AddTripTemplateRequest) Reset()      { *m = AddTripTemplateRequest{} }
 func (*AddTripTemplateRequest) ProtoMessage() {}
 func (*AddTripTemplateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{10}
+	return fileDescriptor_614a4be5fd9deed0, []int{12}
 }
 func (m *AddTripTemplateRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -722,7 +841,7 @@ type AddTripRequest struct {
 func (m *AddTripRequest) Reset()      { *m = AddTripRequest{} }
 func (*AddTripRequest) ProtoMessage() {}
 func (*AddTripRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{11}
+	return fileDescriptor_614a4be5fd9deed0, []int{13}
 }
 func (m *AddTripRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -780,7 +899,7 @@ type AddDivingBoatRequest struct {
 func (m *AddDivingBoatRequest) Reset()      { *m = AddDivingBoatRequest{} }
 func (*AddDivingBoatRequest) ProtoMessage() {}
 func (*AddDivingBoatRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{12}
+	return fileDescriptor_614a4be5fd9deed0, []int{14}
 }
 func (m *AddDivingBoatRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -831,7 +950,7 @@ type AddHotelRequest struct {
 func (m *AddHotelRequest) Reset()      { *m = AddHotelRequest{} }
 func (*AddHotelRequest) ProtoMessage() {}
 func (*AddHotelRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{13}
+	return fileDescriptor_614a4be5fd9deed0, []int{15}
 }
 func (m *AddHotelRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -882,7 +1001,7 @@ type AddLiveaboardRequest struct {
 func (m *AddLiveaboardRequest) Reset()      { *m = AddLiveaboardRequest{} }
 func (*AddLiveaboardRequest) ProtoMessage() {}
 func (*AddLiveaboardRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{14}
+	return fileDescriptor_614a4be5fd9deed0, []int{16}
 }
 func (m *AddLiveaboardRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -928,12 +1047,14 @@ func (m *AddLiveaboardRequest) GetAgencyName() string {
 func init() {
 	proto.RegisterType((*Agency)(nil), "agency.Agency")
 	proto.RegisterType((*DiveMaster)(nil), "agency.DiveMaster")
+	proto.RegisterType((*DiveMasterFirstAndLastName)(nil), "agency.DiveMasterFirstAndLastName")
 	proto.RegisterType((*Staff)(nil), "agency.Staff")
 	proto.RegisterType((*DivingBoat)(nil), "agency.DivingBoat")
+	proto.RegisterType((*Place)(nil), "agency.Place")
+	proto.RegisterType((*TripTemplate)(nil), "agency.TripTemplate")
 	proto.RegisterType((*Trip)(nil), "agency.Trip")
 	proto.RegisterType((*Hotel)(nil), "agency.Hotel")
 	proto.RegisterType((*Liveaboard)(nil), "agency.Liveaboard")
-	proto.RegisterType((*TripTemplate)(nil), "agency.TripTemplate")
 	proto.RegisterType((*AddDiveMasterRequest)(nil), "agency.AddDiveMasterRequest")
 	proto.RegisterType((*AddStaffRequest)(nil), "agency.AddStaffRequest")
 	proto.RegisterType((*AddTripTemplateRequest)(nil), "agency.AddTripTemplateRequest")
@@ -946,67 +1067,73 @@ func init() {
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 954 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x55, 0x41, 0x6f, 0x1b, 0x45,
-	0x14, 0xf6, 0xda, 0x5e, 0x37, 0x79, 0xb6, 0x1b, 0x31, 0x8a, 0x82, 0xe5, 0xc2, 0xc6, 0xb8, 0x97,
-	0x80, 0x84, 0x83, 0x5c, 0x2e, 0x85, 0x93, 0x03, 0x95, 0x28, 0x6a, 0xab, 0x6a, 0x1b, 0x09, 0x89,
-	0xcb, 0x6a, 0xec, 0x1d, 0xaf, 0x97, 0xee, 0xee, 0x2c, 0xbb, 0x93, 0xd0, 0xdc, 0xf8, 0x05, 0xa8,
-	0x3f, 0x03, 0x21, 0xf1, 0x13, 0xb8, 0x73, 0xcc, 0xb1, 0x37, 0x88, 0xc3, 0x81, 0x63, 0x7f, 0x02,
-	0x9a, 0x37, 0x33, 0xf6, 0xd8, 0x49, 0x70, 0x04, 0xb7, 0x79, 0xdf, 0x7b, 0xf3, 0xbe, 0x37, 0xef,
-	0x7d, 0x6f, 0x17, 0x5a, 0x34, 0x62, 0xd9, 0xe4, 0x6c, 0x90, 0x17, 0x5c, 0x70, 0xd2, 0x50, 0x56,
-	0xb7, 0x35, 0xe1, 0x69, 0xca, 0x33, 0x85, 0x76, 0xef, 0x45, 0x9c, 0x47, 0x09, 0x3b, 0x44, 0x6b,
-	0x7c, 0x32, 0x3d, 0x64, 0x69, 0x2e, 0xf4, 0x95, 0xee, 0xfe, 0xba, 0x53, 0xc4, 0x29, 0x2b, 0x05,
-	0x4d, 0x73, 0x1d, 0xf0, 0x71, 0x14, 0x8b, 0xd9, 0xc9, 0x78, 0x30, 0xe1, 0xe9, 0x61, 0xc4, 0x23,
-	0xbe, 0x8c, 0x94, 0x16, 0x1a, 0x78, 0x52, 0xe1, 0xfd, 0xef, 0xa0, 0x31, 0xc2, 0x22, 0x08, 0x81,
-	0x7a, 0x46, 0x53, 0xd6, 0x71, 0x7a, 0xce, 0xc1, 0xb6, 0x8f, 0x67, 0xf2, 0x01, 0xb4, 0xf2, 0x19,
-	0xcf, 0x58, 0x90, 0x9d, 0xa4, 0x63, 0x56, 0x74, 0xaa, 0xe8, 0x6b, 0x22, 0xf6, 0x0c, 0x21, 0xf2,
-	0x21, 0xdc, 0xa1, 0x61, 0x58, 0xb0, 0xb2, 0xec, 0xd4, 0x7a, 0xce, 0x41, 0x73, 0xb8, 0x33, 0xd0,
-	0xaf, 0x19, 0x29, 0xd8, 0x37, 0xfe, 0xfe, 0xaf, 0x0e, 0xc0, 0x97, 0xf1, 0x29, 0x7b, 0x4a, 0x4b,
-	0xc1, 0x0a, 0xf2, 0x3e, 0xc0, 0x34, 0x2e, 0x4a, 0x11, 0x58, 0xb4, 0xdb, 0x88, 0x3c, 0x93, 0xdc,
-	0xf7, 0x60, 0x3b, 0xa1, 0xc6, 0xab, 0x88, 0xb7, 0x24, 0x80, 0xce, 0xfb, 0xe0, 0x26, 0xec, 0x94,
-	0x25, 0xc8, 0x79, 0x77, 0xd8, 0x36, 0x9c, 0x4f, 0x24, 0xe8, 0x2b, 0x1f, 0xd9, 0x87, 0xe6, 0xb4,
-	0xe0, 0x99, 0x08, 0xe2, 0x94, 0x46, 0xac, 0x53, 0xc7, 0x1c, 0x80, 0xd0, 0x63, 0x89, 0xc8, 0x0a,
-	0xc6, 0x74, 0xf2, 0x52, 0xfb, 0x5d, 0x55, 0x81, 0x44, 0xd0, 0xdd, 0x0f, 0xc0, 0x7d, 0x21, 0xe8,
-	0x74, 0xfa, 0xbf, 0x2a, 0xed, 0xc2, 0x56, 0xce, 0xcb, 0x58, 0xc4, 0x3c, 0xc3, 0x62, 0xb7, 0xfd,
-	0x85, 0xdd, 0xff, 0x1a, 0xfb, 0x11, 0x67, 0xd1, 0x11, 0xa7, 0x02, 0xab, 0xe1, 0x54, 0x04, 0x29,
-	0x0f, 0x59, 0x62, 0x58, 0x24, 0xf2, 0x54, 0x02, 0x0b, 0xb7, 0x2a, 0x56, 0xd2, 0xb4, 0x94, 0x5b,
-	0x15, 0xfb, 0x9b, 0x03, 0xf5, 0xe3, 0x22, 0xce, 0xc9, 0xa7, 0x50, 0x9f, 0x16, 0x3c, 0xc5, 0x04,
-	0xcd, 0x61, 0x77, 0xa0, 0x04, 0x33, 0x30, 0x32, 0x18, 0x1c, 0x1b, 0xc1, 0x1c, 0xd5, 0x5f, 0xff,
-	0xb1, 0xef, 0xf8, 0x18, 0x4d, 0x3e, 0x81, 0xaa, 0xe0, 0x98, 0xf5, 0x36, 0x77, 0xaa, 0x82, 0x4b,
-	0x6d, 0xa4, 0xf4, 0x55, 0x30, 0xa1, 0x39, 0x9d, 0xc4, 0xe2, 0x0c, 0x1f, 0xe7, 0xfa, 0xcd, 0x94,
-	0xbe, 0xfa, 0x42, 0x43, 0xe4, 0x23, 0x78, 0x27, 0x2f, 0xe2, 0x09, 0x0b, 0x72, 0x56, 0x04, 0x79,
-	0xc9, 0x8a, 0x92, 0x67, 0x38, 0x06, 0xd7, 0xdf, 0x41, 0xc7, 0x73, 0x56, 0x3c, 0x57, 0x70, 0xbf,
-	0x00, 0xf7, 0x2b, 0x2e, 0xd4, 0x3b, 0x67, 0xf2, 0xb0, 0xd2, 0x6c, 0x44, 0xb0, 0x9f, 0x04, 0xea,
-	0xa5, 0xa0, 0x4a, 0x8a, 0xae, 0x8f, 0x67, 0xe2, 0x01, 0xcc, 0xe2, 0x68, 0x96, 0xc4, 0xd1, 0x4c,
-	0x48, 0x19, 0xd6, 0xe4, 0x9c, 0x97, 0x08, 0xd9, 0x83, 0x06, 0x76, 0xad, 0xec, 0xd4, 0x7b, 0xb5,
-	0x83, 0x96, 0xaf, 0xad, 0xfe, 0x2f, 0x0e, 0xc0, 0x93, 0xf8, 0x94, 0xd1, 0x31, 0xa7, 0x45, 0x48,
-	0x76, 0xc1, 0xb5, 0x7b, 0xaf, 0x0c, 0xd2, 0x83, 0x66, 0xc8, 0xca, 0x49, 0x11, 0xe7, 0x38, 0x43,
-	0xbd, 0x02, 0x16, 0x24, 0xd3, 0x27, 0x2c, 0x8b, 0xc4, 0x0c, 0x7b, 0x50, 0xf5, 0xb5, 0x25, 0xf3,
-	0xfd, 0x10, 0x87, 0x62, 0x86, 0x4f, 0xae, 0xfa, 0xca, 0x58, 0x2b, 0xd6, 0xfd, 0x97, 0x62, 0x1b,
-	0xe8, 0x33, 0xc5, 0x9e, 0x41, 0x4b, 0xce, 0xf7, 0x98, 0xa5, 0x79, 0x42, 0x05, 0xbb, 0x76, 0x5f,
-	0x37, 0xd7, 0xfa, 0x00, 0x9a, 0x21, 0x4a, 0x2e, 0x90, 0xd2, 0xd1, 0x2b, 0x4b, 0x06, 0xfa, 0xb3,
-	0xb4, 0x54, 0xa3, 0x0f, 0xe1, 0xe2, 0xdc, 0x4f, 0x60, 0x77, 0x14, 0x86, 0xcb, 0xd5, 0xf5, 0xd9,
-	0xf7, 0x27, 0xac, 0x14, 0x3a, 0x19, 0x0b, 0x52, 0x44, 0xb5, 0xe2, 0xec, 0x64, 0x26, 0x5e, 0x26,
-	0x33, 0x6b, 0xbf, 0x0f, 0x4d, 0x15, 0x60, 0xef, 0x0b, 0x28, 0x48, 0x4e, 0xb8, 0xff, 0x0d, 0xec,
-	0x8c, 0xc2, 0x10, 0x37, 0xcf, 0x10, 0xdd, 0x07, 0xb7, 0x94, 0xb6, 0xa6, 0x68, 0x1b, 0x0a, 0x15,
-	0xa4, 0x7c, 0x9b, 0x13, 0x0b, 0xd8, 0x1b, 0x85, 0xa1, 0xdd, 0x44, 0x93, 0xff, 0x21, 0xb4, 0x45,
-	0x11, 0xe7, 0x81, 0xd0, 0xb8, 0xe6, 0xd9, 0x35, 0x3c, 0x2b, 0x77, 0x5a, 0xc2, 0x1e, 0xc3, 0x46,
-	0xd6, 0x9f, 0x1c, 0xb8, 0xab, 0x69, 0x0d, 0x5d, 0x0f, 0xea, 0x32, 0x87, 0x66, 0x69, 0xd9, 0x2c,
-	0x3e, 0x7a, 0xae, 0x16, 0x54, 0xfd, 0xaf, 0x05, 0xd5, 0xae, 0x14, 0xb4, 0x98, 0xa6, 0x19, 0xf5,
-	0xca, 0x34, 0x17, 0xd2, 0x70, 0x6e, 0x23, 0x8d, 0xdb, 0x4e, 0x13, 0x57, 0xdb, 0x9a, 0x26, 0xee,
-	0xf3, 0xfa, 0x34, 0x55, 0x90, 0xf2, 0x6d, 0x4e, 0xfc, 0x12, 0x9f, 0xb1, 0x5c, 0x5f, 0x93, 0x7d,
-	0x08, 0x90, 0x2c, 0xc0, 0xf5, 0x57, 0x58, 0xe1, 0x56, 0xd4, 0x46, 0xb2, 0xe1, 0x5f, 0x35, 0x68,
-	0xab, 0xff, 0xe4, 0x0b, 0x56, 0x9c, 0xc6, 0x13, 0x46, 0x1e, 0x41, 0x7b, 0x65, 0x27, 0xc8, 0x7b,
-	0x86, 0xe3, 0xba, 0x55, 0xe9, 0xee, 0x5d, 0xf9, 0xa6, 0x3e, 0x92, 0x7f, 0x75, 0xf2, 0x39, 0x6c,
-	0x19, 0xb1, 0x93, 0x77, 0xad, 0x0c, 0xb6, 0xfc, 0x6f, 0xbc, 0xfc, 0x18, 0x7b, 0xbb, 0xf2, 0x55,
-	0xf0, 0xac, 0x1c, 0xd7, 0x28, 0xfd, 0xc6, 0x54, 0x0f, 0xe1, 0x8e, 0xbe, 0x41, 0xf6, 0xd6, 0x52,
-	0x6c, 0xba, 0xba, 0xe8, 0x84, 0xd1, 0xc4, 0x5a, 0x27, 0x56, 0x65, 0xb6, 0xa1, 0x13, 0xea, 0x1f,
-	0x60, 0x77, 0xc2, 0x96, 0xce, 0x86, 0x1a, 0xac, 0x6f, 0xb9, 0x5d, 0xc3, 0x15, 0x8d, 0xdc, 0x94,
-	0xe6, 0xe8, 0xb3, 0xf3, 0x0b, 0xaf, 0xf2, 0xe6, 0xc2, 0xab, 0xbc, 0xbd, 0xf0, 0x9c, 0x1f, 0xe7,
-	0x9e, 0xf3, 0xf3, 0xdc, 0x73, 0x7e, 0x9f, 0x7b, 0xce, 0xf9, 0xdc, 0x73, 0xfe, 0x9c, 0x7b, 0xce,
-	0xdf, 0x73, 0xaf, 0xf2, 0x76, 0xee, 0x39, 0xaf, 0x2f, 0xbd, 0xca, 0xf9, 0xa5, 0x57, 0x79, 0x73,
-	0xe9, 0x55, 0xbe, 0xad, 0x0f, 0x0e, 0xf3, 0xf1, 0xb8, 0x81, 0xb9, 0x1e, 0xfc, 0x13, 0x00, 0x00,
-	0xff, 0xff, 0x3d, 0x69, 0x49, 0x96, 0xe3, 0x09, 0x00, 0x00,
+	// 1044 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0x41, 0x6f, 0xe3, 0x44,
+	0x14, 0x8e, 0x93, 0x38, 0x6d, 0x5f, 0xd2, 0xad, 0x18, 0x55, 0x25, 0xca, 0x82, 0x1b, 0xdc, 0x4b,
+	0x41, 0x22, 0x45, 0x59, 0x38, 0x2c, 0x9c, 0x52, 0x28, 0x62, 0x51, 0x77, 0x55, 0x79, 0x2b, 0x81,
+	0xb8, 0x58, 0x8e, 0x3d, 0x71, 0xcc, 0xda, 0x1e, 0x63, 0x4f, 0xcb, 0xf6, 0xc6, 0x81, 0x33, 0xda,
+	0x5f, 0xc0, 0x19, 0x21, 0xf1, 0x3f, 0x38, 0xf6, 0xb8, 0x37, 0x68, 0xca, 0x81, 0xe3, 0xfe, 0x04,
+	0x34, 0x6f, 0x66, 0x12, 0x27, 0x69, 0x49, 0xb5, 0x7b, 0xf3, 0xfb, 0xde, 0xcc, 0x7b, 0xdf, 0x7b,
+	0xf3, 0xbd, 0x97, 0x40, 0xcb, 0x0b, 0x69, 0xea, 0x5f, 0xf4, 0xb2, 0x9c, 0x71, 0x46, 0x1a, 0xd2,
+	0xea, 0xb4, 0x7c, 0x96, 0x24, 0x2c, 0x95, 0x68, 0xe7, 0x7e, 0xc8, 0x58, 0x18, 0xd3, 0x03, 0xb4,
+	0x86, 0x67, 0xa3, 0x03, 0x9a, 0x64, 0x5c, 0x5d, 0xe9, 0xec, 0x2e, 0x3a, 0x79, 0x94, 0xd0, 0x82,
+	0x7b, 0x49, 0xa6, 0x0e, 0x7c, 0x18, 0x46, 0x7c, 0x7c, 0x36, 0xec, 0xf9, 0x2c, 0x39, 0x08, 0x59,
+	0xc8, 0x66, 0x27, 0x85, 0x85, 0x06, 0x7e, 0xc9, 0xe3, 0xf6, 0xf7, 0xd0, 0x18, 0x20, 0x09, 0x42,
+	0xa0, 0x9e, 0x7a, 0x09, 0x6d, 0x1b, 0x5d, 0x63, 0x7f, 0xc3, 0xc1, 0x6f, 0xf2, 0x1e, 0xb4, 0xb2,
+	0x31, 0x4b, 0xa9, 0x9b, 0x9e, 0x25, 0x43, 0x9a, 0xb7, 0xab, 0xe8, 0x6b, 0x22, 0xf6, 0x04, 0x21,
+	0xf2, 0x3e, 0xac, 0x79, 0x41, 0x90, 0xd3, 0xa2, 0x68, 0xd7, 0xba, 0xc6, 0x7e, 0xb3, 0xbf, 0xd5,
+	0x53, 0xd5, 0x0c, 0x24, 0xec, 0x68, 0xbf, 0xfd, 0x87, 0x01, 0xf0, 0x45, 0x74, 0x4e, 0x1f, 0x7b,
+	0x05, 0xa7, 0x39, 0x79, 0x17, 0x60, 0x14, 0xe5, 0x05, 0x77, 0x4b, 0x69, 0x37, 0x10, 0x79, 0x22,
+	0x72, 0xdf, 0x87, 0x8d, 0xd8, 0xd3, 0x5e, 0x99, 0x78, 0x5d, 0x00, 0xe8, 0xdc, 0x03, 0x33, 0xa6,
+	0xe7, 0x34, 0xc6, 0x9c, 0xf7, 0xfa, 0x9b, 0x3a, 0xe7, 0xb1, 0x00, 0x1d, 0xe9, 0x23, 0xbb, 0xd0,
+	0x1c, 0xe5, 0x2c, 0xe5, 0x6e, 0x94, 0x78, 0x21, 0x6d, 0xd7, 0x31, 0x06, 0x20, 0xf4, 0x48, 0x20,
+	0x82, 0xc1, 0xd0, 0xf3, 0x9f, 0x29, 0xbf, 0x29, 0x19, 0x08, 0x04, 0xdd, 0xf6, 0xb7, 0xd0, 0x99,
+	0xd1, 0xfd, 0x52, 0x10, 0x1b, 0xa4, 0xc1, 0xb1, 0xa6, 0xf0, 0x06, 0xf4, 0x6d, 0x17, 0xcc, 0xa7,
+	0xdc, 0x1b, 0x8d, 0xde, 0xa8, 0x07, 0x1d, 0x58, 0xcf, 0x58, 0x11, 0xf1, 0x88, 0xa5, 0xd8, 0x86,
+	0x0d, 0x67, 0x6a, 0xdb, 0x5f, 0x63, 0xa7, 0xa3, 0x34, 0x3c, 0x64, 0x1e, 0xc7, 0x3a, 0x99, 0xc7,
+	0xdd, 0x84, 0x05, 0x34, 0xd6, 0x59, 0x04, 0xf2, 0x58, 0x00, 0x53, 0xb7, 0x6c, 0x83, 0x48, 0xd3,
+	0x92, 0x6e, 0xd9, 0x86, 0x4f, 0xc0, 0x3c, 0x89, 0x3d, 0x9f, 0x92, 0x36, 0xac, 0xf9, 0xec, 0x2c,
+	0xe5, 0xf9, 0x85, 0x8a, 0xa1, 0x4d, 0xa1, 0x1d, 0x3f, 0xe2, 0x17, 0x8a, 0x22, 0x7e, 0xdb, 0xbf,
+	0x1a, 0xd0, 0x3a, 0xcd, 0xa3, 0xec, 0x94, 0x26, 0x59, 0xec, 0x71, 0x7a, 0xa3, 0xc0, 0xba, 0xd0,
+	0x0c, 0x68, 0xe1, 0xe7, 0x51, 0x86, 0x65, 0x28, 0x7d, 0x95, 0x20, 0xf2, 0x00, 0x9a, 0x01, 0x56,
+	0xe2, 0x0a, 0x46, 0x4a, 0x63, 0xa4, 0xa7, 0xe6, 0x68, 0x56, 0xa4, 0x03, 0xc1, 0xac, 0xe0, 0x3d,
+	0x30, 0x33, 0x41, 0x19, 0xdf, 0xbc, 0xd9, 0xdf, 0xd4, 0xc7, 0xb1, 0x0e, 0x47, 0xfa, 0xec, 0x9f,
+	0xab, 0x50, 0x17, 0x04, 0xc9, 0xc7, 0x50, 0x1f, 0xe5, 0x2c, 0x41, 0x62, 0xcd, 0x7e, 0xa7, 0x27,
+	0x47, 0xac, 0xa7, 0x07, 0xa7, 0x77, 0xaa, 0x47, 0xec, 0xb0, 0xfe, 0xe2, 0xaf, 0x5d, 0xc3, 0xc1,
+	0xd3, 0xe4, 0x23, 0xa8, 0x72, 0x86, 0x8c, 0xef, 0x72, 0xa7, 0xca, 0x99, 0x98, 0xa6, 0xc4, 0x7b,
+	0xee, 0xfa, 0x5e, 0xe6, 0x61, 0xb7, 0x44, 0x2d, 0xa6, 0xd3, 0x4c, 0xbc, 0xe7, 0x9f, 0x2b, 0x88,
+	0x7c, 0x00, 0x6f, 0x65, 0x79, 0xe4, 0x53, 0x37, 0xa3, 0xb9, 0x9b, 0x15, 0x34, 0x2f, 0x58, 0x8a,
+	0x45, 0x98, 0xce, 0x16, 0x3a, 0x4e, 0x68, 0x7e, 0x22, 0x61, 0x72, 0x04, 0xad, 0x20, 0x3a, 0xa7,
+	0x6e, 0x82, 0xfa, 0x2c, 0xda, 0x66, 0xb7, 0xb6, 0xdf, 0xec, 0xdb, 0xa5, 0xd6, 0xdc, 0x22, 0x5d,
+	0x47, 0x74, 0x54, 0xf9, 0x0a, 0x3b, 0x07, 0xf3, 0x2b, 0xc6, 0xa5, 0x0c, 0xc6, 0xe2, 0x63, 0x4e,
+	0x8b, 0x88, 0xa0, 0xdc, 0x08, 0xd4, 0x0b, 0xee, 0xc9, 0x1d, 0x60, 0x3a, 0xf8, 0x4d, 0x2c, 0x80,
+	0x71, 0x14, 0x8e, 0xe3, 0x28, 0x1c, 0x73, 0x31, 0xff, 0x35, 0x31, 0x60, 0x33, 0x84, 0xec, 0x40,
+	0x03, 0x45, 0x55, 0xb4, 0xeb, 0xdd, 0xda, 0x7e, 0xcb, 0x51, 0x96, 0xfd, 0xbb, 0x01, 0x70, 0x1c,
+	0x9d, 0x53, 0x6f, 0xc8, 0xbc, 0x3c, 0x20, 0xdb, 0x60, 0x96, 0xa5, 0x29, 0x8d, 0x3b, 0x68, 0x63,
+	0x07, 0x1a, 0x31, 0x4d, 0x43, 0x3e, 0xc6, 0x56, 0x56, 0x1d, 0x65, 0x89, 0x78, 0x3f, 0x46, 0x01,
+	0x1f, 0x63, 0xe7, 0xaa, 0x8e, 0x34, 0x16, 0xc8, 0x9a, 0xff, 0x43, 0xb6, 0x81, 0x3e, 0x4d, 0x36,
+	0x86, 0xed, 0x41, 0x10, 0xcc, 0xda, 0xe9, 0xd0, 0x1f, 0xce, 0x68, 0xc1, 0x95, 0x32, 0x75, 0xff,
+	0x95, 0x7a, 0xc8, 0x72, 0xfb, 0x51, 0x99, 0x7a, 0xe9, 0xed, 0x42, 0x53, 0x1e, 0x28, 0xcf, 0x34,
+	0x48, 0x08, 0x57, 0xc3, 0x37, 0xb0, 0x35, 0x08, 0x02, 0xdc, 0x0e, 0x3a, 0xd1, 0x1e, 0x98, 0x85,
+	0xb0, 0x55, 0x8a, 0xa9, 0x9a, 0xe5, 0x21, 0xe9, 0x5b, 0x1d, 0x98, 0xc3, 0xce, 0x20, 0x08, 0xca,
+	0x13, 0xa9, 0xe3, 0x3f, 0x84, 0x4d, 0x9e, 0x47, 0x99, 0xcb, 0x15, 0xae, 0xf2, 0x6c, 0xeb, 0x3c,
+	0x73, 0x77, 0x5a, 0xbc, 0x3c, 0xd3, 0x2b, 0xb3, 0xfe, 0x62, 0xc0, 0x3d, 0x95, 0x56, 0xa7, 0xeb,
+	0x42, 0x5d, 0xc4, 0x50, 0x59, 0x5a, 0xe5, 0x2c, 0x0e, 0x7a, 0x96, 0x09, 0x55, 0x5f, 0x97, 0x50,
+	0x6d, 0x89, 0xd0, 0xf4, 0x35, 0xf5, 0xde, 0x98, 0x7b, 0xcd, 0xe9, 0x9e, 0x31, 0xee, 0xb4, 0x67,
+	0xee, 0xf8, 0x9a, 0x38, 0x5f, 0xa5, 0xd7, 0xc4, 0xa1, 0x5a, 0x7c, 0x4d, 0x79, 0x48, 0xfa, 0x56,
+	0x07, 0x7e, 0x86, 0x65, 0xcc, 0x66, 0x48, 0x47, 0xef, 0x03, 0xc4, 0x53, 0x70, 0xb1, 0x8a, 0xd2,
+	0xf1, 0xd2, 0xa9, 0x95, 0xc9, 0xfa, 0xff, 0xd4, 0x60, 0x53, 0xfe, 0x4b, 0x78, 0x4a, 0xf3, 0xf3,
+	0xc8, 0xa7, 0xe4, 0x08, 0x36, 0xe7, 0x66, 0x82, 0xbc, 0xa3, 0x73, 0xdc, 0x34, 0x2a, 0x9d, 0x9d,
+	0xa5, 0xfd, 0x78, 0x24, 0xfe, 0xd3, 0x90, 0xcf, 0x60, 0x5d, 0x8b, 0x9d, 0xbc, 0x5d, 0x8a, 0x50,
+	0x96, 0xff, 0xad, 0x97, 0x1f, 0x61, 0x6f, 0xe7, 0x7e, 0x62, 0xac, 0x52, 0x8c, 0x1b, 0x94, 0x7e,
+	0x6b, 0xa8, 0x87, 0xb0, 0xa6, 0x6e, 0x90, 0x9d, 0x85, 0x10, 0xab, 0xae, 0x4e, 0x3b, 0xa1, 0x35,
+	0xb1, 0xd0, 0x89, 0x79, 0x99, 0xad, 0xe8, 0x84, 0x5c, 0xc4, 0xe5, 0x4e, 0x94, 0xa5, 0xb3, 0x82,
+	0x43, 0x69, 0xa1, 0x96, 0x39, 0x2c, 0x69, 0xe4, 0xb6, 0x30, 0x87, 0x9f, 0x5e, 0x5e, 0x59, 0x95,
+	0x97, 0x57, 0x56, 0xe5, 0xd5, 0x95, 0x65, 0xfc, 0x34, 0xb1, 0x8c, 0xdf, 0x26, 0x96, 0xf1, 0xe7,
+	0xc4, 0x32, 0x2e, 0x27, 0x96, 0xf1, 0xf7, 0xc4, 0x32, 0xfe, 0x9d, 0x58, 0x95, 0x57, 0x13, 0xcb,
+	0x78, 0x71, 0x6d, 0x55, 0x2e, 0xaf, 0xad, 0xca, 0xcb, 0x6b, 0xab, 0xf2, 0x5d, 0xbd, 0x77, 0x90,
+	0x0d, 0x87, 0x0d, 0x8c, 0xf5, 0xe0, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x83, 0xf2, 0x75, 0x14,
+	0xe1, 0x0a, 0x00, 0x00,
 }
 
 func (this *Agency) Equal(that interface{}) bool {
@@ -1075,6 +1202,33 @@ func (this *DiveMaster) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *DiveMasterFirstAndLastName) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DiveMasterFirstAndLastName)
+	if !ok {
+		that2, ok := that.(DiveMasterFirstAndLastName)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.FirstName != that1.FirstName {
+		return false
+	}
+	if this.LastName != that1.LastName {
+		return false
+	}
+	return true
+}
 func (this *Staff) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -1132,6 +1286,66 @@ func (this *DivingBoat) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *Place) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Place)
+	if !ok {
+		that2, ok := that.(Place)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Country != that1.Country {
+		return false
+	}
+	if this.City != that1.City {
+		return false
+	}
+	return true
+}
+func (this *TripTemplate) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*TripTemplate)
+	if !ok {
+		that2, ok := that.(TripTemplate)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Name != that1.Name {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	if !this.DivingBoat.Equal(that1.DivingBoat) {
+		return false
+	}
+	if !this.Place.Equal(that1.Place) {
+		return false
+	}
+	return true
+}
 func (this *Trip) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -1170,6 +1384,14 @@ func (this *Trip) Equal(that interface{}) bool {
 	}
 	if this.PricePerPserson != that1.PricePerPserson {
 		return false
+	}
+	if len(this.DiveMasters) != len(that1.DiveMasters) {
+		return false
+	}
+	for i := range this.DiveMasters {
+		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
+			return false
+		}
 	}
 	return true
 }
@@ -1262,36 +1484,6 @@ func (this *Liveaboard) Equal(that interface{}) bool {
 		if this.Images[i] != that1.Images[i] {
 			return false
 		}
-	}
-	return true
-}
-func (this *TripTemplate) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*TripTemplate)
-	if !ok {
-		that2, ok := that.(TripTemplate)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if !this.DivingBoat.Equal(that1.DivingBoat) {
-		return false
 	}
 	return true
 }
@@ -1515,6 +1707,17 @@ func (this *DiveMaster) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *DiveMasterFirstAndLastName) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.DiveMasterFirstAndLastName{")
+	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
+	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *Staff) GoString() string {
 	if this == nil {
 		return "nil"
@@ -1538,16 +1741,47 @@ func (this *DivingBoat) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *Trip) GoString() string {
+func (this *Place) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.Place{")
+	s = append(s, "Country: "+fmt.Sprintf("%#v", this.Country)+",\n")
+	s = append(s, "City: "+fmt.Sprintf("%#v", this.City)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *TripTemplate) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 8)
+	s = append(s, "&pb.TripTemplate{")
+	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	if this.DivingBoat != nil {
+		s = append(s, "DivingBoat: "+fmt.Sprintf("%#v", this.DivingBoat)+",\n")
+	}
+	if this.Place != nil {
+		s = append(s, "Place: "+fmt.Sprintf("%#v", this.Place)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Trip) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 9)
 	s = append(s, "&pb.Trip{")
 	s = append(s, "From: "+fmt.Sprintf("%#v", this.From)+",\n")
 	s = append(s, "To: "+fmt.Sprintf("%#v", this.To)+",\n")
 	s = append(s, "MaxCapacity: "+fmt.Sprintf("%#v", this.MaxCapacity)+",\n")
 	s = append(s, "PricePerPserson: "+fmt.Sprintf("%#v", this.PricePerPserson)+",\n")
+	if this.DiveMasters != nil {
+		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1576,20 +1810,6 @@ func (this *Liveaboard) GoString() string {
 	s = append(s, "Width: "+fmt.Sprintf("%#v", this.Width)+",\n")
 	s = append(s, "Highlights: "+fmt.Sprintf("%#v", this.Highlights)+",\n")
 	s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.TripTemplate{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	if this.DivingBoat != nil {
-		s = append(s, "DivingBoat: "+fmt.Sprintf("%#v", this.DivingBoat)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -2097,6 +2317,43 @@ func (m *DiveMaster) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DiveMasterFirstAndLastName) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DiveMasterFirstAndLastName) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DiveMasterFirstAndLastName) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.LastName) > 0 {
+		i -= len(m.LastName)
+		copy(dAtA[i:], m.LastName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.FirstName) > 0 {
+		i -= len(m.FirstName)
+		copy(dAtA[i:], m.FirstName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *Staff) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -2178,6 +2435,104 @@ func (m *DivingBoat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *Place) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Place) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Place) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.City) > 0 {
+		i -= len(m.City)
+		copy(dAtA[i:], m.City)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.City)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Country) > 0 {
+		i -= len(m.Country)
+		copy(dAtA[i:], m.Country)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Country)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TripTemplate) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Place != nil {
+		{
+			size, err := m.Place.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.DivingBoat != nil {
+		{
+			size, err := m.DivingBoat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *Trip) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -2198,6 +2553,20 @@ func (m *Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.DiveMasters) > 0 {
+		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
 	if m.PricePerPserson != 0 {
 		i = encodeVarintAgency(dAtA, i, uint64(m.PricePerPserson))
 		i--
@@ -2209,22 +2578,22 @@ func (m *Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		dAtA[i] = 0x18
 	}
 	if m.To != nil {
-		n2, err2 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.To, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.To):])
-		if err2 != nil {
-			return 0, err2
+		n4, err4 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.To, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.To):])
+		if err4 != nil {
+			return 0, err4
 		}
-		i -= n2
-		i = encodeVarintAgency(dAtA, i, uint64(n2))
+		i -= n4
+		i = encodeVarintAgency(dAtA, i, uint64(n4))
 		i--
 		dAtA[i] = 0x12
 	}
 	if m.From != nil {
-		n3, err3 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.From, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.From):])
-		if err3 != nil {
-			return 0, err3
+		n5, err5 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.From, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.From):])
+		if err5 != nil {
+			return 0, err5
 		}
-		i -= n3
-		i = encodeVarintAgency(dAtA, i, uint64(n3))
+		i -= n5
+		i = encodeVarintAgency(dAtA, i, uint64(n5))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -2345,55 +2714,6 @@ func (m *Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.Model)
 		copy(dAtA[i:], m.Model)
 		i = encodeVarintAgency(dAtA, i, uint64(len(m.Model)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TripTemplate) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TripTemplate) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.DivingBoat != nil {
-		{
-			size, err := m.DivingBoat.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -2766,6 +3086,23 @@ func (m *DiveMaster) Size() (n int) {
 	return n
 }
 
+func (m *DiveMasterFirstAndLastName) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FirstName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.LastName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func (m *Staff) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2804,6 +3141,48 @@ func (m *DivingBoat) Size() (n int) {
 	return n
 }
 
+func (m *Place) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Country)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.City)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *TripTemplate) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.DivingBoat != nil {
+		l = m.DivingBoat.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.Place != nil {
+		l = m.Place.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func (m *Trip) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2823,6 +3202,12 @@ func (m *Trip) Size() (n int) {
 	}
 	if m.PricePerPserson != 0 {
 		n += 1 + sovAgency(uint64(m.PricePerPserson))
+	}
+	if len(m.DiveMasters) > 0 {
+		for _, e := range m.DiveMasters {
+			l = e.Size()
+			n += 1 + l + sovAgency(uint64(l))
+		}
 	}
 	return n
 }
@@ -2886,27 +3271,6 @@ func (m *Liveaboard) Size() (n int) {
 			l = len(s)
 			n += 1 + l + sovAgency(uint64(l))
 		}
-	}
-	return n
-}
-
-func (m *TripTemplate) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.DivingBoat != nil {
-		l = m.DivingBoat.Size()
-		n += 1 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -3066,6 +3430,17 @@ func (this *DiveMaster) String() string {
 	}, "")
 	return s
 }
+func (this *DiveMasterFirstAndLastName) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DiveMasterFirstAndLastName{`,
+		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
+		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *Staff) String() string {
 	if this == nil {
 		return "nil"
@@ -3089,15 +3464,45 @@ func (this *DivingBoat) String() string {
 	}, "")
 	return s
 }
+func (this *Place) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Place{`,
+		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
+		`City:` + fmt.Sprintf("%v", this.City) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TripTemplate) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TripTemplate{`,
+		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`DivingBoat:` + strings.Replace(this.DivingBoat.String(), "DivingBoat", "DivingBoat", 1) + `,`,
+		`Place:` + strings.Replace(this.Place.String(), "Place", "Place", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *Trip) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForDiveMasters := "[]*DiveMasterFirstAndLastName{"
+	for _, f := range this.DiveMasters {
+		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMasterFirstAndLastName", "DiveMasterFirstAndLastName", 1) + ","
+	}
+	repeatedStringForDiveMasters += "}"
 	s := strings.Join([]string{`&Trip{`,
 		`From:` + strings.Replace(fmt.Sprintf("%v", this.From), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`To:` + strings.Replace(fmt.Sprintf("%v", this.To), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`MaxCapacity:` + fmt.Sprintf("%v", this.MaxCapacity) + `,`,
 		`PricePerPserson:` + fmt.Sprintf("%v", this.PricePerPserson) + `,`,
+		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
 		`}`,
 	}, "")
 	return s
@@ -3126,18 +3531,6 @@ func (this *Liveaboard) String() string {
 		`Width:` + fmt.Sprintf("%v", this.Width) + `,`,
 		`Highlights:` + fmt.Sprintf("%v", this.Highlights) + `,`,
 		`Images:` + fmt.Sprintf("%v", this.Images) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *TripTemplate) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&TripTemplate{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`DivingBoat:` + strings.Replace(this.DivingBoat.String(), "DivingBoat", "DivingBoat", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -3575,6 +3968,120 @@ func (m *DiveMaster) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *DiveMasterFirstAndLastName) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DiveMasterFirstAndLastName: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DiveMasterFirstAndLastName: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FirstName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *Staff) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3837,6 +4344,306 @@ func (m *DivingBoat) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *Place) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Place: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Place: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Country = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.City = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TripTemplate) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DivingBoat", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DivingBoat == nil {
+				m.DivingBoat = &DivingBoat{}
+			}
+			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Place", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Place == nil {
+				m.Place = &Place{}
+			}
+			if err := m.Place.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *Trip) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3976,6 +4783,40 @@ func (m *Trip) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DiveMasters = append(m.DiveMasters, &DiveMasterFirstAndLastName{})
+			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipAgency(dAtA[iNdEx:])
@@ -4340,156 +5181,6 @@ func (m *Liveaboard) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Images = append(m.Images, string(dAtA[iNdEx:postIndex]))
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TripTemplate) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DivingBoat", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.DivingBoat == nil {
-				m.DivingBoat = &DivingBoat{}
-			}
-			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

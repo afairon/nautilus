@@ -34,6 +34,11 @@ message DiveMaster {
     string back_image = 5;
 }
 
+message DiveMasterFirstAndLastName {
+    string first_name = 1;
+    string last_name = 2;
+}
+
 message Staff {
     string first_name = 1;
     string last_name = 2;
@@ -45,11 +50,34 @@ message DivingBoat {
     bytes boat_image = 2;
 }
 
+message Place {
+    string country = 1;
+    string city = 2;
+}
+
+message TripTemplate {
+
+    enum TripType {
+        LIVEABOARD = 0;
+        DIVE_RESORTS = 1;
+    }
+
+    string name = 1;
+    string description = 2;
+    DivingBoat diving_boat = 3;
+    Place place = 4;
+    repeated bytes images = 5;
+    TripType trip_type = 6;
+    bytes schedule_image = 7;
+}
+
 message Trip {
     google.protobuf.Timestamp from = 1 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
     int32 max_capacity = 3;
     int32 price_per_pserson = 4;
+    // TODO Should I just reuse DiveMaster above?
+    repeated DiveMasterFirstAndLastName dive_masters = 5;
 }
 
 message Hotel {
@@ -72,12 +100,6 @@ message Liveaboard {
     // optional images when creating a new liveaboard
     repeated string images = 6;
     // TODO haven't dealt with the rooms yet.
-}
-
-message TripTemplate {
-    string name = 1;
-    string description = 2;
-    DivingBoat diving_boat = 3;
 }
 
 message AddDiveMasterRequest {

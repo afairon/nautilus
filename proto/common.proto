@@ -19,10 +19,10 @@ enum Level {
 }
 
 message Address {
-    string country = 1;
-    string region = 2;
-    string city = 3;
-    string addres_line_1 = 4;
-    string addres_line_2 = 5;
-    string postal_code = 6;
+    string COUNTRY = 1;
+    string REGION = 2;
+    string CITY = 3;
+    string ADDRESS_LINE_1 = 4;
+    string ADDRESS_LINE_2 = 5;
+    string POSTAL_CODE = 6;
 }

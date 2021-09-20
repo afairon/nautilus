@@ -80,12 +80,12 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 }
 
 type Address struct {
-	Country      string `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
-	Region       string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
-	City         string `protobuf:"bytes,3,opt,name=city,proto3" json:"city,omitempty"`
-	AddresLine_1 string `protobuf:"bytes,4,opt,name=addres_line_1,json=addresLine1,proto3" json:"addres_line_1,omitempty"`
-	AddresLine_2 string `protobuf:"bytes,5,opt,name=addres_line_2,json=addresLine2,proto3" json:"addres_line_2,omitempty"`
-	PostalCode   string `protobuf:"bytes,6,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	COUNTRY        string `protobuf:"bytes,1,opt,name=COUNTRY,proto3" json:"COUNTRY,omitempty"`
+	REGION         string `protobuf:"bytes,2,opt,name=REGION,proto3" json:"REGION,omitempty"`
+	CITY           string `protobuf:"bytes,3,opt,name=CITY,proto3" json:"CITY,omitempty"`
+	ADDRESS_LINE_1 string `protobuf:"bytes,4,opt,name=ADDRESS_LINE_1,json=ADDRESSLINE1,proto3" json:"ADDRESS_LINE_1,omitempty"`
+	ADDRESS_LINE_2 string `protobuf:"bytes,5,opt,name=ADDRESS_LINE_2,json=ADDRESSLINE2,proto3" json:"ADDRESS_LINE_2,omitempty"`
+	POSTAL_CODE    string `protobuf:"bytes,6,opt,name=POSTAL_CODE,json=POSTALCODE,proto3" json:"POSTAL_CODE,omitempty"`
 }
 
 func (m *Address) Reset()      { *m = Address{} }
@@ -120,44 +120,44 @@ func (m *Address) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Address proto.InternalMessageInfo
 
-func (m *Address) GetCountry() string {
+func (m *Address) GetCOUNTRY() string {
 	if m != nil {
-		return m.Country
+		return m.COUNTRY
 	}
 	return ""
 }
 
-func (m *Address) GetRegion() string {
+func (m *Address) GetREGION() string {
 	if m != nil {
-		return m.Region
+		return m.REGION
 	}
 	return ""
 }
 
-func (m *Address) GetCity() string {
+func (m *Address) GetCITY() string {
 	if m != nil {
-		return m.City
+		return m.CITY
 	}
 	return ""
 }
 
-func (m *Address) GetAddresLine_1() string {
+func (m *Address) GetADDRESS_LINE_1() string {
 	if m != nil {
-		return m.AddresLine_1
+		return m.ADDRESS_LINE_1
 	}
 	return ""
 }
 
-func (m *Address) GetAddresLine_2() string {
+func (m *Address) GetADDRESS_LINE_2() string {
 	if m != nil {
-		return m.AddresLine_2
+		return m.ADDRESS_LINE_2
 	}
 	return ""
 }
 
-func (m *Address) GetPostalCode() string {
+func (m *Address) GetPOSTAL_CODE() string {
 	if m != nil {
-		return m.PostalCode
+		return m.POSTAL_CODE
 	}
 	return ""
 }
@@ -171,28 +171,28 @@ func init() {
 func init() { proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206) }
 
 var fileDescriptor_555bd8c177793206 = []byte{
-	// 335 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x90, 0xb1, 0x6a, 0xfa, 0x40,
-	0x1c, 0xc7, 0x73, 0x1a, 0xa3, 0xfe, 0xf4, 0xff, 0x27, 0xdc, 0x50, 0x32, 0x5d, 0x8b, 0x53, 0x71,
-	0x50, 0xb4, 0x5b, 0xb7, 0x6b, 0x72, 0x88, 0xa0, 0xb1, 0xc4, 0x28, 0xb4, 0x8b, 0x68, 0x72, 0x94,
-	0x80, 0xe6, 0x42, 0x4c, 0x0b, 0x6e, 0x7d, 0x84, 0x3e, 0x46, 0x1f, 0xa1, 0x8f, 0xd0, 0xd1, 0xd1,
-	0xb1, 0x9e, 0x4b, 0x47, 0x1f, 0xa1, 0x78, 0x69, 0x17, 0xb7, 0xef, 0xf7, 0xf3, 0xfd, 0x70, 0x1c,
-	0x3f, 0xa8, 0x07, 0x62, 0xb5, 0x12, 0x71, 0x2b, 0x49, 0x45, 0x26, 0xb0, 0x91, 0xb7, 0xc6, 0x07,
-	0x82, 0x32, 0x0d, 0xc3, 0x94, 0xaf, 0xd7, 0xd8, 0x82, 0x72, 0x20, 0x9e, 0xe3, 0x2c, 0xdd, 0x58,
-	0xe8, 0x0a, 0x5d, 0x57, 0xbd, 0xbf, 0x8a, 0x2f, 0xc0, 0x48, 0xf9, 0x53, 0x24, 0x62, 0xab, 0xa0,
-	0x86, 0xdf, 0x86, 0x31, 0xe8, 0x41, 0x94, 0x6d, 0xac, 0xa2, 0xa2, 0x2a, 0xe3, 0x06, 0xfc, 0x9b,
-	0xab, 0x07, 0x67, 0xcb, 0x28, 0xe6, 0xb3, 0x8e, 0xa5, 0xab, 0xb1, 0x96, 0xc3, 0x41, 0x14, 0xf3,
-	0xce, 0xb9, 0xd3, 0xb5, 0x4a, 0xe7, 0x4e, 0x17, 0x5f, 0x42, 0x2d, 0x11, 0xeb, 0x6c, 0xbe, 0x9c,
-	0x05, 0x22, 0xe4, 0x96, 0xa1, 0x0c, 0xc8, 0x91, 0x2d, 0x42, 0xde, 0x6c, 0x43, 0x8d, 0x06, 0xea,
-	0x87, 0xfe, 0x26, 0xe1, 0xb8, 0x0a, 0x25, 0xea, 0x0c, 0xfb, 0xae, 0xa9, 0x61, 0x00, 0x83, 0xf6,
-	0x98, 0x6b, 0x3f, 0x98, 0xe8, 0x84, 0x9d, 0xfe, 0x94, 0x79, 0x66, 0xa1, 0xd9, 0x83, 0xd2, 0x80,
-	0xbf, 0xf0, 0x25, 0xfe, 0x0f, 0xd0, 0x77, 0xc7, 0xbe, 0x37, 0xb1, 0xfd, 0x91, 0x97, 0xfb, 0x43,
-	0x3a, 0xf6, 0x99, 0x67, 0xa2, 0x53, 0xf6, 0xd8, 0xd8, 0x9e, 0x30, 0xb3, 0x80, 0xeb, 0x50, 0xa1,
-	0xce, 0x94, 0xba, 0x36, 0x73, 0xcc, 0x22, 0xae, 0x80, 0x3e, 0xba, 0x67, 0xae, 0xa9, 0xdf, 0xdd,
-	0x6e, 0xf7, 0x44, 0xdb, 0xed, 0x89, 0x76, 0xdc, 0x13, 0xf4, 0x2a, 0x09, 0x7a, 0x97, 0x04, 0x7d,
-	0x4a, 0x82, 0xb6, 0x92, 0xa0, 0x2f, 0x49, 0xd0, 0xb7, 0x24, 0xda, 0x51, 0x12, 0xf4, 0x76, 0x20,
-	0xda, 0xf6, 0x40, 0xb4, 0xdd, 0x81, 0x68, 0x8f, 0x7a, 0xab, 0x9d, 0x2c, 0x16, 0x86, 0xba, 0xff,
-	0xcd, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x17, 0x81, 0xfc, 0x43, 0x8f, 0x01, 0x00, 0x00,
+	// 330 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x91, 0xb1, 0x6e, 0xf2, 0x30,
+	0x14, 0x46, 0x63, 0x08, 0x01, 0x2e, 0x08, 0x45, 0x1e, 0x7e, 0x79, 0xf2, 0x5f, 0x55, 0x1d, 0x2a,
+	0x06, 0x10, 0x74, 0xeb, 0xe6, 0xda, 0x16, 0x8a, 0x04, 0x0e, 0x72, 0x0c, 0x12, 0x5d, 0x90, 0x80,
+	0x6c, 0x85, 0x20, 0xa0, 0x95, 0xba, 0xf5, 0x11, 0xfa, 0x18, 0x7d, 0x88, 0x3e, 0x40, 0x47, 0x46,
+	0xc6, 0x62, 0x96, 0x8e, 0x3c, 0x42, 0x95, 0x40, 0x27, 0xb6, 0x7b, 0xce, 0x77, 0xb6, 0x0b, 0xd5,
+	0x69, 0x32, 0x9f, 0x27, 0x8b, 0xc6, 0x72, 0x95, 0x6c, 0x12, 0xec, 0x9d, 0xe8, 0xfa, 0x13, 0x41,
+	0x91, 0xcd, 0x66, 0xab, 0x78, 0xbd, 0xc6, 0x04, 0x8a, 0x3c, 0x1c, 0x28, 0xa3, 0x47, 0x04, 0x5d,
+	0xa1, 0xdb, 0xb2, 0xfe, 0x43, 0xfc, 0x0f, 0x3c, 0x2d, 0x3b, 0x41, 0xa8, 0x48, 0x2e, 0x1b, 0xce,
+	0x84, 0x31, 0xb8, 0x3c, 0x30, 0x23, 0x92, 0xcf, 0x6c, 0x76, 0xe3, 0x1b, 0xa8, 0x31, 0x21, 0xb4,
+	0x8c, 0xa2, 0x71, 0x37, 0x50, 0x72, 0xdc, 0x22, 0x6e, 0xb6, 0x56, 0xcf, 0x36, 0x95, 0xad, 0x8b,
+	0xaa, 0x4d, 0x0a, 0x17, 0x55, 0x1b, 0xff, 0x87, 0x4a, 0x3f, 0x8c, 0x0c, 0xeb, 0x8e, 0x79, 0x28,
+	0x24, 0xf1, 0xb2, 0x04, 0x4e, 0x2a, 0x35, 0xf5, 0x26, 0x54, 0xd8, 0x74, 0x9a, 0x3c, 0x2f, 0x36,
+	0xe6, 0x75, 0x19, 0xe3, 0x32, 0x14, 0x98, 0xe8, 0x05, 0xca, 0x77, 0x30, 0x80, 0xc7, 0x3a, 0x52,
+	0xf1, 0x91, 0x8f, 0x52, 0x2d, 0x82, 0xa1, 0xd4, 0x7e, 0xae, 0xde, 0x81, 0x42, 0x37, 0x7e, 0x89,
+	0x9f, 0x70, 0x0d, 0x20, 0x50, 0x91, 0xd1, 0x03, 0x6e, 0x42, 0x7d, 0xea, 0x7b, 0x2c, 0x32, 0x52,
+	0xfb, 0x28, 0xbd, 0xb5, 0x8c, 0xf8, 0x40, 0xfa, 0x39, 0x5c, 0x85, 0x12, 0x13, 0x43, 0xa6, 0xb8,
+	0x14, 0x7e, 0x1e, 0x97, 0xc0, 0x0d, 0xfb, 0x52, 0xf9, 0xee, 0xc3, 0xfd, 0x76, 0x4f, 0x9d, 0xdd,
+	0x9e, 0x3a, 0xc7, 0x3d, 0x45, 0x6f, 0x96, 0xa2, 0x0f, 0x4b, 0xd1, 0x97, 0xa5, 0x68, 0x6b, 0x29,
+	0xfa, 0xb6, 0x14, 0xfd, 0x58, 0xea, 0x1c, 0x2d, 0x45, 0xef, 0x07, 0xea, 0x6c, 0x0f, 0xd4, 0xd9,
+	0x1d, 0xa8, 0xf3, 0xe8, 0x36, 0x9a, 0xcb, 0xc9, 0xc4, 0xcb, 0x7e, 0x70, 0xf7, 0x1b, 0x00, 0x00,
+	0xff, 0xff, 0x85, 0x5e, 0x18, 0xf4, 0x93, 0x01, 0x00, 0x00,
 }
 
 func (x AccountType) String() string {
@@ -228,22 +228,22 @@ func (this *Address) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if this.Country != that1.Country {
+	if this.COUNTRY != that1.COUNTRY {
 		return false
 	}
-	if this.Region != that1.Region {
+	if this.REGION != that1.REGION {
 		return false
 	}
-	if this.City != that1.City {
+	if this.CITY != that1.CITY {
 		return false
 	}
-	if this.AddresLine_1 != that1.AddresLine_1 {
+	if this.ADDRESS_LINE_1 != that1.ADDRESS_LINE_1 {
 		return false
 	}
-	if this.AddresLine_2 != that1.AddresLine_2 {
+	if this.ADDRESS_LINE_2 != that1.ADDRESS_LINE_2 {
 		return false
 	}
-	if this.PostalCode != that1.PostalCode {
+	if this.POSTAL_CODE != that1.POSTAL_CODE {
 		return false
 	}
 	return true
@@ -254,12 +254,12 @@ func (this *Address) GoString() string {
 	}
 	s := make([]string, 0, 10)
 	s = append(s, "&pb.Address{")
-	s = append(s, "Country: "+fmt.Sprintf("%#v", this.Country)+",\n")
-	s = append(s, "Region: "+fmt.Sprintf("%#v", this.Region)+",\n")
-	s = append(s, "City: "+fmt.Sprintf("%#v", this.City)+",\n")
-	s = append(s, "AddresLine_1: "+fmt.Sprintf("%#v", this.AddresLine_1)+",\n")
-	s = append(s, "AddresLine_2: "+fmt.Sprintf("%#v", this.AddresLine_2)+",\n")
-	s = append(s, "PostalCode: "+fmt.Sprintf("%#v", this.PostalCode)+",\n")
+	s = append(s, "COUNTRY: "+fmt.Sprintf("%#v", this.COUNTRY)+",\n")
+	s = append(s, "REGION: "+fmt.Sprintf("%#v", this.REGION)+",\n")
+	s = append(s, "CITY: "+fmt.Sprintf("%#v", this.CITY)+",\n")
+	s = append(s, "ADDRESS_LINE_1: "+fmt.Sprintf("%#v", this.ADDRESS_LINE_1)+",\n")
+	s = append(s, "ADDRESS_LINE_2: "+fmt.Sprintf("%#v", this.ADDRESS_LINE_2)+",\n")
+	s = append(s, "POSTAL_CODE: "+fmt.Sprintf("%#v", this.POSTAL_CODE)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -291,45 +291,45 @@ func (m *Address) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.PostalCode) > 0 {
-		i -= len(m.PostalCode)
-		copy(dAtA[i:], m.PostalCode)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.PostalCode)))
+	if len(m.POSTAL_CODE) > 0 {
+		i -= len(m.POSTAL_CODE)
+		copy(dAtA[i:], m.POSTAL_CODE)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.POSTAL_CODE)))
 		i--
 		dAtA[i] = 0x32
 	}
-	if len(m.AddresLine_2) > 0 {
-		i -= len(m.AddresLine_2)
-		copy(dAtA[i:], m.AddresLine_2)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.AddresLine_2)))
+	if len(m.ADDRESS_LINE_2) > 0 {
+		i -= len(m.ADDRESS_LINE_2)
+		copy(dAtA[i:], m.ADDRESS_LINE_2)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.ADDRESS_LINE_2)))
 		i--
 		dAtA[i] = 0x2a
 	}
-	if len(m.AddresLine_1) > 0 {
-		i -= len(m.AddresLine_1)
-		copy(dAtA[i:], m.AddresLine_1)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.AddresLine_1)))
+	if len(m.ADDRESS_LINE_1) > 0 {
+		i -= len(m.ADDRESS_LINE_1)
+		copy(dAtA[i:], m.ADDRESS_LINE_1)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.ADDRESS_LINE_1)))
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.City) > 0 {
-		i -= len(m.City)
-		copy(dAtA[i:], m.City)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.City)))
+	if len(m.CITY) > 0 {
+		i -= len(m.CITY)
+		copy(dAtA[i:], m.CITY)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.CITY)))
 		i--
 		dAtA[i] = 0x1a
 	}
-	if len(m.Region) > 0 {
-		i -= len(m.Region)
-		copy(dAtA[i:], m.Region)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.Region)))
+	if len(m.REGION) > 0 {
+		i -= len(m.REGION)
+		copy(dAtA[i:], m.REGION)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.REGION)))
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.Country) > 0 {
-		i -= len(m.Country)
-		copy(dAtA[i:], m.Country)
-		i = encodeVarintCommon(dAtA, i, uint64(len(m.Country)))
+	if len(m.COUNTRY) > 0 {
+		i -= len(m.COUNTRY)
+		copy(dAtA[i:], m.COUNTRY)
+		i = encodeVarintCommon(dAtA, i, uint64(len(m.COUNTRY)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -353,27 +353,27 @@ func (m *Address) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Country)
+	l = len(m.COUNTRY)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
-	l = len(m.Region)
+	l = len(m.REGION)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
-	l = len(m.City)
+	l = len(m.CITY)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
-	l = len(m.AddresLine_1)
+	l = len(m.ADDRESS_LINE_1)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
-	l = len(m.AddresLine_2)
+	l = len(m.ADDRESS_LINE_2)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
-	l = len(m.PostalCode)
+	l = len(m.POSTAL_CODE)
 	if l > 0 {
 		n += 1 + l + sovCommon(uint64(l))
 	}
@@ -391,12 +391,12 @@ func (this *Address) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Address{`,
-		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
-		`Region:` + fmt.Sprintf("%v", this.Region) + `,`,
-		`City:` + fmt.Sprintf("%v", this.City) + `,`,
-		`AddresLine_1:` + fmt.Sprintf("%v", this.AddresLine_1) + `,`,
-		`AddresLine_2:` + fmt.Sprintf("%v", this.AddresLine_2) + `,`,
-		`PostalCode:` + fmt.Sprintf("%v", this.PostalCode) + `,`,
+		`COUNTRY:` + fmt.Sprintf("%v", this.COUNTRY) + `,`,
+		`REGION:` + fmt.Sprintf("%v", this.REGION) + `,`,
+		`CITY:` + fmt.Sprintf("%v", this.CITY) + `,`,
+		`ADDRESS_LINE_1:` + fmt.Sprintf("%v", this.ADDRESS_LINE_1) + `,`,
+		`ADDRESS_LINE_2:` + fmt.Sprintf("%v", this.ADDRESS_LINE_2) + `,`,
+		`POSTAL_CODE:` + fmt.Sprintf("%v", this.POSTAL_CODE) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -440,7 +440,7 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field COUNTRY", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -468,11 +468,11 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Country = string(dAtA[iNdEx:postIndex])
+			m.COUNTRY = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Region", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field REGION", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -500,11 +500,11 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Region = string(dAtA[iNdEx:postIndex])
+			m.REGION = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field CITY", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -532,11 +532,11 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.City = string(dAtA[iNdEx:postIndex])
+			m.CITY = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AddresLine_1", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ADDRESS_LINE_1", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -564,11 +564,11 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.AddresLine_1 = string(dAtA[iNdEx:postIndex])
+			m.ADDRESS_LINE_1 = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AddresLine_2", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ADDRESS_LINE_2", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -596,11 +596,11 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.AddresLine_2 = string(dAtA[iNdEx:postIndex])
+			m.ADDRESS_LINE_2 = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PostalCode", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field POSTAL_CODE", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -628,7 +628,7 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PostalCode = string(dAtA[iNdEx:postIndex])
+			m.POSTAL_CODE = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
