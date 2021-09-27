@@ -89,6 +89,7 @@ message Room {
     int32 max_capacity = 3;
     float price = 4;
     repeated bytes room_images = 5;
+    repeated string amenity_names = 6;
 }
 
 message TripTemplate {
@@ -122,7 +123,7 @@ message Hotel {
     repeated string highlights = 3;
     // optional images when creating a new hotel
     repeated bytes images = 4;
-    // TODO haven't dealt with the rooms yet.
+    repeated Room rooms = 5;
 }
 
 message Liveaboard {
@@ -134,7 +135,7 @@ message Liveaboard {
     repeated string highlights = 5;
     // optional images when creating a new liveaboard
     repeated string images = 6;
-    // TODO haven't dealt with the rooms yet.
+    repeated Room rooms = 7;
 }
 
 message AddDiveMasterRequest {
