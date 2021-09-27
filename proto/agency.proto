@@ -83,6 +83,12 @@ message Room {
         FLOORED_ROOM = 21;
         SMOKING_NON_SMOKING = 22;
     }
+
+    RoomType room_type = 1;
+    string description = 2;
+    int32 max_capacity = 3;
+    float price = 4;
+    repeated bytes room_images = 5;
 }
 
 message TripTemplate {
