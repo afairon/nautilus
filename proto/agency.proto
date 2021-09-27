@@ -57,6 +57,34 @@ message Place {
     string city = 2;
 }
 
+message Room {
+    enum RoomType {
+        SINGLE = 0;
+        DOUBLE = 1;
+        TRIPLE = 2;
+        QUAD = 3;
+        QUEEN = 4;
+        KING = 5;
+        TWIN = 6;
+        HOLLYWOOD_TWIN_ROOM = 7;
+        DOUBLE_DOUBLE = 8;
+        STUDIO = 9;
+        EXECUTEIVE_SUITE = 10;
+        MINI_SUITE = 11;
+        PRESIDENTAL_SUITE = 12;
+        APARTMENT = 13;
+        CONNECTING_ROOMS = 14;
+        MURPHY_ROOM = 15;
+        DISABLED_ROOM = 16;
+        CABANA = 17;
+        ADJOINING_ROOMS = 18;
+        ADJACENT_ROOMS = 19;
+        VILLA = 20;
+        FLOORED_ROOM = 21;
+        SMOKING_NON_SMOKING = 22;
+    }
+}
+
 message TripTemplate {
 
     enum TripType {
@@ -78,7 +106,6 @@ message Trip {
     google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
     int32 max_capacity = 3;
     int32 price_per_pserson = 4;
-    // TODO Should I just reuse DiveMaster above?
     repeated DiveMasterFirstAndLastName dive_masters = 5;
 }
 
