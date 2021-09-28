@@ -10,6 +10,13 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	writeTimeout = 30 * time.Second
+	readTimeout  = 30 * time.Second
+	idleTimeout  = 1 * time.Minute
+)
+
+// CreateGRPCWebServer returns a http server.
 func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.Server {
 	wrappedGrpc := grpcweb.WrapServer(grpcServer)
 
@@ -17,6 +24,7 @@ func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.S
 		if r.Method != "OPTIONS" && !wrappedGrpc.IsGrpcWebRequest(r) {
 			log.Println("Web gRPC wrong call:", r.URL.Path)
 			log.Println("Web gRPC remote:", r.RemoteAddr)
+			w.WriteHeader(http.StatusNotFound)
 			return
 		}
 
@@ -36,7 +44,8 @@ func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.S
 	return &http.Server{
 		Addr:         fmt.Sprintf("%s:%d", host, port),
 		Handler:      handler,
-		WriteTimeout: 30 * time.Second,
-		ReadTimeout:  30 * time.Second,
+		ReadTimeout:  readTimeout,
+		WriteTimeout: writeTimeout,
+		IdleTimeout:  idleTimeout,
 	}
 }

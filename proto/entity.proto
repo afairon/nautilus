@@ -7,15 +7,225 @@ import "common.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "./pb";
+option go_package = "./entity";
 
 // Account entity
 message Account {
-    string email = 1 [(gogoproto.moretags) = "db:\"email\""];
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
     string username = 2 [(gogoproto.moretags) = "db:\"username\""];
-    string password = 3 [(gogoproto.moretags) = "db:\"password\""];
-    google.protobuf.Timestamp created_at = 4 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_at\""];
-    google.protobuf.Timestamp updated_at = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_at\""];
-    common.AccountType type = 6 [(gogoproto.moretags) = "db:\"type\""];
-    bool activated = 7 [(gogoproto.moretags) = "db:\"activated\""];
+    string email = 3 [(gogoproto.moretags) = "db:\"email\""];
+    string password = 4 [(gogoproto.moretags) = "db:\"password\""];
+    common.AccountType type = 5 [(gogoproto.moretags) = "db:\"type\""];
+    bool verified = 6 [(gogoproto.moretags) = "db:\"verified\""];
+    bool active = 7 [(gogoproto.moretags) = "db:\"active\""];
+    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Address entity
+message Address {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string address_line_1 = 2 [(gogoproto.moretags) = "db:\"address_line_1\""];
+    string address_line_2 = 3 [(gogoproto.moretags) = "db:\"address_line_2\""];
+    string city = 4 [(gogoproto.moretags) = "db:\"city\""];
+    string postcode = 5 [(gogoproto.moretags) = "db:\"postcode\""];
+    string region = 6 [(gogoproto.moretags) = "db:\"region\""];
+    string country = 7 [(gogoproto.moretags) = "db:\"country\""];
+    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Agency entity
+message Agency {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string phone = 3 [(gogoproto.moretags) = "db:\"phone\""];
+    uint64 account_id = 4 [(gogoproto.moretags) = "db:\"account_id\""];
+    uint64 address_id = 5 [(gogoproto.moretags) = "db:\"address_id\""];
+    google.protobuf.Timestamp created_on = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 7 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Diver entity
+message Diver {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string first_name = 2 [(gogoproto.moretags) = "db:\"first_name\""];
+    string last_name = 3 [(gogoproto.moretags) = "db:\"last_name\""];
+    string phone = 4 [(gogoproto.moretags) = "db:\"phone\""];
+    string birth_date = 5 [(gogoproto.moretags) = "db:\"birth_date\""];
+    common.LevelType level = 6 [(gogoproto.moretags) = "db:\"level\""];
+    uint64 account_id = 7 [(gogoproto.moretags) = "db:\"account_id\""];
+    repeated string documents = 8 [(gogoproto.moretags) = "db:\"documents\""];
+    google.protobuf.Timestamp created_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 10 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Staff entity
+message Staff {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string first_name = 2 [(gogoproto.moretags) = "db:\"first_name\""];
+    string last_name = 3 [(gogoproto.moretags) = "db:\"last_name\""];
+    string position = 4 [(gogoproto.moretags) = "db:\"position\""];
+    common.GenderType gender = 5 [(gogoproto.moretags) = "db:\"gender\""];
+    uint64 agency_id = 6 [(gogoproto.moretags) = "db:\"agency_id\""];
+    google.protobuf.Timestamp created_on = 7 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Hotel entity
+message Hotel {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string description = 3 [(gogoproto.moretags) = "db:\"description\""];
+    uint32 star = 4 [(gogoproto.moretags) = "db:\"star\""];
+    string phone = 5 [(gogoproto.moretags) = "db:\"phone\""];
+    uint64 agency_id = 6 [(gogoproto.moretags) = "db:\"agency_id\""];
+    uint64 address_id = 7 [(gogoproto.moretags) = "db:\"address_id\""];
+    repeated string images = 8 [(gogoproto.moretags) = "db:\"images\""];
+    google.protobuf.Timestamp created_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 10 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Liveaboard entity
+message Liveaboard {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string description = 3 [(gogoproto.moretags) = "db:\"description\""];
+    uint32 length = 4 [(gogoproto.moretags) = "db:\"length\""];
+    uint32 width = 5 [(gogoproto.moretags) = "db:\"width\""];
+    uint64 agency_id = 6 [(gogoproto.moretags) = "db:\"agency_id\""];
+    repeated string images = 7 [(gogoproto.moretags) = "db:\"images\""];
+    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Amenity entity
+message Amenity {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string description = 3 [(gogoproto.moretags) = "db:\"description\""];
+    google.protobuf.Timestamp created_on = 4 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// RoomType entity
+message RoomType {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string description = 3 [(gogoproto.moretags) = "db:\"description\""];
+    uint32 max_guest = 4 [(gogoproto.moretags) = "db:\"max_guest\""];
+    float price = 5 [(gogoproto.moretags) = "db:\"price\""];
+    uint32 quantity = 6 [(gogoproto.moretags) = "db:\"quantity\""];
+    uint64 hotel_id = 7 [(gogoproto.moretags) = "db:\"hotel_id\""];
+    uint64 liveaboard_id = 8 [(gogoproto.moretags) = "db:\"liveaboard_id\""];
+    repeated string images = 9 [(gogoproto.moretags) = "db:\"images\""];
+    google.protobuf.Timestamp created_on = 10 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 11 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// RoomAmenity entity
+message RoomAmenity {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    uint64 room_type_id = 2 [(gogoproto.moretags) = "db:\"room_type_id\""];
+    uint64 amenity_id = 3 [(gogoproto.moretags) = "db:\"amenity_id\""];
+}
+
+// Boat entity
+message Boat {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    uint64 agency_id = 3 [(gogoproto.moretags) = "db:\"agency_id\""];
+    repeated string images = 4 [(gogoproto.moretags) = "db:\"images\""];
+    google.protobuf.Timestamp created_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// TripTemplate entity
+message TripTemplate {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string name = 2 [(gogoproto.moretags) = "db:\"name\""];
+    string description = 3 [(gogoproto.moretags) = "db:\"description\""];
+    common.TripType type = 4 [(gogoproto.moretags) = "db:\"type\""];
+    uint64 agency_id = 5 [(gogoproto.moretags) = "db:\"agency_id\""];
+    uint64 hotel_id = 6 [(gogoproto.moretags) = "db:\"hotel_id\""];
+    uint64 boat_id = 7 [(gogoproto.moretags) = "db:\"boat_id\""];
+    uint64 liveaboard_id = 8 [(gogoproto.moretags) = "db:\"liveaboard_id\""];
+    repeated string images = 9 [(gogoproto.moretags) = "db:\"images\""];
+    google.protobuf.Timestamp created_on = 10 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 11 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Trip entity
+message Trip {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    uint64 template_id = 2 [(gogoproto.moretags) = "db:\"template_id\""];
+    uint64 agency_id = 3 [(gogoproto.moretags) = "db:\"agency_id\""];
+    uint32 max_guest = 4 [(gogoproto.moretags) = "db:\"max_guest\""];
+    float price = 5 [(gogoproto.moretags) = "db:\"price\""];
+    google.protobuf.Timestamp from_date = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"from_date\""];
+    google.protobuf.Timestamp to_date = 7 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"to_date\""];
+    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// DiveMaster entity
+message DiveMaster {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string first_name = 2 [(gogoproto.moretags) = "db:\"first_name\""];
+    string last_name = 3 [(gogoproto.moretags) = "db:\"last_name\""];
+    common.LevelType level = 4 [(gogoproto.moretags) = "db:\"level\""];
+    uint64 agency_id = 5 [(gogoproto.moretags) = "db:\"agency_id\""];
+    uint64 trip_id = 6 [(gogoproto.moretags) = "db:\"trip_id\""];
+    repeated string documents = 7 [(gogoproto.moretags) = "db:\"documents\""];
+    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// Reservation entity
+message Reservation {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    uint64 trip_id = 2 [(gogoproto.moretags) = "db:\"trip_id\""];
+    uint64 diver_id = 3 [(gogoproto.moretags) = "db:\"diver_id\""];
+    google.protobuf.Timestamp created_on = 4 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// BookedRoom entity
+message BookedRoom {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    uint64 room_type_id = 2 [(gogoproto.moretags) = "db:\"room_type_id\""];
+    uint64 reservation_id = 3 [(gogoproto.moretags) = "db:\"reservation_id\""];
+    uint32 no_adults = 4 [(gogoproto.moretags) = "db:\"no_adults\""];
+    uint32 no_kids = 5 [(gogoproto.moretags) = "db:\"no_kids\""];
+    uint32 quantity = 6 [(gogoproto.moretags) = "db:\"quantity\""];
+}
+
+// TripComment entity
+message TripComment {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string comment = 2 [(gogoproto.moretags) = "db:\"comment\""];
+    uint32 star = 3 [(gogoproto.moretags) = "db:\"star\""];
+    uint64 reservation_id = 4 [(gogoproto.moretags) = "db:\"reservation_id\""];
+    google.protobuf.Timestamp created_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// HotelComment entity
+message HotelComment {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string comment = 2 [(gogoproto.moretags) = "db:\"comment\""];
+    uint32 star = 3 [(gogoproto.moretags) = "db:\"star\""];
+    uint64 reservation_id = 4 [(gogoproto.moretags) = "db:\"reservation_id\""];
+    google.protobuf.Timestamp created_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// LiveaboardComment entity
+message LiveaboardComment {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    string comment = 2 [(gogoproto.moretags) = "db:\"comment\""];
+    uint32 star = 3 [(gogoproto.moretags) = "db:\"star\""];
+    uint64 reservation_id = 4 [(gogoproto.moretags) = "db:\"reservation_id\""];
+    google.protobuf.Timestamp created_on = 5 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 6 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
 }

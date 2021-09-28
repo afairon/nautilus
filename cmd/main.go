@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	Checkout string
-	Time     string
+	Commit string
+	Time   string
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 
 	flag.Parse()
 
-	fmt.Printf("Nautilus Server\nCheckout: %s\nBuilt Time: %s\n", Checkout, Time)
+	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\n", Commit, Time)
 
 	if *flagPGUser == "" {
 		log.Fatal("error: postgres user not provided")
@@ -47,7 +47,7 @@ func main() {
 
 	err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
 	if err != nil {
-		panic(err)
+		log.Fatalf("error: %v", err)
 	}
 	defer db.Close()
 

@@ -15,5 +15,5 @@ message Diver {
     bytes front_image = 6;
     bytes back_image = 7;
     uint32 birth_date = 8;
-    common.Level level = 9;
+    common.LevelType level = 9;
 }

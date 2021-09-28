@@ -10,12 +10,22 @@ enum AccountType {
     DIVER = 2;
 }
 
-enum Level {
+enum GenderType {
+    FEMALE = 0;
+    MALE = 1;
+}
+
+enum LevelType {
     INSTRUCTOR = 0;
     MASTER = 1;
     RESCUE = 2;
-    ADVANCED = 3;
-    OPEN = 4;
+    ADVANCED_OPEN_WATER = 3;
+    OPEN_WATER = 4;
+}
+
+enum TripType {
+    ONSHORE = 0;
+    OFFSHORE = 1;
 }
 
 message Address {
