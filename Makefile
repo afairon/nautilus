@@ -102,13 +102,9 @@ update:
 # Remove binaries and Protocol Buffers files generated for Golang
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR) $(PB_GO_DIR) $(ENTITY_GO_DIR)
+	rm -f $(SERVER_BINARY) $(PB_GO) $(ENTITY_GO)
 
 # Remove every files that can be generated
 .PHONY: clean-all
-clean-all:
-	rm -rf $(BUILD_DIR) \
-		$(PB_GO_DIR) \
-		$(ENTITY_GO_DIR) \
-		$(PB_DART_DIR) \
-		$(VENDOR_DIR)
+clean-all: clean
+	rm -rf $(PB_DART_DIR) $(VENDOR_DIR)

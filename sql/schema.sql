@@ -59,12 +59,12 @@ CREATE TABLE public.account (
 
 CREATE TABLE public.address (
   id bigserial NOT NULL,
-  address_line_1 varchar,
-  address_line_2 varchar,
-  city varchar,
-  postcode varchar,
-  region varchar,
-  country varchar,
+  address_line_1 varchar NOT NULL DEFAULT '',
+  address_line_2 varchar NOT NULL DEFAULT '',
+  city varchar NOT NULL DEFAULT '',
+  postcode varchar NOT NULL DEFAULT '',
+  region varchar NOT NULL DEFAULT '',
+  country varchar NOT NULL DEFAULT '',
   CONSTRAINT address_pk PRIMARY KEY (id)
 );
 
@@ -77,9 +77,10 @@ CREATE TABLE public.address (
 CREATE TABLE public.agency (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  phone varchar,
-  account_id bigint,
-  address_id bigint,
+  phone varchar NOT NULL DEFAULT '',
+  account_id bigint NOT NULL,
+  address_id bigint NOT NULL,
+  documents varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT agency_account_un UNIQUE (account_id),
@@ -103,16 +104,16 @@ CREATE TABLE public.diver (
   id bigserial NOT NULL,
   first_name varchar NOT NULL,
   last_name varchar NOT NULL,
-  phone varchar,
+  phone varchar NOT NULL DEFAULT '',
   birth_date date NOT NULL,
   "level" level_t NOT NULL,
-  account_id bigint,
+  account_id bigint NOT NULL,
   documents varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT diver_account_un UNIQUE (account_id),
   CONSTRAINT diver_pk PRIMARY KEY (id),
-  CONSTRAINT diver_un UNIQUE (first_name, last_name, account_id)
+  CONSTRAINT diver_un UNIQUE (first_name, last_name, phone)
 );
 
 
@@ -130,9 +131,9 @@ CREATE TABLE public.staff (
   id bigserial NOT NULL,
   first_name varchar NOT NULL,
   last_name varchar NOT NULL,
-  "position" varchar,
+  "position" varchar NOT NULL,
   gender gender_t NOT NULL,
-  agency_id bigint,
+  agency_id bigint NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT staff_pk PRIMARY KEY (id)
@@ -152,11 +153,11 @@ ALTER TABLE public.staff ADD CONSTRAINT staff_fk FOREIGN KEY (agency_id) REFEREN
 CREATE TABLE public.hotel (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  description text,
+  description text NOT NULL DEFAULT '',
   star smallint,
-  phone varchar,
-  agency_id bigint,
-  address_id bigint,
+  phone varchar NOT NULL DEFAULT '',
+  agency_id bigint NOT NULL,
+  address_id bigint NOT NULL,
   images varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
@@ -179,10 +180,10 @@ ALTER TABLE public.hotel ADD CONSTRAINT hotel_agency_fk FOREIGN KEY (agency_id) 
 CREATE TABLE public.liveaboard (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  description varchar,
+  description varchar NOT NULL DEFAULT '',
   length real,
   width real,
-  agency_id bigint,
+  agency_id bigint NOT NULL,
   images varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
@@ -204,7 +205,7 @@ ALTER TABLE public.liveaboard ADD CONSTRAINT liveaboard_fk FOREIGN KEY (agency_i
 CREATE TABLE public.amenity (
   id serial NOT NULL,
   "name" varchar NOT NULL,
-  description text,
+  description text NOT NULL DEFAULT '',
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT amenity_pk PRIMARY KEY (id),
@@ -220,7 +221,7 @@ CREATE TABLE public.amenity (
 CREATE TABLE public.room_type (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  description varchar,
+  description varchar NOT NULL DEFAULT '',
   max_guest smallint NOT NULL,
   price real NOT NULL,
   quantity integer NOT NULL,
@@ -269,7 +270,7 @@ ALTER TABLE public.room_amenity_link ADD CONSTRAINT room_amenity_link_room_fk FO
 CREATE TABLE public.boat (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  agency_id bigint,
+  agency_id bigint NOT NULL,
   images varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
@@ -291,7 +292,7 @@ ALTER TABLE public.boat ADD CONSTRAINT boat_fk FOREIGN KEY (agency_id) REFERENCE
 CREATE TABLE public.trip_template (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
-  description varchar,
+  description varchar NOT NULL DEFAULT '',
   "type" trip_t NOT NULL,
   agency_id bigint NOT NULL,
   hotel_id bigint,
@@ -375,6 +376,7 @@ CREATE TABLE public.reservation (
   id bigserial NOT NULL,
   trip_id bigint NOT NULL,
   diver_id bigint NOT NULL,
+  price real NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT reservation_pk PRIMARY KEY (id),

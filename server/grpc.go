@@ -3,8 +3,10 @@ package server
 import (
 	"time"
 
+	"github.com/afairon/nautilus/db"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
+	"github.com/afairon/nautilus/store"
 	"google.golang.org/grpc"
 )
 
@@ -28,5 +30,6 @@ func CreateGRPCServer() *grpc.Server {
 
 // registerServices registers services to gRPC.
 func registerServices(server *grpc.Server) {
-	pb.RegisterAccountServer(server, &service.AccountService{})
+	store := store.NewStore(db.DB)
+	pb.RegisterAccountServer(server, &service.AccountService{Store: store})
 }

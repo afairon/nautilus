@@ -16,8 +16,8 @@ service Account {
 
 message AccountRequest {
     oneof kind {
-        diver.Diver diver = 1;
-        agency.Agency agency = 5;
+        diver.DiverRequest diver = 1;
+        agency.AgencyRequest agency = 5;
     }
     string email = 10;
     string username = 11;

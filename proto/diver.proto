@@ -4,6 +4,9 @@ package diver;
 
 import "common.proto";
 
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "./pb";
 
 message Diver {
@@ -16,4 +19,13 @@ message Diver {
     bytes back_image = 7;
     uint32 birth_date = 8;
     common.LevelType level = 9;
+}
+
+message DiverRequest {
+    string first_name = 1;
+    string last_name = 20;
+    string phone_number = 30;
+    repeated bytes documents = 40;
+    google.protobuf.Timestamp birth_date = 80 [(gogoproto.stdtime) = true];
+    common.LevelType level = 90;
 }

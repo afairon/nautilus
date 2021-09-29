@@ -6,18 +6,23 @@ package pb
 import (
 	bytes "bytes"
 	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	io "io"
 	math "math"
 	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -132,34 +137,125 @@ func (m *Diver) GetLevel() LevelType {
 	return INSTRUCTOR
 }
 
+type DiverRequest struct {
+	FirstName   string     `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName    string     `protobuf:"bytes,20,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	PhoneNumber string     `protobuf:"bytes,30,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Documents   [][]byte   `protobuf:"bytes,40,rep,name=documents,proto3" json:"documents,omitempty"`
+	BirthDate   *time.Time `protobuf:"bytes,80,opt,name=birth_date,json=birthDate,proto3,stdtime" json:"birth_date,omitempty"`
+	Level       LevelType  `protobuf:"varint,90,opt,name=level,proto3,enum=common.LevelType" json:"level,omitempty"`
+}
+
+func (m *DiverRequest) Reset()      { *m = DiverRequest{} }
+func (*DiverRequest) ProtoMessage() {}
+func (*DiverRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_765ae613bf716c8b, []int{1}
+}
+func (m *DiverRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DiverRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DiverRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DiverRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiverRequest.Merge(m, src)
+}
+func (m *DiverRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DiverRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiverRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DiverRequest proto.InternalMessageInfo
+
+func (m *DiverRequest) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *DiverRequest) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *DiverRequest) GetPhoneNumber() string {
+	if m != nil {
+		return m.PhoneNumber
+	}
+	return ""
+}
+
+func (m *DiverRequest) GetDocuments() [][]byte {
+	if m != nil {
+		return m.Documents
+	}
+	return nil
+}
+
+func (m *DiverRequest) GetBirthDate() *time.Time {
+	if m != nil {
+		return m.BirthDate
+	}
+	return nil
+}
+
+func (m *DiverRequest) GetLevel() LevelType {
+	if m != nil {
+		return m.Level
+	}
+	return INSTRUCTOR
+}
+
 func init() {
 	proto.RegisterType((*Diver)(nil), "diver.Diver")
+	proto.RegisterType((*DiverRequest)(nil), "diver.DiverRequest")
 }
 
 func init() { proto.RegisterFile("diver.proto", fileDescriptor_765ae613bf716c8b) }
 
 var fileDescriptor_765ae613bf716c8b = []byte{
-	// 307 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x44, 0x90, 0xb1, 0x4e, 0xf3, 0x30,
-	0x14, 0x46, 0x73, 0xfb, 0x37, 0xfd, 0x1b, 0xb7, 0x20, 0x91, 0x29, 0x02, 0x71, 0x09, 0x2c, 0x64,
-	0x2a, 0x12, 0x6c, 0x8c, 0xa8, 0x0b, 0x52, 0xd5, 0x21, 0x62, 0x62, 0x89, 0x9c, 0xd6, 0xd0, 0xa8,
-	0x89, 0x13, 0x19, 0x53, 0x89, 0x8d, 0x47, 0xe0, 0x31, 0x10, 0x4f, 0xc2, 0xd8, 0xb1, 0x23, 0x75,
-	0x17, 0xc6, 0x3e, 0x02, 0xf2, 0x75, 0x11, 0xe3, 0x3d, 0x47, 0xf7, 0x0c, 0x1f, 0xeb, 0x4d, 0x8b,
-	0x85, 0x50, 0x83, 0x46, 0xd5, 0xba, 0x0e, 0x7d, 0x3a, 0x0e, 0xfb, 0x93, 0xba, 0xaa, 0x6a, 0xe9,
-	0xe0, 0xd9, 0x47, 0x8b, 0xf9, 0x43, 0xcb, 0xc3, 0x63, 0xc6, 0x1e, 0x0a, 0xf5, 0xa4, 0x33, 0xc9,
-	0x2b, 0x11, 0x41, 0x0c, 0x49, 0x90, 0x06, 0x44, 0xc6, 0xbc, 0x12, 0xe1, 0x11, 0x0b, 0x4a, 0xfe,
-	0x6b, 0x5b, 0x64, 0xbb, 0x16, 0x90, 0x3c, 0x65, 0xfd, 0x66, 0x56, 0x4b, 0x91, 0xc9, 0xe7, 0x2a,
-	0x17, 0x2a, 0xfa, 0x47, 0xbe, 0x47, 0x6c, 0x4c, 0x88, 0xf2, 0xaa, 0x96, 0x3a, 0x2b, 0x0b, 0x39,
-	0x8f, 0xda, 0xbb, 0xbc, 0x25, 0xa3, 0x42, 0xce, 0x6d, 0x3e, 0xe7, 0x93, 0xb9, 0xb3, 0xbe, 0xcb,
-	0x5b, 0x40, 0xf2, 0x84, 0xf5, 0xdc, 0x6f, 0x51, 0xf1, 0x47, 0x11, 0x75, 0x62, 0x48, 0xfa, 0xa9,
-	0xcb, 0xdd, 0x5a, 0x62, 0xe3, 0xf4, 0xed, 0xfc, 0x7f, 0xf2, 0xd4, 0xfb, 0xd3, 0x85, 0xd2, 0xb3,
-	0x6c, 0xca, 0xb5, 0x88, 0xba, 0x31, 0x24, 0x7b, 0x69, 0x40, 0x64, 0xc8, 0xb5, 0x08, 0xcf, 0x99,
-	0x5f, 0x8a, 0x85, 0x28, 0xa3, 0x20, 0x86, 0x64, 0xff, 0xf2, 0x60, 0xb0, 0x5b, 0x68, 0x64, 0xe1,
-	0xdd, 0x4b, 0x23, 0x52, 0xe7, 0x6f, 0xae, 0x97, 0x6b, 0xf4, 0x56, 0x6b, 0xf4, 0xb6, 0x6b, 0x84,
-	0x57, 0x83, 0xf0, 0x6e, 0x10, 0x3e, 0x0d, 0xc2, 0xd2, 0x20, 0x7c, 0x19, 0x84, 0x6f, 0x83, 0xde,
-	0xd6, 0x20, 0xbc, 0x6d, 0xd0, 0x5b, 0x6e, 0xd0, 0x5b, 0x6d, 0xd0, 0xbb, 0x6f, 0x0f, 0x2e, 0x9a,
-	0x3c, 0xef, 0xd0, 0xde, 0x57, 0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe4, 0xf3, 0x5d, 0x39, 0x93,
-	0x01, 0x00, 0x00,
+	// 430 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x91, 0x31, 0x6f, 0xd3, 0x40,
+	0x14, 0xc7, 0x7d, 0x6d, 0x52, 0xea, 0x4b, 0x40, 0xc2, 0x62, 0xb0, 0x02, 0x5c, 0x4c, 0x17, 0xbc,
+	0xe0, 0x48, 0x65, 0x63, 0x41, 0xaa, 0xba, 0x20, 0x55, 0x15, 0xb2, 0x3a, 0x75, 0x89, 0xce, 0xce,
+	0xab, 0x73, 0x8a, 0xef, 0xce, 0xd8, 0xe7, 0x4a, 0x6c, 0x7c, 0x84, 0x7e, 0x0c, 0xc4, 0x27, 0x61,
+	0xcc, 0xd8, 0x0d, 0xe2, 0x2c, 0x8c, 0x5d, 0xd8, 0xd1, 0xbd, 0x4b, 0x88, 0x10, 0x08, 0xc4, 0x96,
+	0xf7, 0xfb, 0xbd, 0xfb, 0xc7, 0xef, 0x3d, 0x3a, 0x98, 0x89, 0x6b, 0xa8, 0x93, 0xaa, 0xd6, 0x46,
+	0x07, 0x7d, 0x2c, 0x46, 0xc3, 0x5c, 0x4b, 0xa9, 0x95, 0x83, 0xa3, 0x17, 0x85, 0x30, 0xf3, 0x36,
+	0x4b, 0x72, 0x2d, 0x27, 0x85, 0x2e, 0xf4, 0x04, 0x71, 0xd6, 0x5e, 0x61, 0x85, 0x05, 0xfe, 0xda,
+	0xb4, 0x8f, 0x0b, 0xad, 0x8b, 0x12, 0x76, 0x5d, 0x46, 0x48, 0x68, 0x0c, 0x97, 0x95, 0x6b, 0x38,
+	0xfa, 0xb4, 0x47, 0xfb, 0xa7, 0xf6, 0x7f, 0x82, 0xa7, 0x94, 0x5e, 0x89, 0xba, 0x31, 0x53, 0xc5,
+	0x25, 0x84, 0x24, 0x22, 0xb1, 0x9f, 0xfa, 0x48, 0xce, 0xb9, 0x84, 0xe0, 0x31, 0xf5, 0x4b, 0xbe,
+	0xb5, 0x7b, 0x68, 0x0f, 0x2d, 0x40, 0xf9, 0x8c, 0x0e, 0xab, 0xb9, 0x56, 0x30, 0x55, 0xad, 0xcc,
+	0xa0, 0x0e, 0xf7, 0xd1, 0x0f, 0x90, 0x9d, 0x23, 0xc2, 0xf8, 0x5a, 0x2b, 0x33, 0x2d, 0x85, 0x5a,
+	0x84, 0xbd, 0x4d, 0xbc, 0x25, 0x67, 0x42, 0x2d, 0x6c, 0x7c, 0xc6, 0xf3, 0x85, 0xb3, 0x7d, 0x17,
+	0x6f, 0x01, 0xca, 0x31, 0x1d, 0xb8, 0xb7, 0x42, 0xf2, 0x02, 0xc2, 0x83, 0x88, 0xc4, 0xc3, 0xd4,
+	0xc5, 0xbd, 0xb1, 0xc4, 0x86, 0xe3, 0x6b, 0xe7, 0xef, 0xa1, 0xc7, 0xbc, 0x9d, 0x16, 0xb5, 0x99,
+	0x4f, 0x67, 0xdc, 0x40, 0x78, 0x18, 0x91, 0xf8, 0x7e, 0xea, 0x23, 0x39, 0xe5, 0x06, 0x82, 0xe7,
+	0xb4, 0x5f, 0xc2, 0x35, 0x94, 0xa1, 0x1f, 0x91, 0xf8, 0xc1, 0xf1, 0xc3, 0x64, 0xb3, 0xf1, 0x33,
+	0x0b, 0x2f, 0xde, 0x57, 0x90, 0x3a, 0x7f, 0xf4, 0x9d, 0xd0, 0x21, 0x2e, 0x2b, 0x85, 0x77, 0x2d,
+	0x34, 0xe6, 0xbf, 0x76, 0xf6, 0xe8, 0x1f, 0x3b, 0x63, 0xbf, 0xef, 0xec, 0x09, 0xf5, 0x67, 0x3a,
+	0x6f, 0x25, 0x28, 0xd3, 0x84, 0x71, 0xb4, 0x6f, 0xa7, 0xfa, 0x09, 0x82, 0xd7, 0xbf, 0x4c, 0xf5,
+	0x36, 0x22, 0xf1, 0xe0, 0x78, 0x94, 0xb8, 0x83, 0x27, 0xdb, 0x83, 0x27, 0x17, 0xdb, 0x83, 0x9f,
+	0xf4, 0x6e, 0xbe, 0x8c, 0xc9, 0x1f, 0xe7, 0xbe, 0xfc, 0xfb, 0xdc, 0x27, 0xaf, 0x96, 0x2b, 0xe6,
+	0xdd, 0xae, 0x98, 0x77, 0xb7, 0x62, 0xe4, 0x43, 0xc7, 0xc8, 0xc7, 0x8e, 0x91, 0xcf, 0x1d, 0x23,
+	0xcb, 0x8e, 0x91, 0xaf, 0x1d, 0x23, 0xdf, 0x3a, 0xe6, 0xdd, 0x75, 0x8c, 0xdc, 0xac, 0x99, 0xb7,
+	0x5c, 0x33, 0xef, 0x76, 0xcd, 0xbc, 0xcb, 0x5e, 0x32, 0xa9, 0xb2, 0xec, 0x00, 0xbf, 0xe4, 0xe5,
+	0x8f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xb4, 0x4d, 0x52, 0x41, 0xdb, 0x02, 0x00, 0x00,
 }
 
 func (this *Diver) Equal(that interface{}) bool {
@@ -210,6 +306,54 @@ func (this *Diver) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *DiverRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DiverRequest)
+	if !ok {
+		that2, ok := that.(DiverRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.FirstName != that1.FirstName {
+		return false
+	}
+	if this.LastName != that1.LastName {
+		return false
+	}
+	if this.PhoneNumber != that1.PhoneNumber {
+		return false
+	}
+	if len(this.Documents) != len(that1.Documents) {
+		return false
+	}
+	for i := range this.Documents {
+		if !bytes.Equal(this.Documents[i], that1.Documents[i]) {
+			return false
+		}
+	}
+	if that1.BirthDate == nil {
+		if this.BirthDate != nil {
+			return false
+		}
+	} else if !this.BirthDate.Equal(*that1.BirthDate) {
+		return false
+	}
+	if this.Level != that1.Level {
+		return false
+	}
+	return true
+}
 func (this *Diver) GoString() string {
 	if this == nil {
 		return "nil"
@@ -223,6 +367,21 @@ func (this *Diver) GoString() string {
 	s = append(s, "BackLink: "+fmt.Sprintf("%#v", this.BackLink)+",\n")
 	s = append(s, "FrontImage: "+fmt.Sprintf("%#v", this.FrontImage)+",\n")
 	s = append(s, "BackImage: "+fmt.Sprintf("%#v", this.BackImage)+",\n")
+	s = append(s, "BirthDate: "+fmt.Sprintf("%#v", this.BirthDate)+",\n")
+	s = append(s, "Level: "+fmt.Sprintf("%#v", this.Level)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DiverRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 10)
+	s = append(s, "&pb.DiverRequest{")
+	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
+	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
+	s = append(s, "PhoneNumber: "+fmt.Sprintf("%#v", this.PhoneNumber)+",\n")
+	s = append(s, "Documents: "+fmt.Sprintf("%#v", this.Documents)+",\n")
 	s = append(s, "BirthDate: "+fmt.Sprintf("%#v", this.BirthDate)+",\n")
 	s = append(s, "Level: "+fmt.Sprintf("%#v", this.Level)+",\n")
 	s = append(s, "}")
@@ -318,6 +477,84 @@ func (m *Diver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DiverRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DiverRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DiverRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Level != 0 {
+		i = encodeVarintDiver(dAtA, i, uint64(m.Level))
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0xd0
+	}
+	if m.BirthDate != nil {
+		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.BirthDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.BirthDate):])
+		if err1 != nil {
+			return 0, err1
+		}
+		i -= n1
+		i = encodeVarintDiver(dAtA, i, uint64(n1))
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0x82
+	}
+	if len(m.Documents) > 0 {
+		for iNdEx := len(m.Documents) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Documents[iNdEx])
+			copy(dAtA[i:], m.Documents[iNdEx])
+			i = encodeVarintDiver(dAtA, i, uint64(len(m.Documents[iNdEx])))
+			i--
+			dAtA[i] = 0x2
+			i--
+			dAtA[i] = 0xc2
+		}
+	}
+	if len(m.PhoneNumber) > 0 {
+		i -= len(m.PhoneNumber)
+		copy(dAtA[i:], m.PhoneNumber)
+		i = encodeVarintDiver(dAtA, i, uint64(len(m.PhoneNumber)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xf2
+	}
+	if len(m.LastName) > 0 {
+		i -= len(m.LastName)
+		copy(dAtA[i:], m.LastName)
+		i = encodeVarintDiver(dAtA, i, uint64(len(m.LastName)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa2
+	}
+	if len(m.FirstName) > 0 {
+		i -= len(m.FirstName)
+		copy(dAtA[i:], m.FirstName)
+		i = encodeVarintDiver(dAtA, i, uint64(len(m.FirstName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintDiver(dAtA []byte, offset int, v uint64) int {
 	offset -= sovDiver(v)
 	base := offset
@@ -372,6 +609,40 @@ func (m *Diver) Size() (n int) {
 	return n
 }
 
+func (m *DiverRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FirstName)
+	if l > 0 {
+		n += 1 + l + sovDiver(uint64(l))
+	}
+	l = len(m.LastName)
+	if l > 0 {
+		n += 2 + l + sovDiver(uint64(l))
+	}
+	l = len(m.PhoneNumber)
+	if l > 0 {
+		n += 2 + l + sovDiver(uint64(l))
+	}
+	if len(m.Documents) > 0 {
+		for _, b := range m.Documents {
+			l = len(b)
+			n += 2 + l + sovDiver(uint64(l))
+		}
+	}
+	if m.BirthDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.BirthDate)
+		n += 2 + l + sovDiver(uint64(l))
+	}
+	if m.Level != 0 {
+		n += 2 + sovDiver(uint64(m.Level))
+	}
+	return n
+}
+
 func sovDiver(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -391,6 +662,21 @@ func (this *Diver) String() string {
 		`FrontImage:` + fmt.Sprintf("%v", this.FrontImage) + `,`,
 		`BackImage:` + fmt.Sprintf("%v", this.BackImage) + `,`,
 		`BirthDate:` + fmt.Sprintf("%v", this.BirthDate) + `,`,
+		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DiverRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DiverRequest{`,
+		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
+		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
+		`PhoneNumber:` + fmt.Sprintf("%v", this.PhoneNumber) + `,`,
+		`Documents:` + fmt.Sprintf("%v", this.Documents) + `,`,
+		`BirthDate:` + strings.Replace(fmt.Sprintf("%v", this.BirthDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
 		`}`,
 	}, "")
@@ -681,6 +967,239 @@ func (m *Diver) Unmarshal(dAtA []byte) error {
 				}
 			}
 		case 9:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Level", wireType)
+			}
+			m.Level = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Level |= LevelType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipDiver(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DiverRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowDiver
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DiverRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DiverRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FirstName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 20:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 30:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PhoneNumber", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PhoneNumber = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 40:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Documents", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Documents = append(m.Documents, make([]byte, postIndex-iNdEx))
+			copy(m.Documents[len(m.Documents)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 80:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BirthDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.BirthDate == nil {
+				m.BirthDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.BirthDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 90:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Level", wireType)
 			}

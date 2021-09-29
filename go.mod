@@ -8,6 +8,7 @@ require (
 	github.com/improbable-eng/grpc-web v0.14.1
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/lib/pq v1.10.3
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	google.golang.org/grpc v1.40.0
 )
 
