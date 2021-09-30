@@ -6,6 +6,8 @@ import (
 	"github.com/afairon/nautilus/entity"
 )
 
+// AccountStore defines interface for interaction
+// with the account storage.
 type AccountStore interface {
 	Create(context.Context, *entity.Account) (entity.Account, error)
 	Get(context.Context, int64) (entity.Account, error)
@@ -13,16 +15,19 @@ type AccountStore interface {
 	GetByUsername(context.Context, string) (entity.Account, error)
 }
 
+// Account implements AccountStore interface.
 type Account struct {
 	db DBTX
 }
 
+// NewAccountStore creates a new AccountStore.
 func NewAccountStore(db DBTX) AccountStore {
 	return &Account{
 		db: db,
 	}
 }
 
+// Create creates an account record and returns the newly created record.
 func (store *Account) Create(ctx context.Context, account *entity.Account) (entity.Account, error) {
 	var result entity.Account
 
@@ -39,6 +44,7 @@ func (store *Account) Create(ctx context.Context, account *entity.Account) (enti
 	return result, err
 }
 
+// Get retrieves the account record by its id.
 func (store *Account) Get(ctx context.Context, id int64) (entity.Account, error) {
 	var result entity.Account
 
@@ -52,6 +58,7 @@ func (store *Account) Get(ctx context.Context, id int64) (entity.Account, error)
 	return result, err
 }
 
+// Get retrieves the account record by its email.
 func (store *Account) GetByEmail(ctx context.Context, email string) (entity.Account, error) {
 	var result entity.Account
 
@@ -65,6 +72,7 @@ func (store *Account) GetByEmail(ctx context.Context, email string) (entity.Acco
 	return result, err
 }
 
+// Get retrieves the account record by its username.
 func (store *Account) GetByUsername(ctx context.Context, username string) (entity.Account, error) {
 	var result entity.Account
 

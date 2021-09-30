@@ -29,7 +29,7 @@ VENDOR_DIR = vendor
 SERVER_BINARY = $(BUILD_DIR)/nautilus-server
 
 # Google Protocol Buffers definitions
-GOOGLE_PROTO := $(wildcard $(GOOGLE_PROTO_DIR)/google/protobuf/*.proto)
+GOOGLE_PROTO := $(GOOGLE_PROTO_DIR)/google/protobuf/empty.proto $(GOOGLE_PROTO_DIR)/google/protobuf/timestamp.proto
 # Protocol Buffers definitions
 PROTO := $(filter-out $(PROTO_DIR)/entity.proto,$(wildcard $(PROTO_DIR)/*.proto))
 ENTITY := $(PROTO_DIR)/entity.proto

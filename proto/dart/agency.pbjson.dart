@@ -8,14 +8,16 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
-@$core.Deprecated('Use agencyDescriptor instead')
-const Agency$json = const {
-  '1': 'Agency',
+@$core.Deprecated('Use agencyRequestDescriptor instead')
+const AgencyRequest$json = const {
+  '1': 'AgencyRequest',
   '2': const [
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'phone_number', '3': 2, '4': 1, '5': 9, '10': 'phoneNumber'},
+    const {'1': 'phone_number', '3': 20, '4': 1, '5': 9, '10': 'phoneNumber'},
+    const {'1': 'address', '3': 30, '4': 1, '5': 11, '6': '.common.Address', '10': 'address'},
+    const {'1': 'documents', '3': 40, '4': 3, '5': 11, '6': '.common.FileTransfer', '10': 'documents'},
   ],
 };
 
-/// Descriptor for `Agency`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSEgoEbmFtZRgBIAEoCVIEbmFtZRIhCgxwaG9uZV9udW1iZXIYAiABKAlSC3Bob25lTnVtYmVy');
+/// Descriptor for `AgencyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List agencyRequestDescriptor = $convert.base64Decode('Cg1BZ2VuY3lSZXF1ZXN0EhIKBG5hbWUYASABKAlSBG5hbWUSIQoMcGhvbmVfbnVtYmVyGBQgASgJUgtwaG9uZU51bWJlchIpCgdhZGRyZXNzGB4gASgLMg8uY29tbW9uLkFkZHJlc3NSB2FkZHJlc3MSMgoJZG9jdW1lbnRzGCggAygLMhQuY29tbW9uLkZpbGVUcmFuc2ZlclIJZG9jdW1lbnRz');

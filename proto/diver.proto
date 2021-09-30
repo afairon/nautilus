@@ -25,7 +25,7 @@ message DiverRequest {
     string first_name = 1;
     string last_name = 20;
     string phone_number = 30;
-    repeated bytes documents = 40;
+    repeated common.FileTransfer documents = 40;
     google.protobuf.Timestamp birth_date = 80 [(gogoproto.stdtime) = true];
     common.LevelType level = 90;
 }

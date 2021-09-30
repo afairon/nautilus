@@ -7,6 +7,9 @@ import (
 	"net"
 
 	"github.com/afairon/nautilus/db"
+	"github.com/afairon/nautilus/internal/media"
+	"github.com/afairon/nautilus/internal/media/fs"
+	"github.com/afairon/nautilus/internal/media/s3"
 	"github.com/afairon/nautilus/server"
 )
 
@@ -16,6 +19,7 @@ var (
 )
 
 func main() {
+	// Flag definitions
 	flagBindAddr := flag.String("bind_addr", "0.0.0.0", "address to bind the server to")
 	flagGRPCPort := flag.Int("grpc_port", 50051, "gRPC port to listen on")
 
@@ -29,6 +33,11 @@ func main() {
 	flagPGPassword := flag.String("pg_password", "", "the password of the user")
 	flagPGDBName := flag.String("pg_dbname", "", "the name of the database to be connected")
 
+	flagS3 := flag.Bool("s3", false, "use s3 as backend object storage")
+	flagDataPath := flag.String("data", "data", "path of data directory")
+	flagDataRootURL := flag.String("root", "", "root url")
+
+	// Parse arguments
 	flag.Parse()
 
 	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\n", Commit, Time)
@@ -45,11 +54,24 @@ func main() {
 		log.Fatal("error: postgres database name not provided")
 	}
 
-	err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
+	// Connect to postgres.
+	db, err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 	defer db.Close()
+
+	// Object storage interface
+	var mediaStorage media.Store
+
+	// Choose object storage backend
+	if *flagS3 {
+		mediaStorage = s3.NewStore()
+		log.Println("Using S3 object storage backend.")
+	} else {
+		mediaStorage = fs.NewStore(*flagDataPath, *flagDataRootURL)
+		log.Println("Using FS object storage backend.")
+	}
 
 	addr := fmt.Sprintf("%s:%d", *flagBindAddr, *flagGRPCPort)
 	lis, err := net.Listen("tcp", addr)
@@ -57,16 +79,21 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	grpcServer := server.CreateGRPCServer()
+	// Create grpc server.
+	grpcServer := server.CreateGRPCServer(db, mediaStorage)
 
 	if *flagGRPCWeb {
+		// grpc web enabled
+		// Create grpc web server.
 		grpcWebServer := server.CreateGRPCWebServer(grpcServer, *flagHTTPAddr, *flagHTTPPort)
 
 		log.Printf("gRPC Web server listening at %v\n", grpcWebServer.Addr)
 
+		// Run grpc web in a goroutine.
 		go grpcWebServer.ListenAndServe()
 	}
 
+	// Run grpc server.
 	log.Printf("gRPC server listening at %v\n", lis.Addr())
 	if err = grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

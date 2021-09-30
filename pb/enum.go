@@ -13,6 +13,8 @@ var (
 	ErrUnknownEnum = errors.New("enum: unknown enum")
 )
 
+// Scan implements the sql.Scanner interface.
+// It maps postgres data type with AccountType enum.
 func (m *AccountType) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
@@ -26,10 +28,15 @@ func (m *AccountType) Scan(value interface{}) error {
 	return nil
 }
 
+// Value implements the driver.Valuer interface.
+// It converts AccountType enum to string so that postgres
+// can understand.
 func (m AccountType) Value() (driver.Value, error) {
 	return m.String(), nil
 }
 
+// Scan implements the sql.Scanner interface.
+// It maps postgres data type with GenderType enum.
 func (m *GenderType) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
@@ -43,10 +50,15 @@ func (m *GenderType) Scan(value interface{}) error {
 	return nil
 }
 
+// Value implements the driver.Valuer interface.
+// It converts GenderType enum to string so that postgres
+// can understand.
 func (m GenderType) Value() (driver.Value, error) {
 	return m.String(), nil
 }
 
+// Scan implements the sql.Scanner interface.
+// It maps postgres data type with LevelType enum.
 func (m *LevelType) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
@@ -60,10 +72,15 @@ func (m *LevelType) Scan(value interface{}) error {
 	return nil
 }
 
+// Value implements the driver.Valuer interface.
+// It converts LevelType enum to string so that postgres
+// can understand.
 func (m LevelType) Value() (driver.Value, error) {
 	return m.String(), nil
 }
 
+// Scan implements the sql.Scanner interface.
+// It maps postgres data type with TripType enum.
 func (m *TripType) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
@@ -77,6 +94,9 @@ func (m *TripType) Scan(value interface{}) error {
 	return nil
 }
 
+// Value implements the driver.Valuer interface.
+// It converts TripType enum to string so that postgres
+// can understand.
 func (m TripType) Value() (driver.Value, error) {
 	return m.String(), nil
 }

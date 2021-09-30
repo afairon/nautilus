@@ -8,12 +8,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// DBTX defines query behavior.
 type DBTX interface {
 	GetContext(context.Context, interface{}, string, ...interface{}) error
 }
 
-type Store struct {
-	db      *sqlx.DB
+// queries manages the repository.
+type queries struct {
 	account AccountStore
 	address AddressStore
 	agency  AgencyStore
@@ -21,42 +22,39 @@ type Store struct {
 	staff   StaffStore
 }
 
+// newQueries creates a new repository manager.
+func newQueries(db DBTX) *queries {
+	return &queries{
+		account: NewAccountStore(db),
+		address: NewAddressStore(db),
+		agency:  NewAgencyStore(db),
+		diver:   NewDiverStore(db),
+		staff:   NewStaffStore(db),
+	}
+}
+
+// Store is a repository for managing entities.
+type Store struct {
+	db *sqlx.DB
+	*queries
+}
+
+// NewStore creates a new database store.
 func NewStore(db *sqlx.DB) *Store {
 	return &Store{
 		db:      db,
-		account: NewAccountStore(db),
-		address: NewAddressStore(db),
-		agency:  NewAgencyStore(db),
-		diver:   NewDiverStore(db),
-		staff:   NewStaffStore(db),
+		queries: newQueries(db),
 	}
 }
 
-type tx struct {
-	account AccountStore
-	address AddressStore
-	agency  AgencyStore
-	diver   DiverStore
-	staff   StaffStore
-}
-
-func newTx(db DBTX) *tx {
-	return &tx{
-		account: NewAccountStore(db),
-		address: NewAddressStore(db),
-		agency:  NewAgencyStore(db),
-		diver:   NewDiverStore(db),
-		staff:   NewStaffStore(db),
-	}
-}
-
-func (store *Store) execTx(ctx context.Context, fn func(*tx) error) error {
+// execTx is wrapper for executing queries using transaction.
+func (store *Store) execTx(ctx context.Context, fn func(*queries) error) error {
 	tx, err := store.db.BeginTxx(ctx, nil)
 	if err != nil {
 		return err
 	}
 
-	dbtx := newTx(tx)
+	dbtx := newQueries(tx)
 	err = fn(dbtx)
 	if err != nil {
 		if rbErr := tx.Rollback(); rbErr != nil {
@@ -68,21 +66,24 @@ func (store *Store) execTx(ctx context.Context, fn func(*tx) error) error {
 	return tx.Commit()
 }
 
+// CreateAgencyAccount creates an agency account by first creating
+// a record in account table, then a record in address table, and
+// finally a record in agency table with account_id and address_id.
 func (store *Store) CreateAgencyAccount(ctx context.Context, account *entity.Account, address *entity.Address, agency *entity.Agency) error {
-	err := store.execTx(ctx, func(transaction *tx) error {
-		newAccount, err := transaction.account.Create(ctx, account)
+	err := store.execTx(ctx, func(q *queries) error {
+		newAccount, err := q.account.Create(ctx, account)
 		if err != nil {
 			return err
 		}
 
-		newAddress, err := transaction.address.Create(ctx, address)
+		newAddress, err := q.address.Create(ctx, address)
 		if err != nil {
 			return err
 		}
 
 		agency.AccountId = newAccount.Id
 		agency.AddressId = newAddress.Id
-		_, err = transaction.agency.Create(ctx, agency)
+		_, err = q.agency.Create(ctx, agency)
 
 		return err
 	})
@@ -90,15 +91,18 @@ func (store *Store) CreateAgencyAccount(ctx context.Context, account *entity.Acc
 	return err
 }
 
+// CreateDiverAccount creates a diver account by first creating
+// a record in account table and finally a record in diver table
+// with account_id.
 func (store *Store) CreateDiverAccount(ctx context.Context, account *entity.Account, diver *entity.Diver) error {
-	err := store.execTx(ctx, func(transaction *tx) error {
-		newAccount, err := transaction.account.Create(ctx, account)
+	err := store.execTx(ctx, func(q *queries) error {
+		newAccount, err := q.account.Create(ctx, account)
 		if err != nil {
 			return err
 		}
 
 		diver.AccountId = newAccount.Id
-		_, err = transaction.diver.Create(ctx, diver)
+		_, err = q.diver.Create(ctx, diver)
 
 		return err
 	})

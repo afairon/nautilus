@@ -6,21 +6,26 @@ import (
 	"github.com/afairon/nautilus/entity"
 )
 
+// StaffStore defines interface for interaction
+// with the staff storage.
 type StaffStore interface {
 	Create(context.Context, *entity.Staff) (entity.Staff, error)
 	Get(context.Context, int64) (entity.Staff, error)
 }
 
+// Staff implements StaffStore interface.
 type Staff struct {
 	db DBTX
 }
 
+// NewStaffStore creates a new StaffStore.
 func NewStaffStore(db DBTX) StaffStore {
 	return &Staff{
 		db: db,
 	}
 }
 
+// Create creates an staff record and returns the newly created record.
 func (store *Staff) Create(ctx context.Context, staff *entity.Staff) (entity.Staff, error) {
 	var result entity.Staff
 
@@ -38,6 +43,7 @@ func (store *Staff) Create(ctx context.Context, staff *entity.Staff) (entity.Sta
 	return result, err
 }
 
+// Get retrieves the staff record by its id.
 func (store *Staff) Get(ctx context.Context, id int64) (entity.Staff, error) {
 	var result entity.Staff
 

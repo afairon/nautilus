@@ -6,21 +6,26 @@ import (
 	"github.com/afairon/nautilus/entity"
 )
 
+// AddressStore defines interface for interaction
+// with the address storage.
 type AddressStore interface {
 	Create(context.Context, *entity.Address) (entity.Address, error)
 	Get(context.Context, int64) (entity.Address, error)
 }
 
+// Address implements AddressStore interface.
 type Address struct {
 	db DBTX
 }
 
+// NewAddressStore creates a new AddressStore.
 func NewAddressStore(db DBTX) AddressStore {
 	return &Address{
 		db: db,
 	}
 }
 
+// Create creates an address record and returns the newly created record.
 func (store *Address) Create(ctx context.Context, address *entity.Address) (entity.Address, error) {
 	var result entity.Address
 
@@ -39,6 +44,7 @@ func (store *Address) Create(ctx context.Context, address *entity.Address) (enti
 	return result, err
 }
 
+// Get retrieves the address record by its id.
 func (store *Address) Get(ctx context.Context, id int64) (entity.Address, error) {
 	var result entity.Address
 

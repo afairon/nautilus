@@ -11,7 +11,7 @@ import (
 var DB *sqlx.DB
 
 // Connect creates a postgres connection.
-func Connect(host string, port int, user, password, dbname string) (err error) {
+func Connect(host string, port int, user, password, dbname string) (*sqlx.DB, error) {
 	dataSourceName := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=require",
 		host,
 		port,
@@ -19,14 +19,17 @@ func Connect(host string, port int, user, password, dbname string) (err error) {
 		password,
 		dbname,
 	)
-	DB, err = sqlx.Open("postgres", dataSourceName)
+	DB, err := sqlx.Open("postgres", dataSourceName)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	err = DB.Ping()
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return DB, nil
 }
 
 // Close closes postgres connection.

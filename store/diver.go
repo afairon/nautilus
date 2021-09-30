@@ -6,21 +6,26 @@ import (
 	"github.com/afairon/nautilus/entity"
 )
 
+// DiverStore defines interface for interaction
+// with the diver storage.
 type DiverStore interface {
 	Create(context.Context, *entity.Diver) (entity.Diver, error)
 	Get(context.Context, int64) (entity.Diver, error)
 }
 
+// Diver implements DiverStore interface.
 type Diver struct {
 	db DBTX
 }
 
+// NewDiverStore creates a new DiverStore.
 func NewDiverStore(db DBTX) DiverStore {
 	return &Diver{
 		db: db,
 	}
 }
 
+// Create creates an diver record and returns the newly created record.
 func (store *Diver) Create(ctx context.Context, diver *entity.Diver) (entity.Diver, error) {
 	var result entity.Diver
 
@@ -40,6 +45,7 @@ func (store *Diver) Create(ctx context.Context, diver *entity.Diver) (entity.Div
 	return result, err
 }
 
+// Get retrieves the diver record by its id.
 func (store *Diver) Get(ctx context.Context, id int64) (entity.Diver, error) {
 	var result entity.Diver
 

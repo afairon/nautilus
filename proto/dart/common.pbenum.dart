@@ -26,24 +26,54 @@ class AccountType extends $pb.ProtobufEnum {
   const AccountType._($core.int v, $core.String n) : super(v, n);
 }
 
-class Level extends $pb.ProtobufEnum {
-  static const Level INSTRUCTOR = Level._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'INSTRUCTOR');
-  static const Level MASTER = Level._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'MASTER');
-  static const Level RESCUE = Level._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'RESCUE');
-  static const Level ADVANCED = Level._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ADVANCED');
-  static const Level OPEN = Level._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'OPEN');
+class GenderType extends $pb.ProtobufEnum {
+  static const GenderType FEMALE = GenderType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'FEMALE');
+  static const GenderType MALE = GenderType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'MALE');
 
-  static const $core.List<Level> values = <Level> [
+  static const $core.List<GenderType> values = <GenderType> [
+    FEMALE,
+    MALE,
+  ];
+
+  static final $core.Map<$core.int, GenderType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static GenderType? valueOf($core.int value) => _byValue[value];
+
+  const GenderType._($core.int v, $core.String n) : super(v, n);
+}
+
+class LevelType extends $pb.ProtobufEnum {
+  static const LevelType INSTRUCTOR = LevelType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'INSTRUCTOR');
+  static const LevelType MASTER = LevelType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'MASTER');
+  static const LevelType RESCUE = LevelType._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'RESCUE');
+  static const LevelType ADVANCED_OPEN_WATER = LevelType._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ADVANCED_OPEN_WATER');
+  static const LevelType OPEN_WATER = LevelType._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'OPEN_WATER');
+
+  static const $core.List<LevelType> values = <LevelType> [
     INSTRUCTOR,
     MASTER,
     RESCUE,
-    ADVANCED,
-    OPEN,
+    ADVANCED_OPEN_WATER,
+    OPEN_WATER,
   ];
 
-  static final $core.Map<$core.int, Level> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Level? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, LevelType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static LevelType? valueOf($core.int value) => _byValue[value];
 
-  const Level._($core.int v, $core.String n) : super(v, n);
+  const LevelType._($core.int v, $core.String n) : super(v, n);
+}
+
+class TripType extends $pb.ProtobufEnum {
+  static const TripType ONSHORE = TripType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ONSHORE');
+  static const TripType OFFSHORE = TripType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'OFFSHORE');
+
+  static const $core.List<TripType> values = <TripType> [
+    ONSHORE,
+    OFFSHORE,
+  ];
+
+  static final $core.Map<$core.int, TripType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TripType? valueOf($core.int value) => _byValue[value];
+
+  const TripType._($core.int v, $core.String n) : super(v, n);
 }
 

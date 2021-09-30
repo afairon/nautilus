@@ -3,8 +3,10 @@ module github.com/afairon/nautilus
 go 1.17
 
 require (
+	github.com/aws/aws-sdk-go v1.27.0
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.5.2
+	github.com/google/uuid v1.1.2
 	github.com/improbable-eng/grpc-web v0.14.1
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/lib/pq v1.10.3
@@ -14,6 +16,7 @@ require (
 
 require (
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
+	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/rs/cors v1.8.0 // indirect
 	golang.org/x/net v0.0.0-20210916014120-12bc252f5db8 // indirect

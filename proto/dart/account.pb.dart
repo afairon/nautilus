@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'diver.pb.dart' as $3;
-import 'agency.pb.dart' as $4;
+import 'diver.pb.dart' as $4;
+import 'agency.pb.dart' as $5;
 
 enum AccountRequest_Kind {
   diver, 
@@ -26,8 +26,8 @@ class AccountRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
     ..oo(0, [1, 5])
-    ..aOM<$3.Diver>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diver', subBuilder: $3.Diver.create)
-    ..aOM<$4.Agency>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agency', subBuilder: $4.Agency.create)
+    ..aOM<$4.DiverRequest>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diver', subBuilder: $4.DiverRequest.create)
+    ..aOM<$5.AgencyRequest>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agency', subBuilder: $5.AgencyRequest.create)
     ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
     ..aOS(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..aOS(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
@@ -36,8 +36,8 @@ class AccountRequest extends $pb.GeneratedMessage {
 
   AccountRequest._() : super();
   factory AccountRequest({
-    $3.Diver? diver,
-    $4.Agency? agency,
+    $4.DiverRequest? diver,
+    $5.AgencyRequest? agency,
     $core.String? email,
     $core.String? username,
     $core.String? password,
@@ -85,26 +85,26 @@ class AccountRequest extends $pb.GeneratedMessage {
   void clearKind() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $3.Diver get diver => $_getN(0);
+  $4.DiverRequest get diver => $_getN(0);
   @$pb.TagNumber(1)
-  set diver($3.Diver v) { setField(1, v); }
+  set diver($4.DiverRequest v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDiver() => $_has(0);
   @$pb.TagNumber(1)
   void clearDiver() => clearField(1);
   @$pb.TagNumber(1)
-  $3.Diver ensureDiver() => $_ensure(0);
+  $4.DiverRequest ensureDiver() => $_ensure(0);
 
   @$pb.TagNumber(5)
-  $4.Agency get agency => $_getN(1);
+  $5.AgencyRequest get agency => $_getN(1);
   @$pb.TagNumber(5)
-  set agency($4.Agency v) { setField(5, v); }
+  set agency($5.AgencyRequest v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAgency() => $_has(1);
   @$pb.TagNumber(5)
   void clearAgency() => clearField(5);
   @$pb.TagNumber(5)
-  $4.Agency ensureAgency() => $_ensure(1);
+  $5.AgencyRequest ensureAgency() => $_ensure(1);
 
   @$pb.TagNumber(10)
   $core.String get email => $_getSZ(2);
@@ -132,5 +132,66 @@ class AccountRequest extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(4);
   @$pb.TagNumber(12)
   void clearPassword() => clearField(12);
+}
+
+class LoginRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LoginRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..hasRequiredFields = false
+  ;
+
+  LoginRequest._() : super();
+  factory LoginRequest({
+    $core.String? email,
+    $core.String? password,
+  }) {
+    final _result = create();
+    if (email != null) {
+      _result.email = email;
+    }
+    if (password != null) {
+      _result.password = password;
+    }
+    return _result;
+  }
+  factory LoginRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LoginRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  LoginRequest clone() => LoginRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  LoginRequest copyWith(void Function(LoginRequest) updates) => super.copyWith((message) => updates(message as LoginRequest)) as LoginRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LoginRequest create() => LoginRequest._();
+  LoginRequest createEmptyInstance() => create();
+  static $pb.PbList<LoginRequest> createRepeated() => $pb.PbList<LoginRequest>();
+  @$core.pragma('dart2js:noInline')
+  static LoginRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginRequest>(create);
+  static LoginRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get password => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set password($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPassword() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPassword() => clearField(2);
 }
 

@@ -1,10 +1,29 @@
 package entity
 
 import (
+	"errors"
 	"net/mail"
+	"strings"
 
 	pass "github.com/afairon/nautilus/internal/password"
 )
+
+// SetUsername sets username only if the username is valid.
+func (m *Account) SetUsername(username string) error {
+	// Username is empty.
+	if strings.TrimSpace(username) == "" {
+		return errors.New("username: empty")
+	}
+
+	// Username contains space.
+	if strings.Contains(username, " ") {
+		return errors.New("username: contains space")
+	}
+
+	m.Username = username
+
+	return nil
+}
 
 // SetEmail sets the email only if the email is valid.
 func (m *Account) SetEmail(email string) error {
