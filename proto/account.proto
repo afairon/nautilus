@@ -10,11 +10,18 @@ import "google/protobuf/empty.proto";
 option go_package = "./pb";
 
 service Account {
+    // Create is used to create agency and diver account.
     rpc Create (AccountRequest) returns (google.protobuf.Empty) {}
+
+    // Login is used to authenticate the user.
+    // The client supplies the server with credentials and the server
+    // creates a session and sends back a token.
     rpc Login (LoginRequest) returns (LoginResponse) {}
 }
 
+// AccountRequest
 message AccountRequest {
+    // kind defines type of account
     oneof kind {
         diver.DiverRequest diver = 1;
         agency.AgencyRequest agency = 5;
@@ -24,11 +31,13 @@ message AccountRequest {
     string password = 12;
 }
 
+// LoginRequest
 message LoginRequest {
     string email = 1;
     string password = 2;
 }
 
+// LoginResponse
 message LoginResponse {
     string token = 1;
 }

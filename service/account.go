@@ -100,7 +100,7 @@ func (s *AccountService) Create(ctx context.Context, req *pb.AccountRequest) (*e
 		// Get diver's birth date.
 		birthDate := u.Diver.GetBirthDate()
 		if birthDate == nil {
-			return nil, status.Error(codes.InvalidArgument, "diver: missing birth date")
+			return nil, status.Error(codes.InvalidArgument, "account: diver missing birth date")
 		}
 
 		// Format birth date from *time.Time to yyyy-mm-dd

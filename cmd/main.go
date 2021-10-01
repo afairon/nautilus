@@ -70,7 +70,7 @@ func main() {
 	defer db.Close()
 
 	// Session manager
-	sessionManager := session.NewJWTManager(*flagSecret, 15*time.Minute)
+	sessionManager := session.NewJWTManager(*flagSecret, 1*time.Hour)
 
 	// Object storage interface
 	var mediaStorage media.Store

@@ -29,7 +29,10 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+// AccountRequest
 type AccountRequest struct {
+	// kind defines type of account
+	//
 	// Types that are valid to be assigned to Kind:
 	//	*AccountRequest_Diver
 	//	*AccountRequest_Agency
@@ -138,6 +141,7 @@ func (*AccountRequest) XXX_OneofWrappers() []interface{} {
 	}
 }
 
+// LoginRequest
 type LoginRequest struct {
 	Email    string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -189,6 +193,7 @@ func (m *LoginRequest) GetPassword() string {
 	return ""
 }
 
+// LoginResponse
 type LoginResponse struct {
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 }
@@ -479,7 +484,11 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AccountClient interface {
+	// Create is used to create agency and diver account.
 	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	// Login is used to authenticate the user.
+	// The client supplies the server with credentials and the server
+	// creates a session and sends back a token.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
@@ -511,7 +520,11 @@ func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 
 // AccountServer is the server API for Account service.
 type AccountServer interface {
+	// Create is used to create agency and diver account.
 	Create(context.Context, *AccountRequest) (*empty.Empty, error)
+	// Login is used to authenticate the user.
+	// The client supplies the server with credentials and the server
+	// creates a session and sends back a token.
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 }
 

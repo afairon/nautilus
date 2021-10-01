@@ -1,13 +1,11 @@
 package session
 
 import (
-	"context"
 	"errors"
 	"time"
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/golang-jwt/jwt"
-	"google.golang.org/grpc/metadata"
 )
 
 // JWTManager implements Session interface.
@@ -52,40 +50,32 @@ func (manager *JWTManager) Create(account entity.Account) (string, error) {
 	return token.SignedString([]byte(manager.secret))
 }
 
-// Verify verifies if the token is present in the context and
-// checks if the token is still valid.
-func (manager *JWTManager) Verify(ctx context.Context) (entity.Account, error) {
+// Get verifies if the token is present in the context and
+// checks if the token is still valid, if it's valid it returns
+// the user account.
+func (manager *JWTManager) Get(token string) (entity.Account, error) {
 	var userClaims UserClaims
 
-	if headers, ok := metadata.FromIncomingContext(ctx); ok {
-		authorization := headers["authorization"]
-		if len(authorization) == 0 {
-			return userClaims.Account, errors.New("authorization: empty")
-		}
+	jwt, err := jwt.ParseWithClaims(
+		token,
+		&userClaims,
+		func(token *jwt.Token) (interface{}, error) {
+			_, ok := token.Method.(*jwt.SigningMethodHMAC)
+			if !ok {
+				return nil, errors.New("authorization: unexpected token signing method")
+			}
 
-		token, err := jwt.ParseWithClaims(
-			authorization[0],
-			&userClaims,
-			func(token *jwt.Token) (interface{}, error) {
-				_, ok := token.Method.(*jwt.SigningMethodHMAC)
-				if !ok {
-					return nil, errors.New("authorization: unexpected token signing method")
-				}
-
-				return []byte(manager.secret), nil
-			},
-		)
-		if err != nil {
-			return userClaims.Account, errors.New("authorization: invalid token")
-		}
-
-		claims, ok := token.Claims.(*UserClaims)
-		if !ok {
-			return userClaims.Account, errors.New("authorization: invalid token")
-		}
-
-		return claims.Account, nil
+			return []byte(manager.secret), nil
+		},
+	)
+	if err != nil {
+		return userClaims.Account, errors.New("authorization: invalid token")
 	}
 
-	return userClaims.Account, errors.New("authorization: failed to get metadata")
+	claims, ok := jwt.Claims.(*UserClaims)
+	if !ok {
+		return userClaims.Account, errors.New("authorization: invalid token")
+	}
+
+	return claims.Account, nil
 }
