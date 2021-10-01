@@ -7,6 +7,7 @@ import (
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/session"
 	"github.com/afairon/nautilus/store"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
@@ -15,8 +16,9 @@ import (
 
 // AccountService implements the Account rpc interface.
 type AccountService struct {
-	Store *store.Store
-	Media media.Store
+	Store   *store.Store
+	Session session.Session
+	Media   media.Store
 }
 
 // Create handles account creation. It handles the creation of the agency
@@ -128,6 +130,28 @@ func (s *AccountService) Create(ctx context.Context, req *pb.AccountRequest) (*e
 	return &empty.Empty{}, nil
 }
 
-func (s *AccountService) Login(ctx context.Context, req *pb.LoginRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "Login unimplemented")
+// Login checks for account credentials and returns access token.
+func (s *AccountService) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
+	// Retrieve account by email.
+	account, err := s.Store.GetAccountByEmail(context.Background(), req.GetEmail())
+	if err != nil {
+		return nil, status.Error(codes.Unavailable, err.Error())
+	}
+
+	// Check password with hash.
+	if !account.CheckPassword(req.GetPassword()) {
+		// Wrong password
+		return nil, status.Error(codes.PermissionDenied, "account: login failed")
+	}
+
+	token, err := s.Session.Create(account)
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	resp := pb.LoginResponse{
+		Token: token,
+	}
+
+	return &resp, nil
 }

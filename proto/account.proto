@@ -10,8 +10,8 @@ import "google/protobuf/empty.proto";
 option go_package = "./pb";
 
 service Account {
-    rpc Create(AccountRequest) returns (google.protobuf.Empty);
-    rpc Login(LoginRequest) returns (google.protobuf.Empty);
+    rpc Create (AccountRequest) returns (google.protobuf.Empty) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {}
 }
 
 message AccountRequest {
@@ -27,4 +27,8 @@ message AccountRequest {
 message LoginRequest {
     string email = 1;
     string password = 2;
+}
+
+message LoginResponse {
+    string token = 1;
 }

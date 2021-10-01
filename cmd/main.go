@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	"github.com/afairon/nautilus/db"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/internal/media/fs"
 	"github.com/afairon/nautilus/internal/media/s3"
 	"github.com/afairon/nautilus/server"
+	"github.com/afairon/nautilus/session"
 )
 
 var (
@@ -33,6 +35,8 @@ func main() {
 	flagPGPassword := flag.String("pg_password", "", "the password of the user")
 	flagPGDBName := flag.String("pg_dbname", "", "the name of the database to be connected")
 
+	flagSecret := flag.String("secret", "", "jwt secret key")
+
 	flagS3 := flag.Bool("s3", false, "use s3 as backend object storage")
 	flagDataPath := flag.String("data", "data", "path of data directory")
 	flagDataRootURL := flag.String("root", "", "root url")
@@ -41,6 +45,10 @@ func main() {
 	flag.Parse()
 
 	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\n", Commit, Time)
+
+	if *flagSecret == "" {
+		log.Fatal("error: jwt secret key empty")
+	}
 
 	if *flagPGUser == "" {
 		log.Fatal("error: postgres user not provided")
@@ -61,10 +69,13 @@ func main() {
 	}
 	defer db.Close()
 
+	// Session manager
+	sessionManager := session.NewJWTManager(*flagSecret, 15*time.Minute)
+
 	// Object storage interface
 	var mediaStorage media.Store
 
-	// Choose object storage backend
+	// Choose object storage backend.
 	if *flagS3 {
 		mediaStorage = s3.NewStore()
 		log.Println("Using S3 object storage backend.")
@@ -80,7 +91,7 @@ func main() {
 	}
 
 	// Create grpc server.
-	grpcServer := server.CreateGRPCServer(db, mediaStorage)
+	grpcServer := server.CreateGRPCServer(db, sessionManager, mediaStorage)
 
 	if *flagGRPCWeb {
 		// grpc web enabled

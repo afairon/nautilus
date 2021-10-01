@@ -109,3 +109,8 @@ func (store *Store) CreateDiverAccount(ctx context.Context, account *entity.Acco
 
 	return err
 }
+
+// GetAccountByEmail retrieves account by email.
+func (store *Store) GetAccountByEmail(ctx context.Context, email string) (entity.Account, error) {
+	return store.account.GetByEmail(ctx, email)
+}

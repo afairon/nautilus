@@ -31,7 +31,7 @@ func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.S
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 		w.Header().Set("Access-Control-Expose-Headers", "grpc-status, grpc-message")
-		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, XMLHttpRequest, x-user-agent, x-grpc-web, grpc-status, grpc-message")
+		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, XMLHttpRequest, authorization, x-user-agent, x-grpc-web, grpc-status, grpc-message")
 		if r.Method == "OPTIONS" {
 			w.Header().Set("Access-Control-Max-Age", "86400")
 			return
