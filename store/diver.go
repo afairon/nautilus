@@ -19,7 +19,7 @@ type Diver struct {
 }
 
 // NewDiverStore creates a new DiverStore.
-func NewDiverStore(db DBTX) DiverStore {
+func NewDiverStore(db DBTX) *Diver {
 	return &Diver{
 		db: db,
 	}

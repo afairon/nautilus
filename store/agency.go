@@ -19,7 +19,7 @@ type Agency struct {
 }
 
 // NewAgencyStore creates a new AgencyStore.
-func NewAgencyStore(db DBTX) AgencyStore {
+func NewAgencyStore(db DBTX) *Agency {
 	return &Agency{
 		db: db,
 	}

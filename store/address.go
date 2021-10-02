@@ -19,7 +19,7 @@ type Address struct {
 }
 
 // NewAddressStore creates a new AddressStore.
-func NewAddressStore(db DBTX) AddressStore {
+func NewAddressStore(db DBTX) *Address {
 	return &Address{
 		db: db,
 	}

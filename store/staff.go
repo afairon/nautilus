@@ -19,7 +19,7 @@ type Staff struct {
 }
 
 // NewStaffStore creates a new StaffStore.
-func NewStaffStore(db DBTX) StaffStore {
+func NewStaffStore(db DBTX) *Staff {
 	return &Staff{
 		db: db,
 	}

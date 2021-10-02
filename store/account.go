@@ -21,7 +21,7 @@ type Account struct {
 }
 
 // NewAccountStore creates a new AccountStore.
-func NewAccountStore(db DBTX) AccountStore {
+func NewAccountStore(db DBTX) *Account {
 	return &Account{
 		db: db,
 	}
