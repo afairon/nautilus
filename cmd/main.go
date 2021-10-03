@@ -3,16 +3,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"net"
+	"os"
 	"time"
 
 	"github.com/afairon/nautilus/db"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/internal/media/fs"
 	"github.com/afairon/nautilus/internal/media/s3"
+	"github.com/afairon/nautilus/logger"
 	"github.com/afairon/nautilus/server"
 	"github.com/afairon/nautilus/session"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -41,31 +43,45 @@ func main() {
 	flagDataPath := flag.String("data", "data", "path of data directory")
 	flagDataRootURL := flag.String("root", "", "root url")
 
+	flagVerbose := flag.Bool("verbose", false, "output log to stdout")
+	flagLogOutput := flag.String("output", "grpc.log", "log output file")
+
 	// Parse arguments
 	flag.Parse()
 
 	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\n", Commit, Time)
 
 	if *flagSecret == "" {
-		log.Fatal("error: jwt secret key empty")
+		fmt.Fprintln(os.Stderr, "error: jwt secret key empty")
+		os.Exit(1)
 	}
 
 	if *flagPGUser == "" {
-		log.Fatal("error: postgres user not provided")
+		fmt.Fprintln(os.Stderr, "error: postgres user not provided")
+		os.Exit(1)
 	}
 
 	if *flagPGPassword == "" {
-		log.Fatal("error: postgres password not provided")
+		fmt.Fprintln(os.Stderr, "error: postgres password not provided")
+		os.Exit(1)
 	}
 
 	if *flagPGDBName == "" {
-		log.Fatal("error: postgres database name not provided")
+		fmt.Fprintln(os.Stderr, "error: postgres database name not provided")
+		os.Exit(1)
+	}
+
+	// Setup logger
+	if *flagVerbose {
+		logger.Setup("")
+	} else {
+		logger.Setup(*flagLogOutput)
 	}
 
 	// Connect to postgres.
 	db, err := db.Connect(*flagPGHost, *flagPGPort, *flagPGUser, *flagPGPassword, *flagPGDBName)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		log.Fatal("error: ", err)
 	}
 	defer db.Close()
 
@@ -78,17 +94,18 @@ func main() {
 	// Choose object storage backend.
 	if *flagS3 {
 		mediaStorage = s3.NewStore()
-		log.Println("Using S3 object storage backend.")
+		log.Info("Using S3 object storage backend.")
 	} else {
 		mediaStorage = fs.NewStore(*flagDataPath, *flagDataRootURL)
-		log.Println("Using FS object storage backend.")
+		log.Info("Using FS object storage backend.")
 	}
 
 	addr := fmt.Sprintf("%s:%d", *flagBindAddr, *flagGRPCPort)
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatal("failed to listen: ", err)
 	}
+	defer lis.Close()
 
 	// Create grpc server.
 	grpcServer := server.CreateGRPCServer(db, sessionManager, mediaStorage)
@@ -98,15 +115,15 @@ func main() {
 		// Create grpc web server.
 		grpcWebServer := server.CreateGRPCWebServer(grpcServer, *flagHTTPAddr, *flagHTTPPort)
 
-		log.Printf("gRPC Web server listening at %v\n", grpcWebServer.Addr)
+		log.Info("gRPC Web server listening at ", grpcWebServer.Addr)
 
 		// Run grpc web in a goroutine.
 		go grpcWebServer.ListenAndServe()
 	}
 
 	// Run grpc server.
-	log.Printf("gRPC server listening at %v\n", lis.Addr())
+	log.Info("gRPC server listening at ", lis.Addr())
 	if err = grpcServer.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Fatal("failed to serve:", err)
 	}
 }
