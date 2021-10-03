@@ -31,15 +31,12 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // AccountRequest
 type AccountRequest struct {
-	// kind defines type of account
+	// type defines type of account
 	//
-	// Types that are valid to be assigned to Kind:
-	//	*AccountRequest_Diver
+	// Types that are valid to be assigned to Type:
 	//	*AccountRequest_Agency
-	Kind     isAccountRequest_Kind `protobuf_oneof:"kind"`
-	Email    string                `protobuf:"bytes,10,opt,name=email,proto3" json:"email,omitempty"`
-	Username string                `protobuf:"bytes,11,opt,name=username,proto3" json:"username,omitempty"`
-	Password string                `protobuf:"bytes,12,opt,name=password,proto3" json:"password,omitempty"`
+	//	*AccountRequest_Diver
+	Type isAccountRequest_Type `protobuf_oneof:"type"`
 }
 
 func (m *AccountRequest) Reset()      { *m = AccountRequest{} }
@@ -74,70 +71,49 @@ func (m *AccountRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AccountRequest proto.InternalMessageInfo
 
-type isAccountRequest_Kind interface {
-	isAccountRequest_Kind()
+type isAccountRequest_Type interface {
+	isAccountRequest_Type()
 	Equal(interface{}) bool
 	MarshalTo([]byte) (int, error)
 	Size() int
 }
 
-type AccountRequest_Diver struct {
-	Diver *DiverRequest `protobuf:"bytes,1,opt,name=diver,proto3,oneof" json:"diver,omitempty"`
-}
 type AccountRequest_Agency struct {
-	Agency *AgencyRequest `protobuf:"bytes,5,opt,name=agency,proto3,oneof" json:"agency,omitempty"`
+	Agency *Agency `protobuf:"bytes,1,opt,name=agency,proto3,oneof" json:"agency,omitempty"`
+}
+type AccountRequest_Diver struct {
+	Diver *Diver `protobuf:"bytes,5,opt,name=diver,proto3,oneof" json:"diver,omitempty"`
 }
 
-func (*AccountRequest_Diver) isAccountRequest_Kind()  {}
-func (*AccountRequest_Agency) isAccountRequest_Kind() {}
+func (*AccountRequest_Agency) isAccountRequest_Type() {}
+func (*AccountRequest_Diver) isAccountRequest_Type()  {}
 
-func (m *AccountRequest) GetKind() isAccountRequest_Kind {
+func (m *AccountRequest) GetType() isAccountRequest_Type {
 	if m != nil {
-		return m.Kind
+		return m.Type
 	}
 	return nil
 }
 
-func (m *AccountRequest) GetDiver() *DiverRequest {
-	if x, ok := m.GetKind().(*AccountRequest_Diver); ok {
-		return x.Diver
-	}
-	return nil
-}
-
-func (m *AccountRequest) GetAgency() *AgencyRequest {
-	if x, ok := m.GetKind().(*AccountRequest_Agency); ok {
+func (m *AccountRequest) GetAgency() *Agency {
+	if x, ok := m.GetType().(*AccountRequest_Agency); ok {
 		return x.Agency
 	}
 	return nil
 }
 
-func (m *AccountRequest) GetEmail() string {
-	if m != nil {
-		return m.Email
+func (m *AccountRequest) GetDiver() *Diver {
+	if x, ok := m.GetType().(*AccountRequest_Diver); ok {
+		return x.Diver
 	}
-	return ""
-}
-
-func (m *AccountRequest) GetUsername() string {
-	if m != nil {
-		return m.Username
-	}
-	return ""
-}
-
-func (m *AccountRequest) GetPassword() string {
-	if m != nil {
-		return m.Password
-	}
-	return ""
+	return nil
 }
 
 // XXX_OneofWrappers is for the internal use of the proto package.
 func (*AccountRequest) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
-		(*AccountRequest_Diver)(nil),
 		(*AccountRequest_Agency)(nil),
+		(*AccountRequest_Diver)(nil),
 	}
 }
 
@@ -246,31 +222,28 @@ func init() {
 func init() { proto.RegisterFile("account.proto", fileDescriptor_8e28828dcb8d24f0) }
 
 var fileDescriptor_8e28828dcb8d24f0 = []byte{
-	// 369 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x51, 0xbd, 0x4e, 0xf3, 0x30,
-	0x14, 0xb5, 0x3f, 0x35, 0xe9, 0x87, 0xdb, 0x32, 0x18, 0x5a, 0xa2, 0x20, 0x59, 0x55, 0x24, 0xa4,
-	0x4a, 0x48, 0x8e, 0x54, 0x16, 0x04, 0x0b, 0x2d, 0x20, 0x31, 0x30, 0x75, 0x64, 0x4b, 0x5b, 0x13,
-	0x45, 0x6d, 0xe3, 0x90, 0x1f, 0x10, 0x5b, 0x1f, 0x81, 0xc7, 0xe0, 0x41, 0x18, 0x18, 0x3b, 0x76,
-	0xa4, 0xee, 0xc2, 0xd8, 0x47, 0x40, 0xb1, 0x9d, 0x40, 0xbb, 0x24, 0x3a, 0xf7, 0x9e, 0x7b, 0xce,
-	0xbd, 0xc7, 0xa8, 0xe1, 0x8d, 0x46, 0x3c, 0x0b, 0x53, 0x1a, 0xc5, 0x3c, 0xe5, 0xb8, 0xaa, 0xa1,
-	0x5d, 0xf7, 0x7c, 0x16, 0x8e, 0x5e, 0x55, 0xd9, 0xae, 0x8d, 0x83, 0x67, 0x16, 0x6b, 0x70, 0xec,
-	0x73, 0xee, 0x4f, 0x99, 0x2b, 0xd1, 0x30, 0x7b, 0x74, 0xd9, 0x2c, 0x4a, 0x35, 0xd3, 0xf9, 0x80,
-	0x68, 0xbf, 0xa7, 0x34, 0x06, 0xec, 0x29, 0x63, 0x49, 0x8a, 0x4f, 0x91, 0x21, 0xc7, 0x2d, 0xd8,
-	0x86, 0x9d, 0x5a, 0xf7, 0x80, 0x2a, 0xb1, 0x9b, 0xfc, 0xab, 0x39, 0x77, 0x60, 0xa0, 0x38, 0xd8,
-	0x45, 0xa6, 0x72, 0xb6, 0x0c, 0xc9, 0x6e, 0x52, 0xbd, 0x48, 0x4f, 0xfe, 0x7e, 0xf9, 0x9a, 0x86,
-	0x0f, 0x91, 0xc1, 0x66, 0x5e, 0x30, 0xb5, 0x50, 0x1b, 0x76, 0xf6, 0x06, 0x0a, 0x60, 0x1b, 0xfd,
-	0xcf, 0x12, 0x16, 0x87, 0xde, 0x8c, 0x59, 0x35, 0xd9, 0x28, 0x71, 0xde, 0x8b, 0xbc, 0x24, 0x79,
-	0xe1, 0xf1, 0xd8, 0xaa, 0xab, 0x5e, 0x81, 0xfb, 0x26, 0xaa, 0x4c, 0x82, 0x70, 0xec, 0x5c, 0xa1,
-	0xfa, 0x3d, 0xf7, 0x83, 0xb0, 0xb8, 0xa1, 0x74, 0x81, 0x3b, 0x2e, 0xa5, 0xd2, 0xbf, 0x6d, 0x25,
-	0xe7, 0x04, 0x35, 0xb4, 0x42, 0x12, 0xf1, 0x30, 0x61, 0xb9, 0x44, 0xca, 0x27, 0x2c, 0x2c, 0x24,
-	0x24, 0xe8, 0xce, 0x21, 0xaa, 0xea, 0xbc, 0xf0, 0x25, 0x32, 0xaf, 0x63, 0xe6, 0xa5, 0x0c, 0x1f,
-	0xd1, 0xe2, 0x59, 0xb6, 0xb3, 0xb4, 0x5b, 0x54, 0x85, 0x4f, 0x8b, 0xf0, 0xe9, 0x6d, 0x1e, 0xbe,
-	0x03, 0xf0, 0x39, 0x32, 0xa4, 0x1f, 0x6e, 0x96, 0xb3, 0x7f, 0x2f, 0xb0, 0x5b, 0xbb, 0x65, 0xb5,
-	0x96, 0x03, 0xfa, 0x17, 0x8b, 0x15, 0x01, 0xcb, 0x15, 0x01, 0x9b, 0x15, 0x81, 0x73, 0x41, 0xe0,
-	0xbb, 0x20, 0xf0, 0x53, 0x10, 0xb8, 0x10, 0x04, 0x7e, 0x09, 0x02, 0xbf, 0x05, 0x01, 0x1b, 0x41,
-	0xe0, 0xdb, 0x9a, 0x80, 0xc5, 0x9a, 0x80, 0xe5, 0x9a, 0x80, 0x87, 0x0a, 0x75, 0xa3, 0xe1, 0xd0,
-	0x94, 0x7b, 0x9c, 0xfd, 0x04, 0x00, 0x00, 0xff, 0xff, 0x08, 0xbd, 0xaf, 0x5e, 0x47, 0x02, 0x00,
-	0x00,
+	// 335 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x50, 0x31, 0x4f, 0x32, 0x41,
+	0x10, 0xdd, 0xfd, 0xc2, 0x1d, 0x9f, 0x0b, 0x58, 0x6c, 0x14, 0xc9, 0x99, 0x4c, 0xcc, 0x45, 0xa3,
+	0xd5, 0x92, 0x60, 0x63, 0xb4, 0x11, 0xd4, 0x84, 0xc2, 0xea, 0x4a, 0xbb, 0x03, 0xc6, 0x0b, 0x11,
+	0x6e, 0xcf, 0xbb, 0x45, 0x43, 0xc7, 0x4f, 0xf0, 0x67, 0xf8, 0x53, 0x2c, 0x29, 0x29, 0x65, 0x69,
+	0x2c, 0xf9, 0x09, 0x86, 0xdd, 0x3b, 0xa2, 0x96, 0xef, 0xbd, 0x99, 0x37, 0xf3, 0x1e, 0xab, 0x85,
+	0xfd, 0xbe, 0x9c, 0xc4, 0x4a, 0x24, 0xa9, 0x54, 0x92, 0x97, 0x73, 0xe8, 0x55, 0xc6, 0x72, 0x80,
+	0x23, 0xcb, 0x7a, 0x87, 0x91, 0x94, 0xd1, 0x08, 0x9b, 0x06, 0xf5, 0x26, 0x8f, 0x4d, 0x1c, 0x27,
+	0x6a, 0x6a, 0x45, 0x3f, 0x62, 0xbb, 0x6d, 0xbb, 0x14, 0xe0, 0xf3, 0x04, 0x33, 0xc5, 0x4f, 0x99,
+	0x1b, 0x46, 0x18, 0xf7, 0xa7, 0x0d, 0x7a, 0x44, 0xcf, 0x2a, 0xad, 0x9a, 0xb0, 0x66, 0x6d, 0x43,
+	0x76, 0x49, 0x90, 0xcb, 0xfc, 0x98, 0x39, 0x83, 0xe1, 0x0b, 0xa6, 0x0d, 0xc7, 0xcc, 0x55, 0xf3,
+	0xb9, 0xdb, 0x0d, 0xd7, 0x25, 0x81, 0x15, 0x3b, 0x2e, 0x2b, 0xa9, 0x69, 0x82, 0xfe, 0x35, 0xab,
+	0xde, 0xcb, 0x68, 0x18, 0x17, 0x67, 0xf6, 0x98, 0x83, 0xe3, 0x70, 0x38, 0x32, 0x57, 0x76, 0x02,
+	0x0b, 0xb8, 0xc7, 0xfe, 0x27, 0x61, 0x96, 0xbd, 0xca, 0x74, 0xd0, 0xf8, 0x67, 0x84, 0x2d, 0xf6,
+	0x4f, 0x58, 0x2d, 0x77, 0xc8, 0x12, 0x19, 0x67, 0xb8, 0xb1, 0x50, 0xf2, 0x09, 0xe3, 0xc2, 0xc2,
+	0x80, 0xd6, 0x8c, 0xb2, 0x72, 0x1e, 0x89, 0x5f, 0x31, 0xf7, 0x26, 0xc5, 0x50, 0x21, 0x3f, 0x10,
+	0x45, 0x55, 0xbf, 0xe3, 0x7a, 0x75, 0x61, 0xeb, 0x11, 0x45, 0x3d, 0xe2, 0x6e, 0x53, 0x8f, 0x4f,
+	0xf8, 0x05, 0x73, 0xcc, 0x3d, 0xbe, 0xbf, 0xdd, 0xfd, 0x99, 0xc0, 0xab, 0xff, 0xa5, 0xed, 0x5b,
+	0x3e, 0xe9, 0x5c, 0xce, 0x97, 0x40, 0x16, 0x4b, 0x20, 0xeb, 0x25, 0xd0, 0x99, 0x06, 0xfa, 0xae,
+	0x81, 0x7e, 0x68, 0xa0, 0x73, 0x0d, 0xf4, 0x53, 0x03, 0xfd, 0xd2, 0x40, 0xd6, 0x1a, 0xe8, 0xdb,
+	0x0a, 0xc8, 0x7c, 0x05, 0x64, 0xb1, 0x02, 0xf2, 0x50, 0x12, 0xcd, 0xa4, 0xd7, 0x73, 0xcd, 0x1f,
+	0xe7, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xb3, 0x42, 0xe0, 0xca, 0xdb, 0x01, 0x00, 0x00,
 }
 
 func (this *AccountRequest) Equal(that interface{}) bool {
@@ -292,46 +265,13 @@ func (this *AccountRequest) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if that1.Kind == nil {
-		if this.Kind != nil {
+	if that1.Type == nil {
+		if this.Type != nil {
 			return false
 		}
-	} else if this.Kind == nil {
+	} else if this.Type == nil {
 		return false
-	} else if !this.Kind.Equal(that1.Kind) {
-		return false
-	}
-	if this.Email != that1.Email {
-		return false
-	}
-	if this.Username != that1.Username {
-		return false
-	}
-	if this.Password != that1.Password {
-		return false
-	}
-	return true
-}
-func (this *AccountRequest_Diver) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*AccountRequest_Diver)
-	if !ok {
-		that2, ok := that.(AccountRequest_Diver)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.Diver.Equal(that1.Diver) {
+	} else if !this.Type.Equal(that1.Type) {
 		return false
 	}
 	return true
@@ -356,6 +296,30 @@ func (this *AccountRequest_Agency) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Agency.Equal(that1.Agency) {
+		return false
+	}
+	return true
+}
+func (this *AccountRequest_Diver) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AccountRequest_Diver)
+	if !ok {
+		that2, ok := that.(AccountRequest_Diver)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Diver.Equal(that1.Diver) {
 		return false
 	}
 	return true
@@ -415,24 +379,13 @@ func (this *AccountRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 9)
+	s := make([]string, 0, 6)
 	s = append(s, "&pb.AccountRequest{")
-	if this.Kind != nil {
-		s = append(s, "Kind: "+fmt.Sprintf("%#v", this.Kind)+",\n")
+	if this.Type != nil {
+		s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
 	}
-	s = append(s, "Email: "+fmt.Sprintf("%#v", this.Email)+",\n")
-	s = append(s, "Username: "+fmt.Sprintf("%#v", this.Username)+",\n")
-	s = append(s, "Password: "+fmt.Sprintf("%#v", this.Password)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
-}
-func (this *AccountRequest_Diver) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.AccountRequest_Diver{` +
-		`Diver:` + fmt.Sprintf("%#v", this.Diver) + `}`}, ", ")
-	return s
 }
 func (this *AccountRequest_Agency) GoString() string {
 	if this == nil {
@@ -440,6 +393,14 @@ func (this *AccountRequest_Agency) GoString() string {
 	}
 	s := strings.Join([]string{`&pb.AccountRequest_Agency{` +
 		`Agency:` + fmt.Sprintf("%#v", this.Agency) + `}`}, ", ")
+	return s
+}
+func (this *AccountRequest_Diver) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.AccountRequest_Diver{` +
+		`Diver:` + fmt.Sprintf("%#v", this.Diver) + `}`}, ", ")
 	return s
 }
 func (this *LoginRequest) GoString() string {
@@ -616,32 +577,11 @@ func (m *AccountRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Password) > 0 {
-		i -= len(m.Password)
-		copy(dAtA[i:], m.Password)
-		i = encodeVarintAccount(dAtA, i, uint64(len(m.Password)))
-		i--
-		dAtA[i] = 0x62
-	}
-	if len(m.Username) > 0 {
-		i -= len(m.Username)
-		copy(dAtA[i:], m.Username)
-		i = encodeVarintAccount(dAtA, i, uint64(len(m.Username)))
-		i--
-		dAtA[i] = 0x5a
-	}
-	if len(m.Email) > 0 {
-		i -= len(m.Email)
-		copy(dAtA[i:], m.Email)
-		i = encodeVarintAccount(dAtA, i, uint64(len(m.Email)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Kind != nil {
+	if m.Type != nil {
 		{
-			size := m.Kind.Size()
+			size := m.Type.Size()
 			i -= size
-			if _, err := m.Kind.MarshalTo(dAtA[i:]); err != nil {
+			if _, err := m.Type.MarshalTo(dAtA[i:]); err != nil {
 				return 0, err
 			}
 		}
@@ -649,16 +589,16 @@ func (m *AccountRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *AccountRequest_Diver) MarshalTo(dAtA []byte) (int, error) {
+func (m *AccountRequest_Agency) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *AccountRequest_Diver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *AccountRequest_Agency) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.Diver != nil {
+	if m.Agency != nil {
 		{
-			size, err := m.Diver.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.Agency.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -670,16 +610,16 @@ func (m *AccountRequest_Diver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	}
 	return len(dAtA) - i, nil
 }
-func (m *AccountRequest_Agency) MarshalTo(dAtA []byte) (int, error) {
+func (m *AccountRequest_Diver) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *AccountRequest_Agency) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *AccountRequest_Diver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.Agency != nil {
+	if m.Diver != nil {
 		{
-			size, err := m.Agency.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.Diver.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -775,36 +715,12 @@ func (m *AccountRequest) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.Kind != nil {
-		n += m.Kind.Size()
-	}
-	l = len(m.Email)
-	if l > 0 {
-		n += 1 + l + sovAccount(uint64(l))
-	}
-	l = len(m.Username)
-	if l > 0 {
-		n += 1 + l + sovAccount(uint64(l))
-	}
-	l = len(m.Password)
-	if l > 0 {
-		n += 1 + l + sovAccount(uint64(l))
+	if m.Type != nil {
+		n += m.Type.Size()
 	}
 	return n
 }
 
-func (m *AccountRequest_Diver) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Diver != nil {
-		l = m.Diver.Size()
-		n += 1 + l + sovAccount(uint64(l))
-	}
-	return n
-}
 func (m *AccountRequest_Agency) Size() (n int) {
 	if m == nil {
 		return 0
@@ -813,6 +729,18 @@ func (m *AccountRequest_Agency) Size() (n int) {
 	_ = l
 	if m.Agency != nil {
 		l = m.Agency.Size()
+		n += 1 + l + sovAccount(uint64(l))
+	}
+	return n
+}
+func (m *AccountRequest_Diver) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Diver != nil {
+		l = m.Diver.Size()
 		n += 1 + l + sovAccount(uint64(l))
 	}
 	return n
@@ -858,20 +786,7 @@ func (this *AccountRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AccountRequest{`,
-		`Kind:` + fmt.Sprintf("%v", this.Kind) + `,`,
-		`Email:` + fmt.Sprintf("%v", this.Email) + `,`,
-		`Username:` + fmt.Sprintf("%v", this.Username) + `,`,
-		`Password:` + fmt.Sprintf("%v", this.Password) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *AccountRequest_Diver) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&AccountRequest_Diver{`,
-		`Diver:` + strings.Replace(fmt.Sprintf("%v", this.Diver), "DiverRequest", "DiverRequest", 1) + `,`,
+		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -881,7 +796,17 @@ func (this *AccountRequest_Agency) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AccountRequest_Agency{`,
-		`Agency:` + strings.Replace(fmt.Sprintf("%v", this.Agency), "AgencyRequest", "AgencyRequest", 1) + `,`,
+		`Agency:` + strings.Replace(fmt.Sprintf("%v", this.Agency), "Agency", "Agency", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AccountRequest_Diver) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AccountRequest_Diver{`,
+		`Diver:` + strings.Replace(fmt.Sprintf("%v", this.Diver), "Diver", "Diver", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -946,41 +871,6 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Diver", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccount
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAccount
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccount
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			v := &DiverRequest{}
-			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			m.Kind = &AccountRequest_Diver{v}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Agency", wireType)
 			}
 			var msglen int
@@ -1008,17 +898,17 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			v := &AgencyRequest{}
+			v := &Agency{}
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Kind = &AccountRequest_Agency{v}
+			m.Type = &AccountRequest_Agency{v}
 			iNdEx = postIndex
-		case 10:
+		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Email", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Diver", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowAccount
@@ -1028,87 +918,26 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthAccount
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthAccount
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Email = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 11:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Username", wireType)
+			v := &Diver{}
+			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccount
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAccount
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccount
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Username = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 12:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Password", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccount
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAccount
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccount
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Password = string(dAtA[iNdEx:postIndex])
+			m.Type = &AccountRequest_Diver{v}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

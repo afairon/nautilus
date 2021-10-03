@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package account;
 
-import "agency.proto";
-import "diver.proto";
+import "model.proto";
 
 import "google/protobuf/empty.proto";
 
@@ -21,14 +20,11 @@ service Account {
 
 // AccountRequest
 message AccountRequest {
-    // kind defines type of account
-    oneof kind {
-        diver.DiverRequest diver = 1;
-        agency.AgencyRequest agency = 5;
+    // type defines type of account
+    oneof type {
+        model.Agency agency = 1;
+        model.Diver diver = 5;
     }
-    string email = 10;
-    string username = 11;
-    string password = 12;
 }
 
 // LoginRequest

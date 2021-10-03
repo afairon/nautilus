@@ -327,9 +327,10 @@ CREATE TABLE public.trip (
   price real NOT NULL,
   from_date timestamp with time zone NOT NULL,
   to_date timestamp with time zone NOT NULL,
+  last_reservation_date timestamp with time zone NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
-  CONSTRAINT trip_check CHECK (((max_guest > 0) AND (price >= (0)::double precision) AND (from_date < to_date))),
+  CONSTRAINT trip_check CHECK (((max_guest > 0) AND (price >= (0)::double precision) AND (from_date < to_date) AND (last_reservation_date <= from_date))),
   CONSTRAINT trip_pk PRIMARY KEY (id),
   CONSTRAINT trip_un UNIQUE (template_id, from_date, to_date)
 );

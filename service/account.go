@@ -7,151 +7,194 @@ import (
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
-	"github.com/afairon/nautilus/store"
-	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-// AccountService implements the Account rpc interface.
-type AccountService struct {
-	Store   *store.Store
-	Session session.Session
-	Media   media.Store
+// AccountService defines operations on account.
+type AccountService interface {
+	CreateAgencyAccount(context.Context, *pb.Agency) error
+	CreateDiverAccount(context.Context, *pb.Diver) error
+	Login(context.Context, string, string) (string, error)
 }
 
-// Create handles account creation. It handles the creation of the agency
-// and diver account. It checks for username, email, and password before creating records.
-// It also handles files associated to the account. The file creation is handled by
-// the media storage.
-func (s *AccountService) Create(ctx context.Context, req *pb.AccountRequest) (*empty.Empty, error) {
-	account := entity.Account{}
+// accountService implements AccountService.
+type accountService struct {
+	repo    *repo.Repo
+	session session.Session
+	media   media.Store
+}
 
+// NewAccountService creates new accountService.
+func NewAccountService(repo *repo.Repo, session session.Session, media media.Store) *accountService {
+	return &accountService{
+		repo:    repo,
+		session: session,
+		media:   media,
+	}
+}
+
+// setUserAccount checks if the username is valid, the email is valid,
+// and the password is valid.
+func setUserAccount(dst *entity.Account, src *pb.Account) error {
 	// Set a valid username.
-	err := account.SetUsername(req.GetUsername())
+	err := dst.SetUsername(src.GetUsername())
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return status.Error(codes.InvalidArgument, err.Error())
 	}
 
 	// Set a valid email.
-	err = account.SetEmail(req.GetEmail())
+	err = dst.SetEmail(src.GetEmail())
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return status.Error(codes.InvalidArgument, err.Error())
 	}
 
 	// Set a valid password.
-	err = account.SetPassword(req.GetPassword())
+	err = dst.SetPassword(src.GetPassword())
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	// User type assertion
-	// Check for type of account.
-	switch u := req.GetKind().(type) {
-	// Agency account
-	case *pb.AccountRequest_Agency:
-		account.Type = pb.AGENCY
+	return nil
+}
 
-		// Get address associated to the agency.
-		address := entity.Address{
-			AddressLine_1: u.Agency.Address.GetAddresLine_1(),
-			AddressLine_2: u.Agency.Address.GetAddresLine_2(),
-			City:          u.Agency.Address.GetCity(),
-			Postcode:      u.Agency.Address.GetPostcode(),
-			Region:        u.Agency.Address.GetRegion(),
-			Country:       u.Agency.Address.GetCountry(),
-		}
+// CreateAgencyAccount creates an agency account by first creating
+// a record in account table, then a record in address table, and
+// finally a record in agency table with account_id and address_id.
+func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error {
+	account := entity.Account{}
 
-		// Get agency information.
-		agency := entity.Agency{
-			Name:  u.Agency.GetName(),
-			Phone: u.Agency.GetPhoneNumber(),
-		}
-
-		// Get documents associated to the agency.
-		for _, file := range u.Agency.GetDocuments() {
-			if file != nil {
-				// Read file and save.
-				reader := bytes.NewReader(file.GetFile())
-				objectID, err := s.Media.Put(file.GetFilename(), media.PRIVATE, reader)
-				if err != nil {
-					return nil, status.Error(codes.InvalidArgument, err.Error())
-				}
-				agency.Documents = append(agency.Documents, objectID)
-			}
-		}
-
-		// Store agency information in the database.
-		err = s.Store.CreateAgencyAccount(context.Background(), &account, &address, &agency)
-
-	// Diver account
-	case *pb.AccountRequest_Diver:
-		account.Type = pb.DIVER
-
-		// Get diver information.
-		diver := entity.Diver{
-			FirstName: u.Diver.GetFirstName(),
-			LastName:  u.Diver.GetLastName(),
-			Phone:     u.Diver.GetPhoneNumber(),
-			Level:     u.Diver.GetLevel(),
-		}
-
-		// Get diver's birth date.
-		birthDate := u.Diver.GetBirthDate()
-		if birthDate == nil {
-			return nil, status.Error(codes.InvalidArgument, "account: diver missing birth date")
-		}
-
-		// Format birth date from *time.Time to yyyy-mm-dd
-		diver.BirthDate = birthDate.Format("2006-01-02")
-
-		// Get documents.
-		for _, file := range u.Diver.GetDocuments() {
-			if file != nil {
-				// Read file and save.
-				reader := bytes.NewReader(file.GetFile())
-				objectID, err := s.Media.Put(file.GetFilename(), media.PRIVATE, reader)
-				if err != nil {
-					return nil, status.Error(codes.InvalidArgument, err.Error())
-				}
-				diver.Documents = append(diver.Documents, objectID)
-			}
-		}
-
-		// Store diver information in the database.
-		err = s.Store.CreateDiverAccount(context.Background(), &account, &diver)
+	// Copy account information and verify if the information is correct.
+	err := setUserAccount(&account, &agency.Account)
+	if err != nil {
+		return err
 	}
+
+	account.Type = pb.AGENCY
+
+	address := entity.Address{
+		AddressLine_1: agency.Address.GetAddressLine_1(),
+		AddressLine_2: agency.Address.GetAddressLine_2(),
+		City:          agency.Address.GetPostcode(),
+		Postcode:      agency.Address.GetPostcode(),
+		Region:        agency.Address.GetRegion(),
+		Country:       agency.Address.GetCountry(),
+	}
+
+	newAgency := entity.Agency{
+		Name:  agency.GetName(),
+		Phone: agency.GetPhone(),
+	}
+
+	for _, document := range agency.GetDocuments() {
+		reader := bytes.NewReader(document.File)
+		objectID, err := service.media.Put(document.Filename, media.PRIVATE, reader)
+		if err != nil {
+			return err
+		}
+		newAgency.Documents = append(newAgency.Documents, objectID)
+	}
+
+	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		newAccount, err := query.Account.Create(ctx, &account)
+		if err != nil {
+			return err
+		}
+
+		newAddress, err := query.Address.Create(ctx, &address)
+		if err != nil {
+			return err
+		}
+
+		newAgency.AccountId = newAccount.Id
+		newAgency.AddressId = newAddress.Id
+		_, err = query.Agency.Create(ctx, &newAgency)
+
+		return err
+	})
 
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		for _, document := range newAgency.Documents {
+			service.media.Delete(document)
+		}
 	}
 
-	return &empty.Empty{}, nil
+	return err
+}
+
+// CreateDiverAccount creates a diver account by first creating
+// a record in account table and finally a record in diver table
+// with account_id.
+func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb.Diver) error {
+	account := entity.Account{}
+
+	// Copy account information and verify if the information is correct.
+	err := setUserAccount(&account, &diver.Account)
+	if err != nil {
+		return err
+	}
+
+	account.Type = pb.DIVER
+
+	newDiver := entity.Diver{
+		FirstName: diver.GetFirstName(),
+		LastName:  diver.GetLastName(),
+		Phone:     diver.GetPhone(),
+		BirthDate: diver.GetBirthDate().Format("2006-01-02"),
+		Level:     diver.GetLevel(),
+	}
+
+	for _, document := range diver.GetDocuments() {
+		reader := bytes.NewReader(document.File)
+		objectID, err := service.media.Put(document.Filename, media.PRIVATE, reader)
+		if err != nil {
+			return err
+		}
+		newDiver.Documents = append(newDiver.Documents, objectID)
+	}
+
+	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		newAccount, err := query.Account.Create(ctx, &account)
+		if err != nil {
+			return err
+		}
+
+		newDiver.AccountId = newAccount.Id
+		_, err = query.Diver.Create(ctx, &newDiver)
+
+		return err
+	})
+
+	if err != nil {
+		for _, document := range newDiver.Documents {
+			service.media.Delete(document)
+		}
+	}
+
+	return err
 }
 
 // Login checks for account credentials and returns access token.
-func (s *AccountService) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
+func (service *accountService) Login(ctx context.Context, email, password string) (string, error) {
 	// Retrieve account by email.
-	account, err := s.Store.GetAccountByEmail(context.Background(), req.GetEmail())
+	account, err := service.repo.Account.GetByEmail(ctx, email)
 	if err != nil {
-		return nil, status.Error(codes.Unavailable, err.Error())
+		return "", status.Error(codes.Unavailable, err.Error())
 	}
 
 	// Check password with hash.
-	if !account.CheckPassword(req.GetPassword()) {
+	if !account.CheckPassword(password) {
 		// Wrong password
-		return nil, status.Error(codes.PermissionDenied, "account: login failed")
+		return "", status.Error(codes.PermissionDenied, "account: login failed")
 	}
 
-	token, err := s.Session.Create(account)
+	// Create session.
+	token, err := service.session.Create(*account)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return "", status.Error(codes.Internal, err.Error())
 	}
 
-	resp := pb.LoginResponse{
-		Token: token,
-	}
-
-	return &resp, nil
+	return token, nil
 }

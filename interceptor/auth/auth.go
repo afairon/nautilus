@@ -16,6 +16,7 @@ import (
 // Services that are available to everyone should not be defined in here.
 var accessRoles = map[string][]pb.AccountType{}
 
+// AuthFunc is a function type authorizing users to access certain services.
 type AuthFunc func(context.Context, string) (context.Context, error)
 
 // UnaryInterceptor intercepts unary requests and pass it to the handler.
@@ -47,7 +48,7 @@ func StreamServerInterceptor(auth AuthFunc) grpc.StreamServerInterceptor {
 	}
 }
 
-// Authorization returns a function which grants the user the access to user the service.
+// Authorization returns a function which grants the user the access to use the service.
 // The function will check in the accessRoles map which service is public and private,
 // and who has access to it.
 func Authorization(s session.Session) AuthFunc {

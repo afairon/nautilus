@@ -3,13 +3,14 @@ package server
 import (
 	"time"
 
+	"github.com/afairon/nautilus/handler"
 	"github.com/afairon/nautilus/interceptor/auth"
 	"github.com/afairon/nautilus/interceptor/logger"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/service"
 	"github.com/afairon/nautilus/session"
-	"github.com/afairon/nautilus/store"
 	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc"
 )
@@ -42,7 +43,8 @@ func CreateGRPCServer(db *sqlx.DB, session session.Session, mediaStorage media.S
 }
 
 // registerServices registers services to gRPC.
-func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session, mediaStorage media.Store) {
-	store := store.NewStore(db)
-	pb.RegisterAccountServer(server, &service.AccountService{Store: store, Session: session, Media: mediaStorage})
+func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session, media media.Store) {
+	repo := repo.NewRepo(db)
+	accountService := service.NewAccountService(repo, session, media)
+	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
 }

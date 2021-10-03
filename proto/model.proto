@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package model;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./pb";
+
+// Account type
+enum AccountType {
+    ADMIN = 0;
+    AGENCY = 1;
+    DIVER = 2;
+}
+
+// Gender
+enum GenderType {
+    FEMALE = 0;
+    MALE = 1;
+}
+
+// Level
+enum LevelType {
+    INSTRUCTOR = 0;
+    MASTER = 1;
+    RESCUE = 2;
+    ADVANCED_OPEN_WATER = 3;
+    OPEN_WATER = 4;
+}
+
+// Trip type
+enum TripType {
+    ONSHORE = 0;
+    OFFSHORE = 1;
+}
+
+// File
+message File {
+    string filename = 1;
+    string link = 2;
+    bytes file = 10;
+}
+
+message Account {
+    uint64 id = 1;
+    string username = 10;
+    string email = 20;
+    string password = 30;
+    AccountType type = 40;
+    bool verified = 50;
+    bool active = 60;
+    google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+}
+
+message Address {
+    uint64 id = 1;
+    string address_line_1 = 20;
+    string address_line_2 = 30;
+    string city = 40;
+    string postcode = 50;
+    string region = 60;
+    string country = 70;
+    google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+}
+
+message Agency {
+    uint64 id = 10;
+    string name = 20;
+    string phone = 30;
+    Account account = 40 [(gogoproto.nullable) = false];
+    Address address = 50 [(gogoproto.nullable) = false];
+    repeated File documents = 60 [(gogoproto.nullable) = false];
+    google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+}
+
+message Diver {
+    uint64 id = 10;
+    string first_name = 20;
+    string last_name = 30;
+    string phone = 40;
+    google.protobuf.Timestamp birth_date = 50 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+    LevelType level = 60;
+    Account account = 70 [(gogoproto.nullable) = false];
+    repeated File documents = 80 [(gogoproto.nullable) = false];
+    google.protobuf.Timestamp created_on = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 100 [(gogoproto.stdtime) = true];
+}
