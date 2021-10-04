@@ -19,10 +19,10 @@ class AccountClient extends $grpc.Client {
       '/account.Account/Create',
       ($0.AccountRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
-  static final _$login = $grpc.ClientMethod<$0.LoginRequest, $1.Empty>(
+  static final _$login = $grpc.ClientMethod<$0.LoginRequest, $0.LoginResponse>(
       '/account.Account/Login',
       ($0.LoginRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+      ($core.List<$core.int> value) => $0.LoginResponse.fromBuffer(value));
 
   AccountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -34,7 +34,7 @@ class AccountClient extends $grpc.Client {
     return $createUnaryCall(_$create, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.Empty> login($0.LoginRequest request,
+  $grpc.ResponseFuture<$0.LoginResponse> login($0.LoginRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$login, request, options: options);
   }
@@ -51,13 +51,13 @@ abstract class AccountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.AccountRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.LoginRequest, $1.Empty>(
+    $addMethod($grpc.ServiceMethod<$0.LoginRequest, $0.LoginResponse>(
         'Login',
         login_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.LoginRequest.fromBuffer(value),
-        ($1.Empty value) => value.writeToBuffer()));
+        ($0.LoginResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> create_Pre(
@@ -65,13 +65,13 @@ abstract class AccountServiceBase extends $grpc.Service {
     return create(call, await request);
   }
 
-  $async.Future<$1.Empty> login_Pre(
+  $async.Future<$0.LoginResponse> login_Pre(
       $grpc.ServiceCall call, $async.Future<$0.LoginRequest> request) async {
     return login(call, await request);
   }
 
   $async.Future<$1.Empty> create(
       $grpc.ServiceCall call, $0.AccountRequest request);
-  $async.Future<$1.Empty> login(
+  $async.Future<$0.LoginResponse> login(
       $grpc.ServiceCall call, $0.LoginRequest request);
 }

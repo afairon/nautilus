@@ -37,6 +37,14 @@ ENTITY := $(PROTO_DIR)/entity.proto
 PB_GO := $(patsubst $(PROTO_DIR)/%.proto,$(PB_GO_DIR)/%.pb.go,$(PROTO))
 ENTITY_GO := $(patsubst $(PROTO_DIR)/%.proto,$(ENTITY_GO_DIR)/%.pb.go,$(ENTITY))
 
+# Postgres environment variable
+PG_HOST ?= 127.0.0.1
+PG_PORT ?= 5432
+PG_USER ?= postgres
+
+# JWT secret
+JWT_SECRET ?= secret
+
 # Generate every files
 .PHONY: all
 all: proto-go proto-dart server
@@ -90,7 +98,13 @@ $(VENDOR_DIR): go.mod go.sum tools.go
 # Run the generated executable
 .PHONY: run
 run: server
-	@./$(SERVER_BINARY)
+	@./$(SERVER_BINARY) \
+		-pg_host $(PG_HOST) \
+		-pg_port $(PG_PORT) \
+		-pg_user $(PG_USER) \
+		-pg_password $(PG_PASSWORD) \
+		-pg_dbname $(PG_DBNAME) \
+		-secret $(JWT_SECRET)
 
 # Update dependencies
 # Update go mod and vendor
