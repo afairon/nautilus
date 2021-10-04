@@ -4,19 +4,32 @@
 package pb
 
 import (
+	bytes "bytes"
+	context "context"
+	encoding_binary "encoding/binary"
 	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	empty "github.com/golang/protobuf/ptypes/empty"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
 	reflect "reflect"
+	strconv "strconv"
 	strings "strings"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -24,24 +37,130 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type AgencyRequest struct {
-	Name        string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	PhoneNumber string   `protobuf:"bytes,20,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Address     *Address `protobuf:"bytes,30,opt,name=address,proto3" json:"address,omitempty"`
-	Documents   []*File  `protobuf:"bytes,40,rep,name=documents,proto3" json:"documents,omitempty"`
+type Room_RoomType int32
+
+const (
+	SINGLE              Room_RoomType = 0
+	DOUBLE              Room_RoomType = 1
+	TRIPLE              Room_RoomType = 2
+	QUAD                Room_RoomType = 3
+	QUEEN               Room_RoomType = 4
+	KING                Room_RoomType = 5
+	TWIN                Room_RoomType = 6
+	HOLLYWOOD_TWIN_ROOM Room_RoomType = 7
+	DOUBLE_DOUBLE       Room_RoomType = 8
+	STUDIO              Room_RoomType = 9
+	EXECUTEIVE_SUITE    Room_RoomType = 10
+	MINI_SUITE          Room_RoomType = 11
+	PRESIDENTAL_SUITE   Room_RoomType = 12
+	APARTMENT           Room_RoomType = 13
+	CONNECTING_ROOMS    Room_RoomType = 14
+	MURPHY_ROOM         Room_RoomType = 15
+	DISABLED_ROOM       Room_RoomType = 16
+	CABANA              Room_RoomType = 17
+	ADJOINING_ROOMS     Room_RoomType = 18
+	ADJACENT_ROOMS      Room_RoomType = 19
+	VILLA               Room_RoomType = 20
+	FLOORED_ROOM        Room_RoomType = 21
+	SMOKING_NON_SMOKING Room_RoomType = 22
+)
+
+var Room_RoomType_name = map[int32]string{
+	0:  "SINGLE",
+	1:  "DOUBLE",
+	2:  "TRIPLE",
+	3:  "QUAD",
+	4:  "QUEEN",
+	5:  "KING",
+	6:  "TWIN",
+	7:  "HOLLYWOOD_TWIN_ROOM",
+	8:  "DOUBLE_DOUBLE",
+	9:  "STUDIO",
+	10: "EXECUTEIVE_SUITE",
+	11: "MINI_SUITE",
+	12: "PRESIDENTAL_SUITE",
+	13: "APARTMENT",
+	14: "CONNECTING_ROOMS",
+	15: "MURPHY_ROOM",
+	16: "DISABLED_ROOM",
+	17: "CABANA",
+	18: "ADJOINING_ROOMS",
+	19: "ADJACENT_ROOMS",
+	20: "VILLA",
+	21: "FLOORED_ROOM",
+	22: "SMOKING_NON_SMOKING",
 }
 
-func (m *AgencyRequest) Reset()      { *m = AgencyRequest{} }
-func (*AgencyRequest) ProtoMessage() {}
-func (*AgencyRequest) Descriptor() ([]byte, []int) {
+var Room_RoomType_value = map[string]int32{
+	"SINGLE":              0,
+	"DOUBLE":              1,
+	"TRIPLE":              2,
+	"QUAD":                3,
+	"QUEEN":               4,
+	"KING":                5,
+	"TWIN":                6,
+	"HOLLYWOOD_TWIN_ROOM": 7,
+	"DOUBLE_DOUBLE":       8,
+	"STUDIO":              9,
+	"EXECUTEIVE_SUITE":    10,
+	"MINI_SUITE":          11,
+	"PRESIDENTAL_SUITE":   12,
+	"APARTMENT":           13,
+	"CONNECTING_ROOMS":    14,
+	"MURPHY_ROOM":         15,
+	"DISABLED_ROOM":       16,
+	"CABANA":              17,
+	"ADJOINING_ROOMS":     18,
+	"ADJACENT_ROOMS":      19,
+	"VILLA":               20,
+	"FLOORED_ROOM":        21,
+	"SMOKING_NON_SMOKING": 22,
+}
+
+func (Room_RoomType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{5, 0}
+}
+
+type TripTemplate_TripType int32
+
+const (
+	LIVEABOARD   TripTemplate_TripType = 0
+	DIVE_RESORTS TripTemplate_TripType = 1
+)
+
+var TripTemplate_TripType_name = map[int32]string{
+	0: "LIVEABOARD",
+	1: "DIVE_RESORTS",
+}
+
+var TripTemplate_TripType_value = map[string]int32{
+	"LIVEABOARD":   0,
+	"DIVE_RESORTS": 1,
+}
+
+func (TripTemplate_TripType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{6, 0}
+}
+
+type DiveMaster struct {
+	FirstName  string    `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName   string    `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Level      LevelType `protobuf:"varint,3,opt,name=level,proto3,enum=model.LevelType" json:"level,omitempty"`
+	FrontImage string    `protobuf:"bytes,4,opt,name=front_image,json=frontImage,proto3" json:"front_image,omitempty"`
+	BackImage  string    `protobuf:"bytes,5,opt,name=back_image,json=backImage,proto3" json:"back_image,omitempty"`
+}
+
+func (m *DiveMaster) Reset()      { *m = DiveMaster{} }
+func (*DiveMaster) ProtoMessage() {}
+func (*DiveMaster) Descriptor() ([]byte, []int) {
 	return fileDescriptor_614a4be5fd9deed0, []int{0}
 }
-func (m *AgencyRequest) XXX_Unmarshal(b []byte) error {
+func (m *DiveMaster) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *AgencyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DiveMaster) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_AgencyRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DiveMaster.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -51,79 +170,1385 @@ func (m *AgencyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *AgencyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AgencyRequest.Merge(m, src)
+func (m *DiveMaster) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiveMaster.Merge(m, src)
 }
-func (m *AgencyRequest) XXX_Size() int {
+func (m *DiveMaster) XXX_Size() int {
 	return m.Size()
 }
-func (m *AgencyRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_AgencyRequest.DiscardUnknown(m)
+func (m *DiveMaster) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiveMaster.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_AgencyRequest proto.InternalMessageInfo
+var xxx_messageInfo_DiveMaster proto.InternalMessageInfo
 
-func (m *AgencyRequest) GetName() string {
+func (m *DiveMaster) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *DiveMaster) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *DiveMaster) GetLevel() LevelType {
+	if m != nil {
+		return m.Level
+	}
+	return INSTRUCTOR
+}
+
+func (m *DiveMaster) GetFrontImage() string {
+	if m != nil {
+		return m.FrontImage
+	}
+	return ""
+}
+
+func (m *DiveMaster) GetBackImage() string {
+	if m != nil {
+		return m.BackImage
+	}
+	return ""
+}
+
+type DiveMasterFirstAndLastName struct {
+	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName  string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+}
+
+func (m *DiveMasterFirstAndLastName) Reset()      { *m = DiveMasterFirstAndLastName{} }
+func (*DiveMasterFirstAndLastName) ProtoMessage() {}
+func (*DiveMasterFirstAndLastName) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{1}
+}
+func (m *DiveMasterFirstAndLastName) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DiveMasterFirstAndLastName) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DiveMasterFirstAndLastName.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DiveMasterFirstAndLastName) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DiveMasterFirstAndLastName.Merge(m, src)
+}
+func (m *DiveMasterFirstAndLastName) XXX_Size() int {
+	return m.Size()
+}
+func (m *DiveMasterFirstAndLastName) XXX_DiscardUnknown() {
+	xxx_messageInfo_DiveMasterFirstAndLastName.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DiveMasterFirstAndLastName proto.InternalMessageInfo
+
+func (m *DiveMasterFirstAndLastName) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *DiveMasterFirstAndLastName) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+type Staff struct {
+	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName  string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Position  string `protobuf:"bytes,3,opt,name=position,proto3" json:"position,omitempty"`
+}
+
+func (m *Staff) Reset()      { *m = Staff{} }
+func (*Staff) ProtoMessage() {}
+func (*Staff) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{2}
+}
+func (m *Staff) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Staff) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Staff.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Staff) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Staff.Merge(m, src)
+}
+func (m *Staff) XXX_Size() int {
+	return m.Size()
+}
+func (m *Staff) XXX_DiscardUnknown() {
+	xxx_messageInfo_Staff.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Staff proto.InternalMessageInfo
+
+func (m *Staff) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *Staff) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *Staff) GetPosition() string {
+	if m != nil {
+		return m.Position
+	}
+	return ""
+}
+
+type DivingBoat struct {
+	BoatModel string `protobuf:"bytes,1,opt,name=boat_model,json=boatModel,proto3" json:"boat_model,omitempty"`
+	BoatImage []byte `protobuf:"bytes,2,opt,name=boat_image,json=boatImage,proto3" json:"boat_image,omitempty"`
+}
+
+func (m *DivingBoat) Reset()      { *m = DivingBoat{} }
+func (*DivingBoat) ProtoMessage() {}
+func (*DivingBoat) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{3}
+}
+func (m *DivingBoat) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DivingBoat) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DivingBoat.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DivingBoat) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DivingBoat.Merge(m, src)
+}
+func (m *DivingBoat) XXX_Size() int {
+	return m.Size()
+}
+func (m *DivingBoat) XXX_DiscardUnknown() {
+	xxx_messageInfo_DivingBoat.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DivingBoat proto.InternalMessageInfo
+
+func (m *DivingBoat) GetBoatModel() string {
+	if m != nil {
+		return m.BoatModel
+	}
+	return ""
+}
+
+func (m *DivingBoat) GetBoatImage() []byte {
+	if m != nil {
+		return m.BoatImage
+	}
+	return nil
+}
+
+type Place struct {
+	Country string `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	City    string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
+}
+
+func (m *Place) Reset()      { *m = Place{} }
+func (*Place) ProtoMessage() {}
+func (*Place) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{4}
+}
+func (m *Place) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Place) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Place.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Place) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Place.Merge(m, src)
+}
+func (m *Place) XXX_Size() int {
+	return m.Size()
+}
+func (m *Place) XXX_DiscardUnknown() {
+	xxx_messageInfo_Place.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Place proto.InternalMessageInfo
+
+func (m *Place) GetCountry() string {
+	if m != nil {
+		return m.Country
+	}
+	return ""
+}
+
+func (m *Place) GetCity() string {
+	if m != nil {
+		return m.City
+	}
+	return ""
+}
+
+type Room struct {
+	RoomType     Room_RoomType `protobuf:"varint,1,opt,name=room_type,json=roomType,proto3,enum=agency.Room_RoomType" json:"room_type,omitempty"`
+	Description  string        `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	MaxCapacity  int32         `protobuf:"varint,3,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
+	Price        float32       `protobuf:"fixed32,4,opt,name=price,proto3" json:"price,omitempty"`
+	RoomImages   [][]byte      `protobuf:"bytes,5,rep,name=room_images,json=roomImages,proto3" json:"room_images,omitempty"`
+	AmenityNames []string      `protobuf:"bytes,6,rep,name=amenity_names,json=amenityNames,proto3" json:"amenity_names,omitempty"`
+}
+
+func (m *Room) Reset()      { *m = Room{} }
+func (*Room) ProtoMessage() {}
+func (*Room) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{5}
+}
+func (m *Room) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Room) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Room.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Room) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Room.Merge(m, src)
+}
+func (m *Room) XXX_Size() int {
+	return m.Size()
+}
+func (m *Room) XXX_DiscardUnknown() {
+	xxx_messageInfo_Room.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Room proto.InternalMessageInfo
+
+func (m *Room) GetRoomType() Room_RoomType {
+	if m != nil {
+		return m.RoomType
+	}
+	return SINGLE
+}
+
+func (m *Room) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *Room) GetMaxCapacity() int32 {
+	if m != nil {
+		return m.MaxCapacity
+	}
+	return 0
+}
+
+func (m *Room) GetPrice() float32 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *Room) GetRoomImages() [][]byte {
+	if m != nil {
+		return m.RoomImages
+	}
+	return nil
+}
+
+func (m *Room) GetAmenityNames() []string {
+	if m != nil {
+		return m.AmenityNames
+	}
+	return nil
+}
+
+type TripTemplate struct {
+	Name          string                `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	DivingBoat    *DivingBoat           `protobuf:"bytes,3,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
+	Place         *Place                `protobuf:"bytes,4,opt,name=place,proto3" json:"place,omitempty"`
+	Images        [][]byte              `protobuf:"bytes,5,rep,name=images,proto3" json:"images,omitempty"`
+	TripType      TripTemplate_TripType `protobuf:"varint,6,opt,name=trip_type,json=tripType,proto3,enum=agency.TripTemplate_TripType" json:"trip_type,omitempty"`
+	ScheduleImage []byte                `protobuf:"bytes,7,opt,name=schedule_image,json=scheduleImage,proto3" json:"schedule_image,omitempty"`
+}
+
+func (m *TripTemplate) Reset()      { *m = TripTemplate{} }
+func (*TripTemplate) ProtoMessage() {}
+func (*TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{6}
+}
+func (m *TripTemplate) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TripTemplate.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TripTemplate.Merge(m, src)
+}
+func (m *TripTemplate) XXX_Size() int {
+	return m.Size()
+}
+func (m *TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_TripTemplate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TripTemplate proto.InternalMessageInfo
+
+func (m *TripTemplate) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-func (m *AgencyRequest) GetPhoneNumber() string {
+func (m *TripTemplate) GetDescription() string {
 	if m != nil {
-		return m.PhoneNumber
+		return m.Description
 	}
 	return ""
 }
 
-func (m *AgencyRequest) GetAddress() *Address {
+func (m *TripTemplate) GetDivingBoat() *DivingBoat {
 	if m != nil {
-		return m.Address
+		return m.DivingBoat
 	}
 	return nil
 }
 
-func (m *AgencyRequest) GetDocuments() []*File {
+func (m *TripTemplate) GetPlace() *Place {
 	if m != nil {
-		return m.Documents
+		return m.Place
 	}
 	return nil
+}
+
+func (m *TripTemplate) GetImages() [][]byte {
+	if m != nil {
+		return m.Images
+	}
+	return nil
+}
+
+func (m *TripTemplate) GetTripType() TripTemplate_TripType {
+	if m != nil {
+		return m.TripType
+	}
+	return LIVEABOARD
+}
+
+func (m *TripTemplate) GetScheduleImage() []byte {
+	if m != nil {
+		return m.ScheduleImage
+	}
+	return nil
+}
+
+type Trip struct {
+	From            *time.Time                    `protobuf:"bytes,1,opt,name=from,proto3,stdtime" json:"from,omitempty"`
+	To              *time.Time                    `protobuf:"bytes,2,opt,name=to,proto3,stdtime" json:"to,omitempty"`
+	MaxCapacity     int32                         `protobuf:"varint,3,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
+	PricePerPserson int32                         `protobuf:"varint,4,opt,name=price_per_pserson,json=pricePerPserson,proto3" json:"price_per_pserson,omitempty"`
+	DiveMasters     []*DiveMasterFirstAndLastName `protobuf:"bytes,5,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
+}
+
+func (m *Trip) Reset()      { *m = Trip{} }
+func (*Trip) ProtoMessage() {}
+func (*Trip) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{7}
+}
+func (m *Trip) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Trip.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Trip) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Trip.Merge(m, src)
+}
+func (m *Trip) XXX_Size() int {
+	return m.Size()
+}
+func (m *Trip) XXX_DiscardUnknown() {
+	xxx_messageInfo_Trip.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Trip proto.InternalMessageInfo
+
+func (m *Trip) GetFrom() *time.Time {
+	if m != nil {
+		return m.From
+	}
+	return nil
+}
+
+func (m *Trip) GetTo() *time.Time {
+	if m != nil {
+		return m.To
+	}
+	return nil
+}
+
+func (m *Trip) GetMaxCapacity() int32 {
+	if m != nil {
+		return m.MaxCapacity
+	}
+	return 0
+}
+
+func (m *Trip) GetPricePerPserson() int32 {
+	if m != nil {
+		return m.PricePerPserson
+	}
+	return 0
+}
+
+func (m *Trip) GetDiveMasters() []*DiveMasterFirstAndLastName {
+	if m != nil {
+		return m.DiveMasters
+	}
+	return nil
+}
+
+type Hotel struct {
+	HotelName string `protobuf:"bytes,1,opt,name=hotel_name,json=hotelName,proto3" json:"hotel_name,omitempty"`
+	Star      int32  `protobuf:"varint,2,opt,name=star,proto3" json:"star,omitempty"`
+	// optional highlights when creating a new hotel
+	Highlights []string `protobuf:"bytes,3,rep,name=highlights,proto3" json:"highlights,omitempty"`
+	// optional images when creating a new hotel
+	Images [][]byte `protobuf:"bytes,4,rep,name=images,proto3" json:"images,omitempty"`
+	Rooms  []*Room  `protobuf:"bytes,5,rep,name=rooms,proto3" json:"rooms,omitempty"`
+}
+
+func (m *Hotel) Reset()      { *m = Hotel{} }
+func (*Hotel) ProtoMessage() {}
+func (*Hotel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{8}
+}
+func (m *Hotel) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Hotel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Hotel.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Hotel) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Hotel.Merge(m, src)
+}
+func (m *Hotel) XXX_Size() int {
+	return m.Size()
+}
+func (m *Hotel) XXX_DiscardUnknown() {
+	xxx_messageInfo_Hotel.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Hotel proto.InternalMessageInfo
+
+func (m *Hotel) GetHotelName() string {
+	if m != nil {
+		return m.HotelName
+	}
+	return ""
+}
+
+func (m *Hotel) GetStar() int32 {
+	if m != nil {
+		return m.Star
+	}
+	return 0
+}
+
+func (m *Hotel) GetHighlights() []string {
+	if m != nil {
+		return m.Highlights
+	}
+	return nil
+}
+
+func (m *Hotel) GetImages() [][]byte {
+	if m != nil {
+		return m.Images
+	}
+	return nil
+}
+
+func (m *Hotel) GetRooms() []*Room {
+	if m != nil {
+		return m.Rooms
+	}
+	return nil
+}
+
+type Liveaboard struct {
+	Model       string  `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
+	Description string  `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Length      float32 `protobuf:"fixed32,3,opt,name=length,proto3" json:"length,omitempty"`
+	Width       float32 `protobuf:"fixed32,4,opt,name=width,proto3" json:"width,omitempty"`
+	// optional highlights when creating a new liveaboard
+	Highlights []string `protobuf:"bytes,5,rep,name=highlights,proto3" json:"highlights,omitempty"`
+	// optional images when creating a new liveaboard
+	Images []string `protobuf:"bytes,6,rep,name=images,proto3" json:"images,omitempty"`
+	Rooms  []*Room  `protobuf:"bytes,7,rep,name=rooms,proto3" json:"rooms,omitempty"`
+}
+
+func (m *Liveaboard) Reset()      { *m = Liveaboard{} }
+func (*Liveaboard) ProtoMessage() {}
+func (*Liveaboard) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{9}
+}
+func (m *Liveaboard) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Liveaboard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Liveaboard.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Liveaboard) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Liveaboard.Merge(m, src)
+}
+func (m *Liveaboard) XXX_Size() int {
+	return m.Size()
+}
+func (m *Liveaboard) XXX_DiscardUnknown() {
+	xxx_messageInfo_Liveaboard.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Liveaboard proto.InternalMessageInfo
+
+func (m *Liveaboard) GetModel() string {
+	if m != nil {
+		return m.Model
+	}
+	return ""
+}
+
+func (m *Liveaboard) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *Liveaboard) GetLength() float32 {
+	if m != nil {
+		return m.Length
+	}
+	return 0
+}
+
+func (m *Liveaboard) GetWidth() float32 {
+	if m != nil {
+		return m.Width
+	}
+	return 0
+}
+
+func (m *Liveaboard) GetHighlights() []string {
+	if m != nil {
+		return m.Highlights
+	}
+	return nil
+}
+
+func (m *Liveaboard) GetImages() []string {
+	if m != nil {
+		return m.Images
+	}
+	return nil
+}
+
+func (m *Liveaboard) GetRooms() []*Room {
+	if m != nil {
+		return m.Rooms
+	}
+	return nil
+}
+
+type AddDiveMasterRequest struct {
+	DiveMaster *DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
+	AgencyName string      `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddDiveMasterRequest) Reset()      { *m = AddDiveMasterRequest{} }
+func (*AddDiveMasterRequest) ProtoMessage() {}
+func (*AddDiveMasterRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{10}
+}
+func (m *AddDiveMasterRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddDiveMasterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddDiveMasterRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddDiveMasterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddDiveMasterRequest.Merge(m, src)
+}
+func (m *AddDiveMasterRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddDiveMasterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddDiveMasterRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddDiveMasterRequest proto.InternalMessageInfo
+
+func (m *AddDiveMasterRequest) GetDiveMaster() *DiveMaster {
+	if m != nil {
+		return m.DiveMaster
+	}
+	return nil
+}
+
+func (m *AddDiveMasterRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddStaffRequest struct {
+	Staff      *Staff `protobuf:"bytes,1,opt,name=staff,proto3" json:"staff,omitempty"`
+	AgencyName string `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddStaffRequest) Reset()      { *m = AddStaffRequest{} }
+func (*AddStaffRequest) ProtoMessage() {}
+func (*AddStaffRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{11}
+}
+func (m *AddStaffRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddStaffRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddStaffRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddStaffRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddStaffRequest.Merge(m, src)
+}
+func (m *AddStaffRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddStaffRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddStaffRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddStaffRequest proto.InternalMessageInfo
+
+func (m *AddStaffRequest) GetStaff() *Staff {
+	if m != nil {
+		return m.Staff
+	}
+	return nil
+}
+
+func (m *AddStaffRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddTripTemplateRequest struct {
+	TripTemplate *TripTemplate `protobuf:"bytes,1,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+	AgencyName   string        `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddTripTemplateRequest) Reset()      { *m = AddTripTemplateRequest{} }
+func (*AddTripTemplateRequest) ProtoMessage() {}
+func (*AddTripTemplateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{12}
+}
+func (m *AddTripTemplateRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddTripTemplateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddTripTemplateRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddTripTemplateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTripTemplateRequest.Merge(m, src)
+}
+func (m *AddTripTemplateRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddTripTemplateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTripTemplateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTripTemplateRequest proto.InternalMessageInfo
+
+func (m *AddTripTemplateRequest) GetTripTemplate() *TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+func (m *AddTripTemplateRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddTripRequest struct {
+	Trip         *Trip         `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+	TripTemplate *TripTemplate `protobuf:"bytes,2,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+	AgencyName   string        `protobuf:"bytes,3,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddTripRequest) Reset()      { *m = AddTripRequest{} }
+func (*AddTripRequest) ProtoMessage() {}
+func (*AddTripRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{13}
+}
+func (m *AddTripRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddTripRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddTripRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddTripRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddTripRequest.Merge(m, src)
+}
+func (m *AddTripRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddTripRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddTripRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddTripRequest proto.InternalMessageInfo
+
+func (m *AddTripRequest) GetTrip() *Trip {
+	if m != nil {
+		return m.Trip
+	}
+	return nil
+}
+
+func (m *AddTripRequest) GetTripTemplate() *TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+func (m *AddTripRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddDivingBoatRequest struct {
+	DivingBoat *DivingBoat `protobuf:"bytes,1,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
+	AgencyName string      `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddDivingBoatRequest) Reset()      { *m = AddDivingBoatRequest{} }
+func (*AddDivingBoatRequest) ProtoMessage() {}
+func (*AddDivingBoatRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{14}
+}
+func (m *AddDivingBoatRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddDivingBoatRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddDivingBoatRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddDivingBoatRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddDivingBoatRequest.Merge(m, src)
+}
+func (m *AddDivingBoatRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddDivingBoatRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddDivingBoatRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddDivingBoatRequest proto.InternalMessageInfo
+
+func (m *AddDivingBoatRequest) GetDivingBoat() *DivingBoat {
+	if m != nil {
+		return m.DivingBoat
+	}
+	return nil
+}
+
+func (m *AddDivingBoatRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddHotelRequest struct {
+	Hotel      *Hotel `protobuf:"bytes,1,opt,name=hotel,proto3" json:"hotel,omitempty"`
+	AgencyName string `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddHotelRequest) Reset()      { *m = AddHotelRequest{} }
+func (*AddHotelRequest) ProtoMessage() {}
+func (*AddHotelRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{15}
+}
+func (m *AddHotelRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddHotelRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddHotelRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddHotelRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddHotelRequest.Merge(m, src)
+}
+func (m *AddHotelRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddHotelRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddHotelRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddHotelRequest proto.InternalMessageInfo
+
+func (m *AddHotelRequest) GetHotel() *Hotel {
+	if m != nil {
+		return m.Hotel
+	}
+	return nil
+}
+
+func (m *AddHotelRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
+}
+
+type AddLiveaboardRequest struct {
+	Liveaboard *Liveaboard `protobuf:"bytes,1,opt,name=liveaboard,proto3" json:"liveaboard,omitempty"`
+	AgencyName string      `protobuf:"bytes,2,opt,name=agency_name,json=agencyName,proto3" json:"agency_name,omitempty"`
+}
+
+func (m *AddLiveaboardRequest) Reset()      { *m = AddLiveaboardRequest{} }
+func (*AddLiveaboardRequest) ProtoMessage() {}
+func (*AddLiveaboardRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{16}
+}
+func (m *AddLiveaboardRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *AddLiveaboardRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_AddLiveaboardRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *AddLiveaboardRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddLiveaboardRequest.Merge(m, src)
+}
+func (m *AddLiveaboardRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *AddLiveaboardRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddLiveaboardRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddLiveaboardRequest proto.InternalMessageInfo
+
+func (m *AddLiveaboardRequest) GetLiveaboard() *Liveaboard {
+	if m != nil {
+		return m.Liveaboard
+	}
+	return nil
+}
+
+func (m *AddLiveaboardRequest) GetAgencyName() string {
+	if m != nil {
+		return m.AgencyName
+	}
+	return ""
 }
 
 func init() {
-	proto.RegisterType((*AgencyRequest)(nil), "agency.AgencyRequest")
+	proto.RegisterEnum("agency.Room_RoomType", Room_RoomType_name, Room_RoomType_value)
+	proto.RegisterEnum("agency.TripTemplate_TripType", TripTemplate_TripType_name, TripTemplate_TripType_value)
+	proto.RegisterType((*DiveMaster)(nil), "agency.DiveMaster")
+	proto.RegisterType((*DiveMasterFirstAndLastName)(nil), "agency.DiveMasterFirstAndLastName")
+	proto.RegisterType((*Staff)(nil), "agency.Staff")
+	proto.RegisterType((*DivingBoat)(nil), "agency.DivingBoat")
+	proto.RegisterType((*Place)(nil), "agency.Place")
+	proto.RegisterType((*Room)(nil), "agency.Room")
+	proto.RegisterType((*TripTemplate)(nil), "agency.TripTemplate")
+	proto.RegisterType((*Trip)(nil), "agency.Trip")
+	proto.RegisterType((*Hotel)(nil), "agency.Hotel")
+	proto.RegisterType((*Liveaboard)(nil), "agency.Liveaboard")
+	proto.RegisterType((*AddDiveMasterRequest)(nil), "agency.AddDiveMasterRequest")
+	proto.RegisterType((*AddStaffRequest)(nil), "agency.AddStaffRequest")
+	proto.RegisterType((*AddTripTemplateRequest)(nil), "agency.AddTripTemplateRequest")
+	proto.RegisterType((*AddTripRequest)(nil), "agency.AddTripRequest")
+	proto.RegisterType((*AddDivingBoatRequest)(nil), "agency.AddDivingBoatRequest")
+	proto.RegisterType((*AddHotelRequest)(nil), "agency.AddHotelRequest")
+	proto.RegisterType((*AddLiveaboardRequest)(nil), "agency.AddLiveaboardRequest")
 }
 
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 234 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x49, 0x4c, 0x4f, 0xcd,
-	0x4b, 0xae, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x83, 0xf0, 0xa4, 0xb8, 0x73, 0xf3,
-	0x53, 0x52, 0x73, 0x20, 0x82, 0x4a, 0xb3, 0x19, 0xb9, 0x78, 0x1d, 0xc1, 0xe2, 0x41, 0xa9, 0x85,
-	0xa5, 0xa9, 0xc5, 0x25, 0x42, 0x42, 0x5c, 0x2c, 0x79, 0x89, 0xb9, 0xa9, 0x12, 0x8c, 0x0a, 0x8c,
-	0x1a, 0x9c, 0x41, 0x60, 0xb6, 0x90, 0x22, 0x17, 0x4f, 0x41, 0x46, 0x7e, 0x5e, 0x6a, 0x7c, 0x5e,
-	0x69, 0x6e, 0x52, 0x6a, 0x91, 0x84, 0x08, 0x58, 0x8e, 0x1b, 0x2c, 0xe6, 0x07, 0x16, 0x12, 0xd2,
-	0xe0, 0x62, 0x4f, 0x4c, 0x49, 0x29, 0x4a, 0x2d, 0x2e, 0x96, 0x90, 0x53, 0x60, 0xd4, 0xe0, 0x36,
-	0xe2, 0xd3, 0x83, 0xd8, 0xe3, 0x08, 0x11, 0x0d, 0x82, 0x49, 0x0b, 0x69, 0x72, 0x71, 0xa6, 0xe4,
-	0x27, 0x97, 0xe6, 0xa6, 0xe6, 0x95, 0x14, 0x4b, 0x68, 0x28, 0x30, 0x6b, 0x70, 0x1b, 0x71, 0x43,
-	0xd5, 0xba, 0x65, 0xe6, 0xa4, 0x06, 0x21, 0x64, 0x9d, 0xac, 0x2e, 0x3c, 0x94, 0x63, 0xb8, 0xf1,
-	0x50, 0x8e, 0xe1, 0xc3, 0x43, 0x39, 0xc6, 0x86, 0x47, 0x72, 0x8c, 0x2b, 0x1e, 0xc9, 0x31, 0x9e,
-	0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x2f, 0x1e, 0xc9, 0x31,
-	0x7c, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb,
-	0x31, 0x44, 0xb1, 0xe8, 0xe9, 0x17, 0x24, 0x25, 0xb1, 0x81, 0x3d, 0x68, 0x0c, 0x08, 0x00, 0x00,
-	0xff, 0xff, 0xf4, 0x84, 0x38, 0xaf, 0x05, 0x01, 0x00, 0x00,
+	// 1440 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0x4d, 0x53, 0xdb, 0x56,
+	0x17, 0xb6, 0x6c, 0xcb, 0xd8, 0xc7, 0x36, 0x88, 0x1b, 0x42, 0x18, 0xf2, 0x46, 0xf0, 0x3a, 0xd3,
+	0x0e, 0xd3, 0x69, 0x4d, 0xc7, 0x69, 0x17, 0x49, 0x57, 0x02, 0x2b, 0x89, 0x52, 0x23, 0x11, 0x59,
+	0xe4, 0xa3, 0x1b, 0x8d, 0xb0, 0x84, 0xad, 0x89, 0x65, 0xa9, 0xd2, 0x85, 0x86, 0x5d, 0x16, 0x5d,
+	0x77, 0xb2, 0xea, 0x6f, 0xe8, 0xb2, 0xff, 0xa2, 0x5d, 0x75, 0xb2, 0xcc, 0xaa, 0x6d, 0x48, 0x17,
+	0x5d, 0xe6, 0x27, 0x74, 0xee, 0xb9, 0x12, 0x08, 0x08, 0x35, 0xd3, 0x6c, 0x3c, 0xf7, 0x3c, 0xe7,
+	0xea, 0x7c, 0x3f, 0xe7, 0x1a, 0x1a, 0xce, 0xd0, 0x9b, 0x0c, 0x0e, 0xdb, 0x51, 0x1c, 0xd2, 0x90,
+	0x54, 0xb8, 0xb4, 0x5c, 0x0f, 0x42, 0xd7, 0x1b, 0x73, 0x70, 0xf9, 0xfa, 0x30, 0x0c, 0x87, 0x63,
+	0x6f, 0x1d, 0xa5, 0xdd, 0xfd, 0xbd, 0x75, 0x2f, 0x88, 0x68, 0xfa, 0xc5, 0xf2, 0xca, 0x59, 0x25,
+	0xf5, 0x03, 0x2f, 0xa1, 0x4e, 0x10, 0xa5, 0x17, 0x3e, 0x1b, 0xfa, 0x74, 0xb4, 0xbf, 0xdb, 0x1e,
+	0x84, 0xc1, 0xfa, 0x30, 0x1c, 0x86, 0x27, 0x37, 0x99, 0x84, 0x02, 0x9e, 0xf8, 0xf5, 0xd6, 0xcf,
+	0x02, 0x40, 0xd7, 0x3f, 0xf0, 0xb6, 0x9c, 0x84, 0x7a, 0x31, 0xb9, 0x01, 0xb0, 0xe7, 0xc7, 0x09,
+	0xb5, 0x27, 0x4e, 0xe0, 0x2d, 0x09, 0xab, 0xc2, 0x5a, 0xcd, 0xac, 0x21, 0xa2, 0x3b, 0x81, 0x47,
+	0xae, 0x43, 0x6d, 0xec, 0x64, 0xda, 0x22, 0x6a, 0xab, 0x0c, 0x40, 0xe5, 0xc7, 0x20, 0x8e, 0xbd,
+	0x03, 0x6f, 0xbc, 0x54, 0x5a, 0x15, 0xd6, 0x66, 0x3b, 0x52, 0x9b, 0x27, 0xd5, 0x63, 0x98, 0x75,
+	0x18, 0x79, 0x26, 0x57, 0x93, 0x15, 0xa8, 0xef, 0xc5, 0xe1, 0x84, 0xda, 0x7e, 0xe0, 0x0c, 0xbd,
+	0xa5, 0x32, 0x9a, 0x01, 0x84, 0x34, 0x86, 0xb0, 0x20, 0x76, 0x9d, 0xc1, 0xb3, 0x54, 0x2f, 0xf2,
+	0x20, 0x18, 0x82, 0xea, 0xd6, 0x13, 0x58, 0x3e, 0x89, 0xf8, 0x2e, 0x8b, 0x4d, 0x99, 0xb8, 0xbd,
+	0x2c, 0x8a, 0x0f, 0xc8, 0xa0, 0x65, 0x83, 0xd8, 0xa7, 0xce, 0xde, 0xde, 0x07, 0x95, 0x61, 0x19,
+	0xaa, 0x51, 0x98, 0xf8, 0xd4, 0x0f, 0x27, 0x58, 0x89, 0x9a, 0x79, 0x2c, 0xb7, 0x1e, 0x60, 0xb1,
+	0xfd, 0xc9, 0x70, 0x23, 0x74, 0x28, 0xe6, 0x19, 0x3a, 0xd4, 0xc6, 0x3a, 0x65, 0x5e, 0x18, 0xb2,
+	0xc5, 0x80, 0x63, 0x35, 0x2f, 0x03, 0x73, 0xd3, 0xe0, 0x6a, 0x5e, 0x86, 0x2f, 0x41, 0xdc, 0x1e,
+	0x3b, 0x03, 0x8f, 0x2c, 0xc1, 0xcc, 0x20, 0xdc, 0x9f, 0xd0, 0xf8, 0x30, 0xb5, 0x91, 0x89, 0x84,
+	0x40, 0x79, 0xe0, 0xd3, 0xc3, 0x34, 0x44, 0x3c, 0xb7, 0x7e, 0x2f, 0x43, 0xd9, 0x0c, 0xc3, 0x80,
+	0x74, 0xa0, 0x16, 0x87, 0x61, 0x60, 0xd3, 0xc3, 0x88, 0xa7, 0x38, 0xdb, 0xb9, 0xda, 0x4e, 0xa7,
+	0x93, 0x5d, 0xc0, 0x1f, 0xec, 0x5b, 0x35, 0x4e, 0x4f, 0x64, 0x15, 0xea, 0xae, 0x97, 0x0c, 0x62,
+	0x3f, 0xc2, 0xf4, 0xb8, 0xdd, 0x3c, 0x44, 0xfe, 0x0f, 0x8d, 0xc0, 0x79, 0x6e, 0x0f, 0x9c, 0xc8,
+	0x41, 0xd7, 0xac, 0x02, 0xa2, 0x59, 0x0f, 0x9c, 0xe7, 0x9b, 0x29, 0x44, 0x16, 0x40, 0x8c, 0x62,
+	0x7f, 0xc0, 0x3b, 0x5f, 0x34, 0xb9, 0xc0, 0xa6, 0x02, 0xc3, 0xc1, 0x6c, 0x93, 0x25, 0x71, 0xb5,
+	0xb4, 0xd6, 0x30, 0x81, 0x41, 0x98, 0x6e, 0x42, 0x6e, 0x42, 0xd3, 0x09, 0xbc, 0x89, 0x4f, 0x0f,
+	0xb1, 0xee, 0xc9, 0x52, 0x65, 0xb5, 0xb4, 0x56, 0x33, 0x1b, 0x29, 0xc8, 0x6a, 0x9f, 0xb4, 0x5e,
+	0x94, 0xa0, 0x9a, 0xc5, 0x4d, 0x00, 0x2a, 0x7d, 0x4d, 0xbf, 0xd7, 0x53, 0xa5, 0x02, 0x3b, 0x77,
+	0x8d, 0x9d, 0x8d, 0x9e, 0x2a, 0x09, 0xec, 0x6c, 0x99, 0xda, 0x76, 0x4f, 0x95, 0x8a, 0xa4, 0x0a,
+	0xe5, 0x87, 0x3b, 0x4a, 0x57, 0x2a, 0x91, 0x1a, 0x88, 0x0f, 0x77, 0x54, 0x55, 0x97, 0xca, 0x0c,
+	0xfc, 0x5a, 0xd3, 0xef, 0x49, 0x22, 0x3b, 0x59, 0x8f, 0x35, 0x5d, 0xaa, 0x90, 0x6b, 0x70, 0xe5,
+	0xbe, 0xd1, 0xeb, 0x3d, 0x7d, 0x6c, 0x18, 0x5d, 0x9b, 0x61, 0xb6, 0x69, 0x18, 0x5b, 0xd2, 0x0c,
+	0x99, 0x87, 0x26, 0xb7, 0x6c, 0xa7, 0x0e, 0xaa, 0xe8, 0xd8, 0xda, 0xe9, 0x6a, 0x86, 0x54, 0x23,
+	0x0b, 0x20, 0xa9, 0x4f, 0xd4, 0xcd, 0x1d, 0x4b, 0xd5, 0x1e, 0xa9, 0x76, 0x7f, 0x47, 0xb3, 0x54,
+	0x09, 0xc8, 0x2c, 0xc0, 0x96, 0xa6, 0x6b, 0xa9, 0x5c, 0x27, 0x57, 0x61, 0x7e, 0xdb, 0x54, 0xfb,
+	0x5a, 0x57, 0xd5, 0x2d, 0xa5, 0x97, 0xc2, 0x0d, 0xd2, 0x84, 0x9a, 0xb2, 0xad, 0x98, 0xd6, 0x96,
+	0xaa, 0x5b, 0x52, 0x93, 0xd9, 0xda, 0x34, 0x74, 0x5d, 0xdd, 0xb4, 0x34, 0xfd, 0x1e, 0xfa, 0xef,
+	0x4b, 0xb3, 0x64, 0x0e, 0xea, 0x5b, 0x3b, 0xe6, 0xf6, 0xfd, 0xa7, 0x3c, 0xa2, 0x39, 0x8c, 0x48,
+	0xeb, 0x2b, 0x1b, 0x3d, 0xb5, 0xcb, 0x21, 0x89, 0x45, 0xb4, 0xa9, 0x6c, 0x28, 0xba, 0x22, 0xcd,
+	0x93, 0x2b, 0x30, 0xa7, 0x74, 0x1f, 0x18, 0x9a, 0x7e, 0x62, 0x84, 0x10, 0x02, 0xb3, 0x4a, 0xf7,
+	0x81, 0xb2, 0xa9, 0xea, 0x56, 0x8a, 0x5d, 0x61, 0x15, 0x79, 0xa4, 0xf5, 0x7a, 0x8a, 0xb4, 0x40,
+	0x24, 0x68, 0xdc, 0xed, 0x19, 0x86, 0x99, 0x59, 0xbc, 0xca, 0xea, 0xd1, 0xdf, 0x32, 0x58, 0x99,
+	0x6c, 0xdd, 0xd0, 0xed, 0xf4, 0x2c, 0x2d, 0xb6, 0x7e, 0x29, 0x42, 0xc3, 0x8a, 0xfd, 0xc8, 0xf2,
+	0x82, 0x68, 0xec, 0x50, 0x8f, 0x4d, 0x61, 0x8e, 0x46, 0x78, 0xbe, 0xc4, 0x20, 0xdd, 0x82, 0xba,
+	0x8b, 0x54, 0xb1, 0xd9, 0xc8, 0xe3, 0x1c, 0xd5, 0x3b, 0x24, 0x1b, 0xd0, 0x13, 0x16, 0x99, 0xe0,
+	0x9e, 0x30, 0xea, 0x26, 0x88, 0x11, 0xe3, 0x04, 0x8e, 0x56, 0xbd, 0xd3, 0xcc, 0xae, 0x23, 0x51,
+	0x4c, 0xae, 0x23, 0x8b, 0x50, 0x39, 0x35, 0x64, 0xa9, 0x44, 0xee, 0x40, 0x8d, 0xc6, 0x7e, 0xc4,
+	0x09, 0x51, 0x41, 0x42, 0xdc, 0xc8, 0x0c, 0xe4, 0x13, 0xe2, 0x02, 0x12, 0x83, 0xa6, 0x27, 0xf2,
+	0x11, 0xcc, 0x26, 0x83, 0x91, 0xe7, 0xee, 0x8f, 0xbd, 0x94, 0xaf, 0x33, 0xc8, 0xd7, 0x66, 0x86,
+	0x72, 0xce, 0x7e, 0x0a, 0xd5, 0xec, 0x63, 0x36, 0x02, 0x3d, 0xed, 0x91, 0xaa, 0x6c, 0x18, 0x8a,
+	0xd9, 0x95, 0x0a, 0xac, 0xc4, 0x5d, 0x36, 0x22, 0xa6, 0xda, 0x37, 0x4c, 0xab, 0x2f, 0x09, 0xad,
+	0xef, 0x8b, 0x50, 0x66, 0xd7, 0xc9, 0x17, 0x50, 0xde, 0x8b, 0xc3, 0x00, 0x2b, 0x58, 0xef, 0x2c,
+	0xb7, 0xf9, 0x1b, 0xd0, 0xce, 0x36, 0x7b, 0xdb, 0xca, 0xde, 0x80, 0x8d, 0xf2, 0xcb, 0x3f, 0x56,
+	0x04, 0x13, 0x6f, 0x93, 0xcf, 0xa1, 0x48, 0x43, 0x2c, 0xed, 0x65, 0xbe, 0x29, 0xd2, 0xf0, 0x32,
+	0xe4, 0xfd, 0x04, 0xe6, 0x91, 0xaf, 0x76, 0xe4, 0xc5, 0x76, 0x94, 0x78, 0x71, 0x12, 0x4e, 0xb0,
+	0xda, 0xa2, 0x39, 0x87, 0x8a, 0x6d, 0x2f, 0xde, 0xe6, 0x30, 0x51, 0xa1, 0xe1, 0xfa, 0x07, 0x9e,
+	0x1d, 0xe0, 0xa6, 0xe6, 0xe5, 0xae, 0x77, 0x5a, 0xb9, 0x1e, 0x5e, 0xb0, 0xc4, 0x4d, 0xd6, 0xfa,
+	0x54, 0x97, 0xb4, 0x7e, 0x14, 0x40, 0xbc, 0x1f, 0x52, 0xbe, 0x11, 0x47, 0xec, 0x70, 0x6a, 0x2d,
+	0x23, 0x82, 0x9b, 0x97, 0x40, 0x39, 0xa1, 0x4e, 0x8c, 0x29, 0x8b, 0x26, 0x9e, 0x89, 0x0c, 0x30,
+	0xf2, 0x87, 0xa3, 0xb1, 0x3f, 0x1c, 0xd1, 0x64, 0xa9, 0x84, 0x2b, 0x23, 0x87, 0xe4, 0x86, 0xa1,
+	0x7c, 0x6a, 0x18, 0x5a, 0x20, 0xb2, 0xdd, 0x93, 0x05, 0xdd, 0xc8, 0x6f, 0x46, 0x93, 0xab, 0x5a,
+	0xbf, 0x09, 0x00, 0x3d, 0xff, 0xc0, 0x73, 0x76, 0x43, 0x27, 0x76, 0xd9, 0x5e, 0xcb, 0x6f, 0x72,
+	0x2e, 0x5c, 0x62, 0xd2, 0x17, 0xa1, 0x32, 0xf6, 0x26, 0x43, 0x3a, 0xc2, 0x7a, 0x17, 0xcd, 0x54,
+	0x62, 0xf6, 0xbe, 0xf3, 0x5d, 0x3a, 0xca, 0xf6, 0x24, 0x0a, 0x67, 0x12, 0x12, 0xff, 0x25, 0x21,
+	0xbe, 0x1f, 0xcf, 0x25, 0x34, 0x73, 0x71, 0x42, 0x63, 0x58, 0x50, 0x5c, 0xf7, 0xa4, 0x2f, 0xa6,
+	0xf7, 0xed, 0xbe, 0x97, 0xd0, 0x94, 0x8b, 0x59, 0x23, 0xd3, 0x31, 0x24, 0xe7, 0xfb, 0x88, 0x5c,
+	0xcc, 0xfe, 0x4a, 0xac, 0x40, 0x9d, 0x5f, 0xc8, 0x3f, 0x93, 0xc0, 0x21, 0x7c, 0x6d, 0x1f, 0xc3,
+	0x9c, 0xe2, 0xba, 0xf8, 0xe0, 0x66, 0x8e, 0x6e, 0x82, 0x98, 0x30, 0x39, 0x75, 0x71, 0xcc, 0x5f,
+	0x7e, 0x89, 0xeb, 0xa6, 0x1b, 0xa6, 0xb0, 0xa8, 0xb8, 0x6e, 0x9e, 0xb2, 0x99, 0xfd, 0xdb, 0xd0,
+	0xe4, 0x14, 0x4f, 0xf1, 0xd4, 0xcf, 0xc2, 0xfb, 0x68, 0x6e, 0x36, 0x68, 0x7e, 0x8b, 0x4d, 0xf5,
+	0xfa, 0x83, 0x00, 0xb3, 0xa9, 0xdb, 0xcc, 0xdd, 0x2a, 0x94, 0x99, 0x8d, 0xd4, 0x4b, 0x23, 0xef,
+	0xc5, 0x44, 0xcd, 0xf9, 0x80, 0x8a, 0xff, 0x35, 0xa0, 0xd2, 0xb9, 0x80, 0x8e, 0xbb, 0x99, 0x6d,
+	0xca, 0x53, 0xdd, 0x3c, 0xde, 0xac, 0xc2, 0xa5, 0x36, 0xeb, 0x25, 0xbb, 0x89, 0x3c, 0xcd, 0x75,
+	0x13, 0xc9, 0x79, 0xb6, 0x9b, 0xfc, 0x12, 0xd7, 0x4d, 0x37, 0xfc, 0x0c, 0xd3, 0x38, 0xe1, 0x59,
+	0x66, 0xbd, 0x03, 0x30, 0x3e, 0x06, 0xcf, 0x66, 0x91, 0xbb, 0x9e, 0xbb, 0x35, 0xd5, 0x59, 0xe7,
+	0xaf, 0x12, 0x34, 0x15, 0x14, 0xfb, 0x5e, 0x7c, 0xc0, 0xfe, 0x97, 0xa8, 0xd0, 0x3c, 0xc5, 0x09,
+	0xf2, 0xbf, 0xcc, 0xc7, 0xfb, 0xa8, 0xb2, 0xbc, 0x78, 0x6e, 0xd1, 0xaa, 0xec, 0xdf, 0x3b, 0xf9,
+	0x0a, 0xaa, 0xd9, 0xb0, 0x93, 0x6b, 0x39, 0x0b, 0xf9, 0xf1, 0xbf, 0xf0, 0x63, 0x0d, 0x6b, 0x7b,
+	0xea, 0x51, 0x95, 0x73, 0x36, 0xde, 0x33, 0xe9, 0x17, 0x9a, 0xba, 0x0d, 0x33, 0xe9, 0x17, 0x64,
+	0xf1, 0x8c, 0x89, 0x69, 0x9f, 0x1e, 0x57, 0x22, 0x9b, 0x89, 0x33, 0x95, 0x38, 0x3d, 0x66, 0x53,
+	0x2a, 0xc1, 0x17, 0x7a, 0xbe, 0x12, 0xf9, 0xd1, 0x99, 0x12, 0x43, 0x6e, 0xe9, 0xe6, 0x63, 0x38,
+	0x37, 0x23, 0x17, 0x99, 0xd9, 0xb8, 0xf3, 0xea, 0x8d, 0x5c, 0x78, 0xfd, 0x46, 0x2e, 0xbc, 0x7b,
+	0x23, 0x0b, 0x2f, 0x8e, 0x64, 0xe1, 0xa7, 0x23, 0x59, 0xf8, 0xf5, 0x48, 0x16, 0x5e, 0x1d, 0xc9,
+	0xc2, 0x9f, 0x47, 0xb2, 0xf0, 0xf7, 0x91, 0x5c, 0x78, 0x77, 0x24, 0x0b, 0x2f, 0xdf, 0xca, 0x85,
+	0x57, 0x6f, 0xe5, 0xc2, 0xeb, 0xb7, 0x72, 0xe1, 0x9b, 0x72, 0x7b, 0x3d, 0xda, 0xdd, 0xad, 0xa0,
+	0xad, 0x5b, 0xff, 0x04, 0x00, 0x00, 0xff, 0xff, 0x02, 0x49, 0x78, 0x13, 0xca, 0x0d, 0x00, 0x00,
 }
 
-func (this *AgencyRequest) Equal(that interface{}) bool {
+func (x Room_RoomType) String() string {
+	s, ok := Room_RoomType_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
+}
+func (x TripTemplate_TripType) String() string {
+	s, ok := TripTemplate_TripType_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
+}
+func (this *DiveMaster) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*AgencyRequest)
+	that1, ok := that.(*DiveMaster)
 	if !ok {
-		that2, ok := that.(AgencyRequest)
+		that2, ok := that.(DiveMaster)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.FirstName != that1.FirstName {
+		return false
+	}
+	if this.LastName != that1.LastName {
+		return false
+	}
+	if this.Level != that1.Level {
+		return false
+	}
+	if this.FrontImage != that1.FrontImage {
+		return false
+	}
+	if this.BackImage != that1.BackImage {
+		return false
+	}
+	return true
+}
+func (this *DiveMasterFirstAndLastName) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DiveMasterFirstAndLastName)
+	if !ok {
+		that2, ok := that.(DiveMasterFirstAndLastName)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.FirstName != that1.FirstName {
+		return false
+	}
+	if this.LastName != that1.LastName {
+		return false
+	}
+	return true
+}
+func (this *Staff) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Staff)
+	if !ok {
+		that2, ok := that.(Staff)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.FirstName != that1.FirstName {
+		return false
+	}
+	if this.LastName != that1.LastName {
+		return false
+	}
+	if this.Position != that1.Position {
+		return false
+	}
+	return true
+}
+func (this *DivingBoat) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DivingBoat)
+	if !ok {
+		that2, ok := that.(DivingBoat)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.BoatModel != that1.BoatModel {
+		return false
+	}
+	if !bytes.Equal(this.BoatImage, that1.BoatImage) {
+		return false
+	}
+	return true
+}
+func (this *Place) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Place)
+	if !ok {
+		that2, ok := that.(Place)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Country != that1.Country {
+		return false
+	}
+	if this.City != that1.City {
+		return false
+	}
+	return true
+}
+func (this *Room) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Room)
+	if !ok {
+		that2, ok := that.(Room)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.RoomType != that1.RoomType {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	if this.MaxCapacity != that1.MaxCapacity {
+		return false
+	}
+	if this.Price != that1.Price {
+		return false
+	}
+	if len(this.RoomImages) != len(that1.RoomImages) {
+		return false
+	}
+	for i := range this.RoomImages {
+		if !bytes.Equal(this.RoomImages[i], that1.RoomImages[i]) {
+			return false
+		}
+	}
+	if len(this.AmenityNames) != len(that1.AmenityNames) {
+		return false
+	}
+	for i := range this.AmenityNames {
+		if this.AmenityNames[i] != that1.AmenityNames[i] {
+			return false
+		}
+	}
+	return true
+}
+func (this *TripTemplate) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*TripTemplate)
+	if !ok {
+		that2, ok := that.(TripTemplate)
 		if ok {
 			that1 = &that2
 		} else {
@@ -138,36 +1563,615 @@ func (this *AgencyRequest) Equal(that interface{}) bool {
 	if this.Name != that1.Name {
 		return false
 	}
-	if this.PhoneNumber != that1.PhoneNumber {
+	if this.Description != that1.Description {
 		return false
 	}
-	if !this.Address.Equal(that1.Address) {
+	if !this.DivingBoat.Equal(that1.DivingBoat) {
 		return false
 	}
-	if len(this.Documents) != len(that1.Documents) {
+	if !this.Place.Equal(that1.Place) {
 		return false
 	}
-	for i := range this.Documents {
-		if !this.Documents[i].Equal(that1.Documents[i]) {
+	if len(this.Images) != len(that1.Images) {
+		return false
+	}
+	for i := range this.Images {
+		if !bytes.Equal(this.Images[i], that1.Images[i]) {
+			return false
+		}
+	}
+	if this.TripType != that1.TripType {
+		return false
+	}
+	if !bytes.Equal(this.ScheduleImage, that1.ScheduleImage) {
+		return false
+	}
+	return true
+}
+func (this *Trip) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Trip)
+	if !ok {
+		that2, ok := that.(Trip)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if that1.From == nil {
+		if this.From != nil {
+			return false
+		}
+	} else if !this.From.Equal(*that1.From) {
+		return false
+	}
+	if that1.To == nil {
+		if this.To != nil {
+			return false
+		}
+	} else if !this.To.Equal(*that1.To) {
+		return false
+	}
+	if this.MaxCapacity != that1.MaxCapacity {
+		return false
+	}
+	if this.PricePerPserson != that1.PricePerPserson {
+		return false
+	}
+	if len(this.DiveMasters) != len(that1.DiveMasters) {
+		return false
+	}
+	for i := range this.DiveMasters {
+		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
 			return false
 		}
 	}
 	return true
 }
-func (this *AgencyRequest) GoString() string {
+func (this *Hotel) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Hotel)
+	if !ok {
+		that2, ok := that.(Hotel)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.HotelName != that1.HotelName {
+		return false
+	}
+	if this.Star != that1.Star {
+		return false
+	}
+	if len(this.Highlights) != len(that1.Highlights) {
+		return false
+	}
+	for i := range this.Highlights {
+		if this.Highlights[i] != that1.Highlights[i] {
+			return false
+		}
+	}
+	if len(this.Images) != len(that1.Images) {
+		return false
+	}
+	for i := range this.Images {
+		if !bytes.Equal(this.Images[i], that1.Images[i]) {
+			return false
+		}
+	}
+	if len(this.Rooms) != len(that1.Rooms) {
+		return false
+	}
+	for i := range this.Rooms {
+		if !this.Rooms[i].Equal(that1.Rooms[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Liveaboard) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Liveaboard)
+	if !ok {
+		that2, ok := that.(Liveaboard)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Model != that1.Model {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	if this.Length != that1.Length {
+		return false
+	}
+	if this.Width != that1.Width {
+		return false
+	}
+	if len(this.Highlights) != len(that1.Highlights) {
+		return false
+	}
+	for i := range this.Highlights {
+		if this.Highlights[i] != that1.Highlights[i] {
+			return false
+		}
+	}
+	if len(this.Images) != len(that1.Images) {
+		return false
+	}
+	for i := range this.Images {
+		if this.Images[i] != that1.Images[i] {
+			return false
+		}
+	}
+	if len(this.Rooms) != len(that1.Rooms) {
+		return false
+	}
+	for i := range this.Rooms {
+		if !this.Rooms[i].Equal(that1.Rooms[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *AddDiveMasterRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddDiveMasterRequest)
+	if !ok {
+		that2, ok := that.(AddDiveMasterRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.DiveMaster.Equal(that1.DiveMaster) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddStaffRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddStaffRequest)
+	if !ok {
+		that2, ok := that.(AddStaffRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Staff.Equal(that1.Staff) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddTripTemplateRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddTripTemplateRequest)
+	if !ok {
+		that2, ok := that.(AddTripTemplateRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddTripRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddTripRequest)
+	if !ok {
+		that2, ok := that.(AddTripRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Trip.Equal(that1.Trip) {
+		return false
+	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddDivingBoatRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddDivingBoatRequest)
+	if !ok {
+		that2, ok := that.(AddDivingBoatRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.DivingBoat.Equal(that1.DivingBoat) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddHotelRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddHotelRequest)
+	if !ok {
+		that2, ok := that.(AddHotelRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Hotel.Equal(that1.Hotel) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *AddLiveaboardRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*AddLiveaboardRequest)
+	if !ok {
+		that2, ok := that.(AddLiveaboardRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Liveaboard.Equal(that1.Liveaboard) {
+		return false
+	}
+	if this.AgencyName != that1.AgencyName {
+		return false
+	}
+	return true
+}
+func (this *DiveMaster) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.AgencyRequest{")
+	s := make([]string, 0, 9)
+	s = append(s, "&pb.DiveMaster{")
+	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
+	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
+	s = append(s, "Level: "+fmt.Sprintf("%#v", this.Level)+",\n")
+	s = append(s, "FrontImage: "+fmt.Sprintf("%#v", this.FrontImage)+",\n")
+	s = append(s, "BackImage: "+fmt.Sprintf("%#v", this.BackImage)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DiveMasterFirstAndLastName) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.DiveMasterFirstAndLastName{")
+	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
+	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Staff) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.Staff{")
+	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
+	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
+	s = append(s, "Position: "+fmt.Sprintf("%#v", this.Position)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DivingBoat) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.DivingBoat{")
+	s = append(s, "BoatModel: "+fmt.Sprintf("%#v", this.BoatModel)+",\n")
+	s = append(s, "BoatImage: "+fmt.Sprintf("%#v", this.BoatImage)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Place) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.Place{")
+	s = append(s, "Country: "+fmt.Sprintf("%#v", this.Country)+",\n")
+	s = append(s, "City: "+fmt.Sprintf("%#v", this.City)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Room) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 10)
+	s = append(s, "&pb.Room{")
+	s = append(s, "RoomType: "+fmt.Sprintf("%#v", this.RoomType)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	s = append(s, "MaxCapacity: "+fmt.Sprintf("%#v", this.MaxCapacity)+",\n")
+	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
+	s = append(s, "RoomImages: "+fmt.Sprintf("%#v", this.RoomImages)+",\n")
+	s = append(s, "AmenityNames: "+fmt.Sprintf("%#v", this.AmenityNames)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *TripTemplate) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 11)
+	s = append(s, "&pb.TripTemplate{")
 	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "PhoneNumber: "+fmt.Sprintf("%#v", this.PhoneNumber)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	if this.DivingBoat != nil {
+		s = append(s, "DivingBoat: "+fmt.Sprintf("%#v", this.DivingBoat)+",\n")
 	}
-	if this.Documents != nil {
-		s = append(s, "Documents: "+fmt.Sprintf("%#v", this.Documents)+",\n")
+	if this.Place != nil {
+		s = append(s, "Place: "+fmt.Sprintf("%#v", this.Place)+",\n")
 	}
+	s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
+	s = append(s, "ScheduleImage: "+fmt.Sprintf("%#v", this.ScheduleImage)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Trip) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 9)
+	s = append(s, "&pb.Trip{")
+	s = append(s, "From: "+fmt.Sprintf("%#v", this.From)+",\n")
+	s = append(s, "To: "+fmt.Sprintf("%#v", this.To)+",\n")
+	s = append(s, "MaxCapacity: "+fmt.Sprintf("%#v", this.MaxCapacity)+",\n")
+	s = append(s, "PricePerPserson: "+fmt.Sprintf("%#v", this.PricePerPserson)+",\n")
+	if this.DiveMasters != nil {
+		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Hotel) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 9)
+	s = append(s, "&pb.Hotel{")
+	s = append(s, "HotelName: "+fmt.Sprintf("%#v", this.HotelName)+",\n")
+	s = append(s, "Star: "+fmt.Sprintf("%#v", this.Star)+",\n")
+	s = append(s, "Highlights: "+fmt.Sprintf("%#v", this.Highlights)+",\n")
+	s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	if this.Rooms != nil {
+		s = append(s, "Rooms: "+fmt.Sprintf("%#v", this.Rooms)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Liveaboard) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 11)
+	s = append(s, "&pb.Liveaboard{")
+	s = append(s, "Model: "+fmt.Sprintf("%#v", this.Model)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	s = append(s, "Length: "+fmt.Sprintf("%#v", this.Length)+",\n")
+	s = append(s, "Width: "+fmt.Sprintf("%#v", this.Width)+",\n")
+	s = append(s, "Highlights: "+fmt.Sprintf("%#v", this.Highlights)+",\n")
+	s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	if this.Rooms != nil {
+		s = append(s, "Rooms: "+fmt.Sprintf("%#v", this.Rooms)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddDiveMasterRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddDiveMasterRequest{")
+	if this.DiveMaster != nil {
+		s = append(s, "DiveMaster: "+fmt.Sprintf("%#v", this.DiveMaster)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddStaffRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddStaffRequest{")
+	if this.Staff != nil {
+		s = append(s, "Staff: "+fmt.Sprintf("%#v", this.Staff)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddTripTemplateRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddTripTemplateRequest{")
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddTripRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.AddTripRequest{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddDivingBoatRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddDivingBoatRequest{")
+	if this.DivingBoat != nil {
+		s = append(s, "DivingBoat: "+fmt.Sprintf("%#v", this.DivingBoat)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddHotelRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddHotelRequest{")
+	if this.Hotel != nil {
+		s = append(s, "Hotel: "+fmt.Sprintf("%#v", this.Hotel)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *AddLiveaboardRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.AddLiveaboardRequest{")
+	if this.Liveaboard != nil {
+		s = append(s, "Liveaboard: "+fmt.Sprintf("%#v", this.Liveaboard)+",\n")
+	}
+	s = append(s, "AgencyName: "+fmt.Sprintf("%#v", this.AgencyName)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -179,7 +2183,304 @@ func valueToGoStringAgency(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
-func (m *AgencyRequest) Marshal() (dAtA []byte, err error) {
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// AgencyServiceClient is the client API for AgencyService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AgencyServiceClient interface {
+	AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+}
+
+type agencyServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAgencyServiceClient(cc *grpc.ClientConn) AgencyServiceClient {
+	return &agencyServiceClient{cc}
+}
+
+func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDiveMaster", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddStaff", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTripTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTrip", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDivingBoat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddHotel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddLiveaboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AgencyServiceServer is the server API for AgencyService service.
+type AgencyServiceServer interface {
+	AddDiveMaster(context.Context, *AddDiveMasterRequest) (*empty.Empty, error)
+	AddStaff(context.Context, *AddStaffRequest) (*empty.Empty, error)
+	AddTripTemplate(context.Context, *AddTripTemplateRequest) (*empty.Empty, error)
+	AddTrip(context.Context, *AddTripRequest) (*empty.Empty, error)
+	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*empty.Empty, error)
+	AddHotel(context.Context, *AddHotelRequest) (*empty.Empty, error)
+	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*empty.Empty, error)
+}
+
+// UnimplementedAgencyServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedAgencyServiceServer struct {
+}
+
+func (*UnimplementedAgencyServiceServer) AddDiveMaster(ctx context.Context, req *AddDiveMasterRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDiveMaster not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddStaff(ctx context.Context, req *AddStaffRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddStaff not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddTripTemplate(ctx context.Context, req *AddTripTemplateRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTripTemplate not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddTrip(ctx context.Context, req *AddTripRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTrip not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddDivingBoat(ctx context.Context, req *AddDivingBoatRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDivingBoat not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddHotelRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddHotel not implemented")
+}
+func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddLiveaboard not implemented")
+}
+
+func RegisterAgencyServiceServer(s *grpc.Server, srv AgencyServiceServer) {
+	s.RegisterService(&_AgencyService_serviceDesc, srv)
+}
+
+func _AgencyService_AddDiveMaster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDiveMasterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddDiveMaster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddDiveMaster",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddDiveMaster(ctx, req.(*AddDiveMasterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddStaffRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddStaff(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddStaff",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddStaff(ctx, req.(*AddStaffRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddTripTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTripTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddTripTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddTripTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddTripTemplate(ctx, req.(*AddTripTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddTrip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTripRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddTrip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddTrip",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddTrip(ctx, req.(*AddTripRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddDivingBoat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDivingBoatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddDivingBoat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddDivingBoat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddDivingBoat(ctx, req.(*AddDivingBoatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddHotel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddHotelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddHotel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddHotel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddHotel(ctx, req.(*AddHotelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_AddLiveaboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddLiveaboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).AddLiveaboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/AddLiveaboard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).AddLiveaboard(ctx, req.(*AddLiveaboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AgencyService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "agency.AgencyService",
+	HandlerType: (*AgencyServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddDiveMaster",
+			Handler:    _AgencyService_AddDiveMaster_Handler,
+		},
+		{
+			MethodName: "AddStaff",
+			Handler:    _AgencyService_AddStaff_Handler,
+		},
+		{
+			MethodName: "AddTripTemplate",
+			Handler:    _AgencyService_AddTripTemplate_Handler,
+		},
+		{
+			MethodName: "AddTrip",
+			Handler:    _AgencyService_AddTrip_Handler,
+		},
+		{
+			MethodName: "AddDivingBoat",
+			Handler:    _AgencyService_AddDivingBoat_Handler,
+		},
+		{
+			MethodName: "AddHotel",
+			Handler:    _AgencyService_AddHotel_Handler,
+		},
+		{
+			MethodName: "AddLiveaboard",
+			Handler:    _AgencyService_AddLiveaboard_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "agency.proto",
+}
+
+func (m *DiveMaster) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -189,35 +2490,315 @@ func (m *AgencyRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *AgencyRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *DiveMaster) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *AgencyRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DiveMaster) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Documents) > 0 {
-		for iNdEx := len(m.Documents) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Documents[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
+	if len(m.BackImage) > 0 {
+		i -= len(m.BackImage)
+		copy(dAtA[i:], m.BackImage)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.BackImage)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.FrontImage) > 0 {
+		i -= len(m.FrontImage)
+		copy(dAtA[i:], m.FrontImage)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.FrontImage)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.Level != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Level))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.LastName) > 0 {
+		i -= len(m.LastName)
+		copy(dAtA[i:], m.LastName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.FirstName) > 0 {
+		i -= len(m.FirstName)
+		copy(dAtA[i:], m.FirstName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DiveMasterFirstAndLastName) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DiveMasterFirstAndLastName) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DiveMasterFirstAndLastName) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.LastName) > 0 {
+		i -= len(m.LastName)
+		copy(dAtA[i:], m.LastName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.FirstName) > 0 {
+		i -= len(m.FirstName)
+		copy(dAtA[i:], m.FirstName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Staff) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Staff) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Staff) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Position) > 0 {
+		i -= len(m.Position)
+		copy(dAtA[i:], m.Position)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Position)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.LastName) > 0 {
+		i -= len(m.LastName)
+		copy(dAtA[i:], m.LastName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.FirstName) > 0 {
+		i -= len(m.FirstName)
+		copy(dAtA[i:], m.FirstName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DivingBoat) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DivingBoat) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DivingBoat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.BoatImage) > 0 {
+		i -= len(m.BoatImage)
+		copy(dAtA[i:], m.BoatImage)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.BoatImage)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.BoatModel) > 0 {
+		i -= len(m.BoatModel)
+		copy(dAtA[i:], m.BoatModel)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.BoatModel)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Place) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Place) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Place) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.City) > 0 {
+		i -= len(m.City)
+		copy(dAtA[i:], m.City)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.City)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Country) > 0 {
+		i -= len(m.Country)
+		copy(dAtA[i:], m.Country)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Country)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Room) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Room) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Room) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AmenityNames) > 0 {
+		for iNdEx := len(m.AmenityNames) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.AmenityNames[iNdEx])
+			copy(dAtA[i:], m.AmenityNames[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.AmenityNames[iNdEx])))
 			i--
-			dAtA[i] = 0x2
-			i--
-			dAtA[i] = 0xc2
+			dAtA[i] = 0x32
 		}
 	}
-	if m.Address != nil {
+	if len(m.RoomImages) > 0 {
+		for iNdEx := len(m.RoomImages) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.RoomImages[iNdEx])
+			copy(dAtA[i:], m.RoomImages[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.RoomImages[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.Price != 0 {
+		i -= 4
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
+		i--
+		dAtA[i] = 0x25
+	}
+	if m.MaxCapacity != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.MaxCapacity))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.RoomType != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.RoomType))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TripTemplate) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.ScheduleImage) > 0 {
+		i -= len(m.ScheduleImage)
+		copy(dAtA[i:], m.ScheduleImage)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.ScheduleImage)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if m.TripType != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.Images) > 0 {
+		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Images[iNdEx])
+			copy(dAtA[i:], m.Images[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.Images[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.Place != nil {
 		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.Place.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -225,23 +2806,552 @@ func (m *AgencyRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf2
+		dAtA[i] = 0x22
 	}
-	if len(m.PhoneNumber) > 0 {
-		i -= len(m.PhoneNumber)
-		copy(dAtA[i:], m.PhoneNumber)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.PhoneNumber)))
+	if m.DivingBoat != nil {
+		{
+			size, err := m.DivingBoat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
 		i--
-		dAtA[i] = 0x1
+		dAtA[i] = 0x1a
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
 		i--
-		dAtA[i] = 0xa2
+		dAtA[i] = 0x12
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
 		copy(dAtA[i:], m.Name)
 		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Trip) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Trip) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.DiveMasters) > 0 {
+		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.PricePerPserson != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.PricePerPserson))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.MaxCapacity != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.MaxCapacity))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.To != nil {
+		n3, err3 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.To, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.To):])
+		if err3 != nil {
+			return 0, err3
+		}
+		i -= n3
+		i = encodeVarintAgency(dAtA, i, uint64(n3))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.From != nil {
+		n4, err4 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.From, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.From):])
+		if err4 != nil {
+			return 0, err4
+		}
+		i -= n4
+		i = encodeVarintAgency(dAtA, i, uint64(n4))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Hotel) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Hotel) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Rooms) > 0 {
+		for iNdEx := len(m.Rooms) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Rooms[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Images) > 0 {
+		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Images[iNdEx])
+			copy(dAtA[i:], m.Images[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.Images[iNdEx])))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Highlights) > 0 {
+		for iNdEx := len(m.Highlights) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Highlights[iNdEx])
+			copy(dAtA[i:], m.Highlights[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.Highlights[iNdEx])))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if m.Star != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Star))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.HotelName) > 0 {
+		i -= len(m.HotelName)
+		copy(dAtA[i:], m.HotelName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.HotelName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Liveaboard) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Liveaboard) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Rooms) > 0 {
+		for iNdEx := len(m.Rooms) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Rooms[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.Images) > 0 {
+		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Images[iNdEx])
+			copy(dAtA[i:], m.Images[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.Images[iNdEx])))
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.Highlights) > 0 {
+		for iNdEx := len(m.Highlights) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Highlights[iNdEx])
+			copy(dAtA[i:], m.Highlights[iNdEx])
+			i = encodeVarintAgency(dAtA, i, uint64(len(m.Highlights[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.Width != 0 {
+		i -= 4
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Width))))
+		i--
+		dAtA[i] = 0x25
+	}
+	if m.Length != 0 {
+		i -= 4
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Length))))
+		i--
+		dAtA[i] = 0x1d
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Model) > 0 {
+		i -= len(m.Model)
+		copy(dAtA[i:], m.Model)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Model)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddDiveMasterRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddDiveMasterRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddDiveMasterRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.DiveMaster != nil {
+		{
+			size, err := m.DiveMaster.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddStaffRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddStaffRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddStaffRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Staff != nil {
+		{
+			size, err := m.Staff.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddTripTemplateRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddTripTemplateRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddTripTemplateRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddTripRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddTripRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddTripRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Trip != nil {
+		{
+			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddDivingBoatRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddDivingBoatRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddDivingBoatRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.DivingBoat != nil {
+		{
+			size, err := m.DivingBoat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddHotelRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddHotelRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddHotelRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Hotel != nil {
+		{
+			size, err := m.Hotel.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AddLiveaboardRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AddLiveaboardRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddLiveaboardRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AgencyName) > 0 {
+		i -= len(m.AgencyName)
+		copy(dAtA[i:], m.AgencyName)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.AgencyName)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Liveaboard != nil {
+		{
+			size, err := m.Liveaboard.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
 		i--
 		dAtA[i] = 0xa
 	}
@@ -259,7 +3369,141 @@ func encodeVarintAgency(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *AgencyRequest) Size() (n int) {
+func (m *DiveMaster) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FirstName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.LastName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.Level != 0 {
+		n += 1 + sovAgency(uint64(m.Level))
+	}
+	l = len(m.FrontImage)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.BackImage)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DiveMasterFirstAndLastName) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FirstName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.LastName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *Staff) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.FirstName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.LastName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.Position)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DivingBoat) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.BoatModel)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.BoatImage)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *Place) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Country)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.City)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *Room) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.RoomType != 0 {
+		n += 1 + sovAgency(uint64(m.RoomType))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.MaxCapacity != 0 {
+		n += 1 + sovAgency(uint64(m.MaxCapacity))
+	}
+	if m.Price != 0 {
+		n += 5
+	}
+	if len(m.RoomImages) > 0 {
+		for _, b := range m.RoomImages {
+			l = len(b)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	if len(m.AmenityNames) > 0 {
+		for _, s := range m.AmenityNames {
+			l = len(s)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *TripTemplate) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -269,19 +3513,257 @@ func (m *AgencyRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovAgency(uint64(l))
 	}
-	l = len(m.PhoneNumber)
+	l = len(m.Description)
 	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
+		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
+	if m.DivingBoat != nil {
+		l = m.DivingBoat.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
-	if len(m.Documents) > 0 {
-		for _, e := range m.Documents {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
+	if m.Place != nil {
+		l = m.Place.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if len(m.Images) > 0 {
+		for _, b := range m.Images {
+			l = len(b)
+			n += 1 + l + sovAgency(uint64(l))
 		}
+	}
+	if m.TripType != 0 {
+		n += 1 + sovAgency(uint64(m.TripType))
+	}
+	l = len(m.ScheduleImage)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *Trip) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.From != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.From)
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.To != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.To)
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.MaxCapacity != 0 {
+		n += 1 + sovAgency(uint64(m.MaxCapacity))
+	}
+	if m.PricePerPserson != 0 {
+		n += 1 + sovAgency(uint64(m.PricePerPserson))
+	}
+	if len(m.DiveMasters) > 0 {
+		for _, e := range m.DiveMasters {
+			l = e.Size()
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *Hotel) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.HotelName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.Star != 0 {
+		n += 1 + sovAgency(uint64(m.Star))
+	}
+	if len(m.Highlights) > 0 {
+		for _, s := range m.Highlights {
+			l = len(s)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	if len(m.Images) > 0 {
+		for _, b := range m.Images {
+			l = len(b)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	if len(m.Rooms) > 0 {
+		for _, e := range m.Rooms {
+			l = e.Size()
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *Liveaboard) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Model)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.Length != 0 {
+		n += 5
+	}
+	if m.Width != 0 {
+		n += 5
+	}
+	if len(m.Highlights) > 0 {
+		for _, s := range m.Highlights {
+			l = len(s)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	if len(m.Images) > 0 {
+		for _, s := range m.Images {
+			l = len(s)
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	if len(m.Rooms) > 0 {
+		for _, e := range m.Rooms {
+			l = e.Size()
+			n += 1 + l + sovAgency(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *AddDiveMasterRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DiveMaster != nil {
+		l = m.DiveMaster.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddStaffRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Staff != nil {
+		l = m.Staff.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddTripTemplateRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddTripRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Trip != nil {
+		l = m.Trip.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddDivingBoatRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DivingBoat != nil {
+		l = m.DivingBoat.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddHotelRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Hotel != nil {
+		l = m.Hotel.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *AddLiveaboardRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Liveaboard != nil {
+		l = m.Liveaboard.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.AgencyName)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -292,20 +3774,229 @@ func sovAgency(x uint64) (n int) {
 func sozAgency(x uint64) (n int) {
 	return sovAgency(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *AgencyRequest) String() string {
+func (this *DiveMaster) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForDocuments := "[]*File{"
-	for _, f := range this.Documents {
-		repeatedStringForDocuments += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
+	s := strings.Join([]string{`&DiveMaster{`,
+		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
+		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
+		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
+		`FrontImage:` + fmt.Sprintf("%v", this.FrontImage) + `,`,
+		`BackImage:` + fmt.Sprintf("%v", this.BackImage) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DiveMasterFirstAndLastName) String() string {
+	if this == nil {
+		return "nil"
 	}
-	repeatedStringForDocuments += "}"
-	s := strings.Join([]string{`&AgencyRequest{`,
+	s := strings.Join([]string{`&DiveMasterFirstAndLastName{`,
+		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
+		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Staff) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Staff{`,
+		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
+		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
+		`Position:` + fmt.Sprintf("%v", this.Position) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DivingBoat) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DivingBoat{`,
+		`BoatModel:` + fmt.Sprintf("%v", this.BoatModel) + `,`,
+		`BoatImage:` + fmt.Sprintf("%v", this.BoatImage) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Place) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Place{`,
+		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
+		`City:` + fmt.Sprintf("%v", this.City) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Room) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Room{`,
+		`RoomType:` + fmt.Sprintf("%v", this.RoomType) + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`MaxCapacity:` + fmt.Sprintf("%v", this.MaxCapacity) + `,`,
+		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
+		`RoomImages:` + fmt.Sprintf("%v", this.RoomImages) + `,`,
+		`AmenityNames:` + fmt.Sprintf("%v", this.AmenityNames) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *TripTemplate) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&TripTemplate{`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`PhoneNumber:` + fmt.Sprintf("%v", this.PhoneNumber) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`Documents:` + repeatedStringForDocuments + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`DivingBoat:` + strings.Replace(this.DivingBoat.String(), "DivingBoat", "DivingBoat", 1) + `,`,
+		`Place:` + strings.Replace(this.Place.String(), "Place", "Place", 1) + `,`,
+		`Images:` + fmt.Sprintf("%v", this.Images) + `,`,
+		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
+		`ScheduleImage:` + fmt.Sprintf("%v", this.ScheduleImage) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Trip) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForDiveMasters := "[]*DiveMasterFirstAndLastName{"
+	for _, f := range this.DiveMasters {
+		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMasterFirstAndLastName", "DiveMasterFirstAndLastName", 1) + ","
+	}
+	repeatedStringForDiveMasters += "}"
+	s := strings.Join([]string{`&Trip{`,
+		`From:` + strings.Replace(fmt.Sprintf("%v", this.From), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`To:` + strings.Replace(fmt.Sprintf("%v", this.To), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`MaxCapacity:` + fmt.Sprintf("%v", this.MaxCapacity) + `,`,
+		`PricePerPserson:` + fmt.Sprintf("%v", this.PricePerPserson) + `,`,
+		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Hotel) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForRooms := "[]*Room{"
+	for _, f := range this.Rooms {
+		repeatedStringForRooms += strings.Replace(f.String(), "Room", "Room", 1) + ","
+	}
+	repeatedStringForRooms += "}"
+	s := strings.Join([]string{`&Hotel{`,
+		`HotelName:` + fmt.Sprintf("%v", this.HotelName) + `,`,
+		`Star:` + fmt.Sprintf("%v", this.Star) + `,`,
+		`Highlights:` + fmt.Sprintf("%v", this.Highlights) + `,`,
+		`Images:` + fmt.Sprintf("%v", this.Images) + `,`,
+		`Rooms:` + repeatedStringForRooms + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Liveaboard) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForRooms := "[]*Room{"
+	for _, f := range this.Rooms {
+		repeatedStringForRooms += strings.Replace(f.String(), "Room", "Room", 1) + ","
+	}
+	repeatedStringForRooms += "}"
+	s := strings.Join([]string{`&Liveaboard{`,
+		`Model:` + fmt.Sprintf("%v", this.Model) + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`Length:` + fmt.Sprintf("%v", this.Length) + `,`,
+		`Width:` + fmt.Sprintf("%v", this.Width) + `,`,
+		`Highlights:` + fmt.Sprintf("%v", this.Highlights) + `,`,
+		`Images:` + fmt.Sprintf("%v", this.Images) + `,`,
+		`Rooms:` + repeatedStringForRooms + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddDiveMasterRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddDiveMasterRequest{`,
+		`DiveMaster:` + strings.Replace(this.DiveMaster.String(), "DiveMaster", "DiveMaster", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddStaffRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddStaffRequest{`,
+		`Staff:` + strings.Replace(this.Staff.String(), "Staff", "Staff", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddTripTemplateRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddTripTemplateRequest{`,
+		`TripTemplate:` + strings.Replace(this.TripTemplate.String(), "TripTemplate", "TripTemplate", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddTripRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddTripRequest{`,
+		`Trip:` + strings.Replace(this.Trip.String(), "Trip", "Trip", 1) + `,`,
+		`TripTemplate:` + strings.Replace(this.TripTemplate.String(), "TripTemplate", "TripTemplate", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddDivingBoatRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddDivingBoatRequest{`,
+		`DivingBoat:` + strings.Replace(this.DivingBoat.String(), "DivingBoat", "DivingBoat", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddHotelRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddHotelRequest{`,
+		`Hotel:` + strings.Replace(this.Hotel.String(), "Hotel", "Hotel", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *AddLiveaboardRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&AddLiveaboardRequest{`,
+		`Liveaboard:` + strings.Replace(this.Liveaboard.String(), "Liveaboard", "Liveaboard", 1) + `,`,
+		`AgencyName:` + fmt.Sprintf("%v", this.AgencyName) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -318,7 +4009,7 @@ func valueToStringAgency(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
+func (m *DiveMaster) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -341,10 +4032,892 @@ func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: AgencyRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: DiveMaster: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: AgencyRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DiveMaster: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FirstName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Level", wireType)
+			}
+			m.Level = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Level |= LevelType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FrontImage", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FrontImage = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BackImage", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BackImage = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DiveMasterFirstAndLastName) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DiveMasterFirstAndLastName: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DiveMasterFirstAndLastName: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FirstName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Staff) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Staff: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Staff: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FirstName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LastName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Position", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Position = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DivingBoat) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DivingBoat: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DivingBoat: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BoatModel", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BoatModel = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BoatImage", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BoatImage = append(m.BoatImage[:0], dAtA[iNdEx:postIndex]...)
+			if m.BoatImage == nil {
+				m.BoatImage = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Place) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Place: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Place: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Country = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.City = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Room) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Room: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Room: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RoomType", wireType)
+			}
+			m.RoomType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RoomType |= Room_RoomType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxCapacity", wireType)
+			}
+			m.MaxCapacity = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxCapacity |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+			m.Price = float32(math.Float32frombits(v))
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RoomImages", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RoomImages = append(m.RoomImages, make([]byte, postIndex-iNdEx))
+			copy(m.RoomImages[len(m.RoomImages)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AmenityNames", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AmenityNames = append(m.AmenityNames, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TripTemplate) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -379,9 +4952,9 @@ func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.Name = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 20:
+		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PhoneNumber", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -409,11 +4982,11 @@ func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PhoneNumber = string(dAtA[iNdEx:postIndex])
+			m.Description = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 30:
+		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DivingBoat", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -440,16 +5013,16 @@ func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Address == nil {
-				m.Address = &Address{}
+			if m.DivingBoat == nil {
+				m.DivingBoat = &DivingBoat{}
 			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		case 40:
+		case 4:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Documents", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Place", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -476,10 +5049,1586 @@ func (m *AgencyRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Documents = append(m.Documents, &File{})
-			if err := m.Documents[len(m.Documents)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if m.Place == nil {
+				m.Place = &Place{}
+			}
+			if err := m.Place.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Images = append(m.Images, make([]byte, postIndex-iNdEx))
+			copy(m.Images[len(m.Images)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
+			}
+			m.TripType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TripType |= TripTemplate_TripType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ScheduleImage", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ScheduleImage = append(m.ScheduleImage[:0], dAtA[iNdEx:postIndex]...)
+			if m.ScheduleImage == nil {
+				m.ScheduleImage = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Trip) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field From", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.From == nil {
+				m.From = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.From, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field To", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.To == nil {
+				m.To = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.To, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxCapacity", wireType)
+			}
+			m.MaxCapacity = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxCapacity |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PricePerPserson", wireType)
+			}
+			m.PricePerPserson = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PricePerPserson |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DiveMasters = append(m.DiveMasters, &DiveMasterFirstAndLastName{})
+			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Hotel) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Hotel: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Hotel: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HotelName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HotelName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Star", wireType)
+			}
+			m.Star = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Star |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Highlights", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Highlights = append(m.Highlights, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Images = append(m.Images, make([]byte, postIndex-iNdEx))
+			copy(m.Images[len(m.Images)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Rooms", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Rooms = append(m.Rooms, &Room{})
+			if err := m.Rooms[len(m.Rooms)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Liveaboard) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Liveaboard: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Liveaboard: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Model", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Model = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Length", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+			m.Length = float32(math.Float32frombits(v))
+		case 4:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Width", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+			m.Width = float32(math.Float32frombits(v))
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Highlights", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Highlights = append(m.Highlights, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Images = append(m.Images, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Rooms", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Rooms = append(m.Rooms, &Room{})
+			if err := m.Rooms[len(m.Rooms)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddDiveMasterRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddDiveMasterRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddDiveMasterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMaster", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DiveMaster == nil {
+				m.DiveMaster = &DiveMaster{}
+			}
+			if err := m.DiveMaster.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddStaffRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddStaffRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddStaffRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Staff", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Staff == nil {
+				m.Staff = &Staff{}
+			}
+			if err := m.Staff.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddTripTemplateRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddTripTemplateRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddTripTemplateRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddTripRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddTripRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddTripRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Trip == nil {
+				m.Trip = &Trip{}
+			}
+			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddDivingBoatRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddDivingBoatRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddDivingBoatRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DivingBoat", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DivingBoat == nil {
+				m.DivingBoat = &DivingBoat{}
+			}
+			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddHotelRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddHotelRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddHotelRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hotel", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Hotel == nil {
+				m.Hotel = &Hotel{}
+			}
+			if err := m.Hotel.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AddLiveaboardRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AddLiveaboardRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AddLiveaboardRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Liveaboard", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Liveaboard == nil {
+				m.Liveaboard = &Liveaboard{}
+			}
+			if err := m.Liveaboard.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AgencyName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AgencyName = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

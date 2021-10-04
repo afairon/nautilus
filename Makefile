@@ -56,7 +56,7 @@ $(PB_GO_DIR)/%.pb.go: $(PROTO_DIR)/%.proto $(VENDOR_DIR)
 
 # Generating go code for entities
 $(ENTITY_GO_DIR)/%.pb.go: $(PROTO_DIR)/%.proto $(VENDOR_DIR)
-	$(PROTOC) --$(PROTOC_GO_GEN)_out=Mcommon.proto=$(GO_PACKAGE)/$(PB_GO_DIR):. \
+	$(PROTOC) --$(PROTOC_GO_GEN)_out=Mmodel.proto=$(GO_PACKAGE)/$(PB_GO_DIR):. \
 		--proto_path=$(PROTO_DIR) \
 		--proto_path=$(VENDOR_DIR) \
 		--proto_path=$(GOOGLE_PROTO_DIR) \

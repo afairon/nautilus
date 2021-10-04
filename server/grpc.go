@@ -47,4 +47,5 @@ func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session,
 	repo := repo.NewRepo(db)
 	accountService := service.NewAccountService(repo, session, media)
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
+	pb.RegisterAgencyServiceServer(server, &service.AgencyService{})
 }

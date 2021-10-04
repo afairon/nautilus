@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package agency;
+
+import "model.proto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option go_package = "./pb";
+
+service AgencyService {
+    rpc AddDiveMaster(AddDiveMasterRequest) returns (google.protobuf.Empty);
+    rpc AddStaff(AddStaffRequest) returns (google.protobuf.Empty);
+    rpc AddTripTemplate(AddTripTemplateRequest) returns (google.protobuf.Empty);
+    rpc AddTrip(AddTripRequest) returns (google.protobuf.Empty);
+    rpc AddDivingBoat(AddDivingBoatRequest) returns (google.protobuf.Empty);
+    rpc AddHotel(AddHotelRequest) returns (google.protobuf.Empty);
+    rpc AddLiveaboard(AddLiveaboardRequest) returns (google.protobuf.Empty);
+}
+
+message DiveMaster {
+    string first_name = 1;
+    string last_name = 2;
+    model.LevelType level = 3;
+    string front_image = 4;
+    string back_image = 5;
+}
+
+message DiveMasterFirstAndLastName {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+message Staff {
+    string first_name = 1;
+    string last_name = 2;
+    string position = 3;
+}
+
+message DivingBoat {
+    string boat_model = 1;
+    bytes boat_image = 2;
+}
+
+message Place {
+    string country = 1;
+    string city = 2;
+}
+
+message Room {
+    enum RoomType {
+        SINGLE = 0;
+        DOUBLE = 1;
+        TRIPLE = 2;
+        QUAD = 3;
+        QUEEN = 4;
+        KING = 5;
+        TWIN = 6;
+        HOLLYWOOD_TWIN_ROOM = 7;
+        DOUBLE_DOUBLE = 8;
+        STUDIO = 9;
+        EXECUTEIVE_SUITE = 10;
+        MINI_SUITE = 11;
+        PRESIDENTAL_SUITE = 12;
+        APARTMENT = 13;
+        CONNECTING_ROOMS = 14;
+        MURPHY_ROOM = 15;
+        DISABLED_ROOM = 16;
+        CABANA = 17;
+        ADJOINING_ROOMS = 18;
+        ADJACENT_ROOMS = 19;
+        VILLA = 20;
+        FLOORED_ROOM = 21;
+        SMOKING_NON_SMOKING = 22;
+    }
+
+    RoomType room_type = 1;
+    string description = 2;
+    int32 max_capacity = 3;
+    float price = 4;
+    repeated bytes room_images = 5;
+    repeated string amenity_names = 6;
+}
+
+message TripTemplate {
+
+    enum TripType {
+        LIVEABOARD = 0;
+        DIVE_RESORTS = 1;
+    }
+
+    string name = 1;
+    string description = 2;
+    DivingBoat diving_boat = 3;
+    Place place = 4;
+    repeated bytes images = 5;
+    TripType trip_type = 6;
+    bytes schedule_image = 7;
+}
+
+message Trip {
+    google.protobuf.Timestamp from = 1 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
+    int32 max_capacity = 3;
+    int32 price_per_pserson = 4;
+    repeated DiveMasterFirstAndLastName dive_masters = 5;
+}
+
+message Hotel {
+    string hotel_name = 1;
+    int32 star = 2;
+    // optional highlights when creating a new hotel
+    repeated string highlights = 3;
+    // optional images when creating a new hotel
+    repeated bytes images = 4;
+    repeated Room rooms = 5;
+}
+
+message Liveaboard {
+    string model = 1;
+    string description = 2;
+    float length = 3;
+    float width = 4;
+    // optional highlights when creating a new liveaboard
+    repeated string highlights = 5;
+    // optional images when creating a new liveaboard
+    repeated string images = 6;
+    repeated Room rooms = 7;
+}
+
+message AddDiveMasterRequest {
+    DiveMaster dive_master = 1;
+    string agency_name = 2;
+}
+
+message AddStaffRequest {
+    Staff staff = 1;
+    string agency_name = 2;
+}
+
+message AddTripTemplateRequest {
+    TripTemplate trip_template = 1;
+    string agency_name = 2;
+}
+
+message AddTripRequest {
+    Trip trip = 1;
+    TripTemplate trip_template = 2;
+    string agency_name = 3;
+}
+
+message AddDivingBoatRequest {
+    DivingBoat diving_boat = 1;
+    string agency_name = 2;
+}
+
+message AddHotelRequest {
+    Hotel hotel = 1;
+    string agency_name = 2;
+}
+
+message AddLiveaboardRequest {
+    Liveaboard liveaboard = 1;
+    string agency_name = 2;
+}
