@@ -2,10 +2,10 @@ package server
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
+	"github.com/afairon/nautilus/logger"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"google.golang.org/grpc"
 )
@@ -21,9 +21,10 @@ func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.S
 	wrappedGrpc := grpcweb.WrapServer(grpcServer)
 
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		entry := logger.NewHTTPEntry(r)
+
 		if r.Method != "OPTIONS" && !wrappedGrpc.IsGrpcWebRequest(r) {
-			log.Println("Web gRPC wrong call:", r.URL.Path)
-			log.Println("Web gRPC remote:", r.RemoteAddr)
+			entry.Warn("Web gRPC wrong call")
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
@@ -37,7 +38,7 @@ func CreateGRPCWebServer(grpcServer *grpc.Server, host string, port int) *http.S
 			return
 		}
 
-		log.Println("Web gRPC call:", r.URL.Path)
+		entry.Info("Web gRPC call")
 		wrappedGrpc.ServeHTTP(w, r)
 	})
 

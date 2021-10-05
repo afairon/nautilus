@@ -1,7 +1,10 @@
 package logger
 
 import (
+	"net/http"
 	"os"
+	"path"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -30,4 +33,31 @@ func Setup(output string) {
 	}
 
 	log.SetLevel(logLevel)
+}
+
+// NewGRPCEntry creates a new grpc log entry.
+func NewGRPCEntry(fullMethod string, start time.Time) *log.Entry {
+	service := path.Dir(fullMethod)[1:]
+	method := path.Base(fullMethod)
+
+	return log.WithFields(log.Fields{
+		"grpc.service": service,
+		"grpc.method":  method,
+		"elapsed":      time.Since(start),
+	})
+}
+
+// NewHTTPEntry creates a new http log entry.
+func NewHTTPEntry(r *http.Request) *log.Entry {
+	fields := log.Fields{
+		"path": r.URL.Path,
+	}
+
+	if ip := r.Header.Get("X-Real-IP"); ip != "" {
+		fields["ip"] = ip
+	} else {
+		fields["addr"] = r.RemoteAddr
+	}
+
+	return log.WithFields(fields)
 }

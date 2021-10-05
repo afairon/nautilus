@@ -2,10 +2,9 @@ package logger
 
 import (
 	"context"
-	"path"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	"github.com/afairon/nautilus/logger"
 	"google.golang.org/grpc"
 )
 
@@ -15,7 +14,7 @@ func UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 		start := time.Now()
 
 		resp, err := handler(ctx, req)
-		entry := newEntry(info.FullMethod, start)
+		entry := logger.NewGRPCEntry(info.FullMethod, start)
 		if err != nil {
 			entry.Error(err)
 			return nil, err
@@ -33,7 +32,7 @@ func StreamServerInterceptor() grpc.StreamServerInterceptor {
 		start := time.Now()
 
 		err := handler(srv, stream)
-		entry := newEntry(info.FullMethod, start)
+		entry := logger.NewGRPCEntry(info.FullMethod, start)
 		if err != nil {
 			entry.Error(err)
 			return err
@@ -43,16 +42,4 @@ func StreamServerInterceptor() grpc.StreamServerInterceptor {
 
 		return nil
 	}
-}
-
-// newEntry creates a new log entry.
-func newEntry(fullMethod string, start time.Time) *log.Entry {
-	service := path.Dir(fullMethod)[1:]
-	method := path.Base(fullMethod)
-
-	return log.WithFields(log.Fields{
-		"grpc.service": service,
-		"grpc.method":  method,
-		"elapsed":      time.Since(start),
-	})
 }
