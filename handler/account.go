@@ -6,6 +6,8 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"github.com/golang/protobuf/ptypes/empty"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // AccountHandler implements the Account rpc interface.
@@ -34,6 +36,9 @@ func (handler *AccountHandler) Create(ctx context.Context, req *pb.AccountReques
 		if err != nil {
 			return nil, err
 		}
+	default:
+		// Cannot determine type of account
+		return nil, status.Error(codes.InvalidArgument, "account: invalid request")
 	}
 
 	return &empty.Empty{}, nil
