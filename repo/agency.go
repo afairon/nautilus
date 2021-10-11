@@ -12,6 +12,7 @@ import (
 // with the agency repository.
 type AgencyRepository interface {
 	Create(ctx context.Context, agency *entity.Agency) (*entity.Agency, error)
+	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -40,6 +41,21 @@ func (repo *Agency) Create(ctx context.Context, agency *entity.Agency) (*entity.
 			($1, $2, $3, $4, $5)
 		RETURNING id, name, phone, account_id, address_id, documents, created_on, updated_on
 	`, agency.Name, agency.Phone, agency.AccountId, agency.AddressId, agency.Documents)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error) {
+	var result entity.DiveMaster
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.dive_master
+			(first_name, last_name, level, agency_id, documents)
+		VALUES
+			($1, $2, $3, $4, $5)
+		RETURNING id, first_name, last_name, level, agency_id, created_on, updated_on
+	`, diveMaster.FirstName, diveMaster.LastName, diveMaster.Level, diveMaster.AgencyId, diveMaster.Documents)
 
 	return &result, err
 }

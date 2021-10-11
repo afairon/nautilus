@@ -181,12 +181,18 @@ message Trip {
 
 // DiveMaster entity
 message DiveMaster {
+    option (gogoproto.equal) = false;
+    option (gogoproto.marshaler) = false;
+    option (gogoproto.unmarshaler) = false;
+    option (gogoproto.sizer) = false;
+    
     uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
     string first_name = 2 [(gogoproto.moretags) = "db:\"first_name\""];
     string last_name = 3 [(gogoproto.moretags) = "db:\"last_name\""];
     model.LevelType level = 4 [(gogoproto.moretags) = "db:\"level\""];
     uint64 agency_id = 5 [(gogoproto.moretags) = "db:\"agency_id\""];
-    repeated string documents = 6 [(gogoproto.moretags) = "db:\"documents\""];
+    // repeated string documents = 6 [(gogoproto.moretags) = "db:\"documents\""];
+    string documents = 6 [(gogoproto.customtype) = "StringArray", (gogoproto.nullable) = false, (gogoproto.moretags) = "db:\"documents\""];
     google.protobuf.Timestamp created_on = 7 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
     google.protobuf.Timestamp updated_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
 }

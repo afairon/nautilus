@@ -4,37 +4,54 @@ import (
 	"context"
 
 	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/service"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-type AgencyService struct{}
-
-func (s *AgencyService) AddDiveMaster(ctx context.Context, req *pb.AddDiveMasterRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddDiveMaster unimplemented")
+// AgencyHandler implements the Agency rpc interface.
+type AgencyHandler struct {
+	agencyService service.AgencyService
 }
 
-func (s *AgencyService) AddStaff(ctx context.Context, req *pb.AddStaffRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddStaff unimplemented")
+func NewAgencyHandler(agencyService service.AgencyService) *AgencyHandler {
+	return &AgencyHandler{
+		agencyService: agencyService,
+	}
 }
 
-func (s *AgencyService) AddTripTemplate(ctx context.Context, req *pb.AddTripTemplateRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
+// AddDiveMaster handles dive master creation. It delegates the dive master creation to agencyService.
+func (handler *AgencyHandler) AddDiveMaster(ctx context.Context, req *pb.AddDiveMasterRequest) (*empty.Empty, error) {
+	err := handler.agencyService.AddDiveMaster(ctx, req.GetDiveMaster(), req.GetAgencyId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }
 
-func (s *AgencyService) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
-}
-
-func (s *AgencyService) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddDivingBoat unimplemented")
-}
-
-func (s *AgencyService) AddHotel(ctx context.Context, req *pb.AddHotelRequest) (*empty.Empty, error) {
+func (handler *AgencyHandler) AddHotel(ctx context.Context, req *pb.AddHotelRequest) (*empty.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "AddHotel unimplemented")
 }
 
-func (s *AgencyService) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) (*empty.Empty, error) {
+func (handler *AgencyHandler) AddStaff(ctx context.Context, req *pb.AddStaffRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddStaff unimplemented")
+}
+
+func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTripTemplateRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
+}
+
+func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
+}
+
+func (handler *AgencyHandler) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) (*empty.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "AddDivingBoat unimplemented")
+}
+
+func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) (*empty.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "AddLiveaboard unimplemented")
 }

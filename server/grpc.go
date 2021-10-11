@@ -52,6 +52,7 @@ func CreateGRPCServer(db *sqlx.DB, session session.Session, mediaStorage media.S
 func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session, media media.Store) {
 	repo := repo.NewRepo(db)
 	accountService := service.NewAccountService(repo, session, media)
+	agencyService := service.NewAgencyService(repo, session, media)
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
-	pb.RegisterAgencyServiceServer(server, &handler.AgencyService{})
+	pb.RegisterAgencyServiceServer(server, handler.NewAgencyHandler(agencyService))
 }
