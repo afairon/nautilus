@@ -10,9 +10,9 @@ import (
 // AddressRepository defines interface for interaction
 // with the address repository.
 type AddressRepository interface {
-	Create(context.Context, *entity.Address) (*entity.Address, error)
-	Get(context.Context, uint64) (*entity.Address, error)
-	List(context.Context, uint64, uint64) ([]pb.Address, error)
+	Create(ctx context.Context, address *entity.Address) (*entity.Address, error)
+	Get(ctx context.Context, id uint64) (*entity.Address, error)
+	List(ctx context.Context, limit, offset uint64) ([]pb.Address, error)
 }
 
 // Address implements AddressRepository interface.
@@ -61,8 +61,6 @@ func (repo *Address) Get(ctx context.Context, id uint64) (*entity.Address, error
 
 // List returns list of addresses.
 func (repo *Address) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Address, error) {
-	var results []pb.Address
-
 	rows, err := repo.db.Queryx(`
 		SELECT
 			id, address_line_1, address_line_2, city, postcode, region, country
@@ -77,6 +75,8 @@ func (repo *Address) List(ctx context.Context, limit uint64, offset uint64) ([]p
 		return nil, err
 	}
 	defer rows.Close()
+
+	results := make([]pb.Address, 0, limit)
 
 	for rows.Next() {
 		address := pb.Address{}

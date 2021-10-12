@@ -10,11 +10,11 @@ import (
 // AccountRepository defines interface for interaction
 // with the account repository.
 type AccountRepository interface {
-	Create(context.Context, *entity.Account) (*entity.Account, error)
-	Get(context.Context, uint64) (*entity.Account, error)
-	GetByEmail(context.Context, string) (*entity.Account, error)
-	GetByUsername(context.Context, string) (*entity.Account, error)
-	List(context.Context, uint64, uint64) ([]pb.Account, error)
+	Create(ctx context.Context, account *entity.Account) (*entity.Account, error)
+	Get(ctx context.Context, id uint64) (*entity.Account, error)
+	GetByEmail(ctx context.Context, email string) (*entity.Account, error)
+	GetByUsername(ctx context.Context, username string) (*entity.Account, error)
+	List(ctx context.Context, limit, offset uint64) ([]pb.Account, error)
 }
 
 // Account implements AccountRepository interface.
@@ -95,8 +95,6 @@ func (repo *Account) GetByUsername(ctx context.Context, username string) (*entit
 
 // List returns list of accounts.
 func (repo *Account) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Account, error) {
-	var results []pb.Account
-
 	rows, err := repo.db.Queryx(`
 		SELECT
 			id, username, email, "type", verified, active, created_on, updated_on
@@ -111,6 +109,8 @@ func (repo *Account) List(ctx context.Context, limit uint64, offset uint64) ([]p
 		return nil, err
 	}
 	defer rows.Close()
+
+	results := make([]pb.Account, 0, limit)
 
 	for rows.Next() {
 		account := pb.Account{}

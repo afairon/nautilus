@@ -11,9 +11,9 @@ import (
 // DiverRepository defines interface for interaction
 // with the diver repository.
 type DiverRepository interface {
-	Create(context.Context, *entity.Diver) (*entity.Diver, error)
-	Get(context.Context, uint64) (*entity.Diver, error)
-	List(context.Context, uint64, uint64) ([]pb.Diver, error)
+	Create(ctx context.Context, diver *entity.Diver) (*entity.Diver, error)
+	Get(ctx context.Context, id uint64) (*entity.Diver, error)
+	List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error)
 }
 
 // Diver implements DiverRepository interface.
@@ -62,8 +62,6 @@ func (repo *Diver) Get(ctx context.Context, id uint64) (*entity.Diver, error) {
 
 // List returns list of divers.
 func (repo *Diver) List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error) {
-	var results []pb.Diver
-
 	rows, err := repo.db.Queryx(`
 		SELECT
 			diver.id, diver.first_name, diver.last_name, diver.phone, diver.birth_date, diver.documents, diver.created_on, diver.updated_on,
@@ -84,6 +82,8 @@ func (repo *Diver) List(ctx context.Context, limit, offset uint64) ([]pb.Diver, 
 	}
 	defer rows.Close()
 
+	results := make([]pb.Diver, 0, limit)
+
 	for rows.Next() {
 		diver := pb.Diver{}
 		var birthDate string
@@ -97,11 +97,15 @@ func (repo *Diver) List(ctx context.Context, limit, offset uint64) ([]pb.Diver, 
 			return nil, err
 		}
 
-		for _, document := range documents {
-			file := pb.File{
-				Link: document,
+		if len(documents) > 0 {
+			diver.Documents = make([]pb.File, 0, len(documents))
+
+			for _, document := range documents {
+				file := pb.File{
+					Link: document,
+				}
+				diver.Documents = append(diver.Documents, file)
 			}
-			diver.Documents = append(diver.Documents, file)
 		}
 
 		results = append(results, diver)

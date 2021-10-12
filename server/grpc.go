@@ -15,14 +15,20 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	maxRecvMsgSize    = 8 * 1024 * 1024
+	maxSendMsgSize    = 8 * 1024 * 1024
+	connectionTimeout = 120 * time.Second
+)
+
 // CreateGRPCServer returns a gRPC server with services.
 func CreateGRPCServer(db *sqlx.DB, session session.Session, mediaStorage media.Store) *grpc.Server {
 
 	// gRPC options
 	opts := []grpc.ServerOption{
-		grpc.MaxRecvMsgSize(8 * 1024 * 1024),
-		grpc.MaxSendMsgSize(8 * 1024 * 1024),
-		grpc.ConnectionTimeout(120 * time.Second),
+		grpc.MaxRecvMsgSize(maxRecvMsgSize),
+		grpc.MaxSendMsgSize(maxSendMsgSize),
+		grpc.ConnectionTimeout(connectionTimeout),
 		grpc.ChainUnaryInterceptor(
 			logger.UnaryServerInterceptor(),
 			auth.UnaryServerInterceptor(auth.Authorization(session)),

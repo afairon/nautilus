@@ -15,9 +15,9 @@ import (
 
 // AccountService defines operations on account.
 type AccountService interface {
-	CreateAgencyAccount(context.Context, *pb.Agency) error
-	CreateDiverAccount(context.Context, *pb.Diver) error
-	Login(context.Context, string, string) (string, error)
+	CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error
+	CreateDiverAccount(ctx context.Context, diver *pb.Diver) error
+	Login(ctx context.Context, email, password string) (string, error)
 }
 
 // accountService implements AccountService.

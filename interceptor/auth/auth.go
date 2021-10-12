@@ -17,7 +17,7 @@ import (
 var accessRoles = map[string][]pb.AccountType{}
 
 // AuthFunc is a function type authorizing users to access certain services.
-type AuthFunc func(context.Context, string) (context.Context, error)
+type AuthFunc func(ctx context.Context, service string) (context.Context, error)
 
 // UnaryInterceptor intercepts unary requests and pass it to the handler.
 func UnaryServerInterceptor(auth AuthFunc) grpc.UnaryServerInterceptor {

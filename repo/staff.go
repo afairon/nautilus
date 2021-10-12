@@ -9,8 +9,8 @@ import (
 // StaffRepository defines interface for interaction
 // with the staff repository.
 type StaffRepository interface {
-	Create(context.Context, *entity.Staff) (*entity.Staff, error)
-	Get(context.Context, uint64) (*entity.Staff, error)
+	Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
+	Get(ctx context.Context, id uint64) (*entity.Staff, error)
 }
 
 // Staff implements StaffRepository interface.

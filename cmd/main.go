@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"net"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/afairon/nautilus/db"
@@ -15,6 +19,7 @@ import (
 	"github.com/afairon/nautilus/server"
 	"github.com/afairon/nautilus/session"
 	log "github.com/sirupsen/logrus"
+	"google.golang.org/grpc"
 )
 
 var (
@@ -93,37 +98,75 @@ func main() {
 
 	// Choose object storage backend.
 	if *flagS3 {
-		mediaStorage = s3.NewStore()
 		log.Info("Using S3 object storage backend.")
+		mediaStorage = s3.NewStore()
 	} else {
-		mediaStorage = fs.NewStore(*flagDataPath, *flagDataRootURL)
 		log.Info("Using FS object storage backend.")
+		mediaStorage = fs.NewStore(*flagDataPath, *flagDataRootURL)
 	}
 
 	addr := fmt.Sprintf("%s:%d", *flagBindAddr, *flagGRPCPort)
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
+		db.Close()
 		log.Fatal("failed to listen: ", err)
 	}
 	defer lis.Close()
 
+	stop := make(chan os.Signal, 1)
+	chanHTTP := make(chan error)
+	chanGRPC := make(chan error)
+	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+
 	// Create grpc server.
 	grpcServer := server.CreateGRPCServer(db, sessionManager, mediaStorage)
+
+	var httpServer *http.Server
 
 	if *flagGRPCWeb {
 		// grpc web enabled
 		// Create grpc web server.
-		grpcWebServer := server.CreateGRPCWebServer(grpcServer, *flagHTTPAddr, *flagHTTPPort)
+		httpServer = server.CreateGRPCWebServer(grpcServer, *flagHTTPAddr, *flagHTTPPort)
 
-		log.Info("gRPC Web server listening at ", grpcWebServer.Addr)
+		log.Info("gRPC Web server listening at ", httpServer.Addr)
 
 		// Run grpc web in a goroutine.
-		go grpcWebServer.ListenAndServe()
+		go func() {
+			if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+				log.Fatal("failed to serve: ", err)
+				chanHTTP <- err
+			}
+			close(chanHTTP)
+		}()
+		defer cancel()
 	}
 
-	// Run grpc server.
 	log.Info("gRPC server listening at ", lis.Addr())
-	if err = grpcServer.Serve(lis); err != nil {
-		log.Fatal("failed to serve:", err)
+
+	// Run grpc server in a goroutine.
+	go func() {
+		if err = grpcServer.Serve(lis); err != nil && err != grpc.ErrServerStopped {
+			log.Fatal("failed to serve: ", err)
+			chanGRPC <- err
+		}
+		close(chanGRPC)
+	}()
+
+	select {
+	case err := <-chanHTTP:
+		if err != nil {
+			grpcServer.GracefulStop()
+		}
+	case err := <-chanGRPC:
+		if err != nil && httpServer != nil {
+			httpServer.Shutdown(ctx)
+		}
+	case <-stop:
+		if httpServer != nil {
+			httpServer.Shutdown(ctx)
+		}
+		grpcServer.GracefulStop()
 	}
 }

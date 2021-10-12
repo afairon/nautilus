@@ -11,9 +11,9 @@ import (
 // AgencyRepository defines interface for interaction
 // with the agency repository.
 type AgencyRepository interface {
-	Create(context.Context, *entity.Agency) (*entity.Agency, error)
-	Get(context.Context, uint64) (*entity.Agency, error)
-	List(context.Context, uint64, uint64) ([]pb.Agency, error)
+	Create(ctx context.Context, agency *entity.Agency) (*entity.Agency, error)
+	Get(ctx context.Context, id uint64) (*entity.Agency, error)
+	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
 
 // Agency implements AgencyRepository interface.
@@ -61,9 +61,7 @@ func (repo *Agency) Get(ctx context.Context, id uint64) (*entity.Agency, error) 
 }
 
 // List returns list of agencies.
-func (repo *Agency) List(context.Context, uint64, uint64) ([]pb.Agency, error) {
-	var results []pb.Agency
-
+func (repo *Agency) List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
 			agency.id, agency.name, agency.phone, agency.documents, agency.created_on, agency.updated_on,
@@ -83,11 +81,13 @@ func (repo *Agency) List(context.Context, uint64, uint64) ([]pb.Agency, error) {
 			$1
 		OFFSET
 			$2
-	`)
+	`, limit, offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
+
+	results := make([]pb.Agency, 0, limit)
 
 	for rows.Next() {
 		agency := pb.Agency{}
@@ -103,11 +103,15 @@ func (repo *Agency) List(context.Context, uint64, uint64) ([]pb.Agency, error) {
 			return nil, err
 		}
 
-		for _, document := range documents {
-			file := pb.File{
-				Link: document,
+		if len(documents) > 0 {
+			agency.Documents = make([]pb.File, 0, len(documents))
+
+			for _, document := range documents {
+				file := pb.File{
+					Link: document,
+				}
+				agency.Documents = append(agency.Documents, file)
 			}
-			agency.Documents = append(agency.Documents, file)
 		}
 
 		results = append(results, agency)
