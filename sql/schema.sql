@@ -353,19 +353,37 @@ CREATE TABLE public.dive_master (
   last_name varchar NOT NULL,
   "level" level_t NOT NULL,
   agency_id bigint,
-  trip_id bigint,
   documents varchar[],
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT dive_master_pk PRIMARY KEY (id),
-  CONSTRAINT dive_master_un UNIQUE (first_name, last_name, trip_id)
+  CONSTRAINT dive_master_un UNIQUE (first_name, last_name, agency_id)
 );
 
 
 -- public.dive_master foreign keys
 
 ALTER TABLE public.dive_master ADD CONSTRAINT dive_master_agency_fk FOREIGN KEY (agency_id) REFERENCES public.agency(id);
-ALTER TABLE public.dive_master ADD CONSTRAINT dive_master_trip_fk FOREIGN KEY (trip_id) REFERENCES public.trip(id);
+
+-- public.dive_master_trip_link definition
+
+-- Drop table
+
+-- DROP TABLE public.dive_master_trip_link;
+
+CREATE TABLE public.dive_master_trip_link (
+  id bigserial NOT NULL,
+  dive_master_id bigint NOT NULL,
+  trip_id bigint NOT NULL,
+  CONSTRAINT dive_master_trip_link_pk PRIMARY KEY (id),
+  CONSTRAINT dive_master_trip_link_un UNIQUE (dive_master_id, trip_id)
+);
+
+
+-- public.dive_master_trip_link foreign keys
+
+ALTER TABLE public.dive_master_trip_link ADD CONSTRAINT dive_master_trip_link_dive_master_fk FOREIGN KEY (dive_master_id) REFERENCES public.dive_master(id);
+ALTER TABLE public.dive_master_trip_link ADD CONSTRAINT dive_master_trip_link_trip_fk FOREIGN KEY (trip_id) REFERENCES public.trip(id);
 
 -- public.reservation definition
 

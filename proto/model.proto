@@ -42,6 +42,7 @@ message File {
     bytes file = 10;
 }
 
+// User account
 message Account {
     uint64 id = 1;
     string username = 10;
@@ -54,38 +55,41 @@ message Account {
     google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
 }
 
+// Address
 message Address {
     uint64 id = 1;
-    string address_line_1 = 20;
-    string address_line_2 = 30;
-    string city = 40;
-    string postcode = 50;
-    string region = 60;
-    string country = 70;
-    google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
-}
-
-message Agency {
-    uint64 id = 10;
-    string name = 20;
-    string phone = 30;
-    Account account = 40 [(gogoproto.nullable) = false];
-    Address address = 50 [(gogoproto.nullable) = false];
-    repeated File documents = 60 [(gogoproto.nullable) = false];
+    string address_line_1 = 10;
+    string address_line_2 = 20;
+    string city = 30;
+    string postcode = 40;
+    string region = 50;
+    string country = 60;
     google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
 }
 
+// Agency
+message Agency {
+    uint64 id = 1;
+    string name = 10;
+    string phone = 20;
+    Account account = 30 [(gogoproto.nullable) = false];
+    Address address = 40 [(gogoproto.nullable) = false];
+    repeated File documents = 50 [(gogoproto.nullable) = false];
+    google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
+}
+
+// Diver
 message Diver {
-    uint64 id = 10;
-    string first_name = 20;
-    string last_name = 30;
-    string phone = 40;
-    google.protobuf.Timestamp birth_date = 50 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
-    LevelType level = 60;
-    Account account = 70 [(gogoproto.nullable) = false];
-    repeated File documents = 80 [(gogoproto.nullable) = false];
-    google.protobuf.Timestamp created_on = 90 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 100 [(gogoproto.stdtime) = true];
+    uint64 id = 1;
+    string first_name = 10;
+    string last_name = 20;
+    string phone = 30;
+    google.protobuf.Timestamp birth_date = 40 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
+    LevelType level = 50;
+    Account account = 60 [(gogoproto.nullable) = false];
+    repeated File documents = 70 [(gogoproto.nullable) = false];
+    google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
 }

@@ -186,10 +186,16 @@ message DiveMaster {
     string last_name = 3 [(gogoproto.moretags) = "db:\"last_name\""];
     model.LevelType level = 4 [(gogoproto.moretags) = "db:\"level\""];
     uint64 agency_id = 5 [(gogoproto.moretags) = "db:\"agency_id\""];
-    uint64 trip_id = 6 [(gogoproto.moretags) = "db:\"trip_id\""];
-    repeated string documents = 7 [(gogoproto.moretags) = "db:\"documents\""];
-    google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
-    google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+    repeated string documents = 6 [(gogoproto.moretags) = "db:\"documents\""];
+    google.protobuf.Timestamp created_on = 7 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
+    google.protobuf.Timestamp updated_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+}
+
+// DiveMasterTrip entity
+message DiverMasterTrip {
+    uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
+    uint64 dive_master_id = 2 [(gogoproto.moretags) = "db:\"dive_master_id\""];
+    uint64 trip_id = 3 [(gogoproto.moretags) = "db:\"trip_id\""];
 }
 
 // Reservation entity
