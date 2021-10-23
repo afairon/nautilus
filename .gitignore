@@ -16,6 +16,7 @@ vendor/
 
 # Output binaries
 build/
+data/
 
 # Log file
 *.log

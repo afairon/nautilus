@@ -14,7 +14,9 @@ import (
 
 // accessRoles defines the permission and roles for different services.
 // Services that are available to everyone should not be defined in here.
-var accessRoles = map[string][]pb.AccountType{}
+var accessRoles = map[string][]pb.AccountType{
+	"/agency.AgencyService/AddDiveMaster": {pb.AGENCY},
+}
 
 // AuthFunc is a function type authorizing users to access certain services.
 type AuthFunc func(ctx context.Context, service string) (context.Context, error)
