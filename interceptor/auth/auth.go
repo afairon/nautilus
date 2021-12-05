@@ -16,6 +16,7 @@ import (
 // Services that are available to everyone should not be defined in here.
 var accessRoles = map[string][]pb.AccountType{
 	"/agency.AgencyService/AddDiveMaster": {pb.AGENCY},
+	"/comment.Comment/Create":             {pb.DIVER},
 }
 
 // AuthFunc is a function type authorizing users to access certain services.

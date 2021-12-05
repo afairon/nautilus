@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package comment;
+
+import "model.proto";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./pb";
+
+service Comment {
+    // Create comment
+    rpc Create (CommentRequest) returns (google.protobuf.Empty) {}
+}
+
+// CommentRequest
+message CommentRequest {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}

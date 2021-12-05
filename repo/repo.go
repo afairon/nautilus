@@ -18,6 +18,7 @@ type Queries struct {
 	Account AccountRepository
 	Address AddressRepository
 	Agency  AgencyRepository
+	Comment CommentRepository
 	Diver   DiverRepository
 	Staff   StaffRepository
 }
@@ -28,6 +29,7 @@ func newQueries(db DBTX) *Queries {
 		Account: NewAccountRepository(db),
 		Address: NewAddressRepository(db),
 		Agency:  NewAgencyRepository(db),
+		Comment: NewCommentRepository(db),
 		Diver:   NewDiverRepository(db),
 		Staff:   NewStaffRepository(db),
 	}

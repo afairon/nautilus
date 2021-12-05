@@ -51,8 +51,12 @@ func CreateGRPCServer(db *sqlx.DB, session session.Session, mediaStorage media.S
 // registerServices registers services to gRPC.
 func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session, media media.Store) {
 	repo := repo.NewRepo(db)
+
 	accountService := service.NewAccountService(repo, session, media)
 	agencyService := service.NewAgencyService(repo, session, media)
+	commentService := service.NewCommentService(repo)
+
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
 	pb.RegisterAgencyServiceServer(server, handler.NewAgencyHandler(agencyService))
+	pb.RegisterCommentServer(server, handler.NewCommentHandler(commentService))
 }

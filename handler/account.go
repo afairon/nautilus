@@ -12,13 +12,13 @@ import (
 
 // AccountHandler implements the Account rpc interface.
 type AccountHandler struct {
-	accountService service.AccountService
+	service service.AccountService
 }
 
 // NewAccountHandler creates a new AccountHandler.
-func NewAccountHandler(accountService service.AccountService) *AccountHandler {
+func NewAccountHandler(service service.AccountService) *AccountHandler {
 	return &AccountHandler{
-		accountService: accountService,
+		service: service,
 	}
 }
 
@@ -27,12 +27,12 @@ func (handler *AccountHandler) Create(ctx context.Context, req *pb.AccountReques
 	// Get account request type.
 	switch t := req.GetType().(type) {
 	case *pb.AccountRequest_Agency:
-		err := handler.accountService.CreateAgencyAccount(ctx, t.Agency)
+		err := handler.service.CreateAgencyAccount(ctx, t.Agency)
 		if err != nil {
 			return nil, err
 		}
 	case *pb.AccountRequest_Diver:
-		err := handler.accountService.CreateDiverAccount(ctx, t.Diver)
+		err := handler.service.CreateDiverAccount(ctx, t.Diver)
 		if err != nil {
 			return nil, err
 		}
@@ -46,7 +46,7 @@ func (handler *AccountHandler) Create(ctx context.Context, req *pb.AccountReques
 
 // Login checks for account credentials and returns access token.
 func (handler *AccountHandler) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	token, err := handler.accountService.Login(ctx, req.GetEmail(), req.GetPassword())
+	token, err := handler.service.Login(ctx, req.GetEmail(), req.GetPassword())
 	if err != nil {
 		return nil, err
 	}
