@@ -15,23 +15,25 @@ type DBTX interface {
 
 // Queries manages the repository.
 type Queries struct {
-	Account AccountRepository
-	Address AddressRepository
-	Agency  AgencyRepository
-	Comment CommentRepository
-	Diver   DiverRepository
-	Staff   StaffRepository
+	Account     AccountRepository
+	Address     AddressRepository
+	Agency      AgencyRepository
+	Comment     CommentRepository
+	Diver       DiverRepository
+	Reservation ReservationRepository
+	Staff       StaffRepository
 }
 
 // newQueries creates a new repository manager.
 func newQueries(db DBTX) *Queries {
 	return &Queries{
-		Account: NewAccountRepository(db),
-		Address: NewAddressRepository(db),
-		Agency:  NewAgencyRepository(db),
-		Comment: NewCommentRepository(db),
-		Diver:   NewDiverRepository(db),
-		Staff:   NewStaffRepository(db),
+		Account:     NewAccountRepository(db),
+		Address:     NewAddressRepository(db),
+		Agency:      NewAgencyRepository(db),
+		Comment:     NewCommentRepository(db),
+		Diver:       NewDiverRepository(db),
+		Reservation: NewReservationRepository(db),
+		Staff:       NewStaffRepository(db),
 	}
 }
 

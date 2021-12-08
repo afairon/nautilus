@@ -17,20 +17,20 @@ type AccountRepository interface {
 	List(ctx context.Context, limit, offset uint64) ([]pb.Account, error)
 }
 
-// Account implements AccountRepository interface.
-type Account struct {
+// accountRepository implements AccountRepository interface.
+type accountRepository struct {
 	db DBTX
 }
 
 // NewAccountRepository creates a new AccountRepository.
-func NewAccountRepository(db DBTX) *Account {
-	return &Account{
+func NewAccountRepository(db DBTX) *accountRepository {
+	return &accountRepository{
 		db: db,
 	}
 }
 
 // Create creates an account record and returns the newly created record.
-func (repo *Account) Create(ctx context.Context, account *entity.Account) (*entity.Account, error) {
+func (repo *accountRepository) Create(ctx context.Context, account *entity.Account) (*entity.Account, error) {
 	var result entity.Account
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -46,7 +46,7 @@ func (repo *Account) Create(ctx context.Context, account *entity.Account) (*enti
 }
 
 // Get retrieves the account record by its id.
-func (repo *Account) Get(ctx context.Context, id uint64) (*entity.Account, error) {
+func (repo *accountRepository) Get(ctx context.Context, id uint64) (*entity.Account, error) {
 	var result entity.Account
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -62,7 +62,7 @@ func (repo *Account) Get(ctx context.Context, id uint64) (*entity.Account, error
 }
 
 // Get retrieves the account record by its email.
-func (repo *Account) GetByEmail(ctx context.Context, email string) (*entity.Account, error) {
+func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*entity.Account, error) {
 	var result entity.Account
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -78,7 +78,7 @@ func (repo *Account) GetByEmail(ctx context.Context, email string) (*entity.Acco
 }
 
 // Get retrieves the account record by its username.
-func (repo *Account) GetByUsername(ctx context.Context, username string) (*entity.Account, error) {
+func (repo *accountRepository) GetByUsername(ctx context.Context, username string) (*entity.Account, error) {
 	var result entity.Account
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -94,7 +94,7 @@ func (repo *Account) GetByUsername(ctx context.Context, username string) (*entit
 }
 
 // List returns list of accounts.
-func (repo *Account) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Account, error) {
+func (repo *accountRepository) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Account, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
 			id, username, email, "type", verified, active, created_on, updated_on

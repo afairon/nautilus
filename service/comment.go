@@ -10,9 +10,9 @@ import (
 
 // CommentService defines operations on comment.
 type CommentService interface {
-	CreateTripComment(ctx context.Context, comment *pb.TripComment) error
-	CreateHotelComment(ctx context.Context, comment *pb.HotelComment) error
-	CreateLiveaboardComment(ctx context.Context, comment *pb.LiveaboardComment) error
+	CreateTripComment(ctx context.Context, comment *pb.TripComment) (*pb.TripComment, error)
+	CreateHotelComment(ctx context.Context, comment *pb.HotelComment) (*pb.HotelComment, error)
+	CreateLiveaboardComment(ctx context.Context, comment *pb.LiveaboardComment) (*pb.LiveaboardComment, error)
 }
 
 // commentService implements CommentService.
@@ -28,55 +28,97 @@ func NewCommentService(repo *repo.Repo) *commentService {
 }
 
 // CreateTripComment creates a trip comment.
-func (service *commentService) CreateTripComment(ctx context.Context, comment *pb.TripComment) error {
-	star := comment.GetStar()
-	if star > 5 {
-		star = 5
+func (service *commentService) CreateTripComment(ctx context.Context, comment *pb.TripComment) (*pb.TripComment, error) {
+	stars := comment.GetStars()
+	if stars > 5 {
+		stars = 5
 	}
 
-	newComment := entity.TripComment{
+	// TODO: verify diver id with and reservation id
+
+	commentRecord := entity.TripComment{
 		Comment:       comment.GetComment(),
-		Star:          star,
+		Stars:         stars,
 		ReservationId: comment.GetReservationId(),
 	}
 
-	_, err := service.repo.Comment.CreateTripComment(ctx, &newComment)
+	newCommentRecord, err := service.repo.Comment.CreateTripComment(ctx, &commentRecord)
+	if err != nil {
+		return nil, err
+	}
 
-	return err
+	newComment := pb.TripComment{
+		Id:            newCommentRecord.Id,
+		Comment:       newCommentRecord.Comment,
+		Stars:         newCommentRecord.Stars,
+		ReservationId: newCommentRecord.ReservationId,
+		CreatedOn:     newCommentRecord.CreatedOn,
+		UpdatedOn:     newCommentRecord.UpdatedOn,
+	}
+
+	return &newComment, nil
 }
 
 // CreateTripComment creates a hotel comment.
-func (service *commentService) CreateHotelComment(ctx context.Context, comment *pb.HotelComment) error {
-	star := comment.GetStar()
-	if star > 5 {
-		star = 5
+func (service *commentService) CreateHotelComment(ctx context.Context, comment *pb.HotelComment) (*pb.HotelComment, error) {
+	stars := comment.GetStars()
+	if stars > 5 {
+		stars = 5
 	}
 
-	newComment := entity.HotelComment{
+	// TODO: verify diver id with and reservation id
+
+	commentRecord := entity.HotelComment{
 		Comment:       comment.GetComment(),
-		Star:          star,
+		Stars:         stars,
 		ReservationId: comment.GetReservationId(),
 	}
 
-	_, err := service.repo.Comment.CreateHotelComment(ctx, &newComment)
+	newCommentRecord, err := service.repo.Comment.CreateHotelComment(ctx, &commentRecord)
+	if err != nil {
+		return nil, err
+	}
 
-	return err
+	newComment := pb.HotelComment{
+		Id:            newCommentRecord.Id,
+		Comment:       newCommentRecord.Comment,
+		Stars:         newCommentRecord.Stars,
+		ReservationId: newCommentRecord.ReservationId,
+		CreatedOn:     newCommentRecord.CreatedOn,
+		UpdatedOn:     newCommentRecord.UpdatedOn,
+	}
+
+	return &newComment, nil
 }
 
 // CreateTripComment creates a liveaboard comment.
-func (service *commentService) CreateLiveaboardComment(ctx context.Context, comment *pb.LiveaboardComment) error {
-	star := comment.GetStar()
-	if star > 5 {
-		star = 5
+func (service *commentService) CreateLiveaboardComment(ctx context.Context, comment *pb.LiveaboardComment) (*pb.LiveaboardComment, error) {
+	stars := comment.GetStars()
+	if stars > 5 {
+		stars = 5
 	}
 
-	newComment := entity.LiveaboardComment{
+	// TODO: verify diver id with and reservation id
+
+	commentRecord := entity.LiveaboardComment{
 		Comment:       comment.GetComment(),
-		Star:          star,
+		Stars:         stars,
 		ReservationId: comment.GetReservationId(),
 	}
 
-	_, err := service.repo.Comment.CreateLiveaboardComment(ctx, &newComment)
+	newCommentRecord, err := service.repo.Comment.CreateLiveaboardComment(ctx, &commentRecord)
+	if err != nil {
+		return nil, err
+	}
 
-	return err
+	newComment := pb.LiveaboardComment{
+		Id:            newCommentRecord.Id,
+		Comment:       newCommentRecord.Comment,
+		Stars:         newCommentRecord.Stars,
+		ReservationId: newCommentRecord.ReservationId,
+		CreatedOn:     newCommentRecord.CreatedOn,
+		UpdatedOn:     newCommentRecord.UpdatedOn,
+	}
+
+	return &newComment, nil
 }

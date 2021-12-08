@@ -54,9 +54,11 @@ func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session,
 
 	accountService := service.NewAccountService(repo, session, media)
 	agencyService := service.NewAgencyService(repo, session, media)
+	reservationService := service.NewReservationService(repo)
 	commentService := service.NewCommentService(repo)
 
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
 	pb.RegisterAgencyServiceServer(server, handler.NewAgencyHandler(agencyService))
-	pb.RegisterCommentServer(server, handler.NewCommentHandler(commentService))
+	pb.RegisterReservationServiceServer(server, handler.NewReservationHandler(reservationService))
+	pb.RegisterCommentServiceServer(server, handler.NewCommentHandler(commentService))
 }

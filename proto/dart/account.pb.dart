@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $4;
+import 'model.pb.dart' as $6;
 
 enum AccountRequest_Type {
   agency, 
@@ -25,15 +25,15 @@ class AccountRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
     ..oo(0, [1, 5])
-    ..aOM<$4.Agency>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agency', subBuilder: $4.Agency.create)
-    ..aOM<$4.Diver>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diver', subBuilder: $4.Diver.create)
+    ..aOM<$6.Agency>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agency', subBuilder: $6.Agency.create)
+    ..aOM<$6.Diver>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diver', subBuilder: $6.Diver.create)
     ..hasRequiredFields = false
   ;
 
   AccountRequest._() : super();
   factory AccountRequest({
-    $4.Agency? agency,
-    $4.Diver? diver,
+    $6.Agency? agency,
+    $6.Diver? diver,
   }) {
     final _result = create();
     if (agency != null) {
@@ -69,26 +69,26 @@ class AccountRequest extends $pb.GeneratedMessage {
   void clearType() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $4.Agency get agency => $_getN(0);
+  $6.Agency get agency => $_getN(0);
   @$pb.TagNumber(1)
-  set agency($4.Agency v) { setField(1, v); }
+  set agency($6.Agency v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAgency() => $_has(0);
   @$pb.TagNumber(1)
   void clearAgency() => clearField(1);
   @$pb.TagNumber(1)
-  $4.Agency ensureAgency() => $_ensure(0);
+  $6.Agency ensureAgency() => $_ensure(0);
 
   @$pb.TagNumber(5)
-  $4.Diver get diver => $_getN(1);
+  $6.Diver get diver => $_getN(1);
   @$pb.TagNumber(5)
-  set diver($4.Diver v) { setField(5, v); }
+  set diver($6.Diver v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasDiver() => $_has(1);
   @$pb.TagNumber(5)
   void clearDiver() => clearField(5);
   @$pb.TagNumber(5)
-  $4.Diver ensureDiver() => $_ensure(1);
+  $6.Diver ensureDiver() => $_ensure(1);
 }
 
 class LoginRequest extends $pb.GeneratedMessage {

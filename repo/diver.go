@@ -16,20 +16,20 @@ type DiverRepository interface {
 	List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error)
 }
 
-// Diver implements DiverRepository interface.
-type Diver struct {
+// diverRepository implements DiverRepository interface.
+type diverRepository struct {
 	db DBTX
 }
 
 // NewDiverRepository creates a new DiverRepository.
-func NewDiverRepository(db DBTX) *Diver {
-	return &Diver{
+func NewDiverRepository(db DBTX) *diverRepository {
+	return &diverRepository{
 		db: db,
 	}
 }
 
 // Create creates an diver record and returns the newly created record.
-func (repo *Diver) Create(ctx context.Context, diver *entity.Diver) (*entity.Diver, error) {
+func (repo *diverRepository) Create(ctx context.Context, diver *entity.Diver) (*entity.Diver, error) {
 	var result entity.Diver
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -45,7 +45,7 @@ func (repo *Diver) Create(ctx context.Context, diver *entity.Diver) (*entity.Div
 }
 
 // Get retrieves the diver record by its id.
-func (repo *Diver) Get(ctx context.Context, id uint64) (*entity.Diver, error) {
+func (repo *diverRepository) Get(ctx context.Context, id uint64) (*entity.Diver, error) {
 	var result entity.Diver
 
 	err := repo.db.GetContext(ctx, result, `
@@ -61,7 +61,7 @@ func (repo *Diver) Get(ctx context.Context, id uint64) (*entity.Diver, error) {
 }
 
 // List returns list of divers.
-func (repo *Diver) List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error) {
+func (repo *diverRepository) List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
 			diver.id, diver.first_name, diver.last_name, diver.phone, diver.birth_date, diver.documents, diver.created_on, diver.updated_on,

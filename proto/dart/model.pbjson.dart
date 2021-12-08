@@ -140,3 +140,48 @@ const Diver$json = const {
 
 /// Descriptor for `Diver`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List diverDescriptor = $convert.base64Decode('CgVEaXZlchIOCgJpZBgBIAEoBFICaWQSHQoKZmlyc3RfbmFtZRgKIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgUIAEoCVIIbGFzdE5hbWUSFAoFcGhvbmUYHiABKAlSBXBob25lEkMKCmJpcnRoX2RhdGUYKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgiQ3x8ByN4fAFIJYmlydGhEYXRlEiYKBWxldmVsGDIgASgOMhAubW9kZWwuTGV2ZWxUeXBlUgVsZXZlbBIuCgdhY2NvdW50GDwgASgLMg4ubW9kZWwuQWNjb3VudEIEyN4fAFIHYWNjb3VudBIvCglkb2N1bWVudHMYRiADKAsyCy5tb2RlbC5GaWxlQgTI3h8AUglkb2N1bWVudHMSPwoKY3JlYXRlZF9vbhhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
+@$core.Deprecated('Use tripCommentDescriptor instead')
+const TripComment$json = const {
+  '1': 'TripComment',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'comment', '3': 10, '4': 1, '5': 9, '10': 'comment'},
+    const {'1': 'stars', '3': 20, '4': 1, '5': 13, '10': 'stars'},
+    const {'1': 'reservation_id', '3': 30, '4': 1, '5': 4, '10': 'reservationId'},
+    const {'1': 'created_on', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `TripComment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tripCommentDescriptor = $convert.base64Decode('CgtUcmlwQ29tbWVudBIOCgJpZBgBIAEoBFICaWQSGAoHY29tbWVudBgKIAEoCVIHY29tbWVudBIUCgVzdGFycxgUIAEoDVIFc3RhcnMSJQoOcmVzZXJ2YXRpb25faWQYHiABKARSDXJlc2VydmF0aW9uSWQSPwoKY3JlYXRlZF9vbhgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGDIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
+@$core.Deprecated('Use hotelCommentDescriptor instead')
+const HotelComment$json = const {
+  '1': 'HotelComment',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'comment', '3': 10, '4': 1, '5': 9, '10': 'comment'},
+    const {'1': 'stars', '3': 20, '4': 1, '5': 13, '10': 'stars'},
+    const {'1': 'reservation_id', '3': 30, '4': 1, '5': 4, '10': 'reservationId'},
+    const {'1': 'created_on', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `HotelComment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List hotelCommentDescriptor = $convert.base64Decode('CgxIb3RlbENvbW1lbnQSDgoCaWQYASABKARSAmlkEhgKB2NvbW1lbnQYCiABKAlSB2NvbW1lbnQSFAoFc3RhcnMYFCABKA1SBXN0YXJzEiUKDnJlc2VydmF0aW9uX2lkGB4gASgEUg1yZXNlcnZhdGlvbklkEj8KCmNyZWF0ZWRfb24YKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhgyIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+@$core.Deprecated('Use liveaboardCommentDescriptor instead')
+const LiveaboardComment$json = const {
+  '1': 'LiveaboardComment',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'comment', '3': 10, '4': 1, '5': 9, '10': 'comment'},
+    const {'1': 'stars', '3': 20, '4': 1, '5': 13, '10': 'stars'},
+    const {'1': 'reservation_id', '3': 30, '4': 1, '5': 4, '10': 'reservationId'},
+    const {'1': 'created_on', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `LiveaboardComment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List liveaboardCommentDescriptor = $convert.base64Decode('ChFMaXZlYWJvYXJkQ29tbWVudBIOCgJpZBgBIAEoBFICaWQSGAoHY29tbWVudBgKIAEoCVIHY29tbWVudBIUCgVzdGFycxgUIAEoDVIFc3RhcnMSJQoOcmVzZXJ2YXRpb25faWQYHiABKARSDXJlc2VydmF0aW9uSWQSPwoKY3JlYXRlZF9vbhgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGDIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');

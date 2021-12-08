@@ -10,10 +10,10 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $4;
-import 'google/protobuf/timestamp.pb.dart' as $3;
+import 'model.pb.dart' as $6;
+import 'google/protobuf/timestamp.pb.dart' as $5;
 
-import 'model.pbenum.dart' as $4;
+import 'model.pbenum.dart' as $6;
 import 'agency.pbenum.dart';
 
 export 'agency.pbenum.dart';
@@ -22,9 +22,9 @@ class DiveMaster extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DiveMaster', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
-    ..e<$4.LevelType>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: $4.LevelType.INSTRUCTOR, valueOf: $4.LevelType.valueOf, enumValues: $4.LevelType.values)
-    ..aOM<$4.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'frontImage', subBuilder: $4.File.create)
-    ..aOM<$4.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backImage', subBuilder: $4.File.create)
+    ..e<$6.LevelType>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: $6.LevelType.INSTRUCTOR, valueOf: $6.LevelType.valueOf, enumValues: $6.LevelType.values)
+    ..aOM<$6.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'frontImage', subBuilder: $6.File.create)
+    ..aOM<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backImage', subBuilder: $6.File.create)
     ..hasRequiredFields = false
   ;
 
@@ -32,9 +32,9 @@ class DiveMaster extends $pb.GeneratedMessage {
   factory DiveMaster({
     $core.String? firstName,
     $core.String? lastName,
-    $4.LevelType? level,
-    $4.File? frontImage,
-    $4.File? backImage,
+    $6.LevelType? level,
+    $6.File? frontImage,
+    $6.File? backImage,
   }) {
     final _result = create();
     if (firstName != null) {
@@ -94,35 +94,35 @@ class DiveMaster extends $pb.GeneratedMessage {
   void clearLastName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $4.LevelType get level => $_getN(2);
+  $6.LevelType get level => $_getN(2);
   @$pb.TagNumber(3)
-  set level($4.LevelType v) { setField(3, v); }
+  set level($6.LevelType v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasLevel() => $_has(2);
   @$pb.TagNumber(3)
   void clearLevel() => clearField(3);
 
   @$pb.TagNumber(4)
-  $4.File get frontImage => $_getN(3);
+  $6.File get frontImage => $_getN(3);
   @$pb.TagNumber(4)
-  set frontImage($4.File v) { setField(4, v); }
+  set frontImage($6.File v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasFrontImage() => $_has(3);
   @$pb.TagNumber(4)
   void clearFrontImage() => clearField(4);
   @$pb.TagNumber(4)
-  $4.File ensureFrontImage() => $_ensure(3);
+  $6.File ensureFrontImage() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $4.File get backImage => $_getN(4);
+  $6.File get backImage => $_getN(4);
   @$pb.TagNumber(5)
-  set backImage($4.File v) { setField(5, v); }
+  set backImage($6.File v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasBackImage() => $_has(4);
   @$pb.TagNumber(5)
   void clearBackImage() => clearField(5);
   @$pb.TagNumber(5)
-  $4.File ensureBackImage() => $_ensure(4);
+  $6.File ensureBackImage() => $_ensure(4);
 }
 
 class DiveMasterFirstAndLastName extends $pb.GeneratedMessage {
@@ -264,14 +264,14 @@ class Staff extends $pb.GeneratedMessage {
 class DivingBoat extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DivingBoat', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatModel')
-    ..aOM<$4.File>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatImage', subBuilder: $4.File.create)
+    ..aOM<$6.File>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatImage', subBuilder: $6.File.create)
     ..hasRequiredFields = false
   ;
 
   DivingBoat._() : super();
   factory DivingBoat({
     $core.String? boatModel,
-    $4.File? boatImage,
+    $6.File? boatImage,
   }) {
     final _result = create();
     if (boatModel != null) {
@@ -313,15 +313,15 @@ class DivingBoat extends $pb.GeneratedMessage {
   void clearBoatModel() => clearField(1);
 
   @$pb.TagNumber(2)
-  $4.File get boatImage => $_getN(1);
+  $6.File get boatImage => $_getN(1);
   @$pb.TagNumber(2)
-  set boatImage($4.File v) { setField(2, v); }
+  set boatImage($6.File v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasBoatImage() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoatImage() => clearField(2);
   @$pb.TagNumber(2)
-  $4.File ensureBoatImage() => $_ensure(1);
+  $6.File ensureBoatImage() => $_ensure(1);
 }
 
 class Place extends $pb.GeneratedMessage {
@@ -391,7 +391,7 @@ class Room extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxCapacity', $pb.PbFieldType.O3)
     ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
-    ..pc<$4.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomImages', $pb.PbFieldType.PM, subBuilder: $4.File.create)
+    ..pc<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomImages', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..pPS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amenityNames')
     ..hasRequiredFields = false
   ;
@@ -402,7 +402,7 @@ class Room extends $pb.GeneratedMessage {
     $core.String? description,
     $core.int? maxCapacity,
     $core.double? price,
-    $core.Iterable<$4.File>? roomImages,
+    $core.Iterable<$6.File>? roomImages,
     $core.Iterable<$core.String>? amenityNames,
   }) {
     final _result = create();
@@ -484,7 +484,7 @@ class Room extends $pb.GeneratedMessage {
   void clearPrice() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.List<$4.File> get roomImages => $_getList(4);
+  $core.List<$6.File> get roomImages => $_getList(4);
 
   @$pb.TagNumber(6)
   $core.List<$core.String> get amenityNames => $_getList(5);
@@ -496,9 +496,9 @@ class TripTemplate extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
     ..aOM<DivingBoat>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: DivingBoat.create)
     ..aOM<Place>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'place', subBuilder: Place.create)
-    ..pc<$4.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $4.File.create)
+    ..pc<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..e<TripTemplate_TripType>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: TripTemplate_TripType.LIVEABOARD, valueOf: TripTemplate_TripType.valueOf, enumValues: TripTemplate_TripType.values)
-    ..aOM<$4.File>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scheduleImage', subBuilder: $4.File.create)
+    ..aOM<$6.File>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scheduleImage', subBuilder: $6.File.create)
     ..hasRequiredFields = false
   ;
 
@@ -508,9 +508,9 @@ class TripTemplate extends $pb.GeneratedMessage {
     $core.String? description,
     DivingBoat? divingBoat,
     Place? place,
-    $core.Iterable<$4.File>? images,
+    $core.Iterable<$6.File>? images,
     TripTemplate_TripType? tripType,
-    $4.File? scheduleImage,
+    $6.File? scheduleImage,
   }) {
     final _result = create();
     if (name != null) {
@@ -598,7 +598,7 @@ class TripTemplate extends $pb.GeneratedMessage {
   Place ensurePlace() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $core.List<$4.File> get images => $_getList(4);
+  $core.List<$6.File> get images => $_getList(4);
 
   @$pb.TagNumber(6)
   TripTemplate_TripType get tripType => $_getN(5);
@@ -610,21 +610,21 @@ class TripTemplate extends $pb.GeneratedMessage {
   void clearTripType() => clearField(6);
 
   @$pb.TagNumber(7)
-  $4.File get scheduleImage => $_getN(6);
+  $6.File get scheduleImage => $_getN(6);
   @$pb.TagNumber(7)
-  set scheduleImage($4.File v) { setField(7, v); }
+  set scheduleImage($6.File v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasScheduleImage() => $_has(6);
   @$pb.TagNumber(7)
   void clearScheduleImage() => clearField(7);
   @$pb.TagNumber(7)
-  $4.File ensureScheduleImage() => $_ensure(6);
+  $6.File ensureScheduleImage() => $_ensure(6);
 }
 
 class Trip extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$3.Timestamp>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'from', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'to', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'from', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'to', subBuilder: $5.Timestamp.create)
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxCapacity', $pb.PbFieldType.O3)
     ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pricePerPserson', $pb.PbFieldType.O3)
     ..pc<DiveMasterFirstAndLastName>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMasterFirstAndLastName.create)
@@ -633,8 +633,8 @@ class Trip extends $pb.GeneratedMessage {
 
   Trip._() : super();
   factory Trip({
-    $3.Timestamp? from,
-    $3.Timestamp? to,
+    $5.Timestamp? from,
+    $5.Timestamp? to,
     $core.int? maxCapacity,
     $core.int? pricePerPserson,
     $core.Iterable<DiveMasterFirstAndLastName>? diveMasters,
@@ -679,26 +679,26 @@ class Trip extends $pb.GeneratedMessage {
   static Trip? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.Timestamp get from => $_getN(0);
+  $5.Timestamp get from => $_getN(0);
   @$pb.TagNumber(1)
-  set from($3.Timestamp v) { setField(1, v); }
+  set from($5.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFrom() => $_has(0);
   @$pb.TagNumber(1)
   void clearFrom() => clearField(1);
   @$pb.TagNumber(1)
-  $3.Timestamp ensureFrom() => $_ensure(0);
+  $5.Timestamp ensureFrom() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $3.Timestamp get to => $_getN(1);
+  $5.Timestamp get to => $_getN(1);
   @$pb.TagNumber(2)
-  set to($3.Timestamp v) { setField(2, v); }
+  set to($5.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasTo() => $_has(1);
   @$pb.TagNumber(2)
   void clearTo() => clearField(2);
   @$pb.TagNumber(2)
-  $3.Timestamp ensureTo() => $_ensure(1);
+  $5.Timestamp ensureTo() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.int get maxCapacity => $_getIZ(2);
@@ -727,7 +727,7 @@ class Hotel extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelName')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'star', $pb.PbFieldType.O3)
     ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
-    ..pc<$4.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $4.File.create)
+    ..pc<$6.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..pc<Room>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: Room.create)
     ..hasRequiredFields = false
   ;
@@ -737,7 +737,7 @@ class Hotel extends $pb.GeneratedMessage {
     $core.String? hotelName,
     $core.int? star,
     $core.Iterable<$core.String>? highlights,
-    $core.Iterable<$4.File>? images,
+    $core.Iterable<$6.File>? images,
     $core.Iterable<Room>? rooms,
   }) {
     final _result = create();
@@ -801,7 +801,7 @@ class Hotel extends $pb.GeneratedMessage {
   $core.List<$core.String> get highlights => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.List<$4.File> get images => $_getList(3);
+  $core.List<$6.File> get images => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.List<Room> get rooms => $_getList(4);

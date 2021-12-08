@@ -98,28 +98,28 @@ message Diver {
 message TripComment {
     uint64 id = 1;
     string comment = 10;
-    uint32 star = 20;
+    uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
 }
 
 // HotelComment
 message HotelComment {
     uint64 id = 1;
     string comment = 10;
-    uint32 star = 20;
+    uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
 }
 
 // LiveaboardComment
 message LiveaboardComment {
     uint64 id = 1;
     string comment = 10;
-    uint32 star = 20;
+    uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
+    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
 }

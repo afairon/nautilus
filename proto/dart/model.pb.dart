@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $3;
+import 'google/protobuf/timestamp.pb.dart' as $5;
 
 import 'model.pbenum.dart';
 
@@ -100,8 +100,8 @@ class Account extends $pb.GeneratedMessage {
     ..e<AccountType>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: AccountType.ADMIN, valueOf: AccountType.valueOf, enumValues: AccountType.values)
     ..aOB(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'verified')
     ..aOB(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'active')
-    ..aOM<$3.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -114,8 +114,8 @@ class Account extends $pb.GeneratedMessage {
     AccountType? type,
     $core.bool? verified,
     $core.bool? active,
-    $3.Timestamp? createdOn,
-    $3.Timestamp? updatedOn,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
   }) {
     final _result = create();
     if (id != null) {
@@ -232,26 +232,26 @@ class Account extends $pb.GeneratedMessage {
   void clearActive() => clearField(60);
 
   @$pb.TagNumber(70)
-  $3.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get createdOn => $_getN(7);
   @$pb.TagNumber(70)
-  set createdOn($3.Timestamp v) { setField(70, v); }
+  set createdOn($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
   $core.bool hasCreatedOn() => $_has(7);
   @$pb.TagNumber(70)
   void clearCreatedOn() => clearField(70);
   @$pb.TagNumber(70)
-  $3.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureCreatedOn() => $_ensure(7);
 
   @$pb.TagNumber(80)
-  $3.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get updatedOn => $_getN(8);
   @$pb.TagNumber(80)
-  set updatedOn($3.Timestamp v) { setField(80, v); }
+  set updatedOn($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
   $core.bool hasUpdatedOn() => $_has(8);
   @$pb.TagNumber(80)
   void clearUpdatedOn() => clearField(80);
   @$pb.TagNumber(80)
-  $3.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
 }
 
 class Address extends $pb.GeneratedMessage {
@@ -263,8 +263,8 @@ class Address extends $pb.GeneratedMessage {
     ..aOS(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'postcode')
     ..aOS(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'region')
     ..aOS(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'country')
-    ..aOM<$3.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -277,8 +277,8 @@ class Address extends $pb.GeneratedMessage {
     $core.String? postcode,
     $core.String? region,
     $core.String? country,
-    $3.Timestamp? createdOn,
-    $3.Timestamp? updatedOn,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
   }) {
     final _result = create();
     if (id != null) {
@@ -395,26 +395,26 @@ class Address extends $pb.GeneratedMessage {
   void clearCountry() => clearField(60);
 
   @$pb.TagNumber(70)
-  $3.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get createdOn => $_getN(7);
   @$pb.TagNumber(70)
-  set createdOn($3.Timestamp v) { setField(70, v); }
+  set createdOn($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
   $core.bool hasCreatedOn() => $_has(7);
   @$pb.TagNumber(70)
   void clearCreatedOn() => clearField(70);
   @$pb.TagNumber(70)
-  $3.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureCreatedOn() => $_ensure(7);
 
   @$pb.TagNumber(80)
-  $3.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get updatedOn => $_getN(8);
   @$pb.TagNumber(80)
-  set updatedOn($3.Timestamp v) { setField(80, v); }
+  set updatedOn($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
   $core.bool hasUpdatedOn() => $_has(8);
   @$pb.TagNumber(80)
   void clearUpdatedOn() => clearField(80);
   @$pb.TagNumber(80)
-  $3.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
 }
 
 class Agency extends $pb.GeneratedMessage {
@@ -425,8 +425,8 @@ class Agency extends $pb.GeneratedMessage {
     ..aOM<Account>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: Account.create)
     ..aOM<Address>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: Address.create)
     ..pc<File>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'documents', $pb.PbFieldType.PM, subBuilder: File.create)
-    ..aOM<$3.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -438,8 +438,8 @@ class Agency extends $pb.GeneratedMessage {
     Account? account,
     Address? address,
     $core.Iterable<File>? documents,
-    $3.Timestamp? createdOn,
-    $3.Timestamp? updatedOn,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
   }) {
     final _result = create();
     if (id != null) {
@@ -542,26 +542,26 @@ class Agency extends $pb.GeneratedMessage {
   $core.List<File> get documents => $_getList(5);
 
   @$pb.TagNumber(60)
-  $3.Timestamp get createdOn => $_getN(6);
+  $5.Timestamp get createdOn => $_getN(6);
   @$pb.TagNumber(60)
-  set createdOn($3.Timestamp v) { setField(60, v); }
+  set createdOn($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
   $core.bool hasCreatedOn() => $_has(6);
   @$pb.TagNumber(60)
   void clearCreatedOn() => clearField(60);
   @$pb.TagNumber(60)
-  $3.Timestamp ensureCreatedOn() => $_ensure(6);
+  $5.Timestamp ensureCreatedOn() => $_ensure(6);
 
   @$pb.TagNumber(70)
-  $3.Timestamp get updatedOn => $_getN(7);
+  $5.Timestamp get updatedOn => $_getN(7);
   @$pb.TagNumber(70)
-  set updatedOn($3.Timestamp v) { setField(70, v); }
+  set updatedOn($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
   $core.bool hasUpdatedOn() => $_has(7);
   @$pb.TagNumber(70)
   void clearUpdatedOn() => clearField(70);
   @$pb.TagNumber(70)
-  $3.Timestamp ensureUpdatedOn() => $_ensure(7);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(7);
 }
 
 class Diver extends $pb.GeneratedMessage {
@@ -570,12 +570,12 @@ class Diver extends $pb.GeneratedMessage {
     ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
     ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
     ..aOS(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phone')
-    ..aOM<$3.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'birthDate', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'birthDate', subBuilder: $5.Timestamp.create)
     ..e<LevelType>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: LevelType.INSTRUCTOR, valueOf: LevelType.valueOf, enumValues: LevelType.values)
     ..aOM<Account>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: Account.create)
     ..pc<File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'documents', $pb.PbFieldType.PM, subBuilder: File.create)
-    ..aOM<$3.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $3.Timestamp.create)
-    ..aOM<$3.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $3.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -585,12 +585,12 @@ class Diver extends $pb.GeneratedMessage {
     $core.String? firstName,
     $core.String? lastName,
     $core.String? phone,
-    $3.Timestamp? birthDate,
+    $5.Timestamp? birthDate,
     LevelType? level,
     Account? account,
     $core.Iterable<File>? documents,
-    $3.Timestamp? createdOn,
-    $3.Timestamp? updatedOn,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
   }) {
     final _result = create();
     if (id != null) {
@@ -683,15 +683,15 @@ class Diver extends $pb.GeneratedMessage {
   void clearPhone() => clearField(30);
 
   @$pb.TagNumber(40)
-  $3.Timestamp get birthDate => $_getN(4);
+  $5.Timestamp get birthDate => $_getN(4);
   @$pb.TagNumber(40)
-  set birthDate($3.Timestamp v) { setField(40, v); }
+  set birthDate($5.Timestamp v) { setField(40, v); }
   @$pb.TagNumber(40)
   $core.bool hasBirthDate() => $_has(4);
   @$pb.TagNumber(40)
   void clearBirthDate() => clearField(40);
   @$pb.TagNumber(40)
-  $3.Timestamp ensureBirthDate() => $_ensure(4);
+  $5.Timestamp ensureBirthDate() => $_ensure(4);
 
   @$pb.TagNumber(50)
   LevelType get level => $_getN(5);
@@ -717,25 +717,388 @@ class Diver extends $pb.GeneratedMessage {
   $core.List<File> get documents => $_getList(7);
 
   @$pb.TagNumber(80)
-  $3.Timestamp get createdOn => $_getN(8);
+  $5.Timestamp get createdOn => $_getN(8);
   @$pb.TagNumber(80)
-  set createdOn($3.Timestamp v) { setField(80, v); }
+  set createdOn($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
   $core.bool hasCreatedOn() => $_has(8);
   @$pb.TagNumber(80)
   void clearCreatedOn() => clearField(80);
   @$pb.TagNumber(80)
-  $3.Timestamp ensureCreatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedOn() => $_ensure(8);
 
   @$pb.TagNumber(90)
-  $3.Timestamp get updatedOn => $_getN(9);
+  $5.Timestamp get updatedOn => $_getN(9);
   @$pb.TagNumber(90)
-  set updatedOn($3.Timestamp v) { setField(90, v); }
+  set updatedOn($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
   $core.bool hasUpdatedOn() => $_has(9);
   @$pb.TagNumber(90)
   void clearUpdatedOn() => clearField(90);
   @$pb.TagNumber(90)
-  $3.Timestamp ensureUpdatedOn() => $_ensure(9);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+}
+
+class TripComment extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TripComment', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment')
+    ..a<$core.int>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stars', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservationId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  TripComment._() : super();
+  factory TripComment({
+    $fixnum.Int64? id,
+    $core.String? comment,
+    $core.int? stars,
+    $fixnum.Int64? reservationId,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (comment != null) {
+      _result.comment = comment;
+    }
+    if (stars != null) {
+      _result.stars = stars;
+    }
+    if (reservationId != null) {
+      _result.reservationId = reservationId;
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory TripComment.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TripComment.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TripComment clone() => TripComment()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TripComment copyWith(void Function(TripComment) updates) => super.copyWith((message) => updates(message as TripComment)) as TripComment; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TripComment create() => TripComment._();
+  TripComment createEmptyInstance() => create();
+  static $pb.PbList<TripComment> createRepeated() => $pb.PbList<TripComment>();
+  @$core.pragma('dart2js:noInline')
+  static TripComment getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TripComment>(create);
+  static TripComment? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get comment => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set comment($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasComment() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearComment() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.int get stars => $_getIZ(2);
+  @$pb.TagNumber(20)
+  set stars($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasStars() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearStars() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get reservationId => $_getI64(3);
+  @$pb.TagNumber(30)
+  set reservationId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasReservationId() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearReservationId() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $5.Timestamp get createdOn => $_getN(4);
+  @$pb.TagNumber(40)
+  set createdOn($5.Timestamp v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasCreatedOn() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearCreatedOn() => clearField(40);
+  @$pb.TagNumber(40)
+  $5.Timestamp ensureCreatedOn() => $_ensure(4);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get updatedOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set updatedOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasUpdatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearUpdatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(5);
+}
+
+class HotelComment extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HotelComment', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment')
+    ..a<$core.int>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stars', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservationId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  HotelComment._() : super();
+  factory HotelComment({
+    $fixnum.Int64? id,
+    $core.String? comment,
+    $core.int? stars,
+    $fixnum.Int64? reservationId,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (comment != null) {
+      _result.comment = comment;
+    }
+    if (stars != null) {
+      _result.stars = stars;
+    }
+    if (reservationId != null) {
+      _result.reservationId = reservationId;
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory HotelComment.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory HotelComment.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  HotelComment clone() => HotelComment()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  HotelComment copyWith(void Function(HotelComment) updates) => super.copyWith((message) => updates(message as HotelComment)) as HotelComment; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static HotelComment create() => HotelComment._();
+  HotelComment createEmptyInstance() => create();
+  static $pb.PbList<HotelComment> createRepeated() => $pb.PbList<HotelComment>();
+  @$core.pragma('dart2js:noInline')
+  static HotelComment getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HotelComment>(create);
+  static HotelComment? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get comment => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set comment($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasComment() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearComment() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.int get stars => $_getIZ(2);
+  @$pb.TagNumber(20)
+  set stars($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasStars() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearStars() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get reservationId => $_getI64(3);
+  @$pb.TagNumber(30)
+  set reservationId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasReservationId() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearReservationId() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $5.Timestamp get createdOn => $_getN(4);
+  @$pb.TagNumber(40)
+  set createdOn($5.Timestamp v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasCreatedOn() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearCreatedOn() => clearField(40);
+  @$pb.TagNumber(40)
+  $5.Timestamp ensureCreatedOn() => $_ensure(4);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get updatedOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set updatedOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasUpdatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearUpdatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(5);
+}
+
+class LiveaboardComment extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LiveaboardComment', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment')
+    ..a<$core.int>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stars', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservationId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  LiveaboardComment._() : super();
+  factory LiveaboardComment({
+    $fixnum.Int64? id,
+    $core.String? comment,
+    $core.int? stars,
+    $fixnum.Int64? reservationId,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (comment != null) {
+      _result.comment = comment;
+    }
+    if (stars != null) {
+      _result.stars = stars;
+    }
+    if (reservationId != null) {
+      _result.reservationId = reservationId;
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory LiveaboardComment.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory LiveaboardComment.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  LiveaboardComment clone() => LiveaboardComment()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  LiveaboardComment copyWith(void Function(LiveaboardComment) updates) => super.copyWith((message) => updates(message as LiveaboardComment)) as LiveaboardComment; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LiveaboardComment create() => LiveaboardComment._();
+  LiveaboardComment createEmptyInstance() => create();
+  static $pb.PbList<LiveaboardComment> createRepeated() => $pb.PbList<LiveaboardComment>();
+  @$core.pragma('dart2js:noInline')
+  static LiveaboardComment getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LiveaboardComment>(create);
+  static LiveaboardComment? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get comment => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set comment($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasComment() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearComment() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.int get stars => $_getIZ(2);
+  @$pb.TagNumber(20)
+  set stars($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasStars() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearStars() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get reservationId => $_getI64(3);
+  @$pb.TagNumber(30)
+  set reservationId($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasReservationId() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearReservationId() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $5.Timestamp get createdOn => $_getN(4);
+  @$pb.TagNumber(40)
+  set createdOn($5.Timestamp v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasCreatedOn() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearCreatedOn() => clearField(40);
+  @$pb.TagNumber(40)
+  $5.Timestamp ensureCreatedOn() => $_ensure(4);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get updatedOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set updatedOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasUpdatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearUpdatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(5);
 }
 

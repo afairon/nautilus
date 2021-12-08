@@ -154,7 +154,7 @@ CREATE TABLE public.hotel (
   id bigserial NOT NULL,
   "name" varchar NOT NULL,
   description text NOT NULL DEFAULT '',
-  star smallint,
+  stars smallint,
   phone varchar NOT NULL DEFAULT '',
   agency_id bigint NOT NULL,
   address_id bigint NOT NULL,
@@ -440,10 +440,11 @@ ALTER TABLE public.booked_room ADD CONSTRAINT booked_room_type_fk FOREIGN KEY (r
 CREATE TABLE public.trip_comment (
   id bigserial NOT NULL,
   "comment" text NOT NULL,
-  star smallint,
+  stars smallint,
   reservation_id bigint NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT trip_comment_check CHECK (((stars >= 0) AND (stars <= 5))),
   CONSTRAINT trip_comment_pk PRIMARY KEY (id),
   CONSTRAINT trip_comment_un UNIQUE (reservation_id)
 );
@@ -462,10 +463,11 @@ ALTER TABLE public.trip_comment ADD CONSTRAINT trip_comment_fk FOREIGN KEY (rese
 CREATE TABLE public.hotel_comment (
   id bigserial NOT NULL,
   "comment" text NOT NULL,
-  star smallint,
+  stars smallint,
   reservation_id bigint NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT hotel_comment_check CHECK (((stars >= 0) AND (stars <= 5))),
   CONSTRAINT hotel_comment_pk PRIMARY KEY (id),
   CONSTRAINT hotel_comment_un UNIQUE (reservation_id)
 );
@@ -484,10 +486,11 @@ ALTER TABLE public.hotel_comment ADD CONSTRAINT hotel_comment_fk FOREIGN KEY (re
 CREATE TABLE public.liveaboard_comment (
   id bigserial NOT NULL,
   "comment" text NOT NULL,
-  star smallint,
+  stars smallint,
   reservation_id bigint NOT NULL,
   created_on timestamp with time zone NOT NULL DEFAULT now(),
   updated_on timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT liveaboard_comment_check CHECK (((stars >= 0) AND (stars <= 5))),
   CONSTRAINT liveaboard_comment_pk PRIMARY KEY (id),
   CONSTRAINT liveaboard_comment_un UNIQUE (reservation_id)
 );

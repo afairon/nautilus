@@ -15,20 +15,20 @@ type AddressRepository interface {
 	List(ctx context.Context, limit, offset uint64) ([]pb.Address, error)
 }
 
-// Address implements AddressRepository interface.
-type Address struct {
+// addressRepository implements AddressRepository interface.
+type addressRepository struct {
 	db DBTX
 }
 
 // NewAddressRepository creates a new AddressRepository.
-func NewAddressRepository(db DBTX) *Address {
-	return &Address{
+func NewAddressRepository(db DBTX) *addressRepository {
+	return &addressRepository{
 		db: db,
 	}
 }
 
 // Create creates an address record and returns the newly created record.
-func (repo *Address) Create(ctx context.Context, address *entity.Address) (*entity.Address, error) {
+func (repo *addressRepository) Create(ctx context.Context, address *entity.Address) (*entity.Address, error) {
 	var result entity.Address
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -44,7 +44,7 @@ func (repo *Address) Create(ctx context.Context, address *entity.Address) (*enti
 }
 
 // Get retrieves the address record by its id.
-func (repo *Address) Get(ctx context.Context, id uint64) (*entity.Address, error) {
+func (repo *addressRepository) Get(ctx context.Context, id uint64) (*entity.Address, error) {
 	var result entity.Address
 
 	err := repo.db.GetContext(ctx, &result, `
@@ -60,7 +60,7 @@ func (repo *Address) Get(ctx context.Context, id uint64) (*entity.Address, error
 }
 
 // List returns list of addresses.
-func (repo *Address) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Address, error) {
+func (repo *addressRepository) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Address, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
 			id, address_line_1, address_line_2, city, postcode, region, country

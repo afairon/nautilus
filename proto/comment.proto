@@ -4,17 +4,57 @@ package comment;
 
 import "model.proto";
 
-import "google/protobuf/empty.proto";
-
 option go_package = "./pb";
 
-service Comment {
-    // Create comment
-    rpc Create (CommentRequest) returns (google.protobuf.Empty) {}
+service CommentService {
+    rpc CreateComment (CreateCommentRequest) returns (CreateCommentResponse) {}
+    rpc GetComment (GetCommentRequest) returns (GetCommentResponse) {}
 }
 
-// CommentRequest
-message CommentRequest {
+// CreateCommentRequest
+message CreateCommentRequest {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}
+
+// CreateCommentResponse
+message CreateCommentResponse {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}
+
+// GetCommentRequest
+message GetCommentRequest {
+    // type defines type of comment
+    oneof type {
+        Trip trip = 1;
+        Hotel hotel = 5;
+        Liveaboard liveaboard = 10;
+    }
+
+    message Trip {
+        uint64 id = 1;
+    }
+
+    message Hotel {
+        uint64 id = 1;
+    }
+
+    message Liveaboard {
+        uint64 id = 1;
+    }
+}
+
+// GetCommentResponse
+message GetCommentResponse {
     // type defines type of comment
     oneof type {
         model.TripComment trip = 1;
