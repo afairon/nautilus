@@ -13,6 +13,7 @@ import (
 type AgencyRepository interface {
 	Create(ctx context.Context, agency *entity.Agency) (*entity.Agency, error)
 	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
+	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -45,6 +46,7 @@ func (repo *Agency) Create(ctx context.Context, agency *entity.Agency) (*entity.
 	return &result, err
 }
 
+// CreateDiveMaster creates an dive master record and returns the newly created record.z
 func (repo *Agency) CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error) {
 	var result entity.DiveMaster
 
@@ -56,6 +58,21 @@ func (repo *Agency) CreateDiveMaster(ctx context.Context, diveMaster *entity.Div
 			($1, $2, $3, $4, $5)
 		RETURNING id, first_name, last_name, level, agency_id, created_on, updated_on
 	`, diveMaster.FirstName, diveMaster.LastName, diveMaster.Level, diveMaster.AgencyId, diveMaster.Documents)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error) {
+	var result entity.Hotel
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.hotel
+			(name, description, stars, phone, agency_id, address_id, images)
+		VALUES
+			($1, $2, $3, $4, $5, $6, $7)
+		RETURNING id, name, description, stars, phone, agency_id, address_id, images, created_on, updated_on
+		`, hotel.Name, hotel.Description, hotel.Stars, hotel.Phone, hotel.AgencyId, hotel.AddressId, hotel.Images)
 
 	return &result, err
 }

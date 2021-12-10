@@ -110,10 +110,11 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 		}
 
 		newHotel.Images = append(newHotel.Images, objectID)
-
 	}
 
-	return status.Error(codes.Unimplemented, "AddHotel unimplemented")
+	_, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
+
+	return err
 }
 
 func (service *agencyService) AddStaff(ctx context.Context, req *pb.AddStaffRequest) error {
