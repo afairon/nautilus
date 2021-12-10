@@ -117,6 +117,7 @@ message Hotel {
     repeated model.File images = 4;
     repeated Room rooms = 5;
     string hotel_description = 6;
+    string phone = 7;
 }
 
 message Liveaboard {

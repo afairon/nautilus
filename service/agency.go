@@ -86,15 +86,18 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 	return err
 }
 
-func setHotel(dst *entity.Hotel, src *pb.Hotel) {
+func setHotel(dst *entity.Hotel, src *pb.Hotel) error {
 	dst.Name = src.GetHotelName()
-	// dst.Description = src.GetDescription()
+	dst.Description = src.GetHotelDescription()
+	// dst.Phone = src.GetPhoneNumber()
+
+	return status.Error(codes.Unavailable, "setHotel not done yet")
 }
 
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64) error {
-	// newHotel := entity.Hotel{}
+	newHotel := entity.Hotel{}
 
-	// err := setHotel(&newDiveMaster, diveMaster)
+	setHotel(&newHotel, hotel)
 	return status.Error(codes.Unimplemented, "AddHotel unimplemented")
 }
 
