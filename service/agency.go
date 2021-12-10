@@ -95,7 +95,11 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64) error {
 	newHotel := entity.Hotel{}
 
+	// Copy dive master information and verify the dive master's information
 	setHotel(&newHotel, hotel)
+
+	newHotel.AgencyId = agency_id
+
 	return status.Error(codes.Unimplemented, "AddHotel unimplemented")
 }
 

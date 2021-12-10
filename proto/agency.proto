@@ -118,7 +118,6 @@ message Hotel {
     repeated Room rooms = 5;
     string hotel_description = 6;
     string phone = 7;
-    uint64 addressId = 8;
 }
 
 message Liveaboard {
@@ -162,6 +161,7 @@ message AddDivingBoatRequest {
 message AddHotelRequest {
     Hotel hotel = 1;
     uint64 agency_id = 2;
+    uint64 addressId = 3;
 }
 
 message AddLiveaboardRequest {
