@@ -86,12 +86,10 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 	return err
 }
 
-func setHotel(dst *entity.Hotel, src *pb.Hotel) error {
+func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Name = src.GetHotelName()
 	dst.Description = src.GetHotelDescription()
-	// dst.Phone = src.GetPhoneNumber()
-
-	return status.Error(codes.Unavailable, "setHotel not done yet")
+	dst.Phone = src.GetPhone()
 }
 
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64) error {
