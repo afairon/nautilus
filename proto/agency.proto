@@ -116,6 +116,7 @@ message Hotel {
     // optional images when creating a new hotel
     repeated model.File images = 4;
     repeated Room rooms = 5;
+    string hotel_description = 6;
 }
 
 message Liveaboard {
