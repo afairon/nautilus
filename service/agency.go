@@ -20,7 +20,7 @@ type AgencyService interface {
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.AddTripRequest) error
 	AddDivingBoat(context.Context, *pb.AddDivingBoatRequest) error
-	AddHotel(context.Context, *pb.Hotel, uint64) error
+	AddHotel(context.Context, *pb.Hotel, uint64, uint64) error
 	AddLiveaboard(context.Context, *pb.AddLiveaboardRequest) error
 }
 
@@ -92,13 +92,26 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Phone = src.GetPhone()
 }
 
-func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64) error {
+func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64, address_id uint64) error {
 	newHotel := entity.Hotel{}
 
 	// Copy dive master information and verify the dive master's information
 	setHotel(&newHotel, hotel)
 
 	newHotel.AgencyId = agency_id
+	newHotel.AddressId = address_id
+
+	for _, image := range hotel.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newHotel.Images = append(newHotel.Images, objectID)
+
+	}
 
 	return status.Error(codes.Unimplemented, "AddHotel unimplemented")
 }

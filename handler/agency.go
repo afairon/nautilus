@@ -33,7 +33,7 @@ func (handler *AgencyHandler) AddDiveMaster(ctx context.Context, req *pb.AddDive
 }
 
 func (handler *AgencyHandler) AddHotel(ctx context.Context, req *pb.AddHotelRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddHotel(ctx, req.GetHotel(), req.GetAgencyId())
+	err := handler.agencyService.AddHotel(ctx, req.GetHotel(), req.GetAgencyId(), req.GetAddressId())
 
 	if err != nil {
 		return nil, err
