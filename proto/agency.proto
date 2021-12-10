@@ -137,31 +137,31 @@ message AddDiveMasterRequest {
 
 message AddStaffRequest {
     Staff staff = 1;
-    string agency_name = 2;
+    uint64 agency_id = 2;
 }
 
 message AddTripTemplateRequest {
     TripTemplate trip_template = 1;
-    string agency_name = 2;
+    uint64 agency_id = 2;
 }
 
 message AddTripRequest {
     Trip trip = 1;
     TripTemplate trip_template = 2;
-    string agency_name = 3;
+    uint64 agency_id = 3;
 }
 
 message AddDivingBoatRequest {
     DivingBoat diving_boat = 1;
-    string agency_name = 2;
+    uint64 agency_id = 2;
 }
 
 message AddHotelRequest {
     Hotel hotel = 1;
-    string agency_name = 2;
+    uint64 agency_id = 2;
 }
 
 message AddLiveaboardRequest {
     Liveaboard liveaboard = 1;
-    string agency_name = 2;
+    uint64 agency_id = 2;
 }

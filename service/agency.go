@@ -20,7 +20,7 @@ type AgencyService interface {
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.AddTripRequest) error
 	AddDivingBoat(context.Context, *pb.AddDivingBoatRequest) error
-	AddHotel(context.Context, *pb.AddHotelRequest) error
+	AddHotel(context.Context, *pb.Hotel, uint64) error
 	AddLiveaboard(context.Context, *pb.AddLiveaboardRequest) error
 }
 
@@ -86,7 +86,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 	return err
 }
 
-func (service *agencyService) AddHotel(ctx context.Context, req *pb.AddHotelRequest) error {
+func (service *agencyService) AddHotel(ctx context.Context, req *pb.AddHotelRequest, agency_id uint64) error {
 	return status.Error(codes.Unimplemented, "AddHotel unimplemented")
 }
 
