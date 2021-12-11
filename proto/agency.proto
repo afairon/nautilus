@@ -49,34 +49,8 @@ message Place {
     string city = 2;
 }
 
-message Room {
-    enum RoomType {
-        SINGLE = 0;
-        DOUBLE = 1;
-        TRIPLE = 2;
-        QUAD = 3;
-        QUEEN = 4;
-        KING = 5;
-        TWIN = 6;
-        HOLLYWOOD_TWIN_ROOM = 7;
-        DOUBLE_DOUBLE = 8;
-        STUDIO = 9;
-        EXECUTEIVE_SUITE = 10;
-        MINI_SUITE = 11;
-        PRESIDENTAL_SUITE = 12;
-        APARTMENT = 13;
-        CONNECTING_ROOMS = 14;
-        MURPHY_ROOM = 15;
-        DISABLED_ROOM = 16;
-        CABANA = 17;
-        ADJOINING_ROOMS = 18;
-        ADJACENT_ROOMS = 19;
-        VILLA = 20;
-        FLOORED_ROOM = 21;
-        SMOKING_NON_SMOKING = 22;
-    }
-
-    RoomType room_type = 1;
+message RoomType {
+    string name = 1;
     string description = 2;
     int32 max_capacity = 3;
     float price = 4;
@@ -115,7 +89,7 @@ message Hotel {
     repeated string highlights = 3;
     // optional images when creating a new hotel
     repeated model.File images = 4;
-    repeated Room rooms = 5;
+    repeated RoomType room_types = 5;
     string hotel_description = 6;
     string phone = 7;
 }
@@ -129,7 +103,7 @@ message Liveaboard {
     repeated string highlights = 5;
     // optional images when creating a new liveaboard
     repeated string images = 6;
-    repeated Room rooms = 7;
+    repeated RoomType rooms = 7;
 }
 
 message AddDiveMasterRequest {

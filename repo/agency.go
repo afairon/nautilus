@@ -6,6 +6,8 @@ import (
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/pb"
 	"github.com/lib/pq"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // AgencyRepository defines interface for interaction
@@ -14,6 +16,7 @@ type AgencyRepository interface {
 	Create(ctx context.Context, agency *entity.Agency) (*entity.Agency, error)
 	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
+	CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -75,6 +78,10 @@ func (repo *Agency) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*enti
 		`, hotel.Name, hotel.Description, hotel.Stars, hotel.Phone, hotel.AgencyId, hotel.AddressId, hotel.Images)
 
 	return &result, err
+}
+
+func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error) {
+	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
 }
 
 // Get retrieves the agency record by its id.
