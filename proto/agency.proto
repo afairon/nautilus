@@ -52,7 +52,7 @@ message Place {
 message RoomType {
     string name = 1;
     string description = 2;
-    int32 max_capacity = 3;
+    uint32 max_guest = 3;
     float price = 4;
     repeated model.File room_images = 5;
     repeated string amenity_names = 6;

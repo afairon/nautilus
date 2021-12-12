@@ -92,13 +92,18 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Phone = src.GetPhone()
 }
 
-func setRoomType(dst *entity.RoomType, src []*pb.RoomType) {
-	//
+func setRoomType(dst *[]entity.RoomType, src []*pb.RoomType) {
+	for _, rt := range src {
+		tempRoomType := entity.RoomType{}
+		tempRoomType.Name = rt.GetName()
+		tempRoomType.Description = rt.GetDescription()
+		// tempRoomType.MaxGuest = rt.GetMaxCapacity()
+	}
 }
 
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64, address_id uint64) error {
 	newHotel := entity.Hotel{}
-	newRoomType := entity.RoomType{}
+	newRoomType := []entity.RoomType{}
 
 	// Copy dive master information and verify the dive master's information
 	setHotel(&newHotel, hotel)
