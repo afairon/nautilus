@@ -14,7 +14,7 @@ type AgencyRepository interface {
 	Create(ctx context.Context, agency *entity.Agency) (*entity.Agency, error)
 	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
-	CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error)
+	CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
 	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
