@@ -50,7 +50,8 @@ message Place {
 }
 
 message Amenity {
-
+    string name = 1;
+    string description = 2;
 }
 
 message RoomType {
@@ -59,7 +60,7 @@ message RoomType {
     uint32 max_guest = 3;
     float price = 4;
     repeated model.File room_images = 5;
-    repeated string amenity_names = 6;
+    repeated Amenity amenities = 6;
     uint32 quantity = 7;
 }
 
