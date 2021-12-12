@@ -92,24 +92,11 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Phone = src.GetPhone()
 }
 
-func setRoomType(dst *[]entity.RoomType, src []*pb.RoomType) {
-	for _, rt := range src {
-		tempRoomType := entity.RoomType{}
-		tempRoomType.Name = rt.GetName()
-		tempRoomType.Description = rt.GetDescription()
-		tempRoomType.MaxGuest = rt.GetMaxGuest()
-		tempRoomType.Price = rt.GetPrice()
-		// tempRoomType.Quantity = rt.
-	}
-}
-
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64, address_id uint64) error {
 	newHotel := entity.Hotel{}
-	newRoomType := []entity.RoomType{}
 
 	// Copy dive master information and verify the dive master's information
 	setHotel(&newHotel, hotel)
-	setRoomType(&newRoomType, hotel.RoomTypes)
 
 	newHotel.AgencyId = agency_id
 	newHotel.AddressId = address_id
@@ -125,18 +112,51 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	_, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
+	// _, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
 
-	// err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-	// 	createdHotel, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
+	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		createdHotel, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
 
-	// 	if err != nil {
-	// 		return err
-	// 	}
+		if err != nil {
+			return err
+		}
 
-	// 	newRoomType, err := service.repo.Agency.CreateRoomType(ctx, &newRoomType)
+		newRoomTypes := []entity.RoomType{}
 
-	// })
+		// Copy room types information
+		for _, rt := range hotel.GetRoomTypes() {
+			tempRoomType := entity.RoomType{}
+			tempRoomType.Name = rt.GetName()
+			tempRoomType.Description = rt.GetDescription()
+			tempRoomType.MaxGuest = rt.GetMaxGuest()
+			tempRoomType.Price = rt.GetPrice()
+			tempRoomType.Quantity = rt.GetQuantity()
+			tempRoomType.HotelId = createdHotel.GetId()
+
+			for _, image := range rt.GetRoomImages() {
+				reader := bytes.NewReader(image.GetFile())
+				objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+				if err != nil {
+					return err
+				}
+
+				tempRoomType.Images = append(tempRoomType.Images, objectID)
+			}
+
+			newRoomTypes = append(newRoomTypes, tempRoomType)
+		}
+
+		for _, rt := range newRoomTypes {
+			_, err := service.repo.Agency.CreateRoomType(ctx, &rt)
+
+			if err != nil {
+				return err
+			}
+		}
+
+		return err
+	})
 
 	return err
 }

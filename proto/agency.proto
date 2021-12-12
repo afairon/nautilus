@@ -49,6 +49,10 @@ message Place {
     string city = 2;
 }
 
+message Amenity {
+
+}
+
 message RoomType {
     string name = 1;
     string description = 2;
