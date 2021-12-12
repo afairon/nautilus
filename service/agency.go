@@ -150,7 +150,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 
 		// Create RoomTypes and amenities and the links between them.
 		for i, rt := range entityRoomTypes {
-			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt)
+			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt, true)
 
 			if err != nil {
 				return err
