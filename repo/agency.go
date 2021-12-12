@@ -17,6 +17,8 @@ type AgencyRepository interface {
 	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
 	CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error)
+	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
+	CreateRoomAmenity(ctx context.Context, amenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -81,6 +83,14 @@ func (repo *Agency) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*enti
 }
 
 func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error) {
+	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
+}
+
+func (repo *Agency) CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error) {
+	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
+}
+
+func (repo *Agency) CreateRoomAmenity(ctx context.Context, amenity *entity.RoomAmenity) (*entity.RoomAmenity, error) {
 	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
 }
 

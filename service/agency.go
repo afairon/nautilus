@@ -121,10 +121,11 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 			return err
 		}
 
-		newRoomTypes := []entity.RoomType{}
+		entityRoomTypes := []entity.RoomType{}
+		modelRoomTypes := hotel.GetRoomTypes()
 
 		// Copy room types information
-		for _, rt := range hotel.GetRoomTypes() {
+		for _, rt := range modelRoomTypes {
 			tempRoomType := entity.RoomType{}
 			tempRoomType.Name = rt.GetName()
 			tempRoomType.Description = rt.GetDescription()
@@ -144,14 +145,31 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 				tempRoomType.Images = append(tempRoomType.Images, objectID)
 			}
 
-			newRoomTypes = append(newRoomTypes, tempRoomType)
+			entityRoomTypes = append(entityRoomTypes, tempRoomType)
 		}
 
-		for _, rt := range newRoomTypes {
-			_, err := service.repo.Agency.CreateRoomType(ctx, &rt)
+		// Create RoomTypes and amenities and the links between them.
+		for i, rt := range entityRoomTypes {
+			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt)
 
 			if err != nil {
 				return err
+			}
+
+			modelAmenities := modelRoomTypes[i].GetAmenities()
+
+			// Create Amenities of a room type
+			for _, modelAmenity := range modelAmenities {
+				entityAmenity := entity.Amenity{
+					Name:        modelAmenity.GetName(),
+					Description: modelAmenity.GetDescription(),
+				}
+
+				createdAmenity, err := service.repo.Agency.CreateAmenity(ctx, &entityAmenity)
+
+				if err != nil {
+					return err
+				}
 			}
 		}
 
