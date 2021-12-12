@@ -97,7 +97,9 @@ func setRoomType(dst *[]entity.RoomType, src []*pb.RoomType) {
 		tempRoomType := entity.RoomType{}
 		tempRoomType.Name = rt.GetName()
 		tempRoomType.Description = rt.GetDescription()
-		// tempRoomType.MaxGuest = rt.GetMaxCapacity()
+		tempRoomType.MaxGuest = rt.GetMaxGuest()
+		tempRoomType.Price = rt.GetPrice()
+		// tempRoomType.Quantity = rt.
 	}
 }
 
