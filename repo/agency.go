@@ -6,8 +6,6 @@ import (
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/pb"
 	"github.com/lib/pq"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 // AgencyRepository defines interface for interaction
@@ -18,7 +16,7 @@ type AgencyRepository interface {
 	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
 	CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
-	CreateRoomAmenity(ctx context.Context, amenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
+	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -82,16 +80,49 @@ func (repo *Agency) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*enti
 	return &result, err
 }
 
-func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomType) (*entity.RoomType, error) {
-	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
+func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error) {
+	var result entity.RoomType
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.room_type
+			(name, description, max_guest, price, quantity, hotel_id, images)
+		VALUES
+			($1, $2, $3, $4, $5, $6, $7)
+		RETURNING id, name, description, max_guest, price, quantity, hotel_id, liveaboard_id, images, created_on, updated_on)
+		`, roomType.Name, roomType.Description, roomType.MaxGuest, roomType.Price, roomType.Quantity, roomType.HotelId, roomType.Images)
+
+	return &result, err
 }
 
 func (repo *Agency) CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error) {
-	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
+	var result entity.Amenity
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.amenity
+			(name, description)
+		VALUES
+			($1, $2)
+		RETURNING id, name, description, created_on, updated_on)
+		`, amenity.Name, amenity.Description)
+
+	return &result, err
 }
 
-func (repo *Agency) CreateRoomAmenity(ctx context.Context, amenity *entity.RoomAmenity) (*entity.RoomAmenity, error) {
-	return nil, status.Error(codes.Unimplemented, "CreateRoomType unimplemented")
+func (repo *Agency) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error) {
+	var result entity.RoomAmenity
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.room_amenity_link
+			(room_type_id, amenity_id)
+		VALUES
+			($1, $2)
+		RETURNING id, name, description, created_on, updated_on)
+		`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
+
+	return &result, err
 }
 
 // Get retrieves the agency record by its id.
