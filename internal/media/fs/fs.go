@@ -6,20 +6,29 @@ import (
 	"os"
 	"path"
 
+	"github.com/afairon/nautilus/config"
 	"github.com/afairon/nautilus/internal/media"
 )
 
 type Client struct {
 	DataPath string
-	RootURL  string
+	BaseURL  string
 }
 
 // NewStore creates a new filesystem media storage.
-func NewStore(DataPath, RootURL string) media.Store {
+func NewStore(DataPath, BaseURL string) media.Store {
 	return &Client{
 		DataPath: path.Clean(DataPath),
-		RootURL:  path.Clean(RootURL),
+		BaseURL:  path.Clean(BaseURL),
 	}
+}
+
+// NewStoreFromConfig creates a new filesystem media storage from configuration.
+func NewStoreFromConfig(conf *config.FS) media.Store {
+	return NewStore(
+		conf.Path,
+		conf.Base,
+	)
 }
 
 // Put saves the file on the filesystem.
@@ -56,7 +65,7 @@ func (c *Client) Put(filename string, perm media.Permission, reader io.ReadSeeke
 
 // Get returns an url to the object relative to the endpoint.
 func (c *Client) Get(filename string, signed bool) string {
-	return path.Join(c.RootURL, filename)
+	return path.Join(c.BaseURL, filename)
 }
 
 // Delete deletes the file if it exists.

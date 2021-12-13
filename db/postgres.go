@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 
+	"github.com/afairon/nautilus/config"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -11,14 +12,26 @@ import (
 var DB *sqlx.DB
 
 // Connect creates a postgres connection.
-func Connect(host string, port int, user, password, dbname string) (*sqlx.DB, error) {
-	dataSourceName := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=require",
-		host,
-		port,
-		user,
-		password,
-		dbname,
-	)
+func Connect(host string, port int, user, password, dbname string, ssl bool) (*sqlx.DB, error) {
+	var dataSourceName string
+	if ssl {
+		dataSourceName = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=require",
+			host,
+			port,
+			user,
+			password,
+			dbname,
+		)
+	} else {
+		dataSourceName = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+			host,
+			port,
+			user,
+			password,
+			dbname,
+		)
+	}
+
 	DB, err := sqlx.Open("postgres", dataSourceName)
 	if err != nil {
 		return nil, err
@@ -30,6 +43,18 @@ func Connect(host string, port int, user, password, dbname string) (*sqlx.DB, er
 	}
 
 	return DB, nil
+}
+
+// ConnectFromConfig creates a postgres connection from configuration.
+func ConnectFromConfig(conf *config.PostgreSQL) (*sqlx.DB, error) {
+	return Connect(
+		conf.Host,
+		conf.Port,
+		conf.User,
+		conf.Password,
+		conf.DBName,
+		conf.SSL,
+	)
 }
 
 // Close closes postgres connection.

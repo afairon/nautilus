@@ -4,6 +4,7 @@ import (
 	"errors"
 	"time"
 
+	"github.com/afairon/nautilus/config"
 	"github.com/afairon/nautilus/entity"
 	"github.com/golang-jwt/jwt"
 )
@@ -27,6 +28,14 @@ func NewJWTManager(secret string, duration time.Duration) *JWTManager {
 		secret:   secret,
 		duration: duration,
 	}
+}
+
+// NewJWTManagerFromConfig creates a new jwt manager from configuration.
+func NewJWTManagerFromConfig(conf *config.Session) *JWTManager {
+	return NewJWTManager(
+		conf.Secret,
+		time.Duration(conf.Timeout),
+	)
 }
 
 // Create creates a jwt token with user account information.
