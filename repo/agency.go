@@ -82,15 +82,18 @@ func (repo *Agency) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*enti
 
 func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error) {
 	var result entity.RoomType
+	var err error
 
-	err := repo.db.GetContext(ctx, &result, `
-		INSERT INTO
-			public.room_type
-			(name, description, max_guest, price, quantity, hotel_id, images)
-		VALUES
-			($1, $2, $3, $4, $5, $6, $7)
-		RETURNING id, name, description, max_guest, price, quantity, hotel_id, liveaboard_id, images, created_on, updated_on)
-		`, roomType.Name, roomType.Description, roomType.MaxGuest, roomType.Price, roomType.Quantity, roomType.HotelId, roomType.Images)
+	if isHotel {
+		err = repo.db.GetContext(ctx, &result, `
+			INSERT INTO
+				public.room_type
+				(name, description, max_guest, price, quantity, hotel_id, images)
+			VALUES
+				($1, $2, $3, $4, $5, $6, $7)
+			RETURNING id, name, description, max_guest, price, quantity, hotel_id, images, created_on, updated_on
+			`, roomType.Name, roomType.Description, roomType.MaxGuest, roomType.Price, roomType.Quantity, roomType.HotelId, roomType.Images)
+	}
 
 	return &result, err
 }
@@ -104,7 +107,7 @@ func (repo *Agency) CreateAmenity(ctx context.Context, amenity *entity.Amenity) 
 			(name, description)
 		VALUES
 			($1, $2)
-		RETURNING id, name, description, created_on, updated_on)
+		RETURNING id, name, description, created_on, updated_on
 		`, amenity.Name, amenity.Description)
 
 	return &result, err
@@ -119,7 +122,7 @@ func (repo *Agency) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.R
 			(room_type_id, amenity_id)
 		VALUES
 			($1, $2)
-		RETURNING id, name, description, created_on, updated_on)
+		RETURNING id, room_type_id, amenity_id
 		`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
 
 	return &result, err

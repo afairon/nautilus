@@ -112,10 +112,10 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	// _, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
-
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		createdHotel, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
+		// fmt.Printf("%+v\n", createdHotel)
+		// fmt.Printf("%+v\n", err)
 
 		if err != nil {
 			return err
