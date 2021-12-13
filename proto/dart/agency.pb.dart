@@ -385,35 +385,98 @@ class Place extends $pb.GeneratedMessage {
   void clearCity() => clearField(2);
 }
 
-class Room extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Room', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..e<Room_RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', $pb.PbFieldType.OE, defaultOrMaker: Room_RoomType.SINGLE, valueOf: Room_RoomType.valueOf, enumValues: Room_RoomType.values)
+class Amenity extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Amenity', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxCapacity', $pb.PbFieldType.O3)
-    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
-    ..pc<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomImages', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..pPS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amenityNames')
     ..hasRequiredFields = false
   ;
 
-  Room._() : super();
-  factory Room({
-    Room_RoomType? roomType,
+  Amenity._() : super();
+  factory Amenity({
+    $core.String? name,
     $core.String? description,
-    $core.int? maxCapacity,
-    $core.double? price,
-    $core.Iterable<$6.File>? roomImages,
-    $core.Iterable<$core.String>? amenityNames,
   }) {
     final _result = create();
-    if (roomType != null) {
-      _result.roomType = roomType;
+    if (name != null) {
+      _result.name = name;
     }
     if (description != null) {
       _result.description = description;
     }
-    if (maxCapacity != null) {
-      _result.maxCapacity = maxCapacity;
+    return _result;
+  }
+  factory Amenity.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Amenity.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Amenity clone() => Amenity()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Amenity copyWith(void Function(Amenity) updates) => super.copyWith((message) => updates(message as Amenity)) as Amenity; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Amenity create() => Amenity._();
+  Amenity createEmptyInstance() => create();
+  static $pb.PbList<Amenity> createRepeated() => $pb.PbList<Amenity>();
+  @$core.pragma('dart2js:noInline')
+  static Amenity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Amenity>(create);
+  static Amenity? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get description => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set description($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDescription() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDescription() => clearField(2);
+}
+
+class RoomType extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RoomType', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
+    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
+    ..pc<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomImages', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..pc<Amenity>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amenities', $pb.PbFieldType.PM, subBuilder: Amenity.create)
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quantity', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  RoomType._() : super();
+  factory RoomType({
+    $core.String? name,
+    $core.String? description,
+    $core.int? maxGuest,
+    $core.double? price,
+    $core.Iterable<$6.File>? roomImages,
+    $core.Iterable<Amenity>? amenities,
+    $core.int? quantity,
+  }) {
+    final _result = create();
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (maxGuest != null) {
+      _result.maxGuest = maxGuest;
     }
     if (price != null) {
       _result.price = price;
@@ -421,40 +484,43 @@ class Room extends $pb.GeneratedMessage {
     if (roomImages != null) {
       _result.roomImages.addAll(roomImages);
     }
-    if (amenityNames != null) {
-      _result.amenityNames.addAll(amenityNames);
+    if (amenities != null) {
+      _result.amenities.addAll(amenities);
+    }
+    if (quantity != null) {
+      _result.quantity = quantity;
     }
     return _result;
   }
-  factory Room.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Room.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory RoomType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoomType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Room clone() => Room()..mergeFromMessage(this);
+  RoomType clone() => RoomType()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Room copyWith(void Function(Room) updates) => super.copyWith((message) => updates(message as Room)) as Room; // ignore: deprecated_member_use
+  RoomType copyWith(void Function(RoomType) updates) => super.copyWith((message) => updates(message as RoomType)) as RoomType; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Room create() => Room._();
-  Room createEmptyInstance() => create();
-  static $pb.PbList<Room> createRepeated() => $pb.PbList<Room>();
+  static RoomType create() => RoomType._();
+  RoomType createEmptyInstance() => create();
+  static $pb.PbList<RoomType> createRepeated() => $pb.PbList<RoomType>();
   @$core.pragma('dart2js:noInline')
-  static Room getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Room>(create);
-  static Room? _defaultInstance;
+  static RoomType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomType>(create);
+  static RoomType? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Room_RoomType get roomType => $_getN(0);
+  $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set roomType(Room_RoomType v) { setField(1, v); }
+  set name($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasRoomType() => $_has(0);
+  $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearRoomType() => clearField(1);
+  void clearName() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get description => $_getSZ(1);
@@ -466,13 +532,13 @@ class Room extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get maxCapacity => $_getIZ(2);
+  $core.int get maxGuest => $_getIZ(2);
   @$pb.TagNumber(3)
-  set maxCapacity($core.int v) { $_setSignedInt32(2, v); }
+  set maxGuest($core.int v) { $_setUnsignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasMaxCapacity() => $_has(2);
+  $core.bool hasMaxGuest() => $_has(2);
   @$pb.TagNumber(3)
-  void clearMaxCapacity() => clearField(3);
+  void clearMaxGuest() => clearField(3);
 
   @$pb.TagNumber(4)
   $core.double get price => $_getN(3);
@@ -487,7 +553,16 @@ class Room extends $pb.GeneratedMessage {
   $core.List<$6.File> get roomImages => $_getList(4);
 
   @$pb.TagNumber(6)
-  $core.List<$core.String> get amenityNames => $_getList(5);
+  $core.List<Amenity> get amenities => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $core.int get quantity => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set quantity($core.int v) { $_setUnsignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearQuantity() => clearField(7);
 }
 
 class TripTemplate extends $pb.GeneratedMessage {
@@ -728,7 +803,7 @@ class Hotel extends $pb.GeneratedMessage {
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'star', $pb.PbFieldType.O3)
     ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
     ..pc<$6.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..pc<Room>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: Room.create)
+    ..pc<RoomType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypes', $pb.PbFieldType.PM, subBuilder: RoomType.create)
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelDescription')
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phone')
     ..hasRequiredFields = false
@@ -740,7 +815,7 @@ class Hotel extends $pb.GeneratedMessage {
     $core.int? star,
     $core.Iterable<$core.String>? highlights,
     $core.Iterable<$6.File>? images,
-    $core.Iterable<Room>? rooms,
+    $core.Iterable<RoomType>? roomTypes,
     $core.String? hotelDescription,
     $core.String? phone,
   }) {
@@ -757,8 +832,8 @@ class Hotel extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (rooms != null) {
-      _result.rooms.addAll(rooms);
+    if (roomTypes != null) {
+      _result.roomTypes.addAll(roomTypes);
     }
     if (hotelDescription != null) {
       _result.hotelDescription = hotelDescription;
@@ -814,7 +889,7 @@ class Hotel extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.List<Room> get rooms => $_getList(4);
+  $core.List<RoomType> get roomTypes => $_getList(4);
 
   @$pb.TagNumber(6)
   $core.String get hotelDescription => $_getSZ(5);
@@ -843,7 +918,7 @@ class Liveaboard extends $pb.GeneratedMessage {
     ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OF)
     ..pPS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
     ..pPS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images')
-    ..pc<Room>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: Room.create)
+    ..pc<RoomType>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: RoomType.create)
     ..hasRequiredFields = false
   ;
 
@@ -855,7 +930,7 @@ class Liveaboard extends $pb.GeneratedMessage {
     $core.double? width,
     $core.Iterable<$core.String>? highlights,
     $core.Iterable<$core.String>? images,
-    $core.Iterable<Room>? rooms,
+    $core.Iterable<RoomType>? rooms,
   }) {
     final _result = create();
     if (model != null) {
@@ -945,7 +1020,7 @@ class Liveaboard extends $pb.GeneratedMessage {
   $core.List<$core.String> get images => $_getList(5);
 
   @$pb.TagNumber(7)
-  $core.List<Room> get rooms => $_getList(6);
+  $core.List<RoomType> get rooms => $_getList(6);
 }
 
 class AddDiveMasterRequest extends $pb.GeneratedMessage {
