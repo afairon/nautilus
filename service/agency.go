@@ -9,7 +9,6 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
-	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -71,11 +70,8 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	var reader *bytes.Reader
 	var objectID string
-	log.Info("Declared reader and objectID variables")
 
 	if diveMaster.FrontImage.GetFile() != nil {
-		log.Info("appending front card")
-		log.Info(diveMaster.FrontImage.File)
 		reader = bytes.NewReader(diveMaster.FrontImage.File)
 		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PRIVATE, reader)
 
@@ -141,13 +137,14 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 
 		// Copy room types information
 		for _, rt := range modelRoomTypes {
-			tempRoomType := entity.RoomType{}
-			tempRoomType.Name = rt.GetName()
-			tempRoomType.Description = rt.GetDescription()
-			tempRoomType.MaxGuest = rt.GetMaxGuest()
-			tempRoomType.Price = rt.GetPrice()
-			tempRoomType.Quantity = rt.GetQuantity()
-			tempRoomType.HotelId = createdHotel.GetId()
+			tempRoomType := entity.RoomType{
+				Name:        rt.GetName(),
+				Description: rt.GetDescription(),
+				MaxGuest:    rt.GetMaxGuest(),
+				Price:       rt.GetPrice(),
+				Quantity:    rt.GetQuantity(),
+				HotelId:     createdHotel.GetId(),
+			}
 
 			for _, image := range rt.GetRoomImages() {
 				reader := bytes.NewReader(image.GetFile())
@@ -267,6 +264,12 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 			newDiveMasterTripLink := entity.DiverMasterTrip{
 				DiveMasterId: diveMasterId,
 				TripId:       createdTrip.GetId(),
+			}
+
+			_, err = service.repo.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
+
+			if err != nil {
+				return err
 			}
 		}
 
