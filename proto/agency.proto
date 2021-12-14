@@ -42,12 +42,6 @@ message Staff {
 message DivingBoat {
     string boat_model = 1;
     repeated model.File boat_images = 2;
-    uint64 agency_id = 3;
-}
-
-message Place {
-    string country = 1;
-    string city = 2;
 }
 
 message Amenity {
@@ -69,7 +63,6 @@ message TripTemplate {
     string name = 1;
     string description = 2;
     uint64 diving_boat_id = 3;
-    Place place = 4;
     repeated model.File images = 5;
     model.TripType trip_type = 6;
     model.File schedule_image = 7;
@@ -85,6 +78,7 @@ message Trip {
     uint32 max_capacity = 3;
     float price = 4;
     repeated uint64 dive_master_ids = 5;
+    google.protobuf.Timestamp last_reservation_date = 6 [(gogoproto.stdtime) = true];
 }
 
 message Hotel {

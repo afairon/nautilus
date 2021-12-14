@@ -9,6 +9,7 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -239,18 +240,20 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		// Create a record in trip_template table
 		createdTripTemplate, err := service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
-
+		log.Info("err after created trip template:")
+		log.Info(err)
 		if err != nil {
 			return err
 		}
 
 		newTrip := entity.Trip{
-			TemplateId: createdTripTemplate.GetId(),
-			AgencyId:   agency_id,
-			MaxGuest:   trip.GetMaxCapacity(),
-			Price:      float32(trip.GetPrice()),
-			FromDate:   trip.GetFrom(),
-			ToDate:     trip.GetTo(),
+			TemplateId:          createdTripTemplate.GetId(),
+			AgencyId:            agency_id,
+			MaxGuest:            trip.GetMaxCapacity(),
+			Price:               float32(trip.GetPrice()),
+			FromDate:            trip.GetFrom(),
+			ToDate:              trip.GetTo(),
+			LastReservationDate: trip.GetLastReservationDate(),
 		}
 
 		// Create a record in trip table

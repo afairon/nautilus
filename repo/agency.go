@@ -143,7 +143,7 @@ func (repo *Agency) CreateTripTemplate(ctx context.Context, tripTemplate *entity
 				(name, description, type, agency_id, hotel_id, boat_id, images)
 			VALUES
 				($1, $2, $3, $4, $5, $6, $7)
-			RETURNING id, name, description, type, agency_id, hotel_id, boat_id, liveaboard_id, images, created_on, updated_on
+			RETURNING id, name, description, type, agency_id, hotel_id, boat_id, images, created_on, updated_on
 		`, tripTemplate.Name, tripTemplate.Description, tripTemplate.Type,
 			tripTemplate.AgencyId, tripTemplate.HotelId,
 			tripTemplate.BoatId, tripTemplate.Images)
@@ -158,11 +158,11 @@ func (repo *Agency) CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.
 	err := repo.db.GetContext(ctx, &result, `
 		INSERT INTO
 			public.trip
-			(template_id, agency_id, max_guest, price, from_date, to_date)
+			(template_id, agency_id, max_guest, price, from_date, to_date, last_reservation_date)
 		VALUES
-			($1, $2, $3, $4, $5, $6)
-		RETURNING id, template_id, agency_id, max_guest, price, from_date, to_date, created_on, updated_on
-		`, trip.TemplateId, trip.AgencyId, trip.MaxGuest, trip.Price, trip.FromDate, trip.ToDate)
+			($1, $2, $3, $4, $5, $6, $7)
+		RETURNING id, template_id, agency_id, max_guest, price, from_date, to_date, last_reservation_date, created_on, updated_on
+		`, trip.TemplateId, trip.AgencyId, trip.MaxGuest, trip.Price, trip.FromDate, trip.ToDate, trip.LastReservationDate)
 
 	return &result, err
 }
@@ -176,7 +176,7 @@ func (repo *Agency) CreateDiveMasterTripLink(ctx context.Context, diveMasterTrip
 			(dive_master_id, trip_id)
 		VALUES
 			($1, $2)
-		RETURNING id, dive_master_id, trip_id, created_on, updated_on
+		RETURNING id, dive_master_id, trip_id
 		`, diveMasterTripLink.DiveMasterId, diveMasterTripLink.TripId)
 
 	return &result, err

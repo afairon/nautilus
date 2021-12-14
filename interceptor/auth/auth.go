@@ -18,6 +18,7 @@ var accessRoles = map[string][]pb.AccountType{
 	"/agency.AgencyService/AddDiveMaster":               {pb.AGENCY},
 	"/agency.AgencyService/AddHotel":                    {pb.AGENCY},
 	"/agency.AgencyService/AddTrip":                     {pb.AGENCY},
+	"/agency.AgencyService/AddDivingBoat":               {pb.AGENCY},
 	"/comment.CommentService/CreateComment":             {pb.DIVER},
 	"/reservation.ReservationService/CreateReservation": {pb.DIVER},
 	"/reservation.ReservationService/GetReservation":    {pb.AGENCY, pb.DIVER},
