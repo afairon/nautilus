@@ -14,9 +14,6 @@ import 'model.pb.dart' as $6;
 import 'google/protobuf/timestamp.pb.dart' as $5;
 
 import 'model.pbenum.dart' as $6;
-import 'agency.pbenum.dart';
-
-export 'agency.pbenum.dart';
 
 class DiveMaster extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DiveMaster', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
@@ -264,21 +261,21 @@ class Staff extends $pb.GeneratedMessage {
 class DivingBoat extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DivingBoat', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatModel')
-    ..aOM<$6.File>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatImage', subBuilder: $6.File.create)
+    ..pc<$6.File>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatImages', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..hasRequiredFields = false
   ;
 
   DivingBoat._() : super();
   factory DivingBoat({
     $core.String? boatModel,
-    $6.File? boatImage,
+    $core.Iterable<$6.File>? boatImages,
   }) {
     final _result = create();
     if (boatModel != null) {
       _result.boatModel = boatModel;
     }
-    if (boatImage != null) {
-      _result.boatImage = boatImage;
+    if (boatImages != null) {
+      _result.boatImages.addAll(boatImages);
     }
     return _result;
   }
@@ -313,76 +310,7 @@ class DivingBoat extends $pb.GeneratedMessage {
   void clearBoatModel() => clearField(1);
 
   @$pb.TagNumber(2)
-  $6.File get boatImage => $_getN(1);
-  @$pb.TagNumber(2)
-  set boatImage($6.File v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasBoatImage() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBoatImage() => clearField(2);
-  @$pb.TagNumber(2)
-  $6.File ensureBoatImage() => $_ensure(1);
-}
-
-class Place extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Place', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'country')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'city')
-    ..hasRequiredFields = false
-  ;
-
-  Place._() : super();
-  factory Place({
-    $core.String? country,
-    $core.String? city,
-  }) {
-    final _result = create();
-    if (country != null) {
-      _result.country = country;
-    }
-    if (city != null) {
-      _result.city = city;
-    }
-    return _result;
-  }
-  factory Place.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Place.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Place clone() => Place()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Place copyWith(void Function(Place) updates) => super.copyWith((message) => updates(message as Place)) as Place; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Place create() => Place._();
-  Place createEmptyInstance() => create();
-  static $pb.PbList<Place> createRepeated() => $pb.PbList<Place>();
-  @$core.pragma('dart2js:noInline')
-  static Place getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Place>(create);
-  static Place? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get country => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set country($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCountry() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCountry() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get city => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set city($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCity() => clearField(2);
+  $core.List<$6.File> get boatImages => $_getList(1);
 }
 
 class Amenity extends $pb.GeneratedMessage {
@@ -565,15 +493,28 @@ class RoomType extends $pb.GeneratedMessage {
   void clearQuantity() => clearField(7);
 }
 
+enum TripTemplate_ResidenceId {
+  hotelId, 
+  liveaboardId, 
+  notSet
+}
+
 class TripTemplate extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, TripTemplate_ResidenceId> _TripTemplate_ResidenceIdByTag = {
+    8 : TripTemplate_ResidenceId.hotelId,
+    9 : TripTemplate_ResidenceId.liveaboardId,
+    0 : TripTemplate_ResidenceId.notSet
+  };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..oo(0, [8, 9])
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
-    ..aOM<DivingBoat>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: DivingBoat.create)
-    ..aOM<Place>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'place', subBuilder: Place.create)
+    ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<$6.File>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..e<TripTemplate_TripType>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: TripTemplate_TripType.LIVEABOARD, valueOf: TripTemplate_TripType.valueOf, enumValues: TripTemplate_TripType.values)
+    ..e<$6.TripType>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $6.TripType.ONSHORE, valueOf: $6.TripType.valueOf, enumValues: $6.TripType.values)
     ..aOM<$6.File>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scheduleImage', subBuilder: $6.File.create)
+    ..a<$fixnum.Int64>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -581,11 +522,12 @@ class TripTemplate extends $pb.GeneratedMessage {
   factory TripTemplate({
     $core.String? name,
     $core.String? description,
-    DivingBoat? divingBoat,
-    Place? place,
+    $fixnum.Int64? divingBoatId,
     $core.Iterable<$6.File>? images,
-    TripTemplate_TripType? tripType,
+    $6.TripType? tripType,
     $6.File? scheduleImage,
+    $fixnum.Int64? hotelId,
+    $fixnum.Int64? liveaboardId,
   }) {
     final _result = create();
     if (name != null) {
@@ -594,11 +536,8 @@ class TripTemplate extends $pb.GeneratedMessage {
     if (description != null) {
       _result.description = description;
     }
-    if (divingBoat != null) {
-      _result.divingBoat = divingBoat;
-    }
-    if (place != null) {
-      _result.place = place;
+    if (divingBoatId != null) {
+      _result.divingBoatId = divingBoatId;
     }
     if (images != null) {
       _result.images.addAll(images);
@@ -608,6 +547,12 @@ class TripTemplate extends $pb.GeneratedMessage {
     }
     if (scheduleImage != null) {
       _result.scheduleImage = scheduleImage;
+    }
+    if (hotelId != null) {
+      _result.hotelId = hotelId;
+    }
+    if (liveaboardId != null) {
+      _result.liveaboardId = liveaboardId;
     }
     return _result;
   }
@@ -632,6 +577,9 @@ class TripTemplate extends $pb.GeneratedMessage {
   static TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TripTemplate>(create);
   static TripTemplate? _defaultInstance;
 
+  TripTemplate_ResidenceId whichResidenceId() => _TripTemplate_ResidenceIdByTag[$_whichOneof(0)]!;
+  void clearResidenceId() => clearField($_whichOneof(0));
+
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -651,58 +599,64 @@ class TripTemplate extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  DivingBoat get divingBoat => $_getN(2);
+  $fixnum.Int64 get divingBoatId => $_getI64(2);
   @$pb.TagNumber(3)
-  set divingBoat(DivingBoat v) { setField(3, v); }
+  set divingBoatId($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasDivingBoat() => $_has(2);
+  $core.bool hasDivingBoatId() => $_has(2);
   @$pb.TagNumber(3)
-  void clearDivingBoat() => clearField(3);
-  @$pb.TagNumber(3)
-  DivingBoat ensureDivingBoat() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  Place get place => $_getN(3);
-  @$pb.TagNumber(4)
-  set place(Place v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasPlace() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearPlace() => clearField(4);
-  @$pb.TagNumber(4)
-  Place ensurePlace() => $_ensure(3);
+  void clearDivingBoatId() => clearField(3);
 
   @$pb.TagNumber(5)
-  $core.List<$6.File> get images => $_getList(4);
+  $core.List<$6.File> get images => $_getList(3);
 
   @$pb.TagNumber(6)
-  TripTemplate_TripType get tripType => $_getN(5);
+  $6.TripType get tripType => $_getN(4);
   @$pb.TagNumber(6)
-  set tripType(TripTemplate_TripType v) { setField(6, v); }
+  set tripType($6.TripType v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasTripType() => $_has(5);
+  $core.bool hasTripType() => $_has(4);
   @$pb.TagNumber(6)
   void clearTripType() => clearField(6);
 
   @$pb.TagNumber(7)
-  $6.File get scheduleImage => $_getN(6);
+  $6.File get scheduleImage => $_getN(5);
   @$pb.TagNumber(7)
   set scheduleImage($6.File v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasScheduleImage() => $_has(6);
+  $core.bool hasScheduleImage() => $_has(5);
   @$pb.TagNumber(7)
   void clearScheduleImage() => clearField(7);
   @$pb.TagNumber(7)
-  $6.File ensureScheduleImage() => $_ensure(6);
+  $6.File ensureScheduleImage() => $_ensure(5);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get hotelId => $_getI64(6);
+  @$pb.TagNumber(8)
+  set hotelId($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasHotelId() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearHotelId() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get liveaboardId => $_getI64(7);
+  @$pb.TagNumber(9)
+  set liveaboardId($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasLiveaboardId() => $_has(7);
+  @$pb.TagNumber(9)
+  void clearLiveaboardId() => clearField(9);
 }
 
 class Trip extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOM<$5.Timestamp>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'from', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'to', subBuilder: $5.Timestamp.create)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxCapacity', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pricePerPserson', $pb.PbFieldType.O3)
-    ..pc<DiveMasterFirstAndLastName>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMasterFirstAndLastName.create)
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxCapacity', $pb.PbFieldType.OU3)
+    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
+    ..p<$fixnum.Int64>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasterIds', $pb.PbFieldType.PU6)
+    ..aOM<$5.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -711,8 +665,9 @@ class Trip extends $pb.GeneratedMessage {
     $5.Timestamp? from,
     $5.Timestamp? to,
     $core.int? maxCapacity,
-    $core.int? pricePerPserson,
-    $core.Iterable<DiveMasterFirstAndLastName>? diveMasters,
+    $core.double? price,
+    $core.Iterable<$fixnum.Int64>? diveMasterIds,
+    $5.Timestamp? lastReservationDate,
   }) {
     final _result = create();
     if (from != null) {
@@ -724,11 +679,14 @@ class Trip extends $pb.GeneratedMessage {
     if (maxCapacity != null) {
       _result.maxCapacity = maxCapacity;
     }
-    if (pricePerPserson != null) {
-      _result.pricePerPserson = pricePerPserson;
+    if (price != null) {
+      _result.price = price;
     }
-    if (diveMasters != null) {
-      _result.diveMasters.addAll(diveMasters);
+    if (diveMasterIds != null) {
+      _result.diveMasterIds.addAll(diveMasterIds);
+    }
+    if (lastReservationDate != null) {
+      _result.lastReservationDate = lastReservationDate;
     }
     return _result;
   }
@@ -778,29 +736,40 @@ class Trip extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.int get maxCapacity => $_getIZ(2);
   @$pb.TagNumber(3)
-  set maxCapacity($core.int v) { $_setSignedInt32(2, v); }
+  set maxCapacity($core.int v) { $_setUnsignedInt32(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasMaxCapacity() => $_has(2);
   @$pb.TagNumber(3)
   void clearMaxCapacity() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get pricePerPserson => $_getIZ(3);
+  $core.double get price => $_getN(3);
   @$pb.TagNumber(4)
-  set pricePerPserson($core.int v) { $_setSignedInt32(3, v); }
+  set price($core.double v) { $_setFloat(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasPricePerPserson() => $_has(3);
+  $core.bool hasPrice() => $_has(3);
   @$pb.TagNumber(4)
-  void clearPricePerPserson() => clearField(4);
+  void clearPrice() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.List<DiveMasterFirstAndLastName> get diveMasters => $_getList(4);
+  $core.List<$fixnum.Int64> get diveMasterIds => $_getList(4);
+
+  @$pb.TagNumber(6)
+  $5.Timestamp get lastReservationDate => $_getN(5);
+  @$pb.TagNumber(6)
+  set lastReservationDate($5.Timestamp v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasLastReservationDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearLastReservationDate() => clearField(6);
+  @$pb.TagNumber(6)
+  $5.Timestamp ensureLastReservationDate() => $_ensure(5);
 }
 
 class Hotel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Hotel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelName')
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'star', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'star', $pb.PbFieldType.OU3)
     ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
     ..pc<$6.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..pc<RoomType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypes', $pb.PbFieldType.PM, subBuilder: RoomType.create)
@@ -876,7 +845,7 @@ class Hotel extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get star => $_getIZ(1);
   @$pb.TagNumber(2)
-  set star($core.int v) { $_setSignedInt32(1, v); }
+  set star($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasStar() => $_has(1);
   @$pb.TagNumber(2)
