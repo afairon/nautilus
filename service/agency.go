@@ -57,8 +57,6 @@ func setDiveMaster(dst *entity.DiveMaster, src *pb.DiveMaster) error {
 }
 
 func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster, agency_id uint64) error {
-	log.Info("Received DiveMaster:")
-	log.Info(diveMaster.FrontImage.GetFile())
 	newDiveMaster := entity.DiveMaster{}
 
 	// Copy dive master information and verify the dive master's information
@@ -242,6 +240,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	}
 
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		// Create a record in trip_template table
 		createdTripTemplate, err := service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 
 		if err != nil {
@@ -257,10 +256,18 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 			ToDate:     trip.GetTo(),
 		}
 
-		_, err = service.repo.Agency.CreateTrip(ctx, &newTrip)
+		// Create a record in trip table
+		createdTrip, err := service.repo.Agency.CreateTrip(ctx, &newTrip)
 
 		if err != nil {
 			return err
+		}
+
+		for _, diveMasterId := range trip.GetDiveMasterIds() {
+			newDiveMasterTripLink := entity.DiverMasterTrip{
+				DiveMasterId: diveMasterId,
+				TripId:       createdTrip.GetId(),
+			}
 		}
 
 		return err

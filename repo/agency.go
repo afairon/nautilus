@@ -19,6 +19,7 @@ type AgencyRepository interface {
 	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	CreateTripTemplate(ctx context.Context, tripTemplate *entity.TripTemplate) (*entity.TripTemplate, error)
 	CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error)
+	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -141,6 +142,7 @@ func (repo *Agency) CreateTripTemplate(ctx context.Context, tripTemplate *entity
 				(name, description, type, agency_id, hotel_id, boat_id, images)
 			VALUES
 				($1, $2, $3, $4, $5, $6, $7)
+			RETURNING id, name, description, type, agency_id, hotel_id, boat_id, liveaboard_id, images, created_on, updated_on
 		`, tripTemplate.Name, tripTemplate.Description, tripTemplate.Type,
 			tripTemplate.AgencyId, tripTemplate.HotelId,
 			tripTemplate.BoatId, tripTemplate.Images)
@@ -154,12 +156,27 @@ func (repo *Agency) CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.
 
 	err := repo.db.GetContext(ctx, &result, `
 		INSERT INTO
-			public.room_amenity_link
+			public.trip
 			(template_id, agency_id, max_guest, price, from_date, to_date)
 		VALUES
-			($1, $2)
-		RETURNING id, room_type_id, amenity_id
+			($1, $2, $3, $4, $5, $6)
+		RETURNING id, template_id, agency_id, max_guest, price, from_date, to_date, created_on, updated_on
 		`, trip.TemplateId, trip.AgencyId, trip.MaxGuest, trip.Price, trip.FromDate, trip.ToDate)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error) {
+	var result entity.DiverMasterTrip
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.dive_master_trip_link
+			(dive_master_id, trip_id)
+		VALUES
+			($1, $2)
+		RETURNING id, dive_master_id, trip_id
+		`, diveMasterTripLink.DiveMasterId, diveMasterTripLink.TripId)
 
 	return &result, err
 }
