@@ -19,7 +19,7 @@ type AgencyService interface {
 	AddStaff(context.Context, *pb.AddStaffRequest) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip, uint64) error
-	AddDivingBoat(context.Context, *pb.AddDivingBoatRequest) error
+	AddDivingBoat(context.Context, *pb.DivingBoat, uint64) error
 	AddHotel(context.Context, *pb.Hotel, uint64, uint64) error
 	AddLiveaboard(context.Context, *pb.AddLiveaboardRequest) error
 }
@@ -279,8 +279,27 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	return err
 }
 
-func (service *agencyService) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) error {
-	return status.Error(codes.Unimplemented, "AddDivingBoat unimplemented")
+func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat, agency_id uint64) error {
+	newDivingBoat := entity.Boat{
+		Id:       agency_id,
+		Name:     divingBoat.GetBoatModel(),
+		AgencyId: agency_id,
+	}
+
+	for _, image := range divingBoat.GetBoatImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newDivingBoat.Images = append(newDivingBoat.Images, objectID)
+	}
+
+	_, err := service.repo.Agency.CreateBoat(ctx, &newDivingBoat)
+
+	return err
 }
 
 func (service *agencyService) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) error {

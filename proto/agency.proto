@@ -41,7 +41,8 @@ message Staff {
 
 message DivingBoat {
     string boat_model = 1;
-    model.File boat_image = 2;
+    repeated model.File boat_images = 2;
+    uint64 agency_id = 3;
 }
 
 message Place {

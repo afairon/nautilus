@@ -61,7 +61,13 @@ func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripReques
 }
 
 func (handler *AgencyHandler) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddDivingBoat unimplemented")
+	err := handler.agencyService.AddDivingBoat(ctx, req.GetDivingBoat(), req.GetAgencyId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }
 
 func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) (*empty.Empty, error) {

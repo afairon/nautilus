@@ -20,6 +20,7 @@ type AgencyRepository interface {
 	CreateTripTemplate(ctx context.Context, tripTemplate *entity.TripTemplate) (*entity.TripTemplate, error)
 	CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error)
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
+	CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -125,7 +126,7 @@ func (repo *Agency) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.R
 			(room_type_id, amenity_id)
 		VALUES
 			($1, $2)
-		RETURNING id, room_type_id, amenity_id
+		RETURNING id, room_type_id, amenity_id, created_on, updated_on
 		`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
 
 	return &result, err
@@ -175,8 +176,23 @@ func (repo *Agency) CreateDiveMasterTripLink(ctx context.Context, diveMasterTrip
 			(dive_master_id, trip_id)
 		VALUES
 			($1, $2)
-		RETURNING id, dive_master_id, trip_id
+		RETURNING id, dive_master_id, trip_id, created_on, updated_on
 		`, diveMasterTripLink.DiveMasterId, diveMasterTripLink.TripId)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error) {
+	var result entity.Boat
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.boat
+			(name, agency_id, images)
+		VALUES
+			($1, $2, $3)
+		RETURNING id, name, agency_id, images, created_on, updated_on
+	`, divingBoat.Name, divingBoat.AgencyId, divingBoat.Images)
 
 	return &result, err
 }
