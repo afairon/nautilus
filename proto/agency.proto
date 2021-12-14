@@ -65,18 +65,12 @@ message RoomType {
 }
 
 message TripTemplate {
-
-    enum TripType {
-        LIVEABOARD = 0;
-        DIVE_RESORTS = 1;
-    }
-
     string name = 1;
     string description = 2;
-    DivingBoat diving_boat = 3;
+    uint64 diving_boat_id = 3;
     Place place = 4;
     repeated model.File images = 5;
-    TripType trip_type = 6;
+    model.TripType trip_type = 6;
     model.File schedule_image = 7;
 }
 
@@ -85,7 +79,7 @@ message Trip {
     google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
     int32 max_capacity = 3;
     int32 price_per_pserson = 4;
-    repeated DiveMasterFirstAndLastName dive_masters = 5;
+    repeated uint64 dive_master_ids = 5;
 }
 
 message Hotel {

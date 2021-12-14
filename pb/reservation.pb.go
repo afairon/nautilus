@@ -10,10 +10,10 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	_ "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -969,8 +969,8 @@ func (this *Reservation) String() string {
 		`DiverId:` + fmt.Sprintf("%v", this.DiverId) + `,`,
 		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
 		`Rooms:` + repeatedStringForRooms + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
