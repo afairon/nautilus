@@ -199,7 +199,57 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.TripTemplate, trip *pb.Trip, agency_id uint64) error {
-	return status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
+	newTripTemplate := entity.TripTemplate{
+		Name:        tripTemplate.GetName(),
+		Description: tripTemplate.GetDescription(),
+		Type:        tripTemplate.GetTripType(),
+		AgencyId:    agency_id,
+		BoatId:      tripTemplate.GetDivingBoatId(),
+	}
+
+	if tripTemplate.GetTripType() == pb.ONSHORE {
+		newTripTemplate.HotelId = tripTemplate.GetHotelId()
+	} else {
+		newTripTemplate.LiveaboardId = tripTemplate.GetLiveaboardId()
+	}
+
+	for _, image := range tripTemplate.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
+	}
+
+	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		createdTripTemplate, err := service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
+
+		if err != nil {
+			return err
+		}
+
+		newTrip := entity.Trip{
+			TemplateId: createdTripTemplate.GetId(),
+			AgencyId:   agency_id,
+			MaxGuest:   trip.GetMaxCapacity(),
+			Price:      float32(trip.GetPrice()),
+			FromDate:   trip.GetFrom(),
+			ToDate:     trip.GetTo(),
+		}
+
+		_, err = service.repo.Agency.CreateTrip(ctx, &newTrip)
+
+		if err != nil {
+			return err
+		}
+
+		return err
+	})
+
+	return err
 }
 
 func (service *agencyService) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) error {

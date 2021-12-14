@@ -72,19 +72,23 @@ message TripTemplate {
     repeated model.File images = 5;
     model.TripType trip_type = 6;
     model.File schedule_image = 7;
+    oneof residence_id {
+        uint64 hotel_id = 8;
+        uint64 liveaboard_id = 9;
+    }
 }
 
 message Trip {
     google.protobuf.Timestamp from = 1 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
-    int32 max_capacity = 3;
-    int32 price_per_pserson = 4;
+    uint32 max_capacity = 3;
+    float price = 4;
     repeated uint64 dive_master_ids = 5;
 }
 
 message Hotel {
     string hotel_name = 1;
-    int32 star = 2;
+    uint32 star = 2;
     // optional highlights when creating a new hotel
     repeated string highlights = 3;
     // optional images when creating a new hotel

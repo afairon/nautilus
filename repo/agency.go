@@ -17,6 +17,8 @@ type AgencyRepository interface {
 	CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
 	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
+	CreateTripTemplate(ctx context.Context, tripTemplate *entity.TripTemplate) (*entity.TripTemplate, error)
+	CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -124,6 +126,40 @@ func (repo *Agency) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.R
 			($1, $2)
 		RETURNING id, room_type_id, amenity_id
 		`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateTripTemplate(ctx context.Context, tripTemplate *entity.TripTemplate) (*entity.TripTemplate, error) {
+	var result entity.TripTemplate
+	var err error
+
+	if tripTemplate.GetType() == pb.ONSHORE {
+		err = repo.db.GetContext(ctx, &result, `
+			INSERT INTO
+				public.trip_template
+				(name, description, type, agency_id, hotel_id, boat_id, images)
+			VALUES
+				($1, $2, $3, $4, $5, $6, $7)
+		`, tripTemplate.Name, tripTemplate.Description, tripTemplate.Type,
+			tripTemplate.AgencyId, tripTemplate.HotelId,
+			tripTemplate.BoatId, tripTemplate.Images)
+	}
+
+	return &result, err
+}
+
+func (repo *Agency) CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error) {
+	var result entity.Trip
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.room_amenity_link
+			(template_id, agency_id, max_guest, price, from_date, to_date)
+		VALUES
+			($1, $2)
+		RETURNING id, room_type_id, amenity_id
+		`, trip.TemplateId, trip.AgencyId, trip.MaxGuest, trip.Price, trip.FromDate, trip.ToDate)
 
 	return &result, err
 }
