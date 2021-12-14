@@ -9,6 +9,7 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -56,10 +57,13 @@ func setDiveMaster(dst *entity.DiveMaster, src *pb.DiveMaster) error {
 }
 
 func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster, agency_id uint64) error {
+	log.Info("Received DiveMaster:")
+	log.Info(diveMaster.FrontImage.GetFile())
 	newDiveMaster := entity.DiveMaster{}
 
 	// Copy dive master information and verify the dive master's information
 	err := setDiveMaster(&newDiveMaster, diveMaster)
+
 	if err != nil {
 		return err
 	}
@@ -67,19 +71,32 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 	newDiveMaster.Level = diveMaster.Level
 	newDiveMaster.AgencyId = agency_id
 
-	reader := bytes.NewReader(diveMaster.FrontImage.File)
-	objectID, err := service.media.Put(diveMaster.FrontImage.Filename, media.PRIVATE, reader)
-	if err != nil {
-		return err
-	}
-	newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
+	var reader *bytes.Reader
+	var objectID string
+	log.Info("Declared reader and objectID variables")
 
-	reader = bytes.NewReader(diveMaster.BackImage.File)
-	objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PRIVATE, reader)
-	if err != nil {
-		return err
+	if diveMaster.FrontImage.GetFile() != nil {
+		log.Info("appending front card")
+		log.Info(diveMaster.FrontImage.File)
+		reader = bytes.NewReader(diveMaster.FrontImage.File)
+		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
 	}
-	newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
+
+	if diveMaster.BackImage.GetFile() != nil {
+		reader = bytes.NewReader(diveMaster.BackImage.File)
+		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
+	}
 
 	_, err = service.repo.Agency.CreateDiveMaster(ctx, &newDiveMaster)
 
