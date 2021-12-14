@@ -34,7 +34,7 @@ func NewJWTManager(secret string, duration time.Duration) *JWTManager {
 func NewJWTManagerFromConfig(conf *config.Session) *JWTManager {
 	return NewJWTManager(
 		conf.Secret,
-		time.Duration(conf.Timeout),
+		time.Duration(conf.Timeout)*time.Second,
 	)
 }
 
