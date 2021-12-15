@@ -895,29 +895,27 @@ class Hotel extends $pb.GeneratedMessage {
 
 class Liveaboard extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Liveaboard', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'model')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
-    ..a<$core.double>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'length', $pb.PbFieldType.OF)
-    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OF)
-    ..pPS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
-    ..pPS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images')
-    ..pc<RoomType>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: RoomType.create)
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'length', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OU3)
+    ..pc<$6.File>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..pc<RoomType>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypes', $pb.PbFieldType.PM, subBuilder: RoomType.create)
     ..hasRequiredFields = false
   ;
 
   Liveaboard._() : super();
   factory Liveaboard({
-    $core.String? model,
+    $core.String? name,
     $core.String? description,
-    $core.double? length,
-    $core.double? width,
-    $core.Iterable<$core.String>? highlights,
-    $core.Iterable<$core.String>? images,
-    $core.Iterable<RoomType>? rooms,
+    $core.int? length,
+    $core.int? width,
+    $core.Iterable<$6.File>? images,
+    $core.Iterable<RoomType>? roomTypes,
   }) {
     final _result = create();
-    if (model != null) {
-      _result.model = model;
+    if (name != null) {
+      _result.name = name;
     }
     if (description != null) {
       _result.description = description;
@@ -928,14 +926,11 @@ class Liveaboard extends $pb.GeneratedMessage {
     if (width != null) {
       _result.width = width;
     }
-    if (highlights != null) {
-      _result.highlights.addAll(highlights);
-    }
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (rooms != null) {
-      _result.rooms.addAll(rooms);
+    if (roomTypes != null) {
+      _result.roomTypes.addAll(roomTypes);
     }
     return _result;
   }
@@ -961,13 +956,13 @@ class Liveaboard extends $pb.GeneratedMessage {
   static Liveaboard? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get model => $_getSZ(0);
+  $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set model($core.String v) { $_setString(0, v); }
+  set name($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasModel() => $_has(0);
+  $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearModel() => clearField(1);
+  void clearName() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get description => $_getSZ(1);
@@ -979,31 +974,28 @@ class Liveaboard extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.double get length => $_getN(2);
+  $core.int get length => $_getIZ(2);
   @$pb.TagNumber(3)
-  set length($core.double v) { $_setFloat(2, v); }
+  set length($core.int v) { $_setUnsignedInt32(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasLength() => $_has(2);
   @$pb.TagNumber(3)
   void clearLength() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.double get width => $_getN(3);
+  $core.int get width => $_getIZ(3);
   @$pb.TagNumber(4)
-  set width($core.double v) { $_setFloat(3, v); }
+  set width($core.int v) { $_setUnsignedInt32(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasWidth() => $_has(3);
   @$pb.TagNumber(4)
   void clearWidth() => clearField(4);
 
-  @$pb.TagNumber(5)
-  $core.List<$core.String> get highlights => $_getList(4);
-
   @$pb.TagNumber(6)
-  $core.List<$core.String> get images => $_getList(5);
+  $core.List<$6.File> get images => $_getList(4);
 
   @$pb.TagNumber(7)
-  $core.List<RoomType> get rooms => $_getList(6);
+  $core.List<RoomType> get roomTypes => $_getList(5);
 }
 
 class AddDiveMasterRequest extends $pb.GeneratedMessage {

@@ -139,18 +139,17 @@ final $typed_data.Uint8List hotelDescriptor = $convert.base64Decode('CgVIb3RlbBI
 const Liveaboard$json = const {
   '1': 'Liveaboard',
   '2': const [
-    const {'1': 'model', '3': 1, '4': 1, '5': 9, '10': 'model'},
+    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'length', '3': 3, '4': 1, '5': 2, '10': 'length'},
-    const {'1': 'width', '3': 4, '4': 1, '5': 2, '10': 'width'},
-    const {'1': 'highlights', '3': 5, '4': 3, '5': 9, '10': 'highlights'},
-    const {'1': 'images', '3': 6, '4': 3, '5': 9, '10': 'images'},
-    const {'1': 'rooms', '3': 7, '4': 3, '5': 11, '6': '.agency.RoomType', '10': 'rooms'},
+    const {'1': 'length', '3': 3, '4': 1, '5': 13, '10': 'length'},
+    const {'1': 'width', '3': 4, '4': 1, '5': 13, '10': 'width'},
+    const {'1': 'images', '3': 6, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'room_types', '3': 7, '4': 3, '5': 11, '6': '.agency.RoomType', '10': 'roomTypes'},
   ],
 };
 
 /// Descriptor for `Liveaboard`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List liveaboardDescriptor = $convert.base64Decode('CgpMaXZlYWJvYXJkEhQKBW1vZGVsGAEgASgJUgVtb2RlbBIgCgtkZXNjcmlwdGlvbhgCIAEoCVILZGVzY3JpcHRpb24SFgoGbGVuZ3RoGAMgASgCUgZsZW5ndGgSFAoFd2lkdGgYBCABKAJSBXdpZHRoEh4KCmhpZ2hsaWdodHMYBSADKAlSCmhpZ2hsaWdodHMSFgoGaW1hZ2VzGAYgAygJUgZpbWFnZXMSJgoFcm9vbXMYByADKAsyEC5hZ2VuY3kuUm9vbVR5cGVSBXJvb21z');
+final $typed_data.Uint8List liveaboardDescriptor = $convert.base64Decode('CgpMaXZlYWJvYXJkEhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgDIAEoDVIGbGVuZ3RoEhQKBXdpZHRoGAQgASgNUgV3aWR0aBIjCgZpbWFnZXMYBiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLwoKcm9vbV90eXBlcxgHIAMoCzIQLmFnZW5jeS5Sb29tVHlwZVIJcm9vbVR5cGVz');
 @$core.Deprecated('Use addDiveMasterRequestDescriptor instead')
 const AddDiveMasterRequest$json = const {
   '1': 'AddDiveMasterRequest',
