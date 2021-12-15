@@ -125,9 +125,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 	}
 
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		createdHotel, err := service.repo.Agency.CreateHotel(ctx, &newHotel)
-		// fmt.Printf("%+v\n", createdHotel)
-		// fmt.Printf("%+v\n", err)
+		createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
 
 		if err != nil {
 			return err
@@ -163,7 +161,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 
 		// Create RoomTypes and amenities and the links between them.
 		for i, rt := range entityRoomTypes {
-			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt, true)
+			createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, true)
 
 			if err != nil {
 				return err
@@ -178,7 +176,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 					Description: modelAmenity.GetDescription(),
 				}
 
-				createdAmenity, err := service.repo.Agency.CreateAmenity(ctx, &entityAmenity)
+				createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
 
 				if err != nil {
 					return err
@@ -189,7 +187,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 					AmenityId:  createdAmenity.GetId(),
 				}
 
-				_, err = service.repo.Agency.CreateRoomAmenity(ctx, &roomAmenity)
+				_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
 
 				if err != nil {
 					return err
@@ -249,7 +247,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		// Create a record in trip_template table
-		createdTripTemplate, err := service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
+		createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 		log.Info("err after created trip template:")
 		log.Info(err)
 		if err != nil {
@@ -267,7 +265,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		}
 
 		// Create a record in trip table
-		createdTrip, err := service.repo.Agency.CreateTrip(ctx, &newTrip)
+		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
 
 		if err != nil {
 			return err
@@ -279,7 +277,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 				TripId:       createdTrip.GetId(),
 			}
 
-			_, err = service.repo.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
+			_, err = query.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
 
 			if err != nil {
 				return err
@@ -336,7 +334,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	}
 
 	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		createdLiveaboard, err := service.repo.Agency.CreateLiveaboard(ctx, &newLiveaboard)
+		createdLiveaboard, err := query.Agency.CreateLiveaboard(ctx, &newLiveaboard)
 
 		if err != nil {
 			return err
@@ -353,7 +351,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 				MaxGuest:     rt.GetMaxGuest(),
 				Price:        rt.GetPrice(),
 				Quantity:     rt.GetQuantity(),
-				LiveaboardId: createdLiveaboard.GetAgencyId(),
+				LiveaboardId: createdLiveaboard.GetId(),
 			}
 
 			for _, image := range rt.GetRoomImages() {
@@ -372,13 +370,14 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 		// Create RoomTypes and amenities and the links between them.
 		for i, rt := range entityRoomTypes {
-			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt, false)
+			createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, false)
 
 			if err != nil {
 				return err
 			}
 
 			modelAmenities := modelRoomTypes[i].GetAmenities()
+			log.Info(modelAmenities)
 
 			// Create Amenities of a room type
 			for _, modelAmenity := range modelAmenities {
@@ -386,8 +385,10 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 					Name:        modelAmenity.GetName(),
 					Description: modelAmenity.GetDescription(),
 				}
+				log.Info("Current Amenity:")
+				log.Info(entityAmenity)
 
-				createdAmenity, err := service.repo.Agency.CreateAmenity(ctx, &entityAmenity)
+				createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
 
 				if err != nil {
 					return err
@@ -398,7 +399,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 					AmenityId:  createdAmenity.GetId(),
 				}
 
-				_, err = service.repo.Agency.CreateRoomAmenity(ctx, &roomAmenity)
+				_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
 
 				if err != nil {
 					return err

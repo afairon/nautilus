@@ -104,13 +104,18 @@ message Hotel {
 
 // Liveaboard entity
 message Liveaboard {
+    option (gogoproto.equal) = false;
+    option (gogoproto.marshaler) = false;
+    option (gogoproto.unmarshaler) = false;
+    option (gogoproto.sizer) = false;
+    
     uint64 id = 1 [(gogoproto.moretags) = "db:\"id\""];
     string name = 2 [(gogoproto.moretags) = "db:\"name\""];
     string description = 3 [(gogoproto.moretags) = "db:\"description\""];
     uint32 length = 4 [(gogoproto.moretags) = "db:\"length\""];
     uint32 width = 5 [(gogoproto.moretags) = "db:\"width\""];
     uint64 agency_id = 6 [(gogoproto.moretags) = "db:\"agency_id\""];
-    repeated string images = 7 [(gogoproto.moretags) = "db:\"images\""];
+    string images = 7 [(gogoproto.customtype) = "StringArray", (gogoproto.nullable) = false, (gogoproto.moretags) = "db:\"images\""];
     google.protobuf.Timestamp created_on = 8 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"created_on\""];
     google.protobuf.Timestamp updated_on = 9 [(gogoproto.stdtime) = true, (gogoproto.moretags) = "db:\"updated_on\""];
 }

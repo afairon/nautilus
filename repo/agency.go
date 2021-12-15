@@ -6,6 +6,7 @@ import (
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/pb"
 	"github.com/lib/pq"
+	log "github.com/sirupsen/logrus"
 )
 
 // AgencyRepository defines interface for interaction
@@ -91,6 +92,7 @@ func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomTyp
 	var err error
 
 	if isHotel {
+		log.Info("Creating Hotel")
 		err = repo.db.GetContext(ctx, &result, `
 			INSERT INTO
 				public.room_type
@@ -100,6 +102,7 @@ func (repo *Agency) CreateRoomType(ctx context.Context, roomType *entity.RoomTyp
 			RETURNING id, name, description, max_guest, price, quantity, hotel_id, images, created_on, updated_on
 			`, roomType.Name, roomType.Description, roomType.MaxGuest, roomType.Price, roomType.Quantity, roomType.HotelId, roomType.Images)
 	} else {
+		log.Info("Creating Liveaboard")
 		err = repo.db.GetContext(ctx, &result, `
 			INSERT INTO
 				public.room_type
@@ -137,7 +140,7 @@ func (repo *Agency) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.R
 			(room_type_id, amenity_id)
 		VALUES
 			($1, $2)
-		RETURNING id, room_type_id, amenity_id, created_on, updated_on
+		RETURNING id, room_type_id, amenity_id
 		`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
 
 	return &result, err
