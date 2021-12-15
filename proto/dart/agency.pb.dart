@@ -188,6 +188,7 @@ class Staff extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'position')
+    ..e<$6.GenderType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gender', $pb.PbFieldType.OE, defaultOrMaker: $6.GenderType.FEMALE, valueOf: $6.GenderType.valueOf, enumValues: $6.GenderType.values)
     ..hasRequiredFields = false
   ;
 
@@ -196,6 +197,7 @@ class Staff extends $pb.GeneratedMessage {
     $core.String? firstName,
     $core.String? lastName,
     $core.String? position,
+    $6.GenderType? gender,
   }) {
     final _result = create();
     if (firstName != null) {
@@ -206,6 +208,9 @@ class Staff extends $pb.GeneratedMessage {
     }
     if (position != null) {
       _result.position = position;
+    }
+    if (gender != null) {
+      _result.gender = gender;
     }
     return _result;
   }
@@ -256,6 +261,15 @@ class Staff extends $pb.GeneratedMessage {
   $core.bool hasPosition() => $_has(2);
   @$pb.TagNumber(3)
   void clearPosition() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $6.GenderType get gender => $_getN(3);
+  @$pb.TagNumber(4)
+  set gender($6.GenderType v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasGender() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearGender() => clearField(4);
 }
 
 class DivingBoat extends $pb.GeneratedMessage {

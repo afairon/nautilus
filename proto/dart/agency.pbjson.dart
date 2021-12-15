@@ -40,11 +40,12 @@ const Staff$json = const {
     const {'1': 'first_name', '3': 1, '4': 1, '5': 9, '10': 'firstName'},
     const {'1': 'last_name', '3': 2, '4': 1, '5': 9, '10': 'lastName'},
     const {'1': 'position', '3': 3, '4': 1, '5': 9, '10': 'position'},
+    const {'1': 'gender', '3': 4, '4': 1, '5': 14, '6': '.model.GenderType', '10': 'gender'},
   ],
 };
 
 /// Descriptor for `Staff`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List staffDescriptor = $convert.base64Decode('CgVTdGFmZhIdCgpmaXJzdF9uYW1lGAEgASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAIgASgJUghsYXN0TmFtZRIaCghwb3NpdGlvbhgDIAEoCVIIcG9zaXRpb24=');
+final $typed_data.Uint8List staffDescriptor = $convert.base64Decode('CgVTdGFmZhIdCgpmaXJzdF9uYW1lGAEgASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGAIgASgJUghsYXN0TmFtZRIaCghwb3NpdGlvbhgDIAEoCVIIcG9zaXRpb24SKQoGZ2VuZGVyGAQgASgOMhEubW9kZWwuR2VuZGVyVHlwZVIGZ2VuZGVy');
 @$core.Deprecated('Use divingBoatDescriptor instead')
 const DivingBoat$json = const {
   '1': 'DivingBoat',
