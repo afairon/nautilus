@@ -17,7 +17,7 @@ import (
 // AgencyService defines operations on agency.
 type AgencyService interface {
 	AddDiveMaster(context.Context, *pb.DiveMaster, uint64) error
-	AddStaff(context.Context, *pb.AddStaffRequest) error
+	AddStaff(context.Context, *pb.Staff, uint64) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip, uint64) error
 	AddDivingBoat(context.Context, *pb.DivingBoat, uint64) error
@@ -203,8 +203,18 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 	return err
 }
 
-func (service *agencyService) AddStaff(ctx context.Context, req *pb.AddStaffRequest) error {
-	return status.Error(codes.Unimplemented, "AddStaff unimplemented")
+func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff, agency_id uint64) error {
+	newStaff := entity.Staff{
+		FirstName: req.GetFirstName(),
+		LastName:  req.GetLastName(),
+		Position:  req.GetPosition(),
+		Gender:    req.GetGender(),
+		AgencyId:  agency_id,
+	}
+
+	_, err := service.repo.Agency.CreateStaff(ctx, &newStaff)
+
+	return err
 }
 
 func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTripTemplateRequest) error {

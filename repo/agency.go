@@ -21,6 +21,7 @@ type AgencyRepository interface {
 	CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error)
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
 	CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error)
+	CreateStaff(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -193,6 +194,21 @@ func (repo *Agency) CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*e
 			($1, $2, $3)
 		RETURNING id, name, agency_id, images, created_on, updated_on
 	`, divingBoat.Name, divingBoat.AgencyId, divingBoat.Images)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateStaff(ctx context.Context, staff *entity.Staff) (*entity.Staff, error) {
+	var result entity.Staff
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.staff
+			(first_name, last_name, position, gender, agency_id)
+		VALUES
+			($1, $2, $3, $4, $5)
+		RETURNING id, first_name, last_name, position, gender, agency_id, created_on, updated_on
+	`, staff.FirstName, staff.LastName, staff.Position, staff.Gender, staff.AgencyId)
 
 	return &result, err
 }

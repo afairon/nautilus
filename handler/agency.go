@@ -43,7 +43,13 @@ func (handler *AgencyHandler) AddHotel(ctx context.Context, req *pb.AddHotelRequ
 }
 
 func (handler *AgencyHandler) AddStaff(ctx context.Context, req *pb.AddStaffRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddStaff unimplemented")
+	err := handler.agencyService.AddStaff(ctx, req.GetStaff(), req.GetAgencyId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }
 
 func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTripTemplateRequest) (*empty.Empty, error) {
