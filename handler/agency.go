@@ -77,5 +77,11 @@ func (handler *AgencyHandler) AddDivingBoat(ctx context.Context, req *pb.AddDivi
 }
 
 func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) (*empty.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "AddLiveaboard unimplemented")
+	err := handler.agencyService.AddLiveaboard(ctx, req.GetLiveaboard(), req.GetAgencyId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }

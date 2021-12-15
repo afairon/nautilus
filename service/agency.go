@@ -22,7 +22,7 @@ type AgencyService interface {
 	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip, uint64) error
 	AddDivingBoat(context.Context, *pb.DivingBoat, uint64) error
 	AddHotel(context.Context, *pb.Hotel, uint64, uint64) error
-	AddLiveaboard(context.Context, *pb.AddLiveaboardRequest) error
+	AddLiveaboard(context.Context, *pb.Liveaboard, uint64) error
 }
 
 // agencyService implements AgencyService interface above.
@@ -315,6 +315,99 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 	return err
 }
 
-func (service *agencyService) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) error {
-	return status.Error(codes.Unimplemented, "AddLiveaboard unimplemented")
+func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard, agency_id uint64) error {
+	newLiveaboard := entity.Liveaboard{
+		Name:        liveaboard.GetName(),
+		Description: liveaboard.GetDescription(),
+		Length:      liveaboard.GetLength(),
+		Width:       liveaboard.GetWidth(),
+		AgencyId:    agency_id,
+	}
+
+	for _, image := range liveaboard.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
+	}
+
+	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		createdLiveaboard, err := service.repo.Agency.CreateLiveaboard(ctx, &newLiveaboard)
+
+		if err != nil {
+			return err
+		}
+
+		entityRoomTypes := []entity.RoomType{}
+		modelRoomTypes := liveaboard.GetRoomTypes()
+
+		// Copy room types information
+		for _, rt := range modelRoomTypes {
+			tempRoomType := entity.RoomType{
+				Name:         rt.GetName(),
+				Description:  rt.GetDescription(),
+				MaxGuest:     rt.GetMaxGuest(),
+				Price:        rt.GetPrice(),
+				Quantity:     rt.GetQuantity(),
+				LiveaboardId: createdLiveaboard.GetAgencyId(),
+			}
+
+			for _, image := range rt.GetRoomImages() {
+				reader := bytes.NewReader(image.GetFile())
+				objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+
+				if err != nil {
+					return err
+				}
+
+				tempRoomType.Images = append(tempRoomType.Images, objectID)
+			}
+
+			entityRoomTypes = append(entityRoomTypes, tempRoomType)
+		}
+
+		// Create RoomTypes and amenities and the links between them.
+		for i, rt := range entityRoomTypes {
+			createdRoomType, err := service.repo.Agency.CreateRoomType(ctx, &rt, false)
+
+			if err != nil {
+				return err
+			}
+
+			modelAmenities := modelRoomTypes[i].GetAmenities()
+
+			// Create Amenities of a room type
+			for _, modelAmenity := range modelAmenities {
+				entityAmenity := entity.Amenity{
+					Name:        modelAmenity.GetName(),
+					Description: modelAmenity.GetDescription(),
+				}
+
+				createdAmenity, err := service.repo.Agency.CreateAmenity(ctx, &entityAmenity)
+
+				if err != nil {
+					return err
+				}
+
+				roomAmenity := entity.RoomAmenity{
+					RoomTypeId: createdRoomType.GetId(),
+					AmenityId:  createdAmenity.GetId(),
+				}
+
+				_, err = service.repo.Agency.CreateRoomAmenity(ctx, &roomAmenity)
+
+				if err != nil {
+					return err
+				}
+			}
+		}
+
+		return err
+	})
+
+	return err
 }

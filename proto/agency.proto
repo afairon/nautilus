@@ -95,15 +95,13 @@ message Hotel {
 }
 
 message Liveaboard {
-    string model = 1;
+    string name = 1;
     string description = 2;
-    float length = 3;
-    float width = 4;
-    // optional highlights when creating a new liveaboard
-    repeated string highlights = 5;
+    uint32 length = 3;
+    uint32 width = 4;
     // optional images when creating a new liveaboard
-    repeated string images = 6;
-    repeated RoomType rooms = 7;
+    repeated model.File images = 6;
+    repeated RoomType room_types = 7;
 }
 
 message AddDiveMasterRequest {
