@@ -55,6 +55,11 @@ message Account {
     google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
 }
 
+// Admin
+message Admin {
+    Account account = 1;
+}
+
 // Address
 message Address {
     uint64 id = 1;
@@ -73,7 +78,7 @@ message Agency {
     uint64 id = 1;
     string name = 10;
     string phone = 20;
-    Account account = 30 [(gogoproto.nullable) = false];
+    Account account = 30;
     Address address = 40 [(gogoproto.nullable) = false];
     repeated File documents = 50 [(gogoproto.nullable) = false];
     google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
@@ -88,7 +93,7 @@ message Diver {
     string phone = 30;
     google.protobuf.Timestamp birth_date = 40 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
     LevelType level = 50;
-    Account account = 60 [(gogoproto.nullable) = false];
+    Account account = 60;
     repeated File documents = 70 [(gogoproto.nullable) = false];
     google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];

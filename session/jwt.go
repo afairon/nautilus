@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/afairon/nautilus/config"
-	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/pb"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -19,7 +19,9 @@ type JWTManager struct {
 // user account information.
 type UserClaims struct {
 	jwt.StandardClaims
-	entity.Account
+	Admin  *pb.Admin  `json:"admin,omitempty"`
+	Agency *pb.Agency `json:"agency,omitempty"`
+	Diver  *pb.Diver  `json:"diver,omitempty"`
 }
 
 // NewJWTManager creates a new jwt manager.
@@ -39,19 +41,33 @@ func NewJWTManagerFromConfig(conf *config.Session) *JWTManager {
 }
 
 // Create creates a jwt token with user account information.
-func (manager *JWTManager) Create(account entity.Account) (string, error) {
-	// Clear password hash.
-	account.Password = ""
+func (manager *JWTManager) Create(account Account) (string, error) {
+	if account == nil {
+		return "", errors.New("authorization: empty account")
+	}
 
 	// Issued at
 	now := time.Now()
 
-	claims := UserClaims{
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: now.Add(manager.duration).Unix(),
-			IssuedAt:  now.Unix(),
-		},
-		Account: account,
+	// User claims
+	var claims UserClaims
+	claims.StandardClaims.IssuedAt = now.Unix()
+	claims.StandardClaims.ExpiresAt = now.Add(manager.duration).Unix()
+
+	// Clear password hash.
+	if account.GetAccount() == nil {
+		return "", errors.New("authorization: empty account")
+	}
+	account.GetAccount().Password = ""
+
+	// Type assertion, conversion from interface type to concrete type
+	switch v := account.(type) {
+	case *pb.Admin:
+		claims.Admin = v
+	case *pb.Agency:
+		claims.Agency = v
+	case *pb.Diver:
+		claims.Diver = v
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -62,7 +78,7 @@ func (manager *JWTManager) Create(account entity.Account) (string, error) {
 // Get verifies if the token is present in the context and
 // checks if the token is still valid, if it's valid it returns
 // the user account.
-func (manager *JWTManager) Get(token string) (entity.Account, error) {
+func (manager *JWTManager) Get(token string) (Account, error) {
 	var userClaims UserClaims
 
 	jwt, err := jwt.ParseWithClaims(
@@ -78,13 +94,21 @@ func (manager *JWTManager) Get(token string) (entity.Account, error) {
 		},
 	)
 	if err != nil {
-		return userClaims.Account, errors.New("authorization: invalid token")
+		return nil, errors.New("authorization: invalid token")
 	}
 
 	claims, ok := jwt.Claims.(*UserClaims)
 	if !ok {
-		return userClaims.Account, errors.New("authorization: invalid token")
+		return nil, errors.New("authorization: invalid token")
 	}
 
-	return claims.Account, nil
+	if claims.Admin != nil {
+		return claims.Admin, nil
+	}
+
+	if claims.Agency != nil {
+		return claims.Agency, nil
+	}
+
+	return claims.Diver, nil
 }

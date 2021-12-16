@@ -86,6 +86,16 @@ const Account$json = const {
 
 /// Descriptor for `Account`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountDescriptor = $convert.base64Decode('CgdBY2NvdW50Eg4KAmlkGAEgASgEUgJpZBIaCgh1c2VybmFtZRgKIAEoCVIIdXNlcm5hbWUSFAoFZW1haWwYFCABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGB4gASgJUghwYXNzd29yZBImCgR0eXBlGCggASgOMhIubW9kZWwuQWNjb3VudFR5cGVSBHR5cGUSGgoIdmVyaWZpZWQYMiABKAhSCHZlcmlmaWVkEhYKBmFjdGl2ZRg8IAEoCFIGYWN0aXZlEj8KCmNyZWF0ZWRfb24YRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+@$core.Deprecated('Use adminDescriptor instead')
+const Admin$json = const {
+  '1': 'Admin',
+  '2': const [
+    const {'1': 'account', '3': 1, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
+  ],
+};
+
+/// Descriptor for `Admin`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List adminDescriptor = $convert.base64Decode('CgVBZG1pbhIoCgdhY2NvdW50GAEgASgLMg4ubW9kZWwuQWNjb3VudFIHYWNjb3VudA==');
 @$core.Deprecated('Use addressDescriptor instead')
 const Address$json = const {
   '1': 'Address',
@@ -111,7 +121,7 @@ const Agency$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'phone', '3': 20, '4': 1, '5': 9, '10': 'phone'},
-    const {'1': 'account', '3': 30, '4': 1, '5': 11, '6': '.model.Account', '8': const {}, '10': 'account'},
+    const {'1': 'account', '3': 30, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
     const {'1': 'address', '3': 40, '4': 1, '5': 11, '6': '.model.Address', '8': const {}, '10': 'address'},
     const {'1': 'documents', '3': 50, '4': 3, '5': 11, '6': '.model.File', '8': const {}, '10': 'documents'},
     const {'1': 'created_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
@@ -120,7 +130,7 @@ const Agency$json = const {
 };
 
 /// Descriptor for `Agency`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEi4KB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50QgTI3h8AUgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX29uGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZE9uEj8KCnVwZGF0ZWRfb24YRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkT24=');
+final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEigKB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50UgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX29uGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZE9uEj8KCnVwZGF0ZWRfb24YRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkT24=');
 @$core.Deprecated('Use diverDescriptor instead')
 const Diver$json = const {
   '1': 'Diver',
@@ -131,7 +141,7 @@ const Diver$json = const {
     const {'1': 'phone', '3': 30, '4': 1, '5': 9, '10': 'phone'},
     const {'1': 'birth_date', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'birthDate'},
     const {'1': 'level', '3': 50, '4': 1, '5': 14, '6': '.model.LevelType', '10': 'level'},
-    const {'1': 'account', '3': 60, '4': 1, '5': 11, '6': '.model.Account', '8': const {}, '10': 'account'},
+    const {'1': 'account', '3': 60, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
     const {'1': 'documents', '3': 70, '4': 3, '5': 11, '6': '.model.File', '8': const {}, '10': 'documents'},
     const {'1': 'created_on', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
     const {'1': 'updated_on', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
@@ -139,7 +149,7 @@ const Diver$json = const {
 };
 
 /// Descriptor for `Diver`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List diverDescriptor = $convert.base64Decode('CgVEaXZlchIOCgJpZBgBIAEoBFICaWQSHQoKZmlyc3RfbmFtZRgKIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgUIAEoCVIIbGFzdE5hbWUSFAoFcGhvbmUYHiABKAlSBXBob25lEkMKCmJpcnRoX2RhdGUYKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgiQ3x8ByN4fAFIJYmlydGhEYXRlEiYKBWxldmVsGDIgASgOMhAubW9kZWwuTGV2ZWxUeXBlUgVsZXZlbBIuCgdhY2NvdW50GDwgASgLMg4ubW9kZWwuQWNjb3VudEIEyN4fAFIHYWNjb3VudBIvCglkb2N1bWVudHMYRiADKAsyCy5tb2RlbC5GaWxlQgTI3h8AUglkb2N1bWVudHMSPwoKY3JlYXRlZF9vbhhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
+final $typed_data.Uint8List diverDescriptor = $convert.base64Decode('CgVEaXZlchIOCgJpZBgBIAEoBFICaWQSHQoKZmlyc3RfbmFtZRgKIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgUIAEoCVIIbGFzdE5hbWUSFAoFcGhvbmUYHiABKAlSBXBob25lEkMKCmJpcnRoX2RhdGUYKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgiQ3x8ByN4fAFIJYmlydGhEYXRlEiYKBWxldmVsGDIgASgOMhAubW9kZWwuTGV2ZWxUeXBlUgVsZXZlbBIoCgdhY2NvdW50GDwgASgLMg4ubW9kZWwuQWNjb3VudFIHYWNjb3VudBIvCglkb2N1bWVudHMYRiADKAsyCy5tb2RlbC5GaWxlQgTI3h8AUglkb2N1bWVudHMSPwoKY3JlYXRlZF9vbhhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
 @$core.Deprecated('Use tripCommentDescriptor instead')
 const TripComment$json = const {
   '1': 'TripComment',

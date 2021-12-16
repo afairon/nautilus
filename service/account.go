@@ -39,6 +39,9 @@ func NewAccountService(repo *repo.Repo, session session.Session, media media.Sto
 // setUserAccount checks if the username is valid, the email is valid,
 // and the password is valid.
 func setUserAccount(dst *entity.Account, src *pb.Account) error {
+	if src == nil {
+		return status.Error(codes.InvalidArgument, "missing account")
+	}
 	// Set a valid username.
 	err := dst.SetUsername(src.GetUsername())
 	if err != nil {
@@ -67,7 +70,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 	account := entity.Account{}
 
 	// Copy account information and verify if the information is correct.
-	err := setUserAccount(&account, &agency.Account)
+	err := setUserAccount(&account, agency.Account)
 	if err != nil {
 		return err
 	}
@@ -131,7 +134,7 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 	account := entity.Account{}
 
 	// Copy account information and verify if the information is correct.
-	err := setUserAccount(&account, &diver.Account)
+	err := setUserAccount(&account, diver.Account)
 	if err != nil {
 		return err
 	}
@@ -178,20 +181,42 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 
 // Login checks for account credentials and returns access token.
 func (service *accountService) Login(ctx context.Context, email, password string) (string, error) {
+	if email == "" {
+		return "", status.Error(codes.InvalidArgument, "login: missing email")
+	}
+	if password == "" {
+		return "", status.Error(codes.InvalidArgument, "login: missing password")
+	}
+
 	// Retrieve account by email.
-	account, err := service.repo.Account.GetByEmail(ctx, email)
+	accountRecord, err := service.repo.Account.GetByEmail(ctx, email)
 	if err != nil {
 		return "", status.Error(codes.Unavailable, err.Error())
 	}
 
 	// Check password with hash.
-	if !account.CheckPassword(password) {
+	if !accountRecord.CheckPassword(password) {
 		// Wrong password
 		return "", status.Error(codes.PermissionDenied, "account: login failed")
 	}
 
+	var account session.Account
+
+	switch accountRecord.Type {
+	case pb.ADMIN:
+		account, err = service.repo.Account.GetAdminAccount(ctx, accountRecord.GetId())
+	case pb.AGENCY:
+		account, err = service.repo.Account.GetAgencyAccount(ctx, accountRecord.GetId())
+	case pb.DIVER:
+		account, err = service.repo.Account.GetDiverAccount(ctx, accountRecord.GetId())
+	}
+
+	if err != nil {
+		return "", err
+	}
+
 	// Create session.
-	token, err := service.session.Create(*account)
+	token, err := service.session.Create(account)
 	if err != nil {
 		return "", status.Error(codes.Internal, err.Error())
 	}

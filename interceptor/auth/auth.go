@@ -83,8 +83,12 @@ func Authorization(s session.Session) AuthFunc {
 			return nil, status.Error(codes.Unauthenticated, "auth: invalid token")
 		}
 
+		if account.GetAccount() == nil {
+			return nil, status.Error(codes.Unauthenticated, "auth: invalid token")
+		}
+
 		for _, role := range accessibleRoles {
-			if role == account.Type {
+			if role == account.GetAccount().GetType() {
 				ctx = context.WithValue(ctx, session.User, account)
 				return ctx, nil
 			}
