@@ -334,6 +334,8 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat) error {
 	agency, err := getUserInformationFromContext(ctx)
+	log.Info("After getting agency")
+	log.Info(agency)
 
 	if err != nil {
 		return err

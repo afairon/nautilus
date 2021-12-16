@@ -6,6 +6,7 @@ import (
 	"github.com/afairon/nautilus/interceptor"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/session"
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -83,12 +84,12 @@ func Authorization(s session.Session) AuthFunc {
 			return nil, status.Error(codes.Unauthenticated, "auth: invalid token")
 		}
 
-		if account.GetAccount() == nil {
-			return nil, status.Error(codes.Unauthenticated, "auth: invalid token")
-		}
-
+		log.Info("Accessible Roles:")
+		log.Info(accessibleRoles)
 		for _, role := range accessibleRoles {
-			if role == account.GetAccount().GetType() {
+			log.Info("role:", role)
+			log.Infof("account: %+v\n", account)
+			if role == account.Type {
 				ctx = context.WithValue(ctx, session.User, account)
 				return ctx, nil
 			}
