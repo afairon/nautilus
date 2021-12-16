@@ -105,12 +105,10 @@ message Liveaboard {
 
 message AddDiveMasterRequest {
     DiveMaster dive_master = 1;
-    uint64 agency_id = 2;
 }
 
 message AddStaffRequest {
     Staff staff = 1;
-    uint64 agency_id = 2;
 }
 
 message AddTripTemplateRequest {
@@ -121,21 +119,17 @@ message AddTripTemplateRequest {
 message AddTripRequest {
     Trip trip = 1;
     TripTemplate trip_template = 2;
-    uint64 agency_id = 3;
 }
 
 message AddDivingBoatRequest {
     DivingBoat diving_boat = 1;
-    uint64 agency_id = 2;
 }
 
 message AddHotelRequest {
     Hotel hotel = 1;
-    uint64 agency_id = 2;
     uint64 addressId = 3;
 }
 
 message AddLiveaboardRequest {
     Liveaboard liveaboard = 1;
-    uint64 agency_id = 2;
 }

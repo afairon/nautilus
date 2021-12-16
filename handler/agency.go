@@ -23,7 +23,7 @@ func NewAgencyHandler(agencyService service.AgencyService) *AgencyHandler {
 
 // AddDiveMaster handles dive master creation. It delegates the dive master creation to agencyService.
 func (handler *AgencyHandler) AddDiveMaster(ctx context.Context, req *pb.AddDiveMasterRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddDiveMaster(ctx, req.GetDiveMaster(), req.GetAgencyId())
+	err := handler.agencyService.AddDiveMaster(ctx, req.GetDiveMaster())
 
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (handler *AgencyHandler) AddDiveMaster(ctx context.Context, req *pb.AddDive
 }
 
 func (handler *AgencyHandler) AddHotel(ctx context.Context, req *pb.AddHotelRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddHotel(ctx, req.GetHotel(), req.GetAgencyId(), req.GetAddressId())
+	err := handler.agencyService.AddHotel(ctx, req.GetHotel(), req.GetAddressId())
 
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (handler *AgencyHandler) AddHotel(ctx context.Context, req *pb.AddHotelRequ
 }
 
 func (handler *AgencyHandler) AddStaff(ctx context.Context, req *pb.AddStaffRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddStaff(ctx, req.GetStaff(), req.GetAgencyId())
+	err := handler.agencyService.AddStaff(ctx, req.GetStaff())
 
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddTrip(ctx, req.GetTripTemplate(), req.GetTrip(), req.GetAgencyId())
+	err := handler.agencyService.AddTrip(ctx, req.GetTripTemplate(), req.GetTrip())
 
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripReques
 }
 
 func (handler *AgencyHandler) AddDivingBoat(ctx context.Context, req *pb.AddDivingBoatRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddDivingBoat(ctx, req.GetDivingBoat(), req.GetAgencyId())
+	err := handler.agencyService.AddDivingBoat(ctx, req.GetDivingBoat())
 
 	if err != nil {
 		return nil, err
@@ -77,7 +77,7 @@ func (handler *AgencyHandler) AddDivingBoat(ctx context.Context, req *pb.AddDivi
 }
 
 func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLiveaboardRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddLiveaboard(ctx, req.GetLiveaboard(), req.GetAgencyId())
+	err := handler.agencyService.AddLiveaboard(ctx, req.GetLiveaboard())
 
 	if err != nil {
 		return nil, err

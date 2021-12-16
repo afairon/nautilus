@@ -16,13 +16,13 @@ import (
 
 // AgencyService defines operations on agency.
 type AgencyService interface {
-	AddDiveMaster(context.Context, *pb.DiveMaster, uint64) error
-	AddStaff(context.Context, *pb.Staff, uint64) error
+	AddDiveMaster(context.Context, *pb.DiveMaster) error
+	AddStaff(context.Context, *pb.Staff) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
-	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip, uint64) error
-	AddDivingBoat(context.Context, *pb.DivingBoat, uint64) error
-	AddHotel(context.Context, *pb.Hotel, uint64, uint64) error
-	AddLiveaboard(context.Context, *pb.Liveaboard, uint64) error
+	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip) error
+	AddDivingBoat(context.Context, *pb.DivingBoat) error
+	AddHotel(context.Context, *pb.Hotel, uint64) error
+	AddLiveaboard(context.Context, *pb.Liveaboard) error
 }
 
 // agencyService implements AgencyService interface above.
@@ -38,6 +38,24 @@ func NewAgencyService(repo *repo.Repo, session session.Session, media media.Stor
 		session: session,
 		media:   media,
 	}
+}
+
+func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
+	// Obtaining value at session.User
+	user := ctx.Value(session.User)
+
+	if user == nil {
+		// Handle nil condition
+		return nil, status.Error(codes.Unauthenticated, "user not found")
+	}
+	// Type assertion
+	v, ok := user.(*pb.Agency) // Casting to Agency
+	if !ok {
+		// Handle error
+		return nil, status.Error(codes.Internal, "casting user to Agency failed")
+	}
+
+	return v, nil
 }
 
 func setDiveMaster(dst *entity.DiveMaster, src *pb.DiveMaster) error {
@@ -56,18 +74,24 @@ func setDiveMaster(dst *entity.DiveMaster, src *pb.DiveMaster) error {
 	return nil
 }
 
-func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster, agency_id uint64) error {
+func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newDiveMaster := entity.DiveMaster{}
 
 	// Copy dive master information and verify the dive master's information
-	err := setDiveMaster(&newDiveMaster, diveMaster)
+	err = setDiveMaster(&newDiveMaster, diveMaster)
 
 	if err != nil {
 		return err
 	}
 
 	newDiveMaster.Level = diveMaster.Level
-	newDiveMaster.AgencyId = agency_id
+	newDiveMaster.AgencyId = agency.Id
 
 	var reader *bytes.Reader
 	var objectID string
@@ -104,13 +128,19 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Phone = src.GetPhone()
 }
 
-func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, agency_id uint64, address_id uint64) error {
+func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, address_id uint64) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newHotel := entity.Hotel{}
 
 	// Copy dive master information and verify the dive master's information
 	setHotel(&newHotel, hotel)
 
-	newHotel.AgencyId = agency_id
+	newHotel.AgencyId = agency.Id
 	newHotel.AddressId = address_id
 
 	for _, image := range hotel.GetImages() {
@@ -124,7 +154,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
 
 		if err != nil {
@@ -201,16 +231,22 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, age
 	return err
 }
 
-func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff, agency_id uint64) error {
+func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newStaff := entity.Staff{
 		FirstName: req.GetFirstName(),
 		LastName:  req.GetLastName(),
 		Position:  req.GetPosition(),
 		Gender:    req.GetGender(),
-		AgencyId:  agency_id,
+		AgencyId:  agency.Id,
 	}
 
-	_, err := service.repo.Agency.CreateStaff(ctx, &newStaff)
+	_, err = service.repo.Agency.CreateStaff(ctx, &newStaff)
 
 	return err
 }
@@ -219,12 +255,18 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 	return status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
 }
 
-func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.TripTemplate, trip *pb.Trip, agency_id uint64) error {
+func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.TripTemplate, trip *pb.Trip) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newTripTemplate := entity.TripTemplate{
 		Name:        tripTemplate.GetName(),
 		Description: tripTemplate.GetDescription(),
 		Type:        tripTemplate.GetTripType(),
-		AgencyId:    agency_id,
+		AgencyId:    agency.Id,
 		BoatId:      tripTemplate.GetDivingBoatId(),
 	}
 
@@ -245,7 +287,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
 	}
 
-	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		// Create a record in trip_template table
 		createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 		log.Info("err after created trip template:")
@@ -256,7 +298,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 		newTrip := entity.Trip{
 			TemplateId:          createdTripTemplate.GetId(),
-			AgencyId:            agency_id,
+			AgencyId:            agency.Id,
 			MaxGuest:            trip.GetMaxCapacity(),
 			Price:               float32(trip.GetPrice()),
 			FromDate:            trip.GetFrom(),
@@ -290,11 +332,16 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	return err
 }
 
-func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat, agency_id uint64) error {
+func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newDivingBoat := entity.Boat{
-		Id:       agency_id,
 		Name:     divingBoat.GetBoatModel(),
-		AgencyId: agency_id,
+		AgencyId: agency.Id,
 	}
 
 	for _, image := range divingBoat.GetBoatImages() {
@@ -308,18 +355,24 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		newDivingBoat.Images = append(newDivingBoat.Images, objectID)
 	}
 
-	_, err := service.repo.Agency.CreateBoat(ctx, &newDivingBoat)
+	_, err = service.repo.Agency.CreateBoat(ctx, &newDivingBoat)
 
 	return err
 }
 
-func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard, agency_id uint64) error {
+func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
 	newLiveaboard := entity.Liveaboard{
 		Name:        liveaboard.GetName(),
 		Description: liveaboard.GetDescription(),
 		Length:      liveaboard.GetLength(),
 		Width:       liveaboard.GetWidth(),
-		AgencyId:    agency_id,
+		AgencyId:    agency.Id,
 	}
 
 	for _, image := range liveaboard.GetImages() {
@@ -333,7 +386,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
 	}
 
-	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		createdLiveaboard, err := query.Agency.CreateLiveaboard(ctx, &newLiveaboard)
 
 		if err != nil {
