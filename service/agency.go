@@ -9,7 +9,6 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
-	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -290,8 +289,6 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 		// Create a record in trip_template table
 		createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
-		log.Info("err after created trip template:")
-		log.Info(err)
 		if err != nil {
 			return err
 		}
@@ -334,8 +331,6 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat) error {
 	agency, err := getUserInformationFromContext(ctx)
-	log.Info("After getting agency")
-	log.Info(agency)
 
 	if err != nil {
 		return err
@@ -432,7 +427,6 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 			}
 
 			modelAmenities := modelRoomTypes[i].GetAmenities()
-			log.Info(modelAmenities)
 
 			// Create Amenities of a room type
 			for _, modelAmenity := range modelAmenities {
@@ -440,8 +434,6 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 					Name:        modelAmenity.GetName(),
 					Description: modelAmenity.GetDescription(),
 				}
-				log.Info("Current Amenity:")
-				log.Info(entityAmenity)
 
 				createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
 
