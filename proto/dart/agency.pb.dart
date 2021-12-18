@@ -768,11 +768,11 @@ class Hotel extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Hotel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelName')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'star', $pb.PbFieldType.OU3)
-    ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'highlights')
     ..pc<$6.File>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
     ..pc<RoomType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypes', $pb.PbFieldType.PM, subBuilder: RoomType.create)
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelDescription')
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phone')
+    ..aOM<$6.Address>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
     ..hasRequiredFields = false
   ;
 
@@ -780,11 +780,11 @@ class Hotel extends $pb.GeneratedMessage {
   factory Hotel({
     $core.String? hotelName,
     $core.int? star,
-    $core.Iterable<$core.String>? highlights,
     $core.Iterable<$6.File>? images,
     $core.Iterable<RoomType>? roomTypes,
     $core.String? hotelDescription,
     $core.String? phone,
+    $6.Address? address,
   }) {
     final _result = create();
     if (hotelName != null) {
@@ -792,9 +792,6 @@ class Hotel extends $pb.GeneratedMessage {
     }
     if (star != null) {
       _result.star = star;
-    }
-    if (highlights != null) {
-      _result.highlights.addAll(highlights);
     }
     if (images != null) {
       _result.images.addAll(images);
@@ -807,6 +804,9 @@ class Hotel extends $pb.GeneratedMessage {
     }
     if (phone != null) {
       _result.phone = phone;
+    }
+    if (address != null) {
+      _result.address = address;
     }
     return _result;
   }
@@ -849,32 +849,40 @@ class Hotel extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearStar() => clearField(2);
 
-  @$pb.TagNumber(3)
-  $core.List<$core.String> get highlights => $_getList(2);
-
   @$pb.TagNumber(4)
-  $core.List<$6.File> get images => $_getList(3);
+  $core.List<$6.File> get images => $_getList(2);
 
   @$pb.TagNumber(5)
-  $core.List<RoomType> get roomTypes => $_getList(4);
+  $core.List<RoomType> get roomTypes => $_getList(3);
 
   @$pb.TagNumber(6)
-  $core.String get hotelDescription => $_getSZ(5);
+  $core.String get hotelDescription => $_getSZ(4);
   @$pb.TagNumber(6)
-  set hotelDescription($core.String v) { $_setString(5, v); }
+  set hotelDescription($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(6)
-  $core.bool hasHotelDescription() => $_has(5);
+  $core.bool hasHotelDescription() => $_has(4);
   @$pb.TagNumber(6)
   void clearHotelDescription() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get phone => $_getSZ(6);
+  $core.String get phone => $_getSZ(5);
   @$pb.TagNumber(7)
-  set phone($core.String v) { $_setString(6, v); }
+  set phone($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(7)
-  $core.bool hasPhone() => $_has(6);
+  $core.bool hasPhone() => $_has(5);
   @$pb.TagNumber(7)
   void clearPhone() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $6.Address get address => $_getN(6);
+  @$pb.TagNumber(8)
+  set address($6.Address v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasAddress() => $_has(6);
+  @$pb.TagNumber(8)
+  void clearAddress() => clearField(8);
+  @$pb.TagNumber(8)
+  $6.Address ensureAddress() => $_ensure(6);
 }
 
 class Liveaboard extends $pb.GeneratedMessage {
@@ -1260,21 +1268,16 @@ class AddDivingBoatRequest extends $pb.GeneratedMessage {
 class AddHotelRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOM<Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: Hotel.create)
-    ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addressId', $pb.PbFieldType.OU6, protoName: 'addressId', defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
   AddHotelRequest._() : super();
   factory AddHotelRequest({
     Hotel? hotel,
-    $fixnum.Int64? addressId,
   }) {
     final _result = create();
     if (hotel != null) {
       _result.hotel = hotel;
-    }
-    if (addressId != null) {
-      _result.addressId = addressId;
     }
     return _result;
   }
@@ -1309,15 +1312,6 @@ class AddHotelRequest extends $pb.GeneratedMessage {
   void clearHotel() => clearField(1);
   @$pb.TagNumber(1)
   Hotel ensureHotel() => $_ensure(0);
-
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get addressId => $_getI64(1);
-  @$pb.TagNumber(3)
-  set addressId($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasAddressId() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearAddressId() => clearField(3);
 }
 
 class AddLiveaboardRequest extends $pb.GeneratedMessage {

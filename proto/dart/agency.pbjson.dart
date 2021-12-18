@@ -124,16 +124,16 @@ const Hotel$json = const {
   '2': const [
     const {'1': 'hotel_name', '3': 1, '4': 1, '5': 9, '10': 'hotelName'},
     const {'1': 'star', '3': 2, '4': 1, '5': 13, '10': 'star'},
-    const {'1': 'highlights', '3': 3, '4': 3, '5': 9, '10': 'highlights'},
     const {'1': 'images', '3': 4, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
     const {'1': 'room_types', '3': 5, '4': 3, '5': 11, '6': '.agency.RoomType', '10': 'roomTypes'},
     const {'1': 'hotel_description', '3': 6, '4': 1, '5': 9, '10': 'hotelDescription'},
     const {'1': 'phone', '3': 7, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'address', '3': 8, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
   ],
 };
 
 /// Descriptor for `Hotel`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List hotelDescriptor = $convert.base64Decode('CgVIb3RlbBIdCgpob3RlbF9uYW1lGAEgASgJUglob3RlbE5hbWUSEgoEc3RhchgCIAEoDVIEc3RhchIeCgpoaWdobGlnaHRzGAMgAygJUgpoaWdobGlnaHRzEiMKBmltYWdlcxgEIAMoCzILLm1vZGVsLkZpbGVSBmltYWdlcxIvCgpyb29tX3R5cGVzGAUgAygLMhAuYWdlbmN5LlJvb21UeXBlUglyb29tVHlwZXMSKwoRaG90ZWxfZGVzY3JpcHRpb24YBiABKAlSEGhvdGVsRGVzY3JpcHRpb24SFAoFcGhvbmUYByABKAlSBXBob25l');
+final $typed_data.Uint8List hotelDescriptor = $convert.base64Decode('CgVIb3RlbBIdCgpob3RlbF9uYW1lGAEgASgJUglob3RlbE5hbWUSEgoEc3RhchgCIAEoDVIEc3RhchIjCgZpbWFnZXMYBCADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLwoKcm9vbV90eXBlcxgFIAMoCzIQLmFnZW5jeS5Sb29tVHlwZVIJcm9vbVR5cGVzEisKEWhvdGVsX2Rlc2NyaXB0aW9uGAYgASgJUhBob3RlbERlc2NyaXB0aW9uEhQKBXBob25lGAcgASgJUgVwaG9uZRIoCgdhZGRyZXNzGAggASgLMg4ubW9kZWwuQWRkcmVzc1IHYWRkcmVzcw==');
 @$core.Deprecated('Use liveaboardDescriptor instead')
 const Liveaboard$json = const {
   '1': 'Liveaboard',
@@ -206,12 +206,11 @@ const AddHotelRequest$json = const {
   '1': 'AddHotelRequest',
   '2': const [
     const {'1': 'hotel', '3': 1, '4': 1, '5': 11, '6': '.agency.Hotel', '10': 'hotel'},
-    const {'1': 'addressId', '3': 3, '4': 1, '5': 4, '10': 'addressId'},
   ],
 };
 
 /// Descriptor for `AddHotelRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addHotelRequestDescriptor = $convert.base64Decode('Cg9BZGRIb3RlbFJlcXVlc3QSIwoFaG90ZWwYASABKAsyDS5hZ2VuY3kuSG90ZWxSBWhvdGVsEhwKCWFkZHJlc3NJZBgDIAEoBFIJYWRkcmVzc0lk');
+final $typed_data.Uint8List addHotelRequestDescriptor = $convert.base64Decode('Cg9BZGRIb3RlbFJlcXVlc3QSIwoFaG90ZWwYASABKAsyDS5hZ2VuY3kuSG90ZWxSBWhvdGVs');
 @$core.Deprecated('Use addLiveaboardRequestDescriptor instead')
 const AddLiveaboardRequest$json = const {
   '1': 'AddLiveaboardRequest',
