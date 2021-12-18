@@ -124,12 +124,6 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 	return err
 }
 
-func setHotel(dst *entity.Hotel, src *pb.Hotel) {
-	dst.Name = src.GetHotelName()
-	dst.Description = src.GetHotelDescription()
-	dst.Phone = src.GetPhone()
-}
-
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) error {
 	agency, err := getUserInformationFromContext(ctx)
 
@@ -137,12 +131,13 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		return err
 	}
 
-	newHotel := entity.Hotel{}
-
-	// Copy dive master information and verify the dive master's information
-	setHotel(&newHotel, hotel)
-
-	newHotel.AgencyId = agency.Id
+	newHotel := entity.Hotel{
+		Name:        hotel.GetHotelName(),
+		Description: hotel.GetHotelDescription(),
+		Stars:       hotel.GetStar(),
+		Phone:       hotel.GetPhone(),
+		AgencyId:    agency.Id,
+	}
 
 	for _, image := range hotel.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
