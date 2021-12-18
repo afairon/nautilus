@@ -96,7 +96,7 @@ func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session,
 	repo := repo.NewRepo(db)
 
 	accountService := service.NewAccountService(repo, session, media)
-	agencyService := service.NewAgencyService(repo, session, media)
+	agencyService := service.NewAgencyService(repo, media)
 	reservationService := service.NewReservationService(repo)
 	commentService := service.NewCommentService(repo)
 

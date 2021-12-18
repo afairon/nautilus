@@ -18,6 +18,11 @@ service AgencyService {
     rpc AddDivingBoat(AddDivingBoatRequest) returns (google.protobuf.Empty);
     rpc AddHotel(AddHotelRequest) returns (google.protobuf.Empty);
     rpc AddLiveaboard(AddLiveaboardRequest) returns (google.protobuf.Empty);
+
+    rpc ListBoats(ListBoatsRequest) returns (stream ListBoatsResponse);
+    rpc ListDiveMasters(ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
+    rpc ListHotels(ListHotelsRequest) returns (stream ListHotelsResponse);
+    rpc ListLiveaboards(ListLiveaboardsRequest) returns (stream ListLiveaboardsResponse);
 }
 
 message DiveMaster {
@@ -130,4 +135,89 @@ message AddHotelRequest {
 
 message AddLiveaboardRequest {
     Liveaboard liveaboard = 1;
+}
+
+// ListBoatsRequest
+message ListBoatsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListBoatsResponse
+message ListBoatsResponse {
+    Boat boat = 1;
+
+    message Boat {
+        uint64 id = 1;
+        string name = 10;
+        repeated model.File images = 20;
+        google.protobuf.Timestamp created_on = 30 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 40 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListDiveMastersRequest
+message ListDiveMastersRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListDiveMastersResponse
+message ListDiveMastersResponse {
+    DiveMaster dive_master = 1;
+
+    message DiveMaster {
+        uint64 id = 1;
+        string first_name = 10;
+        string last_name = 20;
+        model.LevelType level = 30;
+        repeated model.File documents = 40;
+        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListHotelsRequest
+message ListHotelsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListHotelsResponse
+message ListHotelsResponse {
+    Hotel hotel = 1;
+
+    message Hotel {
+        uint64 id = 1;
+        string name = 10;
+        string description = 20;
+        uint32 stars = 30;
+        string phone = 40;
+        model.Address address = 50;
+        repeated model.File images = 60;
+        google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListLiveaboardsRequest
+message ListLiveaboardsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListLiveaboardsResponse
+message ListLiveaboardsResponse {
+    Liveaboard liveaboard = 1;
+
+    message Liveaboard {
+        uint64 id = 1;
+        string name = 10;
+        string description = 20;
+        float length = 30;
+        float width = 40;
+        repeated model.File images = 50;
+        google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
+    }
 }

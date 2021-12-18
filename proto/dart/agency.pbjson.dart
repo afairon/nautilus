@@ -221,3 +221,148 @@ const AddLiveaboardRequest$json = const {
 
 /// Descriptor for `AddLiveaboardRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addLiveaboardRequestDescriptor = $convert.base64Decode('ChRBZGRMaXZlYWJvYXJkUmVxdWVzdBIyCgpsaXZlYWJvYXJkGAEgASgLMhIuYWdlbmN5LkxpdmVhYm9hcmRSCmxpdmVhYm9hcmQ=');
+@$core.Deprecated('Use listBoatsRequestDescriptor instead')
+const ListBoatsRequest$json = const {
+  '1': 'ListBoatsRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListBoatsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listBoatsRequestDescriptor = $convert.base64Decode('ChBMaXN0Qm9hdHNSZXF1ZXN0EhQKBWxpbWl0GAEgASgEUgVsaW1pdBIWCgZvZmZzZXQYAiABKARSBm9mZnNldA==');
+@$core.Deprecated('Use listBoatsResponseDescriptor instead')
+const ListBoatsResponse$json = const {
+  '1': 'ListBoatsResponse',
+  '2': const [
+    const {'1': 'boat', '3': 1, '4': 1, '5': 11, '6': '.agency.ListBoatsResponse.Boat', '10': 'boat'},
+  ],
+  '3': const [ListBoatsResponse_Boat$json],
+};
+
+@$core.Deprecated('Use listBoatsResponseDescriptor instead')
+const ListBoatsResponse_Boat$json = const {
+  '1': 'Boat',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'images', '3': 20, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'created_on', '3': 30, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `ListBoatsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listBoatsResponseDescriptor = $convert.base64Decode('ChFMaXN0Qm9hdHNSZXNwb25zZRIyCgRib2F0GAEgASgLMh4uYWdlbmN5Lkxpc3RCb2F0c1Jlc3BvbnNlLkJvYXRSBGJvYXQa0QEKBEJvYXQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIwoGaW1hZ2VzGBQgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEj8KCmNyZWF0ZWRfb24YHiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+@$core.Deprecated('Use listDiveMastersRequestDescriptor instead')
+const ListDiveMastersRequest$json = const {
+  '1': 'ListDiveMastersRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListDiveMastersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveMastersRequestDescriptor = $convert.base64Decode('ChZMaXN0RGl2ZU1hc3RlcnNSZXF1ZXN0EhQKBWxpbWl0GAEgASgEUgVsaW1pdBIWCgZvZmZzZXQYAiABKARSBm9mZnNldA==');
+@$core.Deprecated('Use listDiveMastersResponseDescriptor instead')
+const ListDiveMastersResponse$json = const {
+  '1': 'ListDiveMastersResponse',
+  '2': const [
+    const {'1': 'dive_master', '3': 1, '4': 1, '5': 11, '6': '.agency.ListDiveMastersResponse.DiveMaster', '10': 'diveMaster'},
+  ],
+  '3': const [ListDiveMastersResponse_DiveMaster$json],
+};
+
+@$core.Deprecated('Use listDiveMastersResponseDescriptor instead')
+const ListDiveMastersResponse_DiveMaster$json = const {
+  '1': 'DiveMaster',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'first_name', '3': 10, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 20, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'level', '3': 30, '4': 1, '5': 14, '6': '.model.LevelType', '10': 'level'},
+    const {'1': 'documents', '3': 40, '4': 3, '5': 11, '6': '.model.File', '10': 'documents'},
+    const {'1': 'created_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `ListDiveMastersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveMastersResponseDescriptor = $convert.base64Decode('ChdMaXN0RGl2ZU1hc3RlcnNSZXNwb25zZRJLCgtkaXZlX21hc3RlchgBIAEoCzIqLmFnZW5jeS5MaXN0RGl2ZU1hc3RlcnNSZXNwb25zZS5EaXZlTWFzdGVyUgpkaXZlTWFzdGVyGq0CCgpEaXZlTWFzdGVyEg4KAmlkGAEgASgEUgJpZBIdCgpmaXJzdF9uYW1lGAogASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGBQgASgJUghsYXN0TmFtZRImCgVsZXZlbBgeIAEoDjIQLm1vZGVsLkxldmVsVHlwZVIFbGV2ZWwSKQoJZG9jdW1lbnRzGCggAygLMgsubW9kZWwuRmlsZVIJZG9jdW1lbnRzEj8KCmNyZWF0ZWRfb24YMiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+@$core.Deprecated('Use listHotelsRequestDescriptor instead')
+const ListHotelsRequest$json = const {
+  '1': 'ListHotelsRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListHotelsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHotelsRequestDescriptor = $convert.base64Decode('ChFMaXN0SG90ZWxzUmVxdWVzdBIUCgVsaW1pdBgBIAEoBFIFbGltaXQSFgoGb2Zmc2V0GAIgASgEUgZvZmZzZXQ=');
+@$core.Deprecated('Use listHotelsResponseDescriptor instead')
+const ListHotelsResponse$json = const {
+  '1': 'ListHotelsResponse',
+  '2': const [
+    const {'1': 'hotel', '3': 1, '4': 1, '5': 11, '6': '.agency.ListHotelsResponse.Hotel', '10': 'hotel'},
+  ],
+  '3': const [ListHotelsResponse_Hotel$json],
+};
+
+@$core.Deprecated('Use listHotelsResponseDescriptor instead')
+const ListHotelsResponse_Hotel$json = const {
+  '1': 'Hotel',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'stars', '3': 30, '4': 1, '5': 13, '10': 'stars'},
+    const {'1': 'phone', '3': 40, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'address', '3': 50, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'images', '3': 60, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'created_on', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `ListHotelsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listHotelsResponseDescriptor = $convert.base64Decode('ChJMaXN0SG90ZWxzUmVzcG9uc2USNgoFaG90ZWwYASABKAsyIC5hZ2VuY3kuTGlzdEhvdGVsc1Jlc3BvbnNlLkhvdGVsUgVob3RlbBrKAgoFSG90ZWwSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YFCABKAlSC2Rlc2NyaXB0aW9uEhQKBXN0YXJzGB4gASgNUgVzdGFycxIUCgVwaG9uZRgoIAEoCVIFcGhvbmUSKAoHYWRkcmVzcxgyIAEoCzIOLm1vZGVsLkFkZHJlc3NSB2FkZHJlc3MSIwoGaW1hZ2VzGDwgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEj8KCmNyZWF0ZWRfb24YRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+@$core.Deprecated('Use listLiveaboardsRequestDescriptor instead')
+const ListLiveaboardsRequest$json = const {
+  '1': 'ListLiveaboardsRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListLiveaboardsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLiveaboardsRequestDescriptor = $convert.base64Decode('ChZMaXN0TGl2ZWFib2FyZHNSZXF1ZXN0EhQKBWxpbWl0GAEgASgEUgVsaW1pdBIWCgZvZmZzZXQYAiABKARSBm9mZnNldA==');
+@$core.Deprecated('Use listLiveaboardsResponseDescriptor instead')
+const ListLiveaboardsResponse$json = const {
+  '1': 'ListLiveaboardsResponse',
+  '2': const [
+    const {'1': 'liveaboard', '3': 1, '4': 1, '5': 11, '6': '.agency.ListLiveaboardsResponse.Liveaboard', '10': 'liveaboard'},
+  ],
+  '3': const [ListLiveaboardsResponse_Liveaboard$json],
+};
+
+@$core.Deprecated('Use listLiveaboardsResponseDescriptor instead')
+const ListLiveaboardsResponse_Liveaboard$json = const {
+  '1': 'Liveaboard',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'length', '3': 30, '4': 1, '5': 2, '10': 'length'},
+    const {'1': 'width', '3': 40, '4': 1, '5': 2, '10': 'width'},
+    const {'1': 'images', '3': 50, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'created_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
+    const {'1': 'updated_on', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+  ],
+};
+
+/// Descriptor for `ListLiveaboardsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLiveaboardsResponseDescriptor = $convert.base64Decode('ChdMaXN0TGl2ZWFib2FyZHNSZXNwb25zZRJKCgpsaXZlYWJvYXJkGAEgASgLMiouYWdlbmN5Lkxpc3RMaXZlYWJvYXJkc1Jlc3BvbnNlLkxpdmVhYm9hcmRSCmxpdmVhYm9hcmQapwIKCkxpdmVhYm9hcmQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YFCABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgeIAEoAlIGbGVuZ3RoEhQKBXdpZHRoGCggASgCUgV3aWR0aBIjCgZpbWFnZXMYMiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSPwoKY3JlYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');

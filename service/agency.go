@@ -22,20 +22,23 @@ type AgencyService interface {
 	AddDivingBoat(context.Context, *pb.DivingBoat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
+
+	ListBoats(ctx context.Context, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error)
+	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error)
+	ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
+	ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error)
 }
 
 // agencyService implements AgencyService interface above.
 type agencyService struct {
-	repo    *repo.Repo
-	session session.Session
-	media   media.Store
+	repo  *repo.Repo
+	media media.Store
 }
 
-func NewAgencyService(repo *repo.Repo, session session.Session, media media.Store) *agencyService {
+func NewAgencyService(repo *repo.Repo, media media.Store) *agencyService {
 	return &agencyService{
-		repo:    repo,
-		session: session,
-		media:   media,
+		repo:  repo,
+		media: media,
 	}
 }
 
@@ -473,4 +476,64 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	})
 
 	return err
+}
+
+// ListBoats returns list of boats associated with the agency.
+func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	return service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
+}
+
+// ListDiveMasters returns list of divemasters associated with the agency.
+func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	return service.repo.DiveMaster.ListDiveMastersByAgency(ctx, agency.Id, limit, offset)
+}
+
+// ListHotels returns list of hotels associated with the agency.
+func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	return service.repo.Hotel.ListHotelsByAgency(ctx, agency.Id, limit, offset)
+}
+
+// ListLiveaboards returns list of liveaboards associated with the agency.
+func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	return service.repo.Liveaboard.ListLiveaboardsByAgency(ctx, agency.Id, limit, offset)
 }
