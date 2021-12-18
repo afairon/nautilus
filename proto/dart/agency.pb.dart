@@ -1369,3 +1369,975 @@ class AddLiveaboardRequest extends $pb.GeneratedMessage {
   Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
+class ListBoatsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBoatsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListBoatsRequest._() : super();
+  factory ListBoatsRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListBoatsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListBoatsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListBoatsRequest clone() => ListBoatsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListBoatsRequest copyWith(void Function(ListBoatsRequest) updates) => super.copyWith((message) => updates(message as ListBoatsRequest)) as ListBoatsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsRequest create() => ListBoatsRequest._();
+  ListBoatsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListBoatsRequest> createRepeated() => $pb.PbList<ListBoatsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListBoatsRequest>(create);
+  static ListBoatsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBoatsResponse.Boat', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..pc<$6.File>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListBoatsResponse_Boat._() : super();
+  factory ListBoatsResponse_Boat({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.Iterable<$6.File>? images,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListBoatsResponse_Boat.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListBoatsResponse_Boat.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListBoatsResponse_Boat clone() => ListBoatsResponse_Boat()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListBoatsResponse_Boat copyWith(void Function(ListBoatsResponse_Boat) updates) => super.copyWith((message) => updates(message as ListBoatsResponse_Boat)) as ListBoatsResponse_Boat; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsResponse_Boat create() => ListBoatsResponse_Boat._();
+  ListBoatsResponse_Boat createEmptyInstance() => create();
+  static $pb.PbList<ListBoatsResponse_Boat> createRepeated() => $pb.PbList<ListBoatsResponse_Boat>();
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsResponse_Boat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListBoatsResponse_Boat>(create);
+  static ListBoatsResponse_Boat? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.List<$6.File> get images => $_getList(2);
+
+  @$pb.TagNumber(30)
+  $5.Timestamp get createdOn => $_getN(3);
+  @$pb.TagNumber(30)
+  set createdOn($5.Timestamp v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasCreatedOn() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearCreatedOn() => clearField(30);
+  @$pb.TagNumber(30)
+  $5.Timestamp ensureCreatedOn() => $_ensure(3);
+
+  @$pb.TagNumber(40)
+  $5.Timestamp get updatedOn => $_getN(4);
+  @$pb.TagNumber(40)
+  set updatedOn($5.Timestamp v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasUpdatedOn() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearUpdatedOn() => clearField(40);
+  @$pb.TagNumber(40)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(4);
+}
+
+class ListBoatsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBoatsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListBoatsResponse_Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boat', subBuilder: ListBoatsResponse_Boat.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListBoatsResponse._() : super();
+  factory ListBoatsResponse({
+    ListBoatsResponse_Boat? boat,
+  }) {
+    final _result = create();
+    if (boat != null) {
+      _result.boat = boat;
+    }
+    return _result;
+  }
+  factory ListBoatsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListBoatsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListBoatsResponse clone() => ListBoatsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListBoatsResponse copyWith(void Function(ListBoatsResponse) updates) => super.copyWith((message) => updates(message as ListBoatsResponse)) as ListBoatsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsResponse create() => ListBoatsResponse._();
+  ListBoatsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListBoatsResponse> createRepeated() => $pb.PbList<ListBoatsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListBoatsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListBoatsResponse>(create);
+  static ListBoatsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListBoatsResponse_Boat get boat => $_getN(0);
+  @$pb.TagNumber(1)
+  set boat(ListBoatsResponse_Boat v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasBoat() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBoat() => clearField(1);
+  @$pb.TagNumber(1)
+  ListBoatsResponse_Boat ensureBoat() => $_ensure(0);
+}
+
+class ListDiveMastersRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveMastersRequest._() : super();
+  factory ListDiveMastersRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListDiveMastersRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveMastersRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersRequest clone() => ListDiveMastersRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersRequest copyWith(void Function(ListDiveMastersRequest) updates) => super.copyWith((message) => updates(message as ListDiveMastersRequest)) as ListDiveMastersRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersRequest create() => ListDiveMastersRequest._();
+  ListDiveMastersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListDiveMastersRequest> createRepeated() => $pb.PbList<ListDiveMastersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveMastersRequest>(create);
+  static ListDiveMastersRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListDiveMastersResponse_DiveMaster extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersResponse.DiveMaster', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
+    ..e<$6.LevelType>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: $6.LevelType.INSTRUCTOR, valueOf: $6.LevelType.valueOf, enumValues: $6.LevelType.values)
+    ..pc<$6.File>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'documents', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveMastersResponse_DiveMaster._() : super();
+  factory ListDiveMastersResponse_DiveMaster({
+    $fixnum.Int64? id,
+    $core.String? firstName,
+    $core.String? lastName,
+    $6.LevelType? level,
+    $core.Iterable<$6.File>? documents,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (firstName != null) {
+      _result.firstName = firstName;
+    }
+    if (lastName != null) {
+      _result.lastName = lastName;
+    }
+    if (level != null) {
+      _result.level = level;
+    }
+    if (documents != null) {
+      _result.documents.addAll(documents);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListDiveMastersResponse_DiveMaster.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveMastersResponse_DiveMaster.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersResponse_DiveMaster clone() => ListDiveMastersResponse_DiveMaster()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersResponse_DiveMaster copyWith(void Function(ListDiveMastersResponse_DiveMaster) updates) => super.copyWith((message) => updates(message as ListDiveMastersResponse_DiveMaster)) as ListDiveMastersResponse_DiveMaster; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersResponse_DiveMaster create() => ListDiveMastersResponse_DiveMaster._();
+  ListDiveMastersResponse_DiveMaster createEmptyInstance() => create();
+  static $pb.PbList<ListDiveMastersResponse_DiveMaster> createRepeated() => $pb.PbList<ListDiveMastersResponse_DiveMaster>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersResponse_DiveMaster getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveMastersResponse_DiveMaster>(create);
+  static ListDiveMastersResponse_DiveMaster? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get firstName => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set firstName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasFirstName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearFirstName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get lastName => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set lastName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasLastName() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearLastName() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $6.LevelType get level => $_getN(3);
+  @$pb.TagNumber(30)
+  set level($6.LevelType v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasLevel() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearLevel() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $core.List<$6.File> get documents => $_getList(4);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get createdOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set createdOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasCreatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearCreatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+
+  @$pb.TagNumber(60)
+  $5.Timestamp get updatedOn => $_getN(6);
+  @$pb.TagNumber(60)
+  set updatedOn($5.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasUpdatedOn() => $_has(6);
+  @$pb.TagNumber(60)
+  void clearUpdatedOn() => clearField(60);
+  @$pb.TagNumber(60)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+}
+
+class ListDiveMastersResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListDiveMastersResponse_DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: ListDiveMastersResponse_DiveMaster.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveMastersResponse._() : super();
+  factory ListDiveMastersResponse({
+    ListDiveMastersResponse_DiveMaster? diveMaster,
+  }) {
+    final _result = create();
+    if (diveMaster != null) {
+      _result.diveMaster = diveMaster;
+    }
+    return _result;
+  }
+  factory ListDiveMastersResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveMastersResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersResponse clone() => ListDiveMastersResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersResponse copyWith(void Function(ListDiveMastersResponse) updates) => super.copyWith((message) => updates(message as ListDiveMastersResponse)) as ListDiveMastersResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersResponse create() => ListDiveMastersResponse._();
+  ListDiveMastersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListDiveMastersResponse> createRepeated() => $pb.PbList<ListDiveMastersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveMastersResponse>(create);
+  static ListDiveMastersResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListDiveMastersResponse_DiveMaster get diveMaster => $_getN(0);
+  @$pb.TagNumber(1)
+  set diveMaster(ListDiveMastersResponse_DiveMaster v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDiveMaster() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDiveMaster() => clearField(1);
+  @$pb.TagNumber(1)
+  ListDiveMastersResponse_DiveMaster ensureDiveMaster() => $_ensure(0);
+}
+
+class ListHotelsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListHotelsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListHotelsRequest._() : super();
+  factory ListHotelsRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListHotelsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListHotelsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListHotelsRequest clone() => ListHotelsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListHotelsRequest copyWith(void Function(ListHotelsRequest) updates) => super.copyWith((message) => updates(message as ListHotelsRequest)) as ListHotelsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsRequest create() => ListHotelsRequest._();
+  ListHotelsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListHotelsRequest> createRepeated() => $pb.PbList<ListHotelsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHotelsRequest>(create);
+  static ListHotelsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListHotelsResponse_Hotel extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListHotelsResponse.Hotel', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stars', $pb.PbFieldType.OU3)
+    ..aOS(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phone')
+    ..aOM<$6.Address>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
+    ..pc<$6.File>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListHotelsResponse_Hotel._() : super();
+  factory ListHotelsResponse_Hotel({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.String? description,
+    $core.int? stars,
+    $core.String? phone,
+    $6.Address? address,
+    $core.Iterable<$6.File>? images,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (stars != null) {
+      _result.stars = stars;
+    }
+    if (phone != null) {
+      _result.phone = phone;
+    }
+    if (address != null) {
+      _result.address = address;
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListHotelsResponse_Hotel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListHotelsResponse_Hotel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListHotelsResponse_Hotel clone() => ListHotelsResponse_Hotel()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListHotelsResponse_Hotel copyWith(void Function(ListHotelsResponse_Hotel) updates) => super.copyWith((message) => updates(message as ListHotelsResponse_Hotel)) as ListHotelsResponse_Hotel; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsResponse_Hotel create() => ListHotelsResponse_Hotel._();
+  ListHotelsResponse_Hotel createEmptyInstance() => create();
+  static $pb.PbList<ListHotelsResponse_Hotel> createRepeated() => $pb.PbList<ListHotelsResponse_Hotel>();
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsResponse_Hotel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHotelsResponse_Hotel>(create);
+  static ListHotelsResponse_Hotel? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearDescription() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $core.int get stars => $_getIZ(3);
+  @$pb.TagNumber(30)
+  set stars($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasStars() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearStars() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $core.String get phone => $_getSZ(4);
+  @$pb.TagNumber(40)
+  set phone($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasPhone() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearPhone() => clearField(40);
+
+  @$pb.TagNumber(50)
+  $6.Address get address => $_getN(5);
+  @$pb.TagNumber(50)
+  set address($6.Address v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasAddress() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearAddress() => clearField(50);
+  @$pb.TagNumber(50)
+  $6.Address ensureAddress() => $_ensure(5);
+
+  @$pb.TagNumber(60)
+  $core.List<$6.File> get images => $_getList(6);
+
+  @$pb.TagNumber(70)
+  $5.Timestamp get createdOn => $_getN(7);
+  @$pb.TagNumber(70)
+  set createdOn($5.Timestamp v) { setField(70, v); }
+  @$pb.TagNumber(70)
+  $core.bool hasCreatedOn() => $_has(7);
+  @$pb.TagNumber(70)
+  void clearCreatedOn() => clearField(70);
+  @$pb.TagNumber(70)
+  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+
+  @$pb.TagNumber(80)
+  $5.Timestamp get updatedOn => $_getN(8);
+  @$pb.TagNumber(80)
+  set updatedOn($5.Timestamp v) { setField(80, v); }
+  @$pb.TagNumber(80)
+  $core.bool hasUpdatedOn() => $_has(8);
+  @$pb.TagNumber(80)
+  void clearUpdatedOn() => clearField(80);
+  @$pb.TagNumber(80)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+}
+
+class ListHotelsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListHotelsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListHotelsResponse_Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: ListHotelsResponse_Hotel.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListHotelsResponse._() : super();
+  factory ListHotelsResponse({
+    ListHotelsResponse_Hotel? hotel,
+  }) {
+    final _result = create();
+    if (hotel != null) {
+      _result.hotel = hotel;
+    }
+    return _result;
+  }
+  factory ListHotelsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListHotelsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListHotelsResponse clone() => ListHotelsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListHotelsResponse copyWith(void Function(ListHotelsResponse) updates) => super.copyWith((message) => updates(message as ListHotelsResponse)) as ListHotelsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsResponse create() => ListHotelsResponse._();
+  ListHotelsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListHotelsResponse> createRepeated() => $pb.PbList<ListHotelsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListHotelsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListHotelsResponse>(create);
+  static ListHotelsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListHotelsResponse_Hotel get hotel => $_getN(0);
+  @$pb.TagNumber(1)
+  set hotel(ListHotelsResponse_Hotel v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasHotel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearHotel() => clearField(1);
+  @$pb.TagNumber(1)
+  ListHotelsResponse_Hotel ensureHotel() => $_ensure(0);
+}
+
+class ListLiveaboardsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLiveaboardsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListLiveaboardsRequest._() : super();
+  factory ListLiveaboardsRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListLiveaboardsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListLiveaboardsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsRequest clone() => ListLiveaboardsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsRequest copyWith(void Function(ListLiveaboardsRequest) updates) => super.copyWith((message) => updates(message as ListLiveaboardsRequest)) as ListLiveaboardsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsRequest create() => ListLiveaboardsRequest._();
+  ListLiveaboardsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListLiveaboardsRequest> createRepeated() => $pb.PbList<ListLiveaboardsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLiveaboardsRequest>(create);
+  static ListLiveaboardsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLiveaboardsResponse.Liveaboard', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..a<$core.double>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'length', $pb.PbFieldType.OF)
+    ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OF)
+    ..pc<$6.File>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListLiveaboardsResponse_Liveaboard._() : super();
+  factory ListLiveaboardsResponse_Liveaboard({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.String? description,
+    $core.double? length,
+    $core.double? width,
+    $core.Iterable<$6.File>? images,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (length != null) {
+      _result.length = length;
+    }
+    if (width != null) {
+      _result.width = width;
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListLiveaboardsResponse_Liveaboard.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListLiveaboardsResponse_Liveaboard.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsResponse_Liveaboard clone() => ListLiveaboardsResponse_Liveaboard()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsResponse_Liveaboard copyWith(void Function(ListLiveaboardsResponse_Liveaboard) updates) => super.copyWith((message) => updates(message as ListLiveaboardsResponse_Liveaboard)) as ListLiveaboardsResponse_Liveaboard; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsResponse_Liveaboard create() => ListLiveaboardsResponse_Liveaboard._();
+  ListLiveaboardsResponse_Liveaboard createEmptyInstance() => create();
+  static $pb.PbList<ListLiveaboardsResponse_Liveaboard> createRepeated() => $pb.PbList<ListLiveaboardsResponse_Liveaboard>();
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsResponse_Liveaboard getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLiveaboardsResponse_Liveaboard>(create);
+  static ListLiveaboardsResponse_Liveaboard? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearDescription() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $core.double get length => $_getN(3);
+  @$pb.TagNumber(30)
+  set length($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasLength() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearLength() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $core.double get width => $_getN(4);
+  @$pb.TagNumber(40)
+  set width($core.double v) { $_setFloat(4, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasWidth() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearWidth() => clearField(40);
+
+  @$pb.TagNumber(50)
+  $core.List<$6.File> get images => $_getList(5);
+
+  @$pb.TagNumber(60)
+  $5.Timestamp get createdOn => $_getN(6);
+  @$pb.TagNumber(60)
+  set createdOn($5.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasCreatedOn() => $_has(6);
+  @$pb.TagNumber(60)
+  void clearCreatedOn() => clearField(60);
+  @$pb.TagNumber(60)
+  $5.Timestamp ensureCreatedOn() => $_ensure(6);
+
+  @$pb.TagNumber(70)
+  $5.Timestamp get updatedOn => $_getN(7);
+  @$pb.TagNumber(70)
+  set updatedOn($5.Timestamp v) { setField(70, v); }
+  @$pb.TagNumber(70)
+  $core.bool hasUpdatedOn() => $_has(7);
+  @$pb.TagNumber(70)
+  void clearUpdatedOn() => clearField(70);
+  @$pb.TagNumber(70)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(7);
+}
+
+class ListLiveaboardsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLiveaboardsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListLiveaboardsResponse_Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: ListLiveaboardsResponse_Liveaboard.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListLiveaboardsResponse._() : super();
+  factory ListLiveaboardsResponse({
+    ListLiveaboardsResponse_Liveaboard? liveaboard,
+  }) {
+    final _result = create();
+    if (liveaboard != null) {
+      _result.liveaboard = liveaboard;
+    }
+    return _result;
+  }
+  factory ListLiveaboardsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListLiveaboardsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsResponse clone() => ListLiveaboardsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListLiveaboardsResponse copyWith(void Function(ListLiveaboardsResponse) updates) => super.copyWith((message) => updates(message as ListLiveaboardsResponse)) as ListLiveaboardsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsResponse create() => ListLiveaboardsResponse._();
+  ListLiveaboardsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListLiveaboardsResponse> createRepeated() => $pb.PbList<ListLiveaboardsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListLiveaboardsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLiveaboardsResponse>(create);
+  static ListLiveaboardsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListLiveaboardsResponse_Liveaboard get liveaboard => $_getN(0);
+  @$pb.TagNumber(1)
+  set liveaboard(ListLiveaboardsResponse_Liveaboard v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLiveaboard() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLiveaboard() => clearField(1);
+  @$pb.TagNumber(1)
+  ListLiveaboardsResponse_Liveaboard ensureLiveaboard() => $_ensure(0);
+}
+

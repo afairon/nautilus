@@ -85,3 +85,79 @@ func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLive
 
 	return &empty.Empty{}, nil
 }
+
+// ListBoats retrieves list of boats associated with the agency.
+func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, stream pb.AgencyService_ListBoatsServer) error {
+	ctx := stream.Context()
+
+	boats, err := handler.agencyService.ListBoats(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, boat := range boats {
+		resp := &pb.ListBoatsResponse{
+			Boat: boat,
+		}
+		stream.Send(resp)
+	}
+
+	return nil
+}
+
+// ListDiveMasters retrieves list of divemasters associated with the agency.
+func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, stream pb.AgencyService_ListDiveMastersServer) error {
+	ctx := stream.Context()
+
+	diveMasters, err := handler.agencyService.ListDiveMasters(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, diveMaster := range diveMasters {
+		resp := &pb.ListDiveMastersResponse{
+			DiveMaster: diveMaster,
+		}
+		stream.Send(resp)
+	}
+
+	return nil
+}
+
+// ListHotels retrieves list of hotels associated with the agency.
+func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, stream pb.AgencyService_ListHotelsServer) error {
+	ctx := stream.Context()
+
+	hotels, err := handler.agencyService.ListHotels(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, hotel := range hotels {
+		resp := &pb.ListHotelsResponse{
+			Hotel: hotel,
+		}
+		stream.Send(resp)
+	}
+
+	return nil
+}
+
+// ListLiveaboards retrieves list of liveaboards associated with the agency.
+func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, stream pb.AgencyService_ListLiveaboardsServer) error {
+	ctx := stream.Context()
+
+	liveaboards, err := handler.agencyService.ListLiveaboards(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, liveaboard := range liveaboards {
+		resp := &pb.ListLiveaboardsResponse{
+			Liveaboard: liveaboard,
+		}
+		stream.Send(resp)
+	}
+
+	return nil
+}
