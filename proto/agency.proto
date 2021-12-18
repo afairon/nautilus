@@ -84,13 +84,12 @@ message Trip {
 message Hotel {
     string hotel_name = 1;
     uint32 star = 2;
-    // optional highlights when creating a new hotel
-    repeated string highlights = 3;
     // optional images when creating a new hotel
     repeated model.File images = 4;
     repeated RoomType room_types = 5;
     string hotel_description = 6;
     string phone = 7;
+    model.Address address = 8;
 }
 
 message Liveaboard {
@@ -127,7 +126,6 @@ message AddDivingBoatRequest {
 
 message AddHotelRequest {
     Hotel hotel = 1;
-    uint64 addressId = 3;
 }
 
 message AddLiveaboardRequest {

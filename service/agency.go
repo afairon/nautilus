@@ -20,7 +20,7 @@ type AgencyService interface {
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip) error
 	AddDivingBoat(context.Context, *pb.DivingBoat) error
-	AddHotel(context.Context, *pb.Hotel, uint64) error
+	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 }
 
@@ -127,7 +127,7 @@ func setHotel(dst *entity.Hotel, src *pb.Hotel) {
 	dst.Phone = src.GetPhone()
 }
 
-func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, address_id uint64) error {
+func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) error {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -140,7 +140,6 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, add
 	setHotel(&newHotel, hotel)
 
 	newHotel.AgencyId = agency.Id
-	newHotel.AddressId = address_id
 
 	for _, image := range hotel.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
@@ -154,6 +153,22 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel, add
 	}
 
 	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+		hotelAddress := hotel.GetAddress()
+		newAddress := entity.Address{
+			AddressLine_1: hotelAddress.AddressLine_1,
+			AddressLine_2: hotelAddress.AddressLine_2,
+			City:          hotelAddress.City,
+			Postcode:      hotelAddress.Postcode,
+			Region:        hotelAddress.Region,
+			Country:       hotelAddress.Country,
+		}
+		createdAddress, err := query.Agency.CreateAddress(ctx, &newAddress)
+
+		if err != nil {
+			return err
+		}
+
+		newHotel.AddressId = createdAddress.Id
 		createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
 
 		if err != nil {

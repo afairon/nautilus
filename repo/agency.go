@@ -23,6 +23,7 @@ type AgencyRepository interface {
 	CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error)
 	CreateStaff(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
 	CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error)
+	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
@@ -234,6 +235,21 @@ func (repo *Agency) CreateLiveaboard(ctx context.Context, liveaboard *entity.Liv
 			($1, $2, $3, $4, $5, $6)
 		RETURNING id, name, description, length, width, agency_id, images, created_on, updated_on
 	`, liveaboard.Name, liveaboard.Description, liveaboard.Length, liveaboard.Width, liveaboard.AgencyId, liveaboard.Images)
+
+	return &result, err
+}
+
+func (repo *Agency) CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error) {
+	var result entity.Address
+
+	err := repo.db.GetContext(ctx, &result, `
+		INSERT INTO
+			public.address
+			(address_line_1, address_line_2, city, postcode, region, country)
+		VALUES
+			($1, $2, $3, $4, $5, $6)
+		RETURNING id, address_line_1, address_line_2, city, postcode, region, country
+	`, address.AddressLine_1, address.AddressLine_2, address.City, address.Postcode, address.Region, address.Country)
 
 	return &result, err
 }
