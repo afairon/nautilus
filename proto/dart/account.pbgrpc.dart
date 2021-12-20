@@ -23,6 +23,12 @@ class AccountClient extends $grpc.Client {
       '/account.Account/Login',
       ($0.LoginRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.LoginResponse.fromBuffer(value));
+  static final _$getProfile =
+      $grpc.ClientMethod<$1.Empty, $0.GetProfileResponse>(
+          '/account.Account/GetProfile',
+          ($1.Empty value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.GetProfileResponse.fromBuffer(value));
 
   AccountClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -37,6 +43,11 @@ class AccountClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.LoginResponse> login($0.LoginRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$login, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetProfileResponse> getProfile($1.Empty request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getProfile, request, options: options);
   }
 }
 
@@ -58,6 +69,13 @@ abstract class AccountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.LoginRequest.fromBuffer(value),
         ($0.LoginResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.GetProfileResponse>(
+        'GetProfile',
+        getProfile_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.GetProfileResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> create_Pre(
@@ -70,8 +88,15 @@ abstract class AccountServiceBase extends $grpc.Service {
     return login(call, await request);
   }
 
+  $async.Future<$0.GetProfileResponse> getProfile_Pre(
+      $grpc.ServiceCall call, $async.Future<$1.Empty> request) async {
+    return getProfile(call, await request);
+  }
+
   $async.Future<$1.Empty> create(
       $grpc.ServiceCall call, $0.AccountRequest request);
   $async.Future<$0.LoginResponse> login(
       $grpc.ServiceCall call, $0.LoginRequest request);
+  $async.Future<$0.GetProfileResponse> getProfile(
+      $grpc.ServiceCall call, $1.Empty request);
 }

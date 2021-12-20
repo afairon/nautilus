@@ -213,37 +213,142 @@ func (m *LoginResponse) GetToken() string {
 	return ""
 }
 
+// GetProfileResponse
+type GetProfileResponse struct {
+	// Types that are valid to be assigned to Profile:
+	//	*GetProfileResponse_Admin
+	//	*GetProfileResponse_Agency
+	//	*GetProfileResponse_Diver
+	Profile isGetProfileResponse_Profile `protobuf_oneof:"profile"`
+}
+
+func (m *GetProfileResponse) Reset()      { *m = GetProfileResponse{} }
+func (*GetProfileResponse) ProtoMessage() {}
+func (*GetProfileResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8e28828dcb8d24f0, []int{3}
+}
+func (m *GetProfileResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetProfileResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetProfileResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetProfileResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetProfileResponse.Merge(m, src)
+}
+func (m *GetProfileResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetProfileResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetProfileResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetProfileResponse proto.InternalMessageInfo
+
+type isGetProfileResponse_Profile interface {
+	isGetProfileResponse_Profile()
+	Equal(interface{}) bool
+	MarshalTo([]byte) (int, error)
+	Size() int
+}
+
+type GetProfileResponse_Admin struct {
+	Admin *Admin `protobuf:"bytes,1,opt,name=admin,proto3,oneof" json:"admin,omitempty"`
+}
+type GetProfileResponse_Agency struct {
+	Agency *Agency `protobuf:"bytes,5,opt,name=agency,proto3,oneof" json:"agency,omitempty"`
+}
+type GetProfileResponse_Diver struct {
+	Diver *Diver `protobuf:"bytes,10,opt,name=diver,proto3,oneof" json:"diver,omitempty"`
+}
+
+func (*GetProfileResponse_Admin) isGetProfileResponse_Profile()  {}
+func (*GetProfileResponse_Agency) isGetProfileResponse_Profile() {}
+func (*GetProfileResponse_Diver) isGetProfileResponse_Profile()  {}
+
+func (m *GetProfileResponse) GetProfile() isGetProfileResponse_Profile {
+	if m != nil {
+		return m.Profile
+	}
+	return nil
+}
+
+func (m *GetProfileResponse) GetAdmin() *Admin {
+	if x, ok := m.GetProfile().(*GetProfileResponse_Admin); ok {
+		return x.Admin
+	}
+	return nil
+}
+
+func (m *GetProfileResponse) GetAgency() *Agency {
+	if x, ok := m.GetProfile().(*GetProfileResponse_Agency); ok {
+		return x.Agency
+	}
+	return nil
+}
+
+func (m *GetProfileResponse) GetDiver() *Diver {
+	if x, ok := m.GetProfile().(*GetProfileResponse_Diver); ok {
+		return x.Diver
+	}
+	return nil
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*GetProfileResponse) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*GetProfileResponse_Admin)(nil),
+		(*GetProfileResponse_Agency)(nil),
+		(*GetProfileResponse_Diver)(nil),
+	}
+}
+
 func init() {
 	proto.RegisterType((*AccountRequest)(nil), "account.AccountRequest")
 	proto.RegisterType((*LoginRequest)(nil), "account.LoginRequest")
 	proto.RegisterType((*LoginResponse)(nil), "account.LoginResponse")
+	proto.RegisterType((*GetProfileResponse)(nil), "account.GetProfileResponse")
 }
 
 func init() { proto.RegisterFile("account.proto", fileDescriptor_8e28828dcb8d24f0) }
 
 var fileDescriptor_8e28828dcb8d24f0 = []byte{
-	// 335 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x50, 0x31, 0x4f, 0x32, 0x41,
-	0x10, 0xdd, 0xfd, 0xc2, 0x1d, 0x9f, 0x0b, 0x58, 0x6c, 0x14, 0xc9, 0x99, 0x4c, 0xcc, 0x45, 0xa3,
-	0xd5, 0x92, 0x60, 0x63, 0xb4, 0x11, 0xd4, 0x84, 0xc2, 0xea, 0x4a, 0xbb, 0x03, 0xc6, 0x0b, 0x11,
-	0x6e, 0xcf, 0xbb, 0x45, 0x43, 0xc7, 0x4f, 0xf0, 0x67, 0xf8, 0x53, 0x2c, 0x29, 0x29, 0x65, 0x69,
-	0x2c, 0xf9, 0x09, 0x86, 0xdd, 0x3b, 0xa2, 0x96, 0xef, 0xbd, 0x99, 0x37, 0xf3, 0x1e, 0xab, 0x85,
-	0xfd, 0xbe, 0x9c, 0xc4, 0x4a, 0x24, 0xa9, 0x54, 0x92, 0x97, 0x73, 0xe8, 0x55, 0xc6, 0x72, 0x80,
-	0x23, 0xcb, 0x7a, 0x87, 0x91, 0x94, 0xd1, 0x08, 0x9b, 0x06, 0xf5, 0x26, 0x8f, 0x4d, 0x1c, 0x27,
-	0x6a, 0x6a, 0x45, 0x3f, 0x62, 0xbb, 0x6d, 0xbb, 0x14, 0xe0, 0xf3, 0x04, 0x33, 0xc5, 0x4f, 0x99,
-	0x1b, 0x46, 0x18, 0xf7, 0xa7, 0x0d, 0x7a, 0x44, 0xcf, 0x2a, 0xad, 0x9a, 0xb0, 0x66, 0x6d, 0x43,
-	0x76, 0x49, 0x90, 0xcb, 0xfc, 0x98, 0x39, 0x83, 0xe1, 0x0b, 0xa6, 0x0d, 0xc7, 0xcc, 0x55, 0xf3,
-	0xb9, 0xdb, 0x0d, 0xd7, 0x25, 0x81, 0x15, 0x3b, 0x2e, 0x2b, 0xa9, 0x69, 0x82, 0xfe, 0x35, 0xab,
-	0xde, 0xcb, 0x68, 0x18, 0x17, 0x67, 0xf6, 0x98, 0x83, 0xe3, 0x70, 0x38, 0x32, 0x57, 0x76, 0x02,
-	0x0b, 0xb8, 0xc7, 0xfe, 0x27, 0x61, 0x96, 0xbd, 0xca, 0x74, 0xd0, 0xf8, 0x67, 0x84, 0x2d, 0xf6,
-	0x4f, 0x58, 0x2d, 0x77, 0xc8, 0x12, 0x19, 0x67, 0xb8, 0xb1, 0x50, 0xf2, 0x09, 0xe3, 0xc2, 0xc2,
-	0x80, 0xd6, 0x8c, 0xb2, 0x72, 0x1e, 0x89, 0x5f, 0x31, 0xf7, 0x26, 0xc5, 0x50, 0x21, 0x3f, 0x10,
-	0x45, 0x55, 0xbf, 0xe3, 0x7a, 0x75, 0x61, 0xeb, 0x11, 0x45, 0x3d, 0xe2, 0x6e, 0x53, 0x8f, 0x4f,
-	0xf8, 0x05, 0x73, 0xcc, 0x3d, 0xbe, 0xbf, 0xdd, 0xfd, 0x99, 0xc0, 0xab, 0xff, 0xa5, 0xed, 0x5b,
-	0x3e, 0xe9, 0x5c, 0xce, 0x97, 0x40, 0x16, 0x4b, 0x20, 0xeb, 0x25, 0xd0, 0x99, 0x06, 0xfa, 0xae,
-	0x81, 0x7e, 0x68, 0xa0, 0x73, 0x0d, 0xf4, 0x53, 0x03, 0xfd, 0xd2, 0x40, 0xd6, 0x1a, 0xe8, 0xdb,
-	0x0a, 0xc8, 0x7c, 0x05, 0x64, 0xb1, 0x02, 0xf2, 0x50, 0x12, 0xcd, 0xa4, 0xd7, 0x73, 0xcd, 0x1f,
-	0xe7, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xb3, 0x42, 0xe0, 0xca, 0xdb, 0x01, 0x00, 0x00,
+	// 403 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x51, 0x3f, 0x6f, 0xda, 0x40,
+	0x1c, 0xbd, 0xab, 0xb0, 0x29, 0x3f, 0xa0, 0xc3, 0xa9, 0xa5, 0xc8, 0x48, 0xa7, 0xca, 0xa2, 0x6a,
+	0x27, 0x23, 0xd1, 0xa5, 0x6a, 0x97, 0x02, 0xad, 0xca, 0xd0, 0xa1, 0xf2, 0xd8, 0xcd, 0xe0, 0xc3,
+	0xb2, 0x6a, 0xfb, 0x1c, 0xfb, 0x48, 0xc4, 0x96, 0x8f, 0x90, 0x21, 0x1f, 0x22, 0x5f, 0x24, 0x52,
+	0x46, 0x46, 0xc6, 0x60, 0x96, 0x8c, 0x7c, 0x84, 0xc8, 0x77, 0xb6, 0x43, 0x12, 0x25, 0xca, 0xf8,
+	0xde, 0xfb, 0xfd, 0x7d, 0x0f, 0xda, 0xce, 0x7c, 0xce, 0x97, 0x91, 0xb0, 0xe2, 0x84, 0x0b, 0x4e,
+	0xea, 0x05, 0x34, 0x9a, 0x21, 0x77, 0x59, 0xa0, 0x58, 0xa3, 0xe7, 0x71, 0xee, 0x05, 0x6c, 0x20,
+	0xd1, 0x6c, 0xb9, 0x18, 0xb0, 0x30, 0x16, 0x2b, 0x25, 0x9a, 0x1e, 0xbc, 0x19, 0xa9, 0x26, 0x9b,
+	0x1d, 0x2d, 0x59, 0x2a, 0xc8, 0x27, 0xd0, 0x1d, 0x8f, 0x45, 0xf3, 0x55, 0x17, 0x7f, 0xc0, 0x9f,
+	0x9b, 0xc3, 0xb6, 0xa5, 0x86, 0x8d, 0x24, 0x39, 0x45, 0x76, 0x21, 0x93, 0x3e, 0x68, 0xae, 0x7f,
+	0xcc, 0x92, 0xae, 0x26, 0xeb, 0x5a, 0x45, 0xdd, 0xcf, 0x9c, 0x9b, 0x22, 0x5b, 0x89, 0x63, 0x1d,
+	0x6a, 0x62, 0x15, 0x33, 0xf3, 0x07, 0xb4, 0xfe, 0x70, 0xcf, 0x8f, 0xca, 0x35, 0x6f, 0x41, 0x63,
+	0xa1, 0xe3, 0x07, 0x72, 0x4b, 0xc3, 0x56, 0x80, 0x18, 0xf0, 0x3a, 0x76, 0xd2, 0xf4, 0x84, 0x27,
+	0x6e, 0xf7, 0x95, 0x14, 0x2a, 0x6c, 0x7e, 0x84, 0x76, 0x31, 0x21, 0x8d, 0x79, 0x94, 0xb2, 0x7c,
+	0x84, 0xe0, 0xff, 0x59, 0x54, 0x8e, 0x90, 0xc0, 0x3c, 0xc7, 0x40, 0x7e, 0x33, 0xf1, 0x37, 0xe1,
+	0x0b, 0x3f, 0x60, 0x55, 0x71, 0x1f, 0x34, 0xc7, 0x0d, 0xfd, 0xa8, 0xf8, 0xaa, 0xbc, 0x76, 0x94,
+	0x73, 0xf9, 0xb5, 0x52, 0x3c, 0x78, 0x5e, 0x7b, 0xe1, 0xf3, 0xf0, 0xdc, 0xf3, 0x0d, 0xa8, 0xc7,
+	0xea, 0x8e, 0xe1, 0x25, 0x86, 0x7a, 0xe1, 0x34, 0xf9, 0x0e, 0xfa, 0x24, 0x61, 0x8e, 0x60, 0xe4,
+	0xbd, 0x55, 0x26, 0x78, 0x3f, 0x05, 0xa3, 0x63, 0xa9, 0xd4, 0xac, 0x32, 0x35, 0xeb, 0x57, 0x9e,
+	0x9a, 0x89, 0xc8, 0x57, 0xd0, 0xa4, 0x0d, 0xe4, 0x5d, 0xd5, 0x7b, 0x68, 0xac, 0xd1, 0x79, 0x48,
+	0x2b, 0x03, 0x4c, 0x44, 0x26, 0x00, 0x77, 0xc6, 0x90, 0x27, 0x36, 0x18, 0xbd, 0xaa, 0xff, 0xb1,
+	0x8b, 0x26, 0x1a, 0x7f, 0x5b, 0x6f, 0x29, 0xda, 0x6c, 0x29, 0xda, 0x6f, 0x29, 0x3e, 0xcd, 0x28,
+	0xbe, 0xc8, 0x28, 0xbe, 0xca, 0x28, 0x5e, 0x67, 0x14, 0x5f, 0x67, 0x14, 0xdf, 0x64, 0x14, 0xed,
+	0x33, 0x8a, 0xcf, 0x76, 0x14, 0xad, 0x77, 0x14, 0x6d, 0x76, 0x14, 0xfd, 0xab, 0x59, 0x83, 0x78,
+	0x36, 0xd3, 0xe5, 0xaa, 0x2f, 0xb7, 0x01, 0x00, 0x00, 0xff, 0xff, 0x27, 0x8c, 0x0d, 0xdd, 0xb7,
+	0x02, 0x00, 0x00,
 }
 
 func (this *AccountRequest) Equal(that interface{}) bool {
@@ -375,6 +480,108 @@ func (this *LoginResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *GetProfileResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetProfileResponse)
+	if !ok {
+		that2, ok := that.(GetProfileResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if that1.Profile == nil {
+		if this.Profile != nil {
+			return false
+		}
+	} else if this.Profile == nil {
+		return false
+	} else if !this.Profile.Equal(that1.Profile) {
+		return false
+	}
+	return true
+}
+func (this *GetProfileResponse_Admin) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetProfileResponse_Admin)
+	if !ok {
+		that2, ok := that.(GetProfileResponse_Admin)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Admin.Equal(that1.Admin) {
+		return false
+	}
+	return true
+}
+func (this *GetProfileResponse_Agency) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetProfileResponse_Agency)
+	if !ok {
+		that2, ok := that.(GetProfileResponse_Agency)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Agency.Equal(that1.Agency) {
+		return false
+	}
+	return true
+}
+func (this *GetProfileResponse_Diver) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetProfileResponse_Diver)
+	if !ok {
+		that2, ok := that.(GetProfileResponse_Diver)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Diver.Equal(that1.Diver) {
+		return false
+	}
+	return true
+}
 func (this *AccountRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -424,6 +631,42 @@ func (this *LoginResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *GetProfileResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.GetProfileResponse{")
+	if this.Profile != nil {
+		s = append(s, "Profile: "+fmt.Sprintf("%#v", this.Profile)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *GetProfileResponse_Admin) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.GetProfileResponse_Admin{` +
+		`Admin:` + fmt.Sprintf("%#v", this.Admin) + `}`}, ", ")
+	return s
+}
+func (this *GetProfileResponse_Agency) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.GetProfileResponse_Agency{` +
+		`Agency:` + fmt.Sprintf("%#v", this.Agency) + `}`}, ", ")
+	return s
+}
+func (this *GetProfileResponse_Diver) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.GetProfileResponse_Diver{` +
+		`Diver:` + fmt.Sprintf("%#v", this.Diver) + `}`}, ", ")
+	return s
+}
 func valueToGoStringAccount(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -451,6 +694,8 @@ type AccountClient interface {
 	// The client supplies the server with credentials and the server
 	// creates a session and sends back a token.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	// GetProfile takes the token and returns profile associated with the token.
+	GetProfile(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error)
 }
 
 type accountClient struct {
@@ -479,6 +724,15 @@ func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 	return out, nil
 }
 
+func (c *accountClient) GetProfile(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error) {
+	out := new(GetProfileResponse)
+	err := c.cc.Invoke(ctx, "/account.Account/GetProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServer is the server API for Account service.
 type AccountServer interface {
 	// Create is used to create agency and diver account.
@@ -487,6 +741,8 @@ type AccountServer interface {
 	// The client supplies the server with credentials and the server
 	// creates a session and sends back a token.
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	// GetProfile takes the token and returns profile associated with the token.
+	GetProfile(context.Context, *empty.Empty) (*GetProfileResponse, error)
 }
 
 // UnimplementedAccountServer can be embedded to have forward compatible implementations.
@@ -498,6 +754,9 @@ func (*UnimplementedAccountServer) Create(ctx context.Context, req *AccountReque
 }
 func (*UnimplementedAccountServer) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedAccountServer) GetProfile(ctx context.Context, req *empty.Empty) (*GetProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
 }
 
 func RegisterAccountServer(s *grpc.Server, srv AccountServer) {
@@ -540,6 +799,24 @@ func _Account_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Account_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServer).GetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.Account/GetProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServer).GetProfile(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Account_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "account.Account",
 	HandlerType: (*AccountServer)(nil),
@@ -551,6 +828,10 @@ var _Account_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _Account_Login_Handler,
+		},
+		{
+			MethodName: "GetProfile",
+			Handler:    _Account_GetProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -698,6 +979,101 @@ func (m *LoginResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *GetProfileResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetProfileResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetProfileResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Profile != nil {
+		{
+			size := m.Profile.Size()
+			i -= size
+			if _, err := m.Profile.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetProfileResponse_Admin) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetProfileResponse_Admin) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Admin != nil {
+		{
+			size, err := m.Admin.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAccount(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *GetProfileResponse_Agency) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetProfileResponse_Agency) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Agency != nil {
+		{
+			size, err := m.Agency.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAccount(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x2a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *GetProfileResponse_Diver) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetProfileResponse_Diver) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Diver != nil {
+		{
+			size, err := m.Diver.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAccount(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
 func encodeVarintAccount(dAtA []byte, offset int, v uint64) int {
 	offset -= sovAccount(v)
 	base := offset
@@ -775,6 +1151,55 @@ func (m *LoginResponse) Size() (n int) {
 	return n
 }
 
+func (m *GetProfileResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Profile != nil {
+		n += m.Profile.Size()
+	}
+	return n
+}
+
+func (m *GetProfileResponse_Admin) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Admin != nil {
+		l = m.Admin.Size()
+		n += 1 + l + sovAccount(uint64(l))
+	}
+	return n
+}
+func (m *GetProfileResponse_Agency) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Agency != nil {
+		l = m.Agency.Size()
+		n += 1 + l + sovAccount(uint64(l))
+	}
+	return n
+}
+func (m *GetProfileResponse_Diver) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Diver != nil {
+		l = m.Diver.Size()
+		n += 1 + l + sovAccount(uint64(l))
+	}
+	return n
+}
+
 func sovAccount(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -828,6 +1253,46 @@ func (this *LoginResponse) String() string {
 	}
 	s := strings.Join([]string{`&LoginResponse{`,
 		`Token:` + fmt.Sprintf("%v", this.Token) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetProfileResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetProfileResponse{`,
+		`Profile:` + fmt.Sprintf("%v", this.Profile) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetProfileResponse_Admin) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetProfileResponse_Admin{`,
+		`Admin:` + strings.Replace(fmt.Sprintf("%v", this.Admin), "Admin", "Admin", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetProfileResponse_Agency) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetProfileResponse_Agency{`,
+		`Agency:` + strings.Replace(fmt.Sprintf("%v", this.Agency), "Agency", "Agency", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetProfileResponse_Diver) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetProfileResponse_Diver{`,
+		`Diver:` + strings.Replace(fmt.Sprintf("%v", this.Diver), "Diver", "Diver", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1134,6 +1599,161 @@ func (m *LoginResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Token = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAccount(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAccount
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetProfileResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAccount
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetProfileResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetProfileResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Admin", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAccount
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAccount
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAccount
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			v := &Admin{}
+			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			m.Profile = &GetProfileResponse_Admin{v}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Agency", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAccount
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAccount
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAccount
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			v := &Agency{}
+			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			m.Profile = &GetProfileResponse_Agency{v}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Diver", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAccount
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAccount
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAccount
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			v := &Diver{}
+			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			m.Profile = &GetProfileResponse_Diver{v}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

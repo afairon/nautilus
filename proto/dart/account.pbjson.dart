@@ -43,3 +43,18 @@ const LoginResponse$json = const {
 
 /// Descriptor for `LoginResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List loginResponseDescriptor = $convert.base64Decode('Cg1Mb2dpblJlc3BvbnNlEhQKBXRva2VuGAEgASgJUgV0b2tlbg==');
+@$core.Deprecated('Use getProfileResponseDescriptor instead')
+const GetProfileResponse$json = const {
+  '1': 'GetProfileResponse',
+  '2': const [
+    const {'1': 'admin', '3': 1, '4': 1, '5': 11, '6': '.model.Admin', '9': 0, '10': 'admin'},
+    const {'1': 'agency', '3': 5, '4': 1, '5': 11, '6': '.model.Agency', '9': 0, '10': 'agency'},
+    const {'1': 'diver', '3': 10, '4': 1, '5': 11, '6': '.model.Diver', '9': 0, '10': 'diver'},
+  ],
+  '8': const [
+    const {'1': 'profile'},
+  ],
+};
+
+/// Descriptor for `GetProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getProfileResponseDescriptor = $convert.base64Decode('ChJHZXRQcm9maWxlUmVzcG9uc2USJAoFYWRtaW4YASABKAsyDC5tb2RlbC5BZG1pbkgAUgVhZG1pbhInCgZhZ2VuY3kYBSABKAsyDS5tb2RlbC5BZ2VuY3lIAFIGYWdlbmN5EiQKBWRpdmVyGAogASgLMgwubW9kZWwuRGl2ZXJIAFIFZGl2ZXJCCQoHcHJvZmlsZQ==');

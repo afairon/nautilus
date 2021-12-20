@@ -57,3 +57,8 @@ func (handler *AccountHandler) Login(ctx context.Context, req *pb.LoginRequest) 
 
 	return &resp, nil
 }
+
+// GetProfile returns profile based on the given token.
+func (handler *AccountHandler) GetProfile(ctx context.Context, req *empty.Empty) (*pb.GetProfileResponse, error) {
+	return handler.service.GetProfile(ctx)
+}

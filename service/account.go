@@ -19,6 +19,7 @@ type AccountService interface {
 	CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error
 	CreateDiverAccount(ctx context.Context, diver *pb.Diver) error
 	Login(ctx context.Context, email, password string) (string, error)
+	GetProfile(ctx context.Context) (*pb.GetProfileResponse, error)
 }
 
 // accountService implements AccountService.
@@ -199,4 +200,23 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	}
 
 	return token, nil
+}
+
+// GetProfile returns profile based on the given token.
+func (service *accountService) GetProfile(ctx context.Context) (*pb.GetProfileResponse, error) {
+	account := ctx.Value(session.User)
+	if account == nil {
+		return nil, status.Error(codes.Unauthenticated, "account: account not found")
+	}
+
+	switch v := account.(type) {
+	case *pb.Admin:
+		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Admin{Admin: v}}, nil
+	case *pb.Agency:
+		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Agency{Agency: v}}, nil
+	case *pb.Diver:
+		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Diver{Diver: v}}, nil
+	}
+
+	return nil, status.Error(codes.Unauthenticated, "account: account not found")
 }

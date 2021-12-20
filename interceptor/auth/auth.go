@@ -15,6 +15,7 @@ import (
 // accessRoles defines the permission and roles for different services.
 // Services that are available to everyone should not be defined in here.
 var accessRoles = map[string][]pb.AccountType{
+	"/account.Account/GetProfile":                       {pb.ADMIN, pb.AGENCY, pb.DIVER},
 	"/agency.AgencyService/AddDiveMaster":               {pb.AGENCY},
 	"/agency.AgencyService/AddHotel":                    {pb.AGENCY},
 	"/agency.AgencyService/AddTrip":                     {pb.AGENCY},

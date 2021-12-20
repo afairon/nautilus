@@ -19,13 +19,13 @@ service AgencyService {
     rpc AddHotel(AddHotelRequest) returns (google.protobuf.Empty);
     rpc AddLiveaboard(AddLiveaboardRequest) returns (google.protobuf.Empty);
 
-    rpc ListBoats(ListBoatsRequest) returns (stream ListBoatsResponse);
-    rpc ListDiveMasters(ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
-    rpc ListHotels(ListHotelsRequest) returns (stream ListHotelsResponse);
-    rpc ListLiveaboards(ListLiveaboardsRequest) returns (stream ListLiveaboardsResponse);
-    rpc ListStaffs(ListStaffsRequest) returns (stream ListStaffsResponse);
-    rpc ListTripTemplates(ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
-    rpc ListTrips(ListTripsRequest) returns (stream ListTripsResponse);
+    rpc ListBoats (ListBoatsRequest) returns (stream ListBoatsResponse);
+    rpc ListDiveMasters (ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
+    rpc ListHotels (ListHotelsRequest) returns (stream ListHotelsResponse);
+    rpc ListLiveaboards (ListLiveaboardsRequest) returns (stream ListLiveaboardsResponse);
+    rpc ListStaffs (ListStaffsRequest) returns (stream ListStaffsResponse);
+    rpc ListTripTemplates (ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
+    rpc ListTrips (ListTripsRequest) returns (stream ListTripsResponse);
 }
 
 message DiveMaster {

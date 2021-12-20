@@ -16,6 +16,9 @@ service Account {
     // The client supplies the server with credentials and the server
     // creates a session and sends back a token.
     rpc Login (LoginRequest) returns (LoginResponse) {}
+
+    // GetProfile takes the token and returns profile associated with the token.
+    rpc GetProfile (google.protobuf.Empty) returns (GetProfileResponse) {}
 }
 
 // AccountRequest
@@ -36,4 +39,13 @@ message LoginRequest {
 // LoginResponse
 message LoginResponse {
     string token = 1;
+}
+
+// GetProfileResponse
+message GetProfileResponse {
+    oneof profile {
+        model.Admin admin = 1;
+        model.Agency agency = 5;
+        model.Diver diver = 10;
+    }
 }
