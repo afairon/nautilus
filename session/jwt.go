@@ -110,5 +110,9 @@ func (manager *JWTManager) Get(token string) (Account, error) {
 		return claims.Agency, nil
 	}
 
-	return claims.Diver, nil
+	if claims.Diver != nil {
+		return claims.Diver, nil
+	}
+
+	return nil, errors.New("authorization: invalid token")
 }

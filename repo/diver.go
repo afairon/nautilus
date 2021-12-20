@@ -65,7 +65,7 @@ func (repo *diverRepository) List(ctx context.Context, limit, offset uint64) ([]
 	rows, err := repo.db.Queryx(`
 		SELECT
 			diver.id, diver.first_name, diver.last_name, diver.phone, diver.birth_date, diver.documents, diver.created_on, diver.updated_on,
-			account.id, account.username, account.email, account."type", account.verified, account.active, account.created_on, account.updated_on
+			account.id, account.username, LOWER(account.email) AS "account.email", account."type", account.verified, account.active, account.created_on, account.updated_on
 		FROM
 			public.diver diver
 		JOIN

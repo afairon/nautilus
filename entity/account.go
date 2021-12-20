@@ -6,6 +6,9 @@ import (
 	"strings"
 
 	pass "github.com/afairon/nautilus/internal/password"
+	"github.com/afairon/nautilus/pb"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // SetUsername sets username only if the username is valid.
@@ -57,5 +60,32 @@ func (m *Account) SetPassword(password string) error {
 	}
 
 	m.Password = hash
+	return nil
+}
+
+// SetAccount checks if the username is valid, the email is valid,
+// and the password is valid.
+func (m *Account) SetAccount(src *pb.Account) error {
+	if src == nil {
+		return status.Error(codes.InvalidArgument, "missing account")
+	}
+	// Set a valid username.
+	err := m.SetUsername(src.GetUsername())
+	if err != nil {
+		return status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	// Set a valid email.
+	err = m.SetEmail(strings.ToLower(src.GetEmail()))
+	if err != nil {
+		return status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	// Set a valid password.
+	err = m.SetPassword(src.GetPassword())
+	if err != nil {
+		return status.Error(codes.InvalidArgument, err.Error())
+	}
+
 	return nil
 }

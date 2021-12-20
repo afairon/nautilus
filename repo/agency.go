@@ -275,7 +275,7 @@ func (repo *Agency) List(ctx context.Context, limit, offset uint64) ([]pb.Agency
 	rows, err := repo.db.Queryx(`
 		SELECT
 			agency.id, agency.name, agency.phone, agency.documents, agency.created_on, agency.updated_on,
-			account.id, account.username, account.email, account."type", account.verified, account.active, account.created_on, account.updated_on,
+			account.id, account.username, LOWER(account.email) AS "account.email", account."type", account.verified, account.active, account.created_on, account.updated_on,
 			address.id, address.address_line_1, address.address_line_2, address.city, address.postcode, address.region, address.country
 		FROM
 			public.agency

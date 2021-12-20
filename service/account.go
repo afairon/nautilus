@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"strings"
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
@@ -36,41 +37,14 @@ func NewAccountService(repo *repo.Repo, session session.Session, media media.Sto
 	}
 }
 
-// setUserAccount checks if the username is valid, the email is valid,
-// and the password is valid.
-func setUserAccount(dst *entity.Account, src *pb.Account) error {
-	if src == nil {
-		return status.Error(codes.InvalidArgument, "missing account")
-	}
-	// Set a valid username.
-	err := dst.SetUsername(src.GetUsername())
-	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	// Set a valid email.
-	err = dst.SetEmail(src.GetEmail())
-	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	// Set a valid password.
-	err = dst.SetPassword(src.GetPassword())
-	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	return nil
-}
-
 // CreateAgencyAccount creates an agency account by first creating
 // a record in account table, then a record in address table, and
 // finally a record in agency table with account_id and address_id.
 func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error {
-	account := entity.Account{}
+	account := &entity.Account{}
 
 	// Copy account information and verify if the information is correct.
-	err := setUserAccount(&account, agency.Account)
+	err := account.SetAccount(agency.Account)
 	if err != nil {
 		return err
 	}
@@ -101,7 +75,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 	}
 
 	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		newAccount, err := query.Account.Create(ctx, &account)
+		newAccount, err := query.Account.Create(ctx, account)
 		if err != nil {
 			return err
 		}
@@ -131,10 +105,10 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 // a record in account table and finally a record in diver table
 // with account_id.
 func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb.Diver) error {
-	account := entity.Account{}
+	account := &entity.Account{}
 
 	// Copy account information and verify if the information is correct.
-	err := setUserAccount(&account, diver.Account)
+	err := account.SetAccount(diver.Account)
 	if err != nil {
 		return err
 	}
@@ -159,7 +133,7 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 	}
 
 	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		newAccount, err := query.Account.Create(ctx, &account)
+		newAccount, err := query.Account.Create(ctx, account)
 		if err != nil {
 			return err
 		}
@@ -187,6 +161,9 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	if password == "" {
 		return "", status.Error(codes.InvalidArgument, "login: missing password")
 	}
+
+	// email to lowercase
+	email = strings.ToLower(email)
 
 	// Retrieve account by email.
 	accountRecord, err := service.repo.Account.GetByEmail(ctx, email)

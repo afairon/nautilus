@@ -41,7 +41,7 @@ func (repo *accountRepository) Create(ctx context.Context, account *entity.Accou
 			public.account
 			(username, email, "password", "type")
 		VALUES
-			($1, $2, $3, $4)
+			($1, LOWER($2), $3, $4)
 		RETURNING id, username, email, "type", verified, active, created_on, updated_on
 	`, account.Username, account.Email, account.Password, account.Type)
 
@@ -54,7 +54,7 @@ func (repo *accountRepository) Get(ctx context.Context, id uint64) (*entity.Acco
 
 	err := repo.db.GetContext(ctx, &result, `
 		SELECT
-			id, username, email, "password", "type", verified, active, created_on, updated_on
+			id, username, LOWER(email) AS email, "password", "type", verified, active, created_on, updated_on
 		FROM
 			public.account
 		WHERE
@@ -70,11 +70,11 @@ func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*e
 
 	err := repo.db.GetContext(ctx, &result, `
 		SELECT
-			id, username, email, "password", "type", verified, active, created_on, updated_on
+			id, username, LOWER(email) AS email, "password", "type", verified, active, created_on, updated_on
 		FROM
 			public.account
 		WHERE
-			email = $1
+			LOWER(email) = LOWER($1)
 	`, email)
 
 	return &result, err
@@ -86,7 +86,7 @@ func (repo *accountRepository) GetByUsername(ctx context.Context, username strin
 
 	err := repo.db.GetContext(ctx, &result, `
 		SELECT
-			id, username, email, "password", "type", verified, active, created_on, updated_on
+			id, username, LOWER(email) AS email, "password", "type", verified, active, created_on, updated_on
 		FROM
 			public.account
 		WHERE
@@ -102,7 +102,7 @@ func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (
 
 	rows, err := repo.db.Queryx(`
 		SELECT
-			id, username, email, "password", "type", verified, active, created_on, updated_on
+			id, username, LOWER(email) AS email, "password", "type", verified, active, created_on, updated_on
 		FROM
 			public.account
 		WHERE
@@ -130,7 +130,7 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 	rows, err := repo.db.Queryx(`
 		SELECT
 			agency.id, agency."name", agency."phone", agency.created_on, agency.updated_on,
-			account.id, account.username, account.email, account."password", account."type", account.verified, account.active, account.created_on, account.updated_on
+			account.id, account.username, LOWER(account.email) AS "account.email", account."password", account."type", account.verified, account.active, account.created_on, account.updated_on
 		FROM
 			public.agency agency
 		JOIN
@@ -164,7 +164,7 @@ func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (
 	rows, err := repo.db.Queryx(`
 		SELECT
 			diver.id, diver.first_name, diver.last_name, diver.phone, diver.birth_date, diver."level", diver.created_on, diver.updated_on,
-			account.id, account.username, account.email, account."password", account."type", account.verified, account.active, account.created_on, account.updated_on
+			account.id, account.username, LOWER(account.email) AS "account.email", account."password", account."type", account.verified, account.active, account.created_on, account.updated_on
 		FROM
 			public.diver diver
 		JOIN
@@ -195,7 +195,7 @@ func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (
 func (repo *accountRepository) List(ctx context.Context, limit uint64, offset uint64) ([]pb.Account, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
-			id, username, email, "type", verified, active, created_on, updated_on
+			id, username, LOWER(email) AS email, "type", verified, active, created_on, updated_on
 		FROM
 			public.account
 		LIMIT
