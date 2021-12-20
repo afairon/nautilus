@@ -209,13 +209,32 @@ func (service *accountService) GetProfile(ctx context.Context) (*pb.GetProfileRe
 		return nil, status.Error(codes.Unauthenticated, "account: account not found")
 	}
 
+	// Type assertion
 	switch v := account.(type) {
 	case *pb.Admin:
-		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Admin{Admin: v}}, nil
+		if v.GetAccount() != nil {
+			account, err := service.repo.Account.GetAdminAccount(ctx, v.GetAccount().GetId())
+			if err != nil {
+				return nil, err
+			}
+			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Admin{Admin: account}}, nil
+		}
 	case *pb.Agency:
-		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Agency{Agency: v}}, nil
+		if v.GetAccount() != nil {
+			account, err := service.repo.Account.GetAgencyAccount(ctx, v.GetAccount().GetId())
+			if err != nil {
+				return nil, err
+			}
+			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Agency{Agency: account}}, nil
+		}
 	case *pb.Diver:
-		return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Diver{Diver: v}}, nil
+		if v.GetAccount() != nil {
+			account, err := service.repo.Account.GetDiverAccount(ctx, v.GetAccount().GetId())
+			if err != nil {
+				return nil, err
+			}
+			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Diver{Diver: account}}, nil
+		}
 	}
 
 	return nil, status.Error(codes.Unauthenticated, "account: account not found")
