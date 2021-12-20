@@ -32,10 +32,6 @@ func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, i
 			liveaboard.id, liveaboard."name", liveaboard.description, liveaboard.length, liveaboard.width, liveaboard.images, liveaboard.created_on, liveaboard.updated_on
 		FROM
 			public.liveaboard liveaboard
-		JOIN
-			public.agency agency
-		ON
-			liveaboard.agency_id = agency.id
 		WHERE
 			liveaboard.agency_id = $1
 		LIMIT

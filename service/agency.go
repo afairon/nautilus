@@ -27,6 +27,9 @@ type AgencyService interface {
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error)
 	ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
 	ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error)
+	ListStaffs(ctx context.Context, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error)
+	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error)
+	ListTrips(ctx context.Context, limit, offset uint64) ([]*pb.ListTripsResponse_Trip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -485,7 +488,18 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 		limit = 20
 	}
 
-	return service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
+	boats, err := service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, boat := range boats {
+		for _, image := range boat.GetImages() {
+			image.Link = service.media.Get(image.GetLink(), false)
+		}
+	}
+
+	return boats, nil
 }
 
 // ListDiveMasters returns list of divemasters associated with the agency.
@@ -500,7 +514,18 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 		limit = 20
 	}
 
-	return service.repo.DiveMaster.ListDiveMastersByAgency(ctx, agency.Id, limit, offset)
+	diveMasters, err := service.repo.DiveMaster.ListDiveMastersByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, diveMaster := range diveMasters {
+		for _, document := range diveMaster.GetDocuments() {
+			document.Link = service.media.Get(document.GetLink(), false)
+		}
+	}
+
+	return diveMasters, nil
 }
 
 // ListHotels returns list of hotels associated with the agency.
@@ -515,7 +540,18 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 		limit = 20
 	}
 
-	return service.repo.Hotel.ListHotelsByAgency(ctx, agency.Id, limit, offset)
+	hotels, err := service.repo.Hotel.ListHotelsByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, hotel := range hotels {
+		for _, image := range hotel.GetImages() {
+			image.Link = service.media.Get(image.GetLink(), false)
+		}
+	}
+
+	return hotels, nil
 }
 
 // ListLiveaboards returns list of liveaboards associated with the agency.
@@ -530,5 +566,85 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 		limit = 20
 	}
 
-	return service.repo.Liveaboard.ListLiveaboardsByAgency(ctx, agency.Id, limit, offset)
+	liveaboards, err := service.repo.Liveaboard.ListLiveaboardsByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, liveaboard := range liveaboards {
+		for _, image := range liveaboard.GetImages() {
+			image.Link = service.media.Get(image.GetLink(), false)
+		}
+	}
+
+	return liveaboards, nil
+}
+
+// ListStaffs returns list of staffs associated with the agency.
+func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	return service.repo.Staff.ListStaffsByAgency(ctx, agency.Id, limit, offset)
+}
+
+// ListTripTemplates returns list of trip templates associated with the agency.
+func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	templates, err := service.repo.TripTemplate.ListTripTemplatesByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, template := range templates {
+		for _, image := range template.GetImages() {
+			image.Link = service.media.Get(image.GetLink(), false)
+		}
+	}
+
+	return templates, nil
+}
+
+// ListTrips returns list of trips associated with the agency.
+func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint64) ([]*pb.ListTripsResponse_Trip, error) {
+	agency, err := getUserInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	trips, err := service.repo.Trip.ListTripsByAgency(ctx, agency.Id, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, trip := range trips {
+		if trip.GetTemplate() != nil {
+			for _, image := range trip.GetTemplate().GetImages() {
+				image.Link = service.media.Get(image.GetLink(), false)
+			}
+		}
+	}
+
+	return trips, nil
 }

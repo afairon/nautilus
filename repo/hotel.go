@@ -30,13 +30,9 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 	rows, err := repo.db.Queryx(`
 		SELECT
 			hotel.id, hotel."name", hotel.description, hotel.stars, hotel.phone, hotel.images, hotel.created_on, hotel.updated_on,
-			address.address_line_1, address.address_line_2, address.city, address.postcode, address.region, address.country
+			address.id, address.address_line_1, address.address_line_2, address.city, address.postcode, address.region, address.country
 		FROM
 			public.hotel hotel
-		JOIN
-			public.agency agency
-		ON
-			hotel.agency_id = agency.id
 		JOIN
 			public.address address
 		ON
@@ -61,7 +57,7 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 		var images pq.StringArray
 
 		err = rows.Scan(&hotel.Id, &hotel.Name, &hotel.Description, &hotel.Stars, &hotel.Phone, &images, &hotel.CreatedOn, &hotel.UpdatedOn,
-			&hotel.Address.AddressLine_1, &hotel.Address.AddressLine_2, &hotel.Address.City, &hotel.Address.Postcode, &hotel.Address.Region, &hotel.Address.Country,
+			&hotel.Address.Id, &hotel.Address.AddressLine_1, &hotel.Address.AddressLine_2, &hotel.Address.City, &hotel.Address.Postcode, &hotel.Address.Region, &hotel.Address.Country,
 		)
 		if err != nil {
 			return nil, err

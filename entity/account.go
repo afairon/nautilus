@@ -27,6 +27,7 @@ func (m *Account) SetUsername(username string) error {
 
 // SetEmail sets the email only if the email is valid.
 func (m *Account) SetEmail(email string) error {
+	email = strings.ToLower(email)
 	_, err := mail.ParseAddress(email)
 	if err != nil {
 		return err

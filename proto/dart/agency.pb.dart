@@ -2335,3 +2335,939 @@ class ListLiveaboardsResponse extends $pb.GeneratedMessage {
   ListLiveaboardsResponse_Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
+class ListStaffsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListStaffsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListStaffsRequest._() : super();
+  factory ListStaffsRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListStaffsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListStaffsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListStaffsRequest clone() => ListStaffsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListStaffsRequest copyWith(void Function(ListStaffsRequest) updates) => super.copyWith((message) => updates(message as ListStaffsRequest)) as ListStaffsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsRequest create() => ListStaffsRequest._();
+  ListStaffsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListStaffsRequest> createRepeated() => $pb.PbList<ListStaffsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListStaffsRequest>(create);
+  static ListStaffsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListStaffsResponse_Staff extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListStaffsResponse.Staff', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
+    ..aOS(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'position')
+    ..e<$6.GenderType>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gender', $pb.PbFieldType.OE, defaultOrMaker: $6.GenderType.FEMALE, valueOf: $6.GenderType.valueOf, enumValues: $6.GenderType.values)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListStaffsResponse_Staff._() : super();
+  factory ListStaffsResponse_Staff({
+    $fixnum.Int64? id,
+    $core.String? firstName,
+    $core.String? lastName,
+    $core.String? position,
+    $6.GenderType? gender,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (firstName != null) {
+      _result.firstName = firstName;
+    }
+    if (lastName != null) {
+      _result.lastName = lastName;
+    }
+    if (position != null) {
+      _result.position = position;
+    }
+    if (gender != null) {
+      _result.gender = gender;
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListStaffsResponse_Staff.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListStaffsResponse_Staff.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListStaffsResponse_Staff clone() => ListStaffsResponse_Staff()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListStaffsResponse_Staff copyWith(void Function(ListStaffsResponse_Staff) updates) => super.copyWith((message) => updates(message as ListStaffsResponse_Staff)) as ListStaffsResponse_Staff; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsResponse_Staff create() => ListStaffsResponse_Staff._();
+  ListStaffsResponse_Staff createEmptyInstance() => create();
+  static $pb.PbList<ListStaffsResponse_Staff> createRepeated() => $pb.PbList<ListStaffsResponse_Staff>();
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsResponse_Staff getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListStaffsResponse_Staff>(create);
+  static ListStaffsResponse_Staff? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get firstName => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set firstName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasFirstName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearFirstName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get lastName => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set lastName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasLastName() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearLastName() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $core.String get position => $_getSZ(3);
+  @$pb.TagNumber(30)
+  set position($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasPosition() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearPosition() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $6.GenderType get gender => $_getN(4);
+  @$pb.TagNumber(40)
+  set gender($6.GenderType v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasGender() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearGender() => clearField(40);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get createdOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set createdOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasCreatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearCreatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+
+  @$pb.TagNumber(60)
+  $5.Timestamp get updatedOn => $_getN(6);
+  @$pb.TagNumber(60)
+  set updatedOn($5.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasUpdatedOn() => $_has(6);
+  @$pb.TagNumber(60)
+  void clearUpdatedOn() => clearField(60);
+  @$pb.TagNumber(60)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+}
+
+class ListStaffsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListStaffsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListStaffsResponse_Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: ListStaffsResponse_Staff.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListStaffsResponse._() : super();
+  factory ListStaffsResponse({
+    ListStaffsResponse_Staff? staff,
+  }) {
+    final _result = create();
+    if (staff != null) {
+      _result.staff = staff;
+    }
+    return _result;
+  }
+  factory ListStaffsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListStaffsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListStaffsResponse clone() => ListStaffsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListStaffsResponse copyWith(void Function(ListStaffsResponse) updates) => super.copyWith((message) => updates(message as ListStaffsResponse)) as ListStaffsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsResponse create() => ListStaffsResponse._();
+  ListStaffsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListStaffsResponse> createRepeated() => $pb.PbList<ListStaffsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListStaffsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListStaffsResponse>(create);
+  static ListStaffsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListStaffsResponse_Staff get staff => $_getN(0);
+  @$pb.TagNumber(1)
+  set staff(ListStaffsResponse_Staff v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStaff() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStaff() => clearField(1);
+  @$pb.TagNumber(1)
+  ListStaffsResponse_Staff ensureStaff() => $_ensure(0);
+}
+
+class ListTripTemplatesRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripTemplatesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripTemplatesRequest._() : super();
+  factory ListTripTemplatesRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListTripTemplatesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripTemplatesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesRequest clone() => ListTripTemplatesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesRequest copyWith(void Function(ListTripTemplatesRequest) updates) => super.copyWith((message) => updates(message as ListTripTemplatesRequest)) as ListTripTemplatesRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesRequest create() => ListTripTemplatesRequest._();
+  ListTripTemplatesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListTripTemplatesRequest> createRepeated() => $pb.PbList<ListTripTemplatesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripTemplatesRequest>(create);
+  static ListTripTemplatesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListTripTemplatesResponse_TripTemplate extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripTemplatesResponse.TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..e<$6.TripType>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $6.TripType.ONSHORE, valueOf: $6.TripType.valueOf, enumValues: $6.TripType.values)
+    ..a<$fixnum.Int64>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripTemplatesResponse_TripTemplate._() : super();
+  factory ListTripTemplatesResponse_TripTemplate({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.String? description,
+    $6.TripType? tripType,
+    $fixnum.Int64? hotelId,
+    $fixnum.Int64? boatId,
+    $fixnum.Int64? liveaboardId,
+    $core.Iterable<$6.File>? images,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (tripType != null) {
+      _result.tripType = tripType;
+    }
+    if (hotelId != null) {
+      _result.hotelId = hotelId;
+    }
+    if (boatId != null) {
+      _result.boatId = boatId;
+    }
+    if (liveaboardId != null) {
+      _result.liveaboardId = liveaboardId;
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListTripTemplatesResponse_TripTemplate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripTemplatesResponse_TripTemplate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesResponse_TripTemplate clone() => ListTripTemplatesResponse_TripTemplate()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesResponse_TripTemplate copyWith(void Function(ListTripTemplatesResponse_TripTemplate) updates) => super.copyWith((message) => updates(message as ListTripTemplatesResponse_TripTemplate)) as ListTripTemplatesResponse_TripTemplate; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesResponse_TripTemplate create() => ListTripTemplatesResponse_TripTemplate._();
+  ListTripTemplatesResponse_TripTemplate createEmptyInstance() => create();
+  static $pb.PbList<ListTripTemplatesResponse_TripTemplate> createRepeated() => $pb.PbList<ListTripTemplatesResponse_TripTemplate>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesResponse_TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripTemplatesResponse_TripTemplate>(create);
+  static ListTripTemplatesResponse_TripTemplate? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearDescription() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $6.TripType get tripType => $_getN(3);
+  @$pb.TagNumber(30)
+  set tripType($6.TripType v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasTripType() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearTripType() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $fixnum.Int64 get hotelId => $_getI64(4);
+  @$pb.TagNumber(40)
+  set hotelId($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasHotelId() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearHotelId() => clearField(40);
+
+  @$pb.TagNumber(50)
+  $fixnum.Int64 get boatId => $_getI64(5);
+  @$pb.TagNumber(50)
+  set boatId($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasBoatId() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearBoatId() => clearField(50);
+
+  @$pb.TagNumber(60)
+  $fixnum.Int64 get liveaboardId => $_getI64(6);
+  @$pb.TagNumber(60)
+  set liveaboardId($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasLiveaboardId() => $_has(6);
+  @$pb.TagNumber(60)
+  void clearLiveaboardId() => clearField(60);
+
+  @$pb.TagNumber(70)
+  $core.List<$6.File> get images => $_getList(7);
+
+  @$pb.TagNumber(80)
+  $5.Timestamp get createdOn => $_getN(8);
+  @$pb.TagNumber(80)
+  set createdOn($5.Timestamp v) { setField(80, v); }
+  @$pb.TagNumber(80)
+  $core.bool hasCreatedOn() => $_has(8);
+  @$pb.TagNumber(80)
+  void clearCreatedOn() => clearField(80);
+  @$pb.TagNumber(80)
+  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+
+  @$pb.TagNumber(90)
+  $5.Timestamp get updatedOn => $_getN(9);
+  @$pb.TagNumber(90)
+  set updatedOn($5.Timestamp v) { setField(90, v); }
+  @$pb.TagNumber(90)
+  $core.bool hasUpdatedOn() => $_has(9);
+  @$pb.TagNumber(90)
+  void clearUpdatedOn() => clearField(90);
+  @$pb.TagNumber(90)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+}
+
+class ListTripTemplatesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripTemplatesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListTripTemplatesResponse_TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'template', subBuilder: ListTripTemplatesResponse_TripTemplate.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripTemplatesResponse._() : super();
+  factory ListTripTemplatesResponse({
+    ListTripTemplatesResponse_TripTemplate? template,
+  }) {
+    final _result = create();
+    if (template != null) {
+      _result.template = template;
+    }
+    return _result;
+  }
+  factory ListTripTemplatesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripTemplatesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesResponse clone() => ListTripTemplatesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripTemplatesResponse copyWith(void Function(ListTripTemplatesResponse) updates) => super.copyWith((message) => updates(message as ListTripTemplatesResponse)) as ListTripTemplatesResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesResponse create() => ListTripTemplatesResponse._();
+  ListTripTemplatesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListTripTemplatesResponse> createRepeated() => $pb.PbList<ListTripTemplatesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripTemplatesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripTemplatesResponse>(create);
+  static ListTripTemplatesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListTripTemplatesResponse_TripTemplate get template => $_getN(0);
+  @$pb.TagNumber(1)
+  set template(ListTripTemplatesResponse_TripTemplate v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTemplate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTemplate() => clearField(1);
+  @$pb.TagNumber(1)
+  ListTripTemplatesResponse_TripTemplate ensureTemplate() => $_ensure(0);
+}
+
+class ListTripsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripsRequest._() : super();
+  factory ListTripsRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripsRequest clone() => ListTripsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripsRequest copyWith(void Function(ListTripsRequest) updates) => super.copyWith((message) => updates(message as ListTripsRequest)) as ListTripsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripsRequest create() => ListTripsRequest._();
+  ListTripsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListTripsRequest> createRepeated() => $pb.PbList<ListTripsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripsRequest>(create);
+  static ListTripsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+}
+
+class ListTripsResponse_Trip extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsResponse.Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<ListTripsResponse_TripTemplate>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'template', subBuilder: ListTripsResponse_TripTemplate.create)
+    ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
+    ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripsResponse_Trip._() : super();
+  factory ListTripsResponse_Trip({
+    $fixnum.Int64? id,
+    ListTripsResponse_TripTemplate? template,
+    $core.int? maxGuest,
+    $core.double? price,
+    $5.Timestamp? fromDate,
+    $5.Timestamp? toDate,
+    $5.Timestamp? lastReservationDate,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (template != null) {
+      _result.template = template;
+    }
+    if (maxGuest != null) {
+      _result.maxGuest = maxGuest;
+    }
+    if (price != null) {
+      _result.price = price;
+    }
+    if (fromDate != null) {
+      _result.fromDate = fromDate;
+    }
+    if (toDate != null) {
+      _result.toDate = toDate;
+    }
+    if (lastReservationDate != null) {
+      _result.lastReservationDate = lastReservationDate;
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListTripsResponse_Trip.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripsResponse_Trip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse_Trip clone() => ListTripsResponse_Trip()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse_Trip copyWith(void Function(ListTripsResponse_Trip) updates) => super.copyWith((message) => updates(message as ListTripsResponse_Trip)) as ListTripsResponse_Trip; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse_Trip create() => ListTripsResponse_Trip._();
+  ListTripsResponse_Trip createEmptyInstance() => create();
+  static $pb.PbList<ListTripsResponse_Trip> createRepeated() => $pb.PbList<ListTripsResponse_Trip>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse_Trip getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripsResponse_Trip>(create);
+  static ListTripsResponse_Trip? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(20)
+  ListTripsResponse_TripTemplate get template => $_getN(1);
+  @$pb.TagNumber(20)
+  set template(ListTripsResponse_TripTemplate v) { setField(20, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasTemplate() => $_has(1);
+  @$pb.TagNumber(20)
+  void clearTemplate() => clearField(20);
+  @$pb.TagNumber(20)
+  ListTripsResponse_TripTemplate ensureTemplate() => $_ensure(1);
+
+  @$pb.TagNumber(30)
+  $core.int get maxGuest => $_getIZ(2);
+  @$pb.TagNumber(30)
+  set maxGuest($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasMaxGuest() => $_has(2);
+  @$pb.TagNumber(30)
+  void clearMaxGuest() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $core.double get price => $_getN(3);
+  @$pb.TagNumber(40)
+  set price($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(40)
+  void clearPrice() => clearField(40);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get fromDate => $_getN(4);
+  @$pb.TagNumber(50)
+  set fromDate($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasFromDate() => $_has(4);
+  @$pb.TagNumber(50)
+  void clearFromDate() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureFromDate() => $_ensure(4);
+
+  @$pb.TagNumber(60)
+  $5.Timestamp get toDate => $_getN(5);
+  @$pb.TagNumber(60)
+  set toDate($5.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasToDate() => $_has(5);
+  @$pb.TagNumber(60)
+  void clearToDate() => clearField(60);
+  @$pb.TagNumber(60)
+  $5.Timestamp ensureToDate() => $_ensure(5);
+
+  @$pb.TagNumber(70)
+  $5.Timestamp get lastReservationDate => $_getN(6);
+  @$pb.TagNumber(70)
+  set lastReservationDate($5.Timestamp v) { setField(70, v); }
+  @$pb.TagNumber(70)
+  $core.bool hasLastReservationDate() => $_has(6);
+  @$pb.TagNumber(70)
+  void clearLastReservationDate() => clearField(70);
+  @$pb.TagNumber(70)
+  $5.Timestamp ensureLastReservationDate() => $_ensure(6);
+
+  @$pb.TagNumber(80)
+  $5.Timestamp get createdOn => $_getN(7);
+  @$pb.TagNumber(80)
+  set createdOn($5.Timestamp v) { setField(80, v); }
+  @$pb.TagNumber(80)
+  $core.bool hasCreatedOn() => $_has(7);
+  @$pb.TagNumber(80)
+  void clearCreatedOn() => clearField(80);
+  @$pb.TagNumber(80)
+  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+
+  @$pb.TagNumber(90)
+  $5.Timestamp get updatedOn => $_getN(8);
+  @$pb.TagNumber(90)
+  set updatedOn($5.Timestamp v) { setField(90, v); }
+  @$pb.TagNumber(90)
+  $core.bool hasUpdatedOn() => $_has(8);
+  @$pb.TagNumber(90)
+  void clearUpdatedOn() => clearField(90);
+  @$pb.TagNumber(90)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+}
+
+class ListTripsResponse_TripTemplate extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsResponse.TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..e<$6.TripType>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $6.TripType.ONSHORE, valueOf: $6.TripType.valueOf, enumValues: $6.TripType.values)
+    ..pc<$6.File>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripsResponse_TripTemplate._() : super();
+  factory ListTripsResponse_TripTemplate({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.String? description,
+    $6.TripType? tripType,
+    $core.Iterable<$6.File>? images,
+    $5.Timestamp? createdOn,
+    $5.Timestamp? updatedOn,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (tripType != null) {
+      _result.tripType = tripType;
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (createdOn != null) {
+      _result.createdOn = createdOn;
+    }
+    if (updatedOn != null) {
+      _result.updatedOn = updatedOn;
+    }
+    return _result;
+  }
+  factory ListTripsResponse_TripTemplate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripsResponse_TripTemplate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse_TripTemplate clone() => ListTripsResponse_TripTemplate()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse_TripTemplate copyWith(void Function(ListTripsResponse_TripTemplate) updates) => super.copyWith((message) => updates(message as ListTripsResponse_TripTemplate)) as ListTripsResponse_TripTemplate; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse_TripTemplate create() => ListTripsResponse_TripTemplate._();
+  ListTripsResponse_TripTemplate createEmptyInstance() => create();
+  static $pb.PbList<ListTripsResponse_TripTemplate> createRepeated() => $pb.PbList<ListTripsResponse_TripTemplate>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse_TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripsResponse_TripTemplate>(create);
+  static ListTripsResponse_TripTemplate? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearDescription() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $6.TripType get tripType => $_getN(3);
+  @$pb.TagNumber(30)
+  set tripType($6.TripType v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasTripType() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearTripType() => clearField(30);
+
+  @$pb.TagNumber(40)
+  $core.List<$6.File> get images => $_getList(4);
+
+  @$pb.TagNumber(50)
+  $5.Timestamp get createdOn => $_getN(5);
+  @$pb.TagNumber(50)
+  set createdOn($5.Timestamp v) { setField(50, v); }
+  @$pb.TagNumber(50)
+  $core.bool hasCreatedOn() => $_has(5);
+  @$pb.TagNumber(50)
+  void clearCreatedOn() => clearField(50);
+  @$pb.TagNumber(50)
+  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+
+  @$pb.TagNumber(60)
+  $5.Timestamp get updatedOn => $_getN(6);
+  @$pb.TagNumber(60)
+  set updatedOn($5.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasUpdatedOn() => $_has(6);
+  @$pb.TagNumber(60)
+  void clearUpdatedOn() => clearField(60);
+  @$pb.TagNumber(60)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+}
+
+class ListTripsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<ListTripsResponse_Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: ListTripsResponse_Trip.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListTripsResponse._() : super();
+  factory ListTripsResponse({
+    ListTripsResponse_Trip? trip,
+  }) {
+    final _result = create();
+    if (trip != null) {
+      _result.trip = trip;
+    }
+    return _result;
+  }
+  factory ListTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse clone() => ListTripsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListTripsResponse copyWith(void Function(ListTripsResponse) updates) => super.copyWith((message) => updates(message as ListTripsResponse)) as ListTripsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse create() => ListTripsResponse._();
+  ListTripsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListTripsResponse> createRepeated() => $pb.PbList<ListTripsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTripsResponse>(create);
+  static ListTripsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ListTripsResponse_Trip get trip => $_getN(0);
+  @$pb.TagNumber(1)
+  set trip(ListTripsResponse_Trip v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTrip() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTrip() => clearField(1);
+  @$pb.TagNumber(1)
+  ListTripsResponse_Trip ensureTrip() => $_ensure(0);
+}
+

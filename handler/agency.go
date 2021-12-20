@@ -87,8 +87,8 @@ func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLive
 }
 
 // ListBoats retrieves list of boats associated with the agency.
-func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, stream pb.AgencyService_ListBoatsServer) error {
-	ctx := stream.Context()
+func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyService_ListBoatsServer) error {
+	ctx := srv.Context()
 
 	boats, err := handler.agencyService.ListBoats(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
@@ -99,15 +99,15 @@ func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, stream pb.Agen
 		resp := &pb.ListBoatsResponse{
 			Boat: boat,
 		}
-		stream.Send(resp)
+		srv.Send(resp)
 	}
 
 	return nil
 }
 
 // ListDiveMasters retrieves list of divemasters associated with the agency.
-func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, stream pb.AgencyService_ListDiveMastersServer) error {
-	ctx := stream.Context()
+func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, srv pb.AgencyService_ListDiveMastersServer) error {
+	ctx := srv.Context()
 
 	diveMasters, err := handler.agencyService.ListDiveMasters(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
@@ -118,15 +118,15 @@ func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, st
 		resp := &pb.ListDiveMastersResponse{
 			DiveMaster: diveMaster,
 		}
-		stream.Send(resp)
+		srv.Send(resp)
 	}
 
 	return nil
 }
 
 // ListHotels retrieves list of hotels associated with the agency.
-func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, stream pb.AgencyService_ListHotelsServer) error {
-	ctx := stream.Context()
+func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.AgencyService_ListHotelsServer) error {
+	ctx := srv.Context()
 
 	hotels, err := handler.agencyService.ListHotels(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
@@ -137,15 +137,15 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, stream pb.Ag
 		resp := &pb.ListHotelsResponse{
 			Hotel: hotel,
 		}
-		stream.Send(resp)
+		srv.Send(resp)
 	}
 
 	return nil
 }
 
 // ListLiveaboards retrieves list of liveaboards associated with the agency.
-func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, stream pb.AgencyService_ListLiveaboardsServer) error {
-	ctx := stream.Context()
+func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, srv pb.AgencyService_ListLiveaboardsServer) error {
+	ctx := srv.Context()
 
 	liveaboards, err := handler.agencyService.ListLiveaboards(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
@@ -156,7 +156,64 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, st
 		resp := &pb.ListLiveaboardsResponse{
 			Liveaboard: liveaboard,
 		}
-		stream.Send(resp)
+		srv.Send(resp)
+	}
+
+	return nil
+}
+
+// ListStaffs retrieves list of staffs associated with the agency.
+func (handler *AgencyHandler) ListStaffs(req *pb.ListStaffsRequest, srv pb.AgencyService_ListStaffsServer) error {
+	ctx := srv.Context()
+
+	staffs, err := handler.agencyService.ListStaffs(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, staff := range staffs {
+		resp := &pb.ListStaffsResponse{
+			Staff: staff,
+		}
+		srv.Send(resp)
+	}
+
+	return nil
+}
+
+// ListTripTemplates retrieves list of trip templates associated with the agency.
+func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest, srv pb.AgencyService_ListTripTemplatesServer) error {
+	ctx := srv.Context()
+
+	tripTemplates, err := handler.agencyService.ListTripTemplates(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, tripTemplate := range tripTemplates {
+		resp := &pb.ListTripTemplatesResponse{
+			Template: tripTemplate,
+		}
+		srv.Send(resp)
+	}
+
+	return nil
+}
+
+// ListTrips retrieves list of trips associated with the agency.
+func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyService_ListTripsServer) error {
+	ctx := srv.Context()
+
+	trips, err := handler.agencyService.ListTrips(ctx, req.GetLimit(), req.GetOffset())
+	if err != nil {
+		return err
+	}
+
+	for _, trip := range trips {
+		resp := &pb.ListTripsResponse{
+			Trip: trip,
+		}
+		srv.Send(resp)
 	}
 
 	return nil

@@ -71,6 +71,24 @@ class AgencyServiceClient extends $grpc.Client {
           ($2.ListLiveaboardsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $2.ListLiveaboardsResponse.fromBuffer(value));
+  static final _$listStaffs =
+      $grpc.ClientMethod<$2.ListStaffsRequest, $2.ListStaffsResponse>(
+          '/agency.AgencyService/ListStaffs',
+          ($2.ListStaffsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $2.ListStaffsResponse.fromBuffer(value));
+  static final _$listTripTemplates = $grpc.ClientMethod<
+          $2.ListTripTemplatesRequest, $2.ListTripTemplatesResponse>(
+      '/agency.AgencyService/ListTripTemplates',
+      ($2.ListTripTemplatesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ListTripTemplatesResponse.fromBuffer(value));
+  static final _$listTrips =
+      $grpc.ClientMethod<$2.ListTripsRequest, $2.ListTripsResponse>(
+          '/agency.AgencyService/ListTrips',
+          ($2.ListTripsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $2.ListTripsResponse.fromBuffer(value));
 
   AgencyServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -142,6 +160,30 @@ class AgencyServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listLiveaboards, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListStaffsResponse> listStaffs(
+      $2.ListStaffsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listStaffs, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListTripTemplatesResponse> listTripTemplates(
+      $2.ListTripTemplatesRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listTripTemplates, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListTripsResponse> listTrips(
+      $2.ListTripsRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listTrips, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -235,6 +277,29 @@ abstract class AgencyServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.ListLiveaboardsRequest.fromBuffer(value),
         ($2.ListLiveaboardsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListStaffsRequest, $2.ListStaffsResponse>(
+        'ListStaffs',
+        listStaffs_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $2.ListStaffsRequest.fromBuffer(value),
+        ($2.ListStaffsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListTripTemplatesRequest,
+            $2.ListTripTemplatesResponse>(
+        'ListTripTemplates',
+        listTripTemplates_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.ListTripTemplatesRequest.fromBuffer(value),
+        ($2.ListTripTemplatesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListTripsRequest, $2.ListTripsResponse>(
+        'ListTrips',
+        listTrips_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $2.ListTripsRequest.fromBuffer(value),
+        ($2.ListTripsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> addDiveMaster_Pre($grpc.ServiceCall call,
@@ -294,6 +359,22 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* listLiveaboards(call, await request);
   }
 
+  $async.Stream<$2.ListStaffsResponse> listStaffs_Pre($grpc.ServiceCall call,
+      $async.Future<$2.ListStaffsRequest> request) async* {
+    yield* listStaffs(call, await request);
+  }
+
+  $async.Stream<$2.ListTripTemplatesResponse> listTripTemplates_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.ListTripTemplatesRequest> request) async* {
+    yield* listTripTemplates(call, await request);
+  }
+
+  $async.Stream<$2.ListTripsResponse> listTrips_Pre($grpc.ServiceCall call,
+      $async.Future<$2.ListTripsRequest> request) async* {
+    yield* listTrips(call, await request);
+  }
+
   $async.Future<$1.Empty> addDiveMaster(
       $grpc.ServiceCall call, $2.AddDiveMasterRequest request);
   $async.Future<$1.Empty> addStaff(
@@ -316,4 +397,10 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.ListHotelsRequest request);
   $async.Stream<$2.ListLiveaboardsResponse> listLiveaboards(
       $grpc.ServiceCall call, $2.ListLiveaboardsRequest request);
+  $async.Stream<$2.ListStaffsResponse> listStaffs(
+      $grpc.ServiceCall call, $2.ListStaffsRequest request);
+  $async.Stream<$2.ListTripTemplatesResponse> listTripTemplates(
+      $grpc.ServiceCall call, $2.ListTripTemplatesRequest request);
+  $async.Stream<$2.ListTripsResponse> listTrips(
+      $grpc.ServiceCall call, $2.ListTripsRequest request);
 }

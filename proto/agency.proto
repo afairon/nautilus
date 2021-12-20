@@ -23,6 +23,9 @@ service AgencyService {
     rpc ListDiveMasters(ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
     rpc ListHotels(ListHotelsRequest) returns (stream ListHotelsResponse);
     rpc ListLiveaboards(ListLiveaboardsRequest) returns (stream ListLiveaboardsResponse);
+    rpc ListStaffs(ListStaffsRequest) returns (stream ListStaffsResponse);
+    rpc ListTripTemplates(ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
+    rpc ListTrips(ListTripsRequest) returns (stream ListTripsResponse);
 }
 
 message DiveMaster {
@@ -219,5 +222,83 @@ message ListLiveaboardsResponse {
         repeated model.File images = 50;
         google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListStaffsRequest
+message ListStaffsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListStaffsResponse
+message ListStaffsResponse {
+    Staff staff = 1;
+
+    message Staff {
+        uint64 id = 1;
+        string first_name = 10;
+        string last_name = 20;
+        string position = 30;
+        model.GenderType gender = 40;
+        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListTripTemplatesRequest
+message ListTripTemplatesRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListTripTemplatesResponse
+message ListTripTemplatesResponse {
+    TripTemplate template = 1;
+
+    message TripTemplate {
+        uint64 id = 1;
+        string name = 10;
+        string description = 20;
+        model.TripType trip_type = 30;
+        uint64 hotel_id = 40;
+        uint64 boat_id = 50;
+        uint64 liveaboard_id = 60;
+        repeated model.File images = 70;
+        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListTripsRequest
+message ListTripsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListTripsResponse
+message ListTripsResponse {
+    Trip trip = 1;
+
+    message Trip {
+        uint64 id = 1;
+        TripTemplate template = 20;
+        uint32 max_guest = 30;
+        float price = 40;
+        google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+    }
+
+    message TripTemplate {
+        uint64 id = 1;
+        string name = 10;
+        string description = 20;
+        model.TripType trip_type = 30;
+        repeated model.File images = 40;
+        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
     }
 }

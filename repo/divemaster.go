@@ -32,10 +32,6 @@ func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, i
 			dm.id, dm.first_name, dm.last_name, dm."level", dm.documents, dm.created_on, dm.updated_on
 		FROM
 			public.dive_master dm
-		JOIN
-			public.agency agency
-		ON
-			dm.agency_id = agency.id
 		WHERE
 			dm.agency_id = $1
 		LIMIT

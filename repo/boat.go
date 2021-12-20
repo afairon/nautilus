@@ -29,15 +29,11 @@ func NewBoatRepository(db DBTX) *boatRepository {
 func (repo *boatRepository) ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error) {
 	rows, err := repo.db.Queryx(`
 		SELECT
-			boat.id, boat."name", boat."images", boat.created_on, boat.updated_on
+			id, "name", "images", created_on, updated_on
 		FROM
-			public.boat boat
-		JOIN
-			public.agency agency
-		ON
-			boat.agency_id = agency.id
+			public.boat
 		WHERE
-			boat.agency_id = $1
+			agency_id = $1
 		LIMIT
 			$2
 		OFFSET
