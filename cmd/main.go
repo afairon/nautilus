@@ -68,7 +68,10 @@ func run(conf *config.Config) error {
 	// Choose object storage backend.
 	if conf.GetS3() != nil {
 		log.Info("Using S3 object storage backend.")
-		mediaStorage = s3.NewStoreFromConfig(conf.GetS3())
+		mediaStorage, err = s3.NewStoreFromConfig(conf.GetS3())
+		if err != nil {
+			return err
+		}
 	} else {
 		log.Info("Using FS object storage backend.")
 		mediaStorage = fs.NewStoreFromConfig(conf.GetFS())

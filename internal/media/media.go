@@ -17,6 +17,6 @@ type Store interface {
 
 // NewFilename generates unique filename.
 func NewFilename(filename string) string {
-	ext := filepath.Ext(filename)
+	ext := strings.ToLower(filepath.Ext(filename))
 	return strings.Replace(uuid.New().String()+ext, "-", "", -1)
 }

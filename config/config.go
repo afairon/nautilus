@@ -71,6 +71,7 @@ type S3 struct {
 	SecretKey string `yaml:"secret_key"`
 	Region    string `yaml:"region"`
 	Bucket    string `yaml:"bucket"`
+	Duration  int64  `yaml:"duration"`
 }
 
 type Storage struct {
