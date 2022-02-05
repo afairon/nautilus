@@ -1,6 +1,13 @@
 package db
 
-func Connect(host string, user string, password string, dbname string, port int, ssl bool) (*gorm.DB, error) {
+import (
+	"fmt"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+func NewGormConnection(host string, user string, password string, dbname string, port int, ssl bool) (*gorm.DB, error) {
 	var dsn string
 
 	if ssl {
