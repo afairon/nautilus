@@ -78,6 +78,8 @@ type Agency struct {
 	AddressId   uint64
 	Documents   entity.StringArray
 	DiveMasters []DiveMaster `gorm:"embedded"`
+	Staffs      []Staff      `gorm:"embedded"`
+	Boats       []Boat       `gorm:"embedded"`
 }
 
 type Diver struct {
@@ -105,4 +107,14 @@ type Staff struct {
 	LastName  string
 	Position  string
 	Gender    GenderType
+}
+
+type Boat struct {
+	gorm.Model
+	Name          string
+	Description   string
+	TotalCapacity int
+	DiverCapacity int
+	StaffCapacity int
+	Images        entity.StringArray
 }
