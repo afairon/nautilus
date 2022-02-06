@@ -59,6 +59,22 @@ func (g GenderType) EnumIndex() int {
 	return int(g)
 }
 
+// enum implementation for TripType
+type TripType int32
+
+const (
+	ONSHORE TripType = iota
+	OFFSHORE
+)
+
+func (t TripType) String() string {
+	return [...]string{"ONSHORE", "OFFSHORE"}[t]
+}
+
+func (t TripType) EnumIndex() int {
+	return int(t)
+}
+
 type Account struct {
 	gorm.Model
 	Email    string
@@ -71,15 +87,16 @@ type Account struct {
 
 type Agency struct {
 	gorm.Model
-	*Account    `gorm:"embedded"`
-	Name        string
-	Phone       string
-	AccountId   uint64
-	AddressId   uint64
-	Documents   entity.StringArray
-	DiveMasters []DiveMaster `gorm:"embedded"`
-	Staffs      []Staff      `gorm:"embedded"`
-	Boats       []Boat       `gorm:"embedded"`
+	*Account      `gorm:"embedded"`
+	Name          string
+	Phone         string
+	AccountId     uint64
+	AddressId     uint64
+	Documents     entity.StringArray
+	DiveMasters   []DiveMaster   `gorm:"embedded"`
+	Staffs        []Staff        `gorm:"embedded"`
+	Boats         []Boat         `gorm:"embedded"`
+	TripTemplates []TripTemplate `gorm:"embedded"`
 }
 
 type Diver struct {
@@ -117,4 +134,13 @@ type Boat struct {
 	DiverCapacity int
 	StaffCapacity int
 	Images        entity.StringArray
+}
+
+type TripTemplate struct {
+	gorm.Model
+	Name        string
+	Descirption string
+	Type        TripType
+	Images      entity.StringArray
+	Boat        Boat `gorm:"embedded"`
 }
