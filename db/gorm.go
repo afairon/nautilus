@@ -10,7 +10,7 @@ import (
 
 var GormStore *gorm.DB
 
-func NewGormConnection(host string, user string, password string, dbname string, port int, ssl bool) (*gorm.DB, error) {
+func InitGormStore(host string, user string, password string, dbname string, port int, ssl bool) (*gorm.DB, error) {
 	var dsn string
 
 	if ssl {
@@ -31,16 +31,16 @@ func NewGormConnection(host string, user string, password string, dbname string,
 		)
 	}
 
+	// for testing purpose
+	dsn = "postgres://pg:pass@localhost:5432/crud"
+
 	GormStore, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		return nil, err
 	}
 
-	return GormStore, nil
-}
+	GormStore.AutoMigrate(&model.Account{}, &model.Agency{})
 
-// Automatically migrate when the schemas change
-func MigrateGormStore() {
-	GormStore.AutoMigrate(&model.Account{}, &model.Agency{}, &model.Diver{})
+	return GormStore, nil
 }

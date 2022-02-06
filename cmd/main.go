@@ -53,6 +53,8 @@ func run(conf *config.Config) error {
 	}
 
 	// Connect to postgres.
+	db.InitGormStore("", "", "", "", 2, false)
+
 	db, err := db.ConnectFromConfig(conf.GetPostgreSQL())
 	if err != nil {
 		return err

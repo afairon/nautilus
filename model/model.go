@@ -76,7 +76,7 @@ func (t TripType) EnumIndex() int {
 }
 
 type Address struct {
-	gorm.Model
+	*gorm.Model
 	AddressLine_1 string
 	AddressLine_2 string
 	City          string
@@ -91,7 +91,7 @@ type Coordinate struct {
 }
 
 type Account struct {
-	gorm.Model
+	*gorm.Model
 	Email    string
 	Username string
 	Password string
@@ -100,26 +100,25 @@ type Account struct {
 	Active   bool
 }
 
+// this thing should be fixed
 type Agency struct {
-	gorm.Model
-	*Account      `gorm:"embedded"`
-	Name          string
-	Phone         string
-	AccountId     uint64
-	AddressId     uint64
-	Documents     entity.StringArray
-	DiveMasters   []DiveMaster   `gorm:"embedded"`
-	Staffs        []Staff        `gorm:"embedded"`
-	Boats         []Boat         `gorm:"embedded"`
-	TripTemplates []TripTemplate `gorm:"embedded"`
-	Liveaboards   []Liveaboard   `gorm:"embedded"`
-	Hotels        []Hotel        `gorm:"embedded"`
-	*Address
+	*gorm.Model
+	Name      string
+	Phone     string
+	AccountId uint64
+	AddressId uint64
+	Documents entity.StringArray `gorm:"type:text"`
+	// DiveMasters   []DiveMaster   `gorm:"embedded"`
+	// Staffs        []Staff        `gorm:"embedded"`
+	// Boats         []Boat         `gorm:"embedded"`
+	// TripTemplates []TripTemplate `gorm:"embedded"`
+	// Liveaboards   []Liveaboard   `gorm:"embedded"`
+	// Hotels        []Hotel        `gorm:"embedded"`
 	*Coordinate
 }
 
 type Diver struct {
-	gorm.Model
+	*gorm.Model
 	*Account     `gorm:"embedded"`
 	Level        LevelType
 	FirstName    string
@@ -131,7 +130,7 @@ type Diver struct {
 }
 
 type DiveMaster struct {
-	gorm.Model
+	*gorm.Model
 	FirstName string
 	LastName  string
 	Level     LevelType
@@ -139,7 +138,7 @@ type DiveMaster struct {
 }
 
 type Staff struct {
-	gorm.Model
+	*gorm.Model
 	FirstName string
 	LastName  string
 	Position  string
@@ -147,7 +146,7 @@ type Staff struct {
 }
 
 type Boat struct {
-	gorm.Model
+	*gorm.Model
 	Name          string
 	Description   string
 	TotalCapacity uint32
@@ -159,7 +158,7 @@ type Boat struct {
 }
 
 type TripTemplate struct {
-	gorm.Model
+	*gorm.Model
 	Name        string
 	Descirption string
 	Type        TripType
@@ -171,7 +170,7 @@ type TripTemplate struct {
 }
 
 type Trip struct {
-	gorm.Model
+	*gorm.Model
 	MaxGuest            uint32
 	Price               float32
 	StartDate           *time.Time
@@ -181,7 +180,7 @@ type Trip struct {
 }
 
 type Reservation struct {
-	gorm.Model
+	*gorm.Model
 	Price             float32
 	LiveaboardComment *LiveaboardComment `gorm:"embedded"`
 	HotelComment      *HotelComment      `gorm:"embedded"`
@@ -189,31 +188,31 @@ type Reservation struct {
 }
 
 type LiveaboardComment struct {
-	gorm.Model
+	*gorm.Model
 	Comment string
 	Stars   uint32
 }
 
 type HotelComment struct {
-	gorm.Model
+	*gorm.Model
 	Comment string
 	Stars   uint32
 }
 
 type TripComment struct {
-	gorm.Model
+	*gorm.Model
 	Comment string
 	Stars   uint32
 }
 
 type Amenity struct {
-	gorm.Model
+	*gorm.Model
 	Name        string
 	Description string
 }
 
 type Liveaboard struct {
-	gorm.Model
+	*gorm.Model
 	Name          string
 	Description   string
 	Length        uint32
@@ -227,7 +226,7 @@ type Liveaboard struct {
 }
 
 type RoomType struct {
-	gorm.Model
+	*gorm.Model
 	Name        string
 	Description string
 	MaxGuest    uint32
@@ -238,7 +237,7 @@ type RoomType struct {
 }
 
 type Hotel struct {
-	gorm.Model
+	*gorm.Model
 	Name        string
 	Description string
 	Stars       uint32
