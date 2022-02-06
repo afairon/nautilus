@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/afairon/nautilus/entity"
-	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
 
@@ -25,26 +24,7 @@ func (a AccountType) EnumIndex() int {
 	return int(a)
 }
 
-type Account struct {
-	gorm.Model
-	Email    string
-	Username string
-	Password string
-	Type     AccountType
-	Verified bool
-	Active   bool
-}
-
-type Agency struct {
-	gorm.Model
-	*Account  `gorm:"embedded"`
-	Name      string
-	Phone     string
-	AccountId uint64
-	AddressId uint64
-	Documents entity.StringArray
-}
-
+// enum implementation for LevelType
 type LevelType int32
 
 const (
@@ -63,6 +43,43 @@ func (l LevelType) EnumIndex() int {
 	return int(l)
 }
 
+// enum implementation for GenderType
+type GenderType int32
+
+const (
+	FEMALE GenderType = iota
+	MALE
+)
+
+func (g GenderType) String() string {
+	return [...]string{"FEMALE", "MALE"}[g]
+}
+
+func (g GenderType) EnumIndex() int {
+	return int(g)
+}
+
+type Account struct {
+	gorm.Model
+	Email    string
+	Username string
+	Password string
+	Type     AccountType
+	Verified bool
+	Active   bool
+}
+
+type Agency struct {
+	gorm.Model
+	*Account    `gorm:"embedded"`
+	Name        string
+	Phone       string
+	AccountId   uint64
+	AddressId   uint64
+	Documents   entity.StringArray
+	DiveMasters []DiveMaster `gorm:"embedded"`
+}
+
 type Diver struct {
 	gorm.Model
 	*Account  `gorm:"embedded"`
@@ -71,5 +88,21 @@ type Diver struct {
 	LastName  string
 	Phone     string
 	BirthDate time.Time `gorm:"embedded"`
-	Documents []pb.File `gorm:"embedded"`
+	Documents entity.StringArray
+}
+
+type DiveMaster struct {
+	gorm.Model
+	FirstName string
+	LastName  string
+	Level     LevelType
+	Documents entity.StringArray
+}
+
+type Staff struct {
+	gorm.Model
+	FirstName string
+	LastName  string
+	Position  string
+	Gender    GenderType
 }
