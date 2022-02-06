@@ -113,7 +113,7 @@ type Agency struct {
 	Boats         []Boat         `gorm:"embedded"`
 	TripTemplates []TripTemplate `gorm:"embedded"`
 	Liveaboards   []Liveaboard   `gorm:"embedded"`
-
+	Hotels        []Hotel        `gorm:"embedded"`
 	*Address
 	*Coordinate
 }
@@ -167,6 +167,7 @@ type TripTemplate struct {
 	Boat        *Boat        `gorm:"embedded"`
 	Trips       []Trip       `gorm:"embedded"`
 	Liveaboards []Liveaboard `gorm:"embedded"`
+	Hotels      []Hotel      `gorm:"embedded"`
 }
 
 type Trip struct {
@@ -220,6 +221,29 @@ type Liveaboard struct {
 	TotalCapacity uint32
 	DiverRooms    uint32
 	StaffRooms    uint32
+	RoomTypes     []RoomType `gorm:"embedded"`
+	*Address
+	*Coordinate
+}
+
+type RoomType struct {
+	gorm.Model
+	Name        string
+	Description string
+	MaxGuest    uint32
+	Price       float32
+	Quantity    uint32
+	Images      entity.StringArray
+	Amenities   []Amenity `gorm:"embedded"`
+}
+
+type Hotel struct {
+	gorm.Model
+	Name        string
+	Description string
+	Stars       uint32
+	Phone       string
+	RoomTypes   []RoomType
 	*Address
 	*Coordinate
 }
