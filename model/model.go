@@ -112,6 +112,8 @@ type Agency struct {
 	Staffs        []Staff        `gorm:"embedded"`
 	Boats         []Boat         `gorm:"embedded"`
 	TripTemplates []TripTemplate `gorm:"embedded"`
+	Liveaboards   []Liveaboard   `gorm:"embedded"`
+
 	*Address
 	*Coordinate
 }
@@ -148,11 +150,12 @@ type Boat struct {
 	gorm.Model
 	Name          string
 	Description   string
-	TotalCapacity int
-	DiverCapacity int
-	StaffCapacity int
+	TotalCapacity uint32
+	DiverCapacity uint32
+	StaffCapacity uint32
 	Images        entity.StringArray
 	Amenities     []Amenity `gorm:"embedded"`
+	*Address      `gorm:"embedded"`
 }
 
 type TripTemplate struct {
@@ -161,13 +164,14 @@ type TripTemplate struct {
 	Descirption string
 	Type        TripType
 	Images      entity.StringArray
-	Boat        *Boat  `gorm:"embedded"`
-	Trips       []Trip `gorm:"embedded"`
+	Boat        *Boat        `gorm:"embedded"`
+	Trips       []Trip       `gorm:"embedded"`
+	Liveaboards []Liveaboard `gorm:"embedded"`
 }
 
 type Trip struct {
 	gorm.Model
-	MaxGuest            int
+	MaxGuest            uint32
 	Price               float32
 	StartDate           *time.Time
 	EndDate             *time.Time
@@ -186,23 +190,36 @@ type Reservation struct {
 type LiveaboardComment struct {
 	gorm.Model
 	Comment string
-	Stars   int
+	Stars   uint32
 }
 
 type HotelComment struct {
 	gorm.Model
 	Comment string
-	Stars   int
+	Stars   uint32
 }
 
 type TripComment struct {
 	gorm.Model
 	Comment string
-	Stars   int
+	Stars   uint32
 }
 
 type Amenity struct {
 	gorm.Model
 	Name        string
 	Description string
+}
+
+type Liveaboard struct {
+	gorm.Model
+	Name          string
+	Description   string
+	Length        uint32
+	Width         uint32
+	TotalCapacity uint32
+	DiverRooms    uint32
+	StaffRooms    uint32
+	*Address
+	*Coordinate
 }
