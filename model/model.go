@@ -149,8 +149,13 @@ type TripTemplate struct {
 type Trip struct {
 	gorm.Model
 	MaxGuest            int
-	Price               int
+	Price               float32
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
+}
+
+type Reservation struct {
+	gorm.Model
+	Price float32
 }
