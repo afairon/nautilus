@@ -153,9 +153,28 @@ type Trip struct {
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
+	Reservation         []Reservation
 }
 
 type Reservation struct {
 	gorm.Model
 	Price float32
+}
+
+type LiveaboardComment struct {
+	gorm.Model
+	Comment string
+	Stars   int
+}
+
+type TripComment struct {
+	gorm.Model
+	Comment string
+	Stars   int
+}
+
+type HotelComment struct {
+	gorm.Model
+	Comment string
+	Stars   int
 }
