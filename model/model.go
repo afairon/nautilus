@@ -75,6 +75,21 @@ func (t TripType) EnumIndex() int {
 	return int(t)
 }
 
+type Address struct {
+	gorm.Model
+	AddressLine_1 string
+	AddressLine_2 string
+	City          string
+	Postcode      string
+	Region        string
+	Country       string
+}
+
+type Coordinate struct {
+	Lat  float32
+	Long float32
+}
+
 type Account struct {
 	gorm.Model
 	Email    string
@@ -97,17 +112,20 @@ type Agency struct {
 	Staffs        []Staff        `gorm:"embedded"`
 	Boats         []Boat         `gorm:"embedded"`
 	TripTemplates []TripTemplate `gorm:"embedded"`
+	*Address
+	*Coordinate
 }
 
 type Diver struct {
 	gorm.Model
-	*Account  `gorm:"embedded"`
-	Level     LevelType
-	FirstName string
-	LastName  string
-	Phone     string
-	BirthDate time.Time `gorm:"embedded"`
-	Documents entity.StringArray
+	*Account     `gorm:"embedded"`
+	Level        LevelType
+	FirstName    string
+	LastName     string
+	Phone        string
+	BirthDate    *time.Time `gorm:"embedded"`
+	Documents    entity.StringArray
+	Reservations []Reservation
 }
 
 type DiveMaster struct {
@@ -134,6 +152,7 @@ type Boat struct {
 	DiverCapacity int
 	StaffCapacity int
 	Images        entity.StringArray
+	Amenities     []Amenity `gorm:"embedded"`
 }
 
 type TripTemplate struct {
@@ -142,7 +161,7 @@ type TripTemplate struct {
 	Descirption string
 	Type        TripType
 	Images      entity.StringArray
-	Boat        Boat   `gorm:"embedded"`
+	Boat        *Boat  `gorm:"embedded"`
 	Trips       []Trip `gorm:"embedded"`
 }
 
@@ -153,15 +172,24 @@ type Trip struct {
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
-	Reservation         []Reservation
+	Reservation         []Reservation `gorm:"embedded"`
 }
 
 type Reservation struct {
 	gorm.Model
-	Price float32
+	Price             float32
+	LiveaboardComment *LiveaboardComment `gorm:"embedded"`
+	HotelComment      *HotelComment      `gorm:"embedded"`
+	TripComment       *TripComment       `gorm:"embedded"`
 }
 
 type LiveaboardComment struct {
+	gorm.Model
+	Comment string
+	Stars   int
+}
+
+type HotelComment struct {
 	gorm.Model
 	Comment string
 	Stars   int
@@ -173,8 +201,8 @@ type TripComment struct {
 	Stars   int
 }
 
-type HotelComment struct {
+type Amenity struct {
 	gorm.Model
-	Comment string
-	Stars   int
+	Name        string
+	Description string
 }
