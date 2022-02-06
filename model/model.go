@@ -142,5 +142,15 @@ type TripTemplate struct {
 	Descirption string
 	Type        TripType
 	Images      entity.StringArray
-	Boat        Boat `gorm:"embedded"`
+	Boat        Boat   `gorm:"embedded"`
+	Trips       []Trip `gorm:"embedded"`
+}
+
+type Trip struct {
+	gorm.Model
+	MaxGuest            int
+	Price               int
+	StartDate           *time.Time
+	EndDate             *time.Time
+	LastReservationDate *time.Time
 }
