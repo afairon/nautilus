@@ -7,6 +7,9 @@ import (
 	"gorm.io/gorm"
 )
 
+// we havnen't implemented the link between dive masters and trip yet
+// both in this file and in class diagram.
+
 // enum implementation for AccountType
 type AccountType int32
 
@@ -157,7 +160,7 @@ type Boat struct {
 	DiverCapacity  uint32
 	StaffCapacity  uint32
 	Images         entity.StringArray `gorm:"type:text"`
-	Amenities      []Amenity
+	Amenities      []Amenity          `gorm:"many2many:boat_amenity_link;"`
 	AgencyID       uint
 	TripTemplateID uint
 }
@@ -221,8 +224,6 @@ type Amenity struct {
 	*gorm.Model
 	Name        string
 	Description string
-	BoatID      uint
-	RoomTypeID  uint
 }
 
 type Liveaboard struct {
@@ -249,7 +250,7 @@ type RoomType struct {
 	Price        float32
 	Quantity     uint32
 	Images       entity.StringArray `gorm:"type:text"`
-	Amenities    []Amenity
+	Amenities    []Amenity          `gorm:"many2many:room_amenity_link;"`
 	LiveaboardID uint
 	HotelID      uint
 }
