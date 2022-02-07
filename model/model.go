@@ -98,6 +98,7 @@ type Account struct {
 	Type     AccountType
 	Verified bool
 	Active   bool
+	AgencyId uint
 }
 
 // this thing should be fixed
@@ -105,7 +106,7 @@ type Agency struct {
 	*gorm.Model
 	Name      string
 	Phone     string
-	AccountId uint64
+	Account   *Account
 	AddressId uint64
 	Documents entity.StringArray `gorm:"type:text"`
 	// DiveMasters   []DiveMaster   `gorm:"embedded"`
@@ -245,4 +246,16 @@ type Hotel struct {
 	RoomTypes   []RoomType
 	*Address
 	*Coordinate
+}
+
+// User has one CreditCard, CreditCardID is the foreign key
+type User struct {
+	gorm.Model
+	CreditCard CreditCard
+}
+
+type CreditCard struct {
+	gorm.Model
+	Number string
+	UserID uint
 }

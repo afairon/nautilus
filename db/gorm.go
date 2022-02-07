@@ -40,7 +40,7 @@ func InitGormStore(host string, user string, password string, dbname string, por
 		return nil, err
 	}
 
-	GormStore.AutoMigrate(&model.Account{}, &model.Agency{})
+	GormStore.AutoMigrate(&model.Agency{}, &model.Account{})
 
 	return GormStore, nil
 }
