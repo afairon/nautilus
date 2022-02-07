@@ -41,7 +41,10 @@ func InitGormStore(host string, user string, password string, dbname string, por
 	}
 
 	GormStore.AutoMigrate(&model.Agency{}, &model.Diver{}, &model.Account{},
-		&model.DiveMaster{}, &model.Staff{}, &model.Boat{}, &model.TripTemplate{})
+		&model.DiveMaster{}, &model.Staff{}, &model.Boat{}, &model.TripTemplate{},
+		&model.Liveaboard{}, &model.Hotel{}, &model.Reservation{}, &model.HotelComment{},
+		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
+		&model.RoomType{})
 
 	return GormStore, nil
 }

@@ -102,32 +102,32 @@ type Account struct {
 	DiverID  uint64
 }
 
-// this thing should be fixed
 type Agency struct {
 	*gorm.Model
+	*Coordinate   `gorm:"embedded"`
+	*Address      `gorm:"embedded"`
 	Name          string
 	Phone         string
-	Account       *Account
 	AddressId     uint64
 	Documents     entity.StringArray `gorm:"type:text"`
+	Account       *Account
 	DiveMasters   []DiveMaster
 	Staffs        []Staff
 	Boats         []Boat
 	TripTemplates []TripTemplate
-	// Liveaboards   []Liveaboard
-	// Hotels        []Hotel
-	*Coordinate
+	Liveaboards   []Liveaboard
+	Hotels        []Hotel
 }
 
 type Diver struct {
 	*gorm.Model
-	Account   *Account
-	Level     LevelType
-	FirstName string
-	LastName  string
-	Phone     string
-	Documents entity.StringArray `gorm:"type:text"`
-	// Reservations []Reservation
+	Account      *Account
+	Level        LevelType
+	FirstName    string
+	LastName     string
+	Phone        string
+	Documents    entity.StringArray `gorm:"type:text"`
+	Reservations []Reservation
 }
 
 type DiveMaster struct {
@@ -150,14 +150,14 @@ type Staff struct {
 
 type Boat struct {
 	*gorm.Model
-	*Address      `gorm:"embedded"`
-	Name          string
-	Description   string
-	TotalCapacity uint32
-	DiverCapacity uint32
-	StaffCapacity uint32
-	Images        entity.StringArray `gorm:"type:text"`
-	// Amenities     []Amenity `gorm:"embedded"`
+	*Address       `gorm:"embedded"`
+	Name           string
+	Description    string
+	TotalCapacity  uint32
+	DiverCapacity  uint32
+	StaffCapacity  uint32
+	Images         entity.StringArray `gorm:"type:text"`
+	Amenities      []Amenity
 	AgencyID       uint
 	TripTemplateID uint
 }
@@ -169,10 +169,10 @@ type TripTemplate struct {
 	Type        TripType
 	Images      entity.StringArray `gorm:"type:text"`
 	Boat        *Boat
-	// Trips       []Trip       `gorm:"embedded"`
-	// Liveaboards []Liveaboard `gorm:"embedded"`
-	// Hotels      []Hotel      `gorm:"embedded"`
-	AgencyID uint
+	Trips       []Trip
+	Liveaboards []Liveaboard
+	Hotels      []Hotel
+	AgencyID    uint
 }
 
 type Trip struct {
@@ -182,85 +182,87 @@ type Trip struct {
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
-	Reservation         []Reservation `gorm:"embedded"`
+	Reservation         []Reservation
+	TripTemplateID      uint
 }
 
 type Reservation struct {
 	*gorm.Model
 	Price             float32
-	LiveaboardComment *LiveaboardComment `gorm:"embedded"`
-	HotelComment      *HotelComment      `gorm:"embedded"`
-	TripComment       *TripComment       `gorm:"embedded"`
+	LiveaboardComment *LiveaboardComment
+	HotelComment      *HotelComment
+	TripComment       *TripComment
+	DiverID           uint
+	TripID            uint
 }
 
 type LiveaboardComment struct {
 	*gorm.Model
-	Comment string
-	Stars   uint32
+	Comment       string
+	Stars         uint32
+	ReservationID uint
 }
 
 type HotelComment struct {
 	*gorm.Model
-	Comment string
-	Stars   uint32
+	Comment       string
+	Stars         uint32
+	ReservationID uint
 }
 
 type TripComment struct {
 	*gorm.Model
-	Comment string
-	Stars   uint32
+	Comment       string
+	Stars         uint32
+	ReservationID uint
 }
 
 type Amenity struct {
 	*gorm.Model
 	Name        string
 	Description string
+	BoatID      uint
+	RoomTypeID  uint
 }
 
 type Liveaboard struct {
 	*gorm.Model
-	Name          string
-	Description   string
-	Length        uint32
-	Width         uint32
-	TotalCapacity uint32
-	DiverRooms    uint32
-	StaffRooms    uint32
-	RoomTypes     []RoomType `gorm:"embedded"`
 	*Address
 	*Coordinate
+	Name           string
+	Description    string
+	Length         uint32
+	Width          uint32
+	TotalCapacity  uint32
+	DiverRooms     uint32
+	StaffRooms     uint32
+	RoomTypes      []RoomType
+	AgencyID       uint
+	TripTemplateID uint
 }
 
 type RoomType struct {
 	*gorm.Model
-	Name        string
-	Description string
-	MaxGuest    uint32
-	Price       float32
-	Quantity    uint32
-	Images      entity.StringArray
-	Amenities   []Amenity `gorm:"embedded"`
+	Name         string
+	Description  string
+	MaxGuest     uint32
+	Price        float32
+	Quantity     uint32
+	Images       entity.StringArray `gorm:"type:text"`
+	Amenities    []Amenity
+	LiveaboardID uint
+	HotelID      uint
 }
 
 type Hotel struct {
 	*gorm.Model
-	Name        string
-	Description string
-	Stars       uint32
-	Phone       string
-	RoomTypes   []RoomType
-	*Address
-	*Coordinate
-}
-
-// User has one CreditCard, CreditCardID is the foreign key
-type User struct {
-	gorm.Model
-	CreditCard CreditCard
-}
-
-type CreditCard struct {
-	gorm.Model
-	Number string
-	UserID uint
+	*Address       `gorm:"embedded"`
+	*Coordinate    `gorm:"embedded"`
+	Name           string
+	Description    string
+	Stars          uint32
+	Phone          string
+	RoomTypes      []RoomType
+	AgencyID       uint
+	TripTemplateID uint
 }
