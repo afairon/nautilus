@@ -98,36 +98,36 @@ type Account struct {
 	Type     AccountType
 	Verified bool
 	Active   bool
-	AgencyId uint
+	AgencyID uint
+	DiverID  uint64
 }
 
 // this thing should be fixed
 type Agency struct {
 	*gorm.Model
-	Name      string
-	Phone     string
-	Account   *Account
-	AddressId uint64
-	Documents entity.StringArray `gorm:"type:text"`
-	// DiveMasters   []DiveMaster   `gorm:"embedded"`
-	// Staffs        []Staff        `gorm:"embedded"`
-	// Boats         []Boat         `gorm:"embedded"`
-	// TripTemplates []TripTemplate `gorm:"embedded"`
-	// Liveaboards   []Liveaboard   `gorm:"embedded"`
-	// Hotels        []Hotel        `gorm:"embedded"`
+	Name          string
+	Phone         string
+	Account       *Account
+	AddressId     uint64
+	Documents     entity.StringArray `gorm:"type:text"`
+	DiveMasters   []DiveMaster
+	Staffs        []Staff
+	Boats         []Boat
+	TripTemplates []TripTemplate
+	// Liveaboards   []Liveaboard
+	// Hotels        []Hotel
 	*Coordinate
 }
 
 type Diver struct {
 	*gorm.Model
-	*Account     `gorm:"embedded"`
-	Level        LevelType
-	FirstName    string
-	LastName     string
-	Phone        string
-	BirthDate    *time.Time `gorm:"embedded"`
-	Documents    entity.StringArray
-	Reservations []Reservation
+	Account   *Account
+	Level     LevelType
+	FirstName string
+	LastName  string
+	Phone     string
+	Documents entity.StringArray `gorm:"type:text"`
+	// Reservations []Reservation
 }
 
 type DiveMaster struct {
@@ -135,7 +135,8 @@ type DiveMaster struct {
 	FirstName string
 	LastName  string
 	Level     LevelType
-	Documents entity.StringArray
+	Documents entity.StringArray `gorm:"type:text"`
+	AgencyID  uint
 }
 
 type Staff struct {
@@ -144,18 +145,21 @@ type Staff struct {
 	LastName  string
 	Position  string
 	Gender    GenderType
+	AgencyID  uint
 }
 
 type Boat struct {
 	*gorm.Model
+	*Address      `gorm:"embedded"`
 	Name          string
 	Description   string
 	TotalCapacity uint32
 	DiverCapacity uint32
 	StaffCapacity uint32
-	Images        entity.StringArray
-	Amenities     []Amenity `gorm:"embedded"`
-	*Address      `gorm:"embedded"`
+	Images        entity.StringArray `gorm:"type:text"`
+	// Amenities     []Amenity `gorm:"embedded"`
+	AgencyID       uint
+	TripTemplateID uint
 }
 
 type TripTemplate struct {
@@ -163,11 +167,12 @@ type TripTemplate struct {
 	Name        string
 	Descirption string
 	Type        TripType
-	Images      entity.StringArray
-	Boat        *Boat        `gorm:"embedded"`
-	Trips       []Trip       `gorm:"embedded"`
-	Liveaboards []Liveaboard `gorm:"embedded"`
-	Hotels      []Hotel      `gorm:"embedded"`
+	Images      entity.StringArray `gorm:"type:text"`
+	Boat        *Boat
+	// Trips       []Trip       `gorm:"embedded"`
+	// Liveaboards []Liveaboard `gorm:"embedded"`
+	// Hotels      []Hotel      `gorm:"embedded"`
+	AgencyID uint
 }
 
 type Trip struct {
