@@ -53,7 +53,8 @@ func run(conf *config.Config) error {
 	}
 
 	// Connect to postgres.
-	db2, err := db.InitGormStore("", "", "", "", 2, false)
+	// db2, err := db.InitGormStore("", 2, "", "", "2", false)
+	db, err := db.InitGormStoreFromConfig(conf.GetPostgreSQL())
 
 	if err != nil {
 		return err
@@ -95,7 +96,7 @@ func run(conf *config.Config) error {
 	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	// Create grpc server.
-	grpcServer, err := server.CreateGRPCServer(conf.GetGRPC(), db2, sessionManager, mediaStorage)
+	grpcServer, err := server.CreateGRPCServer(conf.GetGRPC(), db, sessionManager, mediaStorage)
 	if err != nil {
 		return err
 	}

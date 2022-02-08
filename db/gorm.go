@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 
+	"github.com/afairon/nautilus/config"
 	"github.com/afairon/nautilus/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -10,7 +11,7 @@ import (
 
 var GormStore *gorm.DB
 
-func InitGormStore(host string, user string, password string, dbname string, port int, ssl bool) (*gorm.DB, error) {
+func InitGormStore(host string, port int, user, password, dbname string, ssl bool) (*gorm.DB, error) {
 	var dsn string
 
 	if ssl {
@@ -32,7 +33,21 @@ func InitGormStore(host string, user string, password string, dbname string, por
 	}
 
 	// for testing purpose
-	dsn = "postgres://pg:pass@localhost:5432/crud"
+	// dsn = "postgres://pg:pass@localhost:5432/crud"
+
+	// sqlDB, err := sqlx.Open("postgres", dsn)
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	// err = sqlDB.Ping()
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	// GormStore, err := gorm.Open(postgres.New(postgres.Config{
+	// 	Conn: sqlDB,
+	// }), &gorm.Config{})
 
 	GormStore, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
@@ -47,4 +62,16 @@ func InitGormStore(host string, user string, password string, dbname string, por
 		&model.RoomType{})
 
 	return GormStore, nil
+}
+
+// InitGormStoreFromConfig creates a postgres connection from configuration.
+func InitGormStoreFromConfig(conf *config.PostgreSQL) (*gorm.DB, error) {
+	return InitGormStore(
+		conf.Host,
+		conf.Port,
+		conf.User,
+		conf.Password,
+		conf.DBName,
+		conf.SSL,
+	)
 }

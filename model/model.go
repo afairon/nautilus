@@ -95,7 +95,7 @@ type Coordinate struct {
 
 type Account struct {
 	*gorm.Model
-	Email    string
+	Email    string `gorm:"unique"`
 	Username string
 	Password string
 	Type     AccountType
