@@ -55,11 +55,15 @@ func run(conf *config.Config) error {
 	// Connect to postgres.
 	db2, err := db.InitGormStore("", "", "", "", 2, false)
 
-	db, err := db.ConnectFromConfig(conf.GetPostgreSQL())
 	if err != nil {
 		return err
 	}
-	defer db.Close()
+
+	// db, err := db.ConnectFromConfig(conf.GetPostgreSQL())
+	// if err != nil {
+	// 	return err
+	// }
+	// defer db.Close()
 
 	// Session manager
 	sessionManager := session.NewJWTManagerFromConfig(conf.GetSession())

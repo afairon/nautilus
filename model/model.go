@@ -101,18 +101,18 @@ type Account struct {
 	Type     AccountType
 	Verified bool
 	Active   bool
-	AgencyID uint
-	DiverID  uint64
+	AgencyID uint   `gorm:"default:null"`
+	DiverID  uint64 `gorm:"default:null"`
 }
 
 type Agency struct {
 	*gorm.Model
 	*Coordinate   `gorm:"embedded"`
 	*Address      `gorm:"embedded"`
+	Account       *Account
 	Name          string
 	Phone         string
 	Documents     entity.StringArray `gorm:"type:text"`
-	Account       *Account
 	DiveMasters   []DiveMaster
 	Staffs        []Staff
 	Boats         []Boat

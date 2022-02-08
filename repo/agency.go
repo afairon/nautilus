@@ -55,6 +55,7 @@ func (repo *agencyRepository) Create(agency *model.Agency) (*model.Agency, error
 	// `, agency.Name, agency.Phone, agency.AccountId, agency.AddressId, agency.Documents)
 
 	result := repo.db.Create(agency)
+	repo.db.Save(agency)
 
 	return agency, result.Error
 }
