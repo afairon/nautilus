@@ -111,7 +111,6 @@ type Agency struct {
 	*Address      `gorm:"embedded"`
 	Name          string
 	Phone         string
-	AddressId     uint64
 	Documents     entity.StringArray `gorm:"type:text"`
 	Account       *Account
 	DiveMasters   []DiveMaster

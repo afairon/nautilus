@@ -153,95 +153,95 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		hotelAddress := hotel.GetAddress()
-		newAddress := entity.Address{
-			AddressLine_1: hotelAddress.AddressLine_1,
-			AddressLine_2: hotelAddress.AddressLine_2,
-			City:          hotelAddress.City,
-			Postcode:      hotelAddress.Postcode,
-			Region:        hotelAddress.Region,
-			Country:       hotelAddress.Country,
-		}
-		createdAddress, err := query.Agency.CreateAddress(ctx, &newAddress)
+	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	hotelAddress := hotel.GetAddress()
+	// 	newAddress := entity.Address{
+	// 		AddressLine_1: hotelAddress.AddressLine_1,
+	// 		AddressLine_2: hotelAddress.AddressLine_2,
+	// 		City:          hotelAddress.City,
+	// 		Postcode:      hotelAddress.Postcode,
+	// 		Region:        hotelAddress.Region,
+	// 		Country:       hotelAddress.Country,
+	// 	}
+	// 	createdAddress, err := query.Agency.CreateAddress(ctx, &newAddress)
 
-		if err != nil {
-			return err
-		}
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		newHotel.AddressId = createdAddress.Id
-		createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
+	// 	newHotel.AddressId = createdAddress.Id
+	// 	createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
 
-		if err != nil {
-			return err
-		}
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		entityRoomTypes := []entity.RoomType{}
-		modelRoomTypes := hotel.GetRoomTypes()
+	// 	entityRoomTypes := []entity.RoomType{}
+	// 	modelRoomTypes := hotel.GetRoomTypes()
 
-		// Copy room types information
-		for _, rt := range modelRoomTypes {
-			tempRoomType := entity.RoomType{
-				Name:        rt.GetName(),
-				Description: rt.GetDescription(),
-				MaxGuest:    rt.GetMaxGuest(),
-				Price:       rt.GetPrice(),
-				Quantity:    rt.GetQuantity(),
-				HotelId:     createdHotel.GetId(),
-			}
+	// 	// Copy room types information
+	// 	for _, rt := range modelRoomTypes {
+	// 		tempRoomType := entity.RoomType{
+	// 			Name:        rt.GetName(),
+	// 			Description: rt.GetDescription(),
+	// 			MaxGuest:    rt.GetMaxGuest(),
+	// 			Price:       rt.GetPrice(),
+	// 			Quantity:    rt.GetQuantity(),
+	// 			HotelId:     createdHotel.GetId(),
+	// 		}
 
-			for _, image := range rt.GetRoomImages() {
-				reader := bytes.NewReader(image.GetFile())
-				objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+	// 		for _, image := range rt.GetRoomImages() {
+	// 			reader := bytes.NewReader(image.GetFile())
+	// 			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
 
-				if err != nil {
-					return err
-				}
+	// 			if err != nil {
+	// 				return err
+	// 			}
 
-				tempRoomType.Images = append(tempRoomType.Images, objectID)
-			}
+	// 			tempRoomType.Images = append(tempRoomType.Images, objectID)
+	// 		}
 
-			entityRoomTypes = append(entityRoomTypes, tempRoomType)
-		}
+	// 		entityRoomTypes = append(entityRoomTypes, tempRoomType)
+	// 	}
 
-		// Create RoomTypes and amenities and the links between them.
-		for i, rt := range entityRoomTypes {
-			createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, true)
+	// 	// Create RoomTypes and amenities and the links between them.
+	// 	for i, rt := range entityRoomTypes {
+	// 		createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, true)
 
-			if err != nil {
-				return err
-			}
+	// 		if err != nil {
+	// 			return err
+	// 		}
 
-			modelAmenities := modelRoomTypes[i].GetAmenities()
+	// 		modelAmenities := modelRoomTypes[i].GetAmenities()
 
-			// Create Amenities of a room type
-			for _, modelAmenity := range modelAmenities {
-				entityAmenity := entity.Amenity{
-					Name:        modelAmenity.GetName(),
-					Description: modelAmenity.GetDescription(),
-				}
+	// 		// Create Amenities of a room type
+	// 		for _, modelAmenity := range modelAmenities {
+	// 			entityAmenity := entity.Amenity{
+	// 				Name:        modelAmenity.GetName(),
+	// 				Description: modelAmenity.GetDescription(),
+	// 			}
 
-				createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
+	// 			createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
 
-				if err != nil {
-					return err
-				}
+	// 			if err != nil {
+	// 				return err
+	// 			}
 
-				roomAmenity := entity.RoomAmenity{
-					RoomTypeId: createdRoomType.GetId(),
-					AmenityId:  createdAmenity.GetId(),
-				}
+	// 			roomAmenity := entity.RoomAmenity{
+	// 				RoomTypeId: createdRoomType.GetId(),
+	// 				AmenityId:  createdAmenity.GetId(),
+	// 			}
 
-				_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
+	// 			_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
 
-				if err != nil {
-					return err
-				}
-			}
-		}
+	// 			if err != nil {
+	// 				return err
+	// 			}
+	// 		}
+	// 	}
 
-		return err
-	})
+	// 	return err
+	// })
 
 	return err
 }
@@ -302,45 +302,45 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
 	}
 
-	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		// Create a record in trip_template table
-		createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
-		if err != nil {
-			return err
-		}
+	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	// Create a record in trip_template table
+	// 	createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		newTrip := entity.Trip{
-			TemplateId:          createdTripTemplate.GetId(),
-			AgencyId:            agency.Id,
-			MaxGuest:            trip.GetMaxCapacity(),
-			Price:               float32(trip.GetPrice()),
-			FromDate:            trip.GetFrom(),
-			ToDate:              trip.GetTo(),
-			LastReservationDate: trip.GetLastReservationDate(),
-		}
+	// 	newTrip := entity.Trip{
+	// 		TemplateId:          createdTripTemplate.GetId(),
+	// 		AgencyId:            agency.Id,
+	// 		MaxGuest:            trip.GetMaxCapacity(),
+	// 		Price:               float32(trip.GetPrice()),
+	// 		FromDate:            trip.GetFrom(),
+	// 		ToDate:              trip.GetTo(),
+	// 		LastReservationDate: trip.GetLastReservationDate(),
+	// 	}
 
-		// Create a record in trip table
-		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
+	// 	// Create a record in trip table
+	// 	createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
 
-		if err != nil {
-			return err
-		}
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		for _, diveMasterId := range trip.GetDiveMasterIds() {
-			newDiveMasterTripLink := entity.DiverMasterTrip{
-				DiveMasterId: diveMasterId,
-				TripId:       createdTrip.GetId(),
-			}
+	// 	for _, diveMasterId := range trip.GetDiveMasterIds() {
+	// 		newDiveMasterTripLink := entity.DiverMasterTrip{
+	// 			DiveMasterId: diveMasterId,
+	// 			TripId:       createdTrip.GetId(),
+	// 		}
 
-			_, err = query.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
+	// 		_, err = query.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
 
-			if err != nil {
-				return err
-			}
-		}
+	// 		if err != nil {
+	// 			return err
+	// 		}
+	// 	}
 
-		return err
-	})
+	// 	return err
+	// })
 
 	return err
 }
@@ -399,79 +399,79 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
 	}
 
-	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		createdLiveaboard, err := query.Agency.CreateLiveaboard(ctx, &newLiveaboard)
+	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	createdLiveaboard, err := query.Agency.CreateLiveaboard(ctx, &newLiveaboard)
 
-		if err != nil {
-			return err
-		}
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		entityRoomTypes := []entity.RoomType{}
-		modelRoomTypes := liveaboard.GetRoomTypes()
+	// 	entityRoomTypes := []entity.RoomType{}
+	// 	modelRoomTypes := liveaboard.GetRoomTypes()
 
-		// Copy room types information
-		for _, rt := range modelRoomTypes {
-			tempRoomType := entity.RoomType{
-				Name:         rt.GetName(),
-				Description:  rt.GetDescription(),
-				MaxGuest:     rt.GetMaxGuest(),
-				Price:        rt.GetPrice(),
-				Quantity:     rt.GetQuantity(),
-				LiveaboardId: createdLiveaboard.GetId(),
-			}
+	// 	// Copy room types information
+	// 	for _, rt := range modelRoomTypes {
+	// 		tempRoomType := entity.RoomType{
+	// 			Name:         rt.GetName(),
+	// 			Description:  rt.GetDescription(),
+	// 			MaxGuest:     rt.GetMaxGuest(),
+	// 			Price:        rt.GetPrice(),
+	// 			Quantity:     rt.GetQuantity(),
+	// 			LiveaboardId: createdLiveaboard.GetId(),
+	// 		}
 
-			for _, image := range rt.GetRoomImages() {
-				reader := bytes.NewReader(image.GetFile())
-				objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+	// 		for _, image := range rt.GetRoomImages() {
+	// 			reader := bytes.NewReader(image.GetFile())
+	// 			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
 
-				if err != nil {
-					return err
-				}
+	// 			if err != nil {
+	// 				return err
+	// 			}
 
-				tempRoomType.Images = append(tempRoomType.Images, objectID)
-			}
+	// 			tempRoomType.Images = append(tempRoomType.Images, objectID)
+	// 		}
 
-			entityRoomTypes = append(entityRoomTypes, tempRoomType)
-		}
+	// 		entityRoomTypes = append(entityRoomTypes, tempRoomType)
+	// 	}
 
-		// Create RoomTypes and amenities and the links between them.
-		for i, rt := range entityRoomTypes {
-			createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, false)
+	// 	// Create RoomTypes and amenities and the links between them.
+	// 	for i, rt := range entityRoomTypes {
+	// 		createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, false)
 
-			if err != nil {
-				return err
-			}
+	// 		if err != nil {
+	// 			return err
+	// 		}
 
-			modelAmenities := modelRoomTypes[i].GetAmenities()
+	// 		modelAmenities := modelRoomTypes[i].GetAmenities()
 
-			// Create Amenities of a room type
-			for _, modelAmenity := range modelAmenities {
-				entityAmenity := entity.Amenity{
-					Name:        modelAmenity.GetName(),
-					Description: modelAmenity.GetDescription(),
-				}
+	// 		// Create Amenities of a room type
+	// 		for _, modelAmenity := range modelAmenities {
+	// 			entityAmenity := entity.Amenity{
+	// 				Name:        modelAmenity.GetName(),
+	// 				Description: modelAmenity.GetDescription(),
+	// 			}
 
-				createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
+	// 			createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
 
-				if err != nil {
-					return err
-				}
+	// 			if err != nil {
+	// 				return err
+	// 			}
 
-				roomAmenity := entity.RoomAmenity{
-					RoomTypeId: createdRoomType.GetId(),
-					AmenityId:  createdAmenity.GetId(),
-				}
+	// 			roomAmenity := entity.RoomAmenity{
+	// 				RoomTypeId: createdRoomType.GetId(),
+	// 				AmenityId:  createdAmenity.GetId(),
+	// 			}
 
-				_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
+	// 			_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
 
-				if err != nil {
-					return err
-				}
-			}
-		}
+	// 			if err != nil {
+	// 				return err
+	// 			}
+	// 		}
+	// 	}
 
-		return err
-	})
+	// 	return err
+	// })
 
 	return err
 }

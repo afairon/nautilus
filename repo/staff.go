@@ -2,9 +2,11 @@ package repo
 
 import (
 	"context"
+	"errors"
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/pb"
+	"gorm.io/gorm"
 )
 
 // StaffRepository defines interface for interaction
@@ -17,11 +19,11 @@ type StaffRepository interface {
 
 // staffRepository implements StaffRepository interface.
 type staffRepository struct {
-	db DBTX
+	db *gorm.DB
 }
 
 // NewStaffRepository creates a new StaffRepository.
-func NewStaffRepository(db DBTX) *staffRepository {
+func NewStaffRepository(db *gorm.DB) *staffRepository {
 	return &staffRepository{
 		db: db,
 	}
@@ -29,67 +31,70 @@ func NewStaffRepository(db DBTX) *staffRepository {
 
 // Create creates an staff record and returns the newly created record.
 func (repo *staffRepository) Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error) {
-	var result entity.Staff
+	// var result entity.Staff
 
-	err := repo.db.GetContext(ctx, &result, `
-		INSERT INTO 
-			public.staff
-			(first_name, last_name, position, gender, agency_id)
-		VALUES
-			($1, $2, $3, $4, $5)
-		RETURNING id, first_name, last_name, position, gender, agency_id, created_on, updated_on
-	`, staff.FirstName, staff.LastName, staff.Position, staff.Gender, staff.AgencyId)
+	// err := repo.db.GetContext(ctx, &result, `
+	// 	INSERT INTO
+	// 		public.staff
+	// 		(first_name, last_name, position, gender, agency_id)
+	// 	VALUES
+	// 		($1, $2, $3, $4, $5)
+	// 	RETURNING id, first_name, last_name, position, gender, agency_id, created_on, updated_on
+	// `, staff.FirstName, staff.LastName, staff.Position, staff.Gender, staff.AgencyId)
 
-	return &result, err
+	// return &result, err
+	return nil, errors.New("Unimplemented")
 }
 
 // Get retrieves the staff record by its id.
 func (repo *staffRepository) Get(ctx context.Context, id uint64) (*entity.Staff, error) {
-	var result entity.Staff
+	// var result entity.Staff
 
-	err := repo.db.GetContext(ctx, result, `
-		SELECT
-			id, first_name, last_name, position, gender, agency_id, created_on, updated_on
-		FROM
-			public.staff
-		WHERE 
-			id = $1
-	`, id)
+	// err := repo.db.GetContext(ctx, result, `
+	// 	SELECT
+	// 		id, first_name, last_name, position, gender, agency_id, created_on, updated_on
+	// 	FROM
+	// 		public.staff
+	// 	WHERE
+	// 		id = $1
+	// `, id)
 
-	return &result, err
+	// return &result, err
+	return nil, errors.New("Unimplemented")
 }
 
 // ListStaffsByAgency returns list of staffs by agency id.
 func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error) {
-	rows, err := repo.db.Queryx(`
-		SELECT
-			staff.id, staff.first_name, staff.last_name, staff."position", staff.gender, staff.created_on, staff.updated_on
-		FROM
-			public.staff staff
-		WHERE
-			staff.agency_id = $1
-		LIMIT
-			$2
-		OFFSET
-			$3
-	`, id, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
+	// rows, err := repo.db.Queryx(`
+	// 	SELECT
+	// 		staff.id, staff.first_name, staff.last_name, staff."position", staff.gender, staff.created_on, staff.updated_on
+	// 	FROM
+	// 		public.staff staff
+	// 	WHERE
+	// 		staff.agency_id = $1
+	// 	LIMIT
+	// 		$2
+	// 	OFFSET
+	// 		$3
+	// `, id, limit, offset)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// defer rows.Close()
 
-	results := make([]*pb.ListStaffsResponse_Staff, 0, limit)
+	// results := make([]*pb.ListStaffsResponse_Staff, 0, limit)
 
-	for rows.Next() {
-		staff := &pb.ListStaffsResponse_Staff{}
+	// for rows.Next() {
+	// 	staff := &pb.ListStaffsResponse_Staff{}
 
-		err = rows.Scan(&staff.Id, &staff.FirstName, &staff.LastName, &staff.Position, &staff.Gender, &staff.CreatedOn, &staff.UpdatedOn)
-		if err != nil {
-			return nil, err
-		}
+	// 	err = rows.Scan(&staff.Id, &staff.FirstName, &staff.LastName, &staff.Position, &staff.Gender, &staff.CreatedOn, &staff.UpdatedOn)
+	// 	if err != nil {
+	// 		return nil, err
+	// 	}
 
-		results = append(results, staff)
-	}
+	// 	results = append(results, staff)
+	// }
 
-	return results, nil
+	// return results, nil
+	return nil, errors.New("Unimplemented")
 }

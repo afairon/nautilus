@@ -7,6 +7,7 @@ import (
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
@@ -42,7 +43,7 @@ func NewAccountService(repo *repo.Repo, session session.Session, media media.Sto
 // a record in account table, then a record in address table, and
 // finally a record in agency table with account_id and address_id.
 func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error {
-	account := &entity.Account{}
+	account := &model.Account{}
 
 	// Copy account information and verify if the information is correct.
 	err := account.SetAccount(agency.Account)
@@ -50,9 +51,9 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 		return err
 	}
 
-	account.Type = pb.AGENCY
+	account.Type = model.AGENCY
 
-	address := entity.Address{
+	address := model.Address{
 		AddressLine_1: agency.Address.GetAddressLine_1(),
 		AddressLine_2: agency.Address.GetAddressLine_2(),
 		City:          agency.Address.GetPostcode(),
@@ -61,7 +62,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 		Country:       agency.Address.GetCountry(),
 	}
 
-	newAgency := entity.Agency{
+	newAgency := model.Agency{
 		Name:  agency.GetName(),
 		Phone: agency.GetPhone(),
 	}
@@ -75,23 +76,28 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 		newAgency.Documents = append(newAgency.Documents, objectID)
 	}
 
-	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		newAccount, err := query.Account.Create(ctx, account)
-		if err != nil {
-			return err
-		}
+	newAgency.Account = account
+	newAgency.Address = &address
 
-		newAddress, err := query.Address.Create(ctx, &address)
-		if err != nil {
-			return err
-		}
+	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	newAccount, err := query.Account.Create(ctx, account)
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		newAgency.AccountId = newAccount.Id
-		newAgency.AddressId = newAddress.Id
-		_, err = query.Agency.Create(ctx, &newAgency)
+	// 	newAddress, err := query.Address.Create(ctx, &address)
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		return err
-	})
+	// 	newAgency.AccountId = newAccount.Id
+	// 	newAgency.AddressId = newAddress.Id
+	// 	_, err = query.Agency.Create(ctx, &newAgency)
+
+	// 	return err
+	// })
+
+	_, err = service.repo.Agency.Create(&newAgency)
 
 	if err != nil {
 		for _, document := range newAgency.Documents {
@@ -133,17 +139,17 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 		newDiver.Documents = append(newDiver.Documents, objectID)
 	}
 
-	err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		newAccount, err := query.Account.Create(ctx, account)
-		if err != nil {
-			return err
-		}
+	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	newAccount, err := query.Account.Create(ctx, account)
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		newDiver.AccountId = newAccount.Id
-		_, err = query.Diver.Create(ctx, &newDiver)
+	// 	newDiver.AccountId = newAccount.Id
+	// 	_, err = query.Diver.Create(ctx, &newDiver)
 
-		return err
-	})
+	// 	return err
+	// })
 
 	if err != nil {
 		for _, document := range newDiver.Documents {

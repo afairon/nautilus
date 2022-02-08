@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"google.golang.org/grpc/codes"
@@ -40,50 +39,54 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	// Copy information from reservation to newReservation
 	newReservation = *reservation
 
-	reservationRecord := entity.Reservation{
-		TripId:  reservation.GetTripId(),
-		DiverId: reservation.GetDiverId(),
-		Price:   reservation.GetPrice(),
-	}
+	// reservationRecord := entity.Reservation{
+	// 	TripId:  reservation.GetTripId(),
+	// 	DiverId: reservation.GetDiverId(),
+	// 	Price:   reservation.GetPrice(),
+	// }
 
 	// Execute transaction
-	err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-		newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
-		if err != nil {
-			return err
-		}
+	// err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
+	// 	newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		newReservation.Id = newReservationRecord.Id
-		newReservation.CreatedOn = newReservationRecord.CreatedOn
-		newReservation.UpdatedOn = newReservationRecord.UpdatedOn
+	// 	newReservation.Id = newReservationRecord.Id
+	// 	newReservation.CreatedOn = newReservationRecord.CreatedOn
+	// 	newReservation.UpdatedOn = newReservationRecord.UpdatedOn
 
-		length := len(reservation.GetRooms())
-		// Allocate memory space for rooms
-		newReservation.Rooms = make([]*pb.Reservation_Room, length)
-		for i := 0; i < length; i++ {
-			newReservation.Rooms[i] = &pb.Reservation_Room{}
-		}
+	// 	length := len(reservation.GetRooms())
+	// 	// Allocate memory space for rooms
+	// 	newReservation.Rooms = make([]*pb.Reservation_Room, length)
+	// 	for i := 0; i < length; i++ {
+	// 		newReservation.Rooms[i] = &pb.Reservation_Room{}
+	// 	}
 
-		for i, room := range reservation.GetRooms() {
-			roomRecord := entity.BookedRoom{
-				RoomTypeId:    room.GetRoomTypeId(),
-				ReservationId: newReservationRecord.Id,
-				NoAdults:      room.GetNoAdults(),
-				NoKids:        room.GetNoKids(),
-				Quantity:      room.GetQuantity(),
-			}
-			bookedRoom, err := query.Reservation.BookRoom(ctx, &roomRecord)
-			if err != nil {
-				return err
-			}
+	// 	for i, room := range reservation.GetRooms() {
+	// 		roomRecord := entity.BookedRoom{
+	// 			RoomTypeId:    room.GetRoomTypeId(),
+	// 			ReservationId: newReservationRecord.Id,
+	// 			NoAdults:      room.GetNoAdults(),
+	// 			NoKids:        room.GetNoKids(),
+	// 			Quantity:      room.GetQuantity(),
+	// 		}
+	// 		bookedRoom, err := query.Reservation.BookRoom(ctx, &roomRecord)
+	// 		if err != nil {
+	// 			return err
+	// 		}
 
-			// Copy room information from reservation to newly created reservation
-			(*newReservation.Rooms[i]) = *room
-			newReservation.Rooms[i].Id = bookedRoom.Id
-		}
+	// 		// Copy room information from reservation to newly created reservation
+	// 		(*newReservation.Rooms[i]) = *room
+	// 		newReservation.Rooms[i].Id = bookedRoom.Id
+	// 	}
 
-		return nil
-	})
+	// 	return nil
+	// })
+
+	// TO BE REMOVED
+	var err error
+	err = nil
 
 	if err != nil {
 		return nil, err
