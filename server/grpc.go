@@ -13,9 +13,9 @@ import (
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/service"
 	"github.com/afairon/nautilus/session"
-	"github.com/jmoiron/sqlx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"gorm.io/gorm"
 )
 
 const (
@@ -40,7 +40,7 @@ func loadTLSCredentials(conf *config.SSL) (credentials.TransportCredentials, err
 }
 
 // CreateGRPCServer returns a gRPC server with services.
-func CreateGRPCServer(conf *config.GRPC, db *sqlx.DB, session session.Session, mediaStorage media.Store) (*grpc.Server, error) {
+func CreateGRPCServer(conf *config.GRPC, db *gorm.DB, session session.Session, mediaStorage media.Store) (*grpc.Server, error) {
 	// gRPC options
 	var opts []grpc.ServerOption
 
@@ -92,7 +92,7 @@ func CreateGRPCServer(conf *config.GRPC, db *sqlx.DB, session session.Session, m
 }
 
 // registerServices registers services to gRPC.
-func registerServices(server *grpc.Server, db *sqlx.DB, session session.Session, media media.Store) {
+func registerServices(server *grpc.Server, db *gorm.DB, session session.Session, media media.Store) {
 	repo := repo.NewRepo(db)
 
 	accountService := service.NewAccountService(repo, session, media)
