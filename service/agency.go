@@ -80,7 +80,8 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 		return err
 	}
 
-	newDiveMaster.Level = diveMaster.Level
+	newDiveMaster.Level = model.LevelType(diveMaster.Level)
+
 	newDiveMaster.AgencyID = uint(agency.Id)
 
 	var reader *bytes.Reader
