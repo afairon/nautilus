@@ -14,7 +14,7 @@ import (
 // with the agency repository.
 type AgencyRepository interface {
 	Create(agency *model.Agency) (*model.Agency, error)
-	CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error)
+	CreateDiveMaster(diveMaster *model.DiveMaster) (*model.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
 	CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
@@ -44,36 +44,16 @@ func NewAgencyRepository(db *gorm.DB) *agencyRepository {
 
 // Create creates an agency record and returns the newly created record.
 func (repo *agencyRepository) Create(agency *model.Agency) (*model.Agency, error) {
-
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.agency
-	// 		(name, phone, account_id, address_id, documents)
-	// 	VALUES
-	// 		($1, $2, $3, $4, $5)
-	// 	RETURNING id, name, phone, account_id, address_id, documents, created_on, updated_on
-	// `, agency.Name, agency.Phone, agency.AccountId, agency.AddressId, agency.Documents)
-
 	result := repo.db.Create(agency)
 
 	return agency, result.Error
 }
 
 // CreateDiveMaster creates an dive master record and returns the newly created record.z
-func (repo *agencyRepository) CreateDiveMaster(ctx context.Context, diveMaster *entity.DiveMaster) (*entity.DiveMaster, error) {
-	// var result entity.DiveMaster
+func (repo *agencyRepository) CreateDiveMaster(diveMaster *model.DiveMaster) (*model.DiveMaster, error) {
+	result := repo.db.Create(diveMaster)
 
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.dive_master
-	// 		(first_name, last_name, level, agency_id, documents)
-	// 	VALUES
-	// 		($1, $2, $3, $4, $5)
-	// 	RETURNING id, first_name, last_name, level, agency_id, created_on, updated_on
-	// `, diveMaster.FirstName, diveMaster.LastName, diveMaster.Level, diveMaster.AgencyId, diveMaster.Documents)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	return diveMaster, result.Error
 }
 
 func (repo *agencyRepository) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error) {

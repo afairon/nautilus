@@ -6,6 +6,7 @@ import (
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
@@ -63,22 +64,6 @@ func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
 	return v, nil
 }
 
-func setDiveMaster(dst *entity.DiveMaster, src *pb.DiveMaster) error {
-	// Set a valid dive master first name
-	err := dst.SetDiveMasterFirstName(src.GetFirstName())
-	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	// Set a valid dive master last name
-	err = dst.SetDiveMasterLastName(src.GetLastName())
-	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
-	}
-
-	return nil
-}
-
 func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error {
 	agency, err := getUserInformationFromContext(ctx)
 
@@ -86,17 +71,17 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 		return err
 	}
 
-	newDiveMaster := entity.DiveMaster{}
+	newDiveMaster := &model.DiveMaster{}
 
 	// Copy dive master information and verify the dive master's information
-	err = setDiveMaster(&newDiveMaster, diveMaster)
+	err = newDiveMaster.SetDiveMaster(diveMaster)
 
 	if err != nil {
 		return err
 	}
 
 	newDiveMaster.Level = diveMaster.Level
-	newDiveMaster.AgencyId = agency.Id
+	newDiveMaster.AgencyID = uint(agency.Id)
 
 	var reader *bytes.Reader
 	var objectID string
@@ -122,7 +107,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
 	}
 
-	_, err = service.repo.Agency.CreateDiveMaster(ctx, &newDiveMaster)
+	_, err = service.repo.Agency.CreateDiveMaster(newDiveMaster)
 
 	return err
 }

@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
 
@@ -98,8 +99,8 @@ type Account struct {
 	Email    string `gorm:"unique"`
 	Username string
 	Password string
-	Type     AccountType
 	Verified bool
+	Type     pb.AccountType
 	Active   bool
 	AgencyID uint   `gorm:"default:null"`
 	DiverID  uint64 `gorm:"default:null"`
@@ -124,7 +125,7 @@ type Agency struct {
 type Diver struct {
 	*gorm.Model
 	Account      *Account
-	Level        LevelType
+	Level        pb.LevelType
 	FirstName    string
 	LastName     string
 	Phone        string
@@ -136,7 +137,7 @@ type DiveMaster struct {
 	*gorm.Model
 	FirstName string
 	LastName  string
-	Level     LevelType
+	Level     pb.LevelType
 	Documents entity.StringArray `gorm:"type:text"`
 	AgencyID  uint
 }
@@ -146,7 +147,7 @@ type Staff struct {
 	FirstName string
 	LastName  string
 	Position  string
-	Gender    GenderType
+	Gender    pb.GenderType
 	AgencyID  uint
 }
 
@@ -168,7 +169,7 @@ type TripTemplate struct {
 	*gorm.Model
 	Name        string
 	Descirption string
-	Type        TripType
+	Type        pb.TripType
 	Images      entity.StringArray `gorm:"type:text"`
 	Boat        *Boat
 	Trips       []Trip
