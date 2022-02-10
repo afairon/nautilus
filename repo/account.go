@@ -15,7 +15,7 @@ import (
 type AccountRepository interface {
 	// Create(ctx context.Context, account *entity.Account) (*entity.Account, error)
 	Get(ctx context.Context, id uint64) (*entity.Account, error)
-	GetByEmail(email string) (*entity.Account, error)
+	GetByEmail(email string) (*model.Account, error)
 	GetByUsername(ctx context.Context, username string) (*entity.Account, error)
 	GetAdminAccount(ctx context.Context, id uint64) (*pb.Admin, error)
 	GetAgencyAccount(ctx context.Context, id uint64) (*pb.Agency, error)
@@ -70,7 +70,7 @@ func (repo *accountRepository) Get(ctx context.Context, id uint64) (*entity.Acco
 }
 
 // Get retrieves the account record by its email.
-func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*entity.Account, error) {
+func (repo *accountRepository) GetByEmail(email string) (*model.Account, error) {
 	// var result entity.Account
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -86,8 +86,8 @@ func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*e
 
 	var account model.Account
 
-	repo.db.Where("LOWER(email) = ?", email).First(&account)
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Where("LOWER(email) = ?", email).First(&account)
+	return &account, result.Error
 }
 
 // Get retrieves the account record by its username.
@@ -110,7 +110,7 @@ func (repo *accountRepository) GetByUsername(ctx context.Context, username strin
 func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (*pb.Admin, error) {
 	var admin model.Admin
 
-	r := repo.db.First(&admin, id)
+	r := repo.db.Joins("Account").First(&admin, id)
 
 	if r.Error != nil {
 		return nil, r.Error
@@ -166,7 +166,7 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 	// // 	return &result, nil
 
 	var agency model.Agency
-	r := repo.db.First(&agency, id)
+	r := repo.db.Joins("Account").First(&agency, id)
 
 	if r.Error != nil {
 		return nil, r.Error
@@ -227,7 +227,7 @@ func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (
 
 	// return &result, nil
 	var diver model.Diver
-	r := repo.db.First(&diver, id)
+	r := repo.db.Joins("Account").First(&diver, id)
 
 	if r.Error != nil {
 		return nil, r.Error
