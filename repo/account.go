@@ -15,7 +15,7 @@ import (
 type AccountRepository interface {
 	// Create(ctx context.Context, account *entity.Account) (*entity.Account, error)
 	Get(ctx context.Context, id uint64) (*entity.Account, error)
-	GetByEmail(email string) (*model.Account, error)
+	GetByEmail(email string) (*entity.Account, error)
 	GetByUsername(ctx context.Context, username string) (*entity.Account, error)
 	GetAdminAccount(ctx context.Context, id uint64) (*pb.Admin, error)
 	GetAgencyAccount(ctx context.Context, id uint64) (*pb.Agency, error)
