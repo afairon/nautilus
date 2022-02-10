@@ -101,8 +101,9 @@ type Account struct {
 	Verified bool
 	Type     AccountType
 	Active   bool
-	AgencyID uint   `gorm:"default:null"`
-	DiverID  uint64 `gorm:"default:null"`
+	AgencyID uint `gorm:"default:null"`
+	DiverID  uint `gorm:"default:null"`
+	AdminID  uint `gorm:"default:null"`
 }
 
 type Agency struct {
@@ -120,6 +121,11 @@ type Agency struct {
 	Liveaboards   []Liveaboard
 	Hotels        []Hotel
 	Trips         []Trip
+}
+
+type Admin struct {
+	*gorm.Model
+	Account *Account
 }
 
 type Diver struct {

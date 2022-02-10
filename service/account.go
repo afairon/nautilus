@@ -173,7 +173,7 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	email = strings.ToLower(email)
 
 	// Retrieve account by email.
-	accountRecord, err := service.repo.Account.GetByEmail(ctx, email)
+	accountRecord, err := service.repo.Account.GetByEmail(email)
 	if err != nil {
 		return "", status.Error(codes.Unavailable, err.Error())
 	}
@@ -187,12 +187,12 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	var account session.Account
 
 	switch accountRecord.Type {
-	case pb.ADMIN:
-		account, err = service.repo.Account.GetAdminAccount(ctx, accountRecord.GetId())
-	case pb.AGENCY:
-		account, err = service.repo.Account.GetAgencyAccount(ctx, accountRecord.GetId())
-	case pb.DIVER:
-		account, err = service.repo.Account.GetDiverAccount(ctx, accountRecord.GetId())
+	case model.ADMIN:
+		account, err = service.repo.Account.GetAdminAccount(ctx, uint64(accountRecord.ID))
+	case model.AGENCY:
+		account, err = service.repo.Account.GetAgencyAccount(ctx, uint64(accountRecord.ID))
+	case model.DIVER:
+		account, err = service.repo.Account.GetDiverAccount(ctx, uint64(accountRecord.ID))
 	}
 
 	if err != nil {
