@@ -112,6 +112,10 @@ func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (
 
 	r := repo.db.First(&admin, id)
 
+	if r.Error != nil {
+		return nil, r.Error
+	}
+
 	var result pb.Admin
 	result.Account = &pb.Account{
 		Id:        uint64(admin.ID),
@@ -125,7 +129,7 @@ func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (
 		UpdatedOn: &admin.UpdatedAt,
 	}
 
-	return &result, r.Error
+	return &result, nil
 }
 
 func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) (*pb.Agency, error) {
@@ -164,6 +168,10 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 	var agency model.Agency
 	r := repo.db.First(&agency, id)
 
+	if r.Error != nil {
+		return nil, r.Error
+	}
+
 	result := pb.Agency{
 		Id:    uint64(agency.Account.AgencyID),
 		Name:  agency.Name,
@@ -183,7 +191,7 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 		UpdatedOn: &agency.UpdatedAt,
 	}
 
-	return &result, r.Error
+	return &result, nil
 }
 
 func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (*pb.Diver, error) {
@@ -218,7 +226,36 @@ func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (
 	// }
 
 	// return &result, nil
-	return nil, errors.New("Unimplemented")
+	var diver model.Diver
+	r := repo.db.First(&diver, id)
+
+	if r.Error != nil {
+		return nil, r.Error
+	}
+
+	result := pb.Diver{
+		Id:        uint64(diver.ID),
+		FirstName: diver.FirstName,
+		LastName:  diver.LastName,
+		Phone:     diver.Phone,
+		BirthDate: diver.BirthDate,
+		Level:     pb.LevelType(diver.Level),
+		Account: &pb.Account{
+			Id:        uint64(diver.ID),
+			Username:  diver.Account.Username,
+			Email:     diver.Account.Email,
+			Password:  diver.Account.Password,
+			Type:      pb.AccountType(diver.Account.Type),
+			Verified:  diver.Account.Verified,
+			Active:    diver.Account.Active,
+			CreatedOn: &diver.Account.CreatedAt,
+			UpdatedOn: &diver.Account.UpdatedAt,
+		},
+		CreatedOn: &diver.CreatedAt,
+		UpdatedOn: &diver.UpdatedAt,
+	}
+
+	return &result, nil
 }
 
 // List returns list of accounts.

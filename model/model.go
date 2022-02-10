@@ -135,6 +135,7 @@ type Diver struct {
 	FirstName    string
 	LastName     string
 	Phone        string
+	BirthDate    time.Time
 	Documents    entity.StringArray `gorm:"type:text"`
 	Reservations []Reservation
 }
