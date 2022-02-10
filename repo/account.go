@@ -160,7 +160,30 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 	// 	}
 
 	// // 	return &result, nil
-	return nil, errors.New("Unimplemented")
+
+	var agency model.Agency
+	r := repo.db.First(&agency, id)
+
+	result := pb.Agency{
+		Id:    uint64(agency.Account.AgencyID),
+		Name:  agency.Name,
+		Phone: agency.Phone,
+		Account: &pb.Account{
+			Id:        uint64(agency.ID),
+			Username:  agency.Account.Username,
+			Email:     agency.Account.Email,
+			Password:  agency.Account.Password,
+			Type:      pb.AccountType(agency.Account.Type),
+			Verified:  agency.Account.Verified,
+			Active:    agency.Account.Active,
+			CreatedOn: &agency.CreatedAt,
+			UpdatedOn: &agency.UpdatedAt,
+		},
+		CreatedOn: &agency.CreatedAt,
+		UpdatedOn: &agency.UpdatedAt,
+	}
+
+	return &result, r.Error
 }
 
 func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (*pb.Diver, error) {
