@@ -240,6 +240,7 @@ type Liveaboard struct {
 	TotalCapacity uint32
 	DiverRooms    uint32
 	StaffRooms    uint32
+	Images        entity.StringArray `gorm:"type:text"`
 	RoomTypes     []RoomType
 	AgencyID      uint
 }

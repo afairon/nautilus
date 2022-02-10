@@ -118,6 +118,10 @@ message Liveaboard {
     // optional images when creating a new liveaboard
     repeated model.File images = 6;
     repeated RoomType room_types = 7;
+    uint32 total_capacity = 8;
+    uint32 diver_rooms = 9;
+    uint32 staff_rooms = 10;
+    model.Address address = 11;
 }
 
 message AddDiveMasterRequest {

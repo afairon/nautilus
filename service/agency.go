@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -181,7 +180,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 	// set room types of hotel
 	newHotel.RoomTypes = roomTypes
-	service.repo.Agency.CreateHotel(&newHotel)
+	_, err = service.repo.Agency.CreateHotel(&newHotel)
 
 	return err
 }
@@ -318,12 +317,26 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		return err
 	}
 
-	newLiveaboard := entity.Liveaboard{
-		Name:        liveaboard.GetName(),
-		Description: liveaboard.GetDescription(),
-		Length:      liveaboard.GetLength(),
-		Width:       liveaboard.GetWidth(),
-		AgencyId:    agency.Id,
+	addr := liveaboard.GetAddress()
+	divingBoatAddress := model.Address{
+		AddressLine_1: addr.GetAddressLine_1(),
+		AddressLine_2: addr.GetAddressLine_2(),
+		City:          addr.GetCity(),
+		Postcode:      addr.GetPostcode(),
+		Region:        addr.GetRegion(),
+		Country:       addr.GetCountry(),
+	}
+
+	newLiveaboard := model.Liveaboard{
+		Address:       &divingBoatAddress,
+		Name:          liveaboard.GetName(),
+		Description:   liveaboard.GetDescription(),
+		Length:        liveaboard.GetLength(),
+		Width:         liveaboard.GetWidth(),
+		TotalCapacity: liveaboard.GetTotalCapacity(),
+		DiverRooms:    liveaboard.GetDiverRooms(),
+		StaffRooms:    liveaboard.GetStaffRooms(),
+		AgencyID:      uint(agency.GetId()),
 	}
 
 	for _, image := range liveaboard.GetImages() {
@@ -337,79 +350,37 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
 	}
 
-	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-	// 	createdLiveaboard, err := query.Agency.CreateLiveaboard(ctx, &newLiveaboard)
+	roomTypes := []model.RoomType{}
+	pbRoomTypes := liveaboard.GetRoomTypes()
 
-	// 	if err != nil {
-	// 		return err
-	// 	}
+	// Copy room types information
+	for _, rt := range pbRoomTypes {
+		tempRoomType := model.RoomType{
+			Name:        rt.GetName(),
+			Description: rt.GetDescription(),
+			MaxGuest:    rt.GetMaxGuest(),
+			Price:       rt.GetPrice(),
+			Quantity:    rt.GetQuantity(),
+			HotelID:     uint(agency.GetId()),
+		}
 
-	// 	entityRoomTypes := []entity.RoomType{}
-	// 	modelRoomTypes := liveaboard.GetRoomTypes()
+		for _, image := range rt.GetRoomImages() {
+			reader := bytes.NewReader(image.GetFile())
+			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
 
-	// 	// Copy room types information
-	// 	for _, rt := range modelRoomTypes {
-	// 		tempRoomType := entity.RoomType{
-	// 			Name:         rt.GetName(),
-	// 			Description:  rt.GetDescription(),
-	// 			MaxGuest:     rt.GetMaxGuest(),
-	// 			Price:        rt.GetPrice(),
-	// 			Quantity:     rt.GetQuantity(),
-	// 			LiveaboardId: createdLiveaboard.GetId(),
-	// 		}
+			if err != nil {
+				return err
+			}
 
-	// 		for _, image := range rt.GetRoomImages() {
-	// 			reader := bytes.NewReader(image.GetFile())
-	// 			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+			tempRoomType.Images = append(tempRoomType.Images, objectID)
+		}
 
-	// 			if err != nil {
-	// 				return err
-	// 			}
+		roomTypes = append(roomTypes, tempRoomType)
+	}
 
-	// 			tempRoomType.Images = append(tempRoomType.Images, objectID)
-	// 		}
-
-	// 		entityRoomTypes = append(entityRoomTypes, tempRoomType)
-	// 	}
-
-	// 	// Create RoomTypes and amenities and the links between them.
-	// 	for i, rt := range entityRoomTypes {
-	// 		createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, false)
-
-	// 		if err != nil {
-	// 			return err
-	// 		}
-
-	// 		modelAmenities := modelRoomTypes[i].GetAmenities()
-
-	// 		// Create Amenities of a room type
-	// 		for _, modelAmenity := range modelAmenities {
-	// 			entityAmenity := entity.Amenity{
-	// 				Name:        modelAmenity.GetName(),
-	// 				Description: modelAmenity.GetDescription(),
-	// 			}
-
-	// 			createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
-
-	// 			if err != nil {
-	// 				return err
-	// 			}
-
-	// 			roomAmenity := entity.RoomAmenity{
-	// 				RoomTypeId: createdRoomType.GetId(),
-	// 				AmenityId:  createdAmenity.GetId(),
-	// 			}
-
-	// 			_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
-
-	// 			if err != nil {
-	// 				return err
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return err
-	// })
+	// set room types of hotel
+	newLiveaboard.RoomTypes = roomTypes
+	_, err = service.repo.Agency.CreateLiveaboard(&newLiveaboard)
 
 	return err
 }

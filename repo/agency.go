@@ -24,7 +24,7 @@ type AgencyRepository interface {
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
 	CreateBoat(divingBoat *model.Boat) (*model.Boat, error)
 	CreateStaff(staff *model.Staff) (*model.Staff, error)
-	CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error)
+	CreateLiveaboard(liveaboard *model.Liveaboard) (*model.Liveaboard, error)
 	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
@@ -162,20 +162,10 @@ func (repo *agencyRepository) CreateStaff(staff *model.Staff) (*model.Staff, err
 	return staff, result.Error
 }
 
-func (repo *agencyRepository) CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error) {
-	// var result entity.Liveaboard
+func (repo *agencyRepository) CreateLiveaboard(liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
+	result := repo.db.Create(liveaboard)
 
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.liveaboard
-	// 		(name, description, length, width, agency_id, images)
-	// 	VALUES
-	// 		($1, $2, $3, $4, $5, $6)
-	// 	RETURNING id, name, description, length, width, agency_id, images, created_on, updated_on
-	// `, liveaboard.Name, liveaboard.Description, liveaboard.Length, liveaboard.Width, liveaboard.AgencyId, liveaboard.Images)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	return liveaboard, result.Error
 }
 
 func (repo *agencyRepository) CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error) {
