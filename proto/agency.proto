@@ -68,6 +68,11 @@ message RoomType {
     uint32 quantity = 7;
 }
 
+message HotelAndBoatId {
+    uint64 hotel_id = 1;
+    uint64 boat_id = 2;
+}
+
 message TripTemplate {
     string name = 1;
     string description = 2;
@@ -75,7 +80,7 @@ message TripTemplate {
     repeated model.File images = 5;
     model.TripType trip_type = 6;
     oneof residence_id {
-        uint64 hotel_id = 8;
+        HotelAndBoatId hotel_and_boat_id = 8;
         uint64 liveaboard_id = 9;
     }
 }

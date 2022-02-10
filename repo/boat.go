@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
@@ -12,6 +13,7 @@ import (
 // with the boat repository.
 type BoatRepository interface {
 	ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error)
+	GetBoat(id uint) (*model.Boat, error)
 }
 
 // boatRepository implements BoatRepository interface.
@@ -72,4 +74,11 @@ func (repo *boatRepository) ListBoatsByAgency(ctx context.Context, id, limit, of
 
 	// return results, nil
 	return nil, errors.New("Unimplemented")
+}
+
+func (repo *boatRepository) GetBoat(id uint) (*model.Boat, error) {
+	var boat model.Boat
+
+	result := repo.db.First(&boat, id)
+	return &boat, result.Error
 }

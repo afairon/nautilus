@@ -217,18 +217,21 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		return err
 	}
 
-	newTripTemplate := entity.TripTemplate{
+	newTripTemplate := model.TripTemplate{
 		Name:        tripTemplate.GetName(),
-		Description: tripTemplate.GetDescription(),
-		Type:        tripTemplate.GetTripType(),
-		AgencyId:    agency.Id,
-		BoatId:      tripTemplate.GetDivingBoatId(),
+		Descirption: tripTemplate.GetDescription(),
+		Type:        model.TripType(tripTemplate.GetTripType()),
+		AgencyID:    uint(agency.GetId()),
 	}
 
-	if tripTemplate.GetTripType() == pb.ONSHORE {
-		newTripTemplate.HotelId = tripTemplate.GetHotelId()
+	if newTripTemplate.Type == model.ONSHORE {
+		onShoreInfo := tripTemplate.GetHotelAndBoatId()
+
+		newTripTemplate.HotelID = uint(onShoreInfo.GetHotelId())
+
+		newTripTemplate.BoatID = uint(onShoreInfo.GetBoatId())
 	} else {
-		newTripTemplate.LiveaboardId = tripTemplate.GetLiveaboardId()
+		newTripTemplate.LiveaboardID = uint(tripTemplate.GetLiveaboardId())
 	}
 
 	for _, image := range tripTemplate.GetImages() {
@@ -242,45 +245,24 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
 	}
 
-	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-	// 	// Create a record in trip_template table
-	// 	createdTripTemplate, err := query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
-	// 	if err != nil {
-	// 		return err
-	// 	}
+	// create trip template
+	_, err = service.repo.Agency.CreateTripTemplate(&newTripTemplate)
 
-	// 	newTrip := entity.Trip{
-	// 		TemplateId:          createdTripTemplate.GetId(),
-	// 		AgencyId:            agency.Id,
-	// 		MaxGuest:            trip.GetMaxCapacity(),
-	// 		Price:               float32(trip.GetPrice()),
-	// 		FromDate:            trip.GetFrom(),
-	// 		ToDate:              trip.GetTo(),
-	// 		LastReservationDate: trip.GetLastReservationDate(),
-	// 	}
+	if err != nil {
+		return err
+	}
 
-	// 	// Create a record in trip table
-	// 	createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
+	newTrip := model.Trip{
+		MaxGuest:            trip.GetMaxCapacity(),
+		Price:               trip.GetPrice(),
+		StartDate:           trip.GetFrom(),
+		EndDate:             trip.GetTo(),
+		LastReservationDate: trip.GetLastReservationDate(),
+		TripTemplateID:      newTripTemplate.ID,
+		AgencyID:            uint(agency.GetId()),
+	}
 
-	// 	if err != nil {
-	// 		return err
-	// 	}
-
-	// 	for _, diveMasterId := range trip.GetDiveMasterIds() {
-	// 		newDiveMasterTripLink := entity.DiverMasterTrip{
-	// 			DiveMasterId: diveMasterId,
-	// 			TripId:       createdTrip.GetId(),
-	// 		}
-
-	// 		_, err = query.Agency.CreateDiveMasterTripLink(ctx, &newDiveMasterTripLink)
-
-	// 		if err != nil {
-	// 			return err
-	// 		}
-	// 	}
-
-	// 	return err
-	// })
+	_, err = service.repo.Agency.CreateTrip(&newTrip)
 
 	return err
 }

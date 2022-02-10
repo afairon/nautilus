@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
@@ -12,6 +13,7 @@ import (
 // with the hotel repository.
 type HotelRepository interface {
 	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
+	GetHotel(id uint) (*model.Hotel, error)
 }
 
 // hotelRepository implements HotelRepository interface.
@@ -80,4 +82,11 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 
 	// return results, nil
 	return nil, errors.New("Unimplemented")
+}
+
+func (repo *hotelRepository) GetHotel(id uint) (*model.Hotel, error) {
+	var hotel model.Hotel
+
+	result := repo.db.First(&hotel, id)
+	return &hotel, result.Error
 }

@@ -119,6 +119,7 @@ type Agency struct {
 	TripTemplates []TripTemplate
 	Liveaboards   []Liveaboard
 	Hotels        []Hotel
+	Trips         []Trip
 }
 
 type Diver struct {
@@ -152,29 +153,31 @@ type Staff struct {
 
 type Boat struct {
 	*gorm.Model
-	*Address       `gorm:"embedded"`
-	Name           string
-	Description    string
-	TotalCapacity  uint32
-	DiverCapacity  uint32
-	StaffCapacity  uint32
-	Images         entity.StringArray `gorm:"type:text"`
-	Amenities      []Amenity          `gorm:"many2many:boat_amenity_link;"`
-	AgencyID       uint
-	TripTemplateID uint
+	*Address      `gorm:"embedded"`
+	Name          string
+	Description   string
+	TotalCapacity uint32
+	DiverCapacity uint32
+	StaffCapacity uint32
+	Images        entity.StringArray `gorm:"type:text"`
+	Amenities     []Amenity          `gorm:"many2many:boat_amenity_link;"`
+	AgencyID      uint
 }
 
 type TripTemplate struct {
 	*gorm.Model
-	Name        string
-	Descirption string
-	Type        TripType
-	Images      entity.StringArray `gorm:"type:text"`
-	Boat        *Boat
-	Trips       []Trip
-	Liveaboards []Liveaboard
-	Hotels      []Hotel
-	AgencyID    uint
+	Name         string
+	Descirption  string
+	Type         TripType
+	Images       entity.StringArray `gorm:"type:text"`
+	Trips        []Trip
+	AgencyID     uint
+	HotelID      uint
+	Hotel        Hotel
+	LiveaboardID uint
+	Liveaboard   Liveaboard
+	BoatID       uint
+	Boat         Boat
 }
 
 type Trip struct {
@@ -184,8 +187,8 @@ type Trip struct {
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
-	Reservation         []Reservation
 	TripTemplateID      uint
+	AgencyID            uint
 }
 
 type Reservation struct {
@@ -196,6 +199,7 @@ type Reservation struct {
 	TripComment       *TripComment
 	DiverID           uint
 	TripID            uint
+	Trip              Trip
 }
 
 type LiveaboardComment struct {
@@ -229,16 +233,15 @@ type Liveaboard struct {
 	*gorm.Model
 	*Address
 	*Coordinate
-	Name           string
-	Description    string
-	Length         uint32
-	Width          uint32
-	TotalCapacity  uint32
-	DiverRooms     uint32
-	StaffRooms     uint32
-	RoomTypes      []RoomType
-	AgencyID       uint
-	TripTemplateID uint
+	Name          string
+	Description   string
+	Length        uint32
+	Width         uint32
+	TotalCapacity uint32
+	DiverRooms    uint32
+	StaffRooms    uint32
+	RoomTypes     []RoomType
+	AgencyID      uint
 }
 
 type RoomType struct {
@@ -256,14 +259,13 @@ type RoomType struct {
 
 type Hotel struct {
 	*gorm.Model
-	*Address       `gorm:"embedded"`
-	*Coordinate    `gorm:"embedded"`
-	Name           string
-	Description    string
-	Stars          uint32
-	Phone          string
-	Images         entity.StringArray `gorm:"type:text"`
-	RoomTypes      []RoomType
-	AgencyID       uint
-	TripTemplateID uint
+	*Address    `gorm:"embedded"`
+	*Coordinate `gorm:"embedded"`
+	Name        string
+	Description string
+	Stars       uint32
+	Phone       string
+	Images      entity.StringArray `gorm:"type:text"`
+	RoomTypes   []RoomType
+	AgencyID    uint
 }
