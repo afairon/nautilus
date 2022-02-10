@@ -262,6 +262,7 @@ type Hotel struct {
 	Description    string
 	Stars          uint32
 	Phone          string
+	Images         entity.StringArray `gorm:"type:text"`
 	RoomTypes      []RoomType
 	AgencyID       uint
 	TripTemplateID uint

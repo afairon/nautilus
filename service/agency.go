@@ -120,12 +120,24 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		return err
 	}
 
-	newHotel := entity.Hotel{
+	addr := hotel.GetAddress()
+
+	hotelAddress := model.Address{
+		AddressLine_1: addr.GetAddressLine_1(),
+		AddressLine_2: addr.GetAddressLine_2(),
+		City:          addr.GetCity(),
+		Postcode:      addr.GetPostcode(),
+		Region:        addr.GetRegion(),
+		Country:       addr.GetCountry(),
+	}
+
+	newHotel := model.Hotel{
+		Address:     &hotelAddress,
 		Name:        hotel.GetHotelName(),
 		Description: hotel.GetHotelDescription(),
 		Stars:       hotel.GetStar(),
 		Phone:       hotel.GetPhone(),
-		AgencyId:    agency.Id,
+		AgencyID:    uint(agency.GetId()),
 	}
 
 	for _, image := range hotel.GetImages() {

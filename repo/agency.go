@@ -15,8 +15,8 @@ import (
 type AgencyRepository interface {
 	Create(agency *model.Agency) (*model.Agency, error)
 	CreateDiveMaster(diveMaster *model.DiveMaster) (*model.DiveMaster, error)
-	CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error)
-	CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error)
+	CreateHotel(hotel *model.Hotel) (*model.Hotel, error)
+	CreateRoomType(roomType *model.RoomType, isHotel bool) (*model.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
 	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	CreateTripTemplate(ctx context.Context, tripTemplate *entity.TripTemplate) (*entity.TripTemplate, error)
@@ -56,23 +56,13 @@ func (repo *agencyRepository) CreateDiveMaster(diveMaster *model.DiveMaster) (*m
 	return diveMaster, result.Error
 }
 
-func (repo *agencyRepository) CreateHotel(ctx context.Context, hotel *entity.Hotel) (*entity.Hotel, error) {
-	// var result entity.Hotel
+func (repo *agencyRepository) CreateHotel(hotel *model.Hotel) (*model.Hotel, error) {
+	result := repo.db.Create(hotel)
 
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.hotel
-	// 		(name, description, stars, phone, agency_id, address_id, images)
-	// 	VALUES
-	// 		($1, $2, $3, $4, $5, $6, $7)
-	// 	RETURNING id, name, description, stars, phone, agency_id, address_id, images, created_on, updated_on
-	// 	`, hotel.Name, hotel.Description, hotel.Stars, hotel.Phone, hotel.AgencyId, hotel.AddressId, hotel.Images)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	return hotel, result.Error
 }
 
-func (repo *agencyRepository) CreateRoomType(ctx context.Context, roomType *entity.RoomType, isHotel bool) (*entity.RoomType, error) {
+func (repo *agencyRepository) CreateRoomType(roomType *model.RoomType, isHotel bool) (*model.RoomType, error) {
 	// var result entity.RoomType
 	// var err error
 
