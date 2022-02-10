@@ -108,31 +108,24 @@ func (repo *accountRepository) GetByUsername(ctx context.Context, username strin
 }
 
 func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (*pb.Admin, error) {
-	// 	var result pb.Admin
-	// 	result.Account = &pb.Account{}
+	var admin model.Admin
 
-	// 	rows, err := repo.db.Queryx(`
-	// 		SELECT
-	// 			id, username, LOWER(email) AS email, "password", "type", verified, active, created_on, updated_on
-	// 		FROM
-	// 			public.account
-	// 		WHERE
-	// 			id = $1
-	// 	`, id)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	defer rows.Close()
+	r := repo.db.First(&admin, id)
 
-	// 	for rows.Next() {
-	// 		err = rows.Scan(&result.Account.Id, &result.Account.Username, &result.Account.Email, &result.Account.Password, &result.Account.Type, &result.Account.Verified, &result.Account.Active, &result.Account.CreatedOn, &result.Account.UpdatedOn)
-	// 		if err != nil {
-	// 			return nil, err
-	// 		}
-	// 	}
+	var result pb.Admin
+	result.Account = &pb.Account{
+		Id:        uint64(admin.ID),
+		Username:  admin.Account.Username,
+		Email:     admin.Account.Email,
+		Password:  admin.Account.Password,
+		Type:      pb.AccountType(admin.Account.Type),
+		Verified:  admin.Account.Verified,
+		Active:    admin.Account.Active,
+		CreatedOn: &admin.CreatedAt,
+		UpdatedOn: &admin.UpdatedAt,
+	}
 
-	// 	return &result, nil
-	return nil, errors.New("Unimplemented")
+	return &result, r.Error
 }
 
 func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) (*pb.Agency, error) {
