@@ -23,7 +23,7 @@ type AgencyRepository interface {
 	CreateTrip(ctx context.Context, trip *entity.Trip) (*entity.Trip, error)
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
 	CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error)
-	CreateStaff(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
+	CreateStaff(staff *model.Staff) (*model.Staff, error)
 	CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error)
 	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
@@ -191,20 +191,10 @@ func (repo *agencyRepository) CreateBoat(ctx context.Context, divingBoat *entity
 	return nil, errors.New("Unimplemented")
 }
 
-func (repo *agencyRepository) CreateStaff(ctx context.Context, staff *entity.Staff) (*entity.Staff, error) {
-	// var result entity.Staff
+func (repo *agencyRepository) CreateStaff(staff *model.Staff) (*model.Staff, error) {
+	result := repo.db.Create(staff)
 
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.staff
-	// 		(first_name, last_name, position, gender, agency_id)
-	// 	VALUES
-	// 		($1, $2, $3, $4, $5)
-	// 	RETURNING id, first_name, last_name, position, gender, agency_id, created_on, updated_on
-	// `, staff.FirstName, staff.LastName, staff.Position, staff.Gender, staff.AgencyId)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	return staff, result.Error
 }
 
 func (repo *agencyRepository) CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error) {

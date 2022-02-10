@@ -151,95 +151,37 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-	// 	hotelAddress := hotel.GetAddress()
-	// 	newAddress := entity.Address{
-	// 		AddressLine_1: hotelAddress.AddressLine_1,
-	// 		AddressLine_2: hotelAddress.AddressLine_2,
-	// 		City:          hotelAddress.City,
-	// 		Postcode:      hotelAddress.Postcode,
-	// 		Region:        hotelAddress.Region,
-	// 		Country:       hotelAddress.Country,
-	// 	}
-	// 	createdAddress, err := query.Agency.CreateAddress(ctx, &newAddress)
+	roomTypes := []model.RoomType{}
+	pbRoomTypes := hotel.GetRoomTypes()
 
-	// 	if err != nil {
-	// 		return err
-	// 	}
+	// Copy room types information
+	for _, rt := range pbRoomTypes {
+		tempRoomType := model.RoomType{
+			Name:        rt.GetName(),
+			Description: rt.GetDescription(),
+			MaxGuest:    rt.GetMaxGuest(),
+			Price:       rt.GetPrice(),
+			Quantity:    rt.GetQuantity(),
+			HotelID:     uint(agency.GetId()),
+		}
 
-	// 	newHotel.AddressId = createdAddress.Id
-	// 	createdHotel, err := query.Agency.CreateHotel(ctx, &newHotel)
+		for _, image := range rt.GetRoomImages() {
+			reader := bytes.NewReader(image.GetFile())
+			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
 
-	// 	if err != nil {
-	// 		return err
-	// 	}
+			if err != nil {
+				return err
+			}
 
-	// 	entityRoomTypes := []entity.RoomType{}
-	// 	modelRoomTypes := hotel.GetRoomTypes()
+			tempRoomType.Images = append(tempRoomType.Images, objectID)
+		}
 
-	// 	// Copy room types information
-	// 	for _, rt := range modelRoomTypes {
-	// 		tempRoomType := entity.RoomType{
-	// 			Name:        rt.GetName(),
-	// 			Description: rt.GetDescription(),
-	// 			MaxGuest:    rt.GetMaxGuest(),
-	// 			Price:       rt.GetPrice(),
-	// 			Quantity:    rt.GetQuantity(),
-	// 			HotelId:     createdHotel.GetId(),
-	// 		}
+		roomTypes = append(roomTypes, tempRoomType)
+	}
 
-	// 		for _, image := range rt.GetRoomImages() {
-	// 			reader := bytes.NewReader(image.GetFile())
-	// 			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
-
-	// 			if err != nil {
-	// 				return err
-	// 			}
-
-	// 			tempRoomType.Images = append(tempRoomType.Images, objectID)
-	// 		}
-
-	// 		entityRoomTypes = append(entityRoomTypes, tempRoomType)
-	// 	}
-
-	// 	// Create RoomTypes and amenities and the links between them.
-	// 	for i, rt := range entityRoomTypes {
-	// 		createdRoomType, err := query.Agency.CreateRoomType(ctx, &rt, true)
-
-	// 		if err != nil {
-	// 			return err
-	// 		}
-
-	// 		modelAmenities := modelRoomTypes[i].GetAmenities()
-
-	// 		// Create Amenities of a room type
-	// 		for _, modelAmenity := range modelAmenities {
-	// 			entityAmenity := entity.Amenity{
-	// 				Name:        modelAmenity.GetName(),
-	// 				Description: modelAmenity.GetDescription(),
-	// 			}
-
-	// 			createdAmenity, err := query.Agency.CreateAmenity(ctx, &entityAmenity)
-
-	// 			if err != nil {
-	// 				return err
-	// 			}
-
-	// 			roomAmenity := entity.RoomAmenity{
-	// 				RoomTypeId: createdRoomType.GetId(),
-	// 				AmenityId:  createdAmenity.GetId(),
-	// 			}
-
-	// 			_, err = query.Agency.CreateRoomAmenity(ctx, &roomAmenity)
-
-	// 			if err != nil {
-	// 				return err
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return err
-	// })
+	// set room types of hotel
+	newHotel.RoomTypes = roomTypes
+	service.repo.Agency.CreateHotel(&newHotel)
 
 	return err
 }
@@ -251,15 +193,15 @@ func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff) error
 		return err
 	}
 
-	newStaff := entity.Staff{
+	newStaff := model.Staff{
 		FirstName: req.GetFirstName(),
 		LastName:  req.GetLastName(),
 		Position:  req.GetPosition(),
-		Gender:    req.GetGender(),
-		AgencyId:  agency.Id,
+		Gender:    model.GenderType(req.GetGender()),
+		AgencyID:  uint(agency.GetId()),
 	}
 
-	_, err = service.repo.Agency.CreateStaff(ctx, &newStaff)
+	_, err = service.repo.Agency.CreateStaff(&newStaff)
 
 	return err
 }
