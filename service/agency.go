@@ -274,9 +274,25 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		return err
 	}
 
-	newDivingBoat := entity.Boat{
-		Name:     divingBoat.GetBoatModel(),
-		AgencyId: agency.Id,
+	addr := divingBoat.GetAddress()
+
+	divingBoatAddress := model.Address{
+		AddressLine_1: addr.GetAddressLine_1(),
+		AddressLine_2: addr.GetAddressLine_2(),
+		City:          addr.GetCity(),
+		Postcode:      addr.GetPostcode(),
+		Region:        addr.GetRegion(),
+		Country:       addr.GetCountry(),
+	}
+
+	newDivingBoat := model.Boat{
+		Address:       &divingBoatAddress,
+		Name:          divingBoat.GetName(),
+		Description:   divingBoat.GetDescription(),
+		TotalCapacity: divingBoat.GetTotalCapacity(),
+		DiverCapacity: divingBoat.GetDiverCapacity(),
+		StaffCapacity: divingBoat.GetStaffCapacity(),
+		AgencyID:      uint(agency.GetId()),
 	}
 
 	for _, image := range divingBoat.GetBoatImages() {
@@ -290,7 +306,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		newDivingBoat.Images = append(newDivingBoat.Images, objectID)
 	}
 
-	_, err = service.repo.Agency.CreateBoat(ctx, &newDivingBoat)
+	_, err = service.repo.Agency.CreateBoat(&newDivingBoat)
 
 	return err
 }

@@ -49,8 +49,13 @@ message Staff {
 }
 
 message DivingBoat {
-    string boat_model = 1;
+    string name = 1;
     repeated model.File boat_images = 2;
+    string description = 3;
+    uint32 total_capacity = 4;
+	uint32 diver_capacity = 5;
+    uint32 staff_capacity = 6;
+    model.Address address = 7;
 }
 
 message Amenity {

@@ -22,7 +22,7 @@ type AgencyRepository interface {
 	CreateTripTemplate(tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
 	CreateTrip(trip *model.Trip) (*model.Trip, error)
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
-	CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error)
+	CreateBoat(divingBoat *model.Boat) (*model.Boat, error)
 	CreateStaff(staff *model.Staff) (*model.Staff, error)
 	CreateLiveaboard(ctx context.Context, liveaboard *entity.Liveaboard) (*entity.Liveaboard, error)
 	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
@@ -150,20 +150,10 @@ func (repo *agencyRepository) CreateDiveMasterTripLink(ctx context.Context, dive
 	return nil, errors.New("Unimplemented")
 }
 
-func (repo *agencyRepository) CreateBoat(ctx context.Context, divingBoat *entity.Boat) (*entity.Boat, error) {
-	// 	var result entity.Boat
+func (repo *agencyRepository) CreateBoat(divingBoat *model.Boat) (*model.Boat, error) {
+	result := repo.db.Create(divingBoat)
 
-	// 	err := repo.db.GetContext(ctx, &result, `
-	// 		INSERT INTO
-	// 			public.boat
-	// 			(name, agency_id, images)
-	// 		VALUES
-	// 			($1, $2, $3)
-	// 		RETURNING id, name, agency_id, images, created_on, updated_on
-	// 	`, divingBoat.Name, divingBoat.AgencyId, divingBoat.Images)
-
-	// 	return &result, err
-	return nil, errors.New("Unimplemented")
+	return divingBoat, result.Error
 }
 
 func (repo *agencyRepository) CreateStaff(staff *model.Staff) (*model.Staff, error) {
