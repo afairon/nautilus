@@ -268,13 +268,16 @@ const ListBoatsResponse_Boat$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'images', '3': 20, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'total_capacity', '3': 21, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_capacity', '3': 22, '4': 1, '5': 13, '10': 'diverCapacity'},
+    const {'1': 'staff_capacity', '3': 23, '4': 1, '5': 13, '10': 'staffCapacity'},
     const {'1': 'created_on', '3': 30, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
     const {'1': 'updated_on', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
   ],
 };
 
 /// Descriptor for `ListBoatsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listBoatsResponseDescriptor = $convert.base64Decode('ChFMaXN0Qm9hdHNSZXNwb25zZRIyCgRib2F0GAEgASgLMh4uYWdlbmN5Lkxpc3RCb2F0c1Jlc3BvbnNlLkJvYXRSBGJvYXQa0QEKBEJvYXQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIwoGaW1hZ2VzGBQgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEj8KCmNyZWF0ZWRfb24YHiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+final $typed_data.Uint8List listBoatsResponseDescriptor = $convert.base64Decode('ChFMaXN0Qm9hdHNSZXNwb25zZRIyCgRib2F0GAEgASgLMh4uYWdlbmN5Lkxpc3RCb2F0c1Jlc3BvbnNlLkJvYXRSBGJvYXQaxgIKBEJvYXQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIwoGaW1hZ2VzGBQgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEiUKDnRvdGFsX2NhcGFjaXR5GBUgASgNUg10b3RhbENhcGFjaXR5EiUKDmRpdmVyX2NhcGFjaXR5GBYgASgNUg1kaXZlckNhcGFjaXR5EiUKDnN0YWZmX2NhcGFjaXR5GBcgASgNUg1zdGFmZkNhcGFjaXR5Ej8KCmNyZWF0ZWRfb24YHiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
 @$core.Deprecated('Use listDiveMastersRequestDescriptor instead')
 const ListDiveMastersRequest$json = const {
   '1': 'ListDiveMastersRequest',
@@ -379,13 +382,17 @@ const ListLiveaboardsResponse_Liveaboard$json = const {
     const {'1': 'length', '3': 30, '4': 1, '5': 2, '10': 'length'},
     const {'1': 'width', '3': 40, '4': 1, '5': 2, '10': 'width'},
     const {'1': 'images', '3': 50, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'total_capacity', '3': 51, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_rooms', '3': 52, '4': 1, '5': 13, '10': 'diverRooms'},
+    const {'1': 'staff_rooms', '3': 53, '4': 1, '5': 13, '10': 'staffRooms'},
+    const {'1': 'address', '3': 54, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
     const {'1': 'created_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
     const {'1': 'updated_on', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
   ],
 };
 
 /// Descriptor for `ListLiveaboardsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listLiveaboardsResponseDescriptor = $convert.base64Decode('ChdMaXN0TGl2ZWFib2FyZHNSZXNwb25zZRJKCgpsaXZlYWJvYXJkGAEgASgLMiouYWdlbmN5Lkxpc3RMaXZlYWJvYXJkc1Jlc3BvbnNlLkxpdmVhYm9hcmRSCmxpdmVhYm9hcmQapwIKCkxpdmVhYm9hcmQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YFCABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgeIAEoAlIGbGVuZ3RoEhQKBXdpZHRoGCggASgCUgV3aWR0aBIjCgZpbWFnZXMYMiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSPwoKY3JlYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
+final $typed_data.Uint8List listLiveaboardsResponseDescriptor = $convert.base64Decode('ChdMaXN0TGl2ZWFib2FyZHNSZXNwb25zZRJKCgpsaXZlYWJvYXJkGAEgASgLMiouYWdlbmN5Lkxpc3RMaXZlYWJvYXJkc1Jlc3BvbnNlLkxpdmVhYm9hcmRSCmxpdmVhYm9hcmQaugMKCkxpdmVhYm9hcmQSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YFCABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgeIAEoAlIGbGVuZ3RoEhQKBXdpZHRoGCggASgCUgV3aWR0aBIjCgZpbWFnZXMYMiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSJQoOdG90YWxfY2FwYWNpdHkYMyABKA1SDXRvdGFsQ2FwYWNpdHkSHwoLZGl2ZXJfcm9vbXMYNCABKA1SCmRpdmVyUm9vbXMSHwoLc3RhZmZfcm9vbXMYNSABKA1SCnN0YWZmUm9vbXMSKAoHYWRkcmVzcxg2IAEoCzIOLm1vZGVsLkFkZHJlc3NSB2FkZHJlc3MSPwoKY3JlYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRPbhI/Cgp1cGRhdGVkX29uGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZE9u');
 @$core.Deprecated('Use listStaffsRequestDescriptor instead')
 const ListStaffsRequest$json = const {
   '1': 'ListStaffsRequest',

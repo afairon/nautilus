@@ -1622,6 +1622,9 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..pc<$6.File>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..a<$core.int>(21, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'totalCapacity', $pb.PbFieldType.OU3)
+    ..a<$core.int>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diverCapacity', $pb.PbFieldType.OU3)
+    ..a<$core.int>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staffCapacity', $pb.PbFieldType.OU3)
     ..aOM<$5.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
@@ -1632,6 +1635,9 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     $fixnum.Int64? id,
     $core.String? name,
     $core.Iterable<$6.File>? images,
+    $core.int? totalCapacity,
+    $core.int? diverCapacity,
+    $core.int? staffCapacity,
     $5.Timestamp? createdOn,
     $5.Timestamp? updatedOn,
   }) {
@@ -1644,6 +1650,15 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     }
     if (images != null) {
       _result.images.addAll(images);
+    }
+    if (totalCapacity != null) {
+      _result.totalCapacity = totalCapacity;
+    }
+    if (diverCapacity != null) {
+      _result.diverCapacity = diverCapacity;
+    }
+    if (staffCapacity != null) {
+      _result.staffCapacity = staffCapacity;
     }
     if (createdOn != null) {
       _result.createdOn = createdOn;
@@ -1695,27 +1710,54 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
   @$pb.TagNumber(20)
   $core.List<$6.File> get images => $_getList(2);
 
+  @$pb.TagNumber(21)
+  $core.int get totalCapacity => $_getIZ(3);
+  @$pb.TagNumber(21)
+  set totalCapacity($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasTotalCapacity() => $_has(3);
+  @$pb.TagNumber(21)
+  void clearTotalCapacity() => clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.int get diverCapacity => $_getIZ(4);
+  @$pb.TagNumber(22)
+  set diverCapacity($core.int v) { $_setUnsignedInt32(4, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasDiverCapacity() => $_has(4);
+  @$pb.TagNumber(22)
+  void clearDiverCapacity() => clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.int get staffCapacity => $_getIZ(5);
+  @$pb.TagNumber(23)
+  set staffCapacity($core.int v) { $_setUnsignedInt32(5, v); }
+  @$pb.TagNumber(23)
+  $core.bool hasStaffCapacity() => $_has(5);
+  @$pb.TagNumber(23)
+  void clearStaffCapacity() => clearField(23);
+
   @$pb.TagNumber(30)
-  $5.Timestamp get createdOn => $_getN(3);
+  $5.Timestamp get createdOn => $_getN(6);
   @$pb.TagNumber(30)
   set createdOn($5.Timestamp v) { setField(30, v); }
   @$pb.TagNumber(30)
-  $core.bool hasCreatedOn() => $_has(3);
+  $core.bool hasCreatedOn() => $_has(6);
   @$pb.TagNumber(30)
   void clearCreatedOn() => clearField(30);
   @$pb.TagNumber(30)
-  $5.Timestamp ensureCreatedOn() => $_ensure(3);
+  $5.Timestamp ensureCreatedOn() => $_ensure(6);
 
   @$pb.TagNumber(40)
-  $5.Timestamp get updatedOn => $_getN(4);
+  $5.Timestamp get updatedOn => $_getN(7);
   @$pb.TagNumber(40)
   set updatedOn($5.Timestamp v) { setField(40, v); }
   @$pb.TagNumber(40)
-  $core.bool hasUpdatedOn() => $_has(4);
+  $core.bool hasUpdatedOn() => $_has(7);
   @$pb.TagNumber(40)
   void clearUpdatedOn() => clearField(40);
   @$pb.TagNumber(40)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(4);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(7);
 }
 
 class ListBoatsResponse extends $pb.GeneratedMessage {
@@ -2344,6 +2386,10 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     ..a<$core.double>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'length', $pb.PbFieldType.OF)
     ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OF)
     ..pc<$6.File>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
+    ..a<$core.int>(51, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'totalCapacity', $pb.PbFieldType.OU3)
+    ..a<$core.int>(52, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diverRooms', $pb.PbFieldType.OU3)
+    ..a<$core.int>(53, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staffRooms', $pb.PbFieldType.OU3)
+    ..aOM<$6.Address>(54, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
     ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
@@ -2357,6 +2403,10 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     $core.double? length,
     $core.double? width,
     $core.Iterable<$6.File>? images,
+    $core.int? totalCapacity,
+    $core.int? diverRooms,
+    $core.int? staffRooms,
+    $6.Address? address,
     $5.Timestamp? createdOn,
     $5.Timestamp? updatedOn,
   }) {
@@ -2378,6 +2428,18 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     }
     if (images != null) {
       _result.images.addAll(images);
+    }
+    if (totalCapacity != null) {
+      _result.totalCapacity = totalCapacity;
+    }
+    if (diverRooms != null) {
+      _result.diverRooms = diverRooms;
+    }
+    if (staffRooms != null) {
+      _result.staffRooms = staffRooms;
+    }
+    if (address != null) {
+      _result.address = address;
     }
     if (createdOn != null) {
       _result.createdOn = createdOn;
@@ -2456,27 +2518,65 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
   @$pb.TagNumber(50)
   $core.List<$6.File> get images => $_getList(5);
 
+  @$pb.TagNumber(51)
+  $core.int get totalCapacity => $_getIZ(6);
+  @$pb.TagNumber(51)
+  set totalCapacity($core.int v) { $_setUnsignedInt32(6, v); }
+  @$pb.TagNumber(51)
+  $core.bool hasTotalCapacity() => $_has(6);
+  @$pb.TagNumber(51)
+  void clearTotalCapacity() => clearField(51);
+
+  @$pb.TagNumber(52)
+  $core.int get diverRooms => $_getIZ(7);
+  @$pb.TagNumber(52)
+  set diverRooms($core.int v) { $_setUnsignedInt32(7, v); }
+  @$pb.TagNumber(52)
+  $core.bool hasDiverRooms() => $_has(7);
+  @$pb.TagNumber(52)
+  void clearDiverRooms() => clearField(52);
+
+  @$pb.TagNumber(53)
+  $core.int get staffRooms => $_getIZ(8);
+  @$pb.TagNumber(53)
+  set staffRooms($core.int v) { $_setUnsignedInt32(8, v); }
+  @$pb.TagNumber(53)
+  $core.bool hasStaffRooms() => $_has(8);
+  @$pb.TagNumber(53)
+  void clearStaffRooms() => clearField(53);
+
+  @$pb.TagNumber(54)
+  $6.Address get address => $_getN(9);
+  @$pb.TagNumber(54)
+  set address($6.Address v) { setField(54, v); }
+  @$pb.TagNumber(54)
+  $core.bool hasAddress() => $_has(9);
+  @$pb.TagNumber(54)
+  void clearAddress() => clearField(54);
+  @$pb.TagNumber(54)
+  $6.Address ensureAddress() => $_ensure(9);
+
   @$pb.TagNumber(60)
-  $5.Timestamp get createdOn => $_getN(6);
+  $5.Timestamp get createdOn => $_getN(10);
   @$pb.TagNumber(60)
   set createdOn($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasCreatedOn() => $_has(6);
+  $core.bool hasCreatedOn() => $_has(10);
   @$pb.TagNumber(60)
   void clearCreatedOn() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureCreatedOn() => $_ensure(6);
+  $5.Timestamp ensureCreatedOn() => $_ensure(10);
 
   @$pb.TagNumber(70)
-  $5.Timestamp get updatedOn => $_getN(7);
+  $5.Timestamp get updatedOn => $_getN(11);
   @$pb.TagNumber(70)
   set updatedOn($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasUpdatedOn() => $_has(7);
+  $core.bool hasUpdatedOn() => $_has(11);
   @$pb.TagNumber(70)
   void clearUpdatedOn() => clearField(70);
   @$pb.TagNumber(70)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(7);
+  $5.Timestamp ensureUpdatedOn() => $_ensure(11);
 }
 
 class ListLiveaboardsResponse extends $pb.GeneratedMessage {
