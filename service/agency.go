@@ -356,12 +356,12 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	// Copy room types information
 	for _, rt := range pbRoomTypes {
 		tempRoomType := model.RoomType{
-			Name:        rt.GetName(),
-			Description: rt.GetDescription(),
-			MaxGuest:    rt.GetMaxGuest(),
-			Price:       rt.GetPrice(),
-			Quantity:    rt.GetQuantity(),
-			HotelID:     uint(agency.GetId()),
+			Name:         rt.GetName(),
+			Description:  rt.GetDescription(),
+			MaxGuest:     rt.GetMaxGuest(),
+			Price:        rt.GetPrice(),
+			Quantity:     rt.GetQuantity(),
+			LiveaboardID: uint(agency.GetId()),
 		}
 
 		for _, image := range rt.GetRoomImages() {

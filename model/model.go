@@ -261,8 +261,8 @@ type RoomType struct {
 	Quantity     uint32
 	Images       entity.StringArray `gorm:"type:text"`
 	Amenities    []Amenity          `gorm:"many2many:room_amenity_link;"`
-	LiveaboardID uint
-	HotelID      uint
+	LiveaboardID uint               `gorm:"default:null"`
+	HotelID      uint               `gorm:"default:null"`
 }
 
 type Hotel struct {
