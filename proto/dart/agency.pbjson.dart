@@ -50,13 +50,18 @@ final $typed_data.Uint8List staffDescriptor = $convert.base64Decode('CgVTdGFmZhI
 const DivingBoat$json = const {
   '1': 'DivingBoat',
   '2': const [
-    const {'1': 'boat_model', '3': 1, '4': 1, '5': 9, '10': 'boatModel'},
+    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'boat_images', '3': 2, '4': 3, '5': 11, '6': '.model.File', '10': 'boatImages'},
+    const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'total_capacity', '3': 4, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_capacity', '3': 5, '4': 1, '5': 13, '10': 'diverCapacity'},
+    const {'1': 'staff_capacity', '3': 6, '4': 1, '5': 13, '10': 'staffCapacity'},
+    const {'1': 'address', '3': 7, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
   ],
 };
 
 /// Descriptor for `DivingBoat`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List divingBoatDescriptor = $convert.base64Decode('CgpEaXZpbmdCb2F0Eh0KCmJvYXRfbW9kZWwYASABKAlSCWJvYXRNb2RlbBIsCgtib2F0X2ltYWdlcxgCIAMoCzILLm1vZGVsLkZpbGVSCmJvYXRJbWFnZXM=');
+final $typed_data.Uint8List divingBoatDescriptor = $convert.base64Decode('CgpEaXZpbmdCb2F0EhIKBG5hbWUYASABKAlSBG5hbWUSLAoLYm9hdF9pbWFnZXMYAiADKAsyCy5tb2RlbC5GaWxlUgpib2F0SW1hZ2VzEiAKC2Rlc2NyaXB0aW9uGAMgASgJUgtkZXNjcmlwdGlvbhIlCg50b3RhbF9jYXBhY2l0eRgEIAEoDVINdG90YWxDYXBhY2l0eRIlCg5kaXZlcl9jYXBhY2l0eRgFIAEoDVINZGl2ZXJDYXBhY2l0eRIlCg5zdGFmZl9jYXBhY2l0eRgGIAEoDVINc3RhZmZDYXBhY2l0eRIoCgdhZGRyZXNzGAcgASgLMg4ubW9kZWwuQWRkcmVzc1IHYWRkcmVzcw==');
 @$core.Deprecated('Use amenityDescriptor instead')
 const Amenity$json = const {
   '1': 'Amenity',
@@ -84,6 +89,17 @@ const RoomType$json = const {
 
 /// Descriptor for `RoomType`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List roomTypeDescriptor = $convert.base64Decode('CghSb29tVHlwZRISCgRuYW1lGAEgASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW9uGAIgASgJUgtkZXNjcmlwdGlvbhIbCgltYXhfZ3Vlc3QYAyABKA1SCG1heEd1ZXN0EhQKBXByaWNlGAQgASgCUgVwcmljZRIsCgtyb29tX2ltYWdlcxgFIAMoCzILLm1vZGVsLkZpbGVSCnJvb21JbWFnZXMSLQoJYW1lbml0aWVzGAYgAygLMg8uYWdlbmN5LkFtZW5pdHlSCWFtZW5pdGllcxIaCghxdWFudGl0eRgHIAEoDVIIcXVhbnRpdHk=');
+@$core.Deprecated('Use hotelAndBoatIdDescriptor instead')
+const HotelAndBoatId$json = const {
+  '1': 'HotelAndBoatId',
+  '2': const [
+    const {'1': 'hotel_id', '3': 1, '4': 1, '5': 4, '10': 'hotelId'},
+    const {'1': 'boat_id', '3': 2, '4': 1, '5': 4, '10': 'boatId'},
+  ],
+};
+
+/// Descriptor for `HotelAndBoatId`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List hotelAndBoatIdDescriptor = $convert.base64Decode('Cg5Ib3RlbEFuZEJvYXRJZBIZCghob3RlbF9pZBgBIAEoBFIHaG90ZWxJZBIXCgdib2F0X2lkGAIgASgEUgZib2F0SWQ=');
 @$core.Deprecated('Use tripTemplateDescriptor instead')
 const TripTemplate$json = const {
   '1': 'TripTemplate',
@@ -93,7 +109,7 @@ const TripTemplate$json = const {
     const {'1': 'diving_boat_id', '3': 3, '4': 1, '5': 4, '10': 'divingBoatId'},
     const {'1': 'images', '3': 5, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
     const {'1': 'trip_type', '3': 6, '4': 1, '5': 14, '6': '.model.TripType', '10': 'tripType'},
-    const {'1': 'hotel_id', '3': 8, '4': 1, '5': 4, '9': 0, '10': 'hotelId'},
+    const {'1': 'hotel_and_boat_id', '3': 8, '4': 1, '5': 11, '6': '.agency.HotelAndBoatId', '9': 0, '10': 'hotelAndBoatId'},
     const {'1': 'liveaboard_id', '3': 9, '4': 1, '5': 4, '9': 0, '10': 'liveaboardId'},
   ],
   '8': const [
@@ -102,7 +118,7 @@ const TripTemplate$json = const {
 };
 
 /// Descriptor for `TripTemplate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tripTemplateDescriptor = $convert.base64Decode('CgxUcmlwVGVtcGxhdGUSEgoEbmFtZRgBIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgCIAEoCVILZGVzY3JpcHRpb24SJAoOZGl2aW5nX2JvYXRfaWQYAyABKARSDGRpdmluZ0JvYXRJZBIjCgZpbWFnZXMYBSADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLAoJdHJpcF90eXBlGAYgASgOMg8ubW9kZWwuVHJpcFR5cGVSCHRyaXBUeXBlEhsKCGhvdGVsX2lkGAggASgESABSB2hvdGVsSWQSJQoNbGl2ZWFib2FyZF9pZBgJIAEoBEgAUgxsaXZlYWJvYXJkSWRCDgoMcmVzaWRlbmNlX2lk');
+final $typed_data.Uint8List tripTemplateDescriptor = $convert.base64Decode('CgxUcmlwVGVtcGxhdGUSEgoEbmFtZRgBIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgCIAEoCVILZGVzY3JpcHRpb24SJAoOZGl2aW5nX2JvYXRfaWQYAyABKARSDGRpdmluZ0JvYXRJZBIjCgZpbWFnZXMYBSADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLAoJdHJpcF90eXBlGAYgASgOMg8ubW9kZWwuVHJpcFR5cGVSCHRyaXBUeXBlEkMKEWhvdGVsX2FuZF9ib2F0X2lkGAggASgLMhYuYWdlbmN5LkhvdGVsQW5kQm9hdElkSABSDmhvdGVsQW5kQm9hdElkEiUKDWxpdmVhYm9hcmRfaWQYCSABKARIAFIMbGl2ZWFib2FyZElkQg4KDHJlc2lkZW5jZV9pZA==');
 @$core.Deprecated('Use tripDescriptor instead')
 const Trip$json = const {
   '1': 'Trip',
@@ -144,11 +160,15 @@ const Liveaboard$json = const {
     const {'1': 'width', '3': 4, '4': 1, '5': 13, '10': 'width'},
     const {'1': 'images', '3': 6, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
     const {'1': 'room_types', '3': 7, '4': 3, '5': 11, '6': '.agency.RoomType', '10': 'roomTypes'},
+    const {'1': 'total_capacity', '3': 8, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_rooms', '3': 9, '4': 1, '5': 13, '10': 'diverRooms'},
+    const {'1': 'staff_rooms', '3': 10, '4': 1, '5': 13, '10': 'staffRooms'},
+    const {'1': 'address', '3': 11, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
   ],
 };
 
 /// Descriptor for `Liveaboard`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List liveaboardDescriptor = $convert.base64Decode('CgpMaXZlYWJvYXJkEhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgDIAEoDVIGbGVuZ3RoEhQKBXdpZHRoGAQgASgNUgV3aWR0aBIjCgZpbWFnZXMYBiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLwoKcm9vbV90eXBlcxgHIAMoCzIQLmFnZW5jeS5Sb29tVHlwZVIJcm9vbVR5cGVz');
+final $typed_data.Uint8List liveaboardDescriptor = $convert.base64Decode('CgpMaXZlYWJvYXJkEhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9uEhYKBmxlbmd0aBgDIAEoDVIGbGVuZ3RoEhQKBXdpZHRoGAQgASgNUgV3aWR0aBIjCgZpbWFnZXMYBiADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLwoKcm9vbV90eXBlcxgHIAMoCzIQLmFnZW5jeS5Sb29tVHlwZVIJcm9vbVR5cGVzEiUKDnRvdGFsX2NhcGFjaXR5GAggASgNUg10b3RhbENhcGFjaXR5Eh8KC2RpdmVyX3Jvb21zGAkgASgNUgpkaXZlclJvb21zEh8KC3N0YWZmX3Jvb21zGAogASgNUgpzdGFmZlJvb21zEigKB2FkZHJlc3MYCyABKAsyDi5tb2RlbC5BZGRyZXNzUgdhZGRyZXNz');
 @$core.Deprecated('Use addDiveMasterRequestDescriptor instead')
 const AddDiveMasterRequest$json = const {
   '1': 'AddDiveMasterRequest',
