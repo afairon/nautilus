@@ -27,9 +27,9 @@ type AgencyService interface {
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error)
 	ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
 	ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error)
-	ListStaffs(ctx context.Context, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error)
-	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error)
-	ListTrips(ctx context.Context, limit, offset uint64) ([]*pb.ListTripsResponse_Trip, error)
+	ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error)
+	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
+	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -490,7 +490,7 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 }
 
 // ListStaffs returns list of staffs associated with the agency.
-func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error) {
+func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -505,7 +505,7 @@ func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint
 }
 
 // ListTripTemplates returns list of trip templates associated with the agency.
-func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error) {
+func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -522,8 +522,8 @@ func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offs
 	}
 
 	for _, template := range templates {
-		for _, image := range template.GetImages() {
-			image.Link = service.media.Get(image.GetLink(), false)
+		for idx, id := range template.Images {
+			template.Images[idx] = service.media.Get(id, false)
 		}
 	}
 
@@ -531,7 +531,7 @@ func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offs
 }
 
 // ListTrips returns list of trips associated with the agency.
-func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint64) ([]*pb.ListTripsResponse_Trip, error) {
+func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -545,14 +545,6 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	trips, err := service.repo.Trip.ListTripsByAgency(ctx, agency.Id, limit, offset)
 	if err != nil {
 		return nil, err
-	}
-
-	for _, trip := range trips {
-		if trip.GetTemplate() != nil {
-			for _, image := range trip.GetTemplate().GetImages() {
-				image.Link = service.media.Get(image.GetLink(), false)
-			}
-		}
 	}
 
 	return trips, nil

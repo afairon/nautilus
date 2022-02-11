@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	"github.com/afairon/nautilus/entity"
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +14,7 @@ import (
 type StaffRepository interface {
 	Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
 	Get(ctx context.Context, id uint64) (*entity.Staff, error)
-	ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error)
+	ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Staff, error)
 }
 
 // staffRepository implements StaffRepository interface.
@@ -64,7 +64,7 @@ func (repo *staffRepository) Get(ctx context.Context, id uint64) (*entity.Staff,
 }
 
 // ListStaffsByAgency returns list of staffs by agency id.
-func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListStaffsResponse_Staff, error) {
+func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Staff, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		staff.id, staff.first_name, staff.last_name, staff."position", staff.gender, staff.created_on, staff.updated_on
@@ -96,5 +96,12 @@ func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, 
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+
+	var staffs []*model.Staff
+
+	if result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&staffs); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return staffs, nil
 }

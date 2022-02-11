@@ -2,16 +2,15 @@ package repo
 
 import (
 	"context"
-	"errors"
 
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
 // TripTemplateRepository defines interface for interaction
 // with the trip template repository.
 type TripTemplateRepository interface {
-	ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error)
+	ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.TripTemplate, error)
 }
 
 // tripTemplateRepository implements TripTemplateRepository interface.
@@ -27,7 +26,7 @@ func NewTripTemplateRepository(db *gorm.DB) *tripTemplateRepository {
 }
 
 // ListTripsByAgency returns list of trips by agency id.
-func (repo *tripTemplateRepository) ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListTripTemplatesResponse_TripTemplate, error) {
+func (repo *tripTemplateRepository) ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.TripTemplate, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		id, "name", description, "type",
@@ -89,5 +88,12 @@ func (repo *tripTemplateRepository) ListTripTemplatesByAgency(ctx context.Contex
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+
+	var templates []*model.TripTemplate
+
+	if result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&templates); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return templates, nil
 }

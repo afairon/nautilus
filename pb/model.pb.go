@@ -9,7 +9,7 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -2703,8 +2703,8 @@ func (this *Account) String() string {
 		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
 		`Verified:` + fmt.Sprintf("%v", this.Verified) + `,`,
 		`Active:` + fmt.Sprintf("%v", this.Active) + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2731,8 +2731,8 @@ func (this *Address) String() string {
 		`Postcode:` + fmt.Sprintf("%v", this.Postcode) + `,`,
 		`Region:` + fmt.Sprintf("%v", this.Region) + `,`,
 		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2753,8 +2753,8 @@ func (this *Agency) String() string {
 		`Account:` + strings.Replace(this.Account.String(), "Account", "Account", 1) + `,`,
 		`Address:` + strings.Replace(strings.Replace(this.Address.String(), "Address", "Address", 1), `&`, ``, 1) + `,`,
 		`Documents:` + repeatedStringForDocuments + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2773,12 +2773,12 @@ func (this *Diver) String() string {
 		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
 		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
 		`Phone:` + fmt.Sprintf("%v", this.Phone) + `,`,
-		`BirthDate:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.BirthDate), "Timestamp", "timestamppb.Timestamp", 1), `&`, ``, 1) + `,`,
+		`BirthDate:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.BirthDate), "Timestamp", "timestamp.Timestamp", 1), `&`, ``, 1) + `,`,
 		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
 		`Account:` + strings.Replace(this.Account.String(), "Account", "Account", 1) + `,`,
 		`Documents:` + repeatedStringForDocuments + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2792,8 +2792,8 @@ func (this *TripComment) String() string {
 		`Comment:` + fmt.Sprintf("%v", this.Comment) + `,`,
 		`Stars:` + fmt.Sprintf("%v", this.Stars) + `,`,
 		`ReservationId:` + fmt.Sprintf("%v", this.ReservationId) + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2807,8 +2807,8 @@ func (this *HotelComment) String() string {
 		`Comment:` + fmt.Sprintf("%v", this.Comment) + `,`,
 		`Stars:` + fmt.Sprintf("%v", this.Stars) + `,`,
 		`ReservationId:` + fmt.Sprintf("%v", this.ReservationId) + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2822,8 +2822,8 @@ func (this *LiveaboardComment) String() string {
 		`Comment:` + fmt.Sprintf("%v", this.Comment) + `,`,
 		`Stars:` + fmt.Sprintf("%v", this.Stars) + `,`,
 		`ReservationId:` + fmt.Sprintf("%v", this.ReservationId) + `,`,
-		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedOn:` + strings.Replace(fmt.Sprintf("%v", this.CreatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedOn:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedOn), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s

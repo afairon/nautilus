@@ -478,7 +478,7 @@ const ListTripsResponse$json = const {
   '2': const [
     const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.agency.ListTripsResponse.Trip', '10': 'trip'},
   ],
-  '3': const [ListTripsResponse_Trip$json, ListTripsResponse_TripTemplate$json],
+  '3': const [ListTripsResponse_Trip$json],
 };
 
 @$core.Deprecated('Use listTripsResponseDescriptor instead')
@@ -486,7 +486,7 @@ const ListTripsResponse_Trip$json = const {
   '1': 'Trip',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    const {'1': 'template', '3': 20, '4': 1, '5': 11, '6': '.agency.ListTripsResponse.TripTemplate', '10': 'template'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
     const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
     const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
     const {'1': 'from_date', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'fromDate'},
@@ -497,19 +497,5 @@ const ListTripsResponse_Trip$json = const {
   ],
 };
 
-@$core.Deprecated('Use listTripsResponseDescriptor instead')
-const ListTripsResponse_TripTemplate$json = const {
-  '1': 'TripTemplate',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'trip_type', '3': 30, '4': 1, '5': 14, '6': '.model.TripType', '10': 'tripType'},
-    const {'1': 'images', '3': 40, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
-    const {'1': 'created_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
-    const {'1': 'updated_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
-  ],
-};
-
 /// Descriptor for `ListTripsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listTripsResponseDescriptor = $convert.base64Decode('ChFMaXN0VHJpcHNSZXNwb25zZRIyCgR0cmlwGAEgASgLMh4uYWdlbmN5Lkxpc3RUcmlwc1Jlc3BvbnNlLlRyaXBSBHRyaXAa3wMKBFRyaXASDgoCaWQYASABKARSAmlkEkIKCHRlbXBsYXRlGBQgASgLMiYuYWdlbmN5Lkxpc3RUcmlwc1Jlc3BvbnNlLlRyaXBUZW1wbGF0ZVIIdGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIUCgVwcmljZRgoIAEoAlIFcHJpY2USPQoJZnJvbV9kYXRlGDIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIIZnJvbURhdGUSOQoHdG9fZGF0ZRg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSBnRvRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfb24YUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbhqpAgoMVHJpcFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBISCgRuYW1lGAogASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW9uGBQgASgJUgtkZXNjcmlwdGlvbhIsCgl0cmlwX3R5cGUYHiABKA4yDy5tb2RlbC5UcmlwVHlwZVIIdHJpcFR5cGUSIwoGaW1hZ2VzGCggAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEj8KCmNyZWF0ZWRfb24YMiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbg==');
+final $typed_data.Uint8List listTripsResponseDescriptor = $convert.base64Decode('ChFMaXN0VHJpcHNSZXNwb25zZRIyCgR0cmlwGAEgASgLMh4uYWdlbmN5Lkxpc3RUcmlwc1Jlc3BvbnNlLlRyaXBSBHRyaXAaxQMKBFRyaXASDgoCaWQYASABKARSAmlkEigKEHRyaXBfdGVtcGxhdGVfaWQYFCABKARSDnRyaXBUZW1wbGF0ZUlkEhsKCW1heF9ndWVzdBgeIAEoDVIIbWF4R3Vlc3QSFAoFcHJpY2UYKCABKAJSBXByaWNlEj0KCWZyb21fZGF0ZRgyIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCGZyb21EYXRlEjkKB3RvX2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgZ0b0RhdGUSVAoVbGFzdF9yZXNlcnZhdGlvbl9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVITbGFzdFJlc2VydmF0aW9uRGF0ZRI/CgpjcmVhdGVkX29uGFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZE9uEj8KCnVwZGF0ZWRfb24YWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkT24=');

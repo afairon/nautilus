@@ -171,9 +171,21 @@ func (handler *AgencyHandler) ListStaffs(req *pb.ListStaffsRequest, srv pb.Agenc
 		return err
 	}
 
+	if len(staffs) == 0 {
+		return status.Error(codes.NotFound, "ListStaffs: not found")
+	}
+
 	for _, staff := range staffs {
 		resp := &pb.ListStaffsResponse{
-			Staff: staff,
+			Staff: &pb.ListStaffsResponse_Staff{
+				Id:        uint64(staff.ID),
+				FirstName: staff.FirstName,
+				LastName:  staff.LastName,
+				Position:  staff.Position,
+				Gender:    pb.GenderType(staff.Gender),
+				CreatedOn: &staff.CreatedAt,
+				UpdatedOn: &staff.UpdatedAt,
+			},
 		}
 		srv.Send(resp)
 	}
@@ -190,10 +202,35 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 		return err
 	}
 
+	if len(tripTemplates) == 0 {
+		return status.Error(codes.NotFound, "ListTripTemplates: not found")
+	}
+
 	for _, tripTemplate := range tripTemplates {
 		resp := &pb.ListTripTemplatesResponse{
-			Template: tripTemplate,
+			Template: &pb.ListTripTemplatesResponse_TripTemplate{
+				Id:           uint64(tripTemplate.ID),
+				Name:         tripTemplate.Name,
+				Description:  tripTemplate.Descirption,
+				TripType:     pb.TripType(tripTemplate.Type),
+				HotelId:      uint64(tripTemplate.HotelID),
+				BoatId:       uint64(tripTemplate.BoatID),
+				LiveaboardId: uint64(tripTemplate.LiveaboardID),
+				CreatedOn:    &tripTemplate.CreatedAt,
+				UpdatedOn:    &tripTemplate.UpdatedAt,
+			},
 		}
+
+		if len(tripTemplate.Images) > 0 {
+			resp.Template.Images = make([]*pb.File, 0, len(tripTemplate.Images))
+			for _, link := range tripTemplate.Images {
+				file := &pb.File{
+					Link: link,
+				}
+				resp.Template.Images = append(resp.Template.Images, file)
+			}
+		}
+
 		srv.Send(resp)
 	}
 
@@ -209,9 +246,23 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 		return err
 	}
 
+	if len(trips) == 0 {
+		return status.Error(codes.NotFound, "ListTrips: not found")
+	}
+
 	for _, trip := range trips {
 		resp := &pb.ListTripsResponse{
-			Trip: trip,
+			Trip: &pb.ListTripsResponse_Trip{
+				Id:                  uint64(trip.ID),
+				TripTemplateId:      uint64(trip.TripTemplateID),
+				MaxGuest:            trip.MaxGuest,
+				Price:               trip.Price,
+				FromDate:            trip.StartDate,
+				ToDate:              trip.EndDate,
+				LastReservationDate: trip.LastReservationDate,
+				CreatedOn:           &trip.CreatedAt,
+				UpdatedOn:           &trip.UpdatedAt,
+			},
 		}
 		srv.Send(resp)
 	}

@@ -296,7 +296,7 @@ message ListTripsResponse {
 
     message Trip {
         uint64 id = 1;
-        TripTemplate template = 20;
+        uint64 trip_template_id = 20;
         uint32 max_guest = 30;
         float price = 40;
         google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
@@ -304,15 +304,5 @@ message ListTripsResponse {
         google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
-    }
-
-    message TripTemplate {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        model.TripType trip_type = 30;
-        repeated model.File images = 40;
-        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
     }
 }
