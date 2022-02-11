@@ -179,11 +179,11 @@ type TripTemplate struct {
 	Images       entity.StringArray `gorm:"type:text"`
 	Trips        []Trip
 	AgencyID     uint
-	HotelID      uint
+	HotelID      uint `gorm:"default:null"`
 	Hotel        Hotel
-	LiveaboardID uint
+	LiveaboardID uint `gorm:"default:null"`
 	Liveaboard   Liveaboard
-	BoatID       uint
+	BoatID       uint `gorm:"default:null"`
 	Boat         Boat
 }
 
