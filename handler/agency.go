@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
@@ -97,8 +98,29 @@ func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyS
 
 	for _, boat := range boats {
 		resp := &pb.ListBoatsResponse{
-			Boat: boat,
+			Boat: &pb.ListBoatsResponse_Boat{
+				Id:            uint64(boat.ID),
+				Name:          boat.Name,
+				TotalCapacity: boat.TotalCapacity,
+				DiverCapacity: boat.DiverCapacity,
+				StaffCapacity: boat.StaffCapacity,
+				CreatedOn:     &boat.CreatedAt,
+				UpdatedOn:     &boat.UpdatedAt,
+			},
 		}
+
+		if len(boat.Images) > 0 {
+			resp.Boat.Images = make([]*pb.File, 0, len(boat.Images))
+
+			for _, link := range boat.Images {
+				file := &pb.File{
+					Link: link,
+				}
+
+				resp.Boat.Images = append(resp.Boat.Images, file)
+			}
+		}
+
 		srv.Send(resp)
 	}
 
@@ -116,8 +138,28 @@ func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, sr
 
 	for _, diveMaster := range diveMasters {
 		resp := &pb.ListDiveMastersResponse{
-			DiveMaster: diveMaster,
+			DiveMaster: &pb.ListDiveMastersResponse_DiveMaster{
+				Id:        uint64(diveMaster.ID),
+				FirstName: diveMaster.FirstName,
+				LastName:  diveMaster.LastName,
+				Level:     pb.LevelType(diveMaster.Level),
+				CreatedOn: &diveMaster.CreatedAt,
+				UpdatedOn: &diveMaster.UpdatedAt,
+			},
 		}
+
+		if len(diveMaster.Documents) > 0 {
+			resp.DiveMaster.Documents = make([]*pb.File, 0, len(diveMaster.Documents))
+
+			for _, link := range diveMaster.Documents {
+				file := &pb.File{
+					Link: link,
+				}
+
+				resp.DiveMaster.Documents = append(resp.DiveMaster.Documents, file)
+			}
+		}
+
 		srv.Send(resp)
 	}
 
@@ -134,9 +176,44 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 	}
 
 	for _, hotel := range hotels {
+		fmt.Printf("Trying to print hotel properties\n")
+		fmt.Printf("%+v\n", hotel)
+
 		resp := &pb.ListHotelsResponse{
-			Hotel: hotel,
+			Hotel: &pb.ListHotelsResponse_Hotel{
+				Id:          uint64(hotel.ID),
+				Name:        hotel.Name,
+				Description: hotel.Description,
+				Stars:       hotel.Stars,
+				Phone:       hotel.Phone,
+				Address: &pb.Address{
+					Id:            uint64(hotel.ID),
+					AddressLine_1: hotel.Address.AddressLine_1,
+					AddressLine_2: hotel.Address.AddressLine_2,
+					City:          hotel.Address.City,
+					Postcode:      hotel.Address.Postcode,
+					Region:        hotel.Address.Region,
+					Country:       hotel.Address.Country,
+					CreatedOn:     &hotel.Address.CreatedAt,
+					UpdatedOn:     &hotel.Address.UpdatedAt,
+				},
+				CreatedOn: &hotel.CreatedAt,
+				UpdatedOn: &hotel.UpdatedAt,
+			},
 		}
+
+		if len(hotel.Images) > 0 {
+			resp.Hotel.Images = make([]*pb.File, 0, len(hotel.Images))
+
+			for _, link := range hotel.Images {
+				file := &pb.File{
+					Link: link,
+				}
+
+				resp.Hotel.Images = append(resp.Hotel.Images, file)
+			}
+		}
+
 		srv.Send(resp)
 	}
 
@@ -149,13 +226,48 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 
 	liveaboards, err := handler.agencyService.ListLiveaboards(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
+		fmt.Printf("%+v\n", err)
 		return err
 	}
 
 	for _, liveaboard := range liveaboards {
 		resp := &pb.ListLiveaboardsResponse{
-			Liveaboard: liveaboard,
+			Liveaboard: &pb.ListLiveaboardsResponse_Liveaboard{
+				Id:            uint64(liveaboard.ID),
+				Name:          liveaboard.Name,
+				Description:   liveaboard.Description,
+				Length:        float32(liveaboard.Length),
+				Width:         float32(liveaboard.Width),
+				TotalCapacity: liveaboard.TotalCapacity,
+				DiverRooms:    liveaboard.DiverRooms,
+				StaffRooms:    liveaboard.StaffRooms,
+				Address: &pb.Address{
+					AddressLine_1: liveaboard.Address.AddressLine_1,
+					AddressLine_2: liveaboard.Address.AddressLine_2,
+					City:          liveaboard.Address.City,
+					Postcode:      liveaboard.Address.Postcode,
+					Region:        liveaboard.Address.Region,
+					Country:       liveaboard.Address.Country,
+					CreatedOn:     &liveaboard.Address.CreatedAt,
+					UpdatedOn:     &liveaboard.Address.UpdatedAt,
+				},
+				CreatedOn: &liveaboard.CreatedAt,
+				UpdatedOn: &liveaboard.UpdatedAt,
+			},
 		}
+
+		if len(liveaboard.Images) > 0 {
+			resp.Liveaboard.Images = make([]*pb.File, 0, len(liveaboard.Images))
+
+			for _, link := range liveaboard.Images {
+				file := &pb.File{
+					Link: link,
+				}
+
+				resp.Liveaboard.Images = append(resp.Liveaboard.Images, file)
+			}
+		}
+
 		srv.Send(resp)
 	}
 

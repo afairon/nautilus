@@ -168,6 +168,9 @@ message ListBoatsResponse {
         uint64 id = 1;
         string name = 10;
         repeated model.File images = 20;
+        uint32 total_capacity = 21;
+        uint32 diver_capacity = 22;
+        uint32 staff_capacity = 23;
         google.protobuf.Timestamp created_on = 30 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_on = 40 [(gogoproto.stdtime) = true];
     }
@@ -234,6 +237,10 @@ message ListLiveaboardsResponse {
         float length = 30;
         float width = 40;
         repeated model.File images = 50;
+        uint32 total_capacity = 51;
+        uint32 diver_rooms = 52;
+        uint32 staff_rooms = 53;
+        model.Address address = 54;
         google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
     }

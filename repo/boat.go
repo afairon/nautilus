@@ -1,18 +1,14 @@
 package repo
 
 import (
-	"context"
-	"errors"
-
 	"github.com/afairon/nautilus/model"
-	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
 
 // BoatRepository defines interface for interaction
 // with the boat repository.
 type BoatRepository interface {
-	ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error)
+	ListBoatsByAgency(id, limit, offset uint64) ([]*model.Boat, error)
 	GetBoat(id uint) (*model.Boat, error)
 }
 
@@ -29,7 +25,7 @@ func NewBoatRepository(db *gorm.DB) *boatRepository {
 }
 
 // ListBoatsByAgency returns list of boats by agency id.
-func (repo *boatRepository) ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error) {
+func (repo *boatRepository) ListBoatsByAgency(id, limit, offset uint64) ([]*model.Boat, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		id, "name", "images", created_on, updated_on
@@ -73,7 +69,10 @@ func (repo *boatRepository) ListBoatsByAgency(ctx context.Context, id, limit, of
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+	var boats []*model.Boat
+
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&boats)
+	return boats, result.Error
 }
 
 func (repo *boatRepository) GetBoat(id uint) (*model.Boat, error) {

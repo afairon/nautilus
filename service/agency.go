@@ -23,10 +23,10 @@ type AgencyService interface {
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 
-	ListBoats(ctx context.Context, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error)
-	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error)
-	ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
-	ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error)
+	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
+	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
+	ListHotels(ctx context.Context, limit, offset uint64) ([]*model.Hotel, error)
+	ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*model.Liveaboard, error)
 	ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error)
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
@@ -131,7 +131,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 	}
 
 	newHotel := model.Hotel{
-		Address:     &hotelAddress,
+		Address:     hotelAddress,
 		Name:        hotel.GetHotelName(),
 		Description: hotel.GetHotelDescription(),
 		Stars:       hotel.GetStar(),
@@ -328,7 +328,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	}
 
 	newLiveaboard := model.Liveaboard{
-		Address:       &divingBoatAddress,
+		Address:       divingBoatAddress,
 		Name:          liveaboard.GetName(),
 		Description:   liveaboard.GetDescription(),
 		Length:        liveaboard.GetLength(),
@@ -386,7 +386,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 }
 
 // ListBoats returns list of boats associated with the agency.
-func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint64) ([]*pb.ListBoatsResponse_Boat, error) {
+func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -397,14 +397,14 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 		limit = 20
 	}
 
-	boats, err := service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
+	boats, err := service.repo.Boat.ListBoatsByAgency(agency.Id, limit, offset)
 	if err != nil {
 		return nil, err
 	}
 
 	for _, boat := range boats {
-		for _, image := range boat.GetImages() {
-			image.Link = service.media.Get(image.GetLink(), false)
+		for idx, id := range boat.Images {
+			boat.Images[idx] = service.media.Get(id, false)
 		}
 	}
 
@@ -412,7 +412,7 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 }
 
 // ListDiveMasters returns list of divemasters associated with the agency.
-func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error) {
+func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -429,8 +429,8 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 	}
 
 	for _, diveMaster := range diveMasters {
-		for _, document := range diveMaster.GetDocuments() {
-			document.Link = service.media.Get(document.GetLink(), false)
+		for idx, id := range diveMaster.Documents {
+			diveMaster.Documents[idx] = service.media.Get(id, false)
 		}
 	}
 
@@ -438,7 +438,7 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 }
 
 // ListHotels returns list of hotels associated with the agency.
-func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error) {
+func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint64) ([]*model.Hotel, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -455,8 +455,8 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 	}
 
 	for _, hotel := range hotels {
-		for _, image := range hotel.GetImages() {
-			image.Link = service.media.Get(image.GetLink(), false)
+		for idx, id := range hotel.Images {
+			hotel.Images[idx] = service.media.Get(id, false)
 		}
 	}
 
@@ -464,7 +464,7 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 }
 
 // ListLiveaboards returns list of liveaboards associated with the agency.
-func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error) {
+func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*model.Liveaboard, error) {
 	agency, err := getUserInformationFromContext(ctx)
 
 	if err != nil {
@@ -481,8 +481,8 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 	}
 
 	for _, liveaboard := range liveaboards {
-		for _, image := range liveaboard.GetImages() {
-			image.Link = service.media.Get(image.GetLink(), false)
+		for idx, id := range liveaboard.Images {
+			liveaboard.Images[idx] = service.media.Get(id, false)
 		}
 	}
 

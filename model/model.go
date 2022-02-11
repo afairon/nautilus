@@ -238,7 +238,8 @@ type Amenity struct {
 
 type Liveaboard struct {
 	*gorm.Model
-	*Address
+	AddressID uint
+	Address   Address
 	*Coordinate
 	Name          string
 	Description   string
@@ -267,8 +268,9 @@ type RoomType struct {
 
 type Hotel struct {
 	*gorm.Model
-	*Address    `gorm:"embedded"`
-	*Coordinate `gorm:"embedded"`
+	Coordinate  Coordinate `gorm:"embedded"`
+	AddressID   uint
+	Address     Address
 	Name        string
 	Description string
 	Stars       uint32

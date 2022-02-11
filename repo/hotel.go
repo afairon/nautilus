@@ -2,17 +2,15 @@ package repo
 
 import (
 	"context"
-	"errors"
 
 	"github.com/afairon/nautilus/model"
-	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
 
 // HotelRepository defines interface for interaction
 // with the hotel repository.
 type HotelRepository interface {
-	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error)
+	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error)
 	GetHotel(id uint) (*model.Hotel, error)
 }
 
@@ -29,7 +27,7 @@ func NewHotelRepository(db *gorm.DB) *hotelRepository {
 }
 
 // ListHotelsByAgency returns list of hotels by agency id.
-func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListHotelsResponse_Hotel, error) {
+func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		hotel.id, hotel."name", hotel.description, hotel.stars, hotel.phone, hotel.images, hotel.created_on, hotel.updated_on,
@@ -81,7 +79,10 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+	var hotels []*model.Hotel
+
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Where("agency_id = ?", id).Find(&hotels)
+	return hotels, result.Error
 }
 
 func (repo *hotelRepository) GetHotel(id uint) (*model.Hotel, error) {

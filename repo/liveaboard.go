@@ -2,16 +2,15 @@ package repo
 
 import (
 	"context"
-	"errors"
 
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
 // LiveaboardRepository defines interface for interaction
 // with the liveaboard repository.
 type LiveaboardRepository interface {
-	ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error)
+	ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Liveaboard, error)
 }
 
 // liveaboardRepository implements LiveaboardRepository interface.
@@ -27,7 +26,7 @@ func NewLiveaboardRepository(db *gorm.DB) *liveaboardRepository {
 }
 
 // ListLiveaboardsByAgency returns list of liveaboards by agency id.
-func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListLiveaboardsResponse_Liveaboard, error) {
+func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Liveaboard, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		liveaboard.id, liveaboard."name", liveaboard.description, liveaboard.length, liveaboard.width, liveaboard.images, liveaboard.created_on, liveaboard.updated_on
@@ -71,5 +70,8 @@ func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, i
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+	var liveaboards []*model.Liveaboard
+
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Where("agency_id = ?", id).Find(&liveaboards)
+	return liveaboards, result.Error
 }

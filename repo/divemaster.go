@@ -2,16 +2,15 @@ package repo
 
 import (
 	"context"
-	"errors"
 
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
 // DiveMasterRepository defines interface for interaction
 // with the divemaster repository.
 type DiveMasterRepository interface {
-	ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error)
+	ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
 }
 
 // diveMasterRepository implements DiveMasterRepository interface.
@@ -27,7 +26,7 @@ func NewDiveMasterRepository(db *gorm.DB) *diveMasterRepository {
 }
 
 // ListDiveMastersByAgency returns list of divemasters by agency id.
-func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*pb.ListDiveMastersResponse_DiveMaster, error) {
+func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		dm.id, dm.first_name, dm.last_name, dm."level", dm.documents, dm.created_on, dm.updated_on
@@ -71,5 +70,8 @@ func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, i
 	// }
 
 	// return results, nil
-	return nil, errors.New("Unimplemented")
+	var diveMasters []*model.DiveMaster
+
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&diveMasters)
+	return diveMasters, result.Error
 }
