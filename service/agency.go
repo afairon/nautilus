@@ -244,32 +244,45 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
 	}
 
-	// create trip template
-	_, err = service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
+	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
 
-	if err != nil {
-		return err
-	}
+		// create trip template
+		_, err = query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 
-	newTrip := model.Trip{
-		MaxGuest:            trip.GetMaxCapacity(),
-		Price:               trip.GetPrice(),
-		StartDate:           trip.GetFrom(),
-		EndDate:             trip.GetTo(),
-		LastReservationDate: trip.GetLastReservationDate(),
-		TripTemplateID:      newTripTemplate.ID,
-		AgencyID:            uint(agency.GetId()),
-	}
-
-	createdTrip, err := service.repo.Agency.CreateTrip(ctx, &newTrip)
-
-	for _, diveMaster := range trip.GetDiveMasterIds() {
-		diveMasterTripLink := model.DiveMasterTrip{
-			TripID:       createdTrip.ID,
-			DiveMasterID: uint(diveMaster),
+		if err != nil {
+			return err
 		}
-		_, err = service.repo.Agency.CreateDiveMasterTripLink(ctx, &diveMasterTripLink)
-	}
+
+		newTrip := model.Trip{
+			MaxGuest:            trip.GetMaxCapacity(),
+			Price:               trip.GetPrice(),
+			StartDate:           trip.GetFrom(),
+			EndDate:             trip.GetTo(),
+			LastReservationDate: trip.GetLastReservationDate(),
+			TripTemplateID:      newTripTemplate.ID,
+			AgencyID:            uint(agency.GetId()),
+		}
+
+		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
+
+		if err != nil {
+			return err
+		}
+
+		for _, diveMaster := range trip.GetDiveMasterIds() {
+			diveMasterTripLink := model.DiveMasterTrip{
+				TripID:       createdTrip.ID,
+				DiveMasterID: uint(diveMaster),
+			}
+			_, err = query.Agency.CreateDiveMasterTripLink(ctx, &diveMasterTripLink)
+
+			if err != nil {
+				return err
+			}
+		}
+
+		return err
+	})
 
 	return err
 }

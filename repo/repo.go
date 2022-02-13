@@ -56,6 +56,15 @@ func NewRepo(db *gorm.DB) *Repo {
 	}
 }
 
-func (repo *Repo) Transaction(ctx context.Context, fn func(tx *gorm.DB) error) error {
-	return repo.db.Transaction(fn)
+func (repo *Repo) Transaction(ctx context.Context, fn func(repo *Queries) error) error {
+	return repo.db.Transaction(func(tx *gorm.DB) error {
+		dbtx := newQueries(tx)
+		err := fn(dbtx)
+
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
 }
