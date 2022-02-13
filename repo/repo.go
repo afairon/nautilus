@@ -1,6 +1,8 @@
 package repo
 
 import (
+	"context"
+
 	"gorm.io/gorm"
 )
 
@@ -52,4 +54,8 @@ func NewRepo(db *gorm.DB) *Repo {
 		db:      db,
 		Queries: newQueries(db),
 	}
+}
+
+func (repo *Repo) Transaction(ctx context.Context, fn func(tx *gorm.DB) error) error {
+	return repo.db.Transaction(fn)
 }
