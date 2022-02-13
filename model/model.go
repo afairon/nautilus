@@ -194,6 +194,7 @@ type Trip struct {
 	StartDate           *time.Time
 	EndDate             *time.Time
 	LastReservationDate *time.Time
+	DiveMasters         []DiveMaster `gorm:"many2many:dive_master_trips;"`
 	TripTemplateID      uint
 	AgencyID            uint
 }
@@ -278,4 +279,9 @@ type Hotel struct {
 	Images      entity.StringArray `gorm:"type:text"`
 	RoomTypes   []RoomType
 	AgencyID    uint
+}
+
+type DiveMasterTrip struct {
+	TripID       uint `gorm:"primaryKey"`
+	DiveMasterID uint `gorm:"primaryKey"`
 }

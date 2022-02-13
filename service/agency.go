@@ -107,7 +107,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
 	}
 
-	_, err = service.repo.Agency.CreateDiveMaster(newDiveMaster)
+	_, err = service.repo.Agency.CreateDiveMaster(ctx, newDiveMaster)
 
 	return err
 }
@@ -180,7 +180,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 	// set room types of hotel
 	newHotel.RoomTypes = roomTypes
-	_, err = service.repo.Agency.CreateHotel(&newHotel)
+	_, err = service.repo.Agency.CreateHotel(ctx, &newHotel)
 
 	return err
 }
@@ -200,7 +200,7 @@ func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff) error
 		AgencyID:  uint(agency.GetId()),
 	}
 
-	_, err = service.repo.Agency.CreateStaff(&newStaff)
+	_, err = service.repo.Agency.CreateStaff(ctx, &newStaff)
 
 	return err
 }
@@ -245,7 +245,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	}
 
 	// create trip template
-	_, err = service.repo.Agency.CreateTripTemplate(&newTripTemplate)
+	_, err = service.repo.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 
 	if err != nil {
 		return err
@@ -261,7 +261,15 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		AgencyID:            uint(agency.GetId()),
 	}
 
-	_, err = service.repo.Agency.CreateTrip(&newTrip)
+	createdTrip, err := service.repo.Agency.CreateTrip(ctx, &newTrip)
+
+	for _, diveMaster := range trip.GetDiveMasterIds() {
+		diveMasterTripLink := model.DiveMasterTrip{
+			TripID:       createdTrip.ID,
+			DiveMasterID: uint(diveMaster),
+		}
+		_, err = service.repo.Agency.CreateDiveMasterTripLink(ctx, &diveMasterTripLink)
+	}
 
 	return err
 }
@@ -305,7 +313,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		newDivingBoat.Images = append(newDivingBoat.Images, objectID)
 	}
 
-	_, err = service.repo.Agency.CreateBoat(&newDivingBoat)
+	_, err = service.repo.Agency.CreateBoat(ctx, &newDivingBoat)
 
 	return err
 }
@@ -380,7 +388,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 	// set room types of hotel
 	newLiveaboard.RoomTypes = roomTypes
-	_, err = service.repo.Agency.CreateLiveaboard(&newLiveaboard)
+	_, err = service.repo.Agency.CreateLiveaboard(ctx, &newLiveaboard)
 
 	return err
 }
@@ -397,7 +405,7 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 		limit = 20
 	}
 
-	boats, err := service.repo.Boat.ListBoatsByAgency(agency.Id, limit, offset)
+	boats, err := service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
 	if err != nil {
 		return nil, err
 	}

@@ -97,7 +97,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 	// 	return err
 	// })
 
-	_, err = service.repo.Agency.Create(&newAgency)
+	_, err = service.repo.Agency.Create(ctx, &newAgency)
 
 	if err != nil {
 		for _, document := range newAgency.Documents {
@@ -173,7 +173,7 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	email = strings.ToLower(email)
 
 	// Retrieve account by email.
-	accountRecord, err := service.repo.Account.GetByEmail(email)
+	accountRecord, err := service.repo.Account.GetByEmail(ctx, email)
 	if err != nil {
 		return "", status.Error(codes.Unavailable, err.Error())
 	}

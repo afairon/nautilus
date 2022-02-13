@@ -15,7 +15,7 @@ import (
 type AccountRepository interface {
 	// Create(ctx context.Context, account *entity.Account) (*entity.Account, error)
 	Get(ctx context.Context, id uint64) (*entity.Account, error)
-	GetByEmail(email string) (*model.Account, error)
+	GetByEmail(ctx context.Context, email string) (*model.Account, error)
 	GetByUsername(ctx context.Context, username string) (*entity.Account, error)
 	GetAdminAccount(ctx context.Context, id uint64) (*pb.Admin, error)
 	GetAgencyAccount(ctx context.Context, id uint64) (*pb.Agency, error)
@@ -36,7 +36,7 @@ func NewAccountRepository(db *gorm.DB) *accountRepository {
 }
 
 // Create creates an account record and returns the newly created record.
-func (repo *accountRepository) Create(account *model.Account) (*model.Account, error) {
+func (repo *accountRepository) Create(ctx context.Context, account *model.Account) (*model.Account, error) {
 	// var result model.Account
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -70,7 +70,7 @@ func (repo *accountRepository) Get(ctx context.Context, id uint64) (*entity.Acco
 }
 
 // Get retrieves the account record by its email.
-func (repo *accountRepository) GetByEmail(email string) (*model.Account, error) {
+func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*model.Account, error) {
 	// var result entity.Account
 
 	// err := repo.db.GetContext(ctx, &result, `

@@ -11,7 +11,7 @@ import (
 // with the hotel repository.
 type HotelRepository interface {
 	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error)
-	GetHotel(id uint) (*model.Hotel, error)
+	GetHotel(ctx context.Context, id uint) (*model.Hotel, error)
 }
 
 // hotelRepository implements HotelRepository interface.
@@ -85,7 +85,7 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 	return hotels, result.Error
 }
 
-func (repo *hotelRepository) GetHotel(id uint) (*model.Hotel, error) {
+func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hotel, error) {
 	var hotel model.Hotel
 
 	result := repo.db.First(&hotel, id)

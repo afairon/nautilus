@@ -13,18 +13,18 @@ import (
 // AgencyRepository defines interface for interaction
 // with the agency repository.
 type AgencyRepository interface {
-	Create(agency *model.Agency) (*model.Agency, error)
-	CreateDiveMaster(diveMaster *model.DiveMaster) (*model.DiveMaster, error)
-	CreateHotel(hotel *model.Hotel) (*model.Hotel, error)
-	CreateRoomType(roomType *model.RoomType, isHotel bool) (*model.RoomType, error)
+	Create(ctx context.Context, agency *model.Agency) (*model.Agency, error)
+	CreateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
+	CreateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
+	CreateRoomType(ctx context.Context, roomType *model.RoomType, isHotel bool) (*model.RoomType, error)
 	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
 	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
-	CreateTripTemplate(tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
-	CreateTrip(trip *model.Trip) (*model.Trip, error)
-	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error)
-	CreateBoat(divingBoat *model.Boat) (*model.Boat, error)
-	CreateStaff(staff *model.Staff) (*model.Staff, error)
-	CreateLiveaboard(liveaboard *model.Liveaboard) (*model.Liveaboard, error)
+	CreateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
+	CreateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
+	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *model.DiveMasterTrip) (*model.DiveMasterTrip, error)
+	CreateBoat(ctx context.Context, divingBoat *model.Boat) (*model.Boat, error)
+	CreateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
+	CreateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error)
 	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
 	Get(ctx context.Context, id uint64) (*entity.Agency, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
@@ -43,26 +43,26 @@ func NewAgencyRepository(db *gorm.DB) *agencyRepository {
 }
 
 // Create creates an agency record and returns the newly created record.
-func (repo *agencyRepository) Create(agency *model.Agency) (*model.Agency, error) {
+func (repo *agencyRepository) Create(ctx context.Context, agency *model.Agency) (*model.Agency, error) {
 	result := repo.db.Create(agency)
 
 	return agency, result.Error
 }
 
 // CreateDiveMaster creates an dive master record and returns the newly created record.z
-func (repo *agencyRepository) CreateDiveMaster(diveMaster *model.DiveMaster) (*model.DiveMaster, error) {
+func (repo *agencyRepository) CreateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error) {
 	result := repo.db.Create(diveMaster)
 
 	return diveMaster, result.Error
 }
 
-func (repo *agencyRepository) CreateHotel(hotel *model.Hotel) (*model.Hotel, error) {
+func (repo *agencyRepository) CreateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error) {
 	result := repo.db.Create(hotel)
 
 	return hotel, result.Error
 }
 
-func (repo *agencyRepository) CreateRoomType(roomType *model.RoomType, isHotel bool) (*model.RoomType, error) {
+func (repo *agencyRepository) CreateRoomType(ctx context.Context, roomType *model.RoomType, isHotel bool) (*model.RoomType, error) {
 	// var result entity.RoomType
 	// var err error
 
@@ -122,19 +122,19 @@ func (repo *agencyRepository) CreateRoomAmenity(ctx context.Context, roomAmenity
 	return nil, errors.New("Unimplemented")
 }
 
-func (repo *agencyRepository) CreateTripTemplate(tripTemplate *model.TripTemplate) (*model.TripTemplate, error) {
+func (repo *agencyRepository) CreateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error) {
 	result := repo.db.Create(tripTemplate)
 
 	return tripTemplate, result.Error
 }
 
-func (repo *agencyRepository) CreateTrip(trip *model.Trip) (*model.Trip, error) {
+func (repo *agencyRepository) CreateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error) {
 	result := repo.db.Create(trip)
 
 	return trip, result.Error
 }
 
-func (repo *agencyRepository) CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *entity.DiverMasterTrip) (*entity.DiverMasterTrip, error) {
+func (repo *agencyRepository) CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *model.DiveMasterTrip) (*model.DiveMasterTrip, error) {
 	// var result entity.DiverMasterTrip
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -147,22 +147,24 @@ func (repo *agencyRepository) CreateDiveMasterTripLink(ctx context.Context, dive
 	// 	`, diveMasterTripLink.DiveMasterId, diveMasterTripLink.TripId)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(diveMasterTripLink)
+
+	return diveMasterTripLink, result.Error
 }
 
-func (repo *agencyRepository) CreateBoat(divingBoat *model.Boat) (*model.Boat, error) {
+func (repo *agencyRepository) CreateBoat(ctx context.Context, divingBoat *model.Boat) (*model.Boat, error) {
 	result := repo.db.Create(divingBoat)
 
 	return divingBoat, result.Error
 }
 
-func (repo *agencyRepository) CreateStaff(staff *model.Staff) (*model.Staff, error) {
+func (repo *agencyRepository) CreateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error) {
 	result := repo.db.Create(staff)
 
 	return staff, result.Error
 }
 
-func (repo *agencyRepository) CreateLiveaboard(liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
+func (repo *agencyRepository) CreateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
 	result := repo.db.Create(liveaboard)
 
 	return liveaboard, result.Error

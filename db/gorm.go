@@ -61,6 +61,12 @@ func InitGormStore(host string, port int, user, password, dbname string, ssl boo
 		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
 		&model.RoomType{})
 
+	err = GormStore.SetupJoinTable(&model.Trip{}, "DiveMasters", &model.DiveMasterTrip{})
+
+	if err != nil {
+		return nil, err
+	}
+
 	return GormStore, nil
 }
 

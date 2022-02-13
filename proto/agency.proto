@@ -81,7 +81,6 @@ message HotelAndBoatId {
 message TripTemplate {
     string name = 1;
     string description = 2;
-    uint64 diving_boat_id = 3;
     repeated model.File images = 5;
     model.TripType trip_type = 6;
     oneof residence_id {
