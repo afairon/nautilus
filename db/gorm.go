@@ -67,6 +67,12 @@ func InitGormStore(host string, port int, user, password, dbname string, ssl boo
 		return nil, err
 	}
 
+	err = Migrate(GormStore)
+
+	if err != nil {
+		return nil, err
+	}
+
 	return GormStore, nil
 }
 
@@ -80,4 +86,8 @@ func InitGormStoreFromConfig(conf *config.PostgreSQL) (*gorm.DB, error) {
 		conf.DBName,
 		conf.SSL,
 	)
+}
+
+func Migrate(db *gorm.DB) error {
+	return db.Migrator().AlterColumn(&model.Account{}, "Email")
 }

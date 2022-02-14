@@ -306,7 +306,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 	}
 
 	newDivingBoat := model.Boat{
-		Address:       &divingBoatAddress,
+		Address:       divingBoatAddress,
 		Name:          divingBoat.GetName(),
 		Description:   divingBoat.GetDescription(),
 		TotalCapacity: divingBoat.GetTotalCapacity(),

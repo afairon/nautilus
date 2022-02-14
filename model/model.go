@@ -80,12 +80,12 @@ func (t TripType) EnumIndex() int {
 
 type Address struct {
 	*gorm.Model
-	AddressLine_1 string
-	AddressLine_2 string
-	City          string
-	Postcode      string
-	Region        string
-	Country       string
+	AddressLine_1 string `gorm:"not null"`
+	AddressLine_2 string `gorm:"not null"`
+	City          string `gorm:"not null"`
+	Postcode      string `gorm:"not null"`
+	Region        string `gorm:"not null"`
+	Country       string `gorm:"not null"`
 }
 
 type Coordinate struct {
@@ -95,24 +95,25 @@ type Coordinate struct {
 
 type Account struct {
 	*gorm.Model
-	Email    string `gorm:"unique"`
-	Username string
-	Password string
-	Verified bool
-	Type     AccountType
-	Active   bool
-	AgencyID uint `gorm:"default:null"`
-	DiverID  uint `gorm:"default:null"`
-	AdminID  uint `gorm:"default:null"`
+	Email    string      `gorm:"unique;not null;"`
+	Username string      `gorm:"not null"`
+	Password string      `gorm:"not null"`
+	Verified bool        `gorm:"default:false;not null"`
+	Type     AccountType `gorm:"not null"`
+	Active   bool        `gorm:"default:true;not null"`
+	AgencyID uint        `gorm:"default:null"`
+	DiverID  uint        `gorm:"default:null"`
+	AdminID  uint        `gorm:"default:null"`
 }
 
 type Agency struct {
 	*gorm.Model
 	*Coordinate   `gorm:"embedded"`
-	*Address      `gorm:"embedded"`
+	AddressID     uint
+	Address       Address
 	Account       *Account
-	Name          string
-	Phone         string
+	Name          string             `gorm:"not null"`
+	Phone         string             `gorm:"not null"`
 	Documents     entity.StringArray `gorm:"type:text"`
 	DiveMasters   []DiveMaster
 	Staffs        []Staff
@@ -131,54 +132,55 @@ type Admin struct {
 type Diver struct {
 	*gorm.Model
 	Account      *Account
-	Level        LevelType
-	FirstName    string
-	LastName     string
-	Phone        string
-	BirthDate    time.Time
+	Level        LevelType          `gorm:"not null"`
+	FirstName    string             `gorm:"not null"`
+	LastName     string             `gorm:"not null"`
+	Phone        string             `gorm:"not null"`
+	BirthDate    time.Time          `gorm:"not null"`
 	Documents    entity.StringArray `gorm:"type:text"`
 	Reservations []Reservation
 }
 
 type DiveMaster struct {
 	*gorm.Model
-	FirstName string
-	LastName  string
-	Level     LevelType
+	FirstName string             `gorm:"not null"`
+	LastName  string             `gorm:"not null"`
+	Level     LevelType          `gorm:"not null"`
 	Documents entity.StringArray `gorm:"type:text"`
-	AgencyID  uint
+	AgencyID  uint               `gorm:"not null"`
 }
 
 type Staff struct {
 	*gorm.Model
-	FirstName string
-	LastName  string
-	Position  string
-	Gender    GenderType
-	AgencyID  uint
+	FirstName string     `gorm:"not null"`
+	LastName  string     `gorm:"not null"`
+	Position  string     `gorm:"not null"`
+	Gender    GenderType `gorm:"not null"`
+	AgencyID  uint       `gorm:"not null"`
 }
 
 type Boat struct {
 	*gorm.Model
-	*Address      `gorm:"embedded"`
-	Name          string
-	Description   string
-	TotalCapacity uint32
-	DiverCapacity uint32
-	StaffCapacity uint32
+	AddressID     uint
+	Address       Address
+	Name          string             `gorm:"not null"`
+	Description   string             `gorm:"not null"`
+	TotalCapacity uint32             `gorm:"not null"`
+	DiverCapacity uint32             `gorm:"not null"`
+	StaffCapacity uint32             `gorm:"not null"`
 	Images        entity.StringArray `gorm:"type:text"`
 	Amenities     []Amenity          `gorm:"many2many:boat_amenity_link;"`
-	AgencyID      uint
+	AgencyID      uint               `gorm:"not null"`
 }
 
 type TripTemplate struct {
 	*gorm.Model
-	Name         string
-	Descirption  string
-	Type         TripType
+	Name         string             `gorm:"not null"`
+	Descirption  string             `gorm:"not null"`
+	Type         TripType           `gorm:"not null"`
 	Images       entity.StringArray `gorm:"type:text"`
 	Trips        []Trip
-	AgencyID     uint
+	AgencyID     uint `gorm:"not null"`
 	HotelID      uint `gorm:"default:null"`
 	Hotel        Hotel
 	LiveaboardID uint `gorm:"default:null"`
@@ -189,19 +191,19 @@ type TripTemplate struct {
 
 type Trip struct {
 	*gorm.Model
-	MaxGuest            uint32
-	Price               float32
-	StartDate           *time.Time
-	EndDate             *time.Time
-	LastReservationDate *time.Time
+	MaxGuest            uint32       `gorm:"not null"`
+	Price               float32      `gorm:"not null;check:price_checker,price > 0"`
+	StartDate           *time.Time   `gorm:"not null;check:trip_date_checker,start_date < end_date"`
+	EndDate             *time.Time   `gorm:"not null"`
+	LastReservationDate *time.Time   `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
 	DiveMasters         []DiveMaster `gorm:"many2many:dive_master_trips;"`
-	TripTemplateID      uint
-	AgencyID            uint
+	TripTemplateID      uint         `gorm:"not null"`
+	AgencyID            uint         `gorm:"not null"`
 }
 
 type Reservation struct {
 	*gorm.Model
-	Price             float32
+	Price             float32 `gorm:"not null"`
 	LiveaboardComment *LiveaboardComment
 	HotelComment      *HotelComment
 	TripComment       *TripComment
@@ -212,29 +214,29 @@ type Reservation struct {
 
 type LiveaboardComment struct {
 	*gorm.Model
-	Comment       string
-	Stars         uint32
-	ReservationID uint
+	Comment       string `gorm:"not null"`
+	Stars         uint32 `gorm:"not null"`
+	ReservationID uint   `gorm:"not null"`
 }
 
 type HotelComment struct {
 	*gorm.Model
-	Comment       string
-	Stars         uint32
-	ReservationID uint
+	Comment       string `gorm:"not null"`
+	Stars         uint32 `gorm:"not null"`
+	ReservationID uint   `gorm:"not null"`
 }
 
 type TripComment struct {
 	*gorm.Model
-	Comment       string
-	Stars         uint32
-	ReservationID uint
+	Comment       string `gorm:"not null"`
+	Stars         uint32 `gorm:"not null"`
+	ReservationID uint   `gorm:"not null"`
 }
 
 type Amenity struct {
 	*gorm.Model
-	Name        string
-	Description string
+	Name        string `gorm:"unique;not null"`
+	Description string `gorm:"not null"`
 }
 
 type Liveaboard struct {
@@ -242,25 +244,25 @@ type Liveaboard struct {
 	AddressID uint
 	Address   Address
 	*Coordinate
-	Name          string
-	Description   string
-	Length        uint32
-	Width         uint32
-	TotalCapacity uint32
-	DiverRooms    uint32
-	StaffRooms    uint32
+	Name          string             `gorm:"not null"`
+	Description   string             `gorm:"not null"`
+	Length        uint32             `gorm:"not null"`
+	Width         uint32             `gorm:"not null"`
+	TotalCapacity uint32             `gorm:"not null"`
+	DiverRooms    uint32             `gorm:"not null"`
+	StaffRooms    uint32             `gorm:"not null"`
 	Images        entity.StringArray `gorm:"type:text"`
 	RoomTypes     []RoomType
-	AgencyID      uint
+	AgencyID      uint `gorm:"not null"`
 }
 
 type RoomType struct {
 	*gorm.Model
-	Name         string
-	Description  string
-	MaxGuest     uint32
-	Price        float32
-	Quantity     uint32
+	Name         string             `gorm:"not null"`
+	Description  string             `gorm:"not null"`
+	MaxGuest     uint32             `gorm:"not null;check:max_guest_checker,max_guest > 0"`
+	Price        float32            `gorm:"not null;check:price_checker,price > 0"`
+	Quantity     uint32             `gorm:"not null;check:quantity_checker,quantity > 0"`
 	Images       entity.StringArray `gorm:"type:text"`
 	Amenities    []Amenity          `gorm:"many2many:room_amenity_link;"`
 	LiveaboardID uint               `gorm:"default:null"`
@@ -272,13 +274,13 @@ type Hotel struct {
 	Coordinate  Coordinate `gorm:"embedded"`
 	AddressID   uint
 	Address     Address
-	Name        string
-	Description string
+	Name        string `gorm:"not null"`
+	Description string `gorm:"not null"`
 	Stars       uint32
-	Phone       string
+	Phone       string             `gorm:"not null"`
 	Images      entity.StringArray `gorm:"type:text"`
 	RoomTypes   []RoomType
-	AgencyID    uint
+	AgencyID    uint `gorm:"not null"`
 }
 
 type DiveMasterTrip struct {

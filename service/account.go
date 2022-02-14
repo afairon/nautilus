@@ -77,7 +77,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 	}
 
 	newAgency.Account = account
-	newAgency.Address = &address
+	newAgency.Address = address
 
 	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 	// 	newAccount, err := query.Account.Create(ctx, account)
