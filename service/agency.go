@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
@@ -220,10 +221,22 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		return err
 	}
 
+	addr := tripTemplate.GetAddress()
+
+	tripTemplateAddress := model.Address{
+		AddressLine_1: addr.GetAddressLine_1(),
+		AddressLine_2: addr.GetAddressLine_2(),
+		City:          addr.GetCity(),
+		Postcode:      addr.GetPostcode(),
+		Region:        addr.GetRegion(),
+		Country:       addr.GetCountry(),
+	}
+
 	newTripTemplate := model.TripTemplate{
 		Name:        tripTemplate.GetName(),
-		Descirption: tripTemplate.GetDescription(),
+		Description: tripTemplate.GetDescription(),
 		Type:        model.TripType(tripTemplate.GetTripType()),
+		Address:     tripTemplateAddress,
 		AgencyID:    uint(agency.GetId()),
 	}
 
@@ -595,6 +608,8 @@ func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnSh
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Printf("trips: %v\n", trips)
 
 	return trips, nil
 }

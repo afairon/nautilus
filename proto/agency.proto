@@ -90,6 +90,7 @@ message TripTemplate {
         HotelAndBoatId hotel_and_boat_id = 8;
         uint64 liveaboard_id = 9;
     }
+    model.Address address = 20;
 }
 
 message Trip {

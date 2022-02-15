@@ -176,9 +176,11 @@ type Boat struct {
 type TripTemplate struct {
 	*gorm.Model
 	Name         string             `gorm:"not null"`
-	Descirption  string             `gorm:"not null"`
+	Description  string             `gorm:"not null"`
 	Type         TripType           `gorm:"not null"`
 	Images       entity.StringArray `gorm:"type:text"`
+	AddressID    uint
+	Address      Address
 	Trips        []Trip
 	AgencyID     uint `gorm:"not null"`
 	HotelID      uint `gorm:"default:null"`
@@ -198,7 +200,8 @@ type Trip struct {
 	LastReservationDate *time.Time   `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
 	DiveMasters         []DiveMaster `gorm:"many2many:dive_master_trips;"`
 	TripTemplateID      uint         `gorm:"not null"`
-	AgencyID            uint         `gorm:"not null"`
+	TripTemplate        TripTemplate
+	AgencyID            uint `gorm:"not null"`
 }
 
 type Reservation struct {

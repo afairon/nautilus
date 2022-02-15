@@ -323,7 +323,7 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 			Template: &pb.ListTripTemplatesResponse_TripTemplate{
 				Id:           uint64(tripTemplate.ID),
 				Name:         tripTemplate.Name,
-				Description:  tripTemplate.Descirption,
+				Description:  tripTemplate.Description,
 				TripType:     pb.TripType(tripTemplate.Type),
 				HotelId:      uint64(tripTemplate.HotelID),
 				BoatId:       uint64(tripTemplate.BoatID),
