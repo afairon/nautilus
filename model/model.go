@@ -176,7 +176,7 @@ type Boat struct {
 type TripTemplate struct {
 	*gorm.Model
 	Name         string             `gorm:"not null"`
-	Description  string             `gorm:"not null"`
+	Descirption  string             `gorm:"not null"`
 	Type         TripType           `gorm:"not null"`
 	Images       entity.StringArray `gorm:"type:text"`
 	AddressID    uint

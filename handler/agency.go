@@ -323,7 +323,7 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 			Template: &pb.ListTripTemplatesResponse_TripTemplate{
 				Id:           uint64(tripTemplate.ID),
 				Name:         tripTemplate.Name,
-				Description:  tripTemplate.Description,
+				Description:  tripTemplate.Descirption,
 				TripType:     pb.TripType(tripTemplate.Type),
 				HotelId:      uint64(tripTemplate.HotelID),
 				BoatId:       uint64(tripTemplate.BoatID),
@@ -386,6 +386,39 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 	ctx := srv.Context()
 
 	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchOnshoreTrips(), req.GetLimit(), req.GetOffset())
+
+	if err != nil {
+		return err
+	}
+
+	for _, trip := range trips {
+		resp := &pb.SearchOnshoreTripsResponse{
+			Trip: &pb.SearchOnshoreTripsResponse_Trip{
+				Id:                  0,
+				TripTemplateId:      0,
+				MaxGuest:            0,
+				Price:               0,
+				FromDate:            trip.StartDate,
+				ToDate:              trip.EndDate,
+				LastReservationDate: trip.LastReservationDate,
+				CreatedOn:           &trip.CreatedAt,
+				UpdatedOn:           &trip.UpdatedAt,
+			},
+			TripTemplate: &pb.SearchOnshoreTripsResponse_TripTemplate{},
+		}
+
+		// if len(tripTemplate.Images) > 0 {
+		// 	resp.Template.Images = make([]*pb.File, 0, len(tripTemplate.Images))
+		// 	for _, link := range tripTemplate.Images {
+		// 		file := &pb.File{
+		// 			Link: link,
+		// 		}
+		// 		resp.Template.Images = append(resp.Template.Images, file)
+		// 	}
+		// }
+
+		srv.Send(resp)
+	}
 
 	fmt.Println(trips, err)
 

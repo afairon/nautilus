@@ -2,11 +2,9 @@ package repo
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/afairon/nautilus/model"
-	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -122,52 +120,122 @@ func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, cit
 	// 	return nil, result.Error
 	// }
 
-	// var trips []*model.Trip
+	var trips []*model.Trip
 	// var trip *model.Trip
 
 	rows, err := repo.db.Raw(`
-	SELECT trip.id, trip.max_guest, trip.price, trip.start_date, trip.end_date, trip.last_reservation_date, trip.created_on, trip.updated_on,
-			trip_template.id, trip_template.name, trip_template.description, trip_template."type", trip_template.images, trip_template.created_on, trip_template.update_on
-	FROM
-	public.trip trip
-	JOIN
-	public.trip_templates trip_template
-	ON
-	trip.template_id = trip_template.id
-	JOIN
-	public.boats boat
-	ON
-	trip_template.boat_id boat.id
-	JOIN
-	public.hotesl hotel
-	ON
-	trip_template.hotel_id hotel.id
-	JOIN
-	public.room_types room_type
-	ON
-	hotel.id = room_type.hotel_id
-	`).Rows()
+	SELECT trip.id, trip.max_guest, trip.price, trip.start_date, trip.end_date, trip.last_reservation_date, trip.created_at, trip.updated_at,
+		trip_template.id, trip_template.name, trip_template.descirption, trip_template."type", trip_template.images, trip_template.created_at, trip_template.updated_at,
+		boat.id, boat.name, boat.description, boat.total_capacity, boat.diver_capacity, boat.staff_capacity, boat.images, boat.created_at, boat.updated_at,
+		hotel.id, hotel.name, hotel.description, hotel.stars, hotel.phone, hotel.images
+			FROM
+				public.trips trip
+			JOIN
+				public.trip_templates trip_template
+			ON
+				trip.trip_template_id = trip_template.id
+			JOIN
+				public.addresses address
+			ON
+				trip_template.address_id = address.id
+			JOIN
+				public.boats boat
+			ON
+				trip_template.boat_id = boat.id
+			JOIN
+				public.hotels hotel
+			ON
+				trip_template.hotel_id = hotel.id
+			JOIN
+				public.room_types room_type
+			ON
+				hotel.id = room_type.hotel_id
+			WHERE
+				room_type.max_guest >= ?
+				AND (start_date BETWEEN ? AND ?)
+				AND (end_date BETWEEN ? AND ?)
+				AND (country = ? OR city = ? OR region = ?)
+	`, divers, start_date, end_date, start_date, end_date, country, city, region).Rows()
 
 	if err != nil {
-		fmt.Println("Printing after .Rows()")
-		fmt.Println(err)
 		return nil, err
 	}
 
+	defer rows.Close()
+
 	for rows.Next() {
-		trip := &model.Trip{}
-		trip.TripTemplate = model.TripTemplate{}
-		var images pq.StringArray
+		trip := &model.Trip{
+			Model:               &gorm.Model{},
+			MaxGuest:            0,
+			Price:               0,
+			StartDate:           &time.Time{},
+			EndDate:             &time.Time{},
+			LastReservationDate: &time.Time{},
+			DiveMasters:         []model.DiveMaster{},
+			TripTemplateID:      0,
+			TripTemplate:        model.TripTemplate{},
+			AgencyID:            0,
+		}
+		tripTemplate := model.TripTemplate{
+			Model:        &gorm.Model{},
+			Name:         "",
+			Descirption:  "",
+			Type:         0,
+			Images:       []string{},
+			AddressID:    0,
+			Address:      model.Address{},
+			Trips:        []model.Trip{},
+			AgencyID:     0,
+			HotelID:      0,
+			Hotel:        model.Hotel{},
+			LiveaboardID: 0,
+			Liveaboard:   model.Liveaboard{},
+			BoatID:       0,
+			Boat:         model.Boat{},
+		}
+		boat := model.Boat{
+			Model:         &gorm.Model{},
+			AddressID:     0,
+			Address:       model.Address{},
+			Name:          "",
+			Description:   "",
+			TotalCapacity: 0,
+			DiverCapacity: 0,
+			StaffCapacity: 0,
+			Images:        []string{},
+			Amenities:     []model.Amenity{},
+			AgencyID:      0,
+		}
+		hotel := model.Hotel{
+			Model:       &gorm.Model{},
+			Coordinate:  model.Coordinate{},
+			AddressID:   0,
+			Address:     model.Address{},
+			Name:        "",
+			Description: "",
+			Stars:       0,
+			Phone:       "",
+			Images:      []string{},
+			RoomTypes:   []model.RoomType{},
+			AgencyID:    0,
+		}
 
 		err = rows.Scan(&trip.ID, &trip.MaxGuest, &trip.Price, &trip.StartDate, &trip.EndDate, &trip.LastReservationDate, &trip.CreatedAt, &trip.UpdatedAt,
-			&trip.TripTemplate.ID, &trip.TripTemplate.Name, &trip.TripTemplate.Description, &trip.TripTemplate.Type, &images, &trip.TripTemplate.CreatedAt, &trip.TripTemplate.UpdatedAt,
+			&tripTemplate.ID, &tripTemplate.Name, &tripTemplate.Descirption, &tripTemplate.Type, &tripTemplate.Images, &tripTemplate.CreatedAt, &tripTemplate.UpdatedAt,
+			&boat.ID, &boat.Name, &boat.Description, &boat.TotalCapacity, &boat.DiverCapacity, &boat.StaffCapacity, &boat.Images, &boat.CreatedAt, &boat.UpdatedAt,
+			&hotel.ID, &hotel.Name, &hotel.Description, &hotel.Stars, &hotel.Phone, &hotel.Images,
 		)
+
 		if err != nil {
 			return nil, err
 		}
 
-		fmt.Printf("%+v\n", trip)
+		trip.TripTemplate = tripTemplate
+		trip.TripTemplate.Boat = boat
+		trip.TripTemplate.Hotel = hotel
+
+		trips = append(trips, trip)
 	}
 
-	return nil, nil
+	return trips, nil
 }
