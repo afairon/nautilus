@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"errors"
 
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
@@ -30,6 +31,9 @@ type AgencyService interface {
 	ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error)
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
+
+	SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchOnshoreTrips, limit, offset uint64) ([]*model.Trip, error)
+	SearchOffshoreTrips(ctx context.Context, searchOffshoreTrips *pb.SearchOffshoreTrips, limit, offset uint64) ([]*model.Trip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -569,4 +573,32 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	}
 
 	return trips, nil
+}
+
+func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchOnshoreTrips, limit, offset uint64) ([]*model.Trip, error) {
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	var err error
+	var trips []*model.Trip
+
+	switch searchOnShoreTrips.GetLocationFilter().(type) {
+	case *pb.SearchOnshoreTrips_Country:
+		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, searchOnShoreTrips.GetCountry(), "", "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+	case *pb.SearchOnshoreTrips_City:
+		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, "", searchOnShoreTrips.GetCity(), "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+	case *pb.SearchOnshoreTrips_Region:
+		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, "", "", searchOnShoreTrips.GetRegion(), searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return trips, nil
+}
+
+func (service *agencyService) SearchOffshoreTrips(ctx context.Context, searchOffshoreTrips *pb.SearchOffshoreTrips, limit, offset uint64) ([]*model.Trip, error) {
+	return nil, errors.New("Unimplemented")
 }

@@ -381,3 +381,17 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 
 	return nil
 }
+
+func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsRequest, srv pb.AgencyService_SearchOnshoreTripsServer) error {
+	ctx := srv.Context()
+
+	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchOnshoreTrips(), req.GetLimit(), req.GetOffset())
+
+	fmt.Println(trips, err)
+
+	return nil
+}
+
+func (handler *AgencyHandler) SearchOffshoreTrips(req *pb.SearchOffshoreTripsRequest, srv pb.AgencyService_SearchOffshoreTripsServer) error {
+	return status.Errorf(codes.Unimplemented, "method SearchOffshoreTrips not implemented")
+}

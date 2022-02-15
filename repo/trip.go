@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"time"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -11,6 +12,7 @@ import (
 // with the trip repository.
 type TripRepository interface {
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
+	SearchOnshoreTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time time.Time, limit, offset uint) ([]*model.Trip, error)
 }
 
 // tripRepository implements TripRepository interface.
@@ -84,6 +86,36 @@ func (repo *tripRepository) ListTripsByAgency(ctx context.Context, id, limit, of
 	var trips []*model.Trip
 
 	if result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
+func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date time.Time, limit, offset uint) ([]*model.Trip, error) {
+	var trips []*model.Trip
+	var tx *gorm.DB
+
+	if len(country) > 0 {
+		if tx = repo.db.Where("country = ?", country); tx.Error != nil {
+			return nil, tx.Error
+		}
+	}
+
+	if len(city) > 0 {
+		if tx = repo.db.Where("city = ?", city); tx.Error != nil {
+			return nil, tx.Error
+		}
+	}
+
+	if len(region) > 0 {
+		if tx = repo.db.Where("region = ?", region); tx.Error != nil {
+			return nil, tx.Error
+		}
+	}
+
+	tx.Preload("Hotel.RoomTypes").Preload("Boat").Where("max_guest = ?", divers).Where("start_date BETWEEN ? AND ?", start_date, end_date).Where("end_date BETWEEN ? AND ?", start_date, end_date)
+	if result := tx.Limit(int(limit)).Offset(int(offset)).Find(&trips); result.Error != nil {
 		return nil, result.Error
 	}
 
