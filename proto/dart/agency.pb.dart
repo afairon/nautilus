@@ -3841,11 +3841,12 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplateId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
     ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
-    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..pc<DiveMaster>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMaster.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -3855,6 +3856,7 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     $fixnum.Int64? tripTemplateId,
     $core.int? maxGuest,
     $core.double? price,
+    $core.Iterable<DiveMaster>? diveMasters,
     $5.Timestamp? fromDate,
     $5.Timestamp? toDate,
     $5.Timestamp? lastReservationDate,
@@ -3873,6 +3875,9 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     }
     if (price != null) {
       _result.price = price;
+    }
+    if (diveMasters != null) {
+      _result.diveMasters.addAll(diveMasters);
     }
     if (fromDate != null) {
       _result.fromDate = fromDate;
@@ -3949,59 +3954,62 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
   void clearPrice() => clearField(40);
 
   @$pb.TagNumber(50)
-  $5.Timestamp get fromDate => $_getN(4);
-  @$pb.TagNumber(50)
-  set fromDate($5.Timestamp v) { setField(50, v); }
-  @$pb.TagNumber(50)
-  $core.bool hasFromDate() => $_has(4);
-  @$pb.TagNumber(50)
-  void clearFromDate() => clearField(50);
-  @$pb.TagNumber(50)
-  $5.Timestamp ensureFromDate() => $_ensure(4);
+  $core.List<DiveMaster> get diveMasters => $_getList(4);
 
   @$pb.TagNumber(60)
-  $5.Timestamp get toDate => $_getN(5);
+  $5.Timestamp get fromDate => $_getN(5);
   @$pb.TagNumber(60)
-  set toDate($5.Timestamp v) { setField(60, v); }
+  set fromDate($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasToDate() => $_has(5);
+  $core.bool hasFromDate() => $_has(5);
   @$pb.TagNumber(60)
-  void clearToDate() => clearField(60);
+  void clearFromDate() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureToDate() => $_ensure(5);
+  $5.Timestamp ensureFromDate() => $_ensure(5);
 
   @$pb.TagNumber(70)
-  $5.Timestamp get lastReservationDate => $_getN(6);
+  $5.Timestamp get toDate => $_getN(6);
   @$pb.TagNumber(70)
-  set lastReservationDate($5.Timestamp v) { setField(70, v); }
+  set toDate($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasLastReservationDate() => $_has(6);
+  $core.bool hasToDate() => $_has(6);
   @$pb.TagNumber(70)
-  void clearLastReservationDate() => clearField(70);
+  void clearToDate() => clearField(70);
   @$pb.TagNumber(70)
-  $5.Timestamp ensureLastReservationDate() => $_ensure(6);
+  $5.Timestamp ensureToDate() => $_ensure(6);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get lastReservationDate => $_getN(7);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set lastReservationDate($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(7);
+  $core.bool hasLastReservationDate() => $_has(7);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearLastReservationDate() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureLastReservationDate() => $_ensure(7);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get createdOn => $_getN(8);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set createdOn($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(8);
+  $core.bool hasCreatedOn() => $_has(8);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearCreatedOn() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+
+  @$pb.TagNumber(100)
+  $5.Timestamp get updatedOn => $_getN(9);
+  @$pb.TagNumber(100)
+  set updatedOn($5.Timestamp v) { setField(100, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasUpdatedOn() => $_has(9);
+  @$pb.TagNumber(100)
+  void clearUpdatedOn() => clearField(100);
+  @$pb.TagNumber(100)
+  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
 }
 
 class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {

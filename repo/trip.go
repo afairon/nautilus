@@ -121,9 +121,29 @@ func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, cit
 	// }
 
 	var trips []*model.Trip
-	// var trip *model.Trip
 
-	rows, err := repo.db.Raw(`
+	result := repo.db.Preload("DiveMasters")
+	result.Preload("TripTemplate.Address")
+	result.Preload("TripTemplate.Hotel")
+	result.Preload("TripTemplate.Liveaboard")
+	result.Preload("TripTemplate.Boat")
+	result.Joins("JOIN trip_templates ON trip_templates.id = trips.trip_template_id")
+	result.Joins("JOIN addresses ON addresses.id = trip_templates.address_id")
+	result.Joins("LEFT JOIN hotels ON hotels.id = trip_templates.hotel_id")
+	result.Joins("LEFT JOIN boats ON boats.id = trip_templates.boat_id")
+	result.Joins("LEFT JOIN liveaboards ON liveaboards.id = trip_templates.liveaboard_id")
+	result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NOT NULL AND trip_templates.boat_id IS NOT NULL AND trip_templates.liveaboard_id IS NULL", model.ONSHORE)
+	result.Where("trips.max_guest >= ?", divers)
+	result.Where("addresses.country ILIKE ? OR addresses.city ILIKE ? OR addresses.region ILIKE ?", country, city, region)
+	result.Where("trips.start_date BETWEEN ? AND ?", start_date, end_date)
+	result.Where("trips.end_date BETWEEN ? AND ?", start_date, end_date)
+	result.Find(&trips)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	/*rows, err := repo.db.Raw(`
 	SELECT trip.id, trip.max_guest, trip.price, trip.start_date, trip.end_date, trip.last_reservation_date, trip.created_at, trip.updated_at,
 		trip_template.id, trip_template.name, trip_template.descirption, trip_template."type", trip_template.images, trip_template.created_at, trip_template.updated_at,
 		boat.id, boat.name, boat.description, boat.total_capacity, boat.diver_capacity, boat.staff_capacity, boat.images, boat.created_at, boat.updated_at,
@@ -235,7 +255,7 @@ func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, cit
 		trip.TripTemplate.Hotel = hotel
 
 		trips = append(trips, trip)
-	}
+	}*/
 
 	return trips, nil
 }

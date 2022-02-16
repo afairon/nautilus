@@ -323,7 +323,7 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 			Template: &pb.ListTripTemplatesResponse_TripTemplate{
 				Id:           uint64(tripTemplate.ID),
 				Name:         tripTemplate.Name,
-				Description:  tripTemplate.Descirption,
+				Description:  tripTemplate.Description,
 				TripType:     pb.TripType(tripTemplate.Type),
 				HotelId:      uint64(tripTemplate.HotelID),
 				BoatId:       uint64(tripTemplate.BoatID),
@@ -386,25 +386,50 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 	ctx := srv.Context()
 
 	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchOnshoreTrips(), req.GetLimit(), req.GetOffset())
-
 	if err != nil {
 		return err
+	}
+
+	if len(trips) == 0 {
+		return status.Error(codes.NotFound, "SearchOnshoreTrips: not found")
 	}
 
 	for _, trip := range trips {
 		resp := &pb.SearchOnshoreTripsResponse{
 			Trip: &pb.SearchOnshoreTripsResponse_Trip{
-				Id:                  0,
-				TripTemplateId:      0,
-				MaxGuest:            0,
-				Price:               0,
+				Id:                  uint64(trip.ID),
+				TripTemplateId:      uint64(trip.TripTemplateID),
+				MaxGuest:            trip.MaxGuest,
+				Price:               trip.Price,
 				FromDate:            trip.StartDate,
 				ToDate:              trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
 				CreatedOn:           &trip.CreatedAt,
 				UpdatedOn:           &trip.UpdatedAt,
 			},
-			TripTemplate: &pb.SearchOnshoreTripsResponse_TripTemplate{},
+			TripTemplate: &pb.SearchOnshoreTripsResponse_TripTemplate{
+				Id:           uint64(trip.TripTemplate.ID),
+				Name:         trip.TripTemplate.Name,
+				Description:  trip.TripTemplate.Description,
+				TripType:     pb.TripType(trip.TripTemplate.Type),
+				HotelId:      uint64(trip.TripTemplate.HotelID),
+				BoatId:       uint64(trip.TripTemplate.BoatID),
+				LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
+				CreatedOn:    &trip.TripTemplate.CreatedAt,
+				UpdatedOn:    &trip.TripTemplate.UpdatedAt,
+			},
+		}
+
+		if len(trip.DiveMasters) > 0 {
+			resp.Trip.DiveMasters = make([]*pb.DiveMaster, 0, len(trip.DiveMasters))
+			for _, dive_master := range trip.DiveMasters {
+				resp.Trip.DiveMasters = append(resp.Trip.DiveMasters, &pb.DiveMaster{
+					FirstName: dive_master.FirstName,
+					LastName:  dive_master.LastName,
+					Level:     pb.LevelType(dive_master.Level),
+				},
+				)
+			}
 		}
 
 		// if len(tripTemplate.Images) > 0 {

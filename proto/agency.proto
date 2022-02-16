@@ -359,11 +359,12 @@ message SearchOnshoreTripsResponse {
         uint64 trip_template_id = 20;
         uint32 max_guest = 30;
         float price = 40;
-        google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        repeated DiveMaster dive_masters = 50;
+        google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_on = 100 [(gogoproto.stdtime) = true];
     }
 
     message TripTemplate {

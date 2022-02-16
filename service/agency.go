@@ -233,7 +233,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 	newTripTemplate := model.TripTemplate{
 		Name:        tripTemplate.GetName(),
-		Descirption: tripTemplate.GetDescription(),
+		Description: tripTemplate.GetDescription(),
 		Type:        model.TripType(tripTemplate.GetTripType()),
 		Address:     tripTemplateAddress,
 		AgencyID:    uint(agency.GetId()),
