@@ -80,12 +80,12 @@ func (t TripType) EnumIndex() int {
 
 type Address struct {
 	*gorm.Model
-	AddressLine_1 string `gorm:"not null"`
-	AddressLine_2 string `gorm:"not null"`
-	City          string `gorm:"not null"`
-	Postcode      string `gorm:"not null"`
-	Region        string `gorm:"not null"`
-	Country       string `gorm:"not null"`
+	AddressLine_1 string `gorm:"not null" json:"address_line_1,omitempty"`
+	AddressLine_2 string `gorm:"not null" json:"address_line_2,omitempty"`
+	City          string `gorm:"not null" json:"city,omitempty"`
+	Postcode      string `gorm:"not null" json:"postcode,omitempty"`
+	Region        string `gorm:"not null" json:"region,omitempty"`
+	Country       string `gorm:"not null" json:"country,omitempty"`
 }
 
 type Coordinate struct {
@@ -95,50 +95,65 @@ type Coordinate struct {
 
 type Account struct {
 	*gorm.Model
-	Email    string      `gorm:"unique;not null;"`
-	Username string      `gorm:"not null"`
-	Password string      `gorm:"not null"`
-	Verified bool        `gorm:"default:false;not null"`
-	Type     AccountType `gorm:"not null"`
-	Active   bool        `gorm:"default:true;not null"`
-	AgencyID uint        `gorm:"default:null"`
-	DiverID  uint        `gorm:"default:null"`
-	AdminID  uint        `gorm:"default:null"`
+	Email    string      `gorm:"unique;not null;" json:"email,omitempty"`
+	Username string      `gorm:"not null" json:"username,omitempty"`
+	Password string      `gorm:"not null" json:"-"`
+	Verified bool        `gorm:"default:false;not null" json:"verified,omitempty"`
+	Type     AccountType `gorm:"not null" json:"type,omitempty"`
+	Active   bool        `gorm:"default:true;not null" json:"active,omitempty"`
+	AgencyID uint        `gorm:"default:null" json:"-"`
+	DiverID  uint        `gorm:"default:null" json:"-"`
+	AdminID  uint        `gorm:"default:null" json:"-"`
+}
+
+func (a *Account) GetType() AccountType {
+	return a.Type
 }
 
 type Agency struct {
 	*gorm.Model
 	*Coordinate   `gorm:"embedded"`
-	AddressID     uint
-	Address       Address
-	Account       *Account
-	Name          string             `gorm:"not null"`
-	Phone         string             `gorm:"not null"`
-	Documents     entity.StringArray `gorm:"type:text"`
-	DiveMasters   []DiveMaster
-	Staffs        []Staff
-	Boats         []Boat
-	TripTemplates []TripTemplate
-	Liveaboards   []Liveaboard
-	Hotels        []Hotel
-	Trips         []Trip
+	AddressID     uint               `json:"-"`
+	Address       Address            `json:"address,omitempty"`
+	Account       *Account           `json:"account,omitempty"`
+	Name          string             `gorm:"not null" json:"name,omitempty"`
+	Phone         string             `gorm:"not null" json:"phone,omitempty"`
+	Documents     entity.StringArray `gorm:"type:text" json:"documents,omitempty"`
+	DiveMasters   []DiveMaster       `json:"dive_masters,omitempty"`
+	Staffs        []Staff            `json:"staffs,omitempty"`
+	Boats         []Boat             `json:"boats,omitempty"`
+	TripTemplates []TripTemplate     `json:"trip_templates,omitempty"`
+	Liveaboards   []Liveaboard       `json:"liveaboards,omitempty"`
+	Hotels        []Hotel            `json:"hotels,omitempty"`
+	Trips         []Trip             `json:"trips,omitempty"`
+}
+
+func (a *Agency) GetAccount() *Account {
+	return a.Account
 }
 
 type Admin struct {
-	*gorm.Model
-	Account *Account
+	*Account
+}
+
+func (a *Admin) GetAccount() *Account {
+	return a.Account
 }
 
 type Diver struct {
 	*gorm.Model
-	Account      *Account
-	Level        LevelType          `gorm:"not null"`
-	FirstName    string             `gorm:"not null"`
-	LastName     string             `gorm:"not null"`
-	Phone        string             `gorm:"not null"`
-	BirthDate    time.Time          `gorm:"not null"`
-	Documents    entity.StringArray `gorm:"type:text"`
-	Reservations []Reservation
+	Account      *Account           `json:"account,omitempty"`
+	Level        LevelType          `gorm:"not null" json:"level,omitempty"`
+	FirstName    string             `gorm:"not null" json:"firstname,omitempty"`
+	LastName     string             `gorm:"not null" json:"lastname,omitempty"`
+	Phone        string             `gorm:"not null" json:"phone,omitempty"`
+	BirthDate    time.Time          `gorm:"not null" json:"birthdate,omitempty"`
+	Documents    entity.StringArray `gorm:"type:text" json:"documents,omitempty"`
+	Reservations []Reservation      `json:"reservations,omitempty"`
+}
+
+func (d *Diver) GetAccount() *Account {
+	return d.Account
 }
 
 type DiveMaster struct {

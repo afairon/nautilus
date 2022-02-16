@@ -174,8 +174,8 @@ message ListBoatsResponse {
         uint32 total_capacity = 21;
         uint32 diver_capacity = 22;
         uint32 staff_capacity = 23;
-        google.protobuf.Timestamp created_on = 30 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 40 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 30 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 40 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -195,8 +195,8 @@ message ListDiveMastersResponse {
         string last_name = 20;
         model.LevelType level = 30;
         repeated model.File documents = 40;
-        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -218,8 +218,8 @@ message ListHotelsResponse {
         string phone = 40;
         model.Address address = 50;
         repeated model.File images = 60;
-        google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -244,8 +244,8 @@ message ListLiveaboardsResponse {
         uint32 diver_rooms = 52;
         uint32 staff_rooms = 53;
         model.Address address = 54;
-        google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -265,8 +265,8 @@ message ListStaffsResponse {
         string last_name = 20;
         string position = 30;
         model.GenderType gender = 40;
-        google.protobuf.Timestamp created_on = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -289,8 +289,8 @@ message ListTripTemplatesResponse {
         uint64 boat_id = 50;
         uint64 liveaboard_id = 60;
         repeated model.File images = 70;
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -312,8 +312,8 @@ message ListTripsResponse {
         google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -363,8 +363,8 @@ message SearchOnshoreTripsResponse {
         google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_on = 90 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 100 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
     }
 
     message TripTemplate {
@@ -376,8 +376,8 @@ message SearchOnshoreTripsResponse {
         uint64 boat_id = 50;
         uint64 liveaboard_id = 60;
         repeated model.File images = 70;
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
     }
 }
 
@@ -393,8 +393,8 @@ message SearchOffshoreTripsResponse {
         google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
     }
 
     message TripTemplate {
@@ -406,7 +406,7 @@ message SearchOffshoreTripsResponse {
         uint64 boat_id = 50;
         uint64 liveaboard_id = 60;
         repeated model.File images = 70;
-        google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
     }
 }

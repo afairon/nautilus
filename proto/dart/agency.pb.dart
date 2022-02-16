@@ -1627,8 +1627,8 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     ..a<$core.int>(21, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'totalCapacity', $pb.PbFieldType.OU3)
     ..a<$core.int>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diverCapacity', $pb.PbFieldType.OU3)
     ..a<$core.int>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staffCapacity', $pb.PbFieldType.OU3)
-    ..aOM<$5.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1640,8 +1640,8 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     $core.int? totalCapacity,
     $core.int? diverCapacity,
     $core.int? staffCapacity,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -1662,11 +1662,11 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
     if (staffCapacity != null) {
       _result.staffCapacity = staffCapacity;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -1740,26 +1740,26 @@ class ListBoatsResponse_Boat extends $pb.GeneratedMessage {
   void clearStaffCapacity() => clearField(23);
 
   @$pb.TagNumber(30)
-  $5.Timestamp get createdOn => $_getN(6);
+  $5.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(30)
-  set createdOn($5.Timestamp v) { setField(30, v); }
+  set createdAt($5.Timestamp v) { setField(30, v); }
   @$pb.TagNumber(30)
-  $core.bool hasCreatedOn() => $_has(6);
+  $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(30)
-  void clearCreatedOn() => clearField(30);
+  void clearCreatedAt() => clearField(30);
   @$pb.TagNumber(30)
-  $5.Timestamp ensureCreatedOn() => $_ensure(6);
+  $5.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(40)
-  $5.Timestamp get updatedOn => $_getN(7);
+  $5.Timestamp get updatedAt => $_getN(7);
   @$pb.TagNumber(40)
-  set updatedOn($5.Timestamp v) { setField(40, v); }
+  set updatedAt($5.Timestamp v) { setField(40, v); }
   @$pb.TagNumber(40)
-  $core.bool hasUpdatedOn() => $_has(7);
+  $core.bool hasUpdatedAt() => $_has(7);
   @$pb.TagNumber(40)
-  void clearUpdatedOn() => clearField(40);
+  void clearUpdatedAt() => clearField(40);
   @$pb.TagNumber(40)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(7);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
 class ListBoatsResponse extends $pb.GeneratedMessage {
@@ -1879,8 +1879,8 @@ class ListDiveMastersResponse_DiveMaster extends $pb.GeneratedMessage {
     ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
     ..e<$6.LevelType>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'level', $pb.PbFieldType.OE, defaultOrMaker: $6.LevelType.INSTRUCTOR, valueOf: $6.LevelType.valueOf, enumValues: $6.LevelType.values)
     ..pc<$6.File>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'documents', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1891,8 +1891,8 @@ class ListDiveMastersResponse_DiveMaster extends $pb.GeneratedMessage {
     $core.String? lastName,
     $6.LevelType? level,
     $core.Iterable<$6.File>? documents,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -1910,11 +1910,11 @@ class ListDiveMastersResponse_DiveMaster extends $pb.GeneratedMessage {
     if (documents != null) {
       _result.documents.addAll(documents);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -1979,26 +1979,26 @@ class ListDiveMastersResponse_DiveMaster extends $pb.GeneratedMessage {
   $core.List<$6.File> get documents => $_getList(4);
 
   @$pb.TagNumber(50)
-  $5.Timestamp get createdOn => $_getN(5);
+  $5.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(50)
-  set createdOn($5.Timestamp v) { setField(50, v); }
+  set createdAt($5.Timestamp v) { setField(50, v); }
   @$pb.TagNumber(50)
-  $core.bool hasCreatedOn() => $_has(5);
+  $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(50)
-  void clearCreatedOn() => clearField(50);
+  void clearCreatedAt() => clearField(50);
   @$pb.TagNumber(50)
-  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+  $5.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(60)
-  $5.Timestamp get updatedOn => $_getN(6);
+  $5.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(60)
-  set updatedOn($5.Timestamp v) { setField(60, v); }
+  set updatedAt($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasUpdatedOn() => $_has(6);
+  $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(60)
-  void clearUpdatedOn() => clearField(60);
+  void clearUpdatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(6);
 }
 
 class ListDiveMastersResponse extends $pb.GeneratedMessage {
@@ -2120,8 +2120,8 @@ class ListHotelsResponse_Hotel extends $pb.GeneratedMessage {
     ..aOS(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'phone')
     ..aOM<$6.Address>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
     ..pc<$6.File>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2134,8 +2134,8 @@ class ListHotelsResponse_Hotel extends $pb.GeneratedMessage {
     $core.String? phone,
     $6.Address? address,
     $core.Iterable<$6.File>? images,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -2159,11 +2159,11 @@ class ListHotelsResponse_Hotel extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -2248,26 +2248,26 @@ class ListHotelsResponse_Hotel extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(6);
 
   @$pb.TagNumber(70)
-  $5.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(70)
-  set createdOn($5.Timestamp v) { setField(70, v); }
+  set createdAt($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasCreatedOn() => $_has(7);
+  $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(70)
-  void clearCreatedOn() => clearField(70);
+  void clearCreatedAt() => clearField(70);
   @$pb.TagNumber(70)
-  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureCreatedAt() => $_ensure(7);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get updatedAt => $_getN(8);
   @$pb.TagNumber(80)
-  set updatedOn($5.Timestamp v) { setField(80, v); }
+  set updatedAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasUpdatedOn() => $_has(8);
+  $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(80)
-  void clearUpdatedOn() => clearField(80);
+  void clearUpdatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(8);
 }
 
 class ListHotelsResponse extends $pb.GeneratedMessage {
@@ -2392,8 +2392,8 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     ..a<$core.int>(52, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diverRooms', $pb.PbFieldType.OU3)
     ..a<$core.int>(53, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staffRooms', $pb.PbFieldType.OU3)
     ..aOM<$6.Address>(54, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2409,8 +2409,8 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     $core.int? diverRooms,
     $core.int? staffRooms,
     $6.Address? address,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -2443,11 +2443,11 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
     if (address != null) {
       _result.address = address;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -2559,26 +2559,26 @@ class ListLiveaboardsResponse_Liveaboard extends $pb.GeneratedMessage {
   $6.Address ensureAddress() => $_ensure(9);
 
   @$pb.TagNumber(60)
-  $5.Timestamp get createdOn => $_getN(10);
+  $5.Timestamp get createdAt => $_getN(10);
   @$pb.TagNumber(60)
-  set createdOn($5.Timestamp v) { setField(60, v); }
+  set createdAt($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasCreatedOn() => $_has(10);
+  $core.bool hasCreatedAt() => $_has(10);
   @$pb.TagNumber(60)
-  void clearCreatedOn() => clearField(60);
+  void clearCreatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureCreatedOn() => $_ensure(10);
+  $5.Timestamp ensureCreatedAt() => $_ensure(10);
 
   @$pb.TagNumber(70)
-  $5.Timestamp get updatedOn => $_getN(11);
+  $5.Timestamp get updatedAt => $_getN(11);
   @$pb.TagNumber(70)
-  set updatedOn($5.Timestamp v) { setField(70, v); }
+  set updatedAt($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasUpdatedOn() => $_has(11);
+  $core.bool hasUpdatedAt() => $_has(11);
   @$pb.TagNumber(70)
-  void clearUpdatedOn() => clearField(70);
+  void clearUpdatedAt() => clearField(70);
   @$pb.TagNumber(70)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(11);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(11);
 }
 
 class ListLiveaboardsResponse extends $pb.GeneratedMessage {
@@ -2698,8 +2698,8 @@ class ListStaffsResponse_Staff extends $pb.GeneratedMessage {
     ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastName')
     ..aOS(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'position')
     ..e<$6.GenderType>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gender', $pb.PbFieldType.OE, defaultOrMaker: $6.GenderType.FEMALE, valueOf: $6.GenderType.valueOf, enumValues: $6.GenderType.values)
-    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2710,8 +2710,8 @@ class ListStaffsResponse_Staff extends $pb.GeneratedMessage {
     $core.String? lastName,
     $core.String? position,
     $6.GenderType? gender,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -2729,11 +2729,11 @@ class ListStaffsResponse_Staff extends $pb.GeneratedMessage {
     if (gender != null) {
       _result.gender = gender;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -2804,26 +2804,26 @@ class ListStaffsResponse_Staff extends $pb.GeneratedMessage {
   void clearGender() => clearField(40);
 
   @$pb.TagNumber(50)
-  $5.Timestamp get createdOn => $_getN(5);
+  $5.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(50)
-  set createdOn($5.Timestamp v) { setField(50, v); }
+  set createdAt($5.Timestamp v) { setField(50, v); }
   @$pb.TagNumber(50)
-  $core.bool hasCreatedOn() => $_has(5);
+  $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(50)
-  void clearCreatedOn() => clearField(50);
+  void clearCreatedAt() => clearField(50);
   @$pb.TagNumber(50)
-  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+  $5.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(60)
-  $5.Timestamp get updatedOn => $_getN(6);
+  $5.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(60)
-  set updatedOn($5.Timestamp v) { setField(60, v); }
+  set updatedAt($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasUpdatedOn() => $_has(6);
+  $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(60)
-  void clearUpdatedOn() => clearField(60);
+  void clearUpdatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(6);
 }
 
 class ListStaffsResponse extends $pb.GeneratedMessage {
@@ -2946,8 +2946,8 @@ class ListTripTemplatesResponse_TripTemplate extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2961,8 +2961,8 @@ class ListTripTemplatesResponse_TripTemplate extends $pb.GeneratedMessage {
     $fixnum.Int64? boatId,
     $fixnum.Int64? liveaboardId,
     $core.Iterable<$6.File>? images,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -2989,11 +2989,11 @@ class ListTripTemplatesResponse_TripTemplate extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -3085,26 +3085,26 @@ class ListTripTemplatesResponse_TripTemplate extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(7);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(8);
+  $5.Timestamp get createdAt => $_getN(8);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set createdAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(8);
+  $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearCreatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(9);
+  $5.Timestamp get updatedAt => $_getN(9);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set updatedAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(9);
+  $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearUpdatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
 }
 
 class ListTripTemplatesResponse extends $pb.GeneratedMessage {
@@ -3226,8 +3226,8 @@ class ListTripsResponse_Trip extends $pb.GeneratedMessage {
     ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -3240,8 +3240,8 @@ class ListTripsResponse_Trip extends $pb.GeneratedMessage {
     $5.Timestamp? fromDate,
     $5.Timestamp? toDate,
     $5.Timestamp? lastReservationDate,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -3265,11 +3265,11 @@ class ListTripsResponse_Trip extends $pb.GeneratedMessage {
     if (lastReservationDate != null) {
       _result.lastReservationDate = lastReservationDate;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -3364,26 +3364,26 @@ class ListTripsResponse_Trip extends $pb.GeneratedMessage {
   $5.Timestamp ensureLastReservationDate() => $_ensure(6);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set createdAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(7);
+  $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearCreatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureCreatedAt() => $_ensure(7);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get updatedAt => $_getN(8);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set updatedAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(8);
+  $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearUpdatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(8);
 }
 
 class ListTripsResponse extends $pb.GeneratedMessage {
@@ -3845,8 +3845,8 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -3860,8 +3860,8 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     $5.Timestamp? fromDate,
     $5.Timestamp? toDate,
     $5.Timestamp? lastReservationDate,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -3888,11 +3888,11 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     if (lastReservationDate != null) {
       _result.lastReservationDate = lastReservationDate;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -3990,26 +3990,26 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
   $5.Timestamp ensureLastReservationDate() => $_ensure(7);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get createdOn => $_getN(8);
+  $5.Timestamp get createdAt => $_getN(8);
   @$pb.TagNumber(90)
-  set createdOn($5.Timestamp v) { setField(90, v); }
+  set createdAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasCreatedOn() => $_has(8);
+  $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(90)
-  void clearCreatedOn() => clearField(90);
+  void clearCreatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(100)
-  $5.Timestamp get updatedOn => $_getN(9);
+  $5.Timestamp get updatedAt => $_getN(9);
   @$pb.TagNumber(100)
-  set updatedOn($5.Timestamp v) { setField(100, v); }
+  set updatedAt($5.Timestamp v) { setField(100, v); }
   @$pb.TagNumber(100)
-  $core.bool hasUpdatedOn() => $_has(9);
+  $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(100)
-  void clearUpdatedOn() => clearField(100);
+  void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
 }
 
 class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
@@ -4022,8 +4022,8 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -4037,8 +4037,8 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     $fixnum.Int64? boatId,
     $fixnum.Int64? liveaboardId,
     $core.Iterable<$6.File>? images,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -4065,11 +4065,11 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -4161,26 +4161,26 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(7);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(8);
+  $5.Timestamp get createdAt => $_getN(8);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set createdAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(8);
+  $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearCreatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(9);
+  $5.Timestamp get updatedAt => $_getN(9);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set updatedAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(9);
+  $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearUpdatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
 }
 
 class SearchOnshoreTripsResponse extends $pb.GeneratedMessage {
@@ -4257,8 +4257,8 @@ class SearchOffshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -4271,8 +4271,8 @@ class SearchOffshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     $5.Timestamp? fromDate,
     $5.Timestamp? toDate,
     $5.Timestamp? lastReservationDate,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -4296,11 +4296,11 @@ class SearchOffshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     if (lastReservationDate != null) {
       _result.lastReservationDate = lastReservationDate;
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -4395,26 +4395,26 @@ class SearchOffshoreTripsResponse_Trip extends $pb.GeneratedMessage {
   $5.Timestamp ensureLastReservationDate() => $_ensure(6);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(7);
+  $5.Timestamp get createdAt => $_getN(7);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set createdAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(7);
+  $core.bool hasCreatedAt() => $_has(7);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearCreatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(7);
+  $5.Timestamp ensureCreatedAt() => $_ensure(7);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(8);
+  $5.Timestamp get updatedAt => $_getN(8);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set updatedAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(8);
+  $core.bool hasUpdatedAt() => $_has(8);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearUpdatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(8);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(8);
 }
 
 class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
@@ -4427,8 +4427,8 @@ class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -4442,8 +4442,8 @@ class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     $fixnum.Int64? boatId,
     $fixnum.Int64? liveaboardId,
     $core.Iterable<$6.File>? images,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -4470,11 +4470,11 @@ class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -4566,26 +4566,26 @@ class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(7);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdOn => $_getN(8);
+  $5.Timestamp get createdAt => $_getN(8);
   @$pb.TagNumber(80)
-  set createdOn($5.Timestamp v) { setField(80, v); }
+  set createdAt($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedOn() => $_has(8);
+  $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(80)
-  void clearCreatedOn() => clearField(80);
+  void clearCreatedAt() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedOn() => $_ensure(8);
+  $5.Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedOn => $_getN(9);
+  $5.Timestamp get updatedAt => $_getN(9);
   @$pb.TagNumber(90)
-  set updatedOn($5.Timestamp v) { setField(90, v); }
+  set updatedAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedOn() => $_has(9);
+  $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(90)
-  void clearUpdatedOn() => clearField(90);
+  void clearUpdatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(9);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
 }
 
 class SearchOffshoreTripsResponse extends $pb.GeneratedMessage {

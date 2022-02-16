@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"github.com/golang/protobuf/ptypes/empty"
@@ -60,5 +61,85 @@ func (handler *AccountHandler) Login(ctx context.Context, req *pb.LoginRequest) 
 
 // GetProfile returns profile based on the given token.
 func (handler *AccountHandler) GetProfile(ctx context.Context, req *empty.Empty) (*pb.GetProfileResponse, error) {
-	return handler.service.GetProfile(ctx)
+	account, err := handler.service.GetProfile(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	switch v := account.(type) {
+	case *model.Admin:
+		return &pb.GetProfileResponse{
+			Profile: &pb.GetProfileResponse_Admin{
+				Admin: &pb.Admin{
+					Account: &pb.Account{
+						Id:        uint64(v.Account.ID),
+						Username:  v.Account.Username,
+						Email:     v.Account.Email,
+						Type:      pb.AccountType(v.Account.Type),
+						Verified:  v.Account.Verified,
+						Active:    v.Account.Active,
+						CreatedAt: &v.CreatedAt,
+						UpdatedAt: &v.UpdatedAt,
+					},
+				},
+			},
+		}, nil
+	case *model.Agency:
+		return &pb.GetProfileResponse{
+			Profile: &pb.GetProfileResponse_Agency{
+				Agency: &pb.Agency{
+					Id:    uint64(v.ID),
+					Name:  v.Name,
+					Phone: v.Phone,
+					Account: &pb.Account{
+						Id:        uint64(v.Account.ID),
+						Username:  v.Account.Username,
+						Email:     v.Account.Email,
+						Type:      pb.AccountType(v.Account.Type),
+						Verified:  v.Account.Verified,
+						Active:    v.Account.Active,
+						CreatedAt: &v.CreatedAt,
+						UpdatedAt: &v.UpdatedAt,
+					},
+					Address: pb.Address{
+						AddressLine_1: v.Address.AddressLine_1,
+						AddressLine_2: v.Address.AddressLine_2,
+						City:          v.Address.City,
+						Postcode:      v.Address.Postcode,
+						Region:        v.Address.Region,
+						Country:       v.Address.Country,
+					},
+					CreatedAt: &v.CreatedAt,
+					UpdatedAt: &v.UpdatedAt,
+				},
+			},
+		}, nil
+	case *model.Diver:
+		return &pb.GetProfileResponse{
+			Profile: &pb.GetProfileResponse_Diver{
+				Diver: &pb.Diver{
+					Id:        uint64(v.ID),
+					FirstName: v.FirstName,
+					LastName:  v.LastName,
+					Phone:     v.Phone,
+					BirthDate: v.BirthDate,
+					Level:     pb.LevelType(v.Level),
+					Account: &pb.Account{
+						Id:        uint64(v.Account.ID),
+						Username:  v.Account.Username,
+						Email:     v.Account.Email,
+						Type:      pb.AccountType(v.Account.Type),
+						Verified:  v.Account.Verified,
+						Active:    v.Account.Active,
+						CreatedAt: &v.CreatedAt,
+						UpdatedAt: &v.UpdatedAt,
+					},
+					CreatedAt: &v.CreatedAt,
+					UpdatedAt: &v.UpdatedAt,
+				},
+			},
+		}, nil
+	}
+
+	return nil, status.Error(codes.InvalidArgument, "GetProfile: cannot get profile")
 }

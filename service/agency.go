@@ -49,7 +49,7 @@ func NewAgencyService(repo *repo.Repo, media media.Store) *agencyService {
 	}
 }
 
-func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
+func getUserInformationFromContext(ctx context.Context) (*model.Agency, error) {
 	// Obtaining value at session.User
 	user := ctx.Value(session.User)
 
@@ -58,7 +58,7 @@ func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
 		return nil, status.Error(codes.Unauthenticated, "user not found")
 	}
 	// Type assertion
-	v, ok := user.(*pb.Agency) // Casting to Agency
+	v, ok := user.(*model.Agency) // Casting to Agency
 	if !ok {
 		// Handle error
 		return nil, status.Error(codes.Internal, "casting user to Agency failed")
@@ -85,7 +85,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	newDiveMaster.Level = model.LevelType(diveMaster.Level)
 
-	newDiveMaster.AgencyID = uint(agency.Id)
+	newDiveMaster.AgencyID = agency.ID
 
 	var reader *bytes.Reader
 	var objectID string
@@ -140,7 +140,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		Description: hotel.GetHotelDescription(),
 		Stars:       hotel.GetStar(),
 		Phone:       hotel.GetPhone(),
-		AgencyID:    uint(agency.GetId()),
+		AgencyID:    agency.ID,
 	}
 
 	for _, image := range hotel.GetImages() {
@@ -165,7 +165,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 			MaxGuest:    rt.GetMaxGuest(),
 			Price:       rt.GetPrice(),
 			Quantity:    rt.GetQuantity(),
-			HotelID:     uint(agency.GetId()),
+			// HotelID:     uint(agency.GetId()),
 		}
 
 		for _, image := range rt.GetRoomImages() {
@@ -201,7 +201,7 @@ func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff) error
 		LastName:  req.GetLastName(),
 		Position:  req.GetPosition(),
 		Gender:    model.GenderType(req.GetGender()),
-		AgencyID:  uint(agency.GetId()),
+		AgencyID:  agency.ID,
 	}
 
 	_, err = service.repo.Agency.CreateStaff(ctx, &newStaff)
@@ -236,7 +236,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		Description: tripTemplate.GetDescription(),
 		Type:        model.TripType(tripTemplate.GetTripType()),
 		Address:     tripTemplateAddress,
-		AgencyID:    uint(agency.GetId()),
+		AgencyID:    agency.ID,
 	}
 
 	if newTripTemplate.Type == model.ONSHORE {
@@ -276,7 +276,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 			EndDate:             trip.GetTo(),
 			LastReservationDate: trip.GetLastReservationDate(),
 			TripTemplateID:      newTripTemplate.ID,
-			AgencyID:            uint(agency.GetId()),
+			AgencyID:            agency.ID,
 		}
 
 		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
@@ -328,7 +328,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		TotalCapacity: divingBoat.GetTotalCapacity(),
 		DiverCapacity: divingBoat.GetDiverCapacity(),
 		StaffCapacity: divingBoat.GetStaffCapacity(),
-		AgencyID:      uint(agency.GetId()),
+		AgencyID:      agency.ID,
 	}
 
 	for _, image := range divingBoat.GetBoatImages() {
@@ -373,7 +373,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		TotalCapacity: liveaboard.GetTotalCapacity(),
 		DiverRooms:    liveaboard.GetDiverRooms(),
 		StaffRooms:    liveaboard.GetStaffRooms(),
-		AgencyID:      uint(agency.GetId()),
+		AgencyID:      agency.ID,
 	}
 
 	for _, image := range liveaboard.GetImages() {
@@ -393,12 +393,12 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	// Copy room types information
 	for _, rt := range pbRoomTypes {
 		tempRoomType := model.RoomType{
-			Name:         rt.GetName(),
-			Description:  rt.GetDescription(),
-			MaxGuest:     rt.GetMaxGuest(),
-			Price:        rt.GetPrice(),
-			Quantity:     rt.GetQuantity(),
-			LiveaboardID: uint(agency.GetId()),
+			Name:        rt.GetName(),
+			Description: rt.GetDescription(),
+			MaxGuest:    rt.GetMaxGuest(),
+			Price:       rt.GetPrice(),
+			Quantity:    rt.GetQuantity(),
+			// LiveaboardID: uint(agency.GetId()),
 		}
 
 		for _, image := range rt.GetRoomImages() {
@@ -434,7 +434,7 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 		limit = 20
 	}
 
-	boats, err := service.repo.Boat.ListBoatsByAgency(ctx, agency.Id, limit, offset)
+	boats, err := service.repo.Boat.ListBoatsByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -460,7 +460,7 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 		limit = 20
 	}
 
-	diveMasters, err := service.repo.DiveMaster.ListDiveMastersByAgency(ctx, agency.Id, limit, offset)
+	diveMasters, err := service.repo.DiveMaster.ListDiveMastersByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -486,7 +486,7 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 		limit = 20
 	}
 
-	hotels, err := service.repo.Hotel.ListHotelsByAgency(ctx, agency.Id, limit, offset)
+	hotels, err := service.repo.Hotel.ListHotelsByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -512,7 +512,7 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 		limit = 20
 	}
 
-	liveaboards, err := service.repo.Liveaboard.ListLiveaboardsByAgency(ctx, agency.Id, limit, offset)
+	liveaboards, err := service.repo.Liveaboard.ListLiveaboardsByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -538,7 +538,7 @@ func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint
 		limit = 20
 	}
 
-	return service.repo.Staff.ListStaffsByAgency(ctx, agency.Id, limit, offset)
+	return service.repo.Staff.ListStaffsByAgency(ctx, uint64(agency.ID), limit, offset)
 }
 
 // ListTripTemplates returns list of trip templates associated with the agency.
@@ -553,7 +553,7 @@ func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offs
 		limit = 20
 	}
 
-	templates, err := service.repo.TripTemplate.ListTripTemplatesByAgency(ctx, agency.Id, limit, offset)
+	templates, err := service.repo.TripTemplate.ListTripTemplatesByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}
@@ -579,7 +579,7 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 		limit = 20
 	}
 
-	trips, err := service.repo.Trip.ListTripsByAgency(ctx, agency.Id, limit, offset)
+	trips, err := service.repo.Trip.ListTripsByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
 	}

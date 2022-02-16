@@ -104,8 +104,8 @@ func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyS
 				TotalCapacity: boat.TotalCapacity,
 				DiverCapacity: boat.DiverCapacity,
 				StaffCapacity: boat.StaffCapacity,
-				CreatedOn:     &boat.CreatedAt,
-				UpdatedOn:     &boat.UpdatedAt,
+				CreatedAt:     &boat.CreatedAt,
+				UpdatedAt:     &boat.UpdatedAt,
 			},
 		}
 
@@ -143,8 +143,8 @@ func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, sr
 				FirstName: diveMaster.FirstName,
 				LastName:  diveMaster.LastName,
 				Level:     pb.LevelType(diveMaster.Level),
-				CreatedOn: &diveMaster.CreatedAt,
-				UpdatedOn: &diveMaster.UpdatedAt,
+				CreatedAt: &diveMaster.CreatedAt,
+				UpdatedAt: &diveMaster.UpdatedAt,
 			},
 		}
 
@@ -194,11 +194,11 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 					Postcode:      hotel.Address.Postcode,
 					Region:        hotel.Address.Region,
 					Country:       hotel.Address.Country,
-					CreatedOn:     &hotel.Address.CreatedAt,
-					UpdatedOn:     &hotel.Address.UpdatedAt,
+					CreatedAt:     &hotel.Address.CreatedAt,
+					UpdatedAt:     &hotel.Address.UpdatedAt,
 				},
-				CreatedOn: &hotel.CreatedAt,
-				UpdatedOn: &hotel.UpdatedAt,
+				CreatedAt: &hotel.CreatedAt,
+				UpdatedAt: &hotel.UpdatedAt,
 			},
 		}
 
@@ -248,11 +248,11 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 					Postcode:      liveaboard.Address.Postcode,
 					Region:        liveaboard.Address.Region,
 					Country:       liveaboard.Address.Country,
-					CreatedOn:     &liveaboard.Address.CreatedAt,
-					UpdatedOn:     &liveaboard.Address.UpdatedAt,
+					CreatedAt:     &liveaboard.Address.CreatedAt,
+					UpdatedAt:     &liveaboard.Address.UpdatedAt,
 				},
-				CreatedOn: &liveaboard.CreatedAt,
-				UpdatedOn: &liveaboard.UpdatedAt,
+				CreatedAt: &liveaboard.CreatedAt,
+				UpdatedAt: &liveaboard.UpdatedAt,
 			},
 		}
 
@@ -295,8 +295,8 @@ func (handler *AgencyHandler) ListStaffs(req *pb.ListStaffsRequest, srv pb.Agenc
 				LastName:  staff.LastName,
 				Position:  staff.Position,
 				Gender:    pb.GenderType(staff.Gender),
-				CreatedOn: &staff.CreatedAt,
-				UpdatedOn: &staff.UpdatedAt,
+				CreatedAt: &staff.CreatedAt,
+				UpdatedAt: &staff.UpdatedAt,
 			},
 		}
 		srv.Send(resp)
@@ -328,8 +328,8 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 				HotelId:      uint64(tripTemplate.HotelID),
 				BoatId:       uint64(tripTemplate.BoatID),
 				LiveaboardId: uint64(tripTemplate.LiveaboardID),
-				CreatedOn:    &tripTemplate.CreatedAt,
-				UpdatedOn:    &tripTemplate.UpdatedAt,
+				CreatedAt:    &tripTemplate.CreatedAt,
+				UpdatedAt:    &tripTemplate.UpdatedAt,
 			},
 		}
 
@@ -372,8 +372,8 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 				FromDate:            trip.StartDate,
 				ToDate:              trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
-				CreatedOn:           &trip.CreatedAt,
-				UpdatedOn:           &trip.UpdatedAt,
+				CreatedAt:           &trip.CreatedAt,
+				UpdatedAt:           &trip.UpdatedAt,
 			},
 		}
 		srv.Send(resp)
@@ -404,8 +404,8 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 				FromDate:            trip.StartDate,
 				ToDate:              trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
-				CreatedOn:           &trip.CreatedAt,
-				UpdatedOn:           &trip.UpdatedAt,
+				CreatedAt:           &trip.CreatedAt,
+				UpdatedAt:           &trip.UpdatedAt,
 			},
 			TripTemplate: &pb.SearchOnshoreTripsResponse_TripTemplate{
 				Id:           uint64(trip.TripTemplate.ID),
@@ -415,8 +415,8 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 				HotelId:      uint64(trip.TripTemplate.HotelID),
 				BoatId:       uint64(trip.TripTemplate.BoatID),
 				LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
-				CreatedOn:    &trip.TripTemplate.CreatedAt,
-				UpdatedOn:    &trip.TripTemplate.UpdatedAt,
+				CreatedAt:    &trip.TripTemplate.CreatedAt,
+				UpdatedAt:    &trip.TripTemplate.UpdatedAt,
 			},
 		}
 

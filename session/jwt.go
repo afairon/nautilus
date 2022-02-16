@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/afairon/nautilus/config"
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -19,9 +19,9 @@ type JWTManager struct {
 // user account information.
 type UserClaims struct {
 	jwt.StandardClaims
-	Admin  *pb.Admin  `json:"admin,omitempty"`
-	Agency *pb.Agency `json:"agency,omitempty"`
-	Diver  *pb.Diver  `json:"diver,omitempty"`
+	Admin  *model.Admin  `json:"admin,omitempty"`
+	Agency *model.Agency `json:"agency,omitempty"`
+	Diver  *model.Diver  `json:"diver,omitempty"`
 }
 
 // NewJWTManager creates a new jwt manager.
@@ -62,11 +62,11 @@ func (manager *JWTManager) Create(account Account) (string, error) {
 
 	// Type assertion, conversion from interface type to concrete type
 	switch v := account.(type) {
-	case *pb.Admin:
+	case *model.Admin:
 		claims.Admin = v
-	case *pb.Agency:
+	case *model.Agency:
 		claims.Agency = v
-	case *pb.Diver:
+	case *model.Diver:
 		claims.Diver = v
 	}
 

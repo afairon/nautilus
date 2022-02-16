@@ -51,8 +51,8 @@ message Account {
     AccountType type = 40;
     bool verified = 50;
     bool active = 60;
-    google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
 }
 
 // Admin
@@ -69,8 +69,8 @@ message Address {
     string postcode = 40;
     string region = 50;
     string country = 60;
-    google.protobuf.Timestamp created_on = 70 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
 }
 
 // Agency
@@ -81,8 +81,8 @@ message Agency {
     Account account = 30;
     Address address = 40 [(gogoproto.nullable) = false];
     repeated File documents = 50 [(gogoproto.nullable) = false];
-    google.protobuf.Timestamp created_on = 60 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
 }
 
 // Diver
@@ -95,8 +95,8 @@ message Diver {
     LevelType level = 50;
     Account account = 60;
     repeated File documents = 70 [(gogoproto.nullable) = false];
-    google.protobuf.Timestamp created_on = 80 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
 }
 
 // TripComment
@@ -105,8 +105,8 @@ message TripComment {
     string comment = 10;
     uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 50 [(gogoproto.stdtime) = true];
 }
 
 // HotelComment
@@ -115,8 +115,8 @@ message HotelComment {
     string comment = 10;
     uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 50 [(gogoproto.stdtime) = true];
 }
 
 // LiveaboardComment
@@ -125,6 +125,6 @@ message LiveaboardComment {
     string comment = 10;
     uint32 stars = 20;
     uint64 reservation_id = 30;
-    google.protobuf.Timestamp created_on = 40 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_on = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 40 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 50 [(gogoproto.stdtime) = true];
 }

@@ -52,8 +52,8 @@ func (service *commentService) CreateTripComment(ctx context.Context, comment *p
 		Comment:       newCommentRecord.Comment,
 		Stars:         newCommentRecord.Stars,
 		ReservationId: newCommentRecord.ReservationId,
-		CreatedOn:     newCommentRecord.CreatedOn,
-		UpdatedOn:     newCommentRecord.UpdatedOn,
+		CreatedAt:     newCommentRecord.CreatedOn,
+		UpdatedAt:     newCommentRecord.UpdatedOn,
 	}
 
 	return &newComment, nil
@@ -84,8 +84,8 @@ func (service *commentService) CreateHotelComment(ctx context.Context, comment *
 		Comment:       newCommentRecord.Comment,
 		Stars:         newCommentRecord.Stars,
 		ReservationId: newCommentRecord.ReservationId,
-		CreatedOn:     newCommentRecord.CreatedOn,
-		UpdatedOn:     newCommentRecord.UpdatedOn,
+		CreatedAt:     newCommentRecord.CreatedOn,
+		UpdatedAt:     newCommentRecord.UpdatedOn,
 	}
 
 	return &newComment, nil
@@ -116,8 +116,8 @@ func (service *commentService) CreateLiveaboardComment(ctx context.Context, comm
 		Comment:       newCommentRecord.Comment,
 		Stars:         newCommentRecord.Stars,
 		ReservationId: newCommentRecord.ReservationId,
-		CreatedOn:     newCommentRecord.CreatedOn,
-		UpdatedOn:     newCommentRecord.UpdatedOn,
+		CreatedAt:     newCommentRecord.CreatedOn,
+		UpdatedAt:     newCommentRecord.UpdatedOn,
 	}
 
 	return &newComment, nil

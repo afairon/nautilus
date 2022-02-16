@@ -122,8 +122,8 @@ class Reservation extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diverId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.double>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..pc<Reservation_Room>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: Reservation_Room.create)
-    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdOn', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedOn', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -134,8 +134,8 @@ class Reservation extends $pb.GeneratedMessage {
     $fixnum.Int64? diverId,
     $core.double? price,
     $core.Iterable<Reservation_Room>? rooms,
-    $5.Timestamp? createdOn,
-    $5.Timestamp? updatedOn,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -153,11 +153,11 @@ class Reservation extends $pb.GeneratedMessage {
     if (rooms != null) {
       _result.rooms.addAll(rooms);
     }
-    if (createdOn != null) {
-      _result.createdOn = createdOn;
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
     }
-    if (updatedOn != null) {
-      _result.updatedOn = updatedOn;
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -222,26 +222,26 @@ class Reservation extends $pb.GeneratedMessage {
   $core.List<Reservation_Room> get rooms => $_getList(4);
 
   @$pb.TagNumber(50)
-  $5.Timestamp get createdOn => $_getN(5);
+  $5.Timestamp get createdAt => $_getN(5);
   @$pb.TagNumber(50)
-  set createdOn($5.Timestamp v) { setField(50, v); }
+  set createdAt($5.Timestamp v) { setField(50, v); }
   @$pb.TagNumber(50)
-  $core.bool hasCreatedOn() => $_has(5);
+  $core.bool hasCreatedAt() => $_has(5);
   @$pb.TagNumber(50)
-  void clearCreatedOn() => clearField(50);
+  void clearCreatedAt() => clearField(50);
   @$pb.TagNumber(50)
-  $5.Timestamp ensureCreatedOn() => $_ensure(5);
+  $5.Timestamp ensureCreatedAt() => $_ensure(5);
 
   @$pb.TagNumber(60)
-  $5.Timestamp get updatedOn => $_getN(6);
+  $5.Timestamp get updatedAt => $_getN(6);
   @$pb.TagNumber(60)
-  set updatedOn($5.Timestamp v) { setField(60, v); }
+  set updatedAt($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasUpdatedOn() => $_has(6);
+  $core.bool hasUpdatedAt() => $_has(6);
   @$pb.TagNumber(60)
-  void clearUpdatedOn() => clearField(60);
+  void clearUpdatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureUpdatedOn() => $_ensure(6);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(6);
 }
 
 class CreateReservationRequest extends $pb.GeneratedMessage {

@@ -1,7 +1,7 @@
 package session
 
 import (
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 )
 
 // context is a string, used as a key when using WithValue.
@@ -11,7 +11,7 @@ type context string
 const User context = "user"
 
 type Account interface {
-	GetAccount() *pb.Account
+	GetAccount() *model.Account
 }
 
 // Session defines interface.

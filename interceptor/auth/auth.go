@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/afairon/nautilus/interceptor"
-	"github.com/afairon/nautilus/pb"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/session"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -14,24 +14,24 @@ import (
 
 // accessRoles defines the permission and roles for different services.
 // Services that are available to everyone should not be defined in here.
-var accessRoles = map[string][]pb.AccountType{
-	"/account.Account/GetProfile":                       {pb.ADMIN, pb.AGENCY, pb.DIVER},
-	"/agency.AgencyService/AddDiveMaster":               {pb.AGENCY},
-	"/agency.AgencyService/AddHotel":                    {pb.AGENCY},
-	"/agency.AgencyService/AddTrip":                     {pb.AGENCY},
-	"/agency.AgencyService/AddDivingBoat":               {pb.AGENCY},
-	"/agency.AgencyService/AddStaff":                    {pb.AGENCY},
-	"/agency.AgencyService/AddLiveaboard":               {pb.AGENCY},
-	"/agency.AgencyService/ListBoats":                   {pb.AGENCY},
-	"/agency.AgencyService/ListDiveMasters":             {pb.AGENCY},
-	"/agency.AgencyService/ListHotels":                  {pb.AGENCY},
-	"/agency.AgencyService/ListLiveaboards":             {pb.AGENCY},
-	"/agency.AgencyService/ListStaffs":                  {pb.AGENCY},
-	"/agency.AgencyService/ListTripTemplates":           {pb.AGENCY},
-	"/agency.AgencyService/ListTrips":                   {pb.AGENCY},
-	"/comment.CommentService/CreateComment":             {pb.DIVER},
-	"/reservation.ReservationService/CreateReservation": {pb.DIVER},
-	"/reservation.ReservationService/GetReservation":    {pb.AGENCY, pb.DIVER},
+var accessRoles = map[string][]model.AccountType{
+	"/account.Account/GetProfile":                       {model.ADMIN, model.AGENCY, model.DIVER},
+	"/agency.AgencyService/AddDiveMaster":               {model.AGENCY},
+	"/agency.AgencyService/AddHotel":                    {model.AGENCY},
+	"/agency.AgencyService/AddTrip":                     {model.AGENCY},
+	"/agency.AgencyService/AddDivingBoat":               {model.AGENCY},
+	"/agency.AgencyService/AddStaff":                    {model.AGENCY},
+	"/agency.AgencyService/AddLiveaboard":               {model.AGENCY},
+	"/agency.AgencyService/ListBoats":                   {model.AGENCY},
+	"/agency.AgencyService/ListDiveMasters":             {model.AGENCY},
+	"/agency.AgencyService/ListHotels":                  {model.AGENCY},
+	"/agency.AgencyService/ListLiveaboards":             {model.AGENCY},
+	"/agency.AgencyService/ListStaffs":                  {model.AGENCY},
+	"/agency.AgencyService/ListTripTemplates":           {model.AGENCY},
+	"/agency.AgencyService/ListTrips":                   {model.AGENCY},
+	"/comment.CommentService/CreateComment":             {model.DIVER},
+	"/reservation.ReservationService/CreateReservation": {model.DIVER},
+	"/reservation.ReservationService/GetReservation":    {model.AGENCY, model.DIVER},
 }
 
 // AuthFunc is a function type authorizing users to access certain services.

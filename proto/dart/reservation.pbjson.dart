@@ -17,8 +17,8 @@ const Reservation$json = const {
     const {'1': 'diver_id', '3': 20, '4': 1, '5': 4, '10': 'diverId'},
     const {'1': 'price', '3': 30, '4': 1, '5': 2, '10': 'price'},
     const {'1': 'rooms', '3': 40, '4': 3, '5': 11, '6': '.reservation.Reservation.Room', '10': 'rooms'},
-    const {'1': 'created_on', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdOn'},
-    const {'1': 'updated_on', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedOn'},
+    const {'1': 'created_at', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
   ],
   '3': const [Reservation_Room$json],
 };
@@ -36,7 +36,7 @@ const Reservation_Room$json = const {
 };
 
 /// Descriptor for `Reservation`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reservationDescriptor = $convert.base64Decode('CgtSZXNlcnZhdGlvbhIOCgJpZBgBIAEoBFICaWQSFwoHdHJpcF9pZBgKIAEoBFIGdHJpcElkEhkKCGRpdmVyX2lkGBQgASgEUgdkaXZlcklkEhQKBXByaWNlGB4gASgCUgVwcmljZRIzCgVyb29tcxgoIAMoCzIdLnJlc2VydmF0aW9uLlJlc2VydmF0aW9uLlJvb21SBXJvb21zEj8KCmNyZWF0ZWRfb24YMiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkT24SPwoKdXBkYXRlZF9vbhg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRPbhqKAQoEUm9vbRIOCgJpZBgBIAEoBFICaWQSIAoMcm9vbV90eXBlX2lkGAogASgEUgpyb29tVHlwZUlkEhsKCW5vX2FkdWx0cxgUIAEoDVIIbm9BZHVsdHMSFwoHbm9fa2lkcxgeIAEoDVIGbm9LaWRzEhoKCHF1YW50aXR5GCggASgNUghxdWFudGl0eQ==');
+final $typed_data.Uint8List reservationDescriptor = $convert.base64Decode('CgtSZXNlcnZhdGlvbhIOCgJpZBgBIAEoBFICaWQSFwoHdHJpcF9pZBgKIAEoBFIGdHJpcElkEhkKCGRpdmVyX2lkGBQgASgEUgdkaXZlcklkEhQKBXByaWNlGB4gASgCUgVwcmljZRIzCgVyb29tcxgoIAMoCzIdLnJlc2VydmF0aW9uLlJlc2VydmF0aW9uLlJvb21SBXJvb21zEj8KCmNyZWF0ZWRfYXQYMiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdBqKAQoEUm9vbRIOCgJpZBgBIAEoBFICaWQSIAoMcm9vbV90eXBlX2lkGAogASgEUgpyb29tVHlwZUlkEhsKCW5vX2FkdWx0cxgUIAEoDVIIbm9BZHVsdHMSFwoHbm9fa2lkcxgeIAEoDVIGbm9LaWRzEhoKCHF1YW50aXR5GCggASgNUghxdWFudGl0eQ==');
 @$core.Deprecated('Use createReservationRequestDescriptor instead')
 const CreateReservationRequest$json = const {
   '1': 'CreateReservationRequest',

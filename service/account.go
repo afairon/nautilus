@@ -19,7 +19,7 @@ type AccountService interface {
 	CreateAgencyAccount(ctx context.Context, agency *pb.Agency) error
 	CreateDiverAccount(ctx context.Context, diver *pb.Diver) error
 	Login(ctx context.Context, email, password string) (string, error)
-	GetProfile(ctx context.Context) (*pb.GetProfileResponse, error)
+	GetProfile(ctx context.Context) (session.Account, error)
 }
 
 // accountService implements AccountService.
@@ -212,38 +212,24 @@ func (service *accountService) Login(ctx context.Context, email, password string
 }
 
 // GetProfile returns profile based on the given token.
-func (service *accountService) GetProfile(ctx context.Context) (*pb.GetProfileResponse, error) {
-	account := ctx.Value(session.User)
-	if account == nil {
+func (service *accountService) GetProfile(ctx context.Context) (session.Account, error) {
+	s := ctx.Value(session.User)
+	if s == nil {
 		return nil, status.Error(codes.Unauthenticated, "account: account not found")
 	}
 
-	// Type assertion
-	switch v := account.(type) {
-	case *pb.Admin:
-		if v.GetAccount() != nil {
-			account, err := service.repo.Account.GetAdminAccount(ctx, v.GetAccount().GetId())
-			if err != nil {
-				return nil, err
-			}
-			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Admin{Admin: account}}, nil
-		}
-	case *pb.Agency:
-		if v.GetAccount() != nil {
-			account, err := service.repo.Account.GetAgencyAccount(ctx, v.GetAccount().GetId())
-			if err != nil {
-				return nil, err
-			}
-			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Agency{Agency: account}}, nil
-		}
-	case *pb.Diver:
-		if v.GetAccount() != nil {
-			account, err := service.repo.Account.GetDiverAccount(ctx, v.GetAccount().GetId())
-			if err != nil {
-				return nil, err
-			}
-			return &pb.GetProfileResponse{Profile: &pb.GetProfileResponse_Diver{Diver: account}}, nil
-		}
+	account, ok := s.(session.Account)
+	if !ok {
+		return nil, status.Error(codes.Unauthenticated, "account: account not found")
+	}
+
+	switch account.GetAccount().Type {
+	case model.ADMIN:
+		return service.repo.Account.GetAdminAccount(ctx, uint64(account.GetAccount().ID))
+	case model.AGENCY:
+		return service.repo.Account.GetAgencyAccount(ctx, uint64(account.GetAccount().ID))
+	case model.DIVER:
+		return service.repo.Account.GetDiverAccount(ctx, uint64(account.GetAccount().ID))
 	}
 
 	return nil, status.Error(codes.Unauthenticated, "account: account not found")
