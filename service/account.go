@@ -5,7 +5,6 @@ import (
 	"context"
 	"strings"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -112,7 +111,7 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 // a record in account table and finally a record in diver table
 // with account_id.
 func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb.Diver) error {
-	account := &entity.Account{}
+	account := &model.Account{}
 
 	// Copy account information and verify if the information is correct.
 	err := account.SetAccount(diver.Account)
@@ -120,14 +119,14 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 		return err
 	}
 
-	account.Type = pb.DIVER
+	account.Type = model.DIVER
 
-	newDiver := entity.Diver{
+	newDiver := model.Diver{
+		Level:     model.LevelType(diver.GetLevel()),
 		FirstName: diver.GetFirstName(),
 		LastName:  diver.GetLastName(),
 		Phone:     diver.GetPhone(),
-		BirthDate: diver.GetBirthDate().Format("2006-01-02"),
-		Level:     diver.GetLevel(),
+		BirthDate: diver.GetBirthDate(),
 	}
 
 	for _, document := range diver.GetDocuments() {
@@ -138,6 +137,8 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 		}
 		newDiver.Documents = append(newDiver.Documents, objectID)
 	}
+
+	newDiver.Account = account
 
 	// err = service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 	// 	newAccount, err := query.Account.Create(ctx, account)
@@ -150,6 +151,8 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *pb
 
 	// 	return err
 	// })
+
+	_, err = service.repo.Diver.Create(ctx, &newDiver)
 
 	if err != nil {
 		for _, document := range newDiver.Documents {

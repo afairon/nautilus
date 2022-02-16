@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
@@ -12,7 +13,7 @@ import (
 // DiverRepository defines interface for interaction
 // with the diver repository.
 type DiverRepository interface {
-	Create(ctx context.Context, diver *entity.Diver) (*entity.Diver, error)
+	Create(ctx context.Context, diver *model.Diver) (*model.Diver, error)
 	Get(ctx context.Context, id uint64) (*entity.Diver, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error)
 }
@@ -30,7 +31,7 @@ func NewDiverRepository(db *gorm.DB) *diverRepository {
 }
 
 // Create creates an diver record and returns the newly created record.
-func (repo *diverRepository) Create(ctx context.Context, diver *entity.Diver) (*entity.Diver, error) {
+func (repo *diverRepository) Create(ctx context.Context, diver *model.Diver) (*model.Diver, error) {
 	// var result entity.Diver
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -43,7 +44,9 @@ func (repo *diverRepository) Create(ctx context.Context, diver *entity.Diver) (*
 	// `, diver.FirstName, diver.LastName, diver.Phone, diver.BirthDate, diver.Level, diver.AccountId, diver.Documents)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(diver)
+
+	return diver, result.Error
 }
 
 // Get retrieves the diver record by its id.
