@@ -3,7 +3,6 @@ package service
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"strings"
 
 	"github.com/afairon/nautilus/internal/media"
@@ -181,8 +180,6 @@ func (service *accountService) Login(ctx context.Context, email, password string
 	if err != nil {
 		return "", status.Error(codes.Unavailable, err.Error())
 	}
-
-	fmt.Printf("%+v\n id: %d", accountRecord, accountRecord.ID)
 
 	// Check password with hash.
 	if !accountRecord.CheckPassword(password) {

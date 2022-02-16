@@ -3,7 +3,6 @@ package repo
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/model"
@@ -178,7 +177,7 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 		Name:  agency.Name,
 		Phone: agency.Phone,
 		Account: &pb.Account{
-			Id:        uint64(agency.ID),
+			Id:        uint64(agency.Account.ID),
 			Username:  agency.Account.Username,
 			Email:     agency.Account.Email,
 			Password:  agency.Account.Password,
@@ -227,10 +226,8 @@ func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (
 	// }
 
 	// return &result, nil
-	fmt.Printf("received account Id: %d\n", id)
 	var diver model.Diver
 	r := repo.db.Preload("Account").Joins("JOIN accounts ON accounts.diver_id = divers.id AND accounts.id = ?", id).First(&diver)
-	fmt.Printf("diver: %+v\naccount id: %d\n", diver.Account, diver.Account.ID)
 
 	if r.Error != nil {
 		return nil, r.Error
