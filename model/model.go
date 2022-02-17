@@ -213,6 +213,7 @@ type Reservation struct {
 	DiverID           uint
 	TripID            uint
 	Trip              Trip
+	RoomTypes         []RoomType `gorm:"many2many:reservation_room_types;"`
 }
 
 type LiveaboardComment struct {
@@ -289,4 +290,12 @@ type Hotel struct {
 type DiveMasterTrip struct {
 	TripID       uint `gorm:"primaryKey"`
 	DiveMasterID uint `gorm:"primaryKey"`
+}
+
+type ReservationRoomTypes struct {
+	*gorm.Model
+	ReservationID uint `gorm:"primaryKey"`
+	RoomTypeID    uint `gorm:"primaryKey"`
+	DiverNo       uint
+	Quantity      uint
 }

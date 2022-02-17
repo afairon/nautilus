@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -47,8 +46,6 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 		Price:   reservation.GetPrice(),
 	}
 
-	fmt.Println(reservationRecord)
-
 	// Execute transaction
 	// err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
 	// 	newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
@@ -88,9 +85,17 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	// 	return nil
 	// })
 
-	// TO BE REMOVED
-	var err error
-	err = nil
+	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
+		newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
+
+		if err != nil {
+			return err
+		}
+
+		newReservation.Id = uint64(newReservationRecord.ID)
+		newReservation.CreatedOn = &newReservationRecord.CreatedAt
+		newReservation.UpdatedOn = &newReservationRecord.UpdatedAt
+	})
 
 	if err != nil {
 		return nil, err

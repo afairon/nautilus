@@ -5,13 +5,14 @@ import (
 	"errors"
 
 	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
 // ReservationRepository defines interface for interaction
 // with the reservation repository.
 type ReservationRepository interface {
-	CreateReservation(ctx context.Context, reservation *entity.Reservation) (*entity.Reservation, error)
+	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
 	BookRoom(ctx context.Context, room *entity.BookedRoom) (*entity.BookedRoom, error)
 }
 
