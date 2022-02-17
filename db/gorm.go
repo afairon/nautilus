@@ -67,7 +67,11 @@ func InitGormStore(host string, port int, user, password, dbname string, ssl boo
 		return nil, err
 	}
 
-	err = Migrate(GormStore)
+	err = GormStore.SetupJoinTable(&model.Reservation{}, "RoomTypes", &model.ReservationRoomTypes{})
+
+	if err != nil {
+		return nil, err
+	}
 
 	if err != nil {
 		return nil, err
