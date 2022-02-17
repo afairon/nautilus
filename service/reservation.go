@@ -2,7 +2,9 @@ package service
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"google.golang.org/grpc/codes"
@@ -39,11 +41,13 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	// Copy information from reservation to newReservation
 	newReservation = *reservation
 
-	// reservationRecord := entity.Reservation{
-	// 	TripId:  reservation.GetTripId(),
-	// 	DiverId: reservation.GetDiverId(),
-	// 	Price:   reservation.GetPrice(),
-	// }
+	reservationRecord := model.Reservation{
+		TripID:  uint(reservation.GetTripId()),
+		DiverID: uint(reservation.GetDiverId()),
+		Price:   reservation.GetPrice(),
+	}
+
+	fmt.Println(reservationRecord)
 
 	// Execute transaction
 	// err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
