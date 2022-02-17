@@ -95,6 +95,34 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 		newReservation.Id = uint64(newReservationRecord.ID)
 		newReservation.CreatedOn = &newReservationRecord.CreatedAt
 		newReservation.UpdatedOn = &newReservationRecord.UpdatedAt
+
+		length := len(reservation.GetRooms())
+		// Allocate memory space for rooms
+		newReservation.Rooms = make([]*pb.Reservation_Room, length)
+
+		for i := 0; i < length; i++ {
+			newReservation.Rooms[i] = &pb.Reservation_Room{}
+		}
+
+		for i, room := range reservation.GetRooms() {
+			newRoomRecord := model.ReservationRoomTypes{
+				ReservationID: uint(newReservation.GetId()),
+				RoomTypeID:    uint(room.GetRoomTypeId()),
+				DiverNo:       uint(room.GetNoDivers()),
+				Quantity:      uint(room.GetQuantity()),
+			}
+
+			bookedRoom, err := query.Reservation.BookRoom(ctx, &newRoomRecord)
+
+			if err != nil {
+				return err
+			}
+
+			*newReservation.Rooms[i] = *room
+			newReservation.Rooms[i].Id = uint64(bookedRoom.ID)
+		}
+
+		return nil
 	})
 
 	if err != nil {

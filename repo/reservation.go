@@ -13,7 +13,7 @@ import (
 // with the reservation repository.
 type ReservationRepository interface {
 	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
-	BookRoom(ctx context.Context, room *entity.BookedRoom) (*entity.BookedRoom, error)
+	BookRoom(ctx context.Context, room *model.ReservationRoomTypes) (*model.ReservationRoomTypes, error)
 }
 
 // reservationRepository implements ReservationRepository interface.
@@ -46,7 +46,7 @@ func (repo *reservationRepository) CreateReservation(ctx context.Context, reserv
 }
 
 // BookRoom creates a booked room record and returns the newly created record.
-func (repo *reservationRepository) BookRoom(ctx context.Context, room *entity.BookedRoom) (*entity.BookedRoom, error) {
+func (repo *reservationRepository) BookRoom(ctx context.Context, room *model.ReservationRoomTypes) (*model.ReservationRoomTypes, error) {
 	// var result entity.BookedRoom
 
 	// err := repo.db.GetContext(ctx, &result, `
