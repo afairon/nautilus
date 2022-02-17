@@ -49,7 +49,7 @@ func NewAgencyService(repo *repo.Repo, media media.Store) *agencyService {
 	}
 }
 
-func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
+func getAgencyInformationFromContext(ctx context.Context) (*pb.Agency, error) {
 	// Obtaining value at session.User
 	user := ctx.Value(session.User)
 
@@ -68,7 +68,7 @@ func getUserInformationFromContext(ctx context.Context) (*pb.Agency, error) {
 }
 
 func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -117,7 +117,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 }
 
 func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -190,7 +190,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 }
 
 func (service *agencyService) AddStaff(ctx context.Context, req *pb.Staff) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -214,7 +214,7 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.TripTemplate, trip *pb.Trip) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -304,7 +304,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 }
 
 func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -348,7 +348,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 }
 
 func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
@@ -424,7 +424,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 // ListBoats returns list of boats associated with the agency.
 func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -450,7 +450,7 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 
 // ListDiveMasters returns list of divemasters associated with the agency.
 func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -476,7 +476,7 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 
 // ListHotels returns list of hotels associated with the agency.
 func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint64) ([]*model.Hotel, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -502,7 +502,7 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 
 // ListLiveaboards returns list of liveaboards associated with the agency.
 func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset uint64) ([]*model.Liveaboard, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -528,7 +528,7 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 
 // ListStaffs returns list of staffs associated with the agency.
 func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -543,7 +543,7 @@ func (service *agencyService) ListStaffs(ctx context.Context, limit, offset uint
 
 // ListTripTemplates returns list of trip templates associated with the agency.
 func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err
@@ -569,7 +569,7 @@ func (service *agencyService) ListTripTemplates(ctx context.Context, limit, offs
 
 // ListTrips returns list of trips associated with the agency.
 func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error) {
-	agency, err := getUserInformationFromContext(ctx)
+	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return nil, err

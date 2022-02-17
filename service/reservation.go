@@ -6,6 +6,7 @@ import (
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
+	"github.com/afairon/nautilus/session"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -25,6 +26,24 @@ func NewReservationService(repo *repo.Repo) *reservationService {
 	return &reservationService{
 		repo: repo,
 	}
+}
+
+func getDiverInformationFromContext(ctx context.Context) (*pb.Diver, error) {
+	// Obtaining value at session.User
+	user := ctx.Value(session.User)
+
+	if user == nil {
+		// Handle nil condition
+		return nil, status.Error(codes.Unauthenticated, "user not found")
+	}
+	// Type assertion
+	v, ok := user.(*pb.Diver) // Casting to Diver
+	if !ok {
+		// Handle error
+		return nil, status.Error(codes.Internal, "casting user to Agency failed")
+	}
+
+	return v, nil
 }
 
 // CreateReservation creates a trip reservation.
@@ -105,21 +124,20 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 		}
 
 		for i, room := range reservation.GetRooms() {
-			newRoomRecord := model.ReservationRoomTypes{
+			*newReservation.Rooms[i] = *room
+
+			newRoomRecord := model.ReservationRoomType{
 				ReservationID: uint(newReservation.GetId()),
 				RoomTypeID:    uint(room.GetRoomTypeId()),
 				DiverNo:       uint(room.GetNoDivers()),
 				Quantity:      uint(room.GetQuantity()),
 			}
 
-			bookedRoom, err := query.Reservation.BookRoom(ctx, &newRoomRecord)
+			_, err := query.Reservation.BookRoom(ctx, &newRoomRecord)
 
 			if err != nil {
 				return err
 			}
-
-			*newReservation.Rooms[i] = *room
-			newReservation.Rooms[i].Id = uint64(bookedRoom.ID)
 		}
 
 		return nil

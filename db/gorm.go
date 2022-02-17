@@ -61,17 +61,7 @@ func InitGormStore(host string, port int, user, password, dbname string, ssl boo
 		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
 		&model.RoomType{})
 
-	err = GormStore.SetupJoinTable(&model.Trip{}, "DiveMasters", &model.DiveMasterTrip{})
-
-	if err != nil {
-		return nil, err
-	}
-
-	err = GormStore.SetupJoinTable(&model.Reservation{}, "RoomTypes", &model.ReservationRoomTypes{})
-
-	if err != nil {
-		return nil, err
-	}
+	err = Migrate(GormStore)
 
 	if err != nil {
 		return nil, err
@@ -93,5 +83,25 @@ func InitGormStoreFromConfig(conf *config.PostgreSQL) (*gorm.DB, error) {
 }
 
 func Migrate(db *gorm.DB) error {
-	return db.Migrator().AlterColumn(&model.Account{}, "Email")
+	err := db.SetupJoinTable(&model.Trip{}, "DiveMasters", &model.DiveMasterTrip{})
+
+	if err != nil {
+		return err
+	}
+
+	err = db.SetupJoinTable(&model.Reservation{}, "RoomTypes", &model.ReservationRoomType{})
+
+	if err != nil {
+		return err
+	}
+
+	err = db.Migrator().AddColumn(&model.ReservationRoomType{}, "DiverNo")
+
+	if err != nil {
+		return err
+	}
+
+	err = db.Migrator().AddColumn(&model.ReservationRoomType{}, "Quantity")
+
+	return err
 }

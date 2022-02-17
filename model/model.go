@@ -292,8 +292,7 @@ type DiveMasterTrip struct {
 	DiveMasterID uint `gorm:"primaryKey"`
 }
 
-type ReservationRoomTypes struct {
-	*gorm.Model
+type ReservationRoomType struct {
 	ReservationID uint `gorm:"primaryKey"`
 	RoomTypeID    uint `gorm:"primaryKey"`
 	DiverNo       uint
