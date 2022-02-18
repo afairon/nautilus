@@ -2,17 +2,16 @@ package repo
 
 import (
 	"context"
-	"errors"
 
-	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
 // ReservationRepository defines interface for interaction
 // with the reservation repository.
 type ReservationRepository interface {
-	CreateReservation(ctx context.Context, reservation *entity.Reservation) (*entity.Reservation, error)
-	BookRoom(ctx context.Context, room *entity.BookedRoom) (*entity.BookedRoom, error)
+	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
+	BookRoom(ctx context.Context, room *model.ReservationRoomType) (*model.ReservationRoomType, error)
 }
 
 // reservationRepository implements ReservationRepository interface.
@@ -28,7 +27,7 @@ func NewReservationRepository(db *gorm.DB) *reservationRepository {
 }
 
 // CreateReservation creates a reservation record and returns the newly created record.
-func (repo *reservationRepository) CreateReservation(ctx context.Context, reservation *entity.Reservation) (*entity.Reservation, error) {
+func (repo *reservationRepository) CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error) {
 	// var result entity.Reservation
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -41,11 +40,13 @@ func (repo *reservationRepository) CreateReservation(ctx context.Context, reserv
 	// `, reservation.TripId, reservation.DiverId, reservation.Price)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(reservation)
+
+	return reservation, result.Error
 }
 
 // BookRoom creates a booked room record and returns the newly created record.
-func (repo *reservationRepository) BookRoom(ctx context.Context, room *entity.BookedRoom) (*entity.BookedRoom, error) {
+func (repo *reservationRepository) BookRoom(ctx context.Context, room *model.ReservationRoomType) (*model.ReservationRoomType, error) {
 	// var result entity.BookedRoom
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -58,5 +59,7 @@ func (repo *reservationRepository) BookRoom(ctx context.Context, room *entity.Bo
 	// `, room.RoomTypeId, room.ReservationId, room.NoAdults, room.NoKids, room.Quantity)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(room)
+
+	return room, result.Error
 }

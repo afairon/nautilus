@@ -24,8 +24,7 @@ message Reservation {
     message Room {
         uint64 id = 1;
         uint64 room_type_id = 10;
-        uint32 no_adults = 20;
-        uint32 no_kids = 30;
+        uint32 no_divers = 20;
         uint32 quantity = 40;
     }
 }
