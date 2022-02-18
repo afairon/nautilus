@@ -95,13 +95,5 @@ func Migrate(db *gorm.DB) error {
 		return err
 	}
 
-	err = db.Migrator().AddColumn(&model.ReservationRoomType{}, "DiverNo")
-
-	if err != nil {
-		return err
-	}
-
-	err = db.Migrator().AddColumn(&model.ReservationRoomType{}, "Quantity")
-
 	return err
 }
