@@ -8,37 +8,35 @@ import (
 	"gorm.io/gorm"
 )
 
-type tripResult struct {
-	endDate time.Time
-}
+func (l *LiveaboardComment) BeforeCreate(tx *gorm.DB) error {
+	var reservation Reservation
 
-func (c *LiveaboardComment) BeforeCreate(tx *gorm.DB) error {
-	var trip tripResult
+	result := tx.Preload("Trip").Joins("JOIN trips on reservations.trip_id = trips.id AND reservations.id = ?", l.ReservationID).First(&reservation)
+	err := result.Error
 
-	tx.Model(&LiveaboardComment{})
-	tx.Select("trips.end_date")
-	tx.Joins("JOIN reservations ON reservations.id = liveaboard_comments.id AND reservations.id = ?", c.ReservationID)
-	tx.Joins("JOIN trips ON trips.id = reservations.trip_id")
-	tx.Scan(&trip)
+	if err != nil {
+		return err
+	}
 
-	if time.Now().Before(trip.endDate) {
-		return status.Errorf(codes.Canceled, "Comments must be posted after the trip has ended.")
+	if time.Now().Before(*reservation.Trip.EndDate) {
+		return status.Errorf(codes.PermissionDenied, "Comments must be posted after the trip has ended.")
 	}
 
 	return nil
 }
 
-func (c *HotelComment) BeforeCreate(tx *gorm.DB) error {
-	var trip tripResult
+func (h *HotelComment) BeforeCreate(tx *gorm.DB) error {
+	var reservation Reservation
 
-	tx.Model(&HotelComment{})
-	tx.Select("trips.end_date")
-	tx.Joins("JOIN reservations ON reservations.id = liveaboard_comments.id AND reservations.id = ?", c.ReservationID)
-	tx.Joins("JOIN trips ON trips.id = reservations.trip_id")
-	tx.Scan(&trip)
+	result := tx.Preload("Trip").Joins("JOIN trips on reservations.trip_id = trips.id AND reservations.id = ?", h.ReservationID).First(&reservation)
+	err := result.Error
 
-	if time.Now().Before(trip.endDate) {
-		return status.Errorf(codes.Canceled, "Comments must be posted after the trip has ended.")
+	if err != nil {
+		return err
+	}
+
+	if time.Now().Before(*reservation.Trip.EndDate) {
+		return status.Errorf(codes.PermissionDenied, "Comments must be posted after the trip has ended.")
 	}
 
 	return nil
