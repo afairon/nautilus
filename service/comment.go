@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 )
@@ -68,10 +69,10 @@ func (service *commentService) CreateHotelComment(ctx context.Context, comment *
 
 	// TODO: verify diver id with and reservation id
 
-	commentRecord := entity.HotelComment{
+	commentRecord := model.HotelComment{
 		Comment:       comment.GetComment(),
 		Stars:         stars,
-		ReservationId: comment.GetReservationId(),
+		ReservationID: uint(comment.GetReservationId()),
 	}
 
 	newCommentRecord, err := service.repo.Comment.CreateHotelComment(ctx, &commentRecord)
@@ -80,12 +81,12 @@ func (service *commentService) CreateHotelComment(ctx context.Context, comment *
 	}
 
 	newComment := pb.HotelComment{
-		Id:            newCommentRecord.Id,
+		Id:            uint64(newCommentRecord.ID),
 		Comment:       newCommentRecord.Comment,
 		Stars:         newCommentRecord.Stars,
-		ReservationId: newCommentRecord.ReservationId,
-		CreatedAt:     newCommentRecord.CreatedOn,
-		UpdatedAt:     newCommentRecord.UpdatedOn,
+		ReservationId: uint64(newCommentRecord.ReservationID),
+		CreatedAt:     &newCommentRecord.CreatedAt,
+		UpdatedAt:     &newCommentRecord.UpdatedAt,
 	}
 
 	return &newComment, nil
@@ -100,10 +101,10 @@ func (service *commentService) CreateLiveaboardComment(ctx context.Context, comm
 
 	// TODO: verify diver id with and reservation id
 
-	commentRecord := entity.LiveaboardComment{
+	commentRecord := model.LiveaboardComment{
 		Comment:       comment.GetComment(),
 		Stars:         stars,
-		ReservationId: comment.GetReservationId(),
+		ReservationID: uint(comment.GetReservationId()),
 	}
 
 	newCommentRecord, err := service.repo.Comment.CreateLiveaboardComment(ctx, &commentRecord)
@@ -112,12 +113,12 @@ func (service *commentService) CreateLiveaboardComment(ctx context.Context, comm
 	}
 
 	newComment := pb.LiveaboardComment{
-		Id:            newCommentRecord.Id,
+		Id:            uint64(newCommentRecord.ID),
 		Comment:       newCommentRecord.Comment,
 		Stars:         newCommentRecord.Stars,
-		ReservationId: newCommentRecord.ReservationId,
-		CreatedAt:     newCommentRecord.CreatedOn,
-		UpdatedAt:     newCommentRecord.UpdatedOn,
+		ReservationId: uint64(newCommentRecord.ReservationID),
+		CreatedAt:     &newCommentRecord.CreatedAt,
+		UpdatedAt:     &newCommentRecord.UpdatedAt,
 	}
 
 	return &newComment, nil

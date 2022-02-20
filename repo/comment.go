@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
 
@@ -12,8 +13,8 @@ import (
 // with the comment repository.
 type CommentRepository interface {
 	CreateTripComment(ctx context.Context, comment *entity.TripComment) (*entity.TripComment, error)
-	CreateHotelComment(ctx context.Context, comment *entity.HotelComment) (*entity.HotelComment, error)
-	CreateLiveaboardComment(ctx context.Context, comment *entity.LiveaboardComment) (*entity.LiveaboardComment, error)
+	CreateHotelComment(ctx context.Context, comment *model.HotelComment) (*model.HotelComment, error)
+	CreateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) (*model.LiveaboardComment, error)
 }
 
 // commentRepository implements CommentRepository interface.
@@ -46,7 +47,7 @@ func (repo *commentRepository) CreateTripComment(ctx context.Context, comment *e
 }
 
 // CreateHotelComment creates a hotel comment record and returns the newly created record.
-func (repo *commentRepository) CreateHotelComment(ctx context.Context, comment *entity.HotelComment) (*entity.HotelComment, error) {
+func (repo *commentRepository) CreateHotelComment(ctx context.Context, comment *model.HotelComment) (*model.HotelComment, error) {
 	// var result entity.HotelComment
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -59,11 +60,12 @@ func (repo *commentRepository) CreateHotelComment(ctx context.Context, comment *
 	// `, comment.Comment, comment.Stars, comment.ReservationId)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(comment)
+	return comment, result.Error
 }
 
 // CreateLiveaboardComment creates a liveaboard comment record and returns the newly created record.
-func (repo *commentRepository) CreateLiveaboardComment(ctx context.Context, comment *entity.LiveaboardComment) (*entity.LiveaboardComment, error) {
+func (repo *commentRepository) CreateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) (*model.LiveaboardComment, error) {
 	// var result entity.LiveaboardComment
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -76,5 +78,6 @@ func (repo *commentRepository) CreateLiveaboardComment(ctx context.Context, comm
 	// `, comment.Comment, comment.Stars, comment.ReservationId)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	result := repo.db.Create(comment)
+	return comment, result.Error
 }
