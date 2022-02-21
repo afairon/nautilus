@@ -11,6 +11,7 @@ import (
 // TripRepository defines interface for interaction
 // with the trip repository.
 type TripRepository interface {
+	Get(ctx context.Context, id uint64) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchOnshoreTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time time.Time, limit, offset uint) ([]*model.Trip, error)
 }
@@ -25,6 +26,16 @@ func NewTripRepository(db *gorm.DB) *tripRepository {
 	return &tripRepository{
 		db: db,
 	}
+}
+
+func (repo *tripRepository) Get(ctx context.Context, id uint64) (*model.Trip, error) {
+	var trip model.Trip
+
+	if result := repo.db.First(&trip, id); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &trip, nil
 }
 
 // ListTripsByAgency returns list of trips by agency id.
