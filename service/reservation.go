@@ -130,6 +130,7 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 			newRoomRecord := model.ReservationRoomType{
 				ReservationID: uint(newReservation.GetId()),
 				RoomTypeID:    uint(room.GetRoomTypeId()),
+				TripID:        uint(reservation.GetTripId()),
 				DiverNo:       uint(room.GetNoDivers()),
 				Quantity:      uint(room.GetQuantity()),
 			}

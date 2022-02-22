@@ -15,7 +15,23 @@ func (r *ReservationRoomType) BeforeSave(tx *gorm.DB) error {
 	}
 
 	if r.DiverNo > uint(roomType.MaxGuest) {
-		return status.Errorf(codes.InvalidArgument, "The number of divers exceeds the maximum number of max guests.")
+		return status.Errorf(codes.PermissionDenied, "The number of divers exceeds the maximum number of max guests.")
+	}
+
+	// get the current amount of divers booked this room type in this current trip
+	// that the diver is trying to make reservation.
+	var roomTypeReservations []*ReservationRoomType
+	tx.Where("trip_id = ? AND room_type_id = ?", r.TripID, r.RoomTypeID).Find(&roomTypeReservations)
+
+	reservedQuantity := 0
+
+	for _, rr := range roomTypeReservations {
+		reservedQuantity += int(rr.Quantity)
+	}
+
+	if reservedQuantity+int(r.Quantity) > int(roomType.Quantity) {
+		roomLeft := roomType.Quantity - uint32(reservedQuantity)
+		return status.Errorf(codes.PermissionDenied, "%d rooms left, but %d were given.", roomLeft, r.Quantity)
 	}
 
 	return nil
