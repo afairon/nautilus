@@ -17,6 +17,7 @@ message Reservation {
     uint64 trip_id = 10;
     uint64 diver_id = 20;
     float price = 30;
+    uint64 total_divers = 35;
     repeated Room rooms = 40;
     google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];

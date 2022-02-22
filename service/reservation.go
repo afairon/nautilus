@@ -60,9 +60,10 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	newReservation = *reservation
 
 	reservationRecord := model.Reservation{
-		TripID:  uint(reservation.GetTripId()),
-		DiverID: uint(reservation.GetDiverId()),
-		Price:   reservation.GetPrice(),
+		TripID:      uint(reservation.GetTripId()),
+		DiverID:     uint(reservation.GetDiverId()),
+		Price:       reservation.GetPrice(),
+		TotalDivers: uint(reservation.TotalDivers),
 	}
 
 	// Execute transaction
