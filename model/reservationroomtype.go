@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (r *ReservationRoomType) BeforeCreate(tx *gorm.DB) error {
+func (r *ReservationRoomType) BeforeSave(tx *gorm.DB) error {
 	var roomType RoomType
 	result := tx.First(&roomType, r.RoomTypeID)
 

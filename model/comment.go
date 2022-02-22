@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (l *LiveaboardComment) BeforeCreate(tx *gorm.DB) error {
+func (l *LiveaboardComment) BeforeSave(tx *gorm.DB) error {
 	var reservation Reservation
 
 	result := tx.Preload("Trip").Joins("JOIN trips on reservations.trip_id = trips.id AND reservations.id = ?", l.ReservationID).First(&reservation)
@@ -25,7 +25,7 @@ func (l *LiveaboardComment) BeforeCreate(tx *gorm.DB) error {
 	return nil
 }
 
-func (h *HotelComment) BeforeCreate(tx *gorm.DB) error {
+func (h *HotelComment) BeforeSave(tx *gorm.DB) error {
 	var reservation Reservation
 
 	result := tx.Preload("Trip").Joins("JOIN trips on reservations.trip_id = trips.id AND reservations.id = ?", h.ReservationID).First(&reservation)
