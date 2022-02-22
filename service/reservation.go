@@ -29,7 +29,7 @@ func NewReservationService(repo *repo.Repo) *reservationService {
 	}
 }
 
-func getDiverInformationFromContext(ctx context.Context) (*pb.Diver, error) {
+func getDiverInformationFromContext(ctx context.Context) (*model.Diver, error) {
 	// Obtaining value at session.User
 	user := ctx.Value(session.User)
 
@@ -38,10 +38,10 @@ func getDiverInformationFromContext(ctx context.Context) (*pb.Diver, error) {
 		return nil, status.Error(codes.Unauthenticated, "user not found")
 	}
 	// Type assertion
-	v, ok := user.(*pb.Diver) // Casting to Diver
+	v, ok := user.(*model.Diver) // Casting to Diver
 	if !ok {
 		// Handle error
-		return nil, status.Error(codes.Internal, "casting user to Agency failed")
+		return nil, status.Error(codes.Internal, "casting user to Diver failed")
 	}
 
 	return v, nil
