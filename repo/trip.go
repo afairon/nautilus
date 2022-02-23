@@ -13,7 +13,7 @@ import (
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
-	SearchOnshoreTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time time.Time, limit, offset uint) ([]*model.Trip, error)
+	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time time.Time, limit, offset uint) ([]*model.Trip, error)
 }
 
 // tripRepository implements TripRepository interface.
@@ -103,7 +103,7 @@ func (repo *tripRepository) ListTripsByAgency(ctx context.Context, id, limit, of
 	return trips, nil
 }
 
-func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date time.Time, limit, offset uint) ([]*model.Trip, error) {
+func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date time.Time, limit, offset uint) ([]*model.Trip, error) {
 	// tx := repo.db.Model(&model.Trip{}).Preload("TripTemplate.Address").Find(&trip)
 	// fmt.Println(tx)
 	// fmt.Printf("trip: %+v\n", trip)

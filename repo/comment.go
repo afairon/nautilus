@@ -2,9 +2,7 @@ package repo
 
 import (
 	"context"
-	"errors"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
@@ -12,7 +10,7 @@ import (
 // CommentRepository defines interface for interaction
 // with the comment repository.
 type CommentRepository interface {
-	CreateTripComment(ctx context.Context, comment *entity.TripComment) (*entity.TripComment, error)
+	CreateTripComment(ctx context.Context, comment *model.TripComment) (*model.TripComment, error)
 	CreateHotelComment(ctx context.Context, comment *model.HotelComment) (*model.HotelComment, error)
 	CreateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) (*model.LiveaboardComment, error)
 }
@@ -30,7 +28,7 @@ func NewCommentRepository(db *gorm.DB) *commentRepository {
 }
 
 // CreateTripComment creates a trip comment record and returns the newly created record.
-func (repo *commentRepository) CreateTripComment(ctx context.Context, comment *entity.TripComment) (*entity.TripComment, error) {
+func (repo *commentRepository) CreateTripComment(ctx context.Context, comment *model.TripComment) (*model.TripComment, error) {
 	// var result entity.TripComment
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -43,7 +41,10 @@ func (repo *commentRepository) CreateTripComment(ctx context.Context, comment *e
 	// `, comment.Comment, comment.Stars, comment.ReservationId)
 
 	// return &result, err
-	return nil, errors.New("Unimplemented")
+	if result := repo.db.Create(comment); result.Error != nil {
+		return nil, result.Error
+	}
+	return comment, nil
 }
 
 // CreateHotelComment creates a hotel comment record and returns the newly created record.

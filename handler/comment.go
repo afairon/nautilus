@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"google.golang.org/grpc/codes"
@@ -29,23 +30,59 @@ func (handler *CommentHandler) CreateComment(ctx context.Context, req *pb.Create
 	// Get comment request type.
 	switch t := req.GetType().(type) {
 	case *pb.CreateCommentRequest_Trip:
-		comment, err := handler.service.CreateTripComment(ctx, t.Trip)
+		c := model.TripComment{
+			Comment:       t.Trip.GetComment(),
+			Stars:         t.Trip.GetStars(),
+			ReservationID: uint(t.Trip.GetReservationId()),
+		}
+		comment, err := handler.service.CreateTripComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Trip{Trip: comment}
+		resp.Type = &pb.CreateCommentResponse_Trip{Trip: &pb.TripComment{
+			Id:            uint64(comment.ID),
+			Comment:       comment.Comment,
+			Stars:         comment.Stars,
+			ReservationId: uint64(comment.ReservationID),
+			CreatedAt:     &comment.CreatedAt,
+			UpdatedAt:     &comment.UpdatedAt,
+		}}
 	case *pb.CreateCommentRequest_Hotel:
-		comment, err := handler.service.CreateHotelComment(ctx, t.Hotel)
+		c := model.HotelComment{
+			Comment:       t.Hotel.GetComment(),
+			Stars:         t.Hotel.GetStars(),
+			ReservationID: uint(t.Hotel.GetReservationId()),
+		}
+		comment, err := handler.service.CreateHotelComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Hotel{Hotel: comment}
+		resp.Type = &pb.CreateCommentResponse_Hotel{Hotel: &pb.HotelComment{
+			Id:            uint64(comment.ID),
+			Comment:       comment.Comment,
+			Stars:         comment.Stars,
+			ReservationId: uint64(comment.ReservationID),
+			CreatedAt:     &comment.CreatedAt,
+			UpdatedAt:     &comment.UpdatedAt,
+		}}
 	case *pb.CreateCommentRequest_Liveaboard:
-		comment, err := handler.service.CreateLiveaboardComment(ctx, t.Liveaboard)
+		c := model.LiveaboardComment{
+			Comment:       t.Liveaboard.GetComment(),
+			Stars:         t.Liveaboard.GetStars(),
+			ReservationID: uint(t.Liveaboard.GetReservationId()),
+		}
+		comment, err := handler.service.CreateLiveaboardComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Liveaboard{Liveaboard: comment}
+		resp.Type = &pb.CreateCommentResponse_Liveaboard{Liveaboard: &pb.LiveaboardComment{
+			Id:            uint64(comment.ID),
+			Comment:       comment.Comment,
+			Stars:         comment.Stars,
+			ReservationId: uint64(comment.ReservationID),
+			CreatedAt:     &comment.CreatedAt,
+			UpdatedAt:     &comment.UpdatedAt,
+		}}
 	default:
 		// Cannot determine type of comment
 		return nil, status.Error(codes.InvalidArgument, "comment: invalid request")

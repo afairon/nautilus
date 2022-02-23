@@ -236,6 +236,8 @@ type Reservation struct {
 
 type LiveaboardComment struct {
 	*gorm.Model
+	DiverID       uint
+	Diver         *Diver
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
@@ -243,6 +245,8 @@ type LiveaboardComment struct {
 
 type HotelComment struct {
 	*gorm.Model
+	DiverID       uint
+	Diver         *Diver
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
@@ -250,6 +254,8 @@ type HotelComment struct {
 
 type TripComment struct {
 	*gorm.Model
+	DiverID       uint
+	Diver         *Diver
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
