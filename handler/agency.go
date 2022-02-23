@@ -439,15 +439,15 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 			}
 		}
 
-		// if len(tripTemplate.Images) > 0 {
-		// 	resp.Template.Images = make([]*pb.File, 0, len(tripTemplate.Images))
-		// 	for _, link := range tripTemplate.Images {
-		// 		file := &pb.File{
-		// 			Link: link,
-		// 		}
-		// 		resp.Template.Images = append(resp.Template.Images, file)
-		// 	}
-		// }
+		if len(trip.TripTemplate.Images) > 0 {
+			resp.Trip.TripTemplate.Images = make([]*pb.File, 0, len(trip.TripTemplate.Images))
+			for _, link := range trip.TripTemplate.Images {
+				file := &pb.File{
+					Link: link,
+				}
+				resp.Trip.TripTemplate.Images = append(resp.Trip.TripTemplate.Images, file)
+			}
+		}
 
 		srv.Send(resp)
 	}

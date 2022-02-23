@@ -616,5 +616,11 @@ func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOption
 		return nil, err
 	}
 
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
+	}
+
 	return trips, nil
 }
