@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"time"
 
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
@@ -585,7 +586,7 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	return trips, nil
 }
 
-func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
+func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
 	if limit > 20 || limit == 0 {
 		limit = 20
 	}
@@ -593,14 +594,21 @@ func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnSh
 	var err error
 	var trips []*model.Trip
 
+	startDate := searchTripsOptions.GetStartDate()
+
+	// default the startDate value to "now" if startDate was not given.
+	if startDate == nil {
+		*startDate = time.Now()
+	}
+
 	// TODO deal with files of trip templates.
-	switch searchOnShoreTrips.GetLocationFilter().(type) {
+	switch searchTripsOptions.GetLocationFilter().(type) {
 	case *pb.SearchTripsOptions_Country:
-		trips, err = service.repo.Trip.SearchTrips(ctx, searchOnShoreTrips.GetCountry(), "", "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, searchTripsOptions.GetCountry(), "", "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
 	case *pb.SearchTripsOptions_City:
-		trips, err = service.repo.Trip.SearchTrips(ctx, "", searchOnShoreTrips.GetCity(), "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", searchTripsOptions.GetCity(), "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
 	case *pb.SearchTripsOptions_Region:
-		trips, err = service.repo.Trip.SearchTrips(ctx, "", "", searchOnShoreTrips.GetRegion(), searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", "", searchTripsOptions.GetRegion(), searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
 	}
 
 	if err != nil {

@@ -176,9 +176,6 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 	}
 
 	for _, hotel := range hotels {
-		fmt.Printf("Trying to print hotel properties\n")
-		fmt.Printf("%+v\n", hotel)
-
 		resp := &pb.ListHotelsResponse{
 			Hotel: &pb.ListHotelsResponse_Hotel{
 				Id:          uint64(hotel.ID),
@@ -385,6 +382,8 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.AgencyService_SearchTripsServer) error {
 	ctx := srv.Context()
 
+	fmt.Printf("%+v\n", req)
+
 	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchTripsOptions(), req.GetLimit(), req.GetOffset())
 
 	if err != nil {
@@ -457,7 +456,9 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 		srv.Send(resp)
 	}
 
-	fmt.Println(trips, err)
+	for _, trip := range trips {
+		fmt.Printf("%+v\n", *trip)
+	}
 
 	return nil
 }
