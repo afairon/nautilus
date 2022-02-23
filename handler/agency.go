@@ -384,14 +384,14 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 
 	fmt.Printf("%+v\n", req)
 
-	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchTripsOptions(), req.GetLimit(), req.GetOffset())
+	trips, err := handler.agencyService.SearchTrips(ctx, req.GetSearchTripsOptions(), req.GetLimit(), req.GetOffset())
 
 	if err != nil {
 		return err
 	}
 
 	if len(trips) == 0 {
-		return status.Error(codes.NotFound, "SearchOnshoreTrips: not found")
+		return status.Error(codes.NotFound, "SearchTrips: not found")
 	}
 
 	for _, trip := range trips {
@@ -456,9 +456,10 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 		srv.Send(resp)
 	}
 
-	for _, trip := range trips {
-		fmt.Printf("%+v\n", *trip)
-	}
+	fmt.Println("Number of trips: ", len(trips))
+	// for _, trip := range trips {
+	// 	fmt.Printf("%+v\n", *trip)
+	// }
 
 	return nil
 }

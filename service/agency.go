@@ -32,7 +32,7 @@ type AgencyService interface {
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 
-	SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
+	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -586,7 +586,7 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	return trips, nil
 }
 
-func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
+func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
 	if limit > 20 || limit == 0 {
 		limit = 20
 	}
@@ -598,7 +598,8 @@ func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchTrip
 
 	// default the startDate value to "now" if startDate was not given.
 	if startDate == nil {
-		*startDate = time.Now()
+		now := time.Now()
+		startDate = &now
 	}
 
 	// TODO deal with files of trip templates.

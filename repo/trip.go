@@ -146,8 +146,13 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NOT NULL AND trip_templates.boat_id IS NOT NULL AND trip_templates.liveaboard_id IS NULL", model.ONSHORE)
 	result.Where("trips.max_guest >= ?", divers)
 	result.Where("addresses.country ILIKE ? OR addresses.city ILIKE ? OR addresses.region ILIKE ?", country, city, region)
-	result.Where("trips.start_date BETWEEN ? AND ?", *start_date, *end_date)
-	result.Where("trips.end_date BETWEEN ? AND ?", *start_date, *end_date)
+	if end_date != nil {
+		result.Where("trips.start_date BETWEEN ? AND ?", *start_date, *end_date)
+		result.Where("trips.end_date BETWEEN ? AND ?", *start_date, *end_date)
+	} else {
+		result.Where("trips.start_date >= ?", *start_date)
+		result.Where("trips.end_date >= ?", *start_date)
+	}
 	result.Find(&trips)
 
 	if result.Error != nil {
