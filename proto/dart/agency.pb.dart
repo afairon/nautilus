@@ -3435,37 +3435,39 @@ class ListTripsResponse extends $pb.GeneratedMessage {
   ListTripsResponse_Trip ensureTrip() => $_ensure(0);
 }
 
-enum SearchOnshoreTrips_LocationFilter {
+enum SearchTripsOptions_LocationFilter {
   country, 
   city, 
   region, 
   notSet
 }
 
-class SearchOnshoreTrips extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, SearchOnshoreTrips_LocationFilter> _SearchOnshoreTrips_LocationFilterByTag = {
-    1 : SearchOnshoreTrips_LocationFilter.country,
-    2 : SearchOnshoreTrips_LocationFilter.city,
-    3 : SearchOnshoreTrips_LocationFilter.region,
-    0 : SearchOnshoreTrips_LocationFilter.notSet
+class SearchTripsOptions extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, SearchTripsOptions_LocationFilter> _SearchTripsOptions_LocationFilterByTag = {
+    1 : SearchTripsOptions_LocationFilter.country,
+    2 : SearchTripsOptions_LocationFilter.city,
+    3 : SearchTripsOptions_LocationFilter.region,
+    0 : SearchTripsOptions_LocationFilter.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOnshoreTrips', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsOptions', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3])
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'country')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'city')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'region')
     ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divers', $pb.PbFieldType.OU3)
+    ..e<$6.TripType>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $6.TripType.ONSHORE, valueOf: $6.TripType.valueOf, enumValues: $6.TripType.values)
     ..aOM<$5.Timestamp>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
-  SearchOnshoreTrips._() : super();
-  factory SearchOnshoreTrips({
+  SearchTripsOptions._() : super();
+  factory SearchTripsOptions({
     $core.String? country,
     $core.String? city,
     $core.String? region,
     $core.int? divers,
+    $6.TripType? tripType,
     $5.Timestamp? startDate,
     $5.Timestamp? endDate,
   }) {
@@ -3482,6 +3484,9 @@ class SearchOnshoreTrips extends $pb.GeneratedMessage {
     if (divers != null) {
       _result.divers = divers;
     }
+    if (tripType != null) {
+      _result.tripType = tripType;
+    }
     if (startDate != null) {
       _result.startDate = startDate;
     }
@@ -3490,28 +3495,28 @@ class SearchOnshoreTrips extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory SearchOnshoreTrips.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOnshoreTrips.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SearchTripsOptions.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchTripsOptions.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTrips clone() => SearchOnshoreTrips()..mergeFromMessage(this);
+  SearchTripsOptions clone() => SearchTripsOptions()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTrips copyWith(void Function(SearchOnshoreTrips) updates) => super.copyWith((message) => updates(message as SearchOnshoreTrips)) as SearchOnshoreTrips; // ignore: deprecated_member_use
+  SearchTripsOptions copyWith(void Function(SearchTripsOptions) updates) => super.copyWith((message) => updates(message as SearchTripsOptions)) as SearchTripsOptions; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTrips create() => SearchOnshoreTrips._();
-  SearchOnshoreTrips createEmptyInstance() => create();
-  static $pb.PbList<SearchOnshoreTrips> createRepeated() => $pb.PbList<SearchOnshoreTrips>();
+  static SearchTripsOptions create() => SearchTripsOptions._();
+  SearchTripsOptions createEmptyInstance() => create();
+  static $pb.PbList<SearchTripsOptions> createRepeated() => $pb.PbList<SearchTripsOptions>();
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTrips getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOnshoreTrips>(create);
-  static SearchOnshoreTrips? _defaultInstance;
+  static SearchTripsOptions getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchTripsOptions>(create);
+  static SearchTripsOptions? _defaultInstance;
 
-  SearchOnshoreTrips_LocationFilter whichLocationFilter() => _SearchOnshoreTrips_LocationFilterByTag[$_whichOneof(0)]!;
+  SearchTripsOptions_LocationFilter whichLocationFilter() => _SearchTripsOptions_LocationFilterByTag[$_whichOneof(0)]!;
   void clearLocationFilter() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -3550,46 +3555,55 @@ class SearchOnshoreTrips extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearDivers() => clearField(10);
 
+  @$pb.TagNumber(15)
+  $6.TripType get tripType => $_getN(4);
+  @$pb.TagNumber(15)
+  set tripType($6.TripType v) { setField(15, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasTripType() => $_has(4);
+  @$pb.TagNumber(15)
+  void clearTripType() => clearField(15);
+
   @$pb.TagNumber(20)
-  $5.Timestamp get startDate => $_getN(4);
+  $5.Timestamp get startDate => $_getN(5);
   @$pb.TagNumber(20)
   set startDate($5.Timestamp v) { setField(20, v); }
   @$pb.TagNumber(20)
-  $core.bool hasStartDate() => $_has(4);
+  $core.bool hasStartDate() => $_has(5);
   @$pb.TagNumber(20)
   void clearStartDate() => clearField(20);
   @$pb.TagNumber(20)
-  $5.Timestamp ensureStartDate() => $_ensure(4);
+  $5.Timestamp ensureStartDate() => $_ensure(5);
 
   @$pb.TagNumber(30)
-  $5.Timestamp get endDate => $_getN(5);
+  $5.Timestamp get endDate => $_getN(6);
   @$pb.TagNumber(30)
   set endDate($5.Timestamp v) { setField(30, v); }
   @$pb.TagNumber(30)
-  $core.bool hasEndDate() => $_has(5);
+  $core.bool hasEndDate() => $_has(6);
   @$pb.TagNumber(30)
   void clearEndDate() => clearField(30);
   @$pb.TagNumber(30)
-  $5.Timestamp ensureEndDate() => $_ensure(5);
+  $5.Timestamp ensureEndDate() => $_ensure(6);
 }
 
-class SearchOnshoreTripsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOnshoreTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<SearchOnshoreTrips>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'searchOnshoreTrips', protoName: 'searchOnshoreTrips', subBuilder: SearchOnshoreTrips.create)
+class SearchTripsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<SearchTripsOptions>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'searchTripsOptions', subBuilder: SearchTripsOptions.create)
     ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
-  SearchOnshoreTripsRequest._() : super();
-  factory SearchOnshoreTripsRequest({
-    SearchOnshoreTrips? searchOnshoreTrips,
+  SearchTripsRequest._() : super();
+  factory SearchTripsRequest({
+    SearchTripsOptions? searchTripsOptions,
     $fixnum.Int64? limit,
     $fixnum.Int64? offset,
   }) {
     final _result = create();
-    if (searchOnshoreTrips != null) {
-      _result.searchOnshoreTrips = searchOnshoreTrips;
+    if (searchTripsOptions != null) {
+      _result.searchTripsOptions = searchTripsOptions;
     }
     if (limit != null) {
       _result.limit = limit;
@@ -3599,37 +3613,37 @@ class SearchOnshoreTripsRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory SearchOnshoreTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOnshoreTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SearchTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsRequest clone() => SearchOnshoreTripsRequest()..mergeFromMessage(this);
+  SearchTripsRequest clone() => SearchTripsRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsRequest copyWith(void Function(SearchOnshoreTripsRequest) updates) => super.copyWith((message) => updates(message as SearchOnshoreTripsRequest)) as SearchOnshoreTripsRequest; // ignore: deprecated_member_use
+  SearchTripsRequest copyWith(void Function(SearchTripsRequest) updates) => super.copyWith((message) => updates(message as SearchTripsRequest)) as SearchTripsRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsRequest create() => SearchOnshoreTripsRequest._();
-  SearchOnshoreTripsRequest createEmptyInstance() => create();
-  static $pb.PbList<SearchOnshoreTripsRequest> createRepeated() => $pb.PbList<SearchOnshoreTripsRequest>();
+  static SearchTripsRequest create() => SearchTripsRequest._();
+  SearchTripsRequest createEmptyInstance() => create();
+  static $pb.PbList<SearchTripsRequest> createRepeated() => $pb.PbList<SearchTripsRequest>();
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOnshoreTripsRequest>(create);
-  static SearchOnshoreTripsRequest? _defaultInstance;
+  static SearchTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchTripsRequest>(create);
+  static SearchTripsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  SearchOnshoreTrips get searchOnshoreTrips => $_getN(0);
+  SearchTripsOptions get searchTripsOptions => $_getN(0);
   @$pb.TagNumber(1)
-  set searchOnshoreTrips(SearchOnshoreTrips v) { setField(1, v); }
+  set searchTripsOptions(SearchTripsOptions v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSearchOnshoreTrips() => $_has(0);
+  $core.bool hasSearchTripsOptions() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSearchOnshoreTrips() => clearField(1);
+  void clearSearchTripsOptions() => clearField(1);
   @$pb.TagNumber(1)
-  SearchOnshoreTrips ensureSearchOnshoreTrips() => $_ensure(0);
+  SearchTripsOptions ensureSearchTripsOptions() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get limit => $_getI64(1);
@@ -3650,193 +3664,8 @@ class SearchOnshoreTripsRequest extends $pb.GeneratedMessage {
   void clearOffset() => clearField(3);
 }
 
-enum SearchOffshoreTrips_LocationFilter {
-  country, 
-  city, 
-  region, 
-  notSet
-}
-
-class SearchOffshoreTrips extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, SearchOffshoreTrips_LocationFilter> _SearchOffshoreTrips_LocationFilterByTag = {
-    1 : SearchOffshoreTrips_LocationFilter.country,
-    2 : SearchOffshoreTrips_LocationFilter.city,
-    3 : SearchOffshoreTrips_LocationFilter.region,
-    0 : SearchOffshoreTrips_LocationFilter.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOffshoreTrips', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'country')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'city')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'region')
-    ..aOM<$5.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startingMonth', subBuilder: $5.Timestamp.create)
-    ..hasRequiredFields = false
-  ;
-
-  SearchOffshoreTrips._() : super();
-  factory SearchOffshoreTrips({
-    $core.String? country,
-    $core.String? city,
-    $core.String? region,
-    $5.Timestamp? startingMonth,
-  }) {
-    final _result = create();
-    if (country != null) {
-      _result.country = country;
-    }
-    if (city != null) {
-      _result.city = city;
-    }
-    if (region != null) {
-      _result.region = region;
-    }
-    if (startingMonth != null) {
-      _result.startingMonth = startingMonth;
-    }
-    return _result;
-  }
-  factory SearchOffshoreTrips.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOffshoreTrips.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTrips clone() => SearchOffshoreTrips()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTrips copyWith(void Function(SearchOffshoreTrips) updates) => super.copyWith((message) => updates(message as SearchOffshoreTrips)) as SearchOffshoreTrips; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTrips create() => SearchOffshoreTrips._();
-  SearchOffshoreTrips createEmptyInstance() => create();
-  static $pb.PbList<SearchOffshoreTrips> createRepeated() => $pb.PbList<SearchOffshoreTrips>();
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTrips getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOffshoreTrips>(create);
-  static SearchOffshoreTrips? _defaultInstance;
-
-  SearchOffshoreTrips_LocationFilter whichLocationFilter() => _SearchOffshoreTrips_LocationFilterByTag[$_whichOneof(0)]!;
-  void clearLocationFilter() => clearField($_whichOneof(0));
-
-  @$pb.TagNumber(1)
-  $core.String get country => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set country($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCountry() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCountry() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get city => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set city($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCity() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get region => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set region($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasRegion() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearRegion() => clearField(3);
-
-  @$pb.TagNumber(10)
-  $5.Timestamp get startingMonth => $_getN(3);
-  @$pb.TagNumber(10)
-  set startingMonth($5.Timestamp v) { setField(10, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasStartingMonth() => $_has(3);
-  @$pb.TagNumber(10)
-  void clearStartingMonth() => clearField(10);
-  @$pb.TagNumber(10)
-  $5.Timestamp ensureStartingMonth() => $_ensure(3);
-}
-
-class SearchOffshoreTripsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOffshoreTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<SearchOffshoreTrips>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'searchOffshoreTrips', protoName: 'searchOffshoreTrips', subBuilder: SearchOffshoreTrips.create)
-    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
-
-  SearchOffshoreTripsRequest._() : super();
-  factory SearchOffshoreTripsRequest({
-    SearchOffshoreTrips? searchOffshoreTrips,
-    $fixnum.Int64? limit,
-    $fixnum.Int64? offset,
-  }) {
-    final _result = create();
-    if (searchOffshoreTrips != null) {
-      _result.searchOffshoreTrips = searchOffshoreTrips;
-    }
-    if (limit != null) {
-      _result.limit = limit;
-    }
-    if (offset != null) {
-      _result.offset = offset;
-    }
-    return _result;
-  }
-  factory SearchOffshoreTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOffshoreTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsRequest clone() => SearchOffshoreTripsRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsRequest copyWith(void Function(SearchOffshoreTripsRequest) updates) => super.copyWith((message) => updates(message as SearchOffshoreTripsRequest)) as SearchOffshoreTripsRequest; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsRequest create() => SearchOffshoreTripsRequest._();
-  SearchOffshoreTripsRequest createEmptyInstance() => create();
-  static $pb.PbList<SearchOffshoreTripsRequest> createRepeated() => $pb.PbList<SearchOffshoreTripsRequest>();
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOffshoreTripsRequest>(create);
-  static SearchOffshoreTripsRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  SearchOffshoreTrips get searchOffshoreTrips => $_getN(0);
-  @$pb.TagNumber(1)
-  set searchOffshoreTrips(SearchOffshoreTrips v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSearchOffshoreTrips() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSearchOffshoreTrips() => clearField(1);
-  @$pb.TagNumber(1)
-  SearchOffshoreTrips ensureSearchOffshoreTrips() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get limit => $_getI64(1);
-  @$pb.TagNumber(2)
-  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasLimit() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLimit() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get offset => $_getI64(2);
-  @$pb.TagNumber(3)
-  set offset($fixnum.Int64 v) { $_setInt64(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasOffset() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearOffset() => clearField(3);
-}
-
-class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOnshoreTripsResponse.Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+class SearchTripsResponse_Trip extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsResponse.Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplateId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
@@ -3847,11 +3676,12 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
+    ..aOM<SearchTripsResponse_TripTemplate>(110, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: SearchTripsResponse_TripTemplate.create)
     ..hasRequiredFields = false
   ;
 
-  SearchOnshoreTripsResponse_Trip._() : super();
-  factory SearchOnshoreTripsResponse_Trip({
+  SearchTripsResponse_Trip._() : super();
+  factory SearchTripsResponse_Trip({
     $fixnum.Int64? id,
     $fixnum.Int64? tripTemplateId,
     $core.int? maxGuest,
@@ -3862,6 +3692,7 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     $5.Timestamp? lastReservationDate,
     $5.Timestamp? createdAt,
     $5.Timestamp? updatedAt,
+    SearchTripsResponse_TripTemplate? tripTemplate,
   }) {
     final _result = create();
     if (id != null) {
@@ -3894,28 +3725,31 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
     if (updatedAt != null) {
       _result.updatedAt = updatedAt;
     }
+    if (tripTemplate != null) {
+      _result.tripTemplate = tripTemplate;
+    }
     return _result;
   }
-  factory SearchOnshoreTripsResponse_Trip.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOnshoreTripsResponse_Trip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SearchTripsResponse_Trip.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchTripsResponse_Trip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse_Trip clone() => SearchOnshoreTripsResponse_Trip()..mergeFromMessage(this);
+  SearchTripsResponse_Trip clone() => SearchTripsResponse_Trip()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse_Trip copyWith(void Function(SearchOnshoreTripsResponse_Trip) updates) => super.copyWith((message) => updates(message as SearchOnshoreTripsResponse_Trip)) as SearchOnshoreTripsResponse_Trip; // ignore: deprecated_member_use
+  SearchTripsResponse_Trip copyWith(void Function(SearchTripsResponse_Trip) updates) => super.copyWith((message) => updates(message as SearchTripsResponse_Trip)) as SearchTripsResponse_Trip; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse_Trip create() => SearchOnshoreTripsResponse_Trip._();
-  SearchOnshoreTripsResponse_Trip createEmptyInstance() => create();
-  static $pb.PbList<SearchOnshoreTripsResponse_Trip> createRepeated() => $pb.PbList<SearchOnshoreTripsResponse_Trip>();
+  static SearchTripsResponse_Trip create() => SearchTripsResponse_Trip._();
+  SearchTripsResponse_Trip createEmptyInstance() => create();
+  static $pb.PbList<SearchTripsResponse_Trip> createRepeated() => $pb.PbList<SearchTripsResponse_Trip>();
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse_Trip getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOnshoreTripsResponse_Trip>(create);
-  static SearchOnshoreTripsResponse_Trip? _defaultInstance;
+  static SearchTripsResponse_Trip getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchTripsResponse_Trip>(create);
+  static SearchTripsResponse_Trip? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get id => $_getI64(0);
@@ -4010,10 +3844,21 @@ class SearchOnshoreTripsResponse_Trip extends $pb.GeneratedMessage {
   void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
   $5.Timestamp ensureUpdatedAt() => $_ensure(9);
+
+  @$pb.TagNumber(110)
+  SearchTripsResponse_TripTemplate get tripTemplate => $_getN(10);
+  @$pb.TagNumber(110)
+  set tripTemplate(SearchTripsResponse_TripTemplate v) { setField(110, v); }
+  @$pb.TagNumber(110)
+  $core.bool hasTripTemplate() => $_has(10);
+  @$pb.TagNumber(110)
+  void clearTripTemplate() => clearField(110);
+  @$pb.TagNumber(110)
+  SearchTripsResponse_TripTemplate ensureTripTemplate() => $_ensure(10);
 }
 
-class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOnshoreTripsResponse.TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+class SearchTripsResponse_TripTemplate extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsResponse.TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
@@ -4022,13 +3867,14 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$6.Address>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: $6.Address.create)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
-  SearchOnshoreTripsResponse_TripTemplate._() : super();
-  factory SearchOnshoreTripsResponse_TripTemplate({
+  SearchTripsResponse_TripTemplate._() : super();
+  factory SearchTripsResponse_TripTemplate({
     $fixnum.Int64? id,
     $core.String? name,
     $core.String? description,
@@ -4037,6 +3883,7 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     $fixnum.Int64? boatId,
     $fixnum.Int64? liveaboardId,
     $core.Iterable<$6.File>? images,
+    $6.Address? address,
     $5.Timestamp? createdAt,
     $5.Timestamp? updatedAt,
   }) {
@@ -4065,6 +3912,9 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     if (images != null) {
       _result.images.addAll(images);
     }
+    if (address != null) {
+      _result.address = address;
+    }
     if (createdAt != null) {
       _result.createdAt = createdAt;
     }
@@ -4073,26 +3923,26 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory SearchOnshoreTripsResponse_TripTemplate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOnshoreTripsResponse_TripTemplate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SearchTripsResponse_TripTemplate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchTripsResponse_TripTemplate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse_TripTemplate clone() => SearchOnshoreTripsResponse_TripTemplate()..mergeFromMessage(this);
+  SearchTripsResponse_TripTemplate clone() => SearchTripsResponse_TripTemplate()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse_TripTemplate copyWith(void Function(SearchOnshoreTripsResponse_TripTemplate) updates) => super.copyWith((message) => updates(message as SearchOnshoreTripsResponse_TripTemplate)) as SearchOnshoreTripsResponse_TripTemplate; // ignore: deprecated_member_use
+  SearchTripsResponse_TripTemplate copyWith(void Function(SearchTripsResponse_TripTemplate) updates) => super.copyWith((message) => updates(message as SearchTripsResponse_TripTemplate)) as SearchTripsResponse_TripTemplate; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse_TripTemplate create() => SearchOnshoreTripsResponse_TripTemplate._();
-  SearchOnshoreTripsResponse_TripTemplate createEmptyInstance() => create();
-  static $pb.PbList<SearchOnshoreTripsResponse_TripTemplate> createRepeated() => $pb.PbList<SearchOnshoreTripsResponse_TripTemplate>();
+  static SearchTripsResponse_TripTemplate create() => SearchTripsResponse_TripTemplate._();
+  SearchTripsResponse_TripTemplate createEmptyInstance() => create();
+  static $pb.PbList<SearchTripsResponse_TripTemplate> createRepeated() => $pb.PbList<SearchTripsResponse_TripTemplate>();
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse_TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOnshoreTripsResponse_TripTemplate>(create);
-  static SearchOnshoreTripsResponse_TripTemplate? _defaultInstance;
+  static SearchTripsResponse_TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchTripsResponse_TripTemplate>(create);
+  static SearchTripsResponse_TripTemplate? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get id => $_getI64(0);
@@ -4161,495 +4011,85 @@ class SearchOnshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
   $core.List<$6.File> get images => $_getList(7);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get createdAt => $_getN(8);
+  $6.Address get address => $_getN(8);
   @$pb.TagNumber(80)
-  set createdAt($5.Timestamp v) { setField(80, v); }
+  set address($6.Address v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasCreatedAt() => $_has(8);
+  $core.bool hasAddress() => $_has(8);
   @$pb.TagNumber(80)
-  void clearCreatedAt() => clearField(80);
+  void clearAddress() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedAt() => $_ensure(8);
+  $6.Address ensureAddress() => $_ensure(8);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get updatedAt => $_getN(9);
+  $5.Timestamp get createdAt => $_getN(9);
   @$pb.TagNumber(90)
-  set updatedAt($5.Timestamp v) { setField(90, v); }
+  set createdAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasUpdatedAt() => $_has(9);
+  $core.bool hasCreatedAt() => $_has(9);
   @$pb.TagNumber(90)
-  void clearUpdatedAt() => clearField(90);
+  void clearCreatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
+  $5.Timestamp ensureCreatedAt() => $_ensure(9);
+
+  @$pb.TagNumber(100)
+  $5.Timestamp get updatedAt => $_getN(10);
+  @$pb.TagNumber(100)
+  set updatedAt($5.Timestamp v) { setField(100, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasUpdatedAt() => $_has(10);
+  @$pb.TagNumber(100)
+  void clearUpdatedAt() => clearField(100);
+  @$pb.TagNumber(100)
+  $5.Timestamp ensureUpdatedAt() => $_ensure(10);
 }
 
-class SearchOnshoreTripsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOnshoreTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<SearchOnshoreTripsResponse_Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: SearchOnshoreTripsResponse_Trip.create)
-    ..aOM<SearchOnshoreTripsResponse_TripTemplate>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: SearchOnshoreTripsResponse_TripTemplate.create)
+class SearchTripsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<SearchTripsResponse_Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: SearchTripsResponse_Trip.create)
     ..hasRequiredFields = false
   ;
 
-  SearchOnshoreTripsResponse._() : super();
-  factory SearchOnshoreTripsResponse({
-    SearchOnshoreTripsResponse_Trip? trip,
-    SearchOnshoreTripsResponse_TripTemplate? tripTemplate,
+  SearchTripsResponse._() : super();
+  factory SearchTripsResponse({
+    SearchTripsResponse_Trip? trip,
   }) {
     final _result = create();
     if (trip != null) {
       _result.trip = trip;
     }
-    if (tripTemplate != null) {
-      _result.tripTemplate = tripTemplate;
-    }
     return _result;
   }
-  factory SearchOnshoreTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOnshoreTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory SearchTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SearchTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse clone() => SearchOnshoreTripsResponse()..mergeFromMessage(this);
+  SearchTripsResponse clone() => SearchTripsResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  SearchOnshoreTripsResponse copyWith(void Function(SearchOnshoreTripsResponse) updates) => super.copyWith((message) => updates(message as SearchOnshoreTripsResponse)) as SearchOnshoreTripsResponse; // ignore: deprecated_member_use
+  SearchTripsResponse copyWith(void Function(SearchTripsResponse) updates) => super.copyWith((message) => updates(message as SearchTripsResponse)) as SearchTripsResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse create() => SearchOnshoreTripsResponse._();
-  SearchOnshoreTripsResponse createEmptyInstance() => create();
-  static $pb.PbList<SearchOnshoreTripsResponse> createRepeated() => $pb.PbList<SearchOnshoreTripsResponse>();
+  static SearchTripsResponse create() => SearchTripsResponse._();
+  SearchTripsResponse createEmptyInstance() => create();
+  static $pb.PbList<SearchTripsResponse> createRepeated() => $pb.PbList<SearchTripsResponse>();
   @$core.pragma('dart2js:noInline')
-  static SearchOnshoreTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOnshoreTripsResponse>(create);
-  static SearchOnshoreTripsResponse? _defaultInstance;
+  static SearchTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchTripsResponse>(create);
+  static SearchTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  SearchOnshoreTripsResponse_Trip get trip => $_getN(0);
+  SearchTripsResponse_Trip get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip(SearchOnshoreTripsResponse_Trip v) { setField(1, v); }
+  set trip(SearchTripsResponse_Trip v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  SearchOnshoreTripsResponse_Trip ensureTrip() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  SearchOnshoreTripsResponse_TripTemplate get tripTemplate => $_getN(1);
-  @$pb.TagNumber(2)
-  set tripTemplate(SearchOnshoreTripsResponse_TripTemplate v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasTripTemplate() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTripTemplate() => clearField(2);
-  @$pb.TagNumber(2)
-  SearchOnshoreTripsResponse_TripTemplate ensureTripTemplate() => $_ensure(1);
-}
-
-class SearchOffshoreTripsResponse_Trip extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOffshoreTripsResponse.Trip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplateId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
-    ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
-    ..aOM<$5.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
-    ..hasRequiredFields = false
-  ;
-
-  SearchOffshoreTripsResponse_Trip._() : super();
-  factory SearchOffshoreTripsResponse_Trip({
-    $fixnum.Int64? id,
-    $fixnum.Int64? tripTemplateId,
-    $core.int? maxGuest,
-    $core.double? price,
-    $5.Timestamp? fromDate,
-    $5.Timestamp? toDate,
-    $5.Timestamp? lastReservationDate,
-    $5.Timestamp? createdAt,
-    $5.Timestamp? updatedAt,
-  }) {
-    final _result = create();
-    if (id != null) {
-      _result.id = id;
-    }
-    if (tripTemplateId != null) {
-      _result.tripTemplateId = tripTemplateId;
-    }
-    if (maxGuest != null) {
-      _result.maxGuest = maxGuest;
-    }
-    if (price != null) {
-      _result.price = price;
-    }
-    if (fromDate != null) {
-      _result.fromDate = fromDate;
-    }
-    if (toDate != null) {
-      _result.toDate = toDate;
-    }
-    if (lastReservationDate != null) {
-      _result.lastReservationDate = lastReservationDate;
-    }
-    if (createdAt != null) {
-      _result.createdAt = createdAt;
-    }
-    if (updatedAt != null) {
-      _result.updatedAt = updatedAt;
-    }
-    return _result;
-  }
-  factory SearchOffshoreTripsResponse_Trip.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOffshoreTripsResponse_Trip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse_Trip clone() => SearchOffshoreTripsResponse_Trip()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse_Trip copyWith(void Function(SearchOffshoreTripsResponse_Trip) updates) => super.copyWith((message) => updates(message as SearchOffshoreTripsResponse_Trip)) as SearchOffshoreTripsResponse_Trip; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse_Trip create() => SearchOffshoreTripsResponse_Trip._();
-  SearchOffshoreTripsResponse_Trip createEmptyInstance() => create();
-  static $pb.PbList<SearchOffshoreTripsResponse_Trip> createRepeated() => $pb.PbList<SearchOffshoreTripsResponse_Trip>();
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse_Trip getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOffshoreTripsResponse_Trip>(create);
-  static SearchOffshoreTripsResponse_Trip? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
-  @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(20)
-  $fixnum.Int64 get tripTemplateId => $_getI64(1);
-  @$pb.TagNumber(20)
-  set tripTemplateId($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(20)
-  $core.bool hasTripTemplateId() => $_has(1);
-  @$pb.TagNumber(20)
-  void clearTripTemplateId() => clearField(20);
-
-  @$pb.TagNumber(30)
-  $core.int get maxGuest => $_getIZ(2);
-  @$pb.TagNumber(30)
-  set maxGuest($core.int v) { $_setUnsignedInt32(2, v); }
-  @$pb.TagNumber(30)
-  $core.bool hasMaxGuest() => $_has(2);
-  @$pb.TagNumber(30)
-  void clearMaxGuest() => clearField(30);
-
-  @$pb.TagNumber(40)
-  $core.double get price => $_getN(3);
-  @$pb.TagNumber(40)
-  set price($core.double v) { $_setFloat(3, v); }
-  @$pb.TagNumber(40)
-  $core.bool hasPrice() => $_has(3);
-  @$pb.TagNumber(40)
-  void clearPrice() => clearField(40);
-
-  @$pb.TagNumber(50)
-  $5.Timestamp get fromDate => $_getN(4);
-  @$pb.TagNumber(50)
-  set fromDate($5.Timestamp v) { setField(50, v); }
-  @$pb.TagNumber(50)
-  $core.bool hasFromDate() => $_has(4);
-  @$pb.TagNumber(50)
-  void clearFromDate() => clearField(50);
-  @$pb.TagNumber(50)
-  $5.Timestamp ensureFromDate() => $_ensure(4);
-
-  @$pb.TagNumber(60)
-  $5.Timestamp get toDate => $_getN(5);
-  @$pb.TagNumber(60)
-  set toDate($5.Timestamp v) { setField(60, v); }
-  @$pb.TagNumber(60)
-  $core.bool hasToDate() => $_has(5);
-  @$pb.TagNumber(60)
-  void clearToDate() => clearField(60);
-  @$pb.TagNumber(60)
-  $5.Timestamp ensureToDate() => $_ensure(5);
-
-  @$pb.TagNumber(70)
-  $5.Timestamp get lastReservationDate => $_getN(6);
-  @$pb.TagNumber(70)
-  set lastReservationDate($5.Timestamp v) { setField(70, v); }
-  @$pb.TagNumber(70)
-  $core.bool hasLastReservationDate() => $_has(6);
-  @$pb.TagNumber(70)
-  void clearLastReservationDate() => clearField(70);
-  @$pb.TagNumber(70)
-  $5.Timestamp ensureLastReservationDate() => $_ensure(6);
-
-  @$pb.TagNumber(80)
-  $5.Timestamp get createdAt => $_getN(7);
-  @$pb.TagNumber(80)
-  set createdAt($5.Timestamp v) { setField(80, v); }
-  @$pb.TagNumber(80)
-  $core.bool hasCreatedAt() => $_has(7);
-  @$pb.TagNumber(80)
-  void clearCreatedAt() => clearField(80);
-  @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedAt() => $_ensure(7);
-
-  @$pb.TagNumber(90)
-  $5.Timestamp get updatedAt => $_getN(8);
-  @$pb.TagNumber(90)
-  set updatedAt($5.Timestamp v) { setField(90, v); }
-  @$pb.TagNumber(90)
-  $core.bool hasUpdatedAt() => $_has(8);
-  @$pb.TagNumber(90)
-  void clearUpdatedAt() => clearField(90);
-  @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedAt() => $_ensure(8);
-}
-
-class SearchOffshoreTripsResponse_TripTemplate extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOffshoreTripsResponse.TripTemplate', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
-    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
-    ..e<$6.TripType>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $6.TripType.ONSHORE, valueOf: $6.TripType.valueOf, enumValues: $6.TripType.values)
-    ..a<$fixnum.Int64>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boatId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..pc<$6.File>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images', $pb.PbFieldType.PM, subBuilder: $6.File.create)
-    ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
-    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
-    ..hasRequiredFields = false
-  ;
-
-  SearchOffshoreTripsResponse_TripTemplate._() : super();
-  factory SearchOffshoreTripsResponse_TripTemplate({
-    $fixnum.Int64? id,
-    $core.String? name,
-    $core.String? description,
-    $6.TripType? tripType,
-    $fixnum.Int64? hotelId,
-    $fixnum.Int64? boatId,
-    $fixnum.Int64? liveaboardId,
-    $core.Iterable<$6.File>? images,
-    $5.Timestamp? createdAt,
-    $5.Timestamp? updatedAt,
-  }) {
-    final _result = create();
-    if (id != null) {
-      _result.id = id;
-    }
-    if (name != null) {
-      _result.name = name;
-    }
-    if (description != null) {
-      _result.description = description;
-    }
-    if (tripType != null) {
-      _result.tripType = tripType;
-    }
-    if (hotelId != null) {
-      _result.hotelId = hotelId;
-    }
-    if (boatId != null) {
-      _result.boatId = boatId;
-    }
-    if (liveaboardId != null) {
-      _result.liveaboardId = liveaboardId;
-    }
-    if (images != null) {
-      _result.images.addAll(images);
-    }
-    if (createdAt != null) {
-      _result.createdAt = createdAt;
-    }
-    if (updatedAt != null) {
-      _result.updatedAt = updatedAt;
-    }
-    return _result;
-  }
-  factory SearchOffshoreTripsResponse_TripTemplate.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOffshoreTripsResponse_TripTemplate.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse_TripTemplate clone() => SearchOffshoreTripsResponse_TripTemplate()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse_TripTemplate copyWith(void Function(SearchOffshoreTripsResponse_TripTemplate) updates) => super.copyWith((message) => updates(message as SearchOffshoreTripsResponse_TripTemplate)) as SearchOffshoreTripsResponse_TripTemplate; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse_TripTemplate create() => SearchOffshoreTripsResponse_TripTemplate._();
-  SearchOffshoreTripsResponse_TripTemplate createEmptyInstance() => create();
-  static $pb.PbList<SearchOffshoreTripsResponse_TripTemplate> createRepeated() => $pb.PbList<SearchOffshoreTripsResponse_TripTemplate>();
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse_TripTemplate getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOffshoreTripsResponse_TripTemplate>(create);
-  static SearchOffshoreTripsResponse_TripTemplate? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
-  @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(10)
-  $core.String get name => $_getSZ(1);
-  @$pb.TagNumber(10)
-  set name($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasName() => $_has(1);
-  @$pb.TagNumber(10)
-  void clearName() => clearField(10);
-
-  @$pb.TagNumber(20)
-  $core.String get description => $_getSZ(2);
-  @$pb.TagNumber(20)
-  set description($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(20)
-  $core.bool hasDescription() => $_has(2);
-  @$pb.TagNumber(20)
-  void clearDescription() => clearField(20);
-
-  @$pb.TagNumber(30)
-  $6.TripType get tripType => $_getN(3);
-  @$pb.TagNumber(30)
-  set tripType($6.TripType v) { setField(30, v); }
-  @$pb.TagNumber(30)
-  $core.bool hasTripType() => $_has(3);
-  @$pb.TagNumber(30)
-  void clearTripType() => clearField(30);
-
-  @$pb.TagNumber(40)
-  $fixnum.Int64 get hotelId => $_getI64(4);
-  @$pb.TagNumber(40)
-  set hotelId($fixnum.Int64 v) { $_setInt64(4, v); }
-  @$pb.TagNumber(40)
-  $core.bool hasHotelId() => $_has(4);
-  @$pb.TagNumber(40)
-  void clearHotelId() => clearField(40);
-
-  @$pb.TagNumber(50)
-  $fixnum.Int64 get boatId => $_getI64(5);
-  @$pb.TagNumber(50)
-  set boatId($fixnum.Int64 v) { $_setInt64(5, v); }
-  @$pb.TagNumber(50)
-  $core.bool hasBoatId() => $_has(5);
-  @$pb.TagNumber(50)
-  void clearBoatId() => clearField(50);
-
-  @$pb.TagNumber(60)
-  $fixnum.Int64 get liveaboardId => $_getI64(6);
-  @$pb.TagNumber(60)
-  set liveaboardId($fixnum.Int64 v) { $_setInt64(6, v); }
-  @$pb.TagNumber(60)
-  $core.bool hasLiveaboardId() => $_has(6);
-  @$pb.TagNumber(60)
-  void clearLiveaboardId() => clearField(60);
-
-  @$pb.TagNumber(70)
-  $core.List<$6.File> get images => $_getList(7);
-
-  @$pb.TagNumber(80)
-  $5.Timestamp get createdAt => $_getN(8);
-  @$pb.TagNumber(80)
-  set createdAt($5.Timestamp v) { setField(80, v); }
-  @$pb.TagNumber(80)
-  $core.bool hasCreatedAt() => $_has(8);
-  @$pb.TagNumber(80)
-  void clearCreatedAt() => clearField(80);
-  @$pb.TagNumber(80)
-  $5.Timestamp ensureCreatedAt() => $_ensure(8);
-
-  @$pb.TagNumber(90)
-  $5.Timestamp get updatedAt => $_getN(9);
-  @$pb.TagNumber(90)
-  set updatedAt($5.Timestamp v) { setField(90, v); }
-  @$pb.TagNumber(90)
-  $core.bool hasUpdatedAt() => $_has(9);
-  @$pb.TagNumber(90)
-  void clearUpdatedAt() => clearField(90);
-  @$pb.TagNumber(90)
-  $5.Timestamp ensureUpdatedAt() => $_ensure(9);
-}
-
-class SearchOffshoreTripsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchOffshoreTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<SearchOffshoreTripsResponse_Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: SearchOffshoreTripsResponse_Trip.create)
-    ..aOM<SearchOffshoreTripsResponse_TripTemplate>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: SearchOffshoreTripsResponse_TripTemplate.create)
-    ..hasRequiredFields = false
-  ;
-
-  SearchOffshoreTripsResponse._() : super();
-  factory SearchOffshoreTripsResponse({
-    SearchOffshoreTripsResponse_Trip? trip,
-    SearchOffshoreTripsResponse_TripTemplate? tripTemplate,
-  }) {
-    final _result = create();
-    if (trip != null) {
-      _result.trip = trip;
-    }
-    if (tripTemplate != null) {
-      _result.tripTemplate = tripTemplate;
-    }
-    return _result;
-  }
-  factory SearchOffshoreTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory SearchOffshoreTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse clone() => SearchOffshoreTripsResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  SearchOffshoreTripsResponse copyWith(void Function(SearchOffshoreTripsResponse) updates) => super.copyWith((message) => updates(message as SearchOffshoreTripsResponse)) as SearchOffshoreTripsResponse; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse create() => SearchOffshoreTripsResponse._();
-  SearchOffshoreTripsResponse createEmptyInstance() => create();
-  static $pb.PbList<SearchOffshoreTripsResponse> createRepeated() => $pb.PbList<SearchOffshoreTripsResponse>();
-  @$core.pragma('dart2js:noInline')
-  static SearchOffshoreTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchOffshoreTripsResponse>(create);
-  static SearchOffshoreTripsResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  SearchOffshoreTripsResponse_Trip get trip => $_getN(0);
-  @$pb.TagNumber(1)
-  set trip(SearchOffshoreTripsResponse_Trip v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasTrip() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTrip() => clearField(1);
-  @$pb.TagNumber(1)
-  SearchOffshoreTripsResponse_Trip ensureTrip() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  SearchOffshoreTripsResponse_TripTemplate get tripTemplate => $_getN(1);
-  @$pb.TagNumber(2)
-  set tripTemplate(SearchOffshoreTripsResponse_TripTemplate v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasTripTemplate() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTripTemplate() => clearField(2);
-  @$pb.TagNumber(2)
-  SearchOffshoreTripsResponse_TripTemplate ensureTripTemplate() => $_ensure(1);
+  SearchTripsResponse_Trip ensureTrip() => $_ensure(0);
 }
 

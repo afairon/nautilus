@@ -89,18 +89,12 @@ class AgencyServiceClient extends $grpc.Client {
           ($2.ListTripsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $2.ListTripsResponse.fromBuffer(value));
-  static final _$searchOnshoreTrips = $grpc.ClientMethod<
-          $2.SearchOnshoreTripsRequest, $2.SearchOnshoreTripsResponse>(
-      '/agency.AgencyService/SearchOnshoreTrips',
-      ($2.SearchOnshoreTripsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $2.SearchOnshoreTripsResponse.fromBuffer(value));
-  static final _$searchOffshoreTrips = $grpc.ClientMethod<
-          $2.SearchOffshoreTripsRequest, $2.SearchOffshoreTripsResponse>(
-      '/agency.AgencyService/SearchOffshoreTrips',
-      ($2.SearchOffshoreTripsRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $2.SearchOffshoreTripsResponse.fromBuffer(value));
+  static final _$searchTrips =
+      $grpc.ClientMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
+          '/agency.AgencyService/SearchTrips',
+          ($2.SearchTripsRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $2.SearchTripsResponse.fromBuffer(value));
 
   AgencyServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -199,19 +193,11 @@ class AgencyServiceClient extends $grpc.Client {
         options: options);
   }
 
-  $grpc.ResponseStream<$2.SearchOnshoreTripsResponse> searchOnshoreTrips(
-      $2.SearchOnshoreTripsRequest request,
+  $grpc.ResponseStream<$2.SearchTripsResponse> searchTrips(
+      $2.SearchTripsRequest request,
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
-        _$searchOnshoreTrips, $async.Stream.fromIterable([request]),
-        options: options);
-  }
-
-  $grpc.ResponseStream<$2.SearchOffshoreTripsResponse> searchOffshoreTrips(
-      $2.SearchOffshoreTripsRequest request,
-      {$grpc.CallOptions? options}) {
-    return $createStreamingCall(
-        _$searchOffshoreTrips, $async.Stream.fromIterable([request]),
+        _$searchTrips, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -328,24 +314,15 @@ abstract class AgencyServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $2.ListTripsRequest.fromBuffer(value),
         ($2.ListTripsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$2.SearchOnshoreTripsRequest,
-            $2.SearchOnshoreTripsResponse>(
-        'SearchOnshoreTrips',
-        searchOnshoreTrips_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) =>
-            $2.SearchOnshoreTripsRequest.fromBuffer(value),
-        ($2.SearchOnshoreTripsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$2.SearchOffshoreTripsRequest,
-            $2.SearchOffshoreTripsResponse>(
-        'SearchOffshoreTrips',
-        searchOffshoreTrips_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) =>
-            $2.SearchOffshoreTripsRequest.fromBuffer(value),
-        ($2.SearchOffshoreTripsResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
+            'SearchTrips',
+            searchTrips_Pre,
+            false,
+            true,
+            ($core.List<$core.int> value) =>
+                $2.SearchTripsRequest.fromBuffer(value),
+            ($2.SearchTripsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> addDiveMaster_Pre($grpc.ServiceCall call,
@@ -421,16 +398,9 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* listTrips(call, await request);
   }
 
-  $async.Stream<$2.SearchOnshoreTripsResponse> searchOnshoreTrips_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$2.SearchOnshoreTripsRequest> request) async* {
-    yield* searchOnshoreTrips(call, await request);
-  }
-
-  $async.Stream<$2.SearchOffshoreTripsResponse> searchOffshoreTrips_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$2.SearchOffshoreTripsRequest> request) async* {
-    yield* searchOffshoreTrips(call, await request);
+  $async.Stream<$2.SearchTripsResponse> searchTrips_Pre($grpc.ServiceCall call,
+      $async.Future<$2.SearchTripsRequest> request) async* {
+    yield* searchTrips(call, await request);
   }
 
   $async.Future<$1.Empty> addDiveMaster(
@@ -461,8 +431,6 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.ListTripTemplatesRequest request);
   $async.Stream<$2.ListTripsResponse> listTrips(
       $grpc.ServiceCall call, $2.ListTripsRequest request);
-  $async.Stream<$2.SearchOnshoreTripsResponse> searchOnshoreTrips(
-      $grpc.ServiceCall call, $2.SearchOnshoreTripsRequest request);
-  $async.Stream<$2.SearchOffshoreTripsResponse> searchOffshoreTrips(
-      $grpc.ServiceCall call, $2.SearchOffshoreTripsRequest request);
+  $async.Stream<$2.SearchTripsResponse> searchTrips(
+      $grpc.ServiceCall call, $2.SearchTripsRequest request);
 }
