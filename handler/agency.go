@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
@@ -223,7 +222,6 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 
 	liveaboards, err := handler.agencyService.ListLiveaboards(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
-		fmt.Printf("%+v\n", err)
 		return err
 	}
 
@@ -382,8 +380,6 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.AgencyService_SearchTripsServer) error {
 	ctx := srv.Context()
 
-	fmt.Printf("%+v\n", req)
-
 	trips, err := handler.agencyService.SearchTrips(ctx, req.GetSearchTripsOptions(), req.GetLimit(), req.GetOffset())
 
 	if err != nil {
@@ -455,11 +451,6 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 
 		srv.Send(resp)
 	}
-
-	fmt.Println("Number of trips: ", len(trips))
-	// for _, trip := range trips {
-	// 	fmt.Printf("%+v\n", *trip)
-	// }
 
 	return nil
 }

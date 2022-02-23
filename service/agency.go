@@ -605,11 +605,11 @@ func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOption
 	// TODO deal with files of trip templates.
 	switch searchTripsOptions.GetLocationFilter().(type) {
 	case *pb.SearchTripsOptions_Country:
-		trips, err = service.repo.Trip.SearchTrips(ctx, searchTripsOptions.GetCountry(), "", "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, searchTripsOptions.GetCountry(), "", "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
 	case *pb.SearchTripsOptions_City:
-		trips, err = service.repo.Trip.SearchTrips(ctx, "", searchTripsOptions.GetCity(), "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", searchTripsOptions.GetCity(), "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
 	case *pb.SearchTripsOptions_Region:
-		trips, err = service.repo.Trip.SearchTrips(ctx, "", "", searchTripsOptions.GetRegion(), searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), uint(limit), uint(offset))
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", "", searchTripsOptions.GetRegion(), searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
 	}
 
 	if err != nil {

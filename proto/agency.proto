@@ -324,6 +324,7 @@ message SearchTripsOptions {
         string region = 3;
     }
     uint32 divers = 10;
+    model.TripType trip_type = 15;
     google.protobuf.Timestamp start_date = 20 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp end_date = 30 [(gogoproto.stdtime) = true];
 }
