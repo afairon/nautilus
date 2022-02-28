@@ -2660,6 +2660,350 @@ func (m *ListTripsResponse_Trip) GetUpdatedAt() *time.Time {
 	return nil
 }
 
+// ListTripsWithTemplatesRequest
+type ListTripsWithTemplatesRequest struct {
+	Limit  uint64 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesRequest) Reset()      { *m = ListTripsWithTemplatesRequest{} }
+func (*ListTripsWithTemplatesRequest) ProtoMessage() {}
+func (*ListTripsWithTemplatesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{32}
+}
+func (m *ListTripsWithTemplatesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesRequest.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesRequest proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesRequest) GetLimit() uint64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesRequest) GetOffset() uint64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+// ListTripsWithTemplatesResponse
+type ListTripsWithTemplatesResponse struct {
+	Trip *ListTripsWithTemplatesResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse) Reset()      { *m = ListTripsWithTemplatesResponse{} }
+func (*ListTripsWithTemplatesResponse) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33}
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse) GetTrip() *ListTripsWithTemplatesResponse_Trip {
+	if m != nil {
+		return m.Trip
+	}
+	return nil
+}
+
+type ListTripsWithTemplatesResponse_Trip struct {
+	Id                  uint64                                       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TripTemplateId      uint64                                       `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
+	MaxGuest            uint32                                       `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
+	Price               float32                                      `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
+	DiveMasters         []*DiveMaster                                `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
+	FromDate            *time.Time                                   `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
+	ToDate              *time.Time                                   `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
+	LastReservationDate *time.Time                                   `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
+	CreatedAt           *time.Time                                   `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt           *time.Time                                   `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+	TripTemplate        *ListTripsWithTemplatesResponse_TripTemplate `protobuf:"bytes,110,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) Reset()      { *m = ListTripsWithTemplatesResponse_Trip{} }
+func (*ListTripsWithTemplatesResponse_Trip) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse_Trip) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33, 0}
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse_Trip proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplateId() uint64 {
+	if m != nil {
+		return m.TripTemplateId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetMaxGuest() uint32 {
+	if m != nil {
+		return m.MaxGuest
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetPrice() float32 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetDiveMasters() []*DiveMaster {
+	if m != nil {
+		return m.DiveMasters
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetFromDate() *time.Time {
+	if m != nil {
+		return m.FromDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetToDate() *time.Time {
+	if m != nil {
+		return m.ToDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetLastReservationDate() *time.Time {
+	if m != nil {
+		return m.LastReservationDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetCreatedAt() *time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetUpdatedAt() *time.Time {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplate() *ListTripsWithTemplatesResponse_TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+type ListTripsWithTemplatesResponse_TripTemplate struct {
+	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
+	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
+	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
+	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
+	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
+	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
+	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
+	Address      *Address   `protobuf:"bytes,80,opt,name=address,proto3" json:"address,omitempty"`
+	CreatedAt    *time.Time `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt    *time.Time `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Reset() {
+	*m = ListTripsWithTemplatesResponse_TripTemplate{}
+}
+func (*ListTripsWithTemplatesResponse_TripTemplate) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse_TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33, 1}
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetTripType() TripType {
+	if m != nil {
+		return m.TripType
+	}
+	return ONSHORE
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetHotelId() uint64 {
+	if m != nil {
+		return m.HotelId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetBoatId() uint64 {
+	if m != nil {
+		return m.BoatId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetLiveaboardId() uint64 {
+	if m != nil {
+		return m.LiveaboardId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetImages() []*File {
+	if m != nil {
+		return m.Images
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetAddress() *Address {
+	if m != nil {
+		return m.Address
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetCreatedAt() *time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetUpdatedAt() *time.Time {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return nil
+}
+
 type SearchTripsOptions struct {
 	// allow either country or city for location filtering
 	//
@@ -2677,7 +3021,7 @@ type SearchTripsOptions struct {
 func (m *SearchTripsOptions) Reset()      { *m = SearchTripsOptions{} }
 func (*SearchTripsOptions) ProtoMessage() {}
 func (*SearchTripsOptions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{32}
+	return fileDescriptor_614a4be5fd9deed0, []int{34}
 }
 func (m *SearchTripsOptions) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2801,7 +3145,7 @@ type SearchTripsRequest struct {
 func (m *SearchTripsRequest) Reset()      { *m = SearchTripsRequest{} }
 func (*SearchTripsRequest) ProtoMessage() {}
 func (*SearchTripsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{33}
+	return fileDescriptor_614a4be5fd9deed0, []int{35}
 }
 func (m *SearchTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2858,7 +3202,7 @@ type SearchTripsResponse struct {
 func (m *SearchTripsResponse) Reset()      { *m = SearchTripsResponse{} }
 func (*SearchTripsResponse) ProtoMessage() {}
 func (*SearchTripsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34}
+	return fileDescriptor_614a4be5fd9deed0, []int{36}
 }
 func (m *SearchTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2911,7 +3255,7 @@ type SearchTripsResponse_Trip struct {
 func (m *SearchTripsResponse_Trip) Reset()      { *m = SearchTripsResponse_Trip{} }
 func (*SearchTripsResponse_Trip) ProtoMessage() {}
 func (*SearchTripsResponse_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34, 0}
+	return fileDescriptor_614a4be5fd9deed0, []int{36, 0}
 }
 func (m *SearchTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -3034,7 +3378,7 @@ type SearchTripsResponse_TripTemplate struct {
 func (m *SearchTripsResponse_TripTemplate) Reset()      { *m = SearchTripsResponse_TripTemplate{} }
 func (*SearchTripsResponse_TripTemplate) ProtoMessage() {}
 func (*SearchTripsResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34, 1}
+	return fileDescriptor_614a4be5fd9deed0, []int{36, 1}
 }
 func (m *SearchTripsResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -3180,6 +3524,10 @@ func init() {
 	proto.RegisterType((*ListTripsRequest)(nil), "agency.ListTripsRequest")
 	proto.RegisterType((*ListTripsResponse)(nil), "agency.ListTripsResponse")
 	proto.RegisterType((*ListTripsResponse_Trip)(nil), "agency.ListTripsResponse.Trip")
+	proto.RegisterType((*ListTripsWithTemplatesRequest)(nil), "agency.ListTripsWithTemplatesRequest")
+	proto.RegisterType((*ListTripsWithTemplatesResponse)(nil), "agency.ListTripsWithTemplatesResponse")
+	proto.RegisterType((*ListTripsWithTemplatesResponse_Trip)(nil), "agency.ListTripsWithTemplatesResponse.Trip")
+	proto.RegisterType((*ListTripsWithTemplatesResponse_TripTemplate)(nil), "agency.ListTripsWithTemplatesResponse.TripTemplate")
 	proto.RegisterType((*SearchTripsOptions)(nil), "agency.SearchTripsOptions")
 	proto.RegisterType((*SearchTripsRequest)(nil), "agency.SearchTripsRequest")
 	proto.RegisterType((*SearchTripsResponse)(nil), "agency.SearchTripsResponse")
@@ -3190,152 +3538,157 @@ func init() {
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 2307 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x59, 0xcd, 0x6f, 0x1b, 0xc7,
-	0x15, 0xe7, 0x2e, 0x29, 0x7e, 0x3c, 0x8a, 0x94, 0x3d, 0x61, 0x64, 0x9a, 0x6e, 0xd7, 0x0a, 0x83,
-	0x04, 0x4c, 0x9a, 0xd0, 0x02, 0xed, 0x18, 0x70, 0xeb, 0xc2, 0xa5, 0x22, 0x2b, 0x52, 0xa2, 0xb4,
-	0xc6, 0x5a, 0x87, 0xc2, 0x17, 0x62, 0xc5, 0x1d, 0x52, 0x8b, 0x72, 0x77, 0x99, 0xdd, 0x91, 0x6a,
-	0xdd, 0x8a, 0x1e, 0x7b, 0x89, 0x4f, 0x05, 0x0a, 0xf4, 0x54, 0xa0, 0x40, 0x0f, 0xed, 0xb9, 0x40,
-	0x81, 0x1e, 0x5b, 0x04, 0x69, 0x0f, 0x3e, 0xa6, 0xa7, 0xd6, 0xf2, 0xa5, 0x40, 0x73, 0xc8, 0x3f,
-	0x50, 0xa0, 0x98, 0x8f, 0xe5, 0xce, 0x90, 0xcb, 0x0f, 0x51, 0x02, 0x92, 0x43, 0x6f, 0x3b, 0x33,
-	0x6f, 0x1e, 0xdf, 0xbc, 0x8f, 0xdf, 0xbc, 0xf9, 0x11, 0x56, 0xad, 0x3e, 0xf6, 0xba, 0xa7, 0xcd,
-	0x61, 0xe0, 0x13, 0x1f, 0x65, 0xf9, 0xa8, 0x56, 0x74, 0x7d, 0x1b, 0x0f, 0xf8, 0x64, 0xed, 0x46,
-	0xdf, 0xf7, 0xfb, 0x03, 0x7c, 0x8b, 0x8d, 0x0e, 0x8f, 0x7b, 0xb7, 0xb0, 0x3b, 0x24, 0x62, 0x47,
-	0xed, 0xe6, 0xf8, 0x22, 0x71, 0x5c, 0x1c, 0x12, 0xcb, 0x1d, 0x0a, 0x81, 0x77, 0xfb, 0x0e, 0x39,
-	0x3a, 0x3e, 0x6c, 0x76, 0x7d, 0xf7, 0x56, 0xdf, 0xef, 0xfb, 0xb1, 0x24, 0x1d, 0xb1, 0x01, 0xfb,
-	0xe2, 0xe2, 0xf5, 0xcf, 0x35, 0x80, 0x6d, 0xe7, 0x04, 0x7f, 0x6c, 0x85, 0x04, 0x07, 0xe8, 0xdb,
-	0x00, 0x3d, 0x27, 0x08, 0x49, 0xc7, 0xb3, 0x5c, 0x5c, 0xd5, 0x36, 0xb4, 0x46, 0xc1, 0x2c, 0xb0,
-	0x99, 0x1f, 0x5a, 0x2e, 0x46, 0x37, 0xa0, 0x30, 0xb0, 0xa2, 0x55, 0x9d, 0xad, 0xe6, 0xe9, 0x04,
-	0x5b, 0x7c, 0x13, 0x56, 0x06, 0xf8, 0x04, 0x0f, 0xaa, 0xe9, 0x0d, 0xad, 0x51, 0x6e, 0x5d, 0x69,
-	0xf2, 0x43, 0xed, 0xd3, 0xb9, 0x83, 0xd3, 0x21, 0x36, 0xf9, 0x32, 0x7a, 0x07, 0x8a, 0xbd, 0xc0,
-	0xf7, 0x48, 0xc7, 0x71, 0xad, 0x3e, 0xae, 0x66, 0x36, 0xb4, 0x46, 0xb1, 0x55, 0x14, 0xd2, 0x3b,
-	0xce, 0x00, 0x9b, 0xc0, 0xd6, 0xf7, 0xe8, 0x32, 0x7a, 0x1b, 0xe0, 0xd0, 0xea, 0xfe, 0x44, 0x08,
-	0xaf, 0x4c, 0x0a, 0x17, 0xe8, 0x32, 0x93, 0xad, 0xff, 0x18, 0x6a, 0xf1, 0x59, 0x76, 0xa8, 0xd5,
-	0x6d, 0xcf, 0xde, 0x8f, 0xec, 0xbb, 0xc0, 0xd9, 0xea, 0xbf, 0xd0, 0x60, 0xe5, 0x31, 0xb1, 0x7a,
-	0xbd, 0x0b, 0x79, 0xa8, 0x06, 0xf9, 0xa1, 0x1f, 0x3a, 0xc4, 0xf1, 0x3d, 0xe6, 0xa4, 0x82, 0x39,
-	0x1a, 0xa3, 0xb7, 0x20, 0xdb, 0xc7, 0x9e, 0x8d, 0x03, 0xe6, 0x90, 0x72, 0xeb, 0xaa, 0x38, 0xe3,
-	0x07, 0x6c, 0x92, 0xf9, 0x4f, 0x08, 0xd4, 0x3f, 0xd5, 0x59, 0xcc, 0x1c, 0xaf, 0xbf, 0xe5, 0x5b,
-	0x04, 0x21, 0xc8, 0x48, 0xb6, 0xb0, 0x6f, 0xea, 0xe3, 0x43, 0xdf, 0x12, 0x2e, 0x0e, 0xab, 0xfa,
-	0x46, 0x7a, 0xc2, 0xc7, 0x74, 0x9d, 0xb9, 0x2d, 0x44, 0x1b, 0x50, 0xb4, 0x71, 0xd8, 0x0d, 0x9c,
-	0xa1, 0x64, 0x9a, 0x3c, 0x85, 0xde, 0x80, 0x32, 0xf1, 0x89, 0x35, 0xe8, 0x74, 0xad, 0xa1, 0xd5,
-	0x75, 0xc8, 0x29, 0xb3, 0xb2, 0x64, 0x96, 0xd8, 0xec, 0xfb, 0x62, 0x92, 0x8a, 0xd9, 0xce, 0x09,
-	0x0e, 0x62, 0xb1, 0x15, 0x2e, 0xc6, 0x66, 0x65, 0xb1, 0x90, 0x3a, 0x33, 0x16, 0xcb, 0x72, 0x31,
-	0x36, 0x3b, 0x12, 0x6b, 0x40, 0xce, 0xb2, 0xed, 0x00, 0x87, 0x61, 0x35, 0xc7, 0xe2, 0x5e, 0x16,
-	0x07, 0x68, 0xf3, 0x59, 0x33, 0x5a, 0xae, 0x3f, 0x80, 0x5c, 0xdb, 0xc5, 0x1e, 0xdd, 0x94, 0xe4,
-	0x8d, 0xb1, 0xf3, 0xe9, 0x13, 0xe7, 0xab, 0x7f, 0xa9, 0x41, 0xde, 0xf4, 0x7d, 0x97, 0xfa, 0x79,
-	0x39, 0x15, 0x34, 0xf2, 0xae, 0xf5, 0xb4, 0xd3, 0x3f, 0xc6, 0x21, 0x61, 0x2e, 0x2c, 0x99, 0x79,
-	0xd7, 0x7a, 0xfa, 0x01, 0x1d, 0xa3, 0x0a, 0xac, 0x0c, 0x03, 0xa7, 0xcb, 0xb3, 0x5d, 0x37, 0xf9,
-	0x80, 0x46, 0x29, 0xf0, 0x7d, 0x37, 0x8a, 0xd2, 0x4a, 0x42, 0x94, 0xe8, 0xba, 0x88, 0xd2, 0xbb,
-	0x50, 0xb0, 0xd8, 0x21, 0x1d, 0x1c, 0x56, 0xb3, 0x4c, 0x76, 0xad, 0x29, 0xe0, 0x44, 0x9c, 0xde,
-	0x8c, 0x25, 0x68, 0xb2, 0x7d, 0x72, 0x6c, 0x79, 0x84, 0xba, 0x37, 0xc7, 0xcd, 0x89, 0xc6, 0xf5,
-	0x6d, 0x28, 0xef, 0xfa, 0x04, 0x0f, 0xda, 0x9e, 0x4d, 0x53, 0x68, 0xcf, 0x46, 0xd7, 0x21, 0x7f,
-	0x44, 0x67, 0x3a, 0x8e, 0xcd, 0xce, 0x9d, 0x31, 0x73, 0x6c, 0xbc, 0x67, 0xa3, 0x6b, 0x90, 0xe3,
-	0xb9, 0x64, 0xb3, 0x63, 0x67, 0xcc, 0x2c, 0x4b, 0x1d, 0xbb, 0xfe, 0x67, 0x1d, 0x56, 0x0f, 0x02,
-	0x67, 0x78, 0x80, 0xdd, 0xe1, 0xc0, 0x22, 0xcb, 0x3a, 0xee, 0x75, 0xc8, 0x4e, 0x77, 0x80, 0x58,
-	0x42, 0xef, 0x40, 0x81, 0x04, 0xce, 0xb0, 0x43, 0x4e, 0x87, 0x98, 0x65, 0x4b, 0xb9, 0xb5, 0x26,
-	0xe4, 0x98, 0x09, 0xb4, 0x3e, 0xf2, 0x44, 0x7c, 0xa1, 0xf7, 0xe1, 0x2a, 0x3f, 0x8d, 0xe5, 0xd9,
-	0x9d, 0xc8, 0xf8, 0x3c, 0xcb, 0xa1, 0xf5, 0xc8, 0x65, 0xaa, 0x03, 0x76, 0x53, 0x66, 0xf9, 0x48,
-	0x75, 0xc9, 0x1b, 0x50, 0x1a, 0x38, 0x27, 0xd8, 0x3a, 0xf4, 0xad, 0xc0, 0xa6, 0x0a, 0x0a, 0xf4,
-	0xf4, 0xbb, 0x29, 0x73, 0x35, 0x9e, 0xde, 0xb3, 0xe5, 0x2c, 0xad, 0xcc, 0xcc, 0xd2, 0xad, 0x32,
-	0xac, 0x06, 0x38, 0x74, 0x6c, 0xec, 0x75, 0x71, 0xc7, 0xb1, 0xeb, 0xbf, 0xd5, 0x21, 0x43, 0x8d,
-	0x47, 0x77, 0x20, 0xd3, 0x0b, 0x7c, 0x97, 0xf9, 0xad, 0xd8, 0xaa, 0x35, 0x39, 0xc6, 0x37, 0x23,
-	0xe4, 0x6e, 0x1e, 0x44, 0x18, 0xbf, 0x95, 0x79, 0xf6, 0xcf, 0x9b, 0x9a, 0xc9, 0xa4, 0xd1, 0x26,
-	0xe8, 0xc4, 0x67, 0x0e, 0x5d, 0x64, 0x8f, 0x4e, 0x7c, 0xf4, 0x1a, 0xac, 0xd2, 0x14, 0x1d, 0x55,
-	0x1d, 0xcf, 0xd2, 0xa2, 0x6b, 0x3d, 0x1d, 0xd5, 0x5c, 0x72, 0xa2, 0xbe, 0x09, 0x6b, 0xb4, 0x82,
-	0x3b, 0x2e, 0x43, 0xd6, 0x8e, 0x63, 0xf3, 0x58, 0x65, 0x78, 0x61, 0x73, 0xbc, 0xdd, 0xb3, 0x43,
-	0x74, 0x00, 0xaf, 0x32, 0xf4, 0x0b, 0x70, 0x88, 0x83, 0x13, 0x8b, 0x86, 0xb7, 0x63, 0x5b, 0x84,
-	0x47, 0x6c, 0x11, 0x2b, 0x5f, 0xa1, 0xdb, 0xcd, 0x78, 0xf7, 0xb6, 0x45, 0x70, 0xfd, 0xbf, 0x1a,
-	0xac, 0xb0, 0x68, 0x51, 0xf0, 0xe5, 0x71, 0x95, 0xc1, 0x97, 0xcd, 0x30, 0x7c, 0x45, 0x90, 0x09,
-	0x89, 0x15, 0x30, 0x9f, 0x94, 0x4c, 0xf6, 0x2d, 0x65, 0x57, 0x66, 0x7a, 0x76, 0xdd, 0x02, 0x56,
-	0x68, 0x2c, 0xbb, 0xa2, 0x34, 0xbc, 0x12, 0x25, 0x4a, 0x84, 0x0b, 0x66, 0x21, 0x10, 0x5f, 0x21,
-	0xfa, 0x4e, 0x94, 0x60, 0x72, 0x6e, 0x67, 0x99, 0x3d, 0x57, 0xd8, 0xc2, 0xb6, 0x94, 0xe0, 0xd4,
-	0xa7, 0x47, 0xbe, 0x87, 0x59, 0x19, 0x16, 0x4c, 0x3e, 0x90, 0xf3, 0x26, 0x3f, 0x1b, 0xdd, 0xfe,
-	0xa1, 0x03, 0xec, 0x8f, 0x52, 0x6e, 0xc9, 0x2a, 0x5b, 0x87, 0xec, 0x00, 0x7b, 0x7d, 0x72, 0x24,
-	0xa2, 0x2e, 0x46, 0xd4, 0xb8, 0x9f, 0x3a, 0x36, 0x39, 0x12, 0x80, 0xce, 0x07, 0x92, 0xd7, 0xb2,
-	0x8b, 0x7a, 0x2d, 0x37, 0xdf, 0x6b, 0x93, 0xb7, 0x48, 0x3e, 0xe9, 0x16, 0xb9, 0x09, 0x45, 0x7e,
-	0x8b, 0xd0, 0x9d, 0x21, 0x2b, 0xbb, 0x92, 0x09, 0x6c, 0x8a, 0x6a, 0x0d, 0xa9, 0x00, 0xbf, 0x3f,
-	0xb8, 0x00, 0x70, 0x01, 0x36, 0xc5, 0x05, 0x24, 0xdf, 0x16, 0x67, 0xfb, 0xf6, 0x23, 0xa8, 0xb4,
-	0x6d, 0x3b, 0xee, 0x1a, 0x4c, 0xfc, 0x09, 0x03, 0xec, 0xdb, 0xdc, 0x06, 0x91, 0xf1, 0xa2, 0x32,
-	0x51, 0x74, 0x38, 0x49, 0x1e, 0xe2, 0x0a, 0xa8, 0xdf, 0x85, 0xb5, 0xb6, 0x6d, 0xb3, 0x3e, 0x21,
-	0xd2, 0xf3, 0x3a, 0xac, 0x30, 0xbb, 0x84, 0x86, 0x52, 0xa4, 0x81, 0x0b, 0xf1, 0xb5, 0xfa, 0x10,
-	0xd6, 0xdb, 0xb6, 0x2d, 0x43, 0x69, 0xb4, 0xfd, 0x1e, 0x94, 0x38, 0xec, 0x89, 0x79, 0xa1, 0xa6,
-	0x12, 0xa9, 0x51, 0xf6, 0xac, 0x12, 0x19, 0x8c, 0x6f, 0x40, 0x81, 0x0b, 0xc5, 0xc0, 0x9d, 0xe7,
-	0x13, 0x7b, 0x76, 0xdd, 0x85, 0xb2, 0xf8, 0xc5, 0xe8, 0x97, 0x36, 0x20, 0x43, 0xb7, 0x8b, 0x1f,
-	0x58, 0x95, 0x7f, 0xc0, 0x64, 0x2b, 0x93, 0xb6, 0xe8, 0x8b, 0xda, 0x12, 0x7b, 0x59, 0xf4, 0x2c,
-	0xaa, 0x97, 0x1d, 0xaf, 0xcf, 0x40, 0x3a, 0xc1, 0xcb, 0x91, 0x3c, 0xd8, 0xa3, 0x6f, 0xe1, 0x65,
-	0x06, 0x08, 0x92, 0x97, 0x59, 0xd5, 0x8d, 0x7b, 0x99, 0x0b, 0xf1, 0xb5, 0xfa, 0x87, 0xcc, 0x88,
-	0xb8, 0x90, 0xa2, 0xcd, 0x2d, 0x80, 0x18, 0xd0, 0xc7, 0x6d, 0x90, 0xc4, 0x25, 0xa9, 0xfa, 0x0f,
-	0xe0, 0xca, 0xbe, 0x13, 0x12, 0x6a, 0x4f, 0x18, 0xe9, 0xa9, 0xc0, 0xca, 0xc0, 0x71, 0x1d, 0x22,
-	0xee, 0x4f, 0x3e, 0xa0, 0x75, 0xe7, 0xf7, 0x7a, 0x21, 0x26, 0xd1, 0xe5, 0xc9, 0x47, 0xf5, 0x67,
-	0x69, 0xb8, 0x2a, 0xa9, 0x08, 0x87, 0xbe, 0x17, 0x62, 0xd4, 0x82, 0x8c, 0xe4, 0x09, 0x23, 0xb6,
-	0x62, 0x4c, 0xb0, 0xc9, 0xbc, 0xc2, 0x64, 0x6b, 0x7f, 0xd5, 0x21, 0xc3, 0x1a, 0xc1, 0x32, 0xe8,
-	0xa3, 0xdb, 0x5b, 0x77, 0x62, 0xa0, 0x00, 0x09, 0x28, 0xe2, 0xc2, 0xae, 0x4c, 0x2f, 0xec, 0xc9,
-	0x3a, 0x7d, 0x75, 0xb1, 0x6e, 0x6f, 0x7d, 0xb1, 0x6e, 0xef, 0x5a, 0x52, 0xb7, 0xf7, 0x00, 0xa0,
-	0x1b, 0x60, 0x8b, 0x60, 0xbb, 0x63, 0x91, 0xaa, 0xb1, 0xe0, 0x85, 0x51, 0x10, 0x7b, 0xda, 0x84,
-	0x2a, 0x38, 0x1e, 0xda, 0x91, 0x82, 0xc6, 0xa2, 0x0a, 0xc4, 0x9e, 0x36, 0xa9, 0xef, 0xc0, 0x3a,
-	0x75, 0x74, 0x5c, 0xdc, 0x4b, 0x86, 0xf6, 0x97, 0x69, 0xb8, 0x36, 0xa1, 0x48, 0x04, 0xf8, 0xa3,
-	0x24, 0x5c, 0x79, 0x5b, 0x8e, 0x73, 0xc2, 0xae, 0x29, 0x78, 0x53, 0xfb, 0x83, 0xae, 0x3c, 0xde,
-	0xc6, 0xe3, 0xaf, 0x3e, 0x55, 0x60, 0xe6, 0x53, 0xa5, 0x32, 0xed, 0x31, 0x67, 0xcc, 0x7e, 0xcc,
-	0xbd, 0x05, 0x05, 0xdb, 0xef, 0x1e, 0xbb, 0xd8, 0x23, 0x61, 0xb5, 0x31, 0x99, 0x52, 0xf1, 0xea,
-	0x58, 0x80, 0x5b, 0x17, 0x0d, 0xf0, 0xfd, 0xf3, 0x07, 0xb8, 0xcd, 0x4b, 0x8e, 0xa1, 0xc2, 0x92,
-	0xb1, 0xfd, 0x55, 0x1a, 0x90, 0xac, 0x43, 0x84, 0xf5, 0xae, 0x0a, 0x40, 0x1b, 0x72, 0x40, 0x55,
-	0x51, 0x05, 0x93, 0x6a, 0x9f, 0xeb, 0x51, 0x6b, 0xb3, 0x48, 0xf1, 0x8e, 0xdd, 0xf2, 0x95, 0xc9,
-	0x5b, 0xbe, 0xc2, 0xae, 0x9b, 0x20, 0x64, 0x61, 0x2b, 0x99, 0x7c, 0x10, 0x37, 0x20, 0x8d, 0x29,
-	0x0d, 0x48, 0x6b, 0xe6, 0x25, 0x29, 0x81, 0xc6, 0xfd, 0xe9, 0xa0, 0xa1, 0x86, 0x77, 0xe7, 0xa2,
-	0xe1, 0x7d, 0xb4, 0x74, 0xfd, 0xc6, 0x90, 0xbd, 0x64, 0x8c, 0x7f, 0x93, 0xe1, 0xf5, 0xab, 0x28,
-	0x12, 0x81, 0xfe, 0x30, 0xe1, 0xb2, 0x50, 0xca, 0x37, 0x61, 0xd3, 0x94, 0x4b, 0xa4, 0xf6, 0xa7,
-	0xb4, 0xd2, 0xd7, 0x5d, 0x4e, 0x06, 0xc4, 0x7d, 0x9e, 0xc1, 0x3a, 0xf8, 0x89, 0x3e, 0xaf, 0xc1,
-	0x1b, 0xfb, 0xf1, 0x3e, 0xaf, 0x75, 0x9e, 0xeb, 0xe0, 0xf6, 0x02, 0x6d, 0xdb, 0x9d, 0x79, 0x6d,
-	0xdb, 0x7b, 0xb3, 0xda, 0xb6, 0xbb, 0xb3, 0x33, 0x52, 0x4d, 0xb6, 0xfb, 0x17, 0x4d, 0xb6, 0x9d,
-	0xa5, 0xb1, 0x84, 0xf5, 0x71, 0x4b, 0xe6, 0xd9, 0x7f, 0x74, 0x8e, 0x25, 0x91, 0x8e, 0x18, 0x4b,
-	0xe4, 0x96, 0x51, 0xc1, 0x12, 0x55, 0x54, 0xe9, 0x22, 0x6b, 0xbf, 0xd6, 0x23, 0x8e, 0xea, 0x32,
-	0x2f, 0x02, 0x99, 0xb3, 0x32, 0xa6, 0x72, 0x56, 0x8d, 0x39, 0x9c, 0xd5, 0x37, 0x00, 0xfc, 0x77,
-	0xa1, 0x4a, 0x3d, 0x28, 0x77, 0xa9, 0x4b, 0xc6, 0xed, 0xcb, 0x34, 0x5c, 0x4f, 0x50, 0x35, 0x42,
-	0x88, 0xfc, 0x58, 0xb7, 0xde, 0x94, 0x23, 0x98, 0xb8, 0x49, 0xed, 0x9d, 0x47, 0xfb, 0x6b, 0x3f,
-	0x4f, 0x8f, 0x31, 0x2c, 0x97, 0x83, 0x11, 0x0a, 0x99, 0x62, 0xcc, 0x23, 0x53, 0x64, 0x6a, 0xa8,
-	0x31, 0x95, 0x1a, 0x6a, 0xc9, 0xd4, 0x10, 0x7a, 0x7d, 0x9c, 0x3b, 0xb9, 0xcf, 0x96, 0x55, 0xe6,
-	0x24, 0x06, 0x9f, 0x9d, 0x45, 0xaf, 0x95, 0x47, 0x17, 0x4d, 0x9c, 0x27, 0xe7, 0x4f, 0x1c, 0xd1,
-	0xeb, 0x53, 0xcf, 0x2c, 0x99, 0x30, 0x9f, 0x66, 0x38, 0x58, 0x08, 0x15, 0x71, 0xaf, 0x2f, 0xbd,
-	0xb8, 0x8c, 0xf1, 0x24, 0x51, 0x93, 0x83, 0xbf, 0xc1, 0x6a, 0x7f, 0x49, 0x0b, 0xca, 0x68, 0x3c,
-	0x11, 0x1a, 0x70, 0x45, 0x79, 0x9c, 0x51, 0x9f, 0x57, 0xd8, 0x6a, 0x59, 0x7e, 0x89, 0xed, 0xd9,
-	0x2a, 0x4f, 0x69, 0x4c, 0xe3, 0x29, 0x1b, 0x32, 0xfd, 0xf3, 0x7d, 0x28, 0xf4, 0x02, 0xdf, 0xe5,
-	0x54, 0xce, 0xa2, 0xb5, 0x9b, 0xa7, 0x5b, 0xb6, 0x69, 0xd2, 0xde, 0x83, 0x1c, 0xf1, 0xf9, 0xe6,
-	0x45, 0xeb, 0x36, 0x4b, 0x7c, 0xb6, 0x75, 0x2a, 0xa1, 0xb4, 0x73, 0x01, 0x42, 0xe9, 0x1b, 0x90,
-	0x53, 0x7f, 0xd4, 0x01, 0x3d, 0xc6, 0x56, 0xd0, 0x3d, 0x62, 0xa1, 0xfe, 0x11, 0xab, 0xcb, 0x10,
-	0xd5, 0x20, 0xd7, 0xf5, 0x8f, 0x3d, 0x12, 0x9c, 0x72, 0x76, 0x67, 0x37, 0x65, 0x46, 0x13, 0xa8,
-	0x02, 0x19, 0x76, 0xf7, 0xea, 0x62, 0x81, 0x8d, 0x50, 0x15, 0xb2, 0x01, 0xee, 0x8f, 0x58, 0xfb,
-	0xdd, 0x94, 0x29, 0xc6, 0x34, 0x19, 0xd9, 0xdd, 0x1b, 0xf1, 0x23, 0x62, 0xa4, 0x16, 0xff, 0xda,
-	0xbc, 0xe2, 0x7f, 0x00, 0xf4, 0x82, 0x0e, 0x08, 0xf7, 0x7a, 0x65, 0xd1, 0x93, 0xb2, 0x3d, 0xcc,
-	0xd7, 0xdf, 0x83, 0x3c, 0xf6, 0x6c, 0xbe, 0x7d, 0xd1, 0x47, 0x5d, 0x0e, 0x7b, 0x36, 0xdd, 0xbc,
-	0x75, 0x15, 0xd6, 0x06, 0x7e, 0x97, 0x87, 0xbd, 0xe7, 0x0c, 0x08, 0x0e, 0xea, 0xcf, 0x34, 0xc5,
-	0x73, 0x51, 0x41, 0xee, 0x43, 0x25, 0x64, 0xb3, 0x1d, 0x6a, 0x7a, 0xd8, 0xf1, 0xb9, 0x47, 0x47,
-	0x94, 0x6a, 0x44, 0xbb, 0x4c, 0xf8, 0xdc, 0x44, 0xe1, 0x64, 0x1c, 0x46, 0xe5, 0xad, 0x27, 0x97,
-	0x77, 0x5a, 0x29, 0xef, 0xcf, 0xf2, 0xf0, 0x8a, 0x62, 0x92, 0x28, 0xf0, 0x3b, 0x4a, 0x81, 0x6f,
-	0x24, 0xd8, 0x90, 0x54, 0xe2, 0x7f, 0xcb, 0x7c, 0x1d, 0x25, 0xfe, 0x1e, 0xac, 0x4a, 0xef, 0xd2,
-	0xa8, 0x1d, 0x4c, 0x22, 0xbc, 0x8a, 0xf1, 0x03, 0x34, 0x54, 0x91, 0xe1, 0xfe, 0x45, 0x90, 0x61,
-	0xe7, 0xb2, 0x90, 0xe1, 0xd1, 0xe5, 0x21, 0xc3, 0x93, 0x8b, 0x22, 0x83, 0x7d, 0x6e, 0x64, 0x40,
-	0x1f, 0x8f, 0xb3, 0x6c, 0x1e, 0xd3, 0xd1, 0x98, 0x97, 0x3d, 0xc9, 0xcc, 0x5b, 0xed, 0xf7, 0xff,
-	0xef, 0x20, 0xa4, 0x57, 0xc5, 0xa3, 0xf3, 0xbc, 0x2a, 0xbe, 0x86, 0xe8, 0xb7, 0xfe, 0x9e, 0x87,
-	0x52, 0x9b, 0x05, 0xfa, 0x31, 0x0e, 0x4e, 0x68, 0x61, 0x3e, 0x84, 0x92, 0x42, 0x50, 0xa3, 0x6f,
-	0x8d, 0xfe, 0xf3, 0x4b, 0xe0, 0xad, 0x6b, 0xeb, 0x13, 0xbf, 0xf6, 0xd0, 0x1d, 0x92, 0x53, 0x0a,
-	0xc3, 0x11, 0x35, 0x8d, 0xae, 0x49, 0x1a, 0x64, 0xb2, 0x7a, 0xea, 0xe6, 0x3d, 0xc6, 0xb8, 0x2a,
-	0x69, 0x64, 0x48, 0x3a, 0x12, 0x88, 0xeb, 0xa9, 0xaa, 0xee, 0x41, 0x4e, 0xec, 0x40, 0xeb, 0x63,
-	0x2a, 0xe6, 0x6d, 0x1d, 0x79, 0x22, 0xfa, 0xe3, 0x7b, 0xcc, 0x13, 0x2a, 0xb7, 0x3c, 0xc7, 0x13,
-	0x9c, 0x74, 0x91, 0x3d, 0x21, 0x13, 0xca, 0x73, 0x6c, 0x90, 0x1e, 0xed, 0xb2, 0x0d, 0x13, 0xd4,
-	0xf2, 0x54, 0x35, 0x5b, 0x50, 0x18, 0x51, 0xba, 0xa8, 0x9a, 0xc0, 0xf2, 0xf2, 0xed, 0xd7, 0xa7,
-	0xf2, 0xbf, 0x9b, 0x1a, 0x3a, 0x80, 0xb5, 0x31, 0xba, 0x10, 0x19, 0x53, 0x79, 0x44, 0xae, 0xef,
-	0xe6, 0x1c, 0x9e, 0x71, 0x53, 0x43, 0x0f, 0x01, 0x62, 0xce, 0x0a, 0x5d, 0x4f, 0xe2, 0xb1, 0xb8,
-	0xae, 0xda, 0x74, 0x8a, 0x2b, 0x36, 0x4e, 0x22, 0x43, 0x54, 0xe3, 0x26, 0x39, 0x1a, 0xd5, 0xb8,
-	0x04, 0x16, 0x25, 0x36, 0x8e, 0x3f, 0x82, 0x55, 0xe3, 0x94, 0x77, 0xb8, 0x6a, 0x9c, 0xfa, 0x66,
-	0xde, 0xd4, 0xd0, 0x93, 0xb8, 0x1b, 0x1f, 0xbd, 0xc4, 0xd0, 0xc6, 0x8c, 0x47, 0x1a, 0x57, 0xfa,
-	0xda, 0xdc, 0x67, 0xdc, 0xa6, 0x16, 0x45, 0x96, 0xe1, 0xb3, 0x1a, 0x59, 0xb9, 0x5d, 0x51, 0x23,
-	0xab, 0x80, 0xf9, 0xa6, 0x86, 0x76, 0xa1, 0x28, 0xa1, 0x3c, 0xaa, 0x25, 0x42, 0x3f, 0xd7, 0x73,
-	0x63, 0xc6, 0xb5, 0xb0, 0xa9, 0x6d, 0x7d, 0xf7, 0xf9, 0x0b, 0x23, 0xf5, 0xc5, 0x0b, 0x23, 0xf5,
-	0xd5, 0x0b, 0x43, 0xfb, 0xd9, 0x99, 0xa1, 0xfd, 0xee, 0xcc, 0xd0, 0x3e, 0x3b, 0x33, 0xb4, 0xe7,
-	0x67, 0x86, 0xf6, 0xaf, 0x33, 0x43, 0xfb, 0xf7, 0x99, 0x91, 0xfa, 0xea, 0xcc, 0xd0, 0x9e, 0xbd,
-	0x34, 0x52, 0xcf, 0x5f, 0x1a, 0xa9, 0x2f, 0x5e, 0x1a, 0xa9, 0x27, 0x99, 0xe6, 0xad, 0xe1, 0xe1,
-	0x61, 0x96, 0xe5, 0xec, 0xed, 0xff, 0x05, 0x00, 0x00, 0xff, 0xff, 0x1d, 0x13, 0x64, 0xe5, 0xb2,
-	0x24, 0x00, 0x00,
+	// 2389 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xcd, 0x6f, 0x1b, 0xc7,
+	0x15, 0xd7, 0xae, 0x28, 0x7e, 0x3c, 0x8a, 0x94, 0x3d, 0x61, 0x64, 0x9a, 0x6e, 0xd6, 0x0a, 0x0d,
+	0x1b, 0xcc, 0x17, 0x2d, 0xd0, 0x8e, 0x01, 0xb7, 0x2e, 0x5c, 0x2a, 0xb6, 0x22, 0x25, 0x76, 0x6b,
+	0xac, 0x05, 0x34, 0xf0, 0x85, 0x58, 0x71, 0x87, 0xd4, 0xa2, 0xdc, 0x5d, 0x66, 0x77, 0xa4, 0x5a,
+	0xb7, 0xa2, 0xc7, 0x5e, 0xe2, 0x53, 0x81, 0x02, 0x3d, 0x15, 0x28, 0xd0, 0x43, 0x7b, 0x0e, 0x50,
+	0xa0, 0xc7, 0x16, 0x41, 0x7a, 0xf1, 0xa9, 0x48, 0x4f, 0xad, 0xe5, 0x4b, 0x8b, 0xe6, 0x90, 0x7f,
+	0xa0, 0x40, 0x31, 0x1f, 0xcb, 0x9d, 0x21, 0x97, 0x1f, 0x22, 0x0d, 0x24, 0x68, 0x7c, 0xdb, 0x99,
+	0x79, 0xf3, 0xf8, 0xe6, 0xbd, 0xdf, 0xfb, 0x98, 0x37, 0x84, 0x55, 0xab, 0x8b, 0xbd, 0xf6, 0x71,
+	0xbd, 0x1f, 0xf8, 0xc4, 0x47, 0x69, 0x3e, 0xaa, 0xe4, 0x5d, 0xdf, 0xc6, 0x3d, 0x3e, 0x59, 0xb9,
+	0xd0, 0xf5, 0xfd, 0x6e, 0x0f, 0x5f, 0x65, 0xa3, 0xfd, 0xc3, 0xce, 0x55, 0xec, 0xf6, 0x89, 0xd8,
+	0x51, 0xb9, 0x38, 0xbc, 0x48, 0x1c, 0x17, 0x87, 0xc4, 0x72, 0xfb, 0x82, 0xe0, 0x9d, 0xae, 0x43,
+	0x0e, 0x0e, 0xf7, 0xeb, 0x6d, 0xdf, 0xbd, 0xda, 0xf5, 0xbb, 0x7e, 0x4c, 0x49, 0x47, 0x6c, 0xc0,
+	0xbe, 0x38, 0x79, 0xf5, 0x73, 0x0d, 0xe0, 0x8e, 0x73, 0x84, 0xef, 0x5b, 0x21, 0xc1, 0x01, 0x7a,
+	0x0d, 0xa0, 0xe3, 0x04, 0x21, 0x69, 0x79, 0x96, 0x8b, 0xcb, 0xda, 0x86, 0x56, 0xcb, 0x99, 0x39,
+	0x36, 0xf3, 0x43, 0xcb, 0xc5, 0xe8, 0x02, 0xe4, 0x7a, 0x56, 0xb4, 0xaa, 0xb3, 0xd5, 0x2c, 0x9d,
+	0x60, 0x8b, 0x57, 0x60, 0xa5, 0x87, 0x8f, 0x70, 0xaf, 0xbc, 0xbc, 0xa1, 0xd5, 0x8a, 0x8d, 0x33,
+	0x75, 0x7e, 0xa8, 0x7b, 0x74, 0x6e, 0xef, 0xb8, 0x8f, 0x4d, 0xbe, 0x8c, 0xde, 0x86, 0x7c, 0x27,
+	0xf0, 0x3d, 0xd2, 0x72, 0x5c, 0xab, 0x8b, 0xcb, 0xa9, 0x0d, 0xad, 0x96, 0x6f, 0xe4, 0x05, 0xf5,
+	0xb6, 0xd3, 0xc3, 0x26, 0xb0, 0xf5, 0x5d, 0xba, 0x8c, 0xde, 0x04, 0xd8, 0xb7, 0xda, 0x3f, 0x11,
+	0xc4, 0x2b, 0xa3, 0xc4, 0x39, 0xba, 0xcc, 0x68, 0xab, 0x1f, 0x41, 0x25, 0x3e, 0xcb, 0x36, 0x95,
+	0xba, 0xe9, 0xd9, 0xf7, 0x22, 0xf9, 0x16, 0x38, 0x5b, 0xf5, 0x17, 0x1a, 0xac, 0x3c, 0x24, 0x56,
+	0xa7, 0xb3, 0x90, 0x86, 0x2a, 0x90, 0xed, 0xfb, 0xa1, 0x43, 0x1c, 0xdf, 0x63, 0x4a, 0xca, 0x99,
+	0x83, 0x31, 0x7a, 0x03, 0xd2, 0x5d, 0xec, 0xd9, 0x38, 0x60, 0x0a, 0x29, 0x36, 0xce, 0x8a, 0x33,
+	0xbe, 0xcf, 0x26, 0x99, 0xfe, 0x04, 0x41, 0xf5, 0x13, 0x9d, 0xd9, 0xcc, 0xf1, 0xba, 0x5b, 0xbe,
+	0x45, 0x10, 0x82, 0x94, 0x24, 0x0b, 0xfb, 0xa6, 0x3a, 0xde, 0xf7, 0x2d, 0xa1, 0xe2, 0xb0, 0xac,
+	0x6f, 0x2c, 0x8f, 0xe8, 0x98, 0xae, 0x33, 0xb5, 0x85, 0x68, 0x03, 0xf2, 0x36, 0x0e, 0xdb, 0x81,
+	0xd3, 0x97, 0x44, 0x93, 0xa7, 0xd0, 0x65, 0x28, 0x12, 0x9f, 0x58, 0xbd, 0x56, 0xdb, 0xea, 0x5b,
+	0x6d, 0x87, 0x1c, 0x33, 0x29, 0x0b, 0x66, 0x81, 0xcd, 0xbe, 0x27, 0x26, 0x29, 0x99, 0xed, 0x1c,
+	0xe1, 0x20, 0x26, 0x5b, 0xe1, 0x64, 0x6c, 0x56, 0x26, 0x0b, 0xa9, 0x32, 0x63, 0xb2, 0x34, 0x27,
+	0x63, 0xb3, 0x03, 0xb2, 0x1a, 0x64, 0x2c, 0xdb, 0x0e, 0x70, 0x18, 0x96, 0x33, 0xcc, 0xee, 0x45,
+	0x71, 0x80, 0x26, 0x9f, 0x35, 0xa3, 0xe5, 0xea, 0x6d, 0xc8, 0x34, 0x5d, 0xec, 0xd1, 0x4d, 0x49,
+	0xda, 0x18, 0x3a, 0x9f, 0x3e, 0x72, 0xbe, 0xea, 0x97, 0x1a, 0x64, 0x4d, 0xdf, 0x77, 0xa9, 0x9e,
+	0xe7, 0x63, 0x41, 0x2d, 0xef, 0x5a, 0x8f, 0x5b, 0xdd, 0x43, 0x1c, 0x12, 0xa6, 0xc2, 0x82, 0x99,
+	0x75, 0xad, 0xc7, 0xef, 0xd3, 0x31, 0x2a, 0xc1, 0x4a, 0x3f, 0x70, 0xda, 0x1c, 0xed, 0xba, 0xc9,
+	0x07, 0xd4, 0x4a, 0x81, 0xef, 0xbb, 0x91, 0x95, 0x56, 0x12, 0xac, 0x44, 0xd7, 0x85, 0x95, 0xde,
+	0x81, 0x9c, 0xc5, 0x0e, 0xe9, 0xe0, 0xb0, 0x9c, 0x66, 0xb4, 0x6b, 0x75, 0x11, 0x4e, 0xc4, 0xe9,
+	0xcd, 0x98, 0x82, 0x82, 0xed, 0xe3, 0x43, 0xcb, 0x23, 0x54, 0xbd, 0x19, 0x2e, 0x4e, 0x34, 0xae,
+	0xde, 0x81, 0xe2, 0x8e, 0x4f, 0x70, 0xaf, 0xe9, 0xd9, 0x14, 0x42, 0xbb, 0x36, 0x3a, 0x0f, 0xd9,
+	0x03, 0x3a, 0xd3, 0x72, 0x6c, 0x76, 0xee, 0x94, 0x99, 0x61, 0xe3, 0x5d, 0x1b, 0x9d, 0x83, 0x0c,
+	0xc7, 0x92, 0xcd, 0x8e, 0x9d, 0x32, 0xd3, 0x0c, 0x3a, 0x76, 0xf5, 0x4f, 0x3a, 0xac, 0xee, 0x05,
+	0x4e, 0x7f, 0x0f, 0xbb, 0xfd, 0x9e, 0x45, 0xe6, 0x55, 0xdc, 0x25, 0x48, 0x8f, 0x57, 0x80, 0x58,
+	0x42, 0x6f, 0x43, 0x8e, 0x04, 0x4e, 0xbf, 0x45, 0x8e, 0xfb, 0x98, 0xa1, 0xa5, 0xd8, 0x58, 0x13,
+	0x74, 0x4c, 0x04, 0xea, 0x1f, 0x59, 0x22, 0xbe, 0xd0, 0x7b, 0x70, 0x96, 0x9f, 0xc6, 0xf2, 0xec,
+	0x56, 0x24, 0x7c, 0x96, 0x61, 0x68, 0x3d, 0x52, 0x99, 0xaa, 0x80, 0x9d, 0x25, 0xb3, 0x78, 0xa0,
+	0xaa, 0xe4, 0x32, 0x14, 0x7a, 0xce, 0x11, 0xb6, 0xf6, 0x7d, 0x2b, 0xb0, 0x29, 0x83, 0x1c, 0x3d,
+	0xfd, 0xce, 0x92, 0xb9, 0x1a, 0x4f, 0xef, 0xda, 0x32, 0x4a, 0x4b, 0x13, 0x51, 0xba, 0x55, 0x84,
+	0xd5, 0x00, 0x87, 0x8e, 0x8d, 0xbd, 0x36, 0x6e, 0x39, 0x76, 0xf5, 0xb7, 0x3a, 0xa4, 0xa8, 0xf0,
+	0xe8, 0x3a, 0xa4, 0x3a, 0x81, 0xef, 0x32, 0xbd, 0xe5, 0x1b, 0x95, 0x3a, 0x8f, 0xf1, 0xf5, 0x28,
+	0x72, 0xd7, 0xf7, 0xa2, 0x18, 0xbf, 0x95, 0x7a, 0xf2, 0x8f, 0x8b, 0x9a, 0xc9, 0xa8, 0xd1, 0x26,
+	0xe8, 0xc4, 0x67, 0x0a, 0x9d, 0x65, 0x8f, 0x4e, 0x7c, 0xf4, 0x3a, 0xac, 0x52, 0x88, 0x0e, 0xbc,
+	0x8e, 0xa3, 0x34, 0xef, 0x5a, 0x8f, 0x07, 0x3e, 0x97, 0x0c, 0xd4, 0x2b, 0xb0, 0x46, 0x3d, 0xb8,
+	0xe5, 0xb2, 0xc8, 0xda, 0x72, 0x6c, 0x6e, 0xab, 0x14, 0x77, 0x6c, 0x1e, 0x6f, 0x77, 0xed, 0x10,
+	0xed, 0xc1, 0xab, 0x2c, 0xfa, 0x05, 0x38, 0xc4, 0xc1, 0x91, 0x45, 0xcd, 0xdb, 0xb2, 0x2d, 0xc2,
+	0x2d, 0x36, 0x8b, 0x94, 0xaf, 0xd0, 0xed, 0x66, 0xbc, 0xfb, 0x8e, 0x45, 0x70, 0xf5, 0xbf, 0x1a,
+	0xac, 0x30, 0x6b, 0xd1, 0xe0, 0xcb, 0xed, 0x2a, 0x07, 0x5f, 0x36, 0xc3, 0xe2, 0x2b, 0x82, 0x54,
+	0x48, 0xac, 0x80, 0xe9, 0xa4, 0x60, 0xb2, 0x6f, 0x09, 0x5d, 0xa9, 0xf1, 0xe8, 0xba, 0x0a, 0xcc,
+	0xd1, 0x18, 0xba, 0x22, 0x18, 0x9e, 0x89, 0x80, 0x12, 0xc5, 0x05, 0x33, 0x17, 0x88, 0xaf, 0x10,
+	0xbd, 0x15, 0x01, 0x4c, 0xc6, 0x76, 0x9a, 0xc9, 0x73, 0x86, 0x2d, 0xdc, 0x91, 0x00, 0x4e, 0x75,
+	0x7a, 0xe0, 0x7b, 0x98, 0xb9, 0x61, 0xce, 0xe4, 0x03, 0x19, 0x37, 0xd9, 0xc9, 0xd1, 0xed, 0xef,
+	0x3a, 0xc0, 0xbd, 0x01, 0xe4, 0xe6, 0xf4, 0xb2, 0x75, 0x48, 0xf7, 0xb0, 0xd7, 0x25, 0x07, 0xc2,
+	0xea, 0x62, 0x44, 0x85, 0xfb, 0xa9, 0x63, 0x93, 0x03, 0x11, 0xd0, 0xf9, 0x40, 0xd2, 0x5a, 0x7a,
+	0x56, 0xad, 0x65, 0xa6, 0x6b, 0x6d, 0x34, 0x8b, 0x64, 0x93, 0xb2, 0xc8, 0x45, 0xc8, 0xf3, 0x2c,
+	0x42, 0x77, 0x86, 0xcc, 0xed, 0x0a, 0x26, 0xb0, 0x29, 0xca, 0x35, 0xa4, 0x04, 0x3c, 0x7f, 0x70,
+	0x02, 0xe0, 0x04, 0x6c, 0x8a, 0x13, 0x48, 0xba, 0xcd, 0x4f, 0xd6, 0xed, 0x87, 0x50, 0x6a, 0xda,
+	0x76, 0x5c, 0x35, 0x98, 0xf8, 0x63, 0x16, 0xb0, 0xaf, 0x71, 0x19, 0x04, 0xe2, 0x85, 0x67, 0xa2,
+	0xe8, 0x70, 0x12, 0x3d, 0xc4, 0x1e, 0x50, 0xbd, 0x01, 0x6b, 0x4d, 0xdb, 0x66, 0x75, 0x42, 0xc4,
+	0xe7, 0x12, 0xac, 0x30, 0xb9, 0x04, 0x87, 0x42, 0xc4, 0x81, 0x13, 0xf1, 0xb5, 0x6a, 0x1f, 0xd6,
+	0x9b, 0xb6, 0x2d, 0x87, 0xd2, 0x68, 0xfb, 0x4d, 0x28, 0xf0, 0xb0, 0x27, 0xe6, 0x05, 0x9b, 0x52,
+	0xc4, 0x46, 0xd9, 0xb3, 0x4a, 0xe4, 0x60, 0x7c, 0x01, 0x72, 0x9c, 0x28, 0x0e, 0xdc, 0x59, 0x3e,
+	0xb1, 0x6b, 0x57, 0x5d, 0x28, 0x8a, 0x5f, 0x8c, 0x7e, 0x69, 0x03, 0x52, 0x74, 0xbb, 0xf8, 0x81,
+	0x55, 0xf9, 0x07, 0x4c, 0xb6, 0x32, 0x2a, 0x8b, 0x3e, 0xab, 0x2c, 0xb1, 0x96, 0x45, 0xcd, 0xa2,
+	0x6a, 0xd9, 0xf1, 0xba, 0x2c, 0x48, 0x27, 0x68, 0x39, 0xa2, 0x07, 0x7b, 0xf0, 0x2d, 0xb4, 0xcc,
+	0x02, 0x82, 0xa4, 0x65, 0xe6, 0x75, 0xc3, 0x5a, 0xe6, 0x44, 0x7c, 0xad, 0xfa, 0x01, 0x13, 0x22,
+	0x76, 0xa4, 0x68, 0x73, 0x03, 0x20, 0x0e, 0xe8, 0xc3, 0x32, 0x48, 0xe4, 0x12, 0x55, 0xf5, 0x07,
+	0x70, 0xe6, 0x9e, 0x13, 0x12, 0x2a, 0x4f, 0x18, 0xf1, 0x29, 0xc1, 0x4a, 0xcf, 0x71, 0x1d, 0x22,
+	0xf2, 0x27, 0x1f, 0x50, 0xbf, 0xf3, 0x3b, 0x9d, 0x10, 0x93, 0x28, 0x79, 0xf2, 0x51, 0xf5, 0xc9,
+	0x32, 0x9c, 0x95, 0x58, 0x84, 0x7d, 0xdf, 0x0b, 0x31, 0x6a, 0x40, 0x4a, 0xd2, 0x84, 0x11, 0x4b,
+	0x31, 0x44, 0x58, 0x67, 0x5a, 0x61, 0xb4, 0x95, 0xbf, 0xe8, 0x90, 0x62, 0x85, 0x60, 0x11, 0xf4,
+	0x41, 0xf6, 0xd6, 0x9d, 0x38, 0x50, 0x80, 0x14, 0x28, 0x62, 0xc7, 0x2e, 0x8d, 0x77, 0xec, 0x51,
+	0x3f, 0x7d, 0x75, 0xb6, 0x6a, 0x6f, 0x7d, 0xb6, 0x6a, 0xef, 0x5c, 0x52, 0xb5, 0x77, 0x1b, 0xa0,
+	0x1d, 0x60, 0x8b, 0x60, 0xbb, 0x65, 0x91, 0xb2, 0x31, 0x63, 0xc2, 0xc8, 0x89, 0x3d, 0x4d, 0x42,
+	0x19, 0x1c, 0xf6, 0xed, 0x88, 0x41, 0x6d, 0x56, 0x06, 0x62, 0x4f, 0x93, 0x54, 0xb7, 0x61, 0x9d,
+	0x2a, 0x3a, 0x76, 0xee, 0x39, 0x4d, 0xfb, 0xcb, 0x65, 0x38, 0x37, 0xc2, 0x48, 0x18, 0xf8, 0xc3,
+	0xa4, 0xb8, 0xf2, 0xa6, 0x6c, 0xe7, 0x84, 0x5d, 0x63, 0xe2, 0x4d, 0xe5, 0x0f, 0xba, 0x72, 0x79,
+	0x1b, 0xb6, 0xbf, 0x7a, 0x55, 0x81, 0x89, 0x57, 0x95, 0xd2, 0xb8, 0xcb, 0x9c, 0x31, 0xf9, 0x32,
+	0xf7, 0x06, 0xe4, 0x6c, 0xbf, 0x7d, 0xe8, 0x62, 0x8f, 0x84, 0xe5, 0xda, 0x28, 0xa4, 0xe2, 0xd5,
+	0x21, 0x03, 0x37, 0x16, 0x35, 0xf0, 0xad, 0xd3, 0x1b, 0xb8, 0xc9, 0x5d, 0x8e, 0x45, 0x85, 0x39,
+	0x6d, 0xfb, 0xab, 0x65, 0x40, 0x32, 0x0f, 0x61, 0xd6, 0x1b, 0x6a, 0x00, 0xda, 0x90, 0x0d, 0xaa,
+	0x92, 0x2a, 0x31, 0xa9, 0xf2, 0xb9, 0x1e, 0x95, 0x36, 0xb3, 0x38, 0xef, 0x50, 0x96, 0x2f, 0x8d,
+	0x66, 0xf9, 0x12, 0x4b, 0x37, 0x41, 0xc8, 0xcc, 0x56, 0x30, 0xf9, 0x20, 0x2e, 0x40, 0x6a, 0x63,
+	0x0a, 0x90, 0xc6, 0xc4, 0x24, 0x29, 0x05, 0x8d, 0x5b, 0xe3, 0x83, 0x86, 0x6a, 0xde, 0xed, 0x45,
+	0xcd, 0xfb, 0x60, 0x6e, 0xff, 0x8d, 0x43, 0xf6, 0x9c, 0x36, 0xfe, 0x4d, 0x8a, 0xfb, 0xaf, 0xc2,
+	0x48, 0x18, 0xfa, 0x83, 0x84, 0x64, 0xa1, 0xb8, 0x6f, 0xc2, 0xa6, 0x31, 0x49, 0xa4, 0xf2, 0xc7,
+	0x65, 0xa5, 0xae, 0x7b, 0x31, 0x08, 0x88, 0xeb, 0x3c, 0x83, 0x55, 0xf0, 0x23, 0x75, 0x5e, 0x8d,
+	0x17, 0xf6, 0xc3, 0x75, 0x5e, 0xe3, 0x34, 0xe9, 0xe0, 0xda, 0x0c, 0x65, 0xdb, 0xf5, 0x69, 0x65,
+	0xdb, 0xbb, 0x93, 0xca, 0xb6, 0x1b, 0x93, 0x11, 0xa9, 0x82, 0xed, 0xd6, 0xa2, 0x60, 0xdb, 0x9e,
+	0x3b, 0x96, 0xb0, 0x3a, 0x6e, 0x4e, 0x9c, 0xfd, 0x47, 0xe7, 0xb1, 0x24, 0xe2, 0x11, 0xc7, 0x12,
+	0xb9, 0x64, 0x54, 0x62, 0x89, 0x4a, 0xaa, 0x54, 0x91, 0x95, 0x5f, 0xeb, 0x51, 0x8f, 0xea, 0x45,
+	0x26, 0x02, 0xb9, 0x67, 0x65, 0x8c, 0xed, 0x59, 0xd5, 0xa6, 0xf4, 0xac, 0xbe, 0x01, 0xc1, 0x7f,
+	0x07, 0xca, 0x54, 0x83, 0x72, 0x95, 0x3a, 0xa7, 0xdd, 0xbe, 0x5c, 0x86, 0xf3, 0x09, 0xac, 0x06,
+	0x11, 0x22, 0x3b, 0x54, 0xad, 0xd7, 0x65, 0x0b, 0x26, 0x6e, 0x52, 0x6b, 0xe7, 0xc1, 0xfe, 0xca,
+	0xcf, 0x97, 0x87, 0x3a, 0x2c, 0x2f, 0x26, 0x46, 0x28, 0xcd, 0x14, 0x63, 0x5a, 0x33, 0x45, 0x6e,
+	0x0d, 0xd5, 0xc6, 0xb6, 0x86, 0x1a, 0x72, 0x6b, 0x08, 0x5d, 0x1a, 0xee, 0x9d, 0xdc, 0x62, 0xcb,
+	0x6a, 0xe7, 0x24, 0x0e, 0x3e, 0xdb, 0xb3, 0xa6, 0x95, 0x07, 0x8b, 0x02, 0xe7, 0xd1, 0xe9, 0x81,
+	0x23, 0x6a, 0x7d, 0xaa, 0x99, 0x39, 0x01, 0xf3, 0x49, 0x8a, 0x07, 0x0b, 0xc1, 0x22, 0xae, 0xf5,
+	0xa5, 0x1b, 0x97, 0x31, 0x0c, 0x12, 0x15, 0x1c, 0xfc, 0x0e, 0x56, 0xf9, 0xf3, 0xb2, 0x68, 0x19,
+	0x0d, 0x03, 0xa1, 0x06, 0x67, 0x94, 0xcb, 0x19, 0xd5, 0x79, 0x89, 0xad, 0x16, 0xe5, 0x9b, 0xd8,
+	0xae, 0xad, 0xf6, 0x29, 0x8d, 0x71, 0x7d, 0xca, 0x9a, 0xdc, 0xfe, 0xf9, 0x3e, 0xe4, 0x3a, 0x81,
+	0xef, 0xf2, 0x56, 0xce, 0xac, 0xbe, 0x9b, 0xa5, 0x5b, 0xee, 0x50, 0xd0, 0xde, 0x84, 0x0c, 0xf1,
+	0xf9, 0xe6, 0x59, 0xfd, 0x36, 0x4d, 0x7c, 0xb6, 0x75, 0x6c, 0x43, 0x69, 0x7b, 0x81, 0x86, 0xd2,
+	0x37, 0x00, 0x53, 0xf7, 0xe1, 0xb5, 0x81, 0x9d, 0x7f, 0xec, 0x90, 0x83, 0x05, 0x23, 0xd2, 0xbf,
+	0xb3, 0x60, 0x8c, 0xe3, 0x27, 0xd0, 0x76, 0x5b, 0x41, 0xdb, 0x5b, 0x23, 0x68, 0x4b, 0xdc, 0x25,
+	0x43, 0xef, 0x6f, 0xa9, 0xaf, 0x03, 0x7a, 0xef, 0xc2, 0xaa, 0x74, 0x5f, 0x8a, 0xca, 0x94, 0xa4,
+	0x46, 0x4c, 0x3e, 0xbe, 0x18, 0x85, 0x2a, 0x62, 0x6f, 0x2d, 0x82, 0xd8, 0xed, 0x17, 0x85, 0xd8,
+	0x07, 0x2f, 0x0e, 0xb1, 0x8f, 0x16, 0x45, 0xac, 0x7d, 0x6a, 0xc4, 0xa2, 0x8f, 0x86, 0xbb, 0x3f,
+	0x1e, 0xe3, 0x71, 0xed, 0x14, 0x40, 0x4a, 0x6e, 0x0e, 0x55, 0x7e, 0xff, 0x32, 0xc9, 0x49, 0x85,
+	0xef, 0x83, 0xd3, 0x14, 0xbe, 0x5f, 0x03, 0x10, 0xaa, 0x9f, 0xea, 0x80, 0x1e, 0x62, 0x2b, 0x68,
+	0x1f, 0x30, 0x73, 0xff, 0x88, 0x69, 0x3b, 0x44, 0x15, 0xc8, 0xb4, 0xfd, 0x43, 0x8f, 0x04, 0xc7,
+	0xbc, 0x31, 0xbd, 0xb3, 0x64, 0x46, 0x13, 0xa8, 0x04, 0x29, 0x76, 0x6d, 0xd0, 0xc5, 0x02, 0x1b,
+	0xa1, 0x32, 0xa4, 0x03, 0xdc, 0x1d, 0x3c, 0x38, 0xee, 0x2c, 0x99, 0x62, 0x4c, 0xc3, 0x1c, 0xbb,
+	0x36, 0x44, 0xad, 0x5d, 0x31, 0x52, 0x4d, 0xba, 0x36, 0xcd, 0xa4, 0xb7, 0x81, 0xde, 0x2d, 0x02,
+	0xc2, 0xdd, 0xaf, 0x34, 0xeb, 0x49, 0xd9, 0x1e, 0xe6, 0x74, 0xdf, 0x83, 0x2c, 0xf6, 0x6c, 0xbe,
+	0x7d, 0xd6, 0x7e, 0x54, 0x06, 0x7b, 0x36, 0xdd, 0xbc, 0x75, 0x16, 0xd6, 0x7a, 0x7e, 0x9b, 0xfb,
+	0x7f, 0xc7, 0xe9, 0x11, 0x1c, 0x54, 0x9f, 0x68, 0x8a, 0xe6, 0xa2, 0x50, 0x7f, 0x0f, 0x4a, 0x21,
+	0x9b, 0x6d, 0x51, 0xd1, 0xc3, 0x96, 0xcf, 0x35, 0x3a, 0x78, 0x0d, 0x8a, 0x3a, 0xc6, 0x23, 0x3a,
+	0x37, 0x51, 0x38, 0x6a, 0x87, 0x41, 0xe2, 0xd0, 0x93, 0x13, 0xc7, 0xb2, 0x92, 0x38, 0x3e, 0xcb,
+	0xc2, 0x2b, 0x8a, 0x48, 0x22, 0x5b, 0x5c, 0x57, 0xb2, 0xc5, 0x46, 0x82, 0x0c, 0x49, 0x29, 0xe2,
+	0xaf, 0x2f, 0x53, 0xc4, 0xb7, 0x39, 0x45, 0xdc, 0x4f, 0x4e, 0x11, 0xb5, 0x69, 0xe8, 0x79, 0x99,
+	0x17, 0xfe, 0x0f, 0xf2, 0x42, 0xe3, 0xd3, 0x1c, 0x14, 0x9a, 0xcc, 0xd0, 0x0f, 0x71, 0x70, 0x44,
+	0x1d, 0xf3, 0x2e, 0x14, 0x94, 0xb7, 0x35, 0xf4, 0x9d, 0xc1, 0xdf, 0x15, 0x12, 0x9e, 0xdc, 0x2a,
+	0xeb, 0x23, 0xbf, 0x76, 0xd7, 0xed, 0x93, 0x63, 0x1a, 0x86, 0xa3, 0x57, 0x35, 0x74, 0x4e, 0xe2,
+	0x20, 0xbf, 0xb3, 0x8d, 0xdd, 0xbc, 0xcb, 0x1e, 0x8b, 0x14, 0x18, 0x19, 0x12, 0x8f, 0x84, 0x37,
+	0xb7, 0xb1, 0xac, 0x6e, 0x42, 0x46, 0xec, 0x40, 0xeb, 0x43, 0x2c, 0xa6, 0x6d, 0x1d, 0x68, 0x22,
+	0xfa, 0xcf, 0xce, 0x90, 0x26, 0xd4, 0x67, 0xb1, 0x29, 0x9a, 0xe0, 0xfd, 0x62, 0x59, 0x13, 0xf2,
+	0x5b, 0xd8, 0x14, 0x19, 0xa4, 0x7e, 0xa3, 0x2c, 0xc3, 0xc8, 0xab, 0xd8, 0x58, 0x36, 0x5b, 0x90,
+	0x1b, 0xbc, 0x46, 0xa1, 0x72, 0xc2, 0x03, 0x15, 0xdf, 0x7e, 0x7e, 0xec, 0xd3, 0xd5, 0xa6, 0x86,
+	0xf6, 0x60, 0x6d, 0xe8, 0xa5, 0x03, 0x19, 0x63, 0x9f, 0x40, 0x38, 0xbf, 0x8b, 0x53, 0x9e, 0x48,
+	0x36, 0x35, 0x74, 0x17, 0x20, 0x6e, 0xb7, 0xa3, 0xf3, 0x49, 0x2d, 0x78, 0xce, 0xab, 0x32, 0xbe,
+	0x3b, 0x1f, 0x0b, 0x27, 0xf5, 0x71, 0x55, 0xe1, 0x46, 0xdb, 0xcb, 0xaa, 0x70, 0x09, 0x0d, 0xe0,
+	0x58, 0x38, 0xde, 0xbf, 0x53, 0x85, 0x53, 0x5a, 0x88, 0xaa, 0x70, 0x6a, 0xbb, 0x6f, 0x53, 0x43,
+	0x8f, 0xe2, 0x46, 0xc2, 0xa0, 0xc6, 0x46, 0x1b, 0x13, 0xfa, 0x4b, 0x9c, 0xe9, 0xeb, 0x53, 0x3b,
+	0x50, 0x9b, 0x5a, 0x64, 0x59, 0x16, 0x9f, 0x55, 0xcb, 0xca, 0xe5, 0x8a, 0x6a, 0x59, 0x25, 0x98,
+	0x6f, 0x6a, 0xc8, 0xe1, 0x2d, 0xf8, 0xd1, 0x8b, 0x00, 0xba, 0x3c, 0xed, 0xa2, 0xc0, 0xb9, 0x5f,
+	0x99, 0xed, 0x3e, 0xb1, 0xa9, 0xa1, 0x1d, 0xc8, 0x4b, 0x09, 0x05, 0x55, 0x12, 0xb3, 0x0c, 0x67,
+	0x7a, 0x61, 0x42, 0x06, 0xda, 0xd4, 0xb6, 0xbe, 0xfb, 0xf4, 0x99, 0xb1, 0xf4, 0xc5, 0x33, 0x63,
+	0xe9, 0xab, 0x67, 0x86, 0xf6, 0xb3, 0x13, 0x43, 0xfb, 0xdd, 0x89, 0xa1, 0x7d, 0x76, 0x62, 0x68,
+	0x4f, 0x4f, 0x0c, 0xed, 0x9f, 0x27, 0x86, 0xf6, 0xaf, 0x13, 0x63, 0xe9, 0xab, 0x13, 0x43, 0x7b,
+	0xf2, 0xdc, 0x58, 0x7a, 0xfa, 0xdc, 0x58, 0xfa, 0xe2, 0xb9, 0xb1, 0xf4, 0x28, 0x55, 0xbf, 0xda,
+	0xdf, 0xdf, 0x4f, 0x33, 0xf7, 0xb8, 0xf6, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x2b, 0x8b, 0x11,
+	0x0e, 0xd8, 0x29, 0x00, 0x00,
 }
 
 func (this *DiveMaster) Equal(that interface{}) bool {
@@ -4811,6 +5164,203 @@ func (this *ListTripsResponse_Trip) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *ListTripsWithTemplatesRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListTripsWithTemplatesRequest)
+	if !ok {
+		that2, ok := that.(ListTripsWithTemplatesRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Limit != that1.Limit {
+		return false
+	}
+	if this.Offset != that1.Offset {
+		return false
+	}
+	return true
+}
+func (this *ListTripsWithTemplatesResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListTripsWithTemplatesResponse)
+	if !ok {
+		that2, ok := that.(ListTripsWithTemplatesResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Trip.Equal(that1.Trip) {
+		return false
+	}
+	return true
+}
+func (this *ListTripsWithTemplatesResponse_Trip) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListTripsWithTemplatesResponse_Trip)
+	if !ok {
+		that2, ok := that.(ListTripsWithTemplatesResponse_Trip)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Id != that1.Id {
+		return false
+	}
+	if this.TripTemplateId != that1.TripTemplateId {
+		return false
+	}
+	if this.MaxGuest != that1.MaxGuest {
+		return false
+	}
+	if this.Price != that1.Price {
+		return false
+	}
+	if len(this.DiveMasters) != len(that1.DiveMasters) {
+		return false
+	}
+	for i := range this.DiveMasters {
+		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
+			return false
+		}
+	}
+	if that1.FromDate == nil {
+		if this.FromDate != nil {
+			return false
+		}
+	} else if !this.FromDate.Equal(*that1.FromDate) {
+		return false
+	}
+	if that1.ToDate == nil {
+		if this.ToDate != nil {
+			return false
+		}
+	} else if !this.ToDate.Equal(*that1.ToDate) {
+		return false
+	}
+	if that1.LastReservationDate == nil {
+		if this.LastReservationDate != nil {
+			return false
+		}
+	} else if !this.LastReservationDate.Equal(*that1.LastReservationDate) {
+		return false
+	}
+	if that1.CreatedAt == nil {
+		if this.CreatedAt != nil {
+			return false
+		}
+	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
+		return false
+	}
+	if that1.UpdatedAt == nil {
+		if this.UpdatedAt != nil {
+			return false
+		}
+	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
+		return false
+	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
+	return true
+}
+func (this *ListTripsWithTemplatesResponse_TripTemplate) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListTripsWithTemplatesResponse_TripTemplate)
+	if !ok {
+		that2, ok := that.(ListTripsWithTemplatesResponse_TripTemplate)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Id != that1.Id {
+		return false
+	}
+	if this.Name != that1.Name {
+		return false
+	}
+	if this.Description != that1.Description {
+		return false
+	}
+	if this.TripType != that1.TripType {
+		return false
+	}
+	if this.HotelId != that1.HotelId {
+		return false
+	}
+	if this.BoatId != that1.BoatId {
+		return false
+	}
+	if this.LiveaboardId != that1.LiveaboardId {
+		return false
+	}
+	if len(this.Images) != len(that1.Images) {
+		return false
+	}
+	for i := range this.Images {
+		if !this.Images[i].Equal(that1.Images[i]) {
+			return false
+		}
+	}
+	if !this.Address.Equal(that1.Address) {
+		return false
+	}
+	if that1.CreatedAt == nil {
+		if this.CreatedAt != nil {
+			return false
+		}
+	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
+		return false
+	}
+	if that1.UpdatedAt == nil {
+		if this.UpdatedAt != nil {
+			return false
+		}
+	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
+		return false
+	}
+	return true
+}
 func (this *SearchTripsOptions) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -5724,6 +6274,77 @@ func (this *ListTripsResponse_Trip) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *ListTripsWithTemplatesRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.ListTripsWithTemplatesRequest{")
+	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
+	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListTripsWithTemplatesResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListTripsWithTemplatesResponse_Trip) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse_Trip{")
+	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
+	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
+	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
+	if this.DiveMasters != nil {
+		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
+	}
+	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
+	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
+	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
+	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
+	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListTripsWithTemplatesResponse_TripTemplate) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse_TripTemplate{")
+	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
+	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
+	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
+	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
+	if this.Images != nil {
+		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	}
+	if this.Address != nil {
+		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
+	}
+	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
+	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *SearchTripsOptions) GoString() string {
 	if this == nil {
 		return "nil"
@@ -5873,6 +6494,7 @@ type AgencyServiceClient interface {
 	ListStaffs(ctx context.Context, in *ListStaffsRequest, opts ...grpc.CallOption) (AgencyService_ListStaffsClient, error)
 	ListTripTemplates(ctx context.Context, in *ListTripTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripTemplatesClient, error)
 	ListTrips(ctx context.Context, in *ListTripsRequest, opts ...grpc.CallOption) (AgencyService_ListTripsClient, error)
+	ListTripsWithTemplates(ctx context.Context, in *ListTripsWithTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripsWithTemplatesClient, error)
 	SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error)
 }
 
@@ -6171,8 +6793,40 @@ func (x *agencyServiceListTripsClient) Recv() (*ListTripsResponse, error) {
 	return m, nil
 }
 
+func (c *agencyServiceClient) ListTripsWithTemplates(ctx context.Context, in *ListTripsWithTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripsWithTemplatesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[7], "/agency.AgencyService/ListTripsWithTemplates", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &agencyServiceListTripsWithTemplatesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AgencyService_ListTripsWithTemplatesClient interface {
+	Recv() (*ListTripsWithTemplatesResponse, error)
+	grpc.ClientStream
+}
+
+type agencyServiceListTripsWithTemplatesClient struct {
+	grpc.ClientStream
+}
+
+func (x *agencyServiceListTripsWithTemplatesClient) Recv() (*ListTripsWithTemplatesResponse, error) {
+	m := new(ListTripsWithTemplatesResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *agencyServiceClient) SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[7], "/agency.AgencyService/SearchTrips", opts...)
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[8], "/agency.AgencyService/SearchTrips", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -6219,6 +6873,7 @@ type AgencyServiceServer interface {
 	ListStaffs(*ListStaffsRequest, AgencyService_ListStaffsServer) error
 	ListTripTemplates(*ListTripTemplatesRequest, AgencyService_ListTripTemplatesServer) error
 	ListTrips(*ListTripsRequest, AgencyService_ListTripsServer) error
+	ListTripsWithTemplates(*ListTripsWithTemplatesRequest, AgencyService_ListTripsWithTemplatesServer) error
 	SearchTrips(*SearchTripsRequest, AgencyService_SearchTripsServer) error
 }
 
@@ -6267,6 +6922,9 @@ func (*UnimplementedAgencyServiceServer) ListTripTemplates(req *ListTripTemplate
 }
 func (*UnimplementedAgencyServiceServer) ListTrips(req *ListTripsRequest, srv AgencyService_ListTripsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListTrips not implemented")
+}
+func (*UnimplementedAgencyServiceServer) ListTripsWithTemplates(req *ListTripsWithTemplatesRequest, srv AgencyService_ListTripsWithTemplatesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListTripsWithTemplates not implemented")
 }
 func (*UnimplementedAgencyServiceServer) SearchTrips(req *SearchTripsRequest, srv AgencyService_SearchTripsServer) error {
 	return status.Errorf(codes.Unimplemented, "method SearchTrips not implemented")
@@ -6549,6 +7207,27 @@ func (x *agencyServiceListTripsServer) Send(m *ListTripsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _AgencyService_ListTripsWithTemplates_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListTripsWithTemplatesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AgencyServiceServer).ListTripsWithTemplates(m, &agencyServiceListTripsWithTemplatesServer{stream})
+}
+
+type AgencyService_ListTripsWithTemplatesServer interface {
+	Send(*ListTripsWithTemplatesResponse) error
+	grpc.ServerStream
+}
+
+type agencyServiceListTripsWithTemplatesServer struct {
+	grpc.ServerStream
+}
+
+func (x *agencyServiceListTripsWithTemplatesServer) Send(m *ListTripsWithTemplatesResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _AgencyService_SearchTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SearchTripsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -6637,6 +7316,11 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListTrips",
 			Handler:       _AgencyService_ListTrips_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListTripsWithTemplates",
+			Handler:       _AgencyService_ListTripsWithTemplates_Handler,
 			ServerStreams: true,
 		},
 		{
@@ -8894,6 +9578,340 @@ func (m *ListTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
+func (m *ListTripsWithTemplatesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTripsWithTemplatesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTripsWithTemplatesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Offset != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Limit != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListTripsWithTemplatesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTripsWithTemplatesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTripsWithTemplatesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Trip != nil {
+		{
+			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xf2
+	}
+	if m.UpdatedAt != nil {
+		n49, err49 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err49 != nil {
+			return 0, err49
+		}
+		i -= n49
+		i = encodeVarintAgency(dAtA, i, uint64(n49))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.CreatedAt != nil {
+		n50, err50 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err50 != nil {
+			return 0, err50
+		}
+		i -= n50
+		i = encodeVarintAgency(dAtA, i, uint64(n50))
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0xd2
+	}
+	if m.LastReservationDate != nil {
+		n51, err51 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
+		if err51 != nil {
+			return 0, err51
+		}
+		i -= n51
+		i = encodeVarintAgency(dAtA, i, uint64(n51))
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0x82
+	}
+	if m.ToDate != nil {
+		n52, err52 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
+		if err52 != nil {
+			return 0, err52
+		}
+		i -= n52
+		i = encodeVarintAgency(dAtA, i, uint64(n52))
+		i--
+		dAtA[i] = 0x4
+		i--
+		dAtA[i] = 0xb2
+	}
+	if m.FromDate != nil {
+		n53, err53 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
+		if err53 != nil {
+			return 0, err53
+		}
+		i -= n53
+		i = encodeVarintAgency(dAtA, i, uint64(n53))
+		i--
+		dAtA[i] = 0x3
+		i--
+		dAtA[i] = 0xe2
+	}
+	if len(m.DiveMasters) > 0 {
+		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3
+			i--
+			dAtA[i] = 0x92
+		}
+	}
+	if m.Price != 0 {
+		i -= 4
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
+		i--
+		dAtA[i] = 0x2
+		i--
+		dAtA[i] = 0xc5
+	}
+	if m.MaxGuest != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.MaxGuest))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xf0
+	}
+	if m.TripTemplateId != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.TripTemplateId))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa0
+	}
+	if m.Id != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.UpdatedAt != nil {
+		n54, err54 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err54 != nil {
+			return 0, err54
+		}
+		i -= n54
+		i = encodeVarintAgency(dAtA, i, uint64(n54))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.CreatedAt != nil {
+		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err55 != nil {
+			return 0, err55
+		}
+		i -= n55
+		i = encodeVarintAgency(dAtA, i, uint64(n55))
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0xd2
+	}
+	if m.Address != nil {
+		{
+			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x5
+		i--
+		dAtA[i] = 0x82
+	}
+	if len(m.Images) > 0 {
+		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x4
+			i--
+			dAtA[i] = 0xb2
+		}
+	}
+	if m.LiveaboardId != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
+		i--
+		dAtA[i] = 0x3
+		i--
+		dAtA[i] = 0xe0
+	}
+	if m.BoatId != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.BoatId))
+		i--
+		dAtA[i] = 0x3
+		i--
+		dAtA[i] = 0x90
+	}
+	if m.HotelId != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
+		i--
+		dAtA[i] = 0x2
+		i--
+		dAtA[i] = 0xc0
+	}
+	if m.TripType != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xf0
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa2
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x52
+	}
+	if m.Id != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *SearchTripsOptions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -8915,24 +9933,24 @@ func (m *SearchTripsOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.EndDate != nil {
-		n47, err47 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
-		if err47 != nil {
-			return 0, err47
+		n57, err57 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
+		if err57 != nil {
+			return 0, err57
 		}
-		i -= n47
-		i = encodeVarintAgency(dAtA, i, uint64(n47))
+		i -= n57
+		i = encodeVarintAgency(dAtA, i, uint64(n57))
 		i--
 		dAtA[i] = 0x1
 		i--
 		dAtA[i] = 0xf2
 	}
 	if m.StartDate != nil {
-		n48, err48 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
-		if err48 != nil {
-			return 0, err48
+		n58, err58 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
+		if err58 != nil {
+			return 0, err58
 		}
-		i -= n48
-		i = encodeVarintAgency(dAtA, i, uint64(n48))
+		i -= n58
+		i = encodeVarintAgency(dAtA, i, uint64(n58))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -9117,60 +10135,60 @@ func (m *SearchTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error
 		dAtA[i] = 0xf2
 	}
 	if m.UpdatedAt != nil {
-		n52, err52 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err52 != nil {
-			return 0, err52
+		n62, err62 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err62 != nil {
+			return 0, err62
 		}
-		i -= n52
-		i = encodeVarintAgency(dAtA, i, uint64(n52))
+		i -= n62
+		i = encodeVarintAgency(dAtA, i, uint64(n62))
 		i--
 		dAtA[i] = 0x6
 		i--
 		dAtA[i] = 0xa2
 	}
 	if m.CreatedAt != nil {
-		n53, err53 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err53 != nil {
-			return 0, err53
+		n63, err63 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err63 != nil {
+			return 0, err63
 		}
-		i -= n53
-		i = encodeVarintAgency(dAtA, i, uint64(n53))
+		i -= n63
+		i = encodeVarintAgency(dAtA, i, uint64(n63))
 		i--
 		dAtA[i] = 0x5
 		i--
 		dAtA[i] = 0xd2
 	}
 	if m.LastReservationDate != nil {
-		n54, err54 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err54 != nil {
-			return 0, err54
+		n64, err64 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
+		if err64 != nil {
+			return 0, err64
 		}
-		i -= n54
-		i = encodeVarintAgency(dAtA, i, uint64(n54))
+		i -= n64
+		i = encodeVarintAgency(dAtA, i, uint64(n64))
 		i--
 		dAtA[i] = 0x5
 		i--
 		dAtA[i] = 0x82
 	}
 	if m.ToDate != nil {
-		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
-		if err55 != nil {
-			return 0, err55
+		n65, err65 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
+		if err65 != nil {
+			return 0, err65
 		}
-		i -= n55
-		i = encodeVarintAgency(dAtA, i, uint64(n55))
+		i -= n65
+		i = encodeVarintAgency(dAtA, i, uint64(n65))
 		i--
 		dAtA[i] = 0x4
 		i--
 		dAtA[i] = 0xb2
 	}
 	if m.FromDate != nil {
-		n56, err56 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err56 != nil {
-			return 0, err56
+		n66, err66 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
+		if err66 != nil {
+			return 0, err66
 		}
-		i -= n56
-		i = encodeVarintAgency(dAtA, i, uint64(n56))
+		i -= n66
+		i = encodeVarintAgency(dAtA, i, uint64(n66))
 		i--
 		dAtA[i] = 0x3
 		i--
@@ -9243,24 +10261,24 @@ func (m *SearchTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (in
 	var l int
 	_ = l
 	if m.UpdatedAt != nil {
-		n57, err57 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err57 != nil {
-			return 0, err57
+		n67, err67 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err67 != nil {
+			return 0, err67
 		}
-		i -= n57
-		i = encodeVarintAgency(dAtA, i, uint64(n57))
+		i -= n67
+		i = encodeVarintAgency(dAtA, i, uint64(n67))
 		i--
 		dAtA[i] = 0x6
 		i--
 		dAtA[i] = 0xa2
 	}
 	if m.CreatedAt != nil {
-		n58, err58 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err58 != nil {
-			return 0, err58
+		n68, err68 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err68 != nil {
+			return 0, err68
 		}
-		i -= n58
-		i = encodeVarintAgency(dAtA, i, uint64(n58))
+		i -= n68
+		i = encodeVarintAgency(dAtA, i, uint64(n68))
 		i--
 		dAtA[i] = 0x5
 		i--
@@ -10300,6 +11318,135 @@ func (m *ListTripsResponse_Trip) Size() (n int) {
 	return n
 }
 
+func (m *ListTripsWithTemplatesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Limit != 0 {
+		n += 1 + sovAgency(uint64(m.Limit))
+	}
+	if m.Offset != 0 {
+		n += 1 + sovAgency(uint64(m.Offset))
+	}
+	return n
+}
+
+func (m *ListTripsWithTemplatesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Trip != nil {
+		l = m.Trip.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovAgency(uint64(m.Id))
+	}
+	if m.TripTemplateId != 0 {
+		n += 2 + sovAgency(uint64(m.TripTemplateId))
+	}
+	if m.MaxGuest != 0 {
+		n += 2 + sovAgency(uint64(m.MaxGuest))
+	}
+	if m.Price != 0 {
+		n += 6
+	}
+	if len(m.DiveMasters) > 0 {
+		for _, e := range m.DiveMasters {
+			l = e.Size()
+			n += 2 + l + sovAgency(uint64(l))
+		}
+	}
+	if m.FromDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.ToDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.LastReservationDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.CreatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.UpdatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovAgency(uint64(m.Id))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.TripType != 0 {
+		n += 2 + sovAgency(uint64(m.TripType))
+	}
+	if m.HotelId != 0 {
+		n += 2 + sovAgency(uint64(m.HotelId))
+	}
+	if m.BoatId != 0 {
+		n += 2 + sovAgency(uint64(m.BoatId))
+	}
+	if m.LiveaboardId != 0 {
+		n += 2 + sovAgency(uint64(m.LiveaboardId))
+	}
+	if len(m.Images) > 0 {
+		for _, e := range m.Images {
+			l = e.Size()
+			n += 2 + l + sovAgency(uint64(l))
+		}
+	}
+	if m.Address != nil {
+		l = m.Address.Size()
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.CreatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.UpdatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func (m *SearchTripsOptions) Size() (n int) {
 	if m == nil {
 		return 0
@@ -11075,6 +12222,77 @@ func (this *ListTripsResponse_Trip) String() string {
 		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListTripsWithTemplatesRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListTripsWithTemplatesRequest{`,
+		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
+		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListTripsWithTemplatesResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse{`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "ListTripsWithTemplatesResponse_Trip", "ListTripsWithTemplatesResponse_Trip", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListTripsWithTemplatesResponse_Trip) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForDiveMasters := "[]*DiveMaster{"
+	for _, f := range this.DiveMasters {
+		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMaster", "DiveMaster", 1) + ","
+	}
+	repeatedStringForDiveMasters += "}"
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_Trip{`,
+		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
+		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
+		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
+		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
+		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "ListTripsWithTemplatesResponse_TripTemplate", "ListTripsWithTemplatesResponse_TripTemplate", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListTripsWithTemplatesResponse_TripTemplate) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForImages := "[]*File{"
+	for _, f := range this.Images {
+		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
+	}
+	repeatedStringForImages += "}"
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_TripTemplate{`,
+		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
+		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
+		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
+		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
+		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
+		`Images:` + repeatedStringForImages + `,`,
+		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
 		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
@@ -17357,6 +18575,899 @@ func (m *ListTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 		case 90:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.UpdatedAt == nil {
+				m.UpdatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTripsWithTemplatesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListTripsWithTemplatesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListTripsWithTemplatesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTripsWithTemplatesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListTripsWithTemplatesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListTripsWithTemplatesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Trip == nil {
+				m.Trip = &ListTripsWithTemplatesResponse_Trip{}
+			}
+			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTripsWithTemplatesResponse_Trip) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 20:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplateId", wireType)
+			}
+			m.TripTemplateId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TripTemplateId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 30:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxGuest", wireType)
+			}
+			m.MaxGuest = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxGuest |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 40:
+			if wireType != 5 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
+			}
+			var v uint32
+			if (iNdEx + 4) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			iNdEx += 4
+			m.Price = float32(math.Float32frombits(v))
+		case 50:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DiveMasters = append(m.DiveMasters, &DiveMaster{})
+			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 60:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FromDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.FromDate == nil {
+				m.FromDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.FromDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 70:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ToDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ToDate == nil {
+				m.ToDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.ToDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 80:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LastReservationDate == nil {
+				m.LastReservationDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.LastReservationDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 90:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.CreatedAt == nil {
+				m.CreatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 100:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.UpdatedAt == nil {
+				m.UpdatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 110:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &ListTripsWithTemplatesResponse_TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 20:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 30:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
+			}
+			m.TripType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TripType |= TripType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 40:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
+			}
+			m.HotelId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.HotelId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 50:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BoatId", wireType)
+			}
+			m.BoatId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BoatId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 60:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
+			}
+			m.LiveaboardId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.LiveaboardId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 70:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Images = append(m.Images, &File{})
+			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 80:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Address == nil {
+				m.Address = &Address{}
+			}
+			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 90:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.CreatedAt == nil {
+				m.CreatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 100:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
 			}

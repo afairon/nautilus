@@ -26,6 +26,7 @@ service AgencyService {
     rpc ListStaffs (ListStaffsRequest) returns (stream ListStaffsResponse);
     rpc ListTripTemplates (ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
     rpc ListTrips (ListTripsRequest) returns (stream ListTripsResponse);
+    rpc ListTripsWithTemplates(ListTripsWithTemplatesRequest) returns (stream ListTripsWithTemplatesResponse);
 
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 }
@@ -313,6 +314,45 @@ message ListTripsResponse {
         google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+    }
+}
+
+// ListTripsWithTemplatesRequest
+message ListTripsWithTemplatesRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+// ListTripsWithTemplatesResponse
+message ListTripsWithTemplatesResponse {
+    Trip trip = 1;
+
+    message Trip {
+        uint64 id = 1;
+        uint64 trip_template_id = 20;
+        uint32 max_guest = 30;
+        float price = 40;
+        repeated DiveMaster dive_masters = 50;
+        google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+        TripTemplate trip_template = 110;
+    }
+
+    message TripTemplate {
+        uint64 id = 1;
+        string name = 10;
+        string description = 20;
+        model.TripType trip_type = 30;
+        uint64 hotel_id = 40;
+        uint64 boat_id = 50;
+        uint64 liveaboard_id = 60;
+        repeated model.File images = 70;
+        model.Address address = 80;
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
     }
 }
 

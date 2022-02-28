@@ -506,6 +506,64 @@ const ListTripsResponse_Trip$json = const {
 
 /// Descriptor for `ListTripsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listTripsResponseDescriptor = $convert.base64Decode('ChFMaXN0VHJpcHNSZXNwb25zZRIyCgR0cmlwGAEgASgLMh4uYWdlbmN5Lkxpc3RUcmlwc1Jlc3BvbnNlLlRyaXBSBHRyaXAaxQMKBFRyaXASDgoCaWQYASABKARSAmlkEigKEHRyaXBfdGVtcGxhdGVfaWQYFCABKARSDnRyaXBUZW1wbGF0ZUlkEhsKCW1heF9ndWVzdBgeIAEoDVIIbWF4R3Vlc3QSFAoFcHJpY2UYKCABKAJSBXByaWNlEj0KCWZyb21fZGF0ZRgyIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCGZyb21EYXRlEjkKB3RvX2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgZ0b0RhdGUSVAoVbGFzdF9yZXNlcnZhdGlvbl9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVITbGFzdFJlc2VydmF0aW9uRGF0ZRI/CgpjcmVhdGVkX2F0GFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+@$core.Deprecated('Use listTripsWithTemplatesRequestDescriptor instead')
+const ListTripsWithTemplatesRequest$json = const {
+  '1': 'ListTripsWithTemplatesRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListTripsWithTemplatesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listTripsWithTemplatesRequestDescriptor = $convert.base64Decode('Ch1MaXN0VHJpcHNXaXRoVGVtcGxhdGVzUmVxdWVzdBIUCgVsaW1pdBgBIAEoBFIFbGltaXQSFgoGb2Zmc2V0GAIgASgEUgZvZmZzZXQ=');
+@$core.Deprecated('Use listTripsWithTemplatesResponseDescriptor instead')
+const ListTripsWithTemplatesResponse$json = const {
+  '1': 'ListTripsWithTemplatesResponse',
+  '2': const [
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.agency.ListTripsWithTemplatesResponse.Trip', '10': 'trip'},
+  ],
+  '3': const [ListTripsWithTemplatesResponse_Trip$json, ListTripsWithTemplatesResponse_TripTemplate$json],
+};
+
+@$core.Deprecated('Use listTripsWithTemplatesResponseDescriptor instead')
+const ListTripsWithTemplatesResponse_Trip$json = const {
+  '1': 'Trip',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.agency.DiveMaster', '10': 'diveMasters'},
+    const {'1': 'from_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'fromDate'},
+    const {'1': 'to_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'toDate'},
+    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+    const {'1': 'trip_template', '3': 110, '4': 1, '5': 11, '6': '.agency.ListTripsWithTemplatesResponse.TripTemplate', '10': 'tripTemplate'},
+  ],
+};
+
+@$core.Deprecated('Use listTripsWithTemplatesResponseDescriptor instead')
+const ListTripsWithTemplatesResponse_TripTemplate$json = const {
+  '1': 'TripTemplate',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'trip_type', '3': 30, '4': 1, '5': 14, '6': '.model.TripType', '10': 'tripType'},
+    const {'1': 'hotel_id', '3': 40, '4': 1, '5': 4, '10': 'hotelId'},
+    const {'1': 'boat_id', '3': 50, '4': 1, '5': 4, '10': 'boatId'},
+    const {'1': 'liveaboard_id', '3': 60, '4': 1, '5': 4, '10': 'liveaboardId'},
+    const {'1': 'images', '3': 70, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'address', '3': 80, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `ListTripsWithTemplatesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listTripsWithTemplatesResponseDescriptor = $convert.base64Decode('Ch5MaXN0VHJpcHNXaXRoVGVtcGxhdGVzUmVzcG9uc2USPwoEdHJpcBgBIAEoCzIrLmFnZW5jeS5MaXN0VHJpcHNXaXRoVGVtcGxhdGVzUmVzcG9uc2UuVHJpcFIEdHJpcBrWBAoEVHJpcBIOCgJpZBgBIAEoBFICaWQSKAoQdHJpcF90ZW1wbGF0ZV9pZBgUIAEoBFIOdHJpcFRlbXBsYXRlSWQSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIUCgVwcmljZRgoIAEoAlIFcHJpY2USNQoMZGl2ZV9tYXN0ZXJzGDIgAygLMhIuYWdlbmN5LkRpdmVNYXN0ZXJSC2RpdmVNYXN0ZXJzEj0KCWZyb21fZGF0ZRg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCGZyb21EYXRlEjkKB3RvX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgZ0b0RhdGUSVAoVbGFzdF9yZXNlcnZhdGlvbl9kYXRlGFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVITbGFzdFJlc2VydmF0aW9uRGF0ZRI/CgpjcmVhdGVkX2F0GFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYZCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQSWAoNdHJpcF90ZW1wbGF0ZRhuIAEoCzIzLmFnZW5jeS5MaXN0VHJpcHNXaXRoVGVtcGxhdGVzUmVzcG9uc2UuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUarAMKDFRyaXBUZW1wbGF0ZRIOCgJpZBgBIAEoBFICaWQSEgoEbmFtZRgKIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgUIAEoCVILZGVzY3JpcHRpb24SLAoJdHJpcF90eXBlGB4gASgOMg8ubW9kZWwuVHJpcFR5cGVSCHRyaXBUeXBlEhkKCGhvdGVsX2lkGCggASgEUgdob3RlbElkEhcKB2JvYXRfaWQYMiABKARSBmJvYXRJZBIjCg1saXZlYWJvYXJkX2lkGDwgASgEUgxsaXZlYWJvYXJkSWQSIwoGaW1hZ2VzGEYgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEigKB2FkZHJlc3MYUCABKAsyDi5tb2RlbC5BZGRyZXNzUgdhZGRyZXNzEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
 @$core.Deprecated('Use searchTripsOptionsDescriptor instead')
 const SearchTripsOptions$json = const {
   '1': 'SearchTripsOptions',

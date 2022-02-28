@@ -13,6 +13,7 @@ import (
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
+	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 
@@ -97,6 +98,17 @@ func (repo *tripRepository) ListTripsByAgency(ctx context.Context, id, limit, of
 	var trips []*model.Trip
 
 	if result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
+// ListTripsWithTemplatesByAgency returns list of trips with templates by agency id.
+func (repo *tripRepository) ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error) {
+	var trips []*model.Trip
+
+	if result := repo.db.Preload("TripTemplate.Address").Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
 		return nil, result.Error
 	}
 

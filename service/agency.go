@@ -31,6 +31,7 @@ type AgencyService interface {
 	ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error)
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
+	ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 
 	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 }
@@ -581,6 +582,32 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	trips, err := service.repo.Trip.ListTripsByAgency(ctx, uint64(agency.ID), limit, offset)
 	if err != nil {
 		return nil, err
+	}
+
+	return trips, nil
+}
+
+// ListTrips returns list of trips associated with the agency.
+func (service *agencyService) ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error) {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	trips, err := service.repo.Trip.ListTripsWithTemplatesByAgency(ctx, uint64(agency.ID), limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
 	}
 
 	return trips, nil
