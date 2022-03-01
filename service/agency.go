@@ -92,7 +92,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	if diveMaster.FrontImage.GetFile() != nil {
 		reader = bytes.NewReader(diveMaster.FrontImage.File)
-		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PRIVATE, reader)
+		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -102,7 +102,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	if diveMaster.BackImage.GetFile() != nil {
 		reader = bytes.NewReader(diveMaster.BackImage.File)
-		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PRIVATE, reader)
+		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -145,7 +145,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 	for _, image := range hotel.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -170,7 +170,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 		for _, image := range rt.GetRoomImages() {
 			reader := bytes.NewReader(image.GetFile())
-			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 			if err != nil {
 				return err
@@ -251,7 +251,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 	for _, image := range tripTemplate.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -333,7 +333,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 
 	for _, image := range divingBoat.GetBoatImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -378,7 +378,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 	for _, image := range liveaboard.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -403,7 +403,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 		for _, image := range rt.GetRoomImages() {
 			reader := bytes.NewReader(image.GetFile())
-			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 			if err != nil {
 				return err
