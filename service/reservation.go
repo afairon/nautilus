@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"time"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -61,9 +60,10 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	newReservation = *reservation
 
 	reservationRecord := model.Reservation{
-		TripID:  uint(reservation.GetTripId()),
-		DiverID: uint(reservation.GetDiverId()),
-		Price:   reservation.GetPrice(),
+		TripID:      uint(reservation.GetTripId()),
+		DiverID:     uint(reservation.GetDiverId()),
+		Price:       reservation.GetPrice(),
+		TotalDivers: uint(reservation.TotalDivers),
 	}
 
 	// Execute transaction
@@ -106,17 +106,6 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	// })
 
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
-		// check if the reservation time is before the last reservation date.
-		trip, err := query.Trip.Get(ctx, reservation.GetTripId())
-
-		if err != nil {
-			return err
-		}
-
-		if time.Now().After(*trip.LastReservationDate) {
-			return status.Errorf(codes.PermissionDenied, "Cannot make reservation. Exceed last reservation date.")
-		}
-
 		newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
 
 		if err != nil {
@@ -141,6 +130,7 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 			newRoomRecord := model.ReservationRoomType{
 				ReservationID: uint(newReservation.GetId()),
 				RoomTypeID:    uint(room.GetRoomTypeId()),
+				TripID:        uint(reservation.GetTripId()),
 				DiverNo:       uint(room.GetNoDivers()),
 				Quantity:      uint(room.GetQuantity()),
 			}

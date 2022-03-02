@@ -26,9 +26,9 @@ service AgencyService {
     rpc ListStaffs (ListStaffsRequest) returns (stream ListStaffsResponse);
     rpc ListTripTemplates (ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
     rpc ListTrips (ListTripsRequest) returns (stream ListTripsResponse);
+    rpc ListTripsWithTemplates(ListTripsWithTemplatesRequest) returns (stream ListTripsWithTemplatesResponse);
 
-    rpc SearchOnshoreTrips(SearchOnshoreTripsRequest) returns (stream SearchOnshoreTripsResponse);
-    rpc SearchOffshoreTrips(SearchOffshoreTripsRequest) returns (stream SearchOffshoreTripsResponse);
+    rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 }
 
 message DiveMaster {
@@ -317,42 +317,15 @@ message ListTripsResponse {
     }
 }
 
-message SearchOnshoreTrips {
-    // allow either country or city for location filtering
-    oneof location_filter {
-        string country = 1;
-        string city = 2;
-        string region = 3;
-    }
-    uint32 divers = 10;
-    google.protobuf.Timestamp start_date = 20 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp end_date = 30 [(gogoproto.stdtime) = true];
+// ListTripsWithTemplatesRequest
+message ListTripsWithTemplatesRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
 }
 
-message SearchOnshoreTripsRequest {
-    SearchOnshoreTrips searchOnshoreTrips = 1;
-    uint64 limit = 2;
-    uint64 offset = 3;
-}
-
-message SearchOffshoreTrips {
-    oneof location_filter {
-        string country = 1;
-        string city = 2;
-        string region = 3;
-    }
-    google.protobuf.Timestamp starting_month = 10 [(gogoproto.stdtime) = true];
-}
-
-message SearchOffshoreTripsRequest {
-    SearchOffshoreTrips searchOffshoreTrips = 1;
-    uint64 limit = 2;
-    uint64 offset = 3;
-}
-
-message SearchOnshoreTripsResponse {
+// ListTripsWithTemplatesResponse
+message ListTripsWithTemplatesResponse {
     Trip trip = 1;
-    TripTemplate trip_template = 2;
 
     message Trip {
         uint64 id = 1;
@@ -365,6 +338,7 @@ message SearchOnshoreTripsResponse {
         google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
         google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+        TripTemplate trip_template = 110;
     }
 
     message TripTemplate {
@@ -376,25 +350,46 @@ message SearchOnshoreTripsResponse {
         uint64 boat_id = 50;
         uint64 liveaboard_id = 60;
         repeated model.File images = 70;
-        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+        model.Address address = 80;
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
     }
 }
 
-message SearchOffshoreTripsResponse {
+message SearchTripsOptions {
+    // allow either country or city for location filtering
+    oneof location_filter {
+        string country = 1;
+        string city = 2;
+        string region = 3;
+    }
+    uint32 divers = 10;
+    model.TripType trip_type = 15;
+    google.protobuf.Timestamp start_date = 20 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp end_date = 30 [(gogoproto.stdtime) = true];
+}
+
+message SearchTripsRequest {
+    SearchTripsOptions search_trips_options = 1;
+    uint64 limit = 2;
+    uint64 offset = 3;
+}
+
+message SearchTripsResponse {
     Trip trip = 1;
-    TripTemplate trip_template = 2;
 
     message Trip {
         uint64 id = 1;
         uint64 trip_template_id = 20;
         uint32 max_guest = 30;
         float price = 40;
-        google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+        repeated DiveMaster dive_masters = 50;
+        google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+        TripTemplate trip_template = 110;
     }
 
     message TripTemplate {
@@ -406,7 +401,8 @@ message SearchOffshoreTripsResponse {
         uint64 boat_id = 50;
         uint64 liveaboard_id = 60;
         repeated model.File images = 70;
-        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+        model.Address address = 80;
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
     }
 }

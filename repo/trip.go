@@ -13,7 +13,8 @@ import (
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
-	SearchOnshoreTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time time.Time, limit, offset uint) ([]*model.Trip, error)
+	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
+	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 
 // tripRepository implements TripRepository interface.
@@ -103,7 +104,18 @@ func (repo *tripRepository) ListTripsByAgency(ctx context.Context, id, limit, of
 	return trips, nil
 }
 
-func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date time.Time, limit, offset uint) ([]*model.Trip, error) {
+// ListTripsWithTemplatesByAgency returns list of trips with templates by agency id.
+func (repo *tripRepository) ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error) {
+	var trips []*model.Trip
+
+	if result := repo.db.Preload("TripTemplate.Address").Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
+func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error) {
 	// tx := repo.db.Model(&model.Trip{}).Preload("TripTemplate.Address").Find(&trip)
 	// fmt.Println(tx)
 	// fmt.Printf("trip: %+v\n", trip)
@@ -143,11 +155,21 @@ func (repo *tripRepository) SearchOnshoreTrips(ctx context.Context, country, cit
 	result.Joins("LEFT JOIN hotels ON hotels.id = trip_templates.hotel_id")
 	result.Joins("LEFT JOIN boats ON boats.id = trip_templates.boat_id")
 	result.Joins("LEFT JOIN liveaboards ON liveaboards.id = trip_templates.liveaboard_id")
-	result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NOT NULL AND trip_templates.boat_id IS NOT NULL AND trip_templates.liveaboard_id IS NULL", model.ONSHORE)
+	switch tripType {
+	case model.ONSHORE:
+		result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NOT NULL AND trip_templates.boat_id IS NOT NULL AND trip_templates.liveaboard_id IS NULL", model.ONSHORE)
+	case model.OFFSHORE:
+		result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NULL AND trip_templates.boat_id IS NULL AND trip_templates.liveaboard_id IS NOT NULL", model.OFFSHORE)
+	}
 	result.Where("trips.max_guest >= ?", divers)
 	result.Where("addresses.country ILIKE ? OR addresses.city ILIKE ? OR addresses.region ILIKE ?", country, city, region)
-	result.Where("trips.start_date BETWEEN ? AND ?", start_date, end_date)
-	result.Where("trips.end_date BETWEEN ? AND ?", start_date, end_date)
+	if end_date != nil {
+		result.Where("trips.start_date BETWEEN ? AND ?", *start_date, *end_date)
+		result.Where("trips.end_date BETWEEN ? AND ?", *start_date, *end_date)
+	} else {
+		result.Where("trips.start_date >= ?", *start_date)
+		result.Where("trips.end_date >= ?", *start_date)
+	}
 	result.Find(&trips)
 
 	if result.Error != nil {

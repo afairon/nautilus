@@ -208,20 +208,23 @@ type TripTemplate struct {
 
 type Trip struct {
 	*gorm.Model
-	MaxGuest            uint32       `gorm:"not null"`
-	Price               float32      `gorm:"not null;check:price_checker,price > 0"`
-	StartDate           *time.Time   `gorm:"not null;check:trip_date_checker,start_date < end_date"`
-	EndDate             *time.Time   `gorm:"not null"`
-	LastReservationDate *time.Time   `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
-	DiveMasters         []DiveMaster `gorm:"many2many:dive_master_trips;"`
-	TripTemplateID      uint         `gorm:"not null"`
-	TripTemplate        TripTemplate
-	AgencyID            uint `gorm:"not null"`
+	MaxGuest             uint32                `gorm:"not null"`
+	CurrentGuest         uint32                `gorm:"not null;default:0"`
+	Price                float32               `gorm:"not null;check:price_checker,price > 0"`
+	StartDate            *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
+	EndDate              *time.Time            `gorm:"not null"`
+	LastReservationDate  *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
+	DiveMasters          []DiveMaster          `gorm:"many2many:dive_master_trips;"`
+	ReservationRoomTypes []ReservationRoomType `gorm:"foreignKey:TripID"`
+	TripTemplateID       uint                  `gorm:"not null"`
+	TripTemplate         TripTemplate
+	AgencyID             uint `gorm:"not null"`
 }
 
 type Reservation struct {
 	*gorm.Model
 	Price             float32 `gorm:"not null"`
+	TotalDivers       uint    `gorm:"not null;default:0"`
 	LiveaboardComment *LiveaboardComment
 	HotelComment      *HotelComment
 	TripComment       *TripComment
@@ -316,6 +319,7 @@ type DiveMasterTrip struct {
 type ReservationRoomType struct {
 	ReservationID uint `gorm:"primaryKey"`
 	RoomTypeID    uint `gorm:"primaryKey"`
+	TripID        uint `gorm:"primaryKey"`
 	DiverNo       uint
 	Quantity      uint
 }

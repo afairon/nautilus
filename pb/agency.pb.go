@@ -2660,30 +2660,23 @@ func (m *ListTripsResponse_Trip) GetUpdatedAt() *time.Time {
 	return nil
 }
 
-type SearchOnshoreTrips struct {
-	// allow either country or city for location filtering
-	//
-	// Types that are valid to be assigned to LocationFilter:
-	//	*SearchOnshoreTrips_Country
-	//	*SearchOnshoreTrips_City
-	//	*SearchOnshoreTrips_Region
-	LocationFilter isSearchOnshoreTrips_LocationFilter `protobuf_oneof:"location_filter"`
-	Divers         uint32                              `protobuf:"varint,10,opt,name=divers,proto3" json:"divers,omitempty"`
-	StartDate      *time.Time                          `protobuf:"bytes,20,opt,name=start_date,json=startDate,proto3,stdtime" json:"start_date,omitempty"`
-	EndDate        *time.Time                          `protobuf:"bytes,30,opt,name=end_date,json=endDate,proto3,stdtime" json:"end_date,omitempty"`
+// ListTripsWithTemplatesRequest
+type ListTripsWithTemplatesRequest struct {
+	Limit  uint64 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
 }
 
-func (m *SearchOnshoreTrips) Reset()      { *m = SearchOnshoreTrips{} }
-func (*SearchOnshoreTrips) ProtoMessage() {}
-func (*SearchOnshoreTrips) Descriptor() ([]byte, []int) {
+func (m *ListTripsWithTemplatesRequest) Reset()      { *m = ListTripsWithTemplatesRequest{} }
+func (*ListTripsWithTemplatesRequest) ProtoMessage() {}
+func (*ListTripsWithTemplatesRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_614a4be5fd9deed0, []int{32}
 }
-func (m *SearchOnshoreTrips) XXX_Unmarshal(b []byte) error {
+func (m *ListTripsWithTemplatesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchOnshoreTrips) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ListTripsWithTemplatesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchOnshoreTrips.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ListTripsWithTemplatesRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -2693,82 +2686,441 @@ func (m *SearchOnshoreTrips) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (m *SearchOnshoreTrips) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOnshoreTrips.Merge(m, src)
+func (m *ListTripsWithTemplatesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesRequest.Merge(m, src)
 }
-func (m *SearchOnshoreTrips) XXX_Size() int {
+func (m *ListTripsWithTemplatesRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchOnshoreTrips) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOnshoreTrips.DiscardUnknown(m)
+func (m *ListTripsWithTemplatesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchOnshoreTrips proto.InternalMessageInfo
+var xxx_messageInfo_ListTripsWithTemplatesRequest proto.InternalMessageInfo
 
-type isSearchOnshoreTrips_LocationFilter interface {
-	isSearchOnshoreTrips_LocationFilter()
+func (m *ListTripsWithTemplatesRequest) GetLimit() uint64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesRequest) GetOffset() uint64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+// ListTripsWithTemplatesResponse
+type ListTripsWithTemplatesResponse struct {
+	Trip *ListTripsWithTemplatesResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse) Reset()      { *m = ListTripsWithTemplatesResponse{} }
+func (*ListTripsWithTemplatesResponse) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33}
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse) GetTrip() *ListTripsWithTemplatesResponse_Trip {
+	if m != nil {
+		return m.Trip
+	}
+	return nil
+}
+
+type ListTripsWithTemplatesResponse_Trip struct {
+	Id                  uint64                                       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TripTemplateId      uint64                                       `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
+	MaxGuest            uint32                                       `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
+	Price               float32                                      `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
+	DiveMasters         []*DiveMaster                                `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
+	FromDate            *time.Time                                   `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
+	ToDate              *time.Time                                   `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
+	LastReservationDate *time.Time                                   `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
+	CreatedAt           *time.Time                                   `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt           *time.Time                                   `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+	TripTemplate        *ListTripsWithTemplatesResponse_TripTemplate `protobuf:"bytes,110,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) Reset()      { *m = ListTripsWithTemplatesResponse_Trip{} }
+func (*ListTripsWithTemplatesResponse_Trip) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse_Trip) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33, 0}
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse_Trip) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse_Trip proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplateId() uint64 {
+	if m != nil {
+		return m.TripTemplateId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetMaxGuest() uint32 {
+	if m != nil {
+		return m.MaxGuest
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetPrice() float32 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetDiveMasters() []*DiveMaster {
+	if m != nil {
+		return m.DiveMasters
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetFromDate() *time.Time {
+	if m != nil {
+		return m.FromDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetToDate() *time.Time {
+	if m != nil {
+		return m.ToDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetLastReservationDate() *time.Time {
+	if m != nil {
+		return m.LastReservationDate
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetCreatedAt() *time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetUpdatedAt() *time.Time {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplate() *ListTripsWithTemplatesResponse_TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+type ListTripsWithTemplatesResponse_TripTemplate struct {
+	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
+	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
+	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
+	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
+	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
+	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
+	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
+	Address      *Address   `protobuf:"bytes,80,opt,name=address,proto3" json:"address,omitempty"`
+	CreatedAt    *time.Time `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt    *time.Time `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Reset() {
+	*m = ListTripsWithTemplatesResponse_TripTemplate{}
+}
+func (*ListTripsWithTemplatesResponse_TripTemplate) ProtoMessage() {}
+func (*ListTripsWithTemplatesResponse_TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{33, 1}
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Merge(m, src)
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate proto.InternalMessageInfo
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetTripType() TripType {
+	if m != nil {
+		return m.TripType
+	}
+	return ONSHORE
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetHotelId() uint64 {
+	if m != nil {
+		return m.HotelId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetBoatId() uint64 {
+	if m != nil {
+		return m.BoatId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetLiveaboardId() uint64 {
+	if m != nil {
+		return m.LiveaboardId
+	}
+	return 0
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetImages() []*File {
+	if m != nil {
+		return m.Images
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetAddress() *Address {
+	if m != nil {
+		return m.Address
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetCreatedAt() *time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return nil
+}
+
+func (m *ListTripsWithTemplatesResponse_TripTemplate) GetUpdatedAt() *time.Time {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return nil
+}
+
+type SearchTripsOptions struct {
+	// allow either country or city for location filtering
+	//
+	// Types that are valid to be assigned to LocationFilter:
+	//	*SearchTripsOptions_Country
+	//	*SearchTripsOptions_City
+	//	*SearchTripsOptions_Region
+	LocationFilter isSearchTripsOptions_LocationFilter `protobuf_oneof:"location_filter"`
+	Divers         uint32                              `protobuf:"varint,10,opt,name=divers,proto3" json:"divers,omitempty"`
+	TripType       TripType                            `protobuf:"varint,15,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
+	StartDate      *time.Time                          `protobuf:"bytes,20,opt,name=start_date,json=startDate,proto3,stdtime" json:"start_date,omitempty"`
+	EndDate        *time.Time                          `protobuf:"bytes,30,opt,name=end_date,json=endDate,proto3,stdtime" json:"end_date,omitempty"`
+}
+
+func (m *SearchTripsOptions) Reset()      { *m = SearchTripsOptions{} }
+func (*SearchTripsOptions) ProtoMessage() {}
+func (*SearchTripsOptions) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{34}
+}
+func (m *SearchTripsOptions) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SearchTripsOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SearchTripsOptions.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *SearchTripsOptions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTripsOptions.Merge(m, src)
+}
+func (m *SearchTripsOptions) XXX_Size() int {
+	return m.Size()
+}
+func (m *SearchTripsOptions) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTripsOptions.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SearchTripsOptions proto.InternalMessageInfo
+
+type isSearchTripsOptions_LocationFilter interface {
+	isSearchTripsOptions_LocationFilter()
 	Equal(interface{}) bool
 	MarshalTo([]byte) (int, error)
 	Size() int
 }
 
-type SearchOnshoreTrips_Country struct {
+type SearchTripsOptions_Country struct {
 	Country string `protobuf:"bytes,1,opt,name=country,proto3,oneof" json:"country,omitempty"`
 }
-type SearchOnshoreTrips_City struct {
+type SearchTripsOptions_City struct {
 	City string `protobuf:"bytes,2,opt,name=city,proto3,oneof" json:"city,omitempty"`
 }
-type SearchOnshoreTrips_Region struct {
+type SearchTripsOptions_Region struct {
 	Region string `protobuf:"bytes,3,opt,name=region,proto3,oneof" json:"region,omitempty"`
 }
 
-func (*SearchOnshoreTrips_Country) isSearchOnshoreTrips_LocationFilter() {}
-func (*SearchOnshoreTrips_City) isSearchOnshoreTrips_LocationFilter()    {}
-func (*SearchOnshoreTrips_Region) isSearchOnshoreTrips_LocationFilter()  {}
+func (*SearchTripsOptions_Country) isSearchTripsOptions_LocationFilter() {}
+func (*SearchTripsOptions_City) isSearchTripsOptions_LocationFilter()    {}
+func (*SearchTripsOptions_Region) isSearchTripsOptions_LocationFilter()  {}
 
-func (m *SearchOnshoreTrips) GetLocationFilter() isSearchOnshoreTrips_LocationFilter {
+func (m *SearchTripsOptions) GetLocationFilter() isSearchTripsOptions_LocationFilter {
 	if m != nil {
 		return m.LocationFilter
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTrips) GetCountry() string {
-	if x, ok := m.GetLocationFilter().(*SearchOnshoreTrips_Country); ok {
+func (m *SearchTripsOptions) GetCountry() string {
+	if x, ok := m.GetLocationFilter().(*SearchTripsOptions_Country); ok {
 		return x.Country
 	}
 	return ""
 }
 
-func (m *SearchOnshoreTrips) GetCity() string {
-	if x, ok := m.GetLocationFilter().(*SearchOnshoreTrips_City); ok {
+func (m *SearchTripsOptions) GetCity() string {
+	if x, ok := m.GetLocationFilter().(*SearchTripsOptions_City); ok {
 		return x.City
 	}
 	return ""
 }
 
-func (m *SearchOnshoreTrips) GetRegion() string {
-	if x, ok := m.GetLocationFilter().(*SearchOnshoreTrips_Region); ok {
+func (m *SearchTripsOptions) GetRegion() string {
+	if x, ok := m.GetLocationFilter().(*SearchTripsOptions_Region); ok {
 		return x.Region
 	}
 	return ""
 }
 
-func (m *SearchOnshoreTrips) GetDivers() uint32 {
+func (m *SearchTripsOptions) GetDivers() uint32 {
 	if m != nil {
 		return m.Divers
 	}
 	return 0
 }
 
-func (m *SearchOnshoreTrips) GetStartDate() *time.Time {
+func (m *SearchTripsOptions) GetTripType() TripType {
+	if m != nil {
+		return m.TripType
+	}
+	return ONSHORE
+}
+
+func (m *SearchTripsOptions) GetStartDate() *time.Time {
 	if m != nil {
 		return m.StartDate
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTrips) GetEndDate() *time.Time {
+func (m *SearchTripsOptions) GetEndDate() *time.Time {
 	if m != nil {
 		return m.EndDate
 	}
@@ -2776,196 +3128,31 @@ func (m *SearchOnshoreTrips) GetEndDate() *time.Time {
 }
 
 // XXX_OneofWrappers is for the internal use of the proto package.
-func (*SearchOnshoreTrips) XXX_OneofWrappers() []interface{} {
+func (*SearchTripsOptions) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
-		(*SearchOnshoreTrips_Country)(nil),
-		(*SearchOnshoreTrips_City)(nil),
-		(*SearchOnshoreTrips_Region)(nil),
+		(*SearchTripsOptions_Country)(nil),
+		(*SearchTripsOptions_City)(nil),
+		(*SearchTripsOptions_Region)(nil),
 	}
 }
 
-type SearchOnshoreTripsRequest struct {
-	SearchOnshoreTrips *SearchOnshoreTrips `protobuf:"bytes,1,opt,name=searchOnshoreTrips,proto3" json:"searchOnshoreTrips,omitempty"`
+type SearchTripsRequest struct {
+	SearchTripsOptions *SearchTripsOptions `protobuf:"bytes,1,opt,name=search_trips_options,json=searchTripsOptions,proto3" json:"search_trips_options,omitempty"`
 	Limit              uint64              `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset             uint64              `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
 }
 
-func (m *SearchOnshoreTripsRequest) Reset()      { *m = SearchOnshoreTripsRequest{} }
-func (*SearchOnshoreTripsRequest) ProtoMessage() {}
-func (*SearchOnshoreTripsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{33}
-}
-func (m *SearchOnshoreTripsRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SearchOnshoreTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SearchOnshoreTripsRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SearchOnshoreTripsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOnshoreTripsRequest.Merge(m, src)
-}
-func (m *SearchOnshoreTripsRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *SearchOnshoreTripsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOnshoreTripsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SearchOnshoreTripsRequest proto.InternalMessageInfo
-
-func (m *SearchOnshoreTripsRequest) GetSearchOnshoreTrips() *SearchOnshoreTrips {
-	if m != nil {
-		return m.SearchOnshoreTrips
-	}
-	return nil
-}
-
-func (m *SearchOnshoreTripsRequest) GetLimit() uint64 {
-	if m != nil {
-		return m.Limit
-	}
-	return 0
-}
-
-func (m *SearchOnshoreTripsRequest) GetOffset() uint64 {
-	if m != nil {
-		return m.Offset
-	}
-	return 0
-}
-
-type SearchOffshoreTrips struct {
-	// Types that are valid to be assigned to LocationFilter:
-	//	*SearchOffshoreTrips_Country
-	//	*SearchOffshoreTrips_City
-	//	*SearchOffshoreTrips_Region
-	LocationFilter isSearchOffshoreTrips_LocationFilter `protobuf_oneof:"location_filter"`
-	StartingMonth  *time.Time                           `protobuf:"bytes,10,opt,name=starting_month,json=startingMonth,proto3,stdtime" json:"starting_month,omitempty"`
-}
-
-func (m *SearchOffshoreTrips) Reset()      { *m = SearchOffshoreTrips{} }
-func (*SearchOffshoreTrips) ProtoMessage() {}
-func (*SearchOffshoreTrips) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34}
-}
-func (m *SearchOffshoreTrips) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SearchOffshoreTrips) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SearchOffshoreTrips.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SearchOffshoreTrips) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOffshoreTrips.Merge(m, src)
-}
-func (m *SearchOffshoreTrips) XXX_Size() int {
-	return m.Size()
-}
-func (m *SearchOffshoreTrips) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOffshoreTrips.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SearchOffshoreTrips proto.InternalMessageInfo
-
-type isSearchOffshoreTrips_LocationFilter interface {
-	isSearchOffshoreTrips_LocationFilter()
-	Equal(interface{}) bool
-	MarshalTo([]byte) (int, error)
-	Size() int
-}
-
-type SearchOffshoreTrips_Country struct {
-	Country string `protobuf:"bytes,1,opt,name=country,proto3,oneof" json:"country,omitempty"`
-}
-type SearchOffshoreTrips_City struct {
-	City string `protobuf:"bytes,2,opt,name=city,proto3,oneof" json:"city,omitempty"`
-}
-type SearchOffshoreTrips_Region struct {
-	Region string `protobuf:"bytes,3,opt,name=region,proto3,oneof" json:"region,omitempty"`
-}
-
-func (*SearchOffshoreTrips_Country) isSearchOffshoreTrips_LocationFilter() {}
-func (*SearchOffshoreTrips_City) isSearchOffshoreTrips_LocationFilter()    {}
-func (*SearchOffshoreTrips_Region) isSearchOffshoreTrips_LocationFilter()  {}
-
-func (m *SearchOffshoreTrips) GetLocationFilter() isSearchOffshoreTrips_LocationFilter {
-	if m != nil {
-		return m.LocationFilter
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTrips) GetCountry() string {
-	if x, ok := m.GetLocationFilter().(*SearchOffshoreTrips_Country); ok {
-		return x.Country
-	}
-	return ""
-}
-
-func (m *SearchOffshoreTrips) GetCity() string {
-	if x, ok := m.GetLocationFilter().(*SearchOffshoreTrips_City); ok {
-		return x.City
-	}
-	return ""
-}
-
-func (m *SearchOffshoreTrips) GetRegion() string {
-	if x, ok := m.GetLocationFilter().(*SearchOffshoreTrips_Region); ok {
-		return x.Region
-	}
-	return ""
-}
-
-func (m *SearchOffshoreTrips) GetStartingMonth() *time.Time {
-	if m != nil {
-		return m.StartingMonth
-	}
-	return nil
-}
-
-// XXX_OneofWrappers is for the internal use of the proto package.
-func (*SearchOffshoreTrips) XXX_OneofWrappers() []interface{} {
-	return []interface{}{
-		(*SearchOffshoreTrips_Country)(nil),
-		(*SearchOffshoreTrips_City)(nil),
-		(*SearchOffshoreTrips_Region)(nil),
-	}
-}
-
-type SearchOffshoreTripsRequest struct {
-	SearchOffshoreTrips *SearchOffshoreTrips `protobuf:"bytes,1,opt,name=searchOffshoreTrips,proto3" json:"searchOffshoreTrips,omitempty"`
-	Limit               uint64               `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset              uint64               `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-}
-
-func (m *SearchOffshoreTripsRequest) Reset()      { *m = SearchOffshoreTripsRequest{} }
-func (*SearchOffshoreTripsRequest) ProtoMessage() {}
-func (*SearchOffshoreTripsRequest) Descriptor() ([]byte, []int) {
+func (m *SearchTripsRequest) Reset()      { *m = SearchTripsRequest{} }
+func (*SearchTripsRequest) ProtoMessage() {}
+func (*SearchTripsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_614a4be5fd9deed0, []int{35}
 }
-func (m *SearchOffshoreTripsRequest) XXX_Unmarshal(b []byte) error {
+func (m *SearchTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchOffshoreTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SearchTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchOffshoreTripsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_SearchTripsRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -2975,55 +3162,54 @@ func (m *SearchOffshoreTripsRequest) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
-func (m *SearchOffshoreTripsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOffshoreTripsRequest.Merge(m, src)
+func (m *SearchTripsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTripsRequest.Merge(m, src)
 }
-func (m *SearchOffshoreTripsRequest) XXX_Size() int {
+func (m *SearchTripsRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchOffshoreTripsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOffshoreTripsRequest.DiscardUnknown(m)
+func (m *SearchTripsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTripsRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchOffshoreTripsRequest proto.InternalMessageInfo
+var xxx_messageInfo_SearchTripsRequest proto.InternalMessageInfo
 
-func (m *SearchOffshoreTripsRequest) GetSearchOffshoreTrips() *SearchOffshoreTrips {
+func (m *SearchTripsRequest) GetSearchTripsOptions() *SearchTripsOptions {
 	if m != nil {
-		return m.SearchOffshoreTrips
+		return m.SearchTripsOptions
 	}
 	return nil
 }
 
-func (m *SearchOffshoreTripsRequest) GetLimit() uint64 {
+func (m *SearchTripsRequest) GetLimit() uint64 {
 	if m != nil {
 		return m.Limit
 	}
 	return 0
 }
 
-func (m *SearchOffshoreTripsRequest) GetOffset() uint64 {
+func (m *SearchTripsRequest) GetOffset() uint64 {
 	if m != nil {
 		return m.Offset
 	}
 	return 0
 }
 
-type SearchOnshoreTripsResponse struct {
-	Trip         *SearchOnshoreTripsResponse_Trip         `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
-	TripTemplate *SearchOnshoreTripsResponse_TripTemplate `protobuf:"bytes,2,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+type SearchTripsResponse struct {
+	Trip *SearchTripsResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
 }
 
-func (m *SearchOnshoreTripsResponse) Reset()      { *m = SearchOnshoreTripsResponse{} }
-func (*SearchOnshoreTripsResponse) ProtoMessage() {}
-func (*SearchOnshoreTripsResponse) Descriptor() ([]byte, []int) {
+func (m *SearchTripsResponse) Reset()      { *m = SearchTripsResponse{} }
+func (*SearchTripsResponse) ProtoMessage() {}
+func (*SearchTripsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_614a4be5fd9deed0, []int{36}
 }
-func (m *SearchOnshoreTripsResponse) XXX_Unmarshal(b []byte) error {
+func (m *SearchTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchOnshoreTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SearchTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchOnshoreTripsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_SearchTripsResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -3033,56 +3219,50 @@ func (m *SearchOnshoreTripsResponse) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
-func (m *SearchOnshoreTripsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOnshoreTripsResponse.Merge(m, src)
+func (m *SearchTripsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTripsResponse.Merge(m, src)
 }
-func (m *SearchOnshoreTripsResponse) XXX_Size() int {
+func (m *SearchTripsResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchOnshoreTripsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOnshoreTripsResponse.DiscardUnknown(m)
+func (m *SearchTripsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTripsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchOnshoreTripsResponse proto.InternalMessageInfo
+var xxx_messageInfo_SearchTripsResponse proto.InternalMessageInfo
 
-func (m *SearchOnshoreTripsResponse) GetTrip() *SearchOnshoreTripsResponse_Trip {
+func (m *SearchTripsResponse) GetTrip() *SearchTripsResponse_Trip {
 	if m != nil {
 		return m.Trip
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse) GetTripTemplate() *SearchOnshoreTripsResponse_TripTemplate {
-	if m != nil {
-		return m.TripTemplate
-	}
-	return nil
+type SearchTripsResponse_Trip struct {
+	Id                  uint64                            `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TripTemplateId      uint64                            `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
+	MaxGuest            uint32                            `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
+	Price               float32                           `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
+	DiveMasters         []*DiveMaster                     `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
+	FromDate            *time.Time                        `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
+	ToDate              *time.Time                        `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
+	LastReservationDate *time.Time                        `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
+	CreatedAt           *time.Time                        `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt           *time.Time                        `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+	TripTemplate        *SearchTripsResponse_TripTemplate `protobuf:"bytes,110,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
 }
 
-type SearchOnshoreTripsResponse_Trip struct {
-	Id                  uint64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripTemplateId      uint64        `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
-	MaxGuest            uint32        `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price               float32       `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
-	DiveMasters         []*DiveMaster `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
-	FromDate            *time.Time    `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
-	ToDate              *time.Time    `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
-	LastReservationDate *time.Time    `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-	CreatedAt           *time.Time    `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt           *time.Time    `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *SearchOnshoreTripsResponse_Trip) Reset()      { *m = SearchOnshoreTripsResponse_Trip{} }
-func (*SearchOnshoreTripsResponse_Trip) ProtoMessage() {}
-func (*SearchOnshoreTripsResponse_Trip) Descriptor() ([]byte, []int) {
+func (m *SearchTripsResponse_Trip) Reset()      { *m = SearchTripsResponse_Trip{} }
+func (*SearchTripsResponse_Trip) ProtoMessage() {}
+func (*SearchTripsResponse_Trip) Descriptor() ([]byte, []int) {
 	return fileDescriptor_614a4be5fd9deed0, []int{36, 0}
 }
-func (m *SearchOnshoreTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
+func (m *SearchTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchOnshoreTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SearchTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchOnshoreTripsResponse_Trip.Marshal(b, m, deterministic)
+		return xxx_messageInfo_SearchTripsResponse_Trip.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -3092,364 +3272,96 @@ func (m *SearchOnshoreTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *SearchOnshoreTripsResponse_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOnshoreTripsResponse_Trip.Merge(m, src)
+func (m *SearchTripsResponse_Trip) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTripsResponse_Trip.Merge(m, src)
 }
-func (m *SearchOnshoreTripsResponse_Trip) XXX_Size() int {
+func (m *SearchTripsResponse_Trip) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchOnshoreTripsResponse_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOnshoreTripsResponse_Trip.DiscardUnknown(m)
+func (m *SearchTripsResponse_Trip) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTripsResponse_Trip.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchOnshoreTripsResponse_Trip proto.InternalMessageInfo
+var xxx_messageInfo_SearchTripsResponse_Trip proto.InternalMessageInfo
 
-func (m *SearchOnshoreTripsResponse_Trip) GetId() uint64 {
+func (m *SearchTripsResponse_Trip) GetId() uint64 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetTripTemplateId() uint64 {
+func (m *SearchTripsResponse_Trip) GetTripTemplateId() uint64 {
 	if m != nil {
 		return m.TripTemplateId
 	}
 	return 0
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetMaxGuest() uint32 {
+func (m *SearchTripsResponse_Trip) GetMaxGuest() uint32 {
 	if m != nil {
 		return m.MaxGuest
 	}
 	return 0
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetPrice() float32 {
+func (m *SearchTripsResponse_Trip) GetPrice() float32 {
 	if m != nil {
 		return m.Price
 	}
 	return 0
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetDiveMasters() []*DiveMaster {
+func (m *SearchTripsResponse_Trip) GetDiveMasters() []*DiveMaster {
 	if m != nil {
 		return m.DiveMasters
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetFromDate() *time.Time {
+func (m *SearchTripsResponse_Trip) GetFromDate() *time.Time {
 	if m != nil {
 		return m.FromDate
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetToDate() *time.Time {
+func (m *SearchTripsResponse_Trip) GetToDate() *time.Time {
 	if m != nil {
 		return m.ToDate
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetLastReservationDate() *time.Time {
+func (m *SearchTripsResponse_Trip) GetLastReservationDate() *time.Time {
 	if m != nil {
 		return m.LastReservationDate
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetCreatedAt() *time.Time {
+func (m *SearchTripsResponse_Trip) GetCreatedAt() *time.Time {
 	if m != nil {
 		return m.CreatedAt
 	}
 	return nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) GetUpdatedAt() *time.Time {
+func (m *SearchTripsResponse_Trip) GetUpdatedAt() *time.Time {
 	if m != nil {
 		return m.UpdatedAt
 	}
 	return nil
 }
 
-type SearchOnshoreTripsResponse_TripTemplate struct {
-	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
-	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
-	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
-	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
-	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
-	CreatedAt    *time.Time `protobuf:"bytes,80,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt    *time.Time `protobuf:"bytes,90,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) Reset() {
-	*m = SearchOnshoreTripsResponse_TripTemplate{}
-}
-func (*SearchOnshoreTripsResponse_TripTemplate) ProtoMessage() {}
-func (*SearchOnshoreTripsResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{36, 1}
-}
-func (m *SearchOnshoreTripsResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SearchOnshoreTripsResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SearchOnshoreTripsResponse_TripTemplate.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SearchOnshoreTripsResponse_TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOnshoreTripsResponse_TripTemplate.Merge(m, src)
-}
-func (m *SearchOnshoreTripsResponse_TripTemplate) XXX_Size() int {
-	return m.Size()
-}
-func (m *SearchOnshoreTripsResponse_TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOnshoreTripsResponse_TripTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SearchOnshoreTripsResponse_TripTemplate proto.InternalMessageInfo
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetTripType() TripType {
-	if m != nil {
-		return m.TripType
-	}
-	return ONSHORE
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetHotelId() uint64 {
-	if m != nil {
-		return m.HotelId
-	}
-	return 0
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetBoatId() uint64 {
-	if m != nil {
-		return m.BoatId
-	}
-	return 0
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetLiveaboardId() uint64 {
-	if m != nil {
-		return m.LiveaboardId
-	}
-	return 0
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *SearchOnshoreTripsResponse_TripTemplate) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return nil
-}
-
-type SearchOffshoreTripsResponse struct {
-	Trip         *SearchOffshoreTripsResponse_Trip         `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
-	TripTemplate *SearchOffshoreTripsResponse_TripTemplate `protobuf:"bytes,2,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
-}
-
-func (m *SearchOffshoreTripsResponse) Reset()      { *m = SearchOffshoreTripsResponse{} }
-func (*SearchOffshoreTripsResponse) ProtoMessage() {}
-func (*SearchOffshoreTripsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{37}
-}
-func (m *SearchOffshoreTripsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SearchOffshoreTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SearchOffshoreTripsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SearchOffshoreTripsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOffshoreTripsResponse.Merge(m, src)
-}
-func (m *SearchOffshoreTripsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *SearchOffshoreTripsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOffshoreTripsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SearchOffshoreTripsResponse proto.InternalMessageInfo
-
-func (m *SearchOffshoreTripsResponse) GetTrip() *SearchOffshoreTripsResponse_Trip {
-	if m != nil {
-		return m.Trip
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTripsResponse) GetTripTemplate() *SearchOffshoreTripsResponse_TripTemplate {
+func (m *SearchTripsResponse_Trip) GetTripTemplate() *SearchTripsResponse_TripTemplate {
 	if m != nil {
 		return m.TripTemplate
 	}
 	return nil
 }
 
-type SearchOffshoreTripsResponse_Trip struct {
-	Id                  uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripTemplateId      uint64     `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
-	MaxGuest            uint32     `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price               float32    `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
-	FromDate            *time.Time `protobuf:"bytes,50,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
-	ToDate              *time.Time `protobuf:"bytes,60,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
-	LastReservationDate *time.Time `protobuf:"bytes,70,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-	CreatedAt           *time.Time `protobuf:"bytes,80,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt           *time.Time `protobuf:"bytes,90,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) Reset()      { *m = SearchOffshoreTripsResponse_Trip{} }
-func (*SearchOffshoreTripsResponse_Trip) ProtoMessage() {}
-func (*SearchOffshoreTripsResponse_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{37, 0}
-}
-func (m *SearchOffshoreTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *SearchOffshoreTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SearchOffshoreTripsResponse_Trip.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *SearchOffshoreTripsResponse_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOffshoreTripsResponse_Trip.Merge(m, src)
-}
-func (m *SearchOffshoreTripsResponse_Trip) XXX_Size() int {
-	return m.Size()
-}
-func (m *SearchOffshoreTripsResponse_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOffshoreTripsResponse_Trip.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_SearchOffshoreTripsResponse_Trip proto.InternalMessageInfo
-
-func (m *SearchOffshoreTripsResponse_Trip) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetTripTemplateId() uint64 {
-	if m != nil {
-		return m.TripTemplateId
-	}
-	return 0
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetMaxGuest() uint32 {
-	if m != nil {
-		return m.MaxGuest
-	}
-	return 0
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetFromDate() *time.Time {
-	if m != nil {
-		return m.FromDate
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetToDate() *time.Time {
-	if m != nil {
-		return m.ToDate
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetLastReservationDate() *time.Time {
-	if m != nil {
-		return m.LastReservationDate
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *SearchOffshoreTripsResponse_Trip) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return nil
-}
-
-type SearchOffshoreTripsResponse_TripTemplate struct {
+type SearchTripsResponse_TripTemplate struct {
 	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
 	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
@@ -3458,23 +3370,22 @@ type SearchOffshoreTripsResponse_TripTemplate struct {
 	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
 	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
 	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
-	CreatedAt    *time.Time `protobuf:"bytes,80,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt    *time.Time `protobuf:"bytes,90,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
+	Address      *Address   `protobuf:"bytes,80,opt,name=address,proto3" json:"address,omitempty"`
+	CreatedAt    *time.Time `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	UpdatedAt    *time.Time `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) Reset() {
-	*m = SearchOffshoreTripsResponse_TripTemplate{}
+func (m *SearchTripsResponse_TripTemplate) Reset()      { *m = SearchTripsResponse_TripTemplate{} }
+func (*SearchTripsResponse_TripTemplate) ProtoMessage() {}
+func (*SearchTripsResponse_TripTemplate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{36, 1}
 }
-func (*SearchOffshoreTripsResponse_TripTemplate) ProtoMessage() {}
-func (*SearchOffshoreTripsResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{37, 1}
-}
-func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
+func (m *SearchTripsResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SearchTripsResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchOffshoreTripsResponse_TripTemplate.Marshal(b, m, deterministic)
+		return xxx_messageInfo_SearchTripsResponse_TripTemplate.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -3484,82 +3395,89 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_Marshal(b []byte, determi
 		return b[:n], nil
 	}
 }
-func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchOffshoreTripsResponse_TripTemplate.Merge(m, src)
+func (m *SearchTripsResponse_TripTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTripsResponse_TripTemplate.Merge(m, src)
 }
-func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_Size() int {
+func (m *SearchTripsResponse_TripTemplate) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchOffshoreTripsResponse_TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchOffshoreTripsResponse_TripTemplate.DiscardUnknown(m)
+func (m *SearchTripsResponse_TripTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTripsResponse_TripTemplate.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchOffshoreTripsResponse_TripTemplate proto.InternalMessageInfo
+var xxx_messageInfo_SearchTripsResponse_TripTemplate proto.InternalMessageInfo
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetId() uint64 {
+func (m *SearchTripsResponse_TripTemplate) GetId() uint64 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetName() string {
+func (m *SearchTripsResponse_TripTemplate) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetDescription() string {
+func (m *SearchTripsResponse_TripTemplate) GetDescription() string {
 	if m != nil {
 		return m.Description
 	}
 	return ""
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetTripType() TripType {
+func (m *SearchTripsResponse_TripTemplate) GetTripType() TripType {
 	if m != nil {
 		return m.TripType
 	}
 	return ONSHORE
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetHotelId() uint64 {
+func (m *SearchTripsResponse_TripTemplate) GetHotelId() uint64 {
 	if m != nil {
 		return m.HotelId
 	}
 	return 0
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetBoatId() uint64 {
+func (m *SearchTripsResponse_TripTemplate) GetBoatId() uint64 {
 	if m != nil {
 		return m.BoatId
 	}
 	return 0
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetLiveaboardId() uint64 {
+func (m *SearchTripsResponse_TripTemplate) GetLiveaboardId() uint64 {
 	if m != nil {
 		return m.LiveaboardId
 	}
 	return 0
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetImages() []*File {
+func (m *SearchTripsResponse_TripTemplate) GetImages() []*File {
 	if m != nil {
 		return m.Images
 	}
 	return nil
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetCreatedAt() *time.Time {
+func (m *SearchTripsResponse_TripTemplate) GetAddress() *Address {
+	if m != nil {
+		return m.Address
+	}
+	return nil
+}
+
+func (m *SearchTripsResponse_TripTemplate) GetCreatedAt() *time.Time {
 	if m != nil {
 		return m.CreatedAt
 	}
 	return nil
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) GetUpdatedAt() *time.Time {
+func (m *SearchTripsResponse_TripTemplate) GetUpdatedAt() *time.Time {
 	if m != nil {
 		return m.UpdatedAt
 	}
@@ -3606,173 +3524,171 @@ func init() {
 	proto.RegisterType((*ListTripsRequest)(nil), "agency.ListTripsRequest")
 	proto.RegisterType((*ListTripsResponse)(nil), "agency.ListTripsResponse")
 	proto.RegisterType((*ListTripsResponse_Trip)(nil), "agency.ListTripsResponse.Trip")
-	proto.RegisterType((*SearchOnshoreTrips)(nil), "agency.SearchOnshoreTrips")
-	proto.RegisterType((*SearchOnshoreTripsRequest)(nil), "agency.SearchOnshoreTripsRequest")
-	proto.RegisterType((*SearchOffshoreTrips)(nil), "agency.SearchOffshoreTrips")
-	proto.RegisterType((*SearchOffshoreTripsRequest)(nil), "agency.SearchOffshoreTripsRequest")
-	proto.RegisterType((*SearchOnshoreTripsResponse)(nil), "agency.SearchOnshoreTripsResponse")
-	proto.RegisterType((*SearchOnshoreTripsResponse_Trip)(nil), "agency.SearchOnshoreTripsResponse.Trip")
-	proto.RegisterType((*SearchOnshoreTripsResponse_TripTemplate)(nil), "agency.SearchOnshoreTripsResponse.TripTemplate")
-	proto.RegisterType((*SearchOffshoreTripsResponse)(nil), "agency.SearchOffshoreTripsResponse")
-	proto.RegisterType((*SearchOffshoreTripsResponse_Trip)(nil), "agency.SearchOffshoreTripsResponse.Trip")
-	proto.RegisterType((*SearchOffshoreTripsResponse_TripTemplate)(nil), "agency.SearchOffshoreTripsResponse.TripTemplate")
+	proto.RegisterType((*ListTripsWithTemplatesRequest)(nil), "agency.ListTripsWithTemplatesRequest")
+	proto.RegisterType((*ListTripsWithTemplatesResponse)(nil), "agency.ListTripsWithTemplatesResponse")
+	proto.RegisterType((*ListTripsWithTemplatesResponse_Trip)(nil), "agency.ListTripsWithTemplatesResponse.Trip")
+	proto.RegisterType((*ListTripsWithTemplatesResponse_TripTemplate)(nil), "agency.ListTripsWithTemplatesResponse.TripTemplate")
+	proto.RegisterType((*SearchTripsOptions)(nil), "agency.SearchTripsOptions")
+	proto.RegisterType((*SearchTripsRequest)(nil), "agency.SearchTripsRequest")
+	proto.RegisterType((*SearchTripsResponse)(nil), "agency.SearchTripsResponse")
+	proto.RegisterType((*SearchTripsResponse_Trip)(nil), "agency.SearchTripsResponse.Trip")
+	proto.RegisterType((*SearchTripsResponse_TripTemplate)(nil), "agency.SearchTripsResponse.TripTemplate")
 }
 
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 2410 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xcd, 0x8f, 0x1b, 0x49,
-	0x15, 0x77, 0xb7, 0x3d, 0xfe, 0x78, 0x1e, 0x7b, 0x92, 0x5a, 0xef, 0xc4, 0x71, 0xa0, 0x33, 0xe9,
-	0x68, 0x17, 0xef, 0xb2, 0xeb, 0x19, 0x39, 0xbb, 0x91, 0xc2, 0x0e, 0x5a, 0x3c, 0x9b, 0x4c, 0x66,
-	0xb2, 0x09, 0x44, 0x9d, 0x41, 0x42, 0x91, 0x90, 0xe9, 0x71, 0x97, 0x3d, 0x2d, 0xdc, 0xdd, 0xde,
-	0xee, 0x9a, 0x21, 0x73, 0x43, 0xdc, 0xe0, 0xb2, 0xb9, 0x80, 0xb4, 0x12, 0x27, 0x24, 0x24, 0x2e,
-	0x9c, 0xb8, 0x21, 0xed, 0x09, 0x81, 0xd0, 0x9e, 0x72, 0x5c, 0x4e, 0x90, 0xc9, 0x05, 0x89, 0x3d,
-	0xec, 0x1f, 0x00, 0x02, 0xd5, 0x47, 0xbb, 0xab, 0xed, 0xf6, 0x47, 0x3c, 0x83, 0x88, 0x50, 0x6e,
-	0xae, 0xaa, 0xf7, 0x5e, 0xbf, 0x7a, 0x1f, 0xbf, 0x7a, 0xf5, 0xca, 0xb0, 0x6c, 0xf6, 0xb0, 0xdb,
-	0x39, 0x6e, 0x0c, 0x7c, 0x8f, 0x78, 0x28, 0xcb, 0x47, 0xb5, 0xa2, 0xe3, 0x59, 0xb8, 0xcf, 0x27,
-	0x6b, 0x97, 0x7a, 0x9e, 0xd7, 0xeb, 0xe3, 0x75, 0x36, 0xda, 0x3f, 0xec, 0xae, 0x63, 0x67, 0x40,
-	0x04, 0x47, 0xed, 0xf2, 0xe8, 0x22, 0xb1, 0x1d, 0x1c, 0x10, 0xd3, 0x19, 0x08, 0x82, 0xb7, 0x7b,
-	0x36, 0x39, 0x38, 0xdc, 0x6f, 0x74, 0x3c, 0x67, 0xbd, 0xe7, 0xf5, 0xbc, 0x88, 0x92, 0x8e, 0xd8,
-	0x80, 0xfd, 0xe2, 0xe4, 0xfa, 0x67, 0x0a, 0xc0, 0x4d, 0xfb, 0x08, 0xdf, 0x33, 0x03, 0x82, 0x7d,
-	0xf4, 0x55, 0x80, 0xae, 0xed, 0x07, 0xa4, 0xed, 0x9a, 0x0e, 0xae, 0x2a, 0x6b, 0x4a, 0xbd, 0x60,
-	0x14, 0xd8, 0xcc, 0xb7, 0x4d, 0x07, 0xa3, 0x4b, 0x50, 0xe8, 0x9b, 0xe1, 0xaa, 0xca, 0x56, 0xf3,
-	0x74, 0x82, 0x2d, 0xbe, 0x0e, 0x4b, 0x7d, 0x7c, 0x84, 0xfb, 0xd5, 0xf4, 0x9a, 0x52, 0x2f, 0x37,
-	0xcf, 0x35, 0xf8, 0xa6, 0xee, 0xd2, 0xb9, 0xbd, 0xe3, 0x01, 0x36, 0xf8, 0x32, 0x7a, 0x0b, 0x8a,
-	0x5d, 0xdf, 0x73, 0x49, 0xdb, 0x76, 0xcc, 0x1e, 0xae, 0x66, 0xd6, 0x94, 0x7a, 0xb1, 0x59, 0x14,
-	0xd4, 0xdb, 0x76, 0x1f, 0x1b, 0xc0, 0xd6, 0x77, 0xe9, 0x32, 0x7a, 0x13, 0x60, 0xdf, 0xec, 0xfc,
-	0x50, 0x10, 0x2f, 0x8d, 0x13, 0x17, 0xe8, 0x32, 0xa3, 0xd5, 0xbf, 0x07, 0xb5, 0x68, 0x2f, 0xdb,
-	0x54, 0xeb, 0x96, 0x6b, 0xdd, 0x0d, 0xf5, 0x3b, 0xc5, 0xde, 0xf4, 0x9f, 0x29, 0xb0, 0xf4, 0x80,
-	0x98, 0xdd, 0xee, 0xa9, 0x2c, 0x54, 0x83, 0xfc, 0xc0, 0x0b, 0x6c, 0x62, 0x7b, 0x2e, 0x33, 0x52,
-	0xc1, 0x18, 0x8e, 0xd1, 0x1b, 0x90, 0xed, 0x61, 0xd7, 0xc2, 0x3e, 0x33, 0x48, 0xb9, 0x79, 0x5e,
-	0xec, 0xf1, 0x36, 0x9b, 0x64, 0xf6, 0x13, 0x04, 0xfa, 0xc7, 0x2a, 0xf3, 0x99, 0xed, 0xf6, 0xb6,
-	0x3c, 0x93, 0x20, 0x04, 0x19, 0x49, 0x17, 0xf6, 0x9b, 0xda, 0x78, 0xdf, 0x33, 0x85, 0x89, 0x83,
-	0xaa, 0xba, 0x96, 0x1e, 0xb3, 0x31, 0x5d, 0x67, 0x66, 0x0b, 0xd0, 0x1a, 0x14, 0x2d, 0x1c, 0x74,
-	0x7c, 0x7b, 0x20, 0xa9, 0x26, 0x4f, 0xa1, 0xd7, 0xa0, 0x4c, 0x3c, 0x62, 0xf6, 0xdb, 0x1d, 0x73,
-	0x60, 0x76, 0x6c, 0x72, 0xcc, 0xb4, 0x2c, 0x19, 0x25, 0x36, 0xfb, 0x81, 0x98, 0xa4, 0x64, 0x96,
-	0x7d, 0x84, 0xfd, 0x88, 0x6c, 0x89, 0x93, 0xb1, 0x59, 0x99, 0x2c, 0xa0, 0xc6, 0x8c, 0xc8, 0xb2,
-	0x9c, 0x8c, 0xcd, 0x0e, 0xc9, 0xea, 0x90, 0x33, 0x2d, 0xcb, 0xc7, 0x41, 0x50, 0xcd, 0x31, 0xbf,
-	0x97, 0xc5, 0x06, 0x5a, 0x7c, 0xd6, 0x08, 0x97, 0xf5, 0xf7, 0x21, 0xd7, 0x72, 0xb0, 0x4b, 0x99,
-	0x92, 0xac, 0x31, 0xb2, 0x3f, 0x75, 0x6c, 0x7f, 0xfa, 0x17, 0x0a, 0xe4, 0x0d, 0xcf, 0x73, 0xa8,
-	0x9d, 0x17, 0x13, 0x41, 0x3d, 0xef, 0x98, 0x8f, 0xda, 0xbd, 0x43, 0x1c, 0x10, 0x66, 0xc2, 0x92,
-	0x91, 0x77, 0xcc, 0x47, 0xb7, 0xe9, 0x18, 0x55, 0x60, 0x69, 0xe0, 0xdb, 0x1d, 0x1e, 0xed, 0xaa,
-	0xc1, 0x07, 0xd4, 0x4b, 0xbe, 0xe7, 0x39, 0xa1, 0x97, 0x96, 0x12, 0xbc, 0x44, 0xd7, 0x85, 0x97,
-	0xde, 0x86, 0x82, 0xc9, 0x36, 0x69, 0xe3, 0xa0, 0x9a, 0x65, 0xb4, 0x2b, 0x0d, 0x01, 0x27, 0x62,
-	0xf7, 0x46, 0x44, 0x41, 0x83, 0xed, 0xa3, 0x43, 0xd3, 0x25, 0xd4, 0xbc, 0x39, 0xae, 0x4e, 0x38,
-	0xd6, 0x6f, 0x42, 0x79, 0xc7, 0x23, 0xb8, 0xdf, 0x72, 0x2d, 0x1a, 0x42, 0xbb, 0x16, 0xba, 0x08,
-	0xf9, 0x03, 0x3a, 0xd3, 0xb6, 0x2d, 0xb6, 0xef, 0x8c, 0x91, 0x63, 0xe3, 0x5d, 0x0b, 0x5d, 0x80,
-	0x1c, 0x8f, 0x25, 0x8b, 0x6d, 0x3b, 0x63, 0x64, 0x59, 0xe8, 0x58, 0xfa, 0xa7, 0x2a, 0x2c, 0xef,
-	0xf9, 0xf6, 0x60, 0x0f, 0x3b, 0x83, 0xbe, 0x49, 0x16, 0x35, 0xdc, 0x55, 0xc8, 0x4e, 0x36, 0x80,
-	0x58, 0x42, 0x6f, 0x41, 0x81, 0xf8, 0xf6, 0xa0, 0x4d, 0x8e, 0x07, 0x98, 0x45, 0x4b, 0xb9, 0xb9,
-	0x22, 0xe8, 0x98, 0x0a, 0x34, 0x3f, 0xf2, 0x44, 0xfc, 0x42, 0x1f, 0xc0, 0x79, 0xbe, 0x1b, 0xd3,
-	0xb5, 0xda, 0xa1, 0xf2, 0x79, 0x16, 0x43, 0xab, 0xa1, 0xc9, 0xe2, 0x06, 0xd8, 0x49, 0x19, 0xe5,
-	0x83, 0xb8, 0x49, 0x5e, 0x83, 0x52, 0xdf, 0x3e, 0xc2, 0xe6, 0xbe, 0x67, 0xfa, 0x16, 0x15, 0x50,
-	0xa0, 0xbb, 0xdf, 0x49, 0x19, 0xcb, 0xd1, 0xf4, 0xae, 0x25, 0x47, 0x69, 0x65, 0x6a, 0x94, 0x6e,
-	0x95, 0x61, 0xd9, 0xc7, 0x81, 0x6d, 0x61, 0xb7, 0x83, 0xdb, 0xb6, 0xa5, 0xff, 0x5a, 0x85, 0x0c,
-	0x55, 0x1e, 0xbd, 0x03, 0x99, 0xae, 0xef, 0x39, 0xcc, 0x6e, 0xc5, 0x66, 0xad, 0xc1, 0x31, 0xbe,
-	0x11, 0x22, 0x77, 0x63, 0x2f, 0xc4, 0xf8, 0xad, 0xcc, 0xe3, 0xbf, 0x5e, 0x56, 0x0c, 0x46, 0x8d,
-	0x36, 0x40, 0x25, 0x1e, 0x33, 0xe8, 0x3c, 0x3c, 0x2a, 0xf1, 0xd0, 0x15, 0x58, 0xa6, 0x21, 0x3a,
-	0xcc, 0x3a, 0x1e, 0xa5, 0x45, 0xc7, 0x7c, 0x34, 0xcc, 0xb9, 0xe4, 0x40, 0x7d, 0x1d, 0x56, 0x68,
-	0x06, 0xb7, 0x1d, 0x86, 0xac, 0x6d, 0xdb, 0xe2, 0xbe, 0xca, 0xf0, 0xc4, 0xe6, 0x78, 0xbb, 0x6b,
-	0x05, 0x68, 0x0f, 0x5e, 0x65, 0xe8, 0xe7, 0xe3, 0x00, 0xfb, 0x47, 0x26, 0x75, 0x6f, 0xdb, 0x32,
-	0x09, 0xf7, 0xd8, 0x3c, 0x5a, 0xbe, 0x42, 0xd9, 0x8d, 0x88, 0xfb, 0xa6, 0x49, 0xb0, 0xfe, 0x2f,
-	0x05, 0x96, 0x98, 0xb7, 0x28, 0xf8, 0x72, 0xbf, 0xca, 0xe0, 0xcb, 0x66, 0x18, 0xbe, 0x22, 0xc8,
-	0x04, 0xc4, 0xf4, 0x99, 0x4d, 0x4a, 0x06, 0xfb, 0x2d, 0x45, 0x57, 0x66, 0x72, 0x74, 0xad, 0x03,
-	0x4b, 0x34, 0x16, 0x5d, 0x61, 0x18, 0x9e, 0x0b, 0x03, 0x25, 0xc4, 0x05, 0xa3, 0xe0, 0x8b, 0x5f,
-	0x01, 0xfa, 0x7a, 0x18, 0x60, 0x72, 0x6c, 0x67, 0x99, 0x3e, 0xe7, 0xd8, 0xc2, 0x4d, 0x29, 0xc0,
-	0xa9, 0x4d, 0x0f, 0x3c, 0x17, 0xb3, 0x34, 0x2c, 0x18, 0x7c, 0x20, 0xc7, 0x4d, 0x7e, 0x3a, 0xba,
-	0xfd, 0x45, 0x05, 0xb8, 0x3b, 0x0c, 0xb9, 0x05, 0xb3, 0x6c, 0x15, 0xb2, 0x7d, 0xec, 0xf6, 0xc8,
-	0x81, 0xf0, 0xba, 0x18, 0x51, 0xe5, 0x7e, 0x64, 0x5b, 0xe4, 0x40, 0x00, 0x3a, 0x1f, 0x48, 0x56,
-	0xcb, 0xce, 0x6b, 0xb5, 0xdc, 0x6c, 0xab, 0x8d, 0x9f, 0x22, 0xf9, 0xa4, 0x53, 0xe4, 0x32, 0x14,
-	0xf9, 0x29, 0x42, 0x39, 0x03, 0x96, 0x76, 0x25, 0x03, 0xd8, 0x14, 0x95, 0x1a, 0x50, 0x02, 0x7e,
-	0x7e, 0x70, 0x02, 0xe0, 0x04, 0x6c, 0x8a, 0x13, 0x48, 0xb6, 0x2d, 0x4e, 0xb7, 0xed, 0x87, 0x50,
-	0x69, 0x59, 0x56, 0x54, 0x35, 0x18, 0xf8, 0x23, 0x06, 0xd8, 0xd7, 0xb8, 0x0e, 0x22, 0xe2, 0x45,
-	0x66, 0xa2, 0x70, 0x73, 0x12, 0x3d, 0x44, 0x19, 0xa0, 0x5f, 0x87, 0x95, 0x96, 0x65, 0xb1, 0x3a,
-	0x21, 0x94, 0x73, 0x15, 0x96, 0x98, 0x5e, 0x42, 0x42, 0x29, 0x94, 0xc0, 0x89, 0xf8, 0x9a, 0x3e,
-	0x80, 0xd5, 0x96, 0x65, 0xc9, 0x50, 0x1a, 0xb2, 0xdf, 0x80, 0x12, 0x87, 0x3d, 0x31, 0x2f, 0xc4,
-	0x54, 0x42, 0x31, 0x31, 0x9e, 0x65, 0x22, 0x83, 0xf1, 0x25, 0x28, 0x70, 0xa2, 0x08, 0xb8, 0xf3,
-	0x7c, 0x62, 0xd7, 0xd2, 0x1d, 0x28, 0x8b, 0x2f, 0x86, 0x5f, 0x5a, 0x83, 0x0c, 0x65, 0x17, 0x1f,
-	0x58, 0x96, 0x3f, 0x60, 0xb0, 0x95, 0x71, 0x5d, 0xd4, 0x79, 0x75, 0x89, 0xac, 0x2c, 0x6a, 0x96,
-	0xb8, 0x95, 0x6d, 0xb7, 0xc7, 0x40, 0x3a, 0xc1, 0xca, 0x21, 0x3d, 0x58, 0xc3, 0xdf, 0xc2, 0xca,
-	0x0c, 0x10, 0x24, 0x2b, 0xb3, 0xac, 0x1b, 0xb5, 0x32, 0x27, 0xe2, 0x6b, 0xfa, 0x1d, 0xa6, 0x44,
-	0x94, 0x48, 0x21, 0x73, 0x13, 0x20, 0x02, 0xf4, 0x51, 0x1d, 0x24, 0x72, 0x89, 0x4a, 0xff, 0x16,
-	0x9c, 0xbb, 0x6b, 0x07, 0x84, 0xea, 0x13, 0x84, 0x72, 0x2a, 0xb0, 0xd4, 0xb7, 0x1d, 0x9b, 0x88,
-	0xf3, 0x93, 0x0f, 0x68, 0xde, 0x79, 0xdd, 0x6e, 0x80, 0x49, 0x78, 0x78, 0xf2, 0x91, 0xfe, 0x38,
-	0x0d, 0xe7, 0x25, 0x11, 0xc1, 0xc0, 0x73, 0x03, 0x8c, 0x9a, 0x90, 0x91, 0x2c, 0xa1, 0x45, 0x5a,
-	0x8c, 0x10, 0x36, 0x98, 0x55, 0x18, 0x6d, 0xed, 0x4f, 0x2a, 0x64, 0x58, 0x21, 0x58, 0x06, 0x75,
-	0x78, 0x7a, 0xab, 0x76, 0x04, 0x14, 0x20, 0x01, 0x45, 0x94, 0xd8, 0x95, 0xc9, 0x89, 0x3d, 0x9e,
-	0xa7, 0xaf, 0xce, 0x57, 0xed, 0xad, 0xce, 0x57, 0xed, 0x5d, 0x48, 0xaa, 0xf6, 0xde, 0x07, 0xe8,
-	0xf8, 0xd8, 0x24, 0xd8, 0x6a, 0x9b, 0xa4, 0xaa, 0xcd, 0x79, 0x60, 0x14, 0x04, 0x4f, 0x8b, 0x50,
-	0x01, 0x87, 0x03, 0x2b, 0x14, 0x50, 0x9f, 0x57, 0x80, 0xe0, 0x69, 0x11, 0x7d, 0x1b, 0x56, 0xa9,
-	0xa1, 0xa3, 0xe4, 0x5e, 0xd0, 0xb5, 0xbf, 0x48, 0xc3, 0x85, 0x31, 0x41, 0xc2, 0xc1, 0x1f, 0x26,
-	0xe1, 0xca, 0x9b, 0xb2, 0x9f, 0x13, 0xb8, 0x26, 0xe0, 0x4d, 0xed, 0xb7, 0x6a, 0xec, 0xf2, 0x36,
-	0xea, 0xff, 0xf8, 0x55, 0x05, 0xa6, 0x5e, 0x55, 0x2a, 0x93, 0x2e, 0x73, 0xda, 0xf4, 0xcb, 0xdc,
-	0x1b, 0x50, 0xb0, 0xbc, 0xce, 0xa1, 0x83, 0x5d, 0x12, 0x54, 0xeb, 0xe3, 0x21, 0x15, 0xad, 0x8e,
-	0x38, 0xb8, 0x79, 0x5a, 0x07, 0x6f, 0x3e, 0xbf, 0x83, 0x5b, 0x3c, 0xe5, 0x18, 0x2a, 0x2c, 0xe8,
-	0xdb, 0x4f, 0xd2, 0x80, 0x64, 0x19, 0xc2, 0xad, 0xd7, 0xe3, 0x00, 0xb4, 0x26, 0x3b, 0x34, 0x4e,
-	0x1a, 0xc3, 0xa4, 0xda, 0x67, 0x6a, 0x58, 0xda, 0xcc, 0x93, 0xbc, 0x23, 0xa7, 0x7c, 0x65, 0xfc,
-	0x94, 0xaf, 0xb0, 0xe3, 0xc6, 0x0f, 0x98, 0xdb, 0x4a, 0x06, 0x1f, 0x44, 0x05, 0x48, 0x7d, 0x42,
-	0x01, 0xd2, 0x9c, 0x7a, 0x48, 0x4a, 0xa0, 0xb1, 0x39, 0x19, 0x34, 0xe2, 0xee, 0xdd, 0x3e, 0xad,
-	0x7b, 0xef, 0x2f, 0x9c, 0xbf, 0x11, 0x64, 0x2f, 0xe8, 0xe3, 0x5f, 0x65, 0x78, 0xfe, 0xc6, 0x04,
-	0x09, 0x47, 0xdf, 0x49, 0x38, 0x2c, 0x62, 0xe9, 0x9b, 0xc0, 0x34, 0xe1, 0x10, 0xa9, 0xfd, 0x3e,
-	0x1d, 0xab, 0xeb, 0xce, 0x26, 0x02, 0xa2, 0x3a, 0x4f, 0x63, 0x15, 0xfc, 0x58, 0x9d, 0x57, 0xe7,
-	0x85, 0xfd, 0x68, 0x9d, 0xd7, 0x7c, 0x9e, 0xe3, 0xe0, 0xda, 0x1c, 0x65, 0xdb, 0x3b, 0xb3, 0xca,
-	0xb6, 0x77, 0xa7, 0x95, 0x6d, 0xd7, 0xa7, 0x47, 0x64, 0x3c, 0xd8, 0x36, 0x4f, 0x1b, 0x6c, 0xdb,
-	0x0b, 0x63, 0x09, 0xab, 0xe3, 0x16, 0x8c, 0xb3, 0x7f, 0xa8, 0x1c, 0x4b, 0x42, 0x19, 0x11, 0x96,
-	0xc8, 0x25, 0x63, 0x0c, 0x4b, 0xe2, 0xa4, 0xb1, 0x2a, 0xb2, 0xf6, 0x4b, 0x35, 0xec, 0x51, 0x9d,
-	0xe5, 0x41, 0x20, 0xf7, 0xac, 0xb4, 0x89, 0x3d, 0xab, 0xfa, 0x8c, 0x9e, 0xd5, 0x0b, 0x00, 0xfe,
-	0x3b, 0x50, 0xa5, 0x16, 0x94, 0xab, 0xd4, 0x05, 0xfd, 0xf6, 0x45, 0x1a, 0x2e, 0x26, 0x88, 0x1a,
-	0x22, 0x44, 0x7e, 0xa4, 0x5a, 0x6f, 0xc8, 0x1e, 0x4c, 0x64, 0x8a, 0xd7, 0xce, 0x43, 0xfe, 0xda,
-	0x4f, 0xd2, 0x23, 0x1d, 0x96, 0xb3, 0xc1, 0x88, 0x58, 0x33, 0x45, 0x9b, 0xd5, 0x4c, 0x91, 0x5b,
-	0x43, 0xf5, 0x89, 0xad, 0xa1, 0xa6, 0xdc, 0x1a, 0x42, 0x57, 0x47, 0x7b, 0x27, 0x9b, 0x6c, 0x39,
-	0xde, 0x39, 0x89, 0xc0, 0x67, 0x7b, 0xde, 0x63, 0xe5, 0xfe, 0x69, 0x03, 0xe7, 0xe1, 0xf3, 0x07,
-	0x8e, 0xa8, 0xf5, 0xa9, 0x65, 0x16, 0x0c, 0x98, 0x8f, 0x33, 0x1c, 0x2c, 0x84, 0x88, 0xa8, 0xd6,
-	0x97, 0x6e, 0x5c, 0xda, 0x68, 0x90, 0xc4, 0x83, 0x83, 0xdf, 0xc1, 0x6a, 0x7f, 0x4c, 0x8b, 0x96,
-	0xd1, 0x68, 0x20, 0xd4, 0xe1, 0x5c, 0xec, 0x72, 0x46, 0x6d, 0x5e, 0x61, 0xab, 0x65, 0xf9, 0x26,
-	0xb6, 0x6b, 0xc5, 0xfb, 0x94, 0xda, 0xa4, 0x3e, 0x65, 0x5d, 0x6e, 0xff, 0x7c, 0x13, 0x0a, 0x5d,
-	0xdf, 0x73, 0x78, 0x2b, 0x67, 0xde, 0xdc, 0xcd, 0x53, 0x96, 0x9b, 0x34, 0x68, 0x6f, 0x40, 0x8e,
-	0x78, 0x9c, 0x79, 0xde, 0xbc, 0xcd, 0x12, 0x8f, 0xb1, 0x4e, 0x6c, 0x28, 0x6d, 0x9f, 0xa2, 0xa1,
-	0xf4, 0x02, 0xc4, 0xd4, 0x4f, 0x55, 0x40, 0x0f, 0xb0, 0xe9, 0x77, 0x0e, 0xbe, 0xe3, 0x06, 0x07,
-	0x9e, 0x8f, 0x99, 0xc7, 0x51, 0x0d, 0x72, 0x1d, 0xef, 0xd0, 0x25, 0xfe, 0x31, 0xef, 0xee, 0xec,
-	0xa4, 0x8c, 0x70, 0x02, 0x55, 0x20, 0xc3, 0xce, 0x5e, 0x55, 0x2c, 0xb0, 0x11, 0xaa, 0x42, 0xd6,
-	0xc7, 0xbd, 0x61, 0xd7, 0x7e, 0x27, 0x65, 0x88, 0x31, 0x0d, 0x46, 0x76, 0xf6, 0x86, 0xfd, 0x11,
-	0x31, 0xa2, 0xba, 0xd3, 0xaa, 0x90, 0x70, 0x3b, 0x56, 0xe6, 0xd5, 0x9d, 0xf1, 0x30, 0xeb, 0xbd,
-	0x07, 0x79, 0xec, 0x5a, 0x9c, 0x7d, 0xde, 0x6b, 0x5a, 0x0e, 0xbb, 0x16, 0x65, 0xde, 0x3a, 0x0f,
-	0x2b, 0x7d, 0xaf, 0xc3, 0x1d, 0xd9, 0xb5, 0xfb, 0x04, 0xfb, 0xfa, 0xcf, 0x15, 0xb8, 0x38, 0x6e,
-	0x8b, 0x30, 0xd3, 0xee, 0x00, 0x0a, 0xc6, 0x16, 0x87, 0x9d, 0xd2, 0xb0, 0x9b, 0x32, 0xce, 0x9e,
-	0xc0, 0x15, 0x65, 0xad, 0x9a, 0x9c, 0xb5, 0xe9, 0x58, 0xd6, 0x7e, 0xaa, 0xc0, 0x2b, 0x42, 0x70,
-	0xb7, 0xfb, 0x5f, 0x72, 0xd2, 0x6d, 0x76, 0x37, 0xf6, 0x89, 0xed, 0xf6, 0xda, 0x8e, 0xe7, 0x92,
-	0x03, 0xe6, 0xac, 0x79, 0x2c, 0x5a, 0x0a, 0xf9, 0xee, 0x51, 0xb6, 0x24, 0xbb, 0x7e, 0xa2, 0x40,
-	0x2d, 0x41, 0xff, 0xd0, 0xb0, 0xf7, 0xe0, 0x95, 0x60, 0x7c, 0x55, 0x58, 0xf6, 0xd2, 0x88, 0x65,
-	0x63, 0x02, 0x92, 0xf8, 0x9e, 0xd3, 0xb6, 0xbf, 0xcb, 0x0f, 0x75, 0x8b, 0xf9, 0x5c, 0x40, 0xe3,
-	0x7b, 0x31, 0x68, 0xfc, 0xda, 0x14, 0x37, 0x8f, 0x63, 0x24, 0xda, 0x4b, 0xee, 0x53, 0xad, 0xcf,
-	0x29, 0x25, 0xb9, 0x85, 0x55, 0xfb, 0xe7, 0xff, 0x04, 0x79, 0xdf, 0x85, 0x65, 0xa9, 0x5d, 0x10,
-	0x56, 0xe9, 0x49, 0x7d, 0xc8, 0x62, 0xd4, 0x17, 0x08, 0xe2, 0x80, 0xbd, 0x79, 0x1a, 0xc0, 0xde,
-	0x3e, 0x2b, 0xc0, 0xbe, 0x7f, 0x76, 0x80, 0xfd, 0xf0, 0xb4, 0x80, 0x6d, 0x3d, 0x37, 0x60, 0xbf,
-	0xac, 0xc4, 0x5e, 0x84, 0x4a, 0xec, 0xdf, 0x39, 0xb8, 0x94, 0x88, 0x68, 0x02, 0x36, 0x36, 0x63,
-	0xb0, 0x51, 0x9f, 0x86, 0x61, 0x09, 0xb8, 0xf1, 0xdd, 0x64, 0xdc, 0xd8, 0x98, 0x57, 0xcc, 0x04,
-	0xe0, 0x78, 0x59, 0xb2, 0xfd, 0x5f, 0x94, 0x6c, 0x2f, 0x11, 0xe0, 0x05, 0x40, 0x80, 0xe6, 0x1f,
-	0x0a, 0x50, 0x6a, 0xb1, 0x74, 0x7c, 0x80, 0xfd, 0x23, 0x1a, 0xe8, 0xb7, 0xa0, 0x14, 0x7b, 0xc0,
-	0x43, 0x5f, 0x19, 0xfe, 0x27, 0x22, 0xe1, 0x5d, 0xaf, 0xb6, 0x3a, 0xf6, 0xb5, 0x5b, 0xce, 0x80,
-	0x1c, 0xd3, 0xa2, 0x36, 0x7c, 0xba, 0x43, 0x17, 0x24, 0x09, 0xf2, 0x63, 0xde, 0x44, 0xe6, 0x5d,
-	0xf6, 0x22, 0x15, 0x0b, 0x0e, 0x4d, 0x92, 0x91, 0xf0, 0xb0, 0x37, 0x51, 0xd4, 0x0d, 0xc8, 0x09,
-	0x0e, 0xb4, 0x3a, 0x22, 0x62, 0x16, 0xeb, 0xd0, 0x12, 0xe1, 0x1f, 0x83, 0x46, 0x2c, 0x11, 0x7f,
-	0x7b, 0x9b, 0x61, 0x09, 0xde, 0x94, 0x96, 0x2d, 0x21, 0x3f, 0xb8, 0xcd, 0xd0, 0x41, 0x6a, 0x6a,
-	0xca, 0x3a, 0x8c, 0x3d, 0xbd, 0x4d, 0x14, 0xb3, 0x05, 0x85, 0xe1, 0x93, 0x17, 0xaa, 0x26, 0xbc,
-	0x82, 0x71, 0xf6, 0x8b, 0x13, 0xdf, 0xc7, 0x36, 0x14, 0xb4, 0x07, 0x2b, 0x23, 0xcf, 0x29, 0x48,
-	0x9b, 0xf8, 0xce, 0xc2, 0xe5, 0x5d, 0x9e, 0xf1, 0x0e, 0xb3, 0xa1, 0xa0, 0x5b, 0x00, 0x51, 0x4f,
-	0x1f, 0x5d, 0x4c, 0xea, 0xf3, 0x73, 0x59, 0xb5, 0xc9, 0x4f, 0x00, 0x91, 0x72, 0x52, 0xb3, 0x38,
-	0xae, 0xdc, 0x78, 0x0f, 0x3b, 0xae, 0x5c, 0x42, 0x97, 0x39, 0x52, 0x8e, 0x37, 0x09, 0xe3, 0xca,
-	0xc5, 0xfa, 0x94, 0x71, 0xe5, 0xe2, 0x3d, 0xc5, 0x0d, 0x05, 0x3d, 0x8c, 0xba, 0x15, 0xc3, 0x4e,
-	0x15, 0x5a, 0x9b, 0xd2, 0xc4, 0xe2, 0x42, 0xaf, 0xcc, 0x6c, 0x73, 0x6d, 0x28, 0xa1, 0x67, 0xf9,
-	0x9d, 0xa1, 0x9a, 0xd0, 0xf3, 0x48, 0xf0, 0x6c, 0xec, 0xa8, 0xdd, 0x50, 0xd0, 0xf7, 0x13, 0xef,
-	0xce, 0x57, 0xa6, 0xd5, 0xf7, 0x5c, 0xaa, 0x3e, 0xfb, 0x0a, 0xb0, 0xa1, 0xa0, 0x1f, 0x24, 0x5f,
-	0xfb, 0xf4, 0xa9, 0x75, 0x00, 0xff, 0xc0, 0xd5, 0x39, 0x6a, 0x85, 0x0d, 0x65, 0xeb, 0x1b, 0x4f,
-	0x9e, 0x6a, 0xa9, 0xcf, 0x9f, 0x6a, 0xa9, 0x2f, 0x9f, 0x6a, 0xca, 0x8f, 0x4f, 0x34, 0xe5, 0x37,
-	0x27, 0x9a, 0xf2, 0xe7, 0x13, 0x4d, 0x79, 0x72, 0xa2, 0x29, 0x7f, 0x3b, 0xd1, 0x94, 0xbf, 0x9f,
-	0x68, 0xa9, 0x2f, 0x4f, 0x34, 0xe5, 0xf1, 0x33, 0x2d, 0xf5, 0xe4, 0x99, 0x96, 0xfa, 0xfc, 0x99,
-	0x96, 0x7a, 0x98, 0x69, 0xac, 0x0f, 0xf6, 0xf7, 0xb3, 0x2c, 0x55, 0xae, 0xfd, 0x27, 0x00, 0x00,
-	0xff, 0xff, 0x70, 0x41, 0xdd, 0x21, 0x49, 0x2a, 0x00, 0x00,
+	// 2389 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xcd, 0x6f, 0x1b, 0xc7,
+	0x15, 0xd7, 0xae, 0x28, 0x7e, 0x3c, 0x8a, 0x94, 0x3d, 0x61, 0x64, 0x9a, 0x6e, 0xd6, 0x0a, 0x0d,
+	0x1b, 0xcc, 0x17, 0x2d, 0xd0, 0x8e, 0x01, 0xb7, 0x2e, 0x5c, 0x2a, 0xb6, 0x22, 0x25, 0x76, 0x6b,
+	0xac, 0x05, 0x34, 0xf0, 0x85, 0x58, 0x71, 0x87, 0xd4, 0xa2, 0xdc, 0x5d, 0x66, 0x77, 0xa4, 0x5a,
+	0xb7, 0xa2, 0xc7, 0x5e, 0xe2, 0x53, 0x81, 0x02, 0x3d, 0x15, 0x28, 0xd0, 0x43, 0x7b, 0x0e, 0x50,
+	0xa0, 0xc7, 0x16, 0x41, 0x7a, 0xf1, 0xa9, 0x48, 0x4f, 0xad, 0xe5, 0x4b, 0x8b, 0xe6, 0x90, 0x7f,
+	0xa0, 0x40, 0x31, 0x1f, 0xcb, 0x9d, 0x21, 0x97, 0x1f, 0x22, 0x0d, 0x24, 0x68, 0x7c, 0xdb, 0x99,
+	0x79, 0xf3, 0xf8, 0xe6, 0xbd, 0xdf, 0xfb, 0x98, 0x37, 0x84, 0x55, 0xab, 0x8b, 0xbd, 0xf6, 0x71,
+	0xbd, 0x1f, 0xf8, 0xc4, 0x47, 0x69, 0x3e, 0xaa, 0xe4, 0x5d, 0xdf, 0xc6, 0x3d, 0x3e, 0x59, 0xb9,
+	0xd0, 0xf5, 0xfd, 0x6e, 0x0f, 0x5f, 0x65, 0xa3, 0xfd, 0xc3, 0xce, 0x55, 0xec, 0xf6, 0x89, 0xd8,
+	0x51, 0xb9, 0x38, 0xbc, 0x48, 0x1c, 0x17, 0x87, 0xc4, 0x72, 0xfb, 0x82, 0xe0, 0x9d, 0xae, 0x43,
+	0x0e, 0x0e, 0xf7, 0xeb, 0x6d, 0xdf, 0xbd, 0xda, 0xf5, 0xbb, 0x7e, 0x4c, 0x49, 0x47, 0x6c, 0xc0,
+	0xbe, 0x38, 0x79, 0xf5, 0x73, 0x0d, 0xe0, 0x8e, 0x73, 0x84, 0xef, 0x5b, 0x21, 0xc1, 0x01, 0x7a,
+	0x0d, 0xa0, 0xe3, 0x04, 0x21, 0x69, 0x79, 0x96, 0x8b, 0xcb, 0xda, 0x86, 0x56, 0xcb, 0x99, 0x39,
+	0x36, 0xf3, 0x43, 0xcb, 0xc5, 0xe8, 0x02, 0xe4, 0x7a, 0x56, 0xb4, 0xaa, 0xb3, 0xd5, 0x2c, 0x9d,
+	0x60, 0x8b, 0x57, 0x60, 0xa5, 0x87, 0x8f, 0x70, 0xaf, 0xbc, 0xbc, 0xa1, 0xd5, 0x8a, 0x8d, 0x33,
+	0x75, 0x7e, 0xa8, 0x7b, 0x74, 0x6e, 0xef, 0xb8, 0x8f, 0x4d, 0xbe, 0x8c, 0xde, 0x86, 0x7c, 0x27,
+	0xf0, 0x3d, 0xd2, 0x72, 0x5c, 0xab, 0x8b, 0xcb, 0xa9, 0x0d, 0xad, 0x96, 0x6f, 0xe4, 0x05, 0xf5,
+	0xb6, 0xd3, 0xc3, 0x26, 0xb0, 0xf5, 0x5d, 0xba, 0x8c, 0xde, 0x04, 0xd8, 0xb7, 0xda, 0x3f, 0x11,
+	0xc4, 0x2b, 0xa3, 0xc4, 0x39, 0xba, 0xcc, 0x68, 0xab, 0x1f, 0x41, 0x25, 0x3e, 0xcb, 0x36, 0x95,
+	0xba, 0xe9, 0xd9, 0xf7, 0x22, 0xf9, 0x16, 0x38, 0x5b, 0xf5, 0x17, 0x1a, 0xac, 0x3c, 0x24, 0x56,
+	0xa7, 0xb3, 0x90, 0x86, 0x2a, 0x90, 0xed, 0xfb, 0xa1, 0x43, 0x1c, 0xdf, 0x63, 0x4a, 0xca, 0x99,
+	0x83, 0x31, 0x7a, 0x03, 0xd2, 0x5d, 0xec, 0xd9, 0x38, 0x60, 0x0a, 0x29, 0x36, 0xce, 0x8a, 0x33,
+	0xbe, 0xcf, 0x26, 0x99, 0xfe, 0x04, 0x41, 0xf5, 0x13, 0x9d, 0xd9, 0xcc, 0xf1, 0xba, 0x5b, 0xbe,
+	0x45, 0x10, 0x82, 0x94, 0x24, 0x0b, 0xfb, 0xa6, 0x3a, 0xde, 0xf7, 0x2d, 0xa1, 0xe2, 0xb0, 0xac,
+	0x6f, 0x2c, 0x8f, 0xe8, 0x98, 0xae, 0x33, 0xb5, 0x85, 0x68, 0x03, 0xf2, 0x36, 0x0e, 0xdb, 0x81,
+	0xd3, 0x97, 0x44, 0x93, 0xa7, 0xd0, 0x65, 0x28, 0x12, 0x9f, 0x58, 0xbd, 0x56, 0xdb, 0xea, 0x5b,
+	0x6d, 0x87, 0x1c, 0x33, 0x29, 0x0b, 0x66, 0x81, 0xcd, 0xbe, 0x27, 0x26, 0x29, 0x99, 0xed, 0x1c,
+	0xe1, 0x20, 0x26, 0x5b, 0xe1, 0x64, 0x6c, 0x56, 0x26, 0x0b, 0xa9, 0x32, 0x63, 0xb2, 0x34, 0x27,
+	0x63, 0xb3, 0x03, 0xb2, 0x1a, 0x64, 0x2c, 0xdb, 0x0e, 0x70, 0x18, 0x96, 0x33, 0xcc, 0xee, 0x45,
+	0x71, 0x80, 0x26, 0x9f, 0x35, 0xa3, 0xe5, 0xea, 0x6d, 0xc8, 0x34, 0x5d, 0xec, 0xd1, 0x4d, 0x49,
+	0xda, 0x18, 0x3a, 0x9f, 0x3e, 0x72, 0xbe, 0xea, 0x97, 0x1a, 0x64, 0x4d, 0xdf, 0x77, 0xa9, 0x9e,
+	0xe7, 0x63, 0x41, 0x2d, 0xef, 0x5a, 0x8f, 0x5b, 0xdd, 0x43, 0x1c, 0x12, 0xa6, 0xc2, 0x82, 0x99,
+	0x75, 0xad, 0xc7, 0xef, 0xd3, 0x31, 0x2a, 0xc1, 0x4a, 0x3f, 0x70, 0xda, 0x1c, 0xed, 0xba, 0xc9,
+	0x07, 0xd4, 0x4a, 0x81, 0xef, 0xbb, 0x91, 0x95, 0x56, 0x12, 0xac, 0x44, 0xd7, 0x85, 0x95, 0xde,
+	0x81, 0x9c, 0xc5, 0x0e, 0xe9, 0xe0, 0xb0, 0x9c, 0x66, 0xb4, 0x6b, 0x75, 0x11, 0x4e, 0xc4, 0xe9,
+	0xcd, 0x98, 0x82, 0x82, 0xed, 0xe3, 0x43, 0xcb, 0x23, 0x54, 0xbd, 0x19, 0x2e, 0x4e, 0x34, 0xae,
+	0xde, 0x81, 0xe2, 0x8e, 0x4f, 0x70, 0xaf, 0xe9, 0xd9, 0x14, 0x42, 0xbb, 0x36, 0x3a, 0x0f, 0xd9,
+	0x03, 0x3a, 0xd3, 0x72, 0x6c, 0x76, 0xee, 0x94, 0x99, 0x61, 0xe3, 0x5d, 0x1b, 0x9d, 0x83, 0x0c,
+	0xc7, 0x92, 0xcd, 0x8e, 0x9d, 0x32, 0xd3, 0x0c, 0x3a, 0x76, 0xf5, 0x4f, 0x3a, 0xac, 0xee, 0x05,
+	0x4e, 0x7f, 0x0f, 0xbb, 0xfd, 0x9e, 0x45, 0xe6, 0x55, 0xdc, 0x25, 0x48, 0x8f, 0x57, 0x80, 0x58,
+	0x42, 0x6f, 0x43, 0x8e, 0x04, 0x4e, 0xbf, 0x45, 0x8e, 0xfb, 0x98, 0xa1, 0xa5, 0xd8, 0x58, 0x13,
+	0x74, 0x4c, 0x04, 0xea, 0x1f, 0x59, 0x22, 0xbe, 0xd0, 0x7b, 0x70, 0x96, 0x9f, 0xc6, 0xf2, 0xec,
+	0x56, 0x24, 0x7c, 0x96, 0x61, 0x68, 0x3d, 0x52, 0x99, 0xaa, 0x80, 0x9d, 0x25, 0xb3, 0x78, 0xa0,
+	0xaa, 0xe4, 0x32, 0x14, 0x7a, 0xce, 0x11, 0xb6, 0xf6, 0x7d, 0x2b, 0xb0, 0x29, 0x83, 0x1c, 0x3d,
+	0xfd, 0xce, 0x92, 0xb9, 0x1a, 0x4f, 0xef, 0xda, 0x32, 0x4a, 0x4b, 0x13, 0x51, 0xba, 0x55, 0x84,
+	0xd5, 0x00, 0x87, 0x8e, 0x8d, 0xbd, 0x36, 0x6e, 0x39, 0x76, 0xf5, 0xb7, 0x3a, 0xa4, 0xa8, 0xf0,
+	0xe8, 0x3a, 0xa4, 0x3a, 0x81, 0xef, 0x32, 0xbd, 0xe5, 0x1b, 0x95, 0x3a, 0x8f, 0xf1, 0xf5, 0x28,
+	0x72, 0xd7, 0xf7, 0xa2, 0x18, 0xbf, 0x95, 0x7a, 0xf2, 0x8f, 0x8b, 0x9a, 0xc9, 0xa8, 0xd1, 0x26,
+	0xe8, 0xc4, 0x67, 0x0a, 0x9d, 0x65, 0x8f, 0x4e, 0x7c, 0xf4, 0x3a, 0xac, 0x52, 0x88, 0x0e, 0xbc,
+	0x8e, 0xa3, 0x34, 0xef, 0x5a, 0x8f, 0x07, 0x3e, 0x97, 0x0c, 0xd4, 0x2b, 0xb0, 0x46, 0x3d, 0xb8,
+	0xe5, 0xb2, 0xc8, 0xda, 0x72, 0x6c, 0x6e, 0xab, 0x14, 0x77, 0x6c, 0x1e, 0x6f, 0x77, 0xed, 0x10,
+	0xed, 0xc1, 0xab, 0x2c, 0xfa, 0x05, 0x38, 0xc4, 0xc1, 0x91, 0x45, 0xcd, 0xdb, 0xb2, 0x2d, 0xc2,
+	0x2d, 0x36, 0x8b, 0x94, 0xaf, 0xd0, 0xed, 0x66, 0xbc, 0xfb, 0x8e, 0x45, 0x70, 0xf5, 0xbf, 0x1a,
+	0xac, 0x30, 0x6b, 0xd1, 0xe0, 0xcb, 0xed, 0x2a, 0x07, 0x5f, 0x36, 0xc3, 0xe2, 0x2b, 0x82, 0x54,
+	0x48, 0xac, 0x80, 0xe9, 0xa4, 0x60, 0xb2, 0x6f, 0x09, 0x5d, 0xa9, 0xf1, 0xe8, 0xba, 0x0a, 0xcc,
+	0xd1, 0x18, 0xba, 0x22, 0x18, 0x9e, 0x89, 0x80, 0x12, 0xc5, 0x05, 0x33, 0x17, 0x88, 0xaf, 0x10,
+	0xbd, 0x15, 0x01, 0x4c, 0xc6, 0x76, 0x9a, 0xc9, 0x73, 0x86, 0x2d, 0xdc, 0x91, 0x00, 0x4e, 0x75,
+	0x7a, 0xe0, 0x7b, 0x98, 0xb9, 0x61, 0xce, 0xe4, 0x03, 0x19, 0x37, 0xd9, 0xc9, 0xd1, 0xed, 0xef,
+	0x3a, 0xc0, 0xbd, 0x01, 0xe4, 0xe6, 0xf4, 0xb2, 0x75, 0x48, 0xf7, 0xb0, 0xd7, 0x25, 0x07, 0xc2,
+	0xea, 0x62, 0x44, 0x85, 0xfb, 0xa9, 0x63, 0x93, 0x03, 0x11, 0xd0, 0xf9, 0x40, 0xd2, 0x5a, 0x7a,
+	0x56, 0xad, 0x65, 0xa6, 0x6b, 0x6d, 0x34, 0x8b, 0x64, 0x93, 0xb2, 0xc8, 0x45, 0xc8, 0xf3, 0x2c,
+	0x42, 0x77, 0x86, 0xcc, 0xed, 0x0a, 0x26, 0xb0, 0x29, 0xca, 0x35, 0xa4, 0x04, 0x3c, 0x7f, 0x70,
+	0x02, 0xe0, 0x04, 0x6c, 0x8a, 0x13, 0x48, 0xba, 0xcd, 0x4f, 0xd6, 0xed, 0x87, 0x50, 0x6a, 0xda,
+	0x76, 0x5c, 0x35, 0x98, 0xf8, 0x63, 0x16, 0xb0, 0xaf, 0x71, 0x19, 0x04, 0xe2, 0x85, 0x67, 0xa2,
+	0xe8, 0x70, 0x12, 0x3d, 0xc4, 0x1e, 0x50, 0xbd, 0x01, 0x6b, 0x4d, 0xdb, 0x66, 0x75, 0x42, 0xc4,
+	0xe7, 0x12, 0xac, 0x30, 0xb9, 0x04, 0x87, 0x42, 0xc4, 0x81, 0x13, 0xf1, 0xb5, 0x6a, 0x1f, 0xd6,
+	0x9b, 0xb6, 0x2d, 0x87, 0xd2, 0x68, 0xfb, 0x4d, 0x28, 0xf0, 0xb0, 0x27, 0xe6, 0x05, 0x9b, 0x52,
+	0xc4, 0x46, 0xd9, 0xb3, 0x4a, 0xe4, 0x60, 0x7c, 0x01, 0x72, 0x9c, 0x28, 0x0e, 0xdc, 0x59, 0x3e,
+	0xb1, 0x6b, 0x57, 0x5d, 0x28, 0x8a, 0x5f, 0x8c, 0x7e, 0x69, 0x03, 0x52, 0x74, 0xbb, 0xf8, 0x81,
+	0x55, 0xf9, 0x07, 0x4c, 0xb6, 0x32, 0x2a, 0x8b, 0x3e, 0xab, 0x2c, 0xb1, 0x96, 0x45, 0xcd, 0xa2,
+	0x6a, 0xd9, 0xf1, 0xba, 0x2c, 0x48, 0x27, 0x68, 0x39, 0xa2, 0x07, 0x7b, 0xf0, 0x2d, 0xb4, 0xcc,
+	0x02, 0x82, 0xa4, 0x65, 0xe6, 0x75, 0xc3, 0x5a, 0xe6, 0x44, 0x7c, 0xad, 0xfa, 0x01, 0x13, 0x22,
+	0x76, 0xa4, 0x68, 0x73, 0x03, 0x20, 0x0e, 0xe8, 0xc3, 0x32, 0x48, 0xe4, 0x12, 0x55, 0xf5, 0x07,
+	0x70, 0xe6, 0x9e, 0x13, 0x12, 0x2a, 0x4f, 0x18, 0xf1, 0x29, 0xc1, 0x4a, 0xcf, 0x71, 0x1d, 0x22,
+	0xf2, 0x27, 0x1f, 0x50, 0xbf, 0xf3, 0x3b, 0x9d, 0x10, 0x93, 0x28, 0x79, 0xf2, 0x51, 0xf5, 0xc9,
+	0x32, 0x9c, 0x95, 0x58, 0x84, 0x7d, 0xdf, 0x0b, 0x31, 0x6a, 0x40, 0x4a, 0xd2, 0x84, 0x11, 0x4b,
+	0x31, 0x44, 0x58, 0x67, 0x5a, 0x61, 0xb4, 0x95, 0xbf, 0xe8, 0x90, 0x62, 0x85, 0x60, 0x11, 0xf4,
+	0x41, 0xf6, 0xd6, 0x9d, 0x38, 0x50, 0x80, 0x14, 0x28, 0x62, 0xc7, 0x2e, 0x8d, 0x77, 0xec, 0x51,
+	0x3f, 0x7d, 0x75, 0xb6, 0x6a, 0x6f, 0x7d, 0xb6, 0x6a, 0xef, 0x5c, 0x52, 0xb5, 0x77, 0x1b, 0xa0,
+	0x1d, 0x60, 0x8b, 0x60, 0xbb, 0x65, 0x91, 0xb2, 0x31, 0x63, 0xc2, 0xc8, 0x89, 0x3d, 0x4d, 0x42,
+	0x19, 0x1c, 0xf6, 0xed, 0x88, 0x41, 0x6d, 0x56, 0x06, 0x62, 0x4f, 0x93, 0x54, 0xb7, 0x61, 0x9d,
+	0x2a, 0x3a, 0x76, 0xee, 0x39, 0x4d, 0xfb, 0xcb, 0x65, 0x38, 0x37, 0xc2, 0x48, 0x18, 0xf8, 0xc3,
+	0xa4, 0xb8, 0xf2, 0xa6, 0x6c, 0xe7, 0x84, 0x5d, 0x63, 0xe2, 0x4d, 0xe5, 0x0f, 0xba, 0x72, 0x79,
+	0x1b, 0xb6, 0xbf, 0x7a, 0x55, 0x81, 0x89, 0x57, 0x95, 0xd2, 0xb8, 0xcb, 0x9c, 0x31, 0xf9, 0x32,
+	0xf7, 0x06, 0xe4, 0x6c, 0xbf, 0x7d, 0xe8, 0x62, 0x8f, 0x84, 0xe5, 0xda, 0x28, 0xa4, 0xe2, 0xd5,
+	0x21, 0x03, 0x37, 0x16, 0x35, 0xf0, 0xad, 0xd3, 0x1b, 0xb8, 0xc9, 0x5d, 0x8e, 0x45, 0x85, 0x39,
+	0x6d, 0xfb, 0xab, 0x65, 0x40, 0x32, 0x0f, 0x61, 0xd6, 0x1b, 0x6a, 0x00, 0xda, 0x90, 0x0d, 0xaa,
+	0x92, 0x2a, 0x31, 0xa9, 0xf2, 0xb9, 0x1e, 0x95, 0x36, 0xb3, 0x38, 0xef, 0x50, 0x96, 0x2f, 0x8d,
+	0x66, 0xf9, 0x12, 0x4b, 0x37, 0x41, 0xc8, 0xcc, 0x56, 0x30, 0xf9, 0x20, 0x2e, 0x40, 0x6a, 0x63,
+	0x0a, 0x90, 0xc6, 0xc4, 0x24, 0x29, 0x05, 0x8d, 0x5b, 0xe3, 0x83, 0x86, 0x6a, 0xde, 0xed, 0x45,
+	0xcd, 0xfb, 0x60, 0x6e, 0xff, 0x8d, 0x43, 0xf6, 0x9c, 0x36, 0xfe, 0x4d, 0x8a, 0xfb, 0xaf, 0xc2,
+	0x48, 0x18, 0xfa, 0x83, 0x84, 0x64, 0xa1, 0xb8, 0x6f, 0xc2, 0xa6, 0x31, 0x49, 0xa4, 0xf2, 0xc7,
+	0x65, 0xa5, 0xae, 0x7b, 0x31, 0x08, 0x88, 0xeb, 0x3c, 0x83, 0x55, 0xf0, 0x23, 0x75, 0x5e, 0x8d,
+	0x17, 0xf6, 0xc3, 0x75, 0x5e, 0xe3, 0x34, 0xe9, 0xe0, 0xda, 0x0c, 0x65, 0xdb, 0xf5, 0x69, 0x65,
+	0xdb, 0xbb, 0x93, 0xca, 0xb6, 0x1b, 0x93, 0x11, 0xa9, 0x82, 0xed, 0xd6, 0xa2, 0x60, 0xdb, 0x9e,
+	0x3b, 0x96, 0xb0, 0x3a, 0x6e, 0x4e, 0x9c, 0xfd, 0x47, 0xe7, 0xb1, 0x24, 0xe2, 0x11, 0xc7, 0x12,
+	0xb9, 0x64, 0x54, 0x62, 0x89, 0x4a, 0xaa, 0x54, 0x91, 0x95, 0x5f, 0xeb, 0x51, 0x8f, 0xea, 0x45,
+	0x26, 0x02, 0xb9, 0x67, 0x65, 0x8c, 0xed, 0x59, 0xd5, 0xa6, 0xf4, 0xac, 0xbe, 0x01, 0xc1, 0x7f,
+	0x07, 0xca, 0x54, 0x83, 0x72, 0x95, 0x3a, 0xa7, 0xdd, 0xbe, 0x5c, 0x86, 0xf3, 0x09, 0xac, 0x06,
+	0x11, 0x22, 0x3b, 0x54, 0xad, 0xd7, 0x65, 0x0b, 0x26, 0x6e, 0x52, 0x6b, 0xe7, 0xc1, 0xfe, 0xca,
+	0xcf, 0x97, 0x87, 0x3a, 0x2c, 0x2f, 0x26, 0x46, 0x28, 0xcd, 0x14, 0x63, 0x5a, 0x33, 0x45, 0x6e,
+	0x0d, 0xd5, 0xc6, 0xb6, 0x86, 0x1a, 0x72, 0x6b, 0x08, 0x5d, 0x1a, 0xee, 0x9d, 0xdc, 0x62, 0xcb,
+	0x6a, 0xe7, 0x24, 0x0e, 0x3e, 0xdb, 0xb3, 0xa6, 0x95, 0x07, 0x8b, 0x02, 0xe7, 0xd1, 0xe9, 0x81,
+	0x23, 0x6a, 0x7d, 0xaa, 0x99, 0x39, 0x01, 0xf3, 0x49, 0x8a, 0x07, 0x0b, 0xc1, 0x22, 0xae, 0xf5,
+	0xa5, 0x1b, 0x97, 0x31, 0x0c, 0x12, 0x15, 0x1c, 0xfc, 0x0e, 0x56, 0xf9, 0xf3, 0xb2, 0x68, 0x19,
+	0x0d, 0x03, 0xa1, 0x06, 0x67, 0x94, 0xcb, 0x19, 0xd5, 0x79, 0x89, 0xad, 0x16, 0xe5, 0x9b, 0xd8,
+	0xae, 0xad, 0xf6, 0x29, 0x8d, 0x71, 0x7d, 0xca, 0x9a, 0xdc, 0xfe, 0xf9, 0x3e, 0xe4, 0x3a, 0x81,
+	0xef, 0xf2, 0x56, 0xce, 0xac, 0xbe, 0x9b, 0xa5, 0x5b, 0xee, 0x50, 0xd0, 0xde, 0x84, 0x0c, 0xf1,
+	0xf9, 0xe6, 0x59, 0xfd, 0x36, 0x4d, 0x7c, 0xb6, 0x75, 0x6c, 0x43, 0x69, 0x7b, 0x81, 0x86, 0xd2,
+	0x37, 0x00, 0x53, 0xf7, 0xe1, 0xb5, 0x81, 0x9d, 0x7f, 0xec, 0x90, 0x83, 0x05, 0x23, 0xd2, 0xbf,
+	0xb3, 0x60, 0x8c, 0xe3, 0x27, 0xd0, 0x76, 0x5b, 0x41, 0xdb, 0x5b, 0x23, 0x68, 0x4b, 0xdc, 0x25,
+	0x43, 0xef, 0x6f, 0xa9, 0xaf, 0x03, 0x7a, 0xef, 0xc2, 0xaa, 0x74, 0x5f, 0x8a, 0xca, 0x94, 0xa4,
+	0x46, 0x4c, 0x3e, 0xbe, 0x18, 0x85, 0x2a, 0x62, 0x6f, 0x2d, 0x82, 0xd8, 0xed, 0x17, 0x85, 0xd8,
+	0x07, 0x2f, 0x0e, 0xb1, 0x8f, 0x16, 0x45, 0xac, 0x7d, 0x6a, 0xc4, 0xa2, 0x8f, 0x86, 0xbb, 0x3f,
+	0x1e, 0xe3, 0x71, 0xed, 0x14, 0x40, 0x4a, 0x6e, 0x0e, 0x55, 0x7e, 0xff, 0x32, 0xc9, 0x49, 0x85,
+	0xef, 0x83, 0xd3, 0x14, 0xbe, 0x5f, 0x03, 0x10, 0xaa, 0x9f, 0xea, 0x80, 0x1e, 0x62, 0x2b, 0x68,
+	0x1f, 0x30, 0x73, 0xff, 0x88, 0x69, 0x3b, 0x44, 0x15, 0xc8, 0xb4, 0xfd, 0x43, 0x8f, 0x04, 0xc7,
+	0xbc, 0x31, 0xbd, 0xb3, 0x64, 0x46, 0x13, 0xa8, 0x04, 0x29, 0x76, 0x6d, 0xd0, 0xc5, 0x02, 0x1b,
+	0xa1, 0x32, 0xa4, 0x03, 0xdc, 0x1d, 0x3c, 0x38, 0xee, 0x2c, 0x99, 0x62, 0x4c, 0xc3, 0x1c, 0xbb,
+	0x36, 0x44, 0xad, 0x5d, 0x31, 0x52, 0x4d, 0xba, 0x36, 0xcd, 0xa4, 0xb7, 0x81, 0xde, 0x2d, 0x02,
+	0xc2, 0xdd, 0xaf, 0x34, 0xeb, 0x49, 0xd9, 0x1e, 0xe6, 0x74, 0xdf, 0x83, 0x2c, 0xf6, 0x6c, 0xbe,
+	0x7d, 0xd6, 0x7e, 0x54, 0x06, 0x7b, 0x36, 0xdd, 0xbc, 0x75, 0x16, 0xd6, 0x7a, 0x7e, 0x9b, 0xfb,
+	0x7f, 0xc7, 0xe9, 0x11, 0x1c, 0x54, 0x9f, 0x68, 0x8a, 0xe6, 0xa2, 0x50, 0x7f, 0x0f, 0x4a, 0x21,
+	0x9b, 0x6d, 0x51, 0xd1, 0xc3, 0x96, 0xcf, 0x35, 0x3a, 0x78, 0x0d, 0x8a, 0x3a, 0xc6, 0x23, 0x3a,
+	0x37, 0x51, 0x38, 0x6a, 0x87, 0x41, 0xe2, 0xd0, 0x93, 0x13, 0xc7, 0xb2, 0x92, 0x38, 0x3e, 0xcb,
+	0xc2, 0x2b, 0x8a, 0x48, 0x22, 0x5b, 0x5c, 0x57, 0xb2, 0xc5, 0x46, 0x82, 0x0c, 0x49, 0x29, 0xe2,
+	0xaf, 0x2f, 0x53, 0xc4, 0xb7, 0x39, 0x45, 0xdc, 0x4f, 0x4e, 0x11, 0xb5, 0x69, 0xe8, 0x79, 0x99,
+	0x17, 0xfe, 0x0f, 0xf2, 0x42, 0xe3, 0xd3, 0x1c, 0x14, 0x9a, 0xcc, 0xd0, 0x0f, 0x71, 0x70, 0x44,
+	0x1d, 0xf3, 0x2e, 0x14, 0x94, 0xb7, 0x35, 0xf4, 0x9d, 0xc1, 0xdf, 0x15, 0x12, 0x9e, 0xdc, 0x2a,
+	0xeb, 0x23, 0xbf, 0x76, 0xd7, 0xed, 0x93, 0x63, 0x1a, 0x86, 0xa3, 0x57, 0x35, 0x74, 0x4e, 0xe2,
+	0x20, 0xbf, 0xb3, 0x8d, 0xdd, 0xbc, 0xcb, 0x1e, 0x8b, 0x14, 0x18, 0x19, 0x12, 0x8f, 0x84, 0x37,
+	0xb7, 0xb1, 0xac, 0x6e, 0x42, 0x46, 0xec, 0x40, 0xeb, 0x43, 0x2c, 0xa6, 0x6d, 0x1d, 0x68, 0x22,
+	0xfa, 0xcf, 0xce, 0x90, 0x26, 0xd4, 0x67, 0xb1, 0x29, 0x9a, 0xe0, 0xfd, 0x62, 0x59, 0x13, 0xf2,
+	0x5b, 0xd8, 0x14, 0x19, 0xa4, 0x7e, 0xa3, 0x2c, 0xc3, 0xc8, 0xab, 0xd8, 0x58, 0x36, 0x5b, 0x90,
+	0x1b, 0xbc, 0x46, 0xa1, 0x72, 0xc2, 0x03, 0x15, 0xdf, 0x7e, 0x7e, 0xec, 0xd3, 0xd5, 0xa6, 0x86,
+	0xf6, 0x60, 0x6d, 0xe8, 0xa5, 0x03, 0x19, 0x63, 0x9f, 0x40, 0x38, 0xbf, 0x8b, 0x53, 0x9e, 0x48,
+	0x36, 0x35, 0x74, 0x17, 0x20, 0x6e, 0xb7, 0xa3, 0xf3, 0x49, 0x2d, 0x78, 0xce, 0xab, 0x32, 0xbe,
+	0x3b, 0x1f, 0x0b, 0x27, 0xf5, 0x71, 0x55, 0xe1, 0x46, 0xdb, 0xcb, 0xaa, 0x70, 0x09, 0x0d, 0xe0,
+	0x58, 0x38, 0xde, 0xbf, 0x53, 0x85, 0x53, 0x5a, 0x88, 0xaa, 0x70, 0x6a, 0xbb, 0x6f, 0x53, 0x43,
+	0x8f, 0xe2, 0x46, 0xc2, 0xa0, 0xc6, 0x46, 0x1b, 0x13, 0xfa, 0x4b, 0x9c, 0xe9, 0xeb, 0x53, 0x3b,
+	0x50, 0x9b, 0x5a, 0x64, 0x59, 0x16, 0x9f, 0x55, 0xcb, 0xca, 0xe5, 0x8a, 0x6a, 0x59, 0x25, 0x98,
+	0x6f, 0x6a, 0xc8, 0xe1, 0x2d, 0xf8, 0xd1, 0x8b, 0x00, 0xba, 0x3c, 0xed, 0xa2, 0xc0, 0xb9, 0x5f,
+	0x99, 0xed, 0x3e, 0xb1, 0xa9, 0xa1, 0x1d, 0xc8, 0x4b, 0x09, 0x05, 0x55, 0x12, 0xb3, 0x0c, 0x67,
+	0x7a, 0x61, 0x42, 0x06, 0xda, 0xd4, 0xb6, 0xbe, 0xfb, 0xf4, 0x99, 0xb1, 0xf4, 0xc5, 0x33, 0x63,
+	0xe9, 0xab, 0x67, 0x86, 0xf6, 0xb3, 0x13, 0x43, 0xfb, 0xdd, 0x89, 0xa1, 0x7d, 0x76, 0x62, 0x68,
+	0x4f, 0x4f, 0x0c, 0xed, 0x9f, 0x27, 0x86, 0xf6, 0xaf, 0x13, 0x63, 0xe9, 0xab, 0x13, 0x43, 0x7b,
+	0xf2, 0xdc, 0x58, 0x7a, 0xfa, 0xdc, 0x58, 0xfa, 0xe2, 0xb9, 0xb1, 0xf4, 0x28, 0x55, 0xbf, 0xda,
+	0xdf, 0xdf, 0x4f, 0x33, 0xf7, 0xb8, 0xf6, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x2b, 0x8b, 0x11,
+	0x0e, 0xd8, 0x29, 0x00, 0x00,
 }
 
 func (this *DiveMaster) Equal(that interface{}) bool {
@@ -5248,14 +5164,14 @@ func (this *ListTripsResponse_Trip) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SearchOnshoreTrips) Equal(that interface{}) bool {
+func (this *ListTripsWithTemplatesRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOnshoreTrips)
+	that1, ok := that.(*ListTripsWithTemplatesRequest)
 	if !ok {
-		that2, ok := that.(SearchOnshoreTrips)
+		that2, ok := that.(ListTripsWithTemplatesRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5265,128 +5181,6 @@ func (this *SearchOnshoreTrips) Equal(that interface{}) bool {
 	if that1 == nil {
 		return this == nil
 	} else if this == nil {
-		return false
-	}
-	if that1.LocationFilter == nil {
-		if this.LocationFilter != nil {
-			return false
-		}
-	} else if this.LocationFilter == nil {
-		return false
-	} else if !this.LocationFilter.Equal(that1.LocationFilter) {
-		return false
-	}
-	if this.Divers != that1.Divers {
-		return false
-	}
-	if that1.StartDate == nil {
-		if this.StartDate != nil {
-			return false
-		}
-	} else if !this.StartDate.Equal(*that1.StartDate) {
-		return false
-	}
-	if that1.EndDate == nil {
-		if this.EndDate != nil {
-			return false
-		}
-	} else if !this.EndDate.Equal(*that1.EndDate) {
-		return false
-	}
-	return true
-}
-func (this *SearchOnshoreTrips_Country) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOnshoreTrips_Country)
-	if !ok {
-		that2, ok := that.(SearchOnshoreTrips_Country)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Country != that1.Country {
-		return false
-	}
-	return true
-}
-func (this *SearchOnshoreTrips_City) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOnshoreTrips_City)
-	if !ok {
-		that2, ok := that.(SearchOnshoreTrips_City)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.City != that1.City {
-		return false
-	}
-	return true
-}
-func (this *SearchOnshoreTrips_Region) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOnshoreTrips_Region)
-	if !ok {
-		that2, ok := that.(SearchOnshoreTrips_Region)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Region != that1.Region {
-		return false
-	}
-	return true
-}
-func (this *SearchOnshoreTripsRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOnshoreTripsRequest)
-	if !ok {
-		that2, ok := that.(SearchOnshoreTripsRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.SearchOnshoreTrips.Equal(that1.SearchOnshoreTrips) {
 		return false
 	}
 	if this.Limit != that1.Limit {
@@ -5397,153 +5191,14 @@ func (this *SearchOnshoreTripsRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SearchOffshoreTrips) Equal(that interface{}) bool {
+func (this *ListTripsWithTemplatesResponse) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOffshoreTrips)
+	that1, ok := that.(*ListTripsWithTemplatesResponse)
 	if !ok {
-		that2, ok := that.(SearchOffshoreTrips)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if that1.LocationFilter == nil {
-		if this.LocationFilter != nil {
-			return false
-		}
-	} else if this.LocationFilter == nil {
-		return false
-	} else if !this.LocationFilter.Equal(that1.LocationFilter) {
-		return false
-	}
-	if that1.StartingMonth == nil {
-		if this.StartingMonth != nil {
-			return false
-		}
-	} else if !this.StartingMonth.Equal(*that1.StartingMonth) {
-		return false
-	}
-	return true
-}
-func (this *SearchOffshoreTrips_Country) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOffshoreTrips_Country)
-	if !ok {
-		that2, ok := that.(SearchOffshoreTrips_Country)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Country != that1.Country {
-		return false
-	}
-	return true
-}
-func (this *SearchOffshoreTrips_City) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOffshoreTrips_City)
-	if !ok {
-		that2, ok := that.(SearchOffshoreTrips_City)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.City != that1.City {
-		return false
-	}
-	return true
-}
-func (this *SearchOffshoreTrips_Region) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOffshoreTrips_Region)
-	if !ok {
-		that2, ok := that.(SearchOffshoreTrips_Region)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Region != that1.Region {
-		return false
-	}
-	return true
-}
-func (this *SearchOffshoreTripsRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOffshoreTripsRequest)
-	if !ok {
-		that2, ok := that.(SearchOffshoreTripsRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.SearchOffshoreTrips.Equal(that1.SearchOffshoreTrips) {
-		return false
-	}
-	if this.Limit != that1.Limit {
-		return false
-	}
-	if this.Offset != that1.Offset {
-		return false
-	}
-	return true
-}
-func (this *SearchOnshoreTripsResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*SearchOnshoreTripsResponse)
-	if !ok {
-		that2, ok := that.(SearchOnshoreTripsResponse)
+		that2, ok := that.(ListTripsWithTemplatesResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5558,19 +5213,16 @@ func (this *SearchOnshoreTripsResponse) Equal(that interface{}) bool {
 	if !this.Trip.Equal(that1.Trip) {
 		return false
 	}
-	if !this.TripTemplate.Equal(that1.TripTemplate) {
-		return false
-	}
 	return true
 }
-func (this *SearchOnshoreTripsResponse_Trip) Equal(that interface{}) bool {
+func (this *ListTripsWithTemplatesResponse_Trip) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOnshoreTripsResponse_Trip)
+	that1, ok := that.(*ListTripsWithTemplatesResponse_Trip)
 	if !ok {
-		that2, ok := that.(SearchOnshoreTripsResponse_Trip)
+		that2, ok := that.(ListTripsWithTemplatesResponse_Trip)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5637,16 +5289,19 @@ func (this *SearchOnshoreTripsResponse_Trip) Equal(that interface{}) bool {
 	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
 	return true
 }
-func (this *SearchOnshoreTripsResponse_TripTemplate) Equal(that interface{}) bool {
+func (this *ListTripsWithTemplatesResponse_TripTemplate) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOnshoreTripsResponse_TripTemplate)
+	that1, ok := that.(*ListTripsWithTemplatesResponse_TripTemplate)
 	if !ok {
-		that2, ok := that.(SearchOnshoreTripsResponse_TripTemplate)
+		that2, ok := that.(ListTripsWithTemplatesResponse_TripTemplate)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5687,6 +5342,9 @@ func (this *SearchOnshoreTripsResponse_TripTemplate) Equal(that interface{}) boo
 			return false
 		}
 	}
+	if !this.Address.Equal(that1.Address) {
+		return false
+	}
 	if that1.CreatedAt == nil {
 		if this.CreatedAt != nil {
 			return false
@@ -5703,14 +5361,166 @@ func (this *SearchOnshoreTripsResponse_TripTemplate) Equal(that interface{}) boo
 	}
 	return true
 }
-func (this *SearchOffshoreTripsResponse) Equal(that interface{}) bool {
+func (this *SearchTripsOptions) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOffshoreTripsResponse)
+	that1, ok := that.(*SearchTripsOptions)
 	if !ok {
-		that2, ok := that.(SearchOffshoreTripsResponse)
+		that2, ok := that.(SearchTripsOptions)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if that1.LocationFilter == nil {
+		if this.LocationFilter != nil {
+			return false
+		}
+	} else if this.LocationFilter == nil {
+		return false
+	} else if !this.LocationFilter.Equal(that1.LocationFilter) {
+		return false
+	}
+	if this.Divers != that1.Divers {
+		return false
+	}
+	if this.TripType != that1.TripType {
+		return false
+	}
+	if that1.StartDate == nil {
+		if this.StartDate != nil {
+			return false
+		}
+	} else if !this.StartDate.Equal(*that1.StartDate) {
+		return false
+	}
+	if that1.EndDate == nil {
+		if this.EndDate != nil {
+			return false
+		}
+	} else if !this.EndDate.Equal(*that1.EndDate) {
+		return false
+	}
+	return true
+}
+func (this *SearchTripsOptions_Country) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*SearchTripsOptions_Country)
+	if !ok {
+		that2, ok := that.(SearchTripsOptions_Country)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Country != that1.Country {
+		return false
+	}
+	return true
+}
+func (this *SearchTripsOptions_City) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*SearchTripsOptions_City)
+	if !ok {
+		that2, ok := that.(SearchTripsOptions_City)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.City != that1.City {
+		return false
+	}
+	return true
+}
+func (this *SearchTripsOptions_Region) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*SearchTripsOptions_Region)
+	if !ok {
+		that2, ok := that.(SearchTripsOptions_Region)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Region != that1.Region {
+		return false
+	}
+	return true
+}
+func (this *SearchTripsRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*SearchTripsRequest)
+	if !ok {
+		that2, ok := that.(SearchTripsRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.SearchTripsOptions.Equal(that1.SearchTripsOptions) {
+		return false
+	}
+	if this.Limit != that1.Limit {
+		return false
+	}
+	if this.Offset != that1.Offset {
+		return false
+	}
+	return true
+}
+func (this *SearchTripsResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*SearchTripsResponse)
+	if !ok {
+		that2, ok := that.(SearchTripsResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5725,19 +5535,16 @@ func (this *SearchOffshoreTripsResponse) Equal(that interface{}) bool {
 	if !this.Trip.Equal(that1.Trip) {
 		return false
 	}
-	if !this.TripTemplate.Equal(that1.TripTemplate) {
-		return false
-	}
 	return true
 }
-func (this *SearchOffshoreTripsResponse_Trip) Equal(that interface{}) bool {
+func (this *SearchTripsResponse_Trip) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOffshoreTripsResponse_Trip)
+	that1, ok := that.(*SearchTripsResponse_Trip)
 	if !ok {
-		that2, ok := that.(SearchOffshoreTripsResponse_Trip)
+		that2, ok := that.(SearchTripsResponse_Trip)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5760,6 +5567,14 @@ func (this *SearchOffshoreTripsResponse_Trip) Equal(that interface{}) bool {
 	}
 	if this.Price != that1.Price {
 		return false
+	}
+	if len(this.DiveMasters) != len(that1.DiveMasters) {
+		return false
+	}
+	for i := range this.DiveMasters {
+		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
+			return false
+		}
 	}
 	if that1.FromDate == nil {
 		if this.FromDate != nil {
@@ -5796,16 +5611,19 @@ func (this *SearchOffshoreTripsResponse_Trip) Equal(that interface{}) bool {
 	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
 	return true
 }
-func (this *SearchOffshoreTripsResponse_TripTemplate) Equal(that interface{}) bool {
+func (this *SearchTripsResponse_TripTemplate) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchOffshoreTripsResponse_TripTemplate)
+	that1, ok := that.(*SearchTripsResponse_TripTemplate)
 	if !ok {
-		that2, ok := that.(SearchOffshoreTripsResponse_TripTemplate)
+		that2, ok := that.(SearchTripsResponse_TripTemplate)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5845,6 +5663,9 @@ func (this *SearchOffshoreTripsResponse_TripTemplate) Equal(that interface{}) bo
 		if !this.Images[i].Equal(that1.Images[i]) {
 			return false
 		}
+	}
+	if !this.Address.Equal(that1.Address) {
+		return false
 	}
 	if that1.CreatedAt == nil {
 		if this.CreatedAt != nil {
@@ -6453,131 +6274,35 @@ func (this *ListTripsResponse_Trip) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SearchOnshoreTrips) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 10)
-	s = append(s, "&pb.SearchOnshoreTrips{")
-	if this.LocationFilter != nil {
-		s = append(s, "LocationFilter: "+fmt.Sprintf("%#v", this.LocationFilter)+",\n")
-	}
-	s = append(s, "Divers: "+fmt.Sprintf("%#v", this.Divers)+",\n")
-	s = append(s, "StartDate: "+fmt.Sprintf("%#v", this.StartDate)+",\n")
-	s = append(s, "EndDate: "+fmt.Sprintf("%#v", this.EndDate)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOnshoreTrips_Country) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOnshoreTrips_Country{` +
-		`Country:` + fmt.Sprintf("%#v", this.Country) + `}`}, ", ")
-	return s
-}
-func (this *SearchOnshoreTrips_City) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOnshoreTrips_City{` +
-		`City:` + fmt.Sprintf("%#v", this.City) + `}`}, ", ")
-	return s
-}
-func (this *SearchOnshoreTrips_Region) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOnshoreTrips_Region{` +
-		`Region:` + fmt.Sprintf("%#v", this.Region) + `}`}, ", ")
-	return s
-}
-func (this *SearchOnshoreTripsRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.SearchOnshoreTripsRequest{")
-	if this.SearchOnshoreTrips != nil {
-		s = append(s, "SearchOnshoreTrips: "+fmt.Sprintf("%#v", this.SearchOnshoreTrips)+",\n")
-	}
-	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
-	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOffshoreTrips) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.SearchOffshoreTrips{")
-	if this.LocationFilter != nil {
-		s = append(s, "LocationFilter: "+fmt.Sprintf("%#v", this.LocationFilter)+",\n")
-	}
-	s = append(s, "StartingMonth: "+fmt.Sprintf("%#v", this.StartingMonth)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOffshoreTrips_Country) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOffshoreTrips_Country{` +
-		`Country:` + fmt.Sprintf("%#v", this.Country) + `}`}, ", ")
-	return s
-}
-func (this *SearchOffshoreTrips_City) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOffshoreTrips_City{` +
-		`City:` + fmt.Sprintf("%#v", this.City) + `}`}, ", ")
-	return s
-}
-func (this *SearchOffshoreTrips_Region) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.SearchOffshoreTrips_Region{` +
-		`Region:` + fmt.Sprintf("%#v", this.Region) + `}`}, ", ")
-	return s
-}
-func (this *SearchOffshoreTripsRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.SearchOffshoreTripsRequest{")
-	if this.SearchOffshoreTrips != nil {
-		s = append(s, "SearchOffshoreTrips: "+fmt.Sprintf("%#v", this.SearchOffshoreTrips)+",\n")
-	}
-	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
-	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOnshoreTripsResponse) GoString() string {
+func (this *ListTripsWithTemplatesRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&pb.SearchOnshoreTripsResponse{")
+	s = append(s, "&pb.ListTripsWithTemplatesRequest{")
+	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
+	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListTripsWithTemplatesResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse{")
 	if this.Trip != nil {
 		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
-	}
-	if this.TripTemplate != nil {
-		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SearchOnshoreTripsResponse_Trip) GoString() string {
+func (this *ListTripsWithTemplatesResponse_Trip) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 14)
-	s = append(s, "&pb.SearchOnshoreTripsResponse_Trip{")
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse_Trip{")
 	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
 	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
 	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
@@ -6590,69 +6315,18 @@ func (this *SearchOnshoreTripsResponse_Trip) GoString() string {
 	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
 	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
 	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOnshoreTripsResponse_TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 14)
-	s = append(s, "&pb.SearchOnshoreTripsResponse_TripTemplate{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
-	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
-	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
-	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOffshoreTripsResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.SearchOffshoreTripsResponse{")
-	if this.Trip != nil {
-		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
-	}
 	if this.TripTemplate != nil {
 		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SearchOffshoreTripsResponse_Trip) GoString() string {
+func (this *ListTripsWithTemplatesResponse_TripTemplate) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 13)
-	s = append(s, "&pb.SearchOffshoreTripsResponse_Trip{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
-	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
-	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
-	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *SearchOffshoreTripsResponse_TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 14)
-	s = append(s, "&pb.SearchOffshoreTripsResponse_TripTemplate{")
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.ListTripsWithTemplatesResponse_TripTemplate{")
 	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
 	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
 	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
@@ -6662,6 +6336,123 @@ func (this *SearchOffshoreTripsResponse_TripTemplate) GoString() string {
 	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
 	if this.Images != nil {
 		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	}
+	if this.Address != nil {
+		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
+	}
+	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
+	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *SearchTripsOptions) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 11)
+	s = append(s, "&pb.SearchTripsOptions{")
+	if this.LocationFilter != nil {
+		s = append(s, "LocationFilter: "+fmt.Sprintf("%#v", this.LocationFilter)+",\n")
+	}
+	s = append(s, "Divers: "+fmt.Sprintf("%#v", this.Divers)+",\n")
+	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
+	s = append(s, "StartDate: "+fmt.Sprintf("%#v", this.StartDate)+",\n")
+	s = append(s, "EndDate: "+fmt.Sprintf("%#v", this.EndDate)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *SearchTripsOptions_Country) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.SearchTripsOptions_Country{` +
+		`Country:` + fmt.Sprintf("%#v", this.Country) + `}`}, ", ")
+	return s
+}
+func (this *SearchTripsOptions_City) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.SearchTripsOptions_City{` +
+		`City:` + fmt.Sprintf("%#v", this.City) + `}`}, ", ")
+	return s
+}
+func (this *SearchTripsOptions_Region) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.SearchTripsOptions_Region{` +
+		`Region:` + fmt.Sprintf("%#v", this.Region) + `}`}, ", ")
+	return s
+}
+func (this *SearchTripsRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.SearchTripsRequest{")
+	if this.SearchTripsOptions != nil {
+		s = append(s, "SearchTripsOptions: "+fmt.Sprintf("%#v", this.SearchTripsOptions)+",\n")
+	}
+	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
+	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *SearchTripsResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.SearchTripsResponse{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *SearchTripsResponse_Trip) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.SearchTripsResponse_Trip{")
+	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
+	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
+	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
+	if this.DiveMasters != nil {
+		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
+	}
+	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
+	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
+	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
+	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
+	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *SearchTripsResponse_TripTemplate) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 15)
+	s = append(s, "&pb.SearchTripsResponse_TripTemplate{")
+	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
+	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
+	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
+	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
+	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
+	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
+	if this.Images != nil {
+		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	}
+	if this.Address != nil {
+		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
 	}
 	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
 	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
@@ -6703,8 +6494,8 @@ type AgencyServiceClient interface {
 	ListStaffs(ctx context.Context, in *ListStaffsRequest, opts ...grpc.CallOption) (AgencyService_ListStaffsClient, error)
 	ListTripTemplates(ctx context.Context, in *ListTripTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripTemplatesClient, error)
 	ListTrips(ctx context.Context, in *ListTripsRequest, opts ...grpc.CallOption) (AgencyService_ListTripsClient, error)
-	SearchOnshoreTrips(ctx context.Context, in *SearchOnshoreTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchOnshoreTripsClient, error)
-	SearchOffshoreTrips(ctx context.Context, in *SearchOffshoreTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchOffshoreTripsClient, error)
+	ListTripsWithTemplates(ctx context.Context, in *ListTripsWithTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripsWithTemplatesClient, error)
+	SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error)
 }
 
 type agencyServiceClient struct {
@@ -7002,12 +6793,12 @@ func (x *agencyServiceListTripsClient) Recv() (*ListTripsResponse, error) {
 	return m, nil
 }
 
-func (c *agencyServiceClient) SearchOnshoreTrips(ctx context.Context, in *SearchOnshoreTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchOnshoreTripsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[7], "/agency.AgencyService/SearchOnshoreTrips", opts...)
+func (c *agencyServiceClient) ListTripsWithTemplates(ctx context.Context, in *ListTripsWithTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripsWithTemplatesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[7], "/agency.AgencyService/ListTripsWithTemplates", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &agencyServiceSearchOnshoreTripsClient{stream}
+	x := &agencyServiceListTripsWithTemplatesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -7017,29 +6808,29 @@ func (c *agencyServiceClient) SearchOnshoreTrips(ctx context.Context, in *Search
 	return x, nil
 }
 
-type AgencyService_SearchOnshoreTripsClient interface {
-	Recv() (*SearchOnshoreTripsResponse, error)
+type AgencyService_ListTripsWithTemplatesClient interface {
+	Recv() (*ListTripsWithTemplatesResponse, error)
 	grpc.ClientStream
 }
 
-type agencyServiceSearchOnshoreTripsClient struct {
+type agencyServiceListTripsWithTemplatesClient struct {
 	grpc.ClientStream
 }
 
-func (x *agencyServiceSearchOnshoreTripsClient) Recv() (*SearchOnshoreTripsResponse, error) {
-	m := new(SearchOnshoreTripsResponse)
+func (x *agencyServiceListTripsWithTemplatesClient) Recv() (*ListTripsWithTemplatesResponse, error) {
+	m := new(ListTripsWithTemplatesResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *agencyServiceClient) SearchOffshoreTrips(ctx context.Context, in *SearchOffshoreTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchOffshoreTripsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[8], "/agency.AgencyService/SearchOffshoreTrips", opts...)
+func (c *agencyServiceClient) SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[8], "/agency.AgencyService/SearchTrips", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &agencyServiceSearchOffshoreTripsClient{stream}
+	x := &agencyServiceSearchTripsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -7049,17 +6840,17 @@ func (c *agencyServiceClient) SearchOffshoreTrips(ctx context.Context, in *Searc
 	return x, nil
 }
 
-type AgencyService_SearchOffshoreTripsClient interface {
-	Recv() (*SearchOffshoreTripsResponse, error)
+type AgencyService_SearchTripsClient interface {
+	Recv() (*SearchTripsResponse, error)
 	grpc.ClientStream
 }
 
-type agencyServiceSearchOffshoreTripsClient struct {
+type agencyServiceSearchTripsClient struct {
 	grpc.ClientStream
 }
 
-func (x *agencyServiceSearchOffshoreTripsClient) Recv() (*SearchOffshoreTripsResponse, error) {
-	m := new(SearchOffshoreTripsResponse)
+func (x *agencyServiceSearchTripsClient) Recv() (*SearchTripsResponse, error) {
+	m := new(SearchTripsResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -7082,8 +6873,8 @@ type AgencyServiceServer interface {
 	ListStaffs(*ListStaffsRequest, AgencyService_ListStaffsServer) error
 	ListTripTemplates(*ListTripTemplatesRequest, AgencyService_ListTripTemplatesServer) error
 	ListTrips(*ListTripsRequest, AgencyService_ListTripsServer) error
-	SearchOnshoreTrips(*SearchOnshoreTripsRequest, AgencyService_SearchOnshoreTripsServer) error
-	SearchOffshoreTrips(*SearchOffshoreTripsRequest, AgencyService_SearchOffshoreTripsServer) error
+	ListTripsWithTemplates(*ListTripsWithTemplatesRequest, AgencyService_ListTripsWithTemplatesServer) error
+	SearchTrips(*SearchTripsRequest, AgencyService_SearchTripsServer) error
 }
 
 // UnimplementedAgencyServiceServer can be embedded to have forward compatible implementations.
@@ -7132,11 +6923,11 @@ func (*UnimplementedAgencyServiceServer) ListTripTemplates(req *ListTripTemplate
 func (*UnimplementedAgencyServiceServer) ListTrips(req *ListTripsRequest, srv AgencyService_ListTripsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListTrips not implemented")
 }
-func (*UnimplementedAgencyServiceServer) SearchOnshoreTrips(req *SearchOnshoreTripsRequest, srv AgencyService_SearchOnshoreTripsServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchOnshoreTrips not implemented")
+func (*UnimplementedAgencyServiceServer) ListTripsWithTemplates(req *ListTripsWithTemplatesRequest, srv AgencyService_ListTripsWithTemplatesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListTripsWithTemplates not implemented")
 }
-func (*UnimplementedAgencyServiceServer) SearchOffshoreTrips(req *SearchOffshoreTripsRequest, srv AgencyService_SearchOffshoreTripsServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchOffshoreTrips not implemented")
+func (*UnimplementedAgencyServiceServer) SearchTrips(req *SearchTripsRequest, srv AgencyService_SearchTripsServer) error {
+	return status.Errorf(codes.Unimplemented, "method SearchTrips not implemented")
 }
 
 func RegisterAgencyServiceServer(s *grpc.Server, srv AgencyServiceServer) {
@@ -7416,45 +7207,45 @@ func (x *agencyServiceListTripsServer) Send(m *ListTripsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AgencyService_SearchOnshoreTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchOnshoreTripsRequest)
+func _AgencyService_ListTripsWithTemplates_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListTripsWithTemplatesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AgencyServiceServer).SearchOnshoreTrips(m, &agencyServiceSearchOnshoreTripsServer{stream})
+	return srv.(AgencyServiceServer).ListTripsWithTemplates(m, &agencyServiceListTripsWithTemplatesServer{stream})
 }
 
-type AgencyService_SearchOnshoreTripsServer interface {
-	Send(*SearchOnshoreTripsResponse) error
+type AgencyService_ListTripsWithTemplatesServer interface {
+	Send(*ListTripsWithTemplatesResponse) error
 	grpc.ServerStream
 }
 
-type agencyServiceSearchOnshoreTripsServer struct {
+type agencyServiceListTripsWithTemplatesServer struct {
 	grpc.ServerStream
 }
 
-func (x *agencyServiceSearchOnshoreTripsServer) Send(m *SearchOnshoreTripsResponse) error {
+func (x *agencyServiceListTripsWithTemplatesServer) Send(m *ListTripsWithTemplatesResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AgencyService_SearchOffshoreTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchOffshoreTripsRequest)
+func _AgencyService_SearchTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SearchTripsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AgencyServiceServer).SearchOffshoreTrips(m, &agencyServiceSearchOffshoreTripsServer{stream})
+	return srv.(AgencyServiceServer).SearchTrips(m, &agencyServiceSearchTripsServer{stream})
 }
 
-type AgencyService_SearchOffshoreTripsServer interface {
-	Send(*SearchOffshoreTripsResponse) error
+type AgencyService_SearchTripsServer interface {
+	Send(*SearchTripsResponse) error
 	grpc.ServerStream
 }
 
-type agencyServiceSearchOffshoreTripsServer struct {
+type agencyServiceSearchTripsServer struct {
 	grpc.ServerStream
 }
 
-func (x *agencyServiceSearchOffshoreTripsServer) Send(m *SearchOffshoreTripsResponse) error {
+func (x *agencyServiceSearchTripsServer) Send(m *SearchTripsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -7528,13 +7319,13 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "SearchOnshoreTrips",
-			Handler:       _AgencyService_SearchOnshoreTrips_Handler,
+			StreamName:    "ListTripsWithTemplates",
+			Handler:       _AgencyService_ListTripsWithTemplates_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "SearchOffshoreTrips",
-			Handler:       _AgencyService_SearchOffshoreTrips_Handler,
+			StreamName:    "SearchTrips",
+			Handler:       _AgencyService_SearchTrips_Handler,
 			ServerStreams: true,
 		},
 	},
@@ -9787,7 +9578,7 @@ func (m *ListTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOnshoreTrips) Marshal() (dAtA []byte, err error) {
+func (m *ListTripsWithTemplatesRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -9797,115 +9588,12 @@ func (m *SearchOnshoreTrips) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchOnshoreTrips) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOnshoreTrips) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.EndDate != nil {
-		n47, err47 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
-		if err47 != nil {
-			return 0, err47
-		}
-		i -= n47
-		i = encodeVarintAgency(dAtA, i, uint64(n47))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf2
-	}
-	if m.StartDate != nil {
-		n48, err48 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
-		if err48 != nil {
-			return 0, err48
-		}
-		i -= n48
-		i = encodeVarintAgency(dAtA, i, uint64(n48))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.Divers != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Divers))
-		i--
-		dAtA[i] = 0x50
-	}
-	if m.LocationFilter != nil {
-		{
-			size := m.LocationFilter.Size()
-			i -= size
-			if _, err := m.LocationFilter.MarshalTo(dAtA[i:]); err != nil {
-				return 0, err
-			}
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *SearchOnshoreTrips_Country) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOnshoreTrips_Country) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Country)
-	copy(dAtA[i:], m.Country)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.Country)))
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-func (m *SearchOnshoreTrips_City) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOnshoreTrips_City) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.City)
-	copy(dAtA[i:], m.City)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.City)))
-	i--
-	dAtA[i] = 0x12
-	return len(dAtA) - i, nil
-}
-func (m *SearchOnshoreTrips_Region) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOnshoreTrips_Region) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Region)
-	copy(dAtA[i:], m.Region)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.Region)))
-	i--
-	dAtA[i] = 0x1a
-	return len(dAtA) - i, nil
-}
-func (m *SearchOnshoreTripsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *SearchOnshoreTripsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOnshoreTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -9913,29 +9601,17 @@ func (m *SearchOnshoreTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	if m.Offset != 0 {
 		i = encodeVarintAgency(dAtA, i, uint64(m.Offset))
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x10
 	}
 	if m.Limit != 0 {
 		i = encodeVarintAgency(dAtA, i, uint64(m.Limit))
 		i--
-		dAtA[i] = 0x10
-	}
-	if m.SearchOnshoreTrips != nil {
-		{
-			size, err := m.SearchOnshoreTrips.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOffshoreTrips) Marshal() (dAtA []byte, err error) {
+func (m *ListTripsWithTemplatesResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -9945,157 +9621,16 @@ func (m *SearchOffshoreTrips) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchOffshoreTrips) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOffshoreTrips) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.StartingMonth != nil {
-		n50, err50 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartingMonth, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartingMonth):])
-		if err50 != nil {
-			return 0, err50
-		}
-		i -= n50
-		i = encodeVarintAgency(dAtA, i, uint64(n50))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.LocationFilter != nil {
-		{
-			size := m.LocationFilter.Size()
-			i -= size
-			if _, err := m.LocationFilter.MarshalTo(dAtA[i:]); err != nil {
-				return 0, err
-			}
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *SearchOffshoreTrips_Country) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOffshoreTrips_Country) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Country)
-	copy(dAtA[i:], m.Country)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.Country)))
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-func (m *SearchOffshoreTrips_City) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOffshoreTrips_City) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.City)
-	copy(dAtA[i:], m.City)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.City)))
-	i--
-	dAtA[i] = 0x12
-	return len(dAtA) - i, nil
-}
-func (m *SearchOffshoreTrips_Region) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOffshoreTrips_Region) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i -= len(m.Region)
-	copy(dAtA[i:], m.Region)
-	i = encodeVarintAgency(dAtA, i, uint64(len(m.Region)))
-	i--
-	dAtA[i] = 0x1a
-	return len(dAtA) - i, nil
-}
-func (m *SearchOffshoreTripsRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *SearchOffshoreTripsRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOffshoreTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Offset != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Offset))
-		i--
-		dAtA[i] = 0x18
-	}
-	if m.Limit != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Limit))
-		i--
-		dAtA[i] = 0x10
-	}
-	if m.SearchOffshoreTrips != nil {
-		{
-			size, err := m.SearchOffshoreTrips.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *SearchOnshoreTripsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *SearchOnshoreTripsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *SearchOnshoreTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.TripTemplate != nil {
-		{
-			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
 	if m.Trip != nil {
 		{
 			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
@@ -10111,7 +9646,7 @@ func (m *SearchOnshoreTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
+func (m *ListTripsWithTemplatesResponse_Trip) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10121,71 +9656,85 @@ func (m *SearchOnshoreTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.UpdatedAt != nil {
-		n54, err54 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err54 != nil {
-			return 0, err54
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
-		i -= n54
-		i = encodeVarintAgency(dAtA, i, uint64(n54))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xf2
+	}
+	if m.UpdatedAt != nil {
+		n49, err49 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err49 != nil {
+			return 0, err49
+		}
+		i -= n49
+		i = encodeVarintAgency(dAtA, i, uint64(n49))
 		i--
 		dAtA[i] = 0x6
 		i--
 		dAtA[i] = 0xa2
 	}
 	if m.CreatedAt != nil {
-		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err55 != nil {
-			return 0, err55
+		n50, err50 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err50 != nil {
+			return 0, err50
 		}
-		i -= n55
-		i = encodeVarintAgency(dAtA, i, uint64(n55))
+		i -= n50
+		i = encodeVarintAgency(dAtA, i, uint64(n50))
 		i--
 		dAtA[i] = 0x5
 		i--
 		dAtA[i] = 0xd2
 	}
 	if m.LastReservationDate != nil {
-		n56, err56 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err56 != nil {
-			return 0, err56
+		n51, err51 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
+		if err51 != nil {
+			return 0, err51
 		}
-		i -= n56
-		i = encodeVarintAgency(dAtA, i, uint64(n56))
+		i -= n51
+		i = encodeVarintAgency(dAtA, i, uint64(n51))
 		i--
 		dAtA[i] = 0x5
 		i--
 		dAtA[i] = 0x82
 	}
 	if m.ToDate != nil {
-		n57, err57 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
-		if err57 != nil {
-			return 0, err57
+		n52, err52 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
+		if err52 != nil {
+			return 0, err52
 		}
-		i -= n57
-		i = encodeVarintAgency(dAtA, i, uint64(n57))
+		i -= n52
+		i = encodeVarintAgency(dAtA, i, uint64(n52))
 		i--
 		dAtA[i] = 0x4
 		i--
 		dAtA[i] = 0xb2
 	}
 	if m.FromDate != nil {
-		n58, err58 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err58 != nil {
-			return 0, err58
+		n53, err53 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
+		if err53 != nil {
+			return 0, err53
 		}
-		i -= n58
-		i = encodeVarintAgency(dAtA, i, uint64(n58))
+		i -= n53
+		i = encodeVarintAgency(dAtA, i, uint64(n53))
 		i--
 		dAtA[i] = 0x3
 		i--
@@ -10237,7 +9786,7 @@ func (m *SearchOnshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOnshoreTripsResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10247,35 +9796,49 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Marshal() (dAtA []byte, err er
 	return dAtA[:n], nil
 }
 
-func (m *SearchOnshoreTripsResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOnshoreTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.UpdatedAt != nil {
-		n59, err59 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err59 != nil {
-			return 0, err59
+		n54, err54 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err54 != nil {
+			return 0, err54
 		}
-		i -= n59
-		i = encodeVarintAgency(dAtA, i, uint64(n59))
+		i -= n54
+		i = encodeVarintAgency(dAtA, i, uint64(n54))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.CreatedAt != nil {
+		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+		if err55 != nil {
+			return 0, err55
+		}
+		i -= n55
+		i = encodeVarintAgency(dAtA, i, uint64(n55))
 		i--
 		dAtA[i] = 0x5
 		i--
 		dAtA[i] = 0xd2
 	}
-	if m.CreatedAt != nil {
-		n60, err60 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err60 != nil {
-			return 0, err60
+	if m.Address != nil {
+		{
+			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
-		i -= n60
-		i = encodeVarintAgency(dAtA, i, uint64(n60))
 		i--
 		dAtA[i] = 0x5
 		i--
@@ -10349,7 +9912,7 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []by
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOffshoreTripsResponse) Marshal() (dAtA []byte, err error) {
+func (m *SearchTripsOptions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10359,19 +9922,137 @@ func (m *SearchOffshoreTripsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchOffshoreTripsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *SearchTripsOptions) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOffshoreTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *SearchTripsOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.TripTemplate != nil {
+	if m.EndDate != nil {
+		n57, err57 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
+		if err57 != nil {
+			return 0, err57
+		}
+		i -= n57
+		i = encodeVarintAgency(dAtA, i, uint64(n57))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xf2
+	}
+	if m.StartDate != nil {
+		n58, err58 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
+		if err58 != nil {
+			return 0, err58
+		}
+		i -= n58
+		i = encodeVarintAgency(dAtA, i, uint64(n58))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.TripType != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
+		i--
+		dAtA[i] = 0x78
+	}
+	if m.Divers != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Divers))
+		i--
+		dAtA[i] = 0x50
+	}
+	if m.LocationFilter != nil {
 		{
-			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			size := m.LocationFilter.Size()
+			i -= size
+			if _, err := m.LocationFilter.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SearchTripsOptions_Country) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SearchTripsOptions_Country) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= len(m.Country)
+	copy(dAtA[i:], m.Country)
+	i = encodeVarintAgency(dAtA, i, uint64(len(m.Country)))
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+func (m *SearchTripsOptions_City) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SearchTripsOptions_City) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= len(m.City)
+	copy(dAtA[i:], m.City)
+	i = encodeVarintAgency(dAtA, i, uint64(len(m.City)))
+	i--
+	dAtA[i] = 0x12
+	return len(dAtA) - i, nil
+}
+func (m *SearchTripsOptions_Region) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SearchTripsOptions_Region) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= len(m.Region)
+	copy(dAtA[i:], m.Region)
+	i = encodeVarintAgency(dAtA, i, uint64(len(m.Region)))
+	i--
+	dAtA[i] = 0x1a
+	return len(dAtA) - i, nil
+}
+func (m *SearchTripsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SearchTripsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SearchTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Offset != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.Limit != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.SearchTripsOptions != nil {
+		{
+			size, err := m.SearchTripsOptions.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -10379,8 +10060,31 @@ func (m *SearchOffshoreTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0xa
 	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SearchTripsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SearchTripsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SearchTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
 	if m.Trip != nil {
 		{
 			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
@@ -10396,7 +10100,7 @@ func (m *SearchOffshoreTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOffshoreTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
+func (m *SearchTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10406,18 +10110,44 @@ func (m *SearchOffshoreTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchOffshoreTripsResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
+func (m *SearchTripsResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *SearchTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xf2
+	}
 	if m.UpdatedAt != nil {
-		n63, err63 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		n62, err62 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err62 != nil {
+			return 0, err62
+		}
+		i -= n62
+		i = encodeVarintAgency(dAtA, i, uint64(n62))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.CreatedAt != nil {
+		n63, err63 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
 		if err63 != nil {
 			return 0, err63
 		}
@@ -10428,8 +10158,8 @@ func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0xd2
 	}
-	if m.CreatedAt != nil {
-		n64, err64 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
+	if m.LastReservationDate != nil {
+		n64, err64 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
 		if err64 != nil {
 			return 0, err64
 		}
@@ -10440,8 +10170,8 @@ func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0x82
 	}
-	if m.LastReservationDate != nil {
-		n65, err65 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
+	if m.ToDate != nil {
+		n65, err65 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
 		if err65 != nil {
 			return 0, err65
 		}
@@ -10452,8 +10182,8 @@ func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0xb2
 	}
-	if m.ToDate != nil {
-		n66, err66 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
+	if m.FromDate != nil {
+		n66, err66 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
 		if err66 != nil {
 			return 0, err66
 		}
@@ -10464,17 +10194,21 @@ func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0xe2
 	}
-	if m.FromDate != nil {
-		n67, err67 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err67 != nil {
-			return 0, err67
+	if len(m.DiveMasters) > 0 {
+		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAgency(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3
+			i--
+			dAtA[i] = 0x92
 		}
-		i -= n67
-		i = encodeVarintAgency(dAtA, i, uint64(n67))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
 	}
 	if m.Price != 0 {
 		i -= 4
@@ -10506,7 +10240,7 @@ func (m *SearchOffshoreTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
+func (m *SearchTripsResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10516,18 +10250,30 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) Marshal() (dAtA []byte, err e
 	return dAtA[:n], nil
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+func (m *SearchTripsResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *SearchTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.UpdatedAt != nil {
-		n68, err68 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		n67, err67 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
+		if err67 != nil {
+			return 0, err67
+		}
+		i -= n67
+		i = encodeVarintAgency(dAtA, i, uint64(n67))
+		i--
+		dAtA[i] = 0x6
+		i--
+		dAtA[i] = 0xa2
+	}
+	if m.CreatedAt != nil {
+		n68, err68 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
 		if err68 != nil {
 			return 0, err68
 		}
@@ -10538,13 +10284,15 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []b
 		i--
 		dAtA[i] = 0xd2
 	}
-	if m.CreatedAt != nil {
-		n69, err69 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err69 != nil {
-			return 0, err69
+	if m.Address != nil {
+		{
+			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
-		i -= n69
-		i = encodeVarintAgency(dAtA, i, uint64(n69))
 		i--
 		dAtA[i] = 0x5
 		i--
@@ -11570,69 +11318,12 @@ func (m *ListTripsResponse_Trip) Size() (n int) {
 	return n
 }
 
-func (m *SearchOnshoreTrips) Size() (n int) {
+func (m *ListTripsWithTemplatesRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.LocationFilter != nil {
-		n += m.LocationFilter.Size()
-	}
-	if m.Divers != 0 {
-		n += 1 + sovAgency(uint64(m.Divers))
-	}
-	if m.StartDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.EndDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *SearchOnshoreTrips_Country) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Country)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOnshoreTrips_City) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.City)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOnshoreTrips_Region) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Region)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOnshoreTripsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.SearchOnshoreTrips != nil {
-		l = m.SearchOnshoreTrips.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
 	if m.Limit != 0 {
 		n += 1 + sovAgency(uint64(m.Limit))
 	}
@@ -11642,72 +11333,7 @@ func (m *SearchOnshoreTripsRequest) Size() (n int) {
 	return n
 }
 
-func (m *SearchOffshoreTrips) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.LocationFilter != nil {
-		n += m.LocationFilter.Size()
-	}
-	if m.StartingMonth != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartingMonth)
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *SearchOffshoreTrips_Country) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Country)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOffshoreTrips_City) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.City)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOffshoreTrips_Region) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Region)
-	n += 1 + l + sovAgency(uint64(l))
-	return n
-}
-func (m *SearchOffshoreTripsRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.SearchOffshoreTrips != nil {
-		l = m.SearchOffshoreTrips.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Limit != 0 {
-		n += 1 + sovAgency(uint64(m.Limit))
-	}
-	if m.Offset != 0 {
-		n += 1 + sovAgency(uint64(m.Offset))
-	}
-	return n
-}
-
-func (m *SearchOnshoreTripsResponse) Size() (n int) {
+func (m *ListTripsWithTemplatesResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11717,14 +11343,10 @@ func (m *SearchOnshoreTripsResponse) Size() (n int) {
 		l = m.Trip.Size()
 		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.TripTemplate != nil {
-		l = m.TripTemplate.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
 	return n
 }
 
-func (m *SearchOnshoreTripsResponse_Trip) Size() (n int) {
+func (m *ListTripsWithTemplatesResponse_Trip) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11768,10 +11390,14 @@ func (m *SearchOnshoreTripsResponse_Trip) Size() (n int) {
 		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
 		n += 2 + l + sovAgency(uint64(l))
 	}
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 2 + l + sovAgency(uint64(l))
+	}
 	return n
 }
 
-func (m *SearchOnshoreTripsResponse_TripTemplate) Size() (n int) {
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11806,6 +11432,10 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Size() (n int) {
 			n += 2 + l + sovAgency(uint64(l))
 		}
 	}
+	if m.Address != nil {
+		l = m.Address.Size()
+		n += 2 + l + sovAgency(uint64(l))
+	}
 	if m.CreatedAt != nil {
 		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
 		n += 2 + l + sovAgency(uint64(l))
@@ -11817,7 +11447,82 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Size() (n int) {
 	return n
 }
 
-func (m *SearchOffshoreTripsResponse) Size() (n int) {
+func (m *SearchTripsOptions) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.LocationFilter != nil {
+		n += m.LocationFilter.Size()
+	}
+	if m.Divers != 0 {
+		n += 1 + sovAgency(uint64(m.Divers))
+	}
+	if m.TripType != 0 {
+		n += 1 + sovAgency(uint64(m.TripType))
+	}
+	if m.StartDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	if m.EndDate != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate)
+		n += 2 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *SearchTripsOptions_Country) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Country)
+	n += 1 + l + sovAgency(uint64(l))
+	return n
+}
+func (m *SearchTripsOptions_City) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.City)
+	n += 1 + l + sovAgency(uint64(l))
+	return n
+}
+func (m *SearchTripsOptions_Region) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Region)
+	n += 1 + l + sovAgency(uint64(l))
+	return n
+}
+func (m *SearchTripsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.SearchTripsOptions != nil {
+		l = m.SearchTripsOptions.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	if m.Limit != 0 {
+		n += 1 + sovAgency(uint64(m.Limit))
+	}
+	if m.Offset != 0 {
+		n += 1 + sovAgency(uint64(m.Offset))
+	}
+	return n
+}
+
+func (m *SearchTripsResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11827,14 +11532,10 @@ func (m *SearchOffshoreTripsResponse) Size() (n int) {
 		l = m.Trip.Size()
 		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.TripTemplate != nil {
-		l = m.TripTemplate.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
 	return n
 }
 
-func (m *SearchOffshoreTripsResponse_Trip) Size() (n int) {
+func (m *SearchTripsResponse_Trip) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11851,6 +11552,12 @@ func (m *SearchOffshoreTripsResponse_Trip) Size() (n int) {
 	}
 	if m.Price != 0 {
 		n += 6
+	}
+	if len(m.DiveMasters) > 0 {
+		for _, e := range m.DiveMasters {
+			l = e.Size()
+			n += 2 + l + sovAgency(uint64(l))
+		}
 	}
 	if m.FromDate != nil {
 		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate)
@@ -11872,10 +11579,14 @@ func (m *SearchOffshoreTripsResponse_Trip) Size() (n int) {
 		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
 		n += 2 + l + sovAgency(uint64(l))
 	}
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 2 + l + sovAgency(uint64(l))
+	}
 	return n
 }
 
-func (m *SearchOffshoreTripsResponse_TripTemplate) Size() (n int) {
+func (m *SearchTripsResponse_TripTemplate) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11909,6 +11620,10 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) Size() (n int) {
 			l = e.Size()
 			n += 2 + l + sovAgency(uint64(l))
 		}
+	}
+	if m.Address != nil {
+		l = m.Address.Size()
+		n += 2 + l + sovAgency(uint64(l))
 	}
 	if m.CreatedAt != nil {
 		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
@@ -12513,126 +12228,28 @@ func (this *ListTripsResponse_Trip) String() string {
 	}, "")
 	return s
 }
-func (this *SearchOnshoreTrips) String() string {
+func (this *ListTripsWithTemplatesRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SearchOnshoreTrips{`,
-		`LocationFilter:` + fmt.Sprintf("%v", this.LocationFilter) + `,`,
-		`Divers:` + fmt.Sprintf("%v", this.Divers) + `,`,
-		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTrips_Country) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOnshoreTrips_Country{`,
-		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTrips_City) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOnshoreTrips_City{`,
-		`City:` + fmt.Sprintf("%v", this.City) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTrips_Region) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOnshoreTrips_Region{`,
-		`Region:` + fmt.Sprintf("%v", this.Region) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTripsRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOnshoreTripsRequest{`,
-		`SearchOnshoreTrips:` + strings.Replace(this.SearchOnshoreTrips.String(), "SearchOnshoreTrips", "SearchOnshoreTrips", 1) + `,`,
+	s := strings.Join([]string{`&ListTripsWithTemplatesRequest{`,
 		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
 		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOffshoreTrips) String() string {
+func (this *ListTripsWithTemplatesResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SearchOffshoreTrips{`,
-		`LocationFilter:` + fmt.Sprintf("%v", this.LocationFilter) + `,`,
-		`StartingMonth:` + strings.Replace(fmt.Sprintf("%v", this.StartingMonth), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse{`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "ListTripsWithTemplatesResponse_Trip", "ListTripsWithTemplatesResponse_Trip", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOffshoreTrips_Country) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOffshoreTrips_Country{`,
-		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOffshoreTrips_City) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOffshoreTrips_City{`,
-		`City:` + fmt.Sprintf("%v", this.City) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOffshoreTrips_Region) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOffshoreTrips_Region{`,
-		`Region:` + fmt.Sprintf("%v", this.Region) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOffshoreTripsRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOffshoreTripsRequest{`,
-		`SearchOffshoreTrips:` + strings.Replace(this.SearchOffshoreTrips.String(), "SearchOffshoreTrips", "SearchOffshoreTrips", 1) + `,`,
-		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
-		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTripsResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&SearchOnshoreTripsResponse{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "SearchOnshoreTripsResponse_Trip", "SearchOnshoreTripsResponse_Trip", 1) + `,`,
-		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "SearchOnshoreTripsResponse_TripTemplate", "SearchOnshoreTripsResponse_TripTemplate", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *SearchOnshoreTripsResponse_Trip) String() string {
+func (this *ListTripsWithTemplatesResponse_Trip) String() string {
 	if this == nil {
 		return "nil"
 	}
@@ -12641,7 +12258,7 @@ func (this *SearchOnshoreTripsResponse_Trip) String() string {
 		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMaster", "DiveMaster", 1) + ","
 	}
 	repeatedStringForDiveMasters += "}"
-	s := strings.Join([]string{`&SearchOnshoreTripsResponse_Trip{`,
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_Trip{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
 		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
@@ -12652,11 +12269,12 @@ func (this *SearchOnshoreTripsResponse_Trip) String() string {
 		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "ListTripsWithTemplatesResponse_TripTemplate", "ListTripsWithTemplatesResponse_TripTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOnshoreTripsResponse_TripTemplate) String() string {
+func (this *ListTripsWithTemplatesResponse_TripTemplate) String() string {
 	if this == nil {
 		return "nil"
 	}
@@ -12665,7 +12283,7 @@ func (this *SearchOnshoreTripsResponse_TripTemplate) String() string {
 		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
 	}
 	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&SearchOnshoreTripsResponse_TripTemplate{`,
+	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_TripTemplate{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
@@ -12674,42 +12292,105 @@ func (this *SearchOnshoreTripsResponse_TripTemplate) String() string {
 		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
 		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
 		`Images:` + repeatedStringForImages + `,`,
+		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
 		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOffshoreTripsResponse) String() string {
+func (this *SearchTripsOptions) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SearchOffshoreTripsResponse{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "SearchOffshoreTripsResponse_Trip", "SearchOffshoreTripsResponse_Trip", 1) + `,`,
-		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "SearchOffshoreTripsResponse_TripTemplate", "SearchOffshoreTripsResponse_TripTemplate", 1) + `,`,
+	s := strings.Join([]string{`&SearchTripsOptions{`,
+		`LocationFilter:` + fmt.Sprintf("%v", this.LocationFilter) + `,`,
+		`Divers:` + fmt.Sprintf("%v", this.Divers) + `,`,
+		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
+		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOffshoreTripsResponse_Trip) String() string {
+func (this *SearchTripsOptions_Country) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SearchOffshoreTripsResponse_Trip{`,
+	s := strings.Join([]string{`&SearchTripsOptions_Country{`,
+		`Country:` + fmt.Sprintf("%v", this.Country) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *SearchTripsOptions_City) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&SearchTripsOptions_City{`,
+		`City:` + fmt.Sprintf("%v", this.City) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *SearchTripsOptions_Region) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&SearchTripsOptions_Region{`,
+		`Region:` + fmt.Sprintf("%v", this.Region) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *SearchTripsRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&SearchTripsRequest{`,
+		`SearchTripsOptions:` + strings.Replace(this.SearchTripsOptions.String(), "SearchTripsOptions", "SearchTripsOptions", 1) + `,`,
+		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
+		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *SearchTripsResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&SearchTripsResponse{`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "SearchTripsResponse_Trip", "SearchTripsResponse_Trip", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *SearchTripsResponse_Trip) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForDiveMasters := "[]*DiveMaster{"
+	for _, f := range this.DiveMasters {
+		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMaster", "DiveMaster", 1) + ","
+	}
+	repeatedStringForDiveMasters += "}"
+	s := strings.Join([]string{`&SearchTripsResponse_Trip{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
 		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
 		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
+		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
 		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "SearchTripsResponse_TripTemplate", "SearchTripsResponse_TripTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchOffshoreTripsResponse_TripTemplate) String() string {
+func (this *SearchTripsResponse_TripTemplate) String() string {
 	if this == nil {
 		return "nil"
 	}
@@ -12718,7 +12399,7 @@ func (this *SearchOffshoreTripsResponse_TripTemplate) String() string {
 		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
 	}
 	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&SearchOffshoreTripsResponse_TripTemplate{`,
+	s := strings.Join([]string{`&SearchTripsResponse_TripTemplate{`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
@@ -12727,6 +12408,7 @@ func (this *SearchOffshoreTripsResponse_TripTemplate) String() string {
 		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
 		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
 		`Images:` + repeatedStringForImages + `,`,
+		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
 		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
@@ -18949,7 +18631,7 @@ func (m *ListTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOnshoreTrips) Unmarshal(dAtA []byte) error {
+func (m *ListTripsWithTemplatesRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -18972,286 +18654,13 @@ func (m *SearchOnshoreTrips) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOnshoreTrips: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListTripsWithTemplatesRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOnshoreTrips: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListTripsWithTemplatesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOnshoreTrips_Country{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOnshoreTrips_City{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Region", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOnshoreTrips_Region{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Divers", wireType)
-			}
-			m.Divers = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Divers |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StartDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.StartDate == nil {
-				m.StartDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.StartDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 30:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field EndDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.EndDate == nil {
-				m.EndDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.EndDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SearchOnshoreTripsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOnshoreTripsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOnshoreTripsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SearchOnshoreTrips", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.SearchOnshoreTrips == nil {
-				m.SearchOnshoreTrips = &SearchOnshoreTrips{}
-			}
-			if err := m.SearchOnshoreTrips.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
 			}
@@ -19270,7 +18679,7 @@ func (m *SearchOnshoreTripsRequest) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 3:
+		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
 			}
@@ -19310,7 +18719,7 @@ func (m *SearchOnshoreTripsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOffshoreTrips) Unmarshal(dAtA []byte) error {
+func (m *ListTripsWithTemplatesResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -19333,316 +18742,10 @@ func (m *SearchOffshoreTrips) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOffshoreTrips: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListTripsWithTemplatesResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOffshoreTrips: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOffshoreTrips_Country{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOffshoreTrips_City{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Region", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LocationFilter = &SearchOffshoreTrips_Region{string(dAtA[iNdEx:postIndex])}
-			iNdEx = postIndex
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StartingMonth", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.StartingMonth == nil {
-				m.StartingMonth = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.StartingMonth, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SearchOffshoreTripsRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOffshoreTripsRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOffshoreTripsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SearchOffshoreTrips", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.SearchOffshoreTrips == nil {
-				m.SearchOffshoreTrips = &SearchOffshoreTrips{}
-			}
-			if err := m.SearchOffshoreTrips.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
-			}
-			m.Limit = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Limit |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
-			}
-			m.Offset = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Offset |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SearchOnshoreTripsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOnshoreTripsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOnshoreTripsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListTripsWithTemplatesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -19675,45 +18778,9 @@ func (m *SearchOnshoreTripsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Trip == nil {
-				m.Trip = &SearchOnshoreTripsResponse_Trip{}
+				m.Trip = &ListTripsWithTemplatesResponse_Trip{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.TripTemplate == nil {
-				m.TripTemplate = &SearchOnshoreTripsResponse_TripTemplate{}
-			}
-			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -19738,7 +18805,7 @@ func (m *SearchOnshoreTripsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOnshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
+func (m *ListTripsWithTemplatesResponse_Trip) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20049,6 +19116,42 @@ func (m *SearchOnshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 110:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &ListTripsWithTemplatesResponse_TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipAgency(dAtA[iNdEx:])
@@ -20070,7 +19173,7 @@ func (m *SearchOnshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOnshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
+func (m *ListTripsWithTemplatesResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20294,6 +19397,42 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 80:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Address == nil {
+				m.Address = &Address{}
+			}
+			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 90:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
 			}
 			var msglen int
@@ -20328,7 +19467,7 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 90:
+		case 100:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
 			}
@@ -20385,7 +19524,7 @@ func (m *SearchOnshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOffshoreTripsResponse) Unmarshal(dAtA []byte) error {
+func (m *SearchTripsOptions) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20408,10 +19547,390 @@ func (m *SearchOffshoreTripsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: SearchOffshoreTripsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: SearchTripsOptions: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SearchOffshoreTripsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: SearchTripsOptions: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Country", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LocationFilter = &SearchTripsOptions_Country{string(dAtA[iNdEx:postIndex])}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field City", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LocationFilter = &SearchTripsOptions_City{string(dAtA[iNdEx:postIndex])}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Region", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LocationFilter = &SearchTripsOptions_Region{string(dAtA[iNdEx:postIndex])}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Divers", wireType)
+			}
+			m.Divers = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Divers |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 15:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
+			}
+			m.TripType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TripType |= TripType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 20:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StartDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.StartDate == nil {
+				m.StartDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.StartDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 30:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EndDate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.EndDate == nil {
+				m.EndDate = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.EndDate, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SearchTripsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SearchTripsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SearchTripsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SearchTripsOptions", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.SearchTripsOptions == nil {
+				m.SearchTripsOptions = &SearchTripsOptions{}
+			}
+			if err := m.SearchTripsOptions.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SearchTripsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SearchTripsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SearchTripsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -20444,45 +19963,9 @@ func (m *SearchOffshoreTripsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Trip == nil {
-				m.Trip = &SearchOffshoreTripsResponse_Trip{}
+				m.Trip = &SearchTripsResponse_Trip{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.TripTemplate == nil {
-				m.TripTemplate = &SearchOffshoreTripsResponse_TripTemplate{}
-			}
-			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -20507,7 +19990,7 @@ func (m *SearchOffshoreTripsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
+func (m *SearchTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20606,6 +20089,40 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 			m.Price = float32(math.Float32frombits(v))
 		case 50:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DiveMasters = append(m.DiveMasters, &DiveMaster{})
+			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 60:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FromDate", wireType)
 			}
 			var msglen int
@@ -20640,7 +20157,7 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 60:
+		case 70:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ToDate", wireType)
 			}
@@ -20676,7 +20193,7 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 70:
+		case 80:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
 			}
@@ -20712,7 +20229,7 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 80:
+		case 90:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
 			}
@@ -20748,7 +20265,7 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 90:
+		case 100:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
 			}
@@ -20784,6 +20301,42 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 110:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &SearchTripsResponse_TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipAgency(dAtA[iNdEx:])
@@ -20805,7 +20358,7 @@ func (m *SearchOffshoreTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchOffshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
+func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -21029,6 +20582,42 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error 
 			iNdEx = postIndex
 		case 80:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Address == nil {
+				m.Address = &Address{}
+			}
+			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 90:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
 			}
 			var msglen int
@@ -21063,7 +20652,7 @@ func (m *SearchOffshoreTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error 
 				return err
 			}
 			iNdEx = postIndex
-		case 90:
+		case 100:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
 			}

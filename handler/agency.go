@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
@@ -176,9 +175,6 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 	}
 
 	for _, hotel := range hotels {
-		fmt.Printf("Trying to print hotel properties\n")
-		fmt.Printf("%+v\n", hotel)
-
 		resp := &pb.ListHotelsResponse{
 			Hotel: &pb.ListHotelsResponse_Hotel{
 				Id:          uint64(hotel.ID),
@@ -226,7 +222,6 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 
 	liveaboards, err := handler.agencyService.ListLiveaboards(ctx, req.GetLimit(), req.GetOffset())
 	if err != nil {
-		fmt.Printf("%+v\n", err)
 		return err
 	}
 
@@ -382,21 +377,22 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 	return nil
 }
 
-func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsRequest, srv pb.AgencyService_SearchOnshoreTripsServer) error {
+func (handler *AgencyHandler) ListTripsWithTemplates(req *pb.ListTripsWithTemplatesRequest, srv pb.AgencyService_ListTripsWithTemplatesServer) error {
 	ctx := srv.Context()
 
-	trips, err := handler.agencyService.SearchOnshoreTrips(ctx, req.GetSearchOnshoreTrips(), req.GetLimit(), req.GetOffset())
+	trips, err := handler.agencyService.ListTripsWithTemplates(ctx, req.GetLimit(), req.GetOffset())
+
 	if err != nil {
 		return err
 	}
 
 	if len(trips) == 0 {
-		return status.Error(codes.NotFound, "SearchOnshoreTrips: not found")
+		return status.Error(codes.NotFound, "SearchTrips: not found")
 	}
 
 	for _, trip := range trips {
-		resp := &pb.SearchOnshoreTripsResponse{
-			Trip: &pb.SearchOnshoreTripsResponse_Trip{
+		resp := &pb.ListTripsWithTemplatesResponse{
+			Trip: &pb.ListTripsWithTemplatesResponse_Trip{
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
@@ -406,17 +402,28 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,
-			},
-			TripTemplate: &pb.SearchOnshoreTripsResponse_TripTemplate{
-				Id:           uint64(trip.TripTemplate.ID),
-				Name:         trip.TripTemplate.Name,
-				Description:  trip.TripTemplate.Description,
-				TripType:     pb.TripType(trip.TripTemplate.Type),
-				HotelId:      uint64(trip.TripTemplate.HotelID),
-				BoatId:       uint64(trip.TripTemplate.BoatID),
-				LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
-				CreatedAt:    &trip.TripTemplate.CreatedAt,
-				UpdatedAt:    &trip.TripTemplate.UpdatedAt,
+				TripTemplate: &pb.ListTripsWithTemplatesResponse_TripTemplate{
+					Id:           uint64(trip.TripTemplate.ID),
+					Name:         trip.TripTemplate.Name,
+					Description:  trip.TripTemplate.Description,
+					TripType:     pb.TripType(trip.TripTemplate.Type),
+					HotelId:      uint64(trip.TripTemplate.HotelID),
+					BoatId:       uint64(trip.TripTemplate.BoatID),
+					LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
+					Address: &pb.Address{
+						Id:            uint64(trip.TripTemplate.Address.ID),
+						AddressLine_1: trip.TripTemplate.Address.AddressLine_1,
+						AddressLine_2: trip.TripTemplate.Address.AddressLine_2,
+						City:          trip.TripTemplate.Address.City,
+						Postcode:      trip.TripTemplate.Address.Postcode,
+						Region:        trip.TripTemplate.Address.Region,
+						Country:       trip.TripTemplate.Address.Country,
+						CreatedAt:     &trip.TripTemplate.Address.CreatedAt,
+						UpdatedAt:     &trip.TripTemplate.Address.UpdatedAt,
+					},
+					CreatedAt: &trip.TripTemplate.CreatedAt,
+					UpdatedAt: &trip.TripTemplate.UpdatedAt,
+				},
 			},
 		}
 
@@ -432,24 +439,96 @@ func (handler *AgencyHandler) SearchOnshoreTrips(req *pb.SearchOnshoreTripsReque
 			}
 		}
 
-		// if len(tripTemplate.Images) > 0 {
-		// 	resp.Template.Images = make([]*pb.File, 0, len(tripTemplate.Images))
-		// 	for _, link := range tripTemplate.Images {
-		// 		file := &pb.File{
-		// 			Link: link,
-		// 		}
-		// 		resp.Template.Images = append(resp.Template.Images, file)
-		// 	}
-		// }
+		if len(trip.TripTemplate.Images) > 0 {
+			resp.Trip.TripTemplate.Images = make([]*pb.File, 0, len(trip.TripTemplate.Images))
+			for _, link := range trip.TripTemplate.Images {
+				file := &pb.File{
+					Link: link,
+				}
+				resp.Trip.TripTemplate.Images = append(resp.Trip.TripTemplate.Images, file)
+			}
+		}
 
 		srv.Send(resp)
 	}
 
-	fmt.Println(trips, err)
-
 	return nil
 }
 
-func (handler *AgencyHandler) SearchOffshoreTrips(req *pb.SearchOffshoreTripsRequest, srv pb.AgencyService_SearchOffshoreTripsServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchOffshoreTrips not implemented")
+func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.AgencyService_SearchTripsServer) error {
+	ctx := srv.Context()
+
+	trips, err := handler.agencyService.SearchTrips(ctx, req.GetSearchTripsOptions(), req.GetLimit(), req.GetOffset())
+
+	if err != nil {
+		return err
+	}
+
+	if len(trips) == 0 {
+		return status.Error(codes.NotFound, "SearchTrips: not found")
+	}
+
+	for _, trip := range trips {
+		resp := &pb.SearchTripsResponse{
+			Trip: &pb.SearchTripsResponse_Trip{
+				Id:                  uint64(trip.ID),
+				TripTemplateId:      uint64(trip.TripTemplateID),
+				MaxGuest:            trip.MaxGuest,
+				Price:               trip.Price,
+				FromDate:            trip.StartDate,
+				ToDate:              trip.EndDate,
+				LastReservationDate: trip.LastReservationDate,
+				CreatedAt:           &trip.CreatedAt,
+				UpdatedAt:           &trip.UpdatedAt,
+				TripTemplate: &pb.SearchTripsResponse_TripTemplate{
+					Id:           uint64(trip.TripTemplate.ID),
+					Name:         trip.TripTemplate.Name,
+					Description:  trip.TripTemplate.Description,
+					TripType:     pb.TripType(trip.TripTemplate.Type),
+					HotelId:      uint64(trip.TripTemplate.HotelID),
+					BoatId:       uint64(trip.TripTemplate.BoatID),
+					LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
+					Address: &pb.Address{
+						Id:            uint64(trip.TripTemplate.Address.ID),
+						AddressLine_1: trip.TripTemplate.Address.AddressLine_1,
+						AddressLine_2: trip.TripTemplate.Address.AddressLine_2,
+						City:          trip.TripTemplate.Address.City,
+						Postcode:      trip.TripTemplate.Address.Postcode,
+						Region:        trip.TripTemplate.Address.Region,
+						Country:       trip.TripTemplate.Address.Country,
+						CreatedAt:     &trip.TripTemplate.Address.CreatedAt,
+						UpdatedAt:     &trip.TripTemplate.Address.UpdatedAt,
+					},
+					CreatedAt: &trip.TripTemplate.CreatedAt,
+					UpdatedAt: &trip.TripTemplate.UpdatedAt,
+				},
+			},
+		}
+
+		if len(trip.DiveMasters) > 0 {
+			resp.Trip.DiveMasters = make([]*pb.DiveMaster, 0, len(trip.DiveMasters))
+			for _, dive_master := range trip.DiveMasters {
+				resp.Trip.DiveMasters = append(resp.Trip.DiveMasters, &pb.DiveMaster{
+					FirstName: dive_master.FirstName,
+					LastName:  dive_master.LastName,
+					Level:     pb.LevelType(dive_master.Level),
+				},
+				)
+			}
+		}
+
+		if len(trip.TripTemplate.Images) > 0 {
+			resp.Trip.TripTemplate.Images = make([]*pb.File, 0, len(trip.TripTemplate.Images))
+			for _, link := range trip.TripTemplate.Images {
+				file := &pb.File{
+					Link: link,
+				}
+				resp.Trip.TripTemplate.Images = append(resp.Trip.TripTemplate.Images, file)
+			}
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
 }

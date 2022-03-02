@@ -3,7 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
-	"errors"
+	"time"
 
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
@@ -31,9 +31,9 @@ type AgencyService interface {
 	ListStaffs(ctx context.Context, limit, offset uint64) ([]*model.Staff, error)
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
+	ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 
-	SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchOnshoreTrips, limit, offset uint64) ([]*model.Trip, error)
-	SearchOffshoreTrips(ctx context.Context, searchOffshoreTrips *pb.SearchOffshoreTrips, limit, offset uint64) ([]*model.Trip, error)
+	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -92,7 +92,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	if diveMaster.FrontImage.GetFile() != nil {
 		reader = bytes.NewReader(diveMaster.FrontImage.File)
-		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PRIVATE, reader)
+		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -102,7 +102,7 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	if diveMaster.BackImage.GetFile() != nil {
 		reader = bytes.NewReader(diveMaster.BackImage.File)
-		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PRIVATE, reader)
+		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -145,7 +145,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 	for _, image := range hotel.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -170,7 +170,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 		for _, image := range rt.GetRoomImages() {
 			reader := bytes.NewReader(image.GetFile())
-			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 			if err != nil {
 				return err
@@ -251,7 +251,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 
 	for _, image := range tripTemplate.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -333,7 +333,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 
 	for _, image := range divingBoat.GetBoatImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -378,7 +378,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 	for _, image := range liveaboard.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -403,7 +403,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 
 		for _, image := range rt.GetRoomImages() {
 			reader := bytes.NewReader(image.GetFile())
-			objectID, err := service.media.Put(image.GetFilename(), media.PRIVATE, reader)
+			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 			if err != nil {
 				return err
@@ -587,7 +587,33 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 	return trips, nil
 }
 
-func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnShoreTrips *pb.SearchOnshoreTrips, limit, offset uint64) ([]*model.Trip, error) {
+// ListTrips returns list of trips associated with the agency.
+func (service *agencyService) ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error) {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	trips, err := service.repo.Trip.ListTripsWithTemplatesByAgency(ctx, uint64(agency.ID), limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
+	}
+
+	return trips, nil
+}
+
+func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
 	if limit > 20 || limit == 0 {
 		limit = 20
 	}
@@ -595,22 +621,33 @@ func (service *agencyService) SearchOnshoreTrips(ctx context.Context, searchOnSh
 	var err error
 	var trips []*model.Trip
 
-	switch searchOnShoreTrips.GetLocationFilter().(type) {
-	case *pb.SearchOnshoreTrips_Country:
-		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, searchOnShoreTrips.GetCountry(), "", "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
-	case *pb.SearchOnshoreTrips_City:
-		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, "", searchOnShoreTrips.GetCity(), "", searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
-	case *pb.SearchOnshoreTrips_Region:
-		trips, err = service.repo.Trip.SearchOnshoreTrips(ctx, "", "", searchOnShoreTrips.GetRegion(), searchOnShoreTrips.GetDivers(), *searchOnShoreTrips.GetStartDate(), *searchOnShoreTrips.GetEndDate(), uint(limit), uint(offset))
+	startDate := searchTripsOptions.GetStartDate()
+
+	// default the startDate value to "now" if startDate was not given.
+	if startDate == nil {
+		now := time.Now()
+		startDate = &now
+	}
+
+	// TODO deal with files of trip templates.
+	switch searchTripsOptions.GetLocationFilter().(type) {
+	case *pb.SearchTripsOptions_Country:
+		trips, err = service.repo.Trip.SearchTrips(ctx, searchTripsOptions.GetCountry(), "", "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
+	case *pb.SearchTripsOptions_City:
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", searchTripsOptions.GetCity(), "", searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
+	case *pb.SearchTripsOptions_Region:
+		trips, err = service.repo.Trip.SearchTrips(ctx, "", "", searchTripsOptions.GetRegion(), searchTripsOptions.GetDivers(), startDate, searchTripsOptions.GetEndDate(), model.TripType(searchTripsOptions.GetTripType()), uint(limit), uint(offset))
 	}
 
 	if err != nil {
 		return nil, err
 	}
 
-	return trips, nil
-}
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
+	}
 
-func (service *agencyService) SearchOffshoreTrips(ctx context.Context, searchOffshoreTrips *pb.SearchOffshoreTrips, limit, offset uint64) ([]*model.Trip, error) {
-	return nil, errors.New("Unimplemented")
+	return trips, nil
 }
