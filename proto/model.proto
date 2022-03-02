@@ -163,6 +163,7 @@ message Hotel {
     string phone = 40;
     Address address = 50;
     repeated File images = 60;
+    repeated RoomType room_types = 65;
     google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
 }
@@ -179,6 +180,7 @@ message Liveaboard {
     uint32 diver_rooms = 52;
     uint32 staff_rooms = 53;
     Address address = 54;
+    repeated RoomType room_types = 55;
     google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
 }
@@ -204,8 +206,9 @@ message TripTemplate {
     uint64 boat_id = 50;
     uint64 liveaboard_id = 60;
     repeated File images = 70;
-    google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+    Address address = 80;
+    google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
 }
 
 // Trip
@@ -215,8 +218,9 @@ message Trip {
     uint32 max_guest = 30;
     float price = 40;
     repeated DiveMaster dive_masters = 50;
-    google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+    repeated uint64 dive_master_ids = 55;
+    google.protobuf.Timestamp start_date = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp end_date = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];

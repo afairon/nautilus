@@ -8,6 +8,7 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // AgencyHandler implements the Agency rpc interface.
@@ -97,7 +98,7 @@ func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyS
 
 	for _, boat := range boats {
 		resp := &pb.ListBoatsResponse{
-			Boat: &pb.ListBoatsResponse_Boat{
+			Boat: &pb.Boat{
 				Id:            uint64(boat.ID),
 				Name:          boat.Name,
 				TotalCapacity: boat.TotalCapacity,
@@ -137,7 +138,7 @@ func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, sr
 
 	for _, diveMaster := range diveMasters {
 		resp := &pb.ListDiveMastersResponse{
-			DiveMaster: &pb.ListDiveMastersResponse_DiveMaster{
+			DiveMaster: &pb.DiveMaster{
 				Id:        uint64(diveMaster.ID),
 				FirstName: diveMaster.FirstName,
 				LastName:  diveMaster.LastName,
@@ -176,7 +177,7 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 
 	for _, hotel := range hotels {
 		resp := &pb.ListHotelsResponse{
-			Hotel: &pb.ListHotelsResponse_Hotel{
+			Hotel: &pb.Hotel{
 				Id:          uint64(hotel.ID),
 				Name:        hotel.Name,
 				Description: hotel.Description,
@@ -227,7 +228,7 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 
 	for _, liveaboard := range liveaboards {
 		resp := &pb.ListLiveaboardsResponse{
-			Liveaboard: &pb.ListLiveaboardsResponse_Liveaboard{
+			Liveaboard: &pb.Liveaboard{
 				Id:            uint64(liveaboard.ID),
 				Name:          liveaboard.Name,
 				Description:   liveaboard.Description,
@@ -284,7 +285,7 @@ func (handler *AgencyHandler) ListStaffs(req *pb.ListStaffsRequest, srv pb.Agenc
 
 	for _, staff := range staffs {
 		resp := &pb.ListStaffsResponse{
-			Staff: &pb.ListStaffsResponse_Staff{
+			Staff: &pb.Staff{
 				Id:        uint64(staff.ID),
 				FirstName: staff.FirstName,
 				LastName:  staff.LastName,
@@ -315,7 +316,7 @@ func (handler *AgencyHandler) ListTripTemplates(req *pb.ListTripTemplatesRequest
 
 	for _, tripTemplate := range tripTemplates {
 		resp := &pb.ListTripTemplatesResponse{
-			Template: &pb.ListTripTemplatesResponse_TripTemplate{
+			Template: &pb.TripTemplate{
 				Id:           uint64(tripTemplate.ID),
 				Name:         tripTemplate.Name,
 				Description:  tripTemplate.Description,
@@ -359,13 +360,13 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 
 	for _, trip := range trips {
 		resp := &pb.ListTripsResponse{
-			Trip: &pb.ListTripsResponse_Trip{
+			Trip: &pb.Trip{
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
 				Price:               trip.Price,
-				FromDate:            trip.StartDate,
-				ToDate:              trip.EndDate,
+				StartDate:           trip.StartDate,
+				EndDate:             trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,
@@ -392,7 +393,7 @@ func (handler *AgencyHandler) ListTripsWithTemplates(req *pb.ListTripsWithTempla
 
 	for _, trip := range trips {
 		resp := &pb.ListTripsWithTemplatesResponse{
-			Trip: &pb.ListTripsWithTemplatesResponse_Trip{
+			Trip: &pb.TripWithTemplate{
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
@@ -402,7 +403,7 @@ func (handler *AgencyHandler) ListTripsWithTemplates(req *pb.ListTripsWithTempla
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,
-				TripTemplate: &pb.ListTripsWithTemplatesResponse_TripTemplate{
+				TripTemplate: &pb.TripTemplate{
 					Id:           uint64(trip.TripTemplate.ID),
 					Name:         trip.TripTemplate.Name,
 					Description:  trip.TripTemplate.Description,
@@ -470,7 +471,7 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 
 	for _, trip := range trips {
 		resp := &pb.SearchTripsResponse{
-			Trip: &pb.SearchTripsResponse_Trip{
+			Trip: &pb.TripWithTemplate{
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
@@ -480,7 +481,7 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,
-				TripTemplate: &pb.SearchTripsResponse_TripTemplate{
+				TripTemplate: &pb.TripTemplate{
 					Id:           uint64(trip.TripTemplate.ID),
 					Name:         trip.TripTemplate.Name,
 					Description:  trip.TripTemplate.Description,
@@ -531,4 +532,28 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 	}
 
 	return nil
+}
+
+func (handler *AgencyHandler) UpdateTrip(context.Context, *pb.UpdateTripRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateTrip unimplemented")
+}
+
+func (handler *AgencyHandler) UpdateHotel(context.Context, *pb.UpdateHotelRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateHotel unimplemented")
+}
+
+func (handler *AgencyHandler) UpdateLiveaboard(context.Context, *pb.UpdateLiveaboardRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateLiveaboard unimplemented")
+}
+
+func (handler *AgencyHandler) UpdateBoat(context.Context, *pb.UpdateBoatRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateBoat unimplemented")
+}
+
+func (handler *AgencyHandler) UpdateDiveMaster(context.Context, *pb.UpdateDiveMasterRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateDiveMaster unimplemented")
+}
+
+func (handler *AgencyHandler) UpdateStaff(context.Context, *pb.UpdateStaffRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "UpdateStaff unimplemented")
 }

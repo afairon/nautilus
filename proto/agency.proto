@@ -24,6 +24,7 @@ service AgencyService {
     rpc UpdateLiveaboard(UpdateLiveaboardRequest) returns (google.protobuf.Empty);
     rpc UpdateBoat(UpdateBoatRequest) returns (google.protobuf.Empty);
     rpc UpdateDiveMaster(UpdateDiveMasterRequest) returns (google.protobuf.Empty);
+    rpc UpdateStaff(UpdateStaffRequest) returns (google.protobuf.Empty);
 
     rpc ListBoats (ListBoatsRequest) returns (stream ListBoatsResponse);
     rpc ListDiveMasters (ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
@@ -37,80 +38,34 @@ service AgencyService {
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 }
 
-message TripTemplate {
-    string name = 1;
-    string description = 2;
-    repeated model.File images = 5;
-    model.TripType trip_type = 6;
-    oneof residence_id {
-        HotelAndBoatId hotel_and_boat_id = 8;
-        uint64 liveaboard_id = 9;
-    }
-    model.Address address = 20;
-}
-
-message Trip {
-    google.protobuf.Timestamp from = 1 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp to = 2 [(gogoproto.stdtime) = true];
-    uint32 max_capacity = 3;
-    float price = 4;
-    repeated uint64 dive_master_ids = 5;
-    google.protobuf.Timestamp last_reservation_date = 6 [(gogoproto.stdtime) = true];
-}
-
-message Hotel {
-    string hotel_name = 1;
-    uint32 star = 2;
-    // optional images when creating a new hotel
-    repeated model.File images = 4;
-    repeated RoomType room_types = 5;
-    string hotel_description = 6;
-    string phone = 7;
-    model.Address address = 8;
-}
-
-message Liveaboard {
-    string name = 1;
-    string description = 2;
-    uint32 length = 3;
-    uint32 width = 4;
-    // optional images when creating a new liveaboard
-    repeated model.File images = 6;
-    repeated RoomType room_types = 7;
-    uint32 total_capacity = 8;
-    uint32 diver_rooms = 9;
-    uint32 staff_rooms = 10;
-    model.Address address = 11;
-}
-
 message AddDiveMasterRequest {
-    DiveMaster dive_master = 1;
+    model.DiveMaster dive_master = 1;
 }
 
 message AddStaffRequest {
-    Staff staff = 1;
+    model.Staff staff = 1;
 }
 
 message AddTripTemplateRequest {
-    TripTemplate trip_template = 1;
+    model.TripTemplate trip_template = 1;
     uint64 agency_id = 2;
 }
 
 message AddTripRequest {
-    Trip trip = 1;
-    TripTemplate trip_template = 2;
+    model.Trip trip = 1;
+    model.TripTemplate trip_template = 2;
 }
 
 message AddDivingBoatRequest {
-    DivingBoat diving_boat = 1;
+    model.Boat diving_boat = 1;
 }
 
 message AddHotelRequest {
-    Hotel hotel = 1;
+    model.Hotel hotel = 1;
 }
 
 message AddLiveaboardRequest {
-    Liveaboard liveaboard = 1;
+    model.Liveaboard liveaboard = 1;
 }
 
 // ListBoatsRequest
@@ -121,18 +76,7 @@ message ListBoatsRequest {
 
 // ListBoatsResponse
 message ListBoatsResponse {
-    Boat boat = 1;
-
-    message Boat {
-        uint64 id = 1;
-        string name = 10;
-        repeated model.File images = 20;
-        uint32 total_capacity = 21;
-        uint32 diver_capacity = 22;
-        uint32 staff_capacity = 23;
-        google.protobuf.Timestamp created_at = 30 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 40 [(gogoproto.stdtime) = true];
-    }
+    model.Boat boat = 1;
 }
 
 // ListDiveMastersRequest
@@ -143,17 +87,7 @@ message ListDiveMastersRequest {
 
 // ListDiveMastersResponse
 message ListDiveMastersResponse {
-    DiveMaster dive_master = 1;
-
-    message DiveMaster {
-        uint64 id = 1;
-        string first_name = 10;
-        string last_name = 20;
-        model.LevelType level = 30;
-        repeated model.File documents = 40;
-        google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
-    }
+    model.DiveMaster dive_master = 1;
 }
 
 // ListHotelsRequest
@@ -164,19 +98,7 @@ message ListHotelsRequest {
 
 // ListHotelsResponse
 message ListHotelsResponse {
-    Hotel hotel = 1;
-
-    message Hotel {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        uint32 stars = 30;
-        string phone = 40;
-        model.Address address = 50;
-        repeated model.File images = 60;
-        google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
-    }
+    model.Hotel hotel = 1;
 }
 
 // ListLiveaboardsRequest
@@ -187,22 +109,7 @@ message ListLiveaboardsRequest {
 
 // ListLiveaboardsResponse
 message ListLiveaboardsResponse {
-    Liveaboard liveaboard = 1;
-
-    message Liveaboard {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        float length = 30;
-        float width = 40;
-        repeated model.File images = 50;
-        uint32 total_capacity = 51;
-        uint32 diver_rooms = 52;
-        uint32 staff_rooms = 53;
-        model.Address address = 54;
-        google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
-    }
+    model.Liveaboard liveaboard = 1;
 }
 
 // ListStaffsRequest
@@ -213,17 +120,7 @@ message ListStaffsRequest {
 
 // ListStaffsResponse
 message ListStaffsResponse {
-    Staff staff = 1;
-
-    message Staff {
-        uint64 id = 1;
-        string first_name = 10;
-        string last_name = 20;
-        string position = 30;
-        model.GenderType gender = 40;
-        google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
-    }
+    model.Staff staff = 1;
 }
 
 // ListTripTemplatesRequest
@@ -234,20 +131,7 @@ message ListTripTemplatesRequest {
 
 // ListTripTemplatesResponse
 message ListTripTemplatesResponse {
-    TripTemplate template = 1;
-
-    message TripTemplate {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        model.TripType trip_type = 30;
-        uint64 hotel_id = 40;
-        uint64 boat_id = 50;
-        uint64 liveaboard_id = 60;
-        repeated model.File images = 70;
-        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
-    }
+    model.TripTemplate template = 1;
 }
 
 // ListTripsRequest
@@ -258,19 +142,7 @@ message ListTripsRequest {
 
 // ListTripsResponse
 message ListTripsResponse {
-    Trip trip = 1;
-
-    message Trip {
-        uint64 id = 1;
-        uint64 trip_template_id = 20;
-        uint32 max_guest = 30;
-        float price = 40;
-        google.protobuf.Timestamp from_date = 50 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp to_date = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp last_reservation_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
-    }
+    model.Trip trip = 1;
 }
 
 // ListTripsWithTemplatesRequest
@@ -281,35 +153,7 @@ message ListTripsWithTemplatesRequest {
 
 // ListTripsWithTemplatesResponse
 message ListTripsWithTemplatesResponse {
-    Trip trip = 1;
-
-    message Trip {
-        uint64 id = 1;
-        uint64 trip_template_id = 20;
-        uint32 max_guest = 30;
-        float price = 40;
-        repeated DiveMaster dive_masters = 50;
-        google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
-        TripTemplate trip_template = 110;
-    }
-
-    message TripTemplate {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        model.TripType trip_type = 30;
-        uint64 hotel_id = 40;
-        uint64 boat_id = 50;
-        uint64 liveaboard_id = 60;
-        repeated model.File images = 70;
-        model.Address address = 80;
-        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
-    }
+    model.TripWithTemplate trip = 1;
 }
 
 message SearchTripsOptions {
@@ -332,33 +176,29 @@ message SearchTripsRequest {
 }
 
 message SearchTripsResponse {
-    Trip trip = 1;
+    model.TripWithTemplate trip = 1;
+}
 
-    message Trip {
-        uint64 id = 1;
-        uint64 trip_template_id = 20;
-        uint32 max_guest = 30;
-        float price = 40;
-        repeated DiveMaster dive_masters = 50;
-        google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
-        TripTemplate trip_template = 110;
-    }
+message UpdateTripRequest {
+    model.Trip trip = 10;
+}
 
-    message TripTemplate {
-        uint64 id = 1;
-        string name = 10;
-        string description = 20;
-        model.TripType trip_type = 30;
-        uint64 hotel_id = 40;
-        uint64 boat_id = 50;
-        uint64 liveaboard_id = 60;
-        repeated model.File images = 70;
-        model.Address address = 80;
-        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
-        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
-    }
+message UpdateHotelRequest {
+    model.Hotel hotel = 10;
+}
+
+message UpdateLiveaboardRequest {
+    model.Liveaboard liveaboard = 10;
+}
+
+message UpdateBoatRequest {
+    model.Boat boat = 10;
+}
+
+message UpdateDiveMasterRequest {
+    model.DiveMaster dive_master = 10;
+}
+
+message UpdateStaffRequest {
+    model.Staff staff = 10;
 }

@@ -5,7 +5,6 @@ package pb
 
 import (
 	context "context"
-	encoding_binary "encoding/binary"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
@@ -35,899 +34,6 @@ var _ = time.Kitchen
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type DiveMaster struct {
-	FirstName  string    `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName   string    `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Level      LevelType `protobuf:"varint,3,opt,name=level,proto3,enum=model.LevelType" json:"level,omitempty"`
-	FrontImage *File     `protobuf:"bytes,4,opt,name=front_image,json=frontImage,proto3" json:"front_image,omitempty"`
-	BackImage  *File     `protobuf:"bytes,5,opt,name=back_image,json=backImage,proto3" json:"back_image,omitempty"`
-}
-
-func (m *DiveMaster) Reset()      { *m = DiveMaster{} }
-func (*DiveMaster) ProtoMessage() {}
-func (*DiveMaster) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{0}
-}
-func (m *DiveMaster) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DiveMaster) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DiveMaster.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DiveMaster) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DiveMaster.Merge(m, src)
-}
-func (m *DiveMaster) XXX_Size() int {
-	return m.Size()
-}
-func (m *DiveMaster) XXX_DiscardUnknown() {
-	xxx_messageInfo_DiveMaster.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DiveMaster proto.InternalMessageInfo
-
-func (m *DiveMaster) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *DiveMaster) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *DiveMaster) GetLevel() LevelType {
-	if m != nil {
-		return m.Level
-	}
-	return INSTRUCTOR
-}
-
-func (m *DiveMaster) GetFrontImage() *File {
-	if m != nil {
-		return m.FrontImage
-	}
-	return nil
-}
-
-func (m *DiveMaster) GetBackImage() *File {
-	if m != nil {
-		return m.BackImage
-	}
-	return nil
-}
-
-type DiveMasterFirstAndLastName struct {
-	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName  string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-}
-
-func (m *DiveMasterFirstAndLastName) Reset()      { *m = DiveMasterFirstAndLastName{} }
-func (*DiveMasterFirstAndLastName) ProtoMessage() {}
-func (*DiveMasterFirstAndLastName) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{1}
-}
-func (m *DiveMasterFirstAndLastName) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DiveMasterFirstAndLastName) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DiveMasterFirstAndLastName.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DiveMasterFirstAndLastName) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DiveMasterFirstAndLastName.Merge(m, src)
-}
-func (m *DiveMasterFirstAndLastName) XXX_Size() int {
-	return m.Size()
-}
-func (m *DiveMasterFirstAndLastName) XXX_DiscardUnknown() {
-	xxx_messageInfo_DiveMasterFirstAndLastName.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DiveMasterFirstAndLastName proto.InternalMessageInfo
-
-func (m *DiveMasterFirstAndLastName) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *DiveMasterFirstAndLastName) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-type Staff struct {
-	FirstName string     `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName  string     `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Position  string     `protobuf:"bytes,3,opt,name=position,proto3" json:"position,omitempty"`
-	Gender    GenderType `protobuf:"varint,4,opt,name=gender,proto3,enum=model.GenderType" json:"gender,omitempty"`
-}
-
-func (m *Staff) Reset()      { *m = Staff{} }
-func (*Staff) ProtoMessage() {}
-func (*Staff) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{2}
-}
-func (m *Staff) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Staff) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Staff.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Staff) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Staff.Merge(m, src)
-}
-func (m *Staff) XXX_Size() int {
-	return m.Size()
-}
-func (m *Staff) XXX_DiscardUnknown() {
-	xxx_messageInfo_Staff.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Staff proto.InternalMessageInfo
-
-func (m *Staff) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *Staff) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *Staff) GetPosition() string {
-	if m != nil {
-		return m.Position
-	}
-	return ""
-}
-
-func (m *Staff) GetGender() GenderType {
-	if m != nil {
-		return m.Gender
-	}
-	return FEMALE
-}
-
-type DivingBoat struct {
-	Name          string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	BoatImages    []*File  `protobuf:"bytes,2,rep,name=boat_images,json=boatImages,proto3" json:"boat_images,omitempty"`
-	Description   string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	TotalCapacity uint32   `protobuf:"varint,4,opt,name=total_capacity,json=totalCapacity,proto3" json:"total_capacity,omitempty"`
-	DiverCapacity uint32   `protobuf:"varint,5,opt,name=diver_capacity,json=diverCapacity,proto3" json:"diver_capacity,omitempty"`
-	StaffCapacity uint32   `protobuf:"varint,6,opt,name=staff_capacity,json=staffCapacity,proto3" json:"staff_capacity,omitempty"`
-	Address       *Address `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
-}
-
-func (m *DivingBoat) Reset()      { *m = DivingBoat{} }
-func (*DivingBoat) ProtoMessage() {}
-func (*DivingBoat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{3}
-}
-func (m *DivingBoat) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DivingBoat) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DivingBoat.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DivingBoat) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DivingBoat.Merge(m, src)
-}
-func (m *DivingBoat) XXX_Size() int {
-	return m.Size()
-}
-func (m *DivingBoat) XXX_DiscardUnknown() {
-	xxx_messageInfo_DivingBoat.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DivingBoat proto.InternalMessageInfo
-
-func (m *DivingBoat) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *DivingBoat) GetBoatImages() []*File {
-	if m != nil {
-		return m.BoatImages
-	}
-	return nil
-}
-
-func (m *DivingBoat) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *DivingBoat) GetTotalCapacity() uint32 {
-	if m != nil {
-		return m.TotalCapacity
-	}
-	return 0
-}
-
-func (m *DivingBoat) GetDiverCapacity() uint32 {
-	if m != nil {
-		return m.DiverCapacity
-	}
-	return 0
-}
-
-func (m *DivingBoat) GetStaffCapacity() uint32 {
-	if m != nil {
-		return m.StaffCapacity
-	}
-	return 0
-}
-
-func (m *DivingBoat) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-type Amenity struct {
-	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-}
-
-func (m *Amenity) Reset()      { *m = Amenity{} }
-func (*Amenity) ProtoMessage() {}
-func (*Amenity) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{4}
-}
-func (m *Amenity) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Amenity) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Amenity.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Amenity) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Amenity.Merge(m, src)
-}
-func (m *Amenity) XXX_Size() int {
-	return m.Size()
-}
-func (m *Amenity) XXX_DiscardUnknown() {
-	xxx_messageInfo_Amenity.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Amenity proto.InternalMessageInfo
-
-func (m *Amenity) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *Amenity) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-type RoomType struct {
-	Name        string     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description string     `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	MaxGuest    uint32     `protobuf:"varint,3,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price       float32    `protobuf:"fixed32,4,opt,name=price,proto3" json:"price,omitempty"`
-	RoomImages  []*File    `protobuf:"bytes,5,rep,name=room_images,json=roomImages,proto3" json:"room_images,omitempty"`
-	Amenities   []*Amenity `protobuf:"bytes,6,rep,name=amenities,proto3" json:"amenities,omitempty"`
-	Quantity    uint32     `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
-}
-
-func (m *RoomType) Reset()      { *m = RoomType{} }
-func (*RoomType) ProtoMessage() {}
-func (*RoomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{5}
-}
-func (m *RoomType) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *RoomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RoomType.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *RoomType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RoomType.Merge(m, src)
-}
-func (m *RoomType) XXX_Size() int {
-	return m.Size()
-}
-func (m *RoomType) XXX_DiscardUnknown() {
-	xxx_messageInfo_RoomType.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_RoomType proto.InternalMessageInfo
-
-func (m *RoomType) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *RoomType) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *RoomType) GetMaxGuest() uint32 {
-	if m != nil {
-		return m.MaxGuest
-	}
-	return 0
-}
-
-func (m *RoomType) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *RoomType) GetRoomImages() []*File {
-	if m != nil {
-		return m.RoomImages
-	}
-	return nil
-}
-
-func (m *RoomType) GetAmenities() []*Amenity {
-	if m != nil {
-		return m.Amenities
-	}
-	return nil
-}
-
-func (m *RoomType) GetQuantity() uint32 {
-	if m != nil {
-		return m.Quantity
-	}
-	return 0
-}
-
-type HotelAndBoatId struct {
-	HotelId uint64 `protobuf:"varint,1,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
-	BoatId  uint64 `protobuf:"varint,2,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
-}
-
-func (m *HotelAndBoatId) Reset()      { *m = HotelAndBoatId{} }
-func (*HotelAndBoatId) ProtoMessage() {}
-func (*HotelAndBoatId) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{6}
-}
-func (m *HotelAndBoatId) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *HotelAndBoatId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_HotelAndBoatId.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *HotelAndBoatId) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HotelAndBoatId.Merge(m, src)
-}
-func (m *HotelAndBoatId) XXX_Size() int {
-	return m.Size()
-}
-func (m *HotelAndBoatId) XXX_DiscardUnknown() {
-	xxx_messageInfo_HotelAndBoatId.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HotelAndBoatId proto.InternalMessageInfo
-
-func (m *HotelAndBoatId) GetHotelId() uint64 {
-	if m != nil {
-		return m.HotelId
-	}
-	return 0
-}
-
-func (m *HotelAndBoatId) GetBoatId() uint64 {
-	if m != nil {
-		return m.BoatId
-	}
-	return 0
-}
-
-type TripTemplate struct {
-	Name        string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description string   `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Images      []*File  `protobuf:"bytes,5,rep,name=images,proto3" json:"images,omitempty"`
-	TripType    TripType `protobuf:"varint,6,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
-	// Types that are valid to be assigned to ResidenceId:
-	//	*TripTemplate_HotelAndBoatId
-	//	*TripTemplate_LiveaboardId
-	ResidenceId isTripTemplate_ResidenceId `protobuf_oneof:"residence_id"`
-	Address     *Address                   `protobuf:"bytes,20,opt,name=address,proto3" json:"address,omitempty"`
-}
-
-func (m *TripTemplate) Reset()      { *m = TripTemplate{} }
-func (*TripTemplate) ProtoMessage() {}
-func (*TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{7}
-}
-func (m *TripTemplate) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_TripTemplate.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TripTemplate.Merge(m, src)
-}
-func (m *TripTemplate) XXX_Size() int {
-	return m.Size()
-}
-func (m *TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_TripTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_TripTemplate proto.InternalMessageInfo
-
-type isTripTemplate_ResidenceId interface {
-	isTripTemplate_ResidenceId()
-	Equal(interface{}) bool
-	MarshalTo([]byte) (int, error)
-	Size() int
-}
-
-type TripTemplate_HotelAndBoatId struct {
-	HotelAndBoatId *HotelAndBoatId `protobuf:"bytes,8,opt,name=hotel_and_boat_id,json=hotelAndBoatId,proto3,oneof" json:"hotel_and_boat_id,omitempty"`
-}
-type TripTemplate_LiveaboardId struct {
-	LiveaboardId uint64 `protobuf:"varint,9,opt,name=liveaboard_id,json=liveaboardId,proto3,oneof" json:"liveaboard_id,omitempty"`
-}
-
-func (*TripTemplate_HotelAndBoatId) isTripTemplate_ResidenceId() {}
-func (*TripTemplate_LiveaboardId) isTripTemplate_ResidenceId()   {}
-
-func (m *TripTemplate) GetResidenceId() isTripTemplate_ResidenceId {
-	if m != nil {
-		return m.ResidenceId
-	}
-	return nil
-}
-
-func (m *TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *TripTemplate) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *TripTemplate) GetTripType() TripType {
-	if m != nil {
-		return m.TripType
-	}
-	return ONSHORE
-}
-
-func (m *TripTemplate) GetHotelAndBoatId() *HotelAndBoatId {
-	if x, ok := m.GetResidenceId().(*TripTemplate_HotelAndBoatId); ok {
-		return x.HotelAndBoatId
-	}
-	return nil
-}
-
-func (m *TripTemplate) GetLiveaboardId() uint64 {
-	if x, ok := m.GetResidenceId().(*TripTemplate_LiveaboardId); ok {
-		return x.LiveaboardId
-	}
-	return 0
-}
-
-func (m *TripTemplate) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-// XXX_OneofWrappers is for the internal use of the proto package.
-func (*TripTemplate) XXX_OneofWrappers() []interface{} {
-	return []interface{}{
-		(*TripTemplate_HotelAndBoatId)(nil),
-		(*TripTemplate_LiveaboardId)(nil),
-	}
-}
-
-type Trip struct {
-	From                *time.Time `protobuf:"bytes,1,opt,name=from,proto3,stdtime" json:"from,omitempty"`
-	To                  *time.Time `protobuf:"bytes,2,opt,name=to,proto3,stdtime" json:"to,omitempty"`
-	MaxCapacity         uint32     `protobuf:"varint,3,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
-	Price               float32    `protobuf:"fixed32,4,opt,name=price,proto3" json:"price,omitempty"`
-	DiveMasterIds       []uint64   `protobuf:"varint,5,rep,packed,name=dive_master_ids,json=diveMasterIds,proto3" json:"dive_master_ids,omitempty"`
-	LastReservationDate *time.Time `protobuf:"bytes,6,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-}
-
-func (m *Trip) Reset()      { *m = Trip{} }
-func (*Trip) ProtoMessage() {}
-func (*Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{8}
-}
-func (m *Trip) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Trip.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Trip.Merge(m, src)
-}
-func (m *Trip) XXX_Size() int {
-	return m.Size()
-}
-func (m *Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_Trip.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Trip proto.InternalMessageInfo
-
-func (m *Trip) GetFrom() *time.Time {
-	if m != nil {
-		return m.From
-	}
-	return nil
-}
-
-func (m *Trip) GetTo() *time.Time {
-	if m != nil {
-		return m.To
-	}
-	return nil
-}
-
-func (m *Trip) GetMaxCapacity() uint32 {
-	if m != nil {
-		return m.MaxCapacity
-	}
-	return 0
-}
-
-func (m *Trip) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *Trip) GetDiveMasterIds() []uint64 {
-	if m != nil {
-		return m.DiveMasterIds
-	}
-	return nil
-}
-
-func (m *Trip) GetLastReservationDate() *time.Time {
-	if m != nil {
-		return m.LastReservationDate
-	}
-	return nil
-}
-
-type Hotel struct {
-	HotelName string `protobuf:"bytes,1,opt,name=hotel_name,json=hotelName,proto3" json:"hotel_name,omitempty"`
-	Star      uint32 `protobuf:"varint,2,opt,name=star,proto3" json:"star,omitempty"`
-	// optional images when creating a new hotel
-	Images           []*File     `protobuf:"bytes,4,rep,name=images,proto3" json:"images,omitempty"`
-	RoomTypes        []*RoomType `protobuf:"bytes,5,rep,name=room_types,json=roomTypes,proto3" json:"room_types,omitempty"`
-	HotelDescription string      `protobuf:"bytes,6,opt,name=hotel_description,json=hotelDescription,proto3" json:"hotel_description,omitempty"`
-	Phone            string      `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`
-	Address          *Address    `protobuf:"bytes,8,opt,name=address,proto3" json:"address,omitempty"`
-}
-
-func (m *Hotel) Reset()      { *m = Hotel{} }
-func (*Hotel) ProtoMessage() {}
-func (*Hotel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{9}
-}
-func (m *Hotel) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Hotel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Hotel.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Hotel) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Hotel.Merge(m, src)
-}
-func (m *Hotel) XXX_Size() int {
-	return m.Size()
-}
-func (m *Hotel) XXX_DiscardUnknown() {
-	xxx_messageInfo_Hotel.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Hotel proto.InternalMessageInfo
-
-func (m *Hotel) GetHotelName() string {
-	if m != nil {
-		return m.HotelName
-	}
-	return ""
-}
-
-func (m *Hotel) GetStar() uint32 {
-	if m != nil {
-		return m.Star
-	}
-	return 0
-}
-
-func (m *Hotel) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *Hotel) GetRoomTypes() []*RoomType {
-	if m != nil {
-		return m.RoomTypes
-	}
-	return nil
-}
-
-func (m *Hotel) GetHotelDescription() string {
-	if m != nil {
-		return m.HotelDescription
-	}
-	return ""
-}
-
-func (m *Hotel) GetPhone() string {
-	if m != nil {
-		return m.Phone
-	}
-	return ""
-}
-
-func (m *Hotel) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-type Liveaboard struct {
-	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Length      uint32 `protobuf:"varint,3,opt,name=length,proto3" json:"length,omitempty"`
-	Width       uint32 `protobuf:"varint,4,opt,name=width,proto3" json:"width,omitempty"`
-	// optional images when creating a new liveaboard
-	Images        []*File     `protobuf:"bytes,6,rep,name=images,proto3" json:"images,omitempty"`
-	RoomTypes     []*RoomType `protobuf:"bytes,7,rep,name=room_types,json=roomTypes,proto3" json:"room_types,omitempty"`
-	TotalCapacity uint32      `protobuf:"varint,8,opt,name=total_capacity,json=totalCapacity,proto3" json:"total_capacity,omitempty"`
-	DiverRooms    uint32      `protobuf:"varint,9,opt,name=diver_rooms,json=diverRooms,proto3" json:"diver_rooms,omitempty"`
-	StaffRooms    uint32      `protobuf:"varint,10,opt,name=staff_rooms,json=staffRooms,proto3" json:"staff_rooms,omitempty"`
-	Address       *Address    `protobuf:"bytes,11,opt,name=address,proto3" json:"address,omitempty"`
-}
-
-func (m *Liveaboard) Reset()      { *m = Liveaboard{} }
-func (*Liveaboard) ProtoMessage() {}
-func (*Liveaboard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{10}
-}
-func (m *Liveaboard) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Liveaboard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Liveaboard.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Liveaboard) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Liveaboard.Merge(m, src)
-}
-func (m *Liveaboard) XXX_Size() int {
-	return m.Size()
-}
-func (m *Liveaboard) XXX_DiscardUnknown() {
-	xxx_messageInfo_Liveaboard.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Liveaboard proto.InternalMessageInfo
-
-func (m *Liveaboard) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *Liveaboard) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *Liveaboard) GetLength() uint32 {
-	if m != nil {
-		return m.Length
-	}
-	return 0
-}
-
-func (m *Liveaboard) GetWidth() uint32 {
-	if m != nil {
-		return m.Width
-	}
-	return 0
-}
-
-func (m *Liveaboard) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *Liveaboard) GetRoomTypes() []*RoomType {
-	if m != nil {
-		return m.RoomTypes
-	}
-	return nil
-}
-
-func (m *Liveaboard) GetTotalCapacity() uint32 {
-	if m != nil {
-		return m.TotalCapacity
-	}
-	return 0
-}
-
-func (m *Liveaboard) GetDiverRooms() uint32 {
-	if m != nil {
-		return m.DiverRooms
-	}
-	return 0
-}
-
-func (m *Liveaboard) GetStaffRooms() uint32 {
-	if m != nil {
-		return m.StaffRooms
-	}
-	return 0
-}
-
-func (m *Liveaboard) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
 type AddDiveMasterRequest struct {
 	DiveMaster *DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
 }
@@ -935,7 +41,7 @@ type AddDiveMasterRequest struct {
 func (m *AddDiveMasterRequest) Reset()      { *m = AddDiveMasterRequest{} }
 func (*AddDiveMasterRequest) ProtoMessage() {}
 func (*AddDiveMasterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{11}
+	return fileDescriptor_614a4be5fd9deed0, []int{0}
 }
 func (m *AddDiveMasterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -978,7 +84,7 @@ type AddStaffRequest struct {
 func (m *AddStaffRequest) Reset()      { *m = AddStaffRequest{} }
 func (*AddStaffRequest) ProtoMessage() {}
 func (*AddStaffRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{12}
+	return fileDescriptor_614a4be5fd9deed0, []int{1}
 }
 func (m *AddStaffRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1022,7 +128,7 @@ type AddTripTemplateRequest struct {
 func (m *AddTripTemplateRequest) Reset()      { *m = AddTripTemplateRequest{} }
 func (*AddTripTemplateRequest) ProtoMessage() {}
 func (*AddTripTemplateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{13}
+	return fileDescriptor_614a4be5fd9deed0, []int{2}
 }
 func (m *AddTripTemplateRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1073,7 +179,7 @@ type AddTripRequest struct {
 func (m *AddTripRequest) Reset()      { *m = AddTripRequest{} }
 func (*AddTripRequest) ProtoMessage() {}
 func (*AddTripRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{14}
+	return fileDescriptor_614a4be5fd9deed0, []int{3}
 }
 func (m *AddTripRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1117,13 +223,13 @@ func (m *AddTripRequest) GetTripTemplate() *TripTemplate {
 }
 
 type AddDivingBoatRequest struct {
-	DivingBoat *DivingBoat `protobuf:"bytes,1,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
+	DivingBoat *Boat `protobuf:"bytes,1,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
 }
 
 func (m *AddDivingBoatRequest) Reset()      { *m = AddDivingBoatRequest{} }
 func (*AddDivingBoatRequest) ProtoMessage() {}
 func (*AddDivingBoatRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{15}
+	return fileDescriptor_614a4be5fd9deed0, []int{4}
 }
 func (m *AddDivingBoatRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1152,7 +258,7 @@ func (m *AddDivingBoatRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AddDivingBoatRequest proto.InternalMessageInfo
 
-func (m *AddDivingBoatRequest) GetDivingBoat() *DivingBoat {
+func (m *AddDivingBoatRequest) GetDivingBoat() *Boat {
 	if m != nil {
 		return m.DivingBoat
 	}
@@ -1166,7 +272,7 @@ type AddHotelRequest struct {
 func (m *AddHotelRequest) Reset()      { *m = AddHotelRequest{} }
 func (*AddHotelRequest) ProtoMessage() {}
 func (*AddHotelRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{16}
+	return fileDescriptor_614a4be5fd9deed0, []int{5}
 }
 func (m *AddHotelRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1209,7 +315,7 @@ type AddLiveaboardRequest struct {
 func (m *AddLiveaboardRequest) Reset()      { *m = AddLiveaboardRequest{} }
 func (*AddLiveaboardRequest) ProtoMessage() {}
 func (*AddLiveaboardRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{17}
+	return fileDescriptor_614a4be5fd9deed0, []int{6}
 }
 func (m *AddLiveaboardRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1254,7 +360,7 @@ type ListBoatsRequest struct {
 func (m *ListBoatsRequest) Reset()      { *m = ListBoatsRequest{} }
 func (*ListBoatsRequest) ProtoMessage() {}
 func (*ListBoatsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{18}
+	return fileDescriptor_614a4be5fd9deed0, []int{7}
 }
 func (m *ListBoatsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1299,13 +405,13 @@ func (m *ListBoatsRequest) GetOffset() uint64 {
 
 // ListBoatsResponse
 type ListBoatsResponse struct {
-	Boat *ListBoatsResponse_Boat `protobuf:"bytes,1,opt,name=boat,proto3" json:"boat,omitempty"`
+	Boat *Boat `protobuf:"bytes,1,opt,name=boat,proto3" json:"boat,omitempty"`
 }
 
 func (m *ListBoatsResponse) Reset()      { *m = ListBoatsResponse{} }
 func (*ListBoatsResponse) ProtoMessage() {}
 func (*ListBoatsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{19}
+	return fileDescriptor_614a4be5fd9deed0, []int{8}
 }
 func (m *ListBoatsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1334,108 +440,9 @@ func (m *ListBoatsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListBoatsResponse proto.InternalMessageInfo
 
-func (m *ListBoatsResponse) GetBoat() *ListBoatsResponse_Boat {
+func (m *ListBoatsResponse) GetBoat() *Boat {
 	if m != nil {
 		return m.Boat
-	}
-	return nil
-}
-
-type ListBoatsResponse_Boat struct {
-	Id            uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Images        []*File    `protobuf:"bytes,20,rep,name=images,proto3" json:"images,omitempty"`
-	TotalCapacity uint32     `protobuf:"varint,21,opt,name=total_capacity,json=totalCapacity,proto3" json:"total_capacity,omitempty"`
-	DiverCapacity uint32     `protobuf:"varint,22,opt,name=diver_capacity,json=diverCapacity,proto3" json:"diver_capacity,omitempty"`
-	StaffCapacity uint32     `protobuf:"varint,23,opt,name=staff_capacity,json=staffCapacity,proto3" json:"staff_capacity,omitempty"`
-	CreatedAt     *time.Time `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt     *time.Time `protobuf:"bytes,40,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListBoatsResponse_Boat) Reset()      { *m = ListBoatsResponse_Boat{} }
-func (*ListBoatsResponse_Boat) ProtoMessage() {}
-func (*ListBoatsResponse_Boat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{19, 0}
-}
-func (m *ListBoatsResponse_Boat) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListBoatsResponse_Boat) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListBoatsResponse_Boat.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListBoatsResponse_Boat) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListBoatsResponse_Boat.Merge(m, src)
-}
-func (m *ListBoatsResponse_Boat) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListBoatsResponse_Boat) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListBoatsResponse_Boat.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListBoatsResponse_Boat proto.InternalMessageInfo
-
-func (m *ListBoatsResponse_Boat) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListBoatsResponse_Boat) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListBoatsResponse_Boat) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *ListBoatsResponse_Boat) GetTotalCapacity() uint32 {
-	if m != nil {
-		return m.TotalCapacity
-	}
-	return 0
-}
-
-func (m *ListBoatsResponse_Boat) GetDiverCapacity() uint32 {
-	if m != nil {
-		return m.DiverCapacity
-	}
-	return 0
-}
-
-func (m *ListBoatsResponse_Boat) GetStaffCapacity() uint32 {
-	if m != nil {
-		return m.StaffCapacity
-	}
-	return 0
-}
-
-func (m *ListBoatsResponse_Boat) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListBoatsResponse_Boat) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -1449,7 +456,7 @@ type ListDiveMastersRequest struct {
 func (m *ListDiveMastersRequest) Reset()      { *m = ListDiveMastersRequest{} }
 func (*ListDiveMastersRequest) ProtoMessage() {}
 func (*ListDiveMastersRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{20}
+	return fileDescriptor_614a4be5fd9deed0, []int{9}
 }
 func (m *ListDiveMastersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1494,13 +501,13 @@ func (m *ListDiveMastersRequest) GetOffset() uint64 {
 
 // ListDiveMastersResponse
 type ListDiveMastersResponse struct {
-	DiveMaster *ListDiveMastersResponse_DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
+	DiveMaster *DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
 }
 
 func (m *ListDiveMastersResponse) Reset()      { *m = ListDiveMastersResponse{} }
 func (*ListDiveMastersResponse) ProtoMessage() {}
 func (*ListDiveMastersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{21}
+	return fileDescriptor_614a4be5fd9deed0, []int{10}
 }
 func (m *ListDiveMastersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1529,100 +536,9 @@ func (m *ListDiveMastersResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListDiveMastersResponse proto.InternalMessageInfo
 
-func (m *ListDiveMastersResponse) GetDiveMaster() *ListDiveMastersResponse_DiveMaster {
+func (m *ListDiveMastersResponse) GetDiveMaster() *DiveMaster {
 	if m != nil {
 		return m.DiveMaster
-	}
-	return nil
-}
-
-type ListDiveMastersResponse_DiveMaster struct {
-	Id        uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FirstName string     `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName  string     `protobuf:"bytes,20,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Level     LevelType  `protobuf:"varint,30,opt,name=level,proto3,enum=model.LevelType" json:"level,omitempty"`
-	Documents []*File    `protobuf:"bytes,40,rep,name=documents,proto3" json:"documents,omitempty"`
-	CreatedAt *time.Time `protobuf:"bytes,50,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt *time.Time `protobuf:"bytes,60,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) Reset()      { *m = ListDiveMastersResponse_DiveMaster{} }
-func (*ListDiveMastersResponse_DiveMaster) ProtoMessage() {}
-func (*ListDiveMastersResponse_DiveMaster) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{21, 0}
-}
-func (m *ListDiveMastersResponse_DiveMaster) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListDiveMastersResponse_DiveMaster) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListDiveMastersResponse_DiveMaster.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListDiveMastersResponse_DiveMaster) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListDiveMastersResponse_DiveMaster.Merge(m, src)
-}
-func (m *ListDiveMastersResponse_DiveMaster) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListDiveMastersResponse_DiveMaster) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListDiveMastersResponse_DiveMaster.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListDiveMastersResponse_DiveMaster proto.InternalMessageInfo
-
-func (m *ListDiveMastersResponse_DiveMaster) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetLevel() LevelType {
-	if m != nil {
-		return m.Level
-	}
-	return INSTRUCTOR
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetDocuments() []*File {
-	if m != nil {
-		return m.Documents
-	}
-	return nil
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -1636,7 +552,7 @@ type ListHotelsRequest struct {
 func (m *ListHotelsRequest) Reset()      { *m = ListHotelsRequest{} }
 func (*ListHotelsRequest) ProtoMessage() {}
 func (*ListHotelsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{22}
+	return fileDescriptor_614a4be5fd9deed0, []int{11}
 }
 func (m *ListHotelsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1681,13 +597,13 @@ func (m *ListHotelsRequest) GetOffset() uint64 {
 
 // ListHotelsResponse
 type ListHotelsResponse struct {
-	Hotel *ListHotelsResponse_Hotel `protobuf:"bytes,1,opt,name=hotel,proto3" json:"hotel,omitempty"`
+	Hotel *Hotel `protobuf:"bytes,1,opt,name=hotel,proto3" json:"hotel,omitempty"`
 }
 
 func (m *ListHotelsResponse) Reset()      { *m = ListHotelsResponse{} }
 func (*ListHotelsResponse) ProtoMessage() {}
 func (*ListHotelsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{23}
+	return fileDescriptor_614a4be5fd9deed0, []int{12}
 }
 func (m *ListHotelsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1716,116 +632,9 @@ func (m *ListHotelsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListHotelsResponse proto.InternalMessageInfo
 
-func (m *ListHotelsResponse) GetHotel() *ListHotelsResponse_Hotel {
+func (m *ListHotelsResponse) GetHotel() *Hotel {
 	if m != nil {
 		return m.Hotel
-	}
-	return nil
-}
-
-type ListHotelsResponse_Hotel struct {
-	Id          uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name        string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	Stars       uint32     `protobuf:"varint,30,opt,name=stars,proto3" json:"stars,omitempty"`
-	Phone       string     `protobuf:"bytes,40,opt,name=phone,proto3" json:"phone,omitempty"`
-	Address     *Address   `protobuf:"bytes,50,opt,name=address,proto3" json:"address,omitempty"`
-	Images      []*File    `protobuf:"bytes,60,rep,name=images,proto3" json:"images,omitempty"`
-	CreatedAt   *time.Time `protobuf:"bytes,70,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt   *time.Time `protobuf:"bytes,80,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListHotelsResponse_Hotel) Reset()      { *m = ListHotelsResponse_Hotel{} }
-func (*ListHotelsResponse_Hotel) ProtoMessage() {}
-func (*ListHotelsResponse_Hotel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{23, 0}
-}
-func (m *ListHotelsResponse_Hotel) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListHotelsResponse_Hotel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListHotelsResponse_Hotel.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListHotelsResponse_Hotel) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListHotelsResponse_Hotel.Merge(m, src)
-}
-func (m *ListHotelsResponse_Hotel) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListHotelsResponse_Hotel) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListHotelsResponse_Hotel.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListHotelsResponse_Hotel proto.InternalMessageInfo
-
-func (m *ListHotelsResponse_Hotel) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListHotelsResponse_Hotel) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListHotelsResponse_Hotel) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *ListHotelsResponse_Hotel) GetStars() uint32 {
-	if m != nil {
-		return m.Stars
-	}
-	return 0
-}
-
-func (m *ListHotelsResponse_Hotel) GetPhone() string {
-	if m != nil {
-		return m.Phone
-	}
-	return ""
-}
-
-func (m *ListHotelsResponse_Hotel) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-func (m *ListHotelsResponse_Hotel) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *ListHotelsResponse_Hotel) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListHotelsResponse_Hotel) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -1839,7 +648,7 @@ type ListLiveaboardsRequest struct {
 func (m *ListLiveaboardsRequest) Reset()      { *m = ListLiveaboardsRequest{} }
 func (*ListLiveaboardsRequest) ProtoMessage() {}
 func (*ListLiveaboardsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{24}
+	return fileDescriptor_614a4be5fd9deed0, []int{13}
 }
 func (m *ListLiveaboardsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1884,13 +693,13 @@ func (m *ListLiveaboardsRequest) GetOffset() uint64 {
 
 // ListLiveaboardsResponse
 type ListLiveaboardsResponse struct {
-	Liveaboard *ListLiveaboardsResponse_Liveaboard `protobuf:"bytes,1,opt,name=liveaboard,proto3" json:"liveaboard,omitempty"`
+	Liveaboard *Liveaboard `protobuf:"bytes,1,opt,name=liveaboard,proto3" json:"liveaboard,omitempty"`
 }
 
 func (m *ListLiveaboardsResponse) Reset()      { *m = ListLiveaboardsResponse{} }
 func (*ListLiveaboardsResponse) ProtoMessage() {}
 func (*ListLiveaboardsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{25}
+	return fileDescriptor_614a4be5fd9deed0, []int{14}
 }
 func (m *ListLiveaboardsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1919,140 +728,9 @@ func (m *ListLiveaboardsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListLiveaboardsResponse proto.InternalMessageInfo
 
-func (m *ListLiveaboardsResponse) GetLiveaboard() *ListLiveaboardsResponse_Liveaboard {
+func (m *ListLiveaboardsResponse) GetLiveaboard() *Liveaboard {
 	if m != nil {
 		return m.Liveaboard
-	}
-	return nil
-}
-
-type ListLiveaboardsResponse_Liveaboard struct {
-	Id            uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	Length        float32    `protobuf:"fixed32,30,opt,name=length,proto3" json:"length,omitempty"`
-	Width         float32    `protobuf:"fixed32,40,opt,name=width,proto3" json:"width,omitempty"`
-	Images        []*File    `protobuf:"bytes,50,rep,name=images,proto3" json:"images,omitempty"`
-	TotalCapacity uint32     `protobuf:"varint,51,opt,name=total_capacity,json=totalCapacity,proto3" json:"total_capacity,omitempty"`
-	DiverRooms    uint32     `protobuf:"varint,52,opt,name=diver_rooms,json=diverRooms,proto3" json:"diver_rooms,omitempty"`
-	StaffRooms    uint32     `protobuf:"varint,53,opt,name=staff_rooms,json=staffRooms,proto3" json:"staff_rooms,omitempty"`
-	Address       *Address   `protobuf:"bytes,54,opt,name=address,proto3" json:"address,omitempty"`
-	CreatedAt     *time.Time `protobuf:"bytes,60,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt     *time.Time `protobuf:"bytes,70,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) Reset()      { *m = ListLiveaboardsResponse_Liveaboard{} }
-func (*ListLiveaboardsResponse_Liveaboard) ProtoMessage() {}
-func (*ListLiveaboardsResponse_Liveaboard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{25, 0}
-}
-func (m *ListLiveaboardsResponse_Liveaboard) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListLiveaboardsResponse_Liveaboard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListLiveaboardsResponse_Liveaboard.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListLiveaboardsResponse_Liveaboard) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListLiveaboardsResponse_Liveaboard.Merge(m, src)
-}
-func (m *ListLiveaboardsResponse_Liveaboard) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListLiveaboardsResponse_Liveaboard) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListLiveaboardsResponse_Liveaboard.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListLiveaboardsResponse_Liveaboard proto.InternalMessageInfo
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetLength() float32 {
-	if m != nil {
-		return m.Length
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetWidth() float32 {
-	if m != nil {
-		return m.Width
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetTotalCapacity() uint32 {
-	if m != nil {
-		return m.TotalCapacity
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetDiverRooms() uint32 {
-	if m != nil {
-		return m.DiverRooms
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetStaffRooms() uint32 {
-	if m != nil {
-		return m.StaffRooms
-	}
-	return 0
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -2066,7 +744,7 @@ type ListStaffsRequest struct {
 func (m *ListStaffsRequest) Reset()      { *m = ListStaffsRequest{} }
 func (*ListStaffsRequest) ProtoMessage() {}
 func (*ListStaffsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{26}
+	return fileDescriptor_614a4be5fd9deed0, []int{15}
 }
 func (m *ListStaffsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2111,13 +789,13 @@ func (m *ListStaffsRequest) GetOffset() uint64 {
 
 // ListStaffsResponse
 type ListStaffsResponse struct {
-	Staff *ListStaffsResponse_Staff `protobuf:"bytes,1,opt,name=staff,proto3" json:"staff,omitempty"`
+	Staff *Staff `protobuf:"bytes,1,opt,name=staff,proto3" json:"staff,omitempty"`
 }
 
 func (m *ListStaffsResponse) Reset()      { *m = ListStaffsResponse{} }
 func (*ListStaffsResponse) ProtoMessage() {}
 func (*ListStaffsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{27}
+	return fileDescriptor_614a4be5fd9deed0, []int{16}
 }
 func (m *ListStaffsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2146,100 +824,9 @@ func (m *ListStaffsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListStaffsResponse proto.InternalMessageInfo
 
-func (m *ListStaffsResponse) GetStaff() *ListStaffsResponse_Staff {
+func (m *ListStaffsResponse) GetStaff() *Staff {
 	if m != nil {
 		return m.Staff
-	}
-	return nil
-}
-
-type ListStaffsResponse_Staff struct {
-	Id        uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FirstName string     `protobuf:"bytes,10,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName  string     `protobuf:"bytes,20,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Position  string     `protobuf:"bytes,30,opt,name=position,proto3" json:"position,omitempty"`
-	Gender    GenderType `protobuf:"varint,40,opt,name=gender,proto3,enum=model.GenderType" json:"gender,omitempty"`
-	CreatedAt *time.Time `protobuf:"bytes,50,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt *time.Time `protobuf:"bytes,60,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListStaffsResponse_Staff) Reset()      { *m = ListStaffsResponse_Staff{} }
-func (*ListStaffsResponse_Staff) ProtoMessage() {}
-func (*ListStaffsResponse_Staff) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{27, 0}
-}
-func (m *ListStaffsResponse_Staff) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListStaffsResponse_Staff) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListStaffsResponse_Staff.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListStaffsResponse_Staff) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListStaffsResponse_Staff.Merge(m, src)
-}
-func (m *ListStaffsResponse_Staff) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListStaffsResponse_Staff) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListStaffsResponse_Staff.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListStaffsResponse_Staff proto.InternalMessageInfo
-
-func (m *ListStaffsResponse_Staff) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListStaffsResponse_Staff) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *ListStaffsResponse_Staff) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *ListStaffsResponse_Staff) GetPosition() string {
-	if m != nil {
-		return m.Position
-	}
-	return ""
-}
-
-func (m *ListStaffsResponse_Staff) GetGender() GenderType {
-	if m != nil {
-		return m.Gender
-	}
-	return FEMALE
-}
-
-func (m *ListStaffsResponse_Staff) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListStaffsResponse_Staff) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -2253,7 +840,7 @@ type ListTripTemplatesRequest struct {
 func (m *ListTripTemplatesRequest) Reset()      { *m = ListTripTemplatesRequest{} }
 func (*ListTripTemplatesRequest) ProtoMessage() {}
 func (*ListTripTemplatesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{28}
+	return fileDescriptor_614a4be5fd9deed0, []int{17}
 }
 func (m *ListTripTemplatesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2298,13 +885,13 @@ func (m *ListTripTemplatesRequest) GetOffset() uint64 {
 
 // ListTripTemplatesResponse
 type ListTripTemplatesResponse struct {
-	Template *ListTripTemplatesResponse_TripTemplate `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
+	Template *TripTemplate `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 }
 
 func (m *ListTripTemplatesResponse) Reset()      { *m = ListTripTemplatesResponse{} }
 func (*ListTripTemplatesResponse) ProtoMessage() {}
 func (*ListTripTemplatesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{29}
+	return fileDescriptor_614a4be5fd9deed0, []int{18}
 }
 func (m *ListTripTemplatesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2333,126 +920,9 @@ func (m *ListTripTemplatesResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListTripTemplatesResponse proto.InternalMessageInfo
 
-func (m *ListTripTemplatesResponse) GetTemplate() *ListTripTemplatesResponse_TripTemplate {
+func (m *ListTripTemplatesResponse) GetTemplate() *TripTemplate {
 	if m != nil {
 		return m.Template
-	}
-	return nil
-}
-
-type ListTripTemplatesResponse_TripTemplate struct {
-	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
-	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
-	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
-	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
-	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
-	CreatedAt    *time.Time `protobuf:"bytes,80,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt    *time.Time `protobuf:"bytes,90,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) Reset() {
-	*m = ListTripTemplatesResponse_TripTemplate{}
-}
-func (*ListTripTemplatesResponse_TripTemplate) ProtoMessage() {}
-func (*ListTripTemplatesResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{29, 0}
-}
-func (m *ListTripTemplatesResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListTripTemplatesResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListTripTemplatesResponse_TripTemplate.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListTripTemplatesResponse_TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTripTemplatesResponse_TripTemplate.Merge(m, src)
-}
-func (m *ListTripTemplatesResponse_TripTemplate) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListTripTemplatesResponse_TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTripTemplatesResponse_TripTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTripTemplatesResponse_TripTemplate proto.InternalMessageInfo
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetTripType() TripType {
-	if m != nil {
-		return m.TripType
-	}
-	return ONSHORE
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetHotelId() uint64 {
-	if m != nil {
-		return m.HotelId
-	}
-	return 0
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetBoatId() uint64 {
-	if m != nil {
-		return m.BoatId
-	}
-	return 0
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetLiveaboardId() uint64 {
-	if m != nil {
-		return m.LiveaboardId
-	}
-	return 0
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -2466,7 +936,7 @@ type ListTripsRequest struct {
 func (m *ListTripsRequest) Reset()      { *m = ListTripsRequest{} }
 func (*ListTripsRequest) ProtoMessage() {}
 func (*ListTripsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{30}
+	return fileDescriptor_614a4be5fd9deed0, []int{19}
 }
 func (m *ListTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2511,13 +981,13 @@ func (m *ListTripsRequest) GetOffset() uint64 {
 
 // ListTripsResponse
 type ListTripsResponse struct {
-	Trip *ListTripsResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+	Trip *Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
 }
 
 func (m *ListTripsResponse) Reset()      { *m = ListTripsResponse{} }
 func (*ListTripsResponse) ProtoMessage() {}
 func (*ListTripsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{31}
+	return fileDescriptor_614a4be5fd9deed0, []int{20}
 }
 func (m *ListTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2546,116 +1016,9 @@ func (m *ListTripsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListTripsResponse proto.InternalMessageInfo
 
-func (m *ListTripsResponse) GetTrip() *ListTripsResponse_Trip {
+func (m *ListTripsResponse) GetTrip() *Trip {
 	if m != nil {
 		return m.Trip
-	}
-	return nil
-}
-
-type ListTripsResponse_Trip struct {
-	Id                  uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripTemplateId      uint64     `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
-	MaxGuest            uint32     `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price               float32    `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
-	FromDate            *time.Time `protobuf:"bytes,50,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
-	ToDate              *time.Time `protobuf:"bytes,60,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
-	LastReservationDate *time.Time `protobuf:"bytes,70,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-	CreatedAt           *time.Time `protobuf:"bytes,80,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt           *time.Time `protobuf:"bytes,90,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListTripsResponse_Trip) Reset()      { *m = ListTripsResponse_Trip{} }
-func (*ListTripsResponse_Trip) ProtoMessage() {}
-func (*ListTripsResponse_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{31, 0}
-}
-func (m *ListTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListTripsResponse_Trip.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListTripsResponse_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTripsResponse_Trip.Merge(m, src)
-}
-func (m *ListTripsResponse_Trip) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListTripsResponse_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTripsResponse_Trip.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTripsResponse_Trip proto.InternalMessageInfo
-
-func (m *ListTripsResponse_Trip) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListTripsResponse_Trip) GetTripTemplateId() uint64 {
-	if m != nil {
-		return m.TripTemplateId
-	}
-	return 0
-}
-
-func (m *ListTripsResponse_Trip) GetMaxGuest() uint32 {
-	if m != nil {
-		return m.MaxGuest
-	}
-	return 0
-}
-
-func (m *ListTripsResponse_Trip) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *ListTripsResponse_Trip) GetFromDate() *time.Time {
-	if m != nil {
-		return m.FromDate
-	}
-	return nil
-}
-
-func (m *ListTripsResponse_Trip) GetToDate() *time.Time {
-	if m != nil {
-		return m.ToDate
-	}
-	return nil
-}
-
-func (m *ListTripsResponse_Trip) GetLastReservationDate() *time.Time {
-	if m != nil {
-		return m.LastReservationDate
-	}
-	return nil
-}
-
-func (m *ListTripsResponse_Trip) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListTripsResponse_Trip) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -2669,7 +1032,7 @@ type ListTripsWithTemplatesRequest struct {
 func (m *ListTripsWithTemplatesRequest) Reset()      { *m = ListTripsWithTemplatesRequest{} }
 func (*ListTripsWithTemplatesRequest) ProtoMessage() {}
 func (*ListTripsWithTemplatesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{32}
+	return fileDescriptor_614a4be5fd9deed0, []int{21}
 }
 func (m *ListTripsWithTemplatesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2714,13 +1077,13 @@ func (m *ListTripsWithTemplatesRequest) GetOffset() uint64 {
 
 // ListTripsWithTemplatesResponse
 type ListTripsWithTemplatesResponse struct {
-	Trip *ListTripsWithTemplatesResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+	Trip *TripWithTemplate `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
 }
 
 func (m *ListTripsWithTemplatesResponse) Reset()      { *m = ListTripsWithTemplatesResponse{} }
 func (*ListTripsWithTemplatesResponse) ProtoMessage() {}
 func (*ListTripsWithTemplatesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{33}
+	return fileDescriptor_614a4be5fd9deed0, []int{22}
 }
 func (m *ListTripsWithTemplatesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2749,257 +1112,9 @@ func (m *ListTripsWithTemplatesResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ListTripsWithTemplatesResponse proto.InternalMessageInfo
 
-func (m *ListTripsWithTemplatesResponse) GetTrip() *ListTripsWithTemplatesResponse_Trip {
+func (m *ListTripsWithTemplatesResponse) GetTrip() *TripWithTemplate {
 	if m != nil {
 		return m.Trip
-	}
-	return nil
-}
-
-type ListTripsWithTemplatesResponse_Trip struct {
-	Id                  uint64                                       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripTemplateId      uint64                                       `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
-	MaxGuest            uint32                                       `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price               float32                                      `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
-	DiveMasters         []*DiveMaster                                `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
-	FromDate            *time.Time                                   `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
-	ToDate              *time.Time                                   `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
-	LastReservationDate *time.Time                                   `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-	CreatedAt           *time.Time                                   `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt           *time.Time                                   `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-	TripTemplate        *ListTripsWithTemplatesResponse_TripTemplate `protobuf:"bytes,110,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) Reset()      { *m = ListTripsWithTemplatesResponse_Trip{} }
-func (*ListTripsWithTemplatesResponse_Trip) ProtoMessage() {}
-func (*ListTripsWithTemplatesResponse_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{33, 0}
-}
-func (m *ListTripsWithTemplatesResponse_Trip) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListTripsWithTemplatesResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListTripsWithTemplatesResponse_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.Merge(m, src)
-}
-func (m *ListTripsWithTemplatesResponse_Trip) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListTripsWithTemplatesResponse_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTripsWithTemplatesResponse_Trip.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTripsWithTemplatesResponse_Trip proto.InternalMessageInfo
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplateId() uint64 {
-	if m != nil {
-		return m.TripTemplateId
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetMaxGuest() uint32 {
-	if m != nil {
-		return m.MaxGuest
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetDiveMasters() []*DiveMaster {
-	if m != nil {
-		return m.DiveMasters
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetFromDate() *time.Time {
-	if m != nil {
-		return m.FromDate
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetToDate() *time.Time {
-	if m != nil {
-		return m.ToDate
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetLastReservationDate() *time.Time {
-	if m != nil {
-		return m.LastReservationDate
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) GetTripTemplate() *ListTripsWithTemplatesResponse_TripTemplate {
-	if m != nil {
-		return m.TripTemplate
-	}
-	return nil
-}
-
-type ListTripsWithTemplatesResponse_TripTemplate struct {
-	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
-	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
-	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
-	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
-	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
-	Address      *Address   `protobuf:"bytes,80,opt,name=address,proto3" json:"address,omitempty"`
-	CreatedAt    *time.Time `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt    *time.Time `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) Reset() {
-	*m = ListTripsWithTemplatesResponse_TripTemplate{}
-}
-func (*ListTripsWithTemplatesResponse_TripTemplate) ProtoMessage() {}
-func (*ListTripsWithTemplatesResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{33, 1}
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.Merge(m, src)
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_Size() int {
-	return m.Size()
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTripsWithTemplatesResponse_TripTemplate proto.InternalMessageInfo
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetTripType() TripType {
-	if m != nil {
-		return m.TripType
-	}
-	return ONSHORE
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetHotelId() uint64 {
-	if m != nil {
-		return m.HotelId
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetBoatId() uint64 {
-	if m != nil {
-		return m.BoatId
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetLiveaboardId() uint64 {
-	if m != nil {
-		return m.LiveaboardId
-	}
-	return 0
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetImages() []*File {
-	if m != nil {
-		return m.Images
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetAddress() *Address {
-	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
 	}
 	return nil
 }
@@ -3021,7 +1136,7 @@ type SearchTripsOptions struct {
 func (m *SearchTripsOptions) Reset()      { *m = SearchTripsOptions{} }
 func (*SearchTripsOptions) ProtoMessage() {}
 func (*SearchTripsOptions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34}
+	return fileDescriptor_614a4be5fd9deed0, []int{23}
 }
 func (m *SearchTripsOptions) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -3145,7 +1260,7 @@ type SearchTripsRequest struct {
 func (m *SearchTripsRequest) Reset()      { *m = SearchTripsRequest{} }
 func (*SearchTripsRequest) ProtoMessage() {}
 func (*SearchTripsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{35}
+	return fileDescriptor_614a4be5fd9deed0, []int{24}
 }
 func (m *SearchTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -3196,13 +1311,13 @@ func (m *SearchTripsRequest) GetOffset() uint64 {
 }
 
 type SearchTripsResponse struct {
-	Trip *SearchTripsResponse_Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+	Trip *TripWithTemplate `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
 }
 
 func (m *SearchTripsResponse) Reset()      { *m = SearchTripsResponse{} }
 func (*SearchTripsResponse) ProtoMessage() {}
 func (*SearchTripsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{36}
+	return fileDescriptor_614a4be5fd9deed0, []int{25}
 }
 func (m *SearchTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -3231,38 +1346,28 @@ func (m *SearchTripsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SearchTripsResponse proto.InternalMessageInfo
 
-func (m *SearchTripsResponse) GetTrip() *SearchTripsResponse_Trip {
+func (m *SearchTripsResponse) GetTrip() *TripWithTemplate {
 	if m != nil {
 		return m.Trip
 	}
 	return nil
 }
 
-type SearchTripsResponse_Trip struct {
-	Id                  uint64                            `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripTemplateId      uint64                            `protobuf:"varint,20,opt,name=trip_template_id,json=tripTemplateId,proto3" json:"trip_template_id,omitempty"`
-	MaxGuest            uint32                            `protobuf:"varint,30,opt,name=max_guest,json=maxGuest,proto3" json:"max_guest,omitempty"`
-	Price               float32                           `protobuf:"fixed32,40,opt,name=price,proto3" json:"price,omitempty"`
-	DiveMasters         []*DiveMaster                     `protobuf:"bytes,50,rep,name=dive_masters,json=diveMasters,proto3" json:"dive_masters,omitempty"`
-	FromDate            *time.Time                        `protobuf:"bytes,60,opt,name=from_date,json=fromDate,proto3,stdtime" json:"from_date,omitempty"`
-	ToDate              *time.Time                        `protobuf:"bytes,70,opt,name=to_date,json=toDate,proto3,stdtime" json:"to_date,omitempty"`
-	LastReservationDate *time.Time                        `protobuf:"bytes,80,opt,name=last_reservation_date,json=lastReservationDate,proto3,stdtime" json:"last_reservation_date,omitempty"`
-	CreatedAt           *time.Time                        `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt           *time.Time                        `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-	TripTemplate        *SearchTripsResponse_TripTemplate `protobuf:"bytes,110,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+type UpdateTripRequest struct {
+	Trip *Trip `protobuf:"bytes,10,opt,name=trip,proto3" json:"trip,omitempty"`
 }
 
-func (m *SearchTripsResponse_Trip) Reset()      { *m = SearchTripsResponse_Trip{} }
-func (*SearchTripsResponse_Trip) ProtoMessage() {}
-func (*SearchTripsResponse_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{36, 0}
+func (m *UpdateTripRequest) Reset()      { *m = UpdateTripRequest{} }
+func (*UpdateTripRequest) ProtoMessage() {}
+func (*UpdateTripRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{26}
 }
-func (m *SearchTripsResponse_Trip) XXX_Unmarshal(b []byte) error {
+func (m *UpdateTripRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UpdateTripRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchTripsResponse_Trip.Marshal(b, m, deterministic)
+		return xxx_messageInfo_UpdateTripRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -3272,120 +1377,40 @@ func (m *SearchTripsResponse_Trip) XXX_Marshal(b []byte, deterministic bool) ([]
 		return b[:n], nil
 	}
 }
-func (m *SearchTripsResponse_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchTripsResponse_Trip.Merge(m, src)
+func (m *UpdateTripRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTripRequest.Merge(m, src)
 }
-func (m *SearchTripsResponse_Trip) XXX_Size() int {
+func (m *UpdateTripRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchTripsResponse_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchTripsResponse_Trip.DiscardUnknown(m)
+func (m *UpdateTripRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTripRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchTripsResponse_Trip proto.InternalMessageInfo
+var xxx_messageInfo_UpdateTripRequest proto.InternalMessageInfo
 
-func (m *SearchTripsResponse_Trip) GetId() uint64 {
+func (m *UpdateTripRequest) GetTrip() *Trip {
 	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_Trip) GetTripTemplateId() uint64 {
-	if m != nil {
-		return m.TripTemplateId
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_Trip) GetMaxGuest() uint32 {
-	if m != nil {
-		return m.MaxGuest
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_Trip) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_Trip) GetDiveMasters() []*DiveMaster {
-	if m != nil {
-		return m.DiveMasters
+		return m.Trip
 	}
 	return nil
 }
 
-func (m *SearchTripsResponse_Trip) GetFromDate() *time.Time {
-	if m != nil {
-		return m.FromDate
-	}
-	return nil
+type UpdateHotelRequest struct {
+	Hotel *Hotel `protobuf:"bytes,10,opt,name=hotel,proto3" json:"hotel,omitempty"`
 }
 
-func (m *SearchTripsResponse_Trip) GetToDate() *time.Time {
-	if m != nil {
-		return m.ToDate
-	}
-	return nil
+func (m *UpdateHotelRequest) Reset()      { *m = UpdateHotelRequest{} }
+func (*UpdateHotelRequest) ProtoMessage() {}
+func (*UpdateHotelRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{27}
 }
-
-func (m *SearchTripsResponse_Trip) GetLastReservationDate() *time.Time {
-	if m != nil {
-		return m.LastReservationDate
-	}
-	return nil
-}
-
-func (m *SearchTripsResponse_Trip) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *SearchTripsResponse_Trip) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return nil
-}
-
-func (m *SearchTripsResponse_Trip) GetTripTemplate() *SearchTripsResponse_TripTemplate {
-	if m != nil {
-		return m.TripTemplate
-	}
-	return nil
-}
-
-type SearchTripsResponse_TripTemplate struct {
-	Id           uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string     `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
-	Description  string     `protobuf:"bytes,20,opt,name=description,proto3" json:"description,omitempty"`
-	TripType     TripType   `protobuf:"varint,30,opt,name=trip_type,json=tripType,proto3,enum=model.TripType" json:"trip_type,omitempty"`
-	HotelId      uint64     `protobuf:"varint,40,opt,name=hotel_id,json=hotelId,proto3" json:"hotel_id,omitempty"`
-	BoatId       uint64     `protobuf:"varint,50,opt,name=boat_id,json=boatId,proto3" json:"boat_id,omitempty"`
-	LiveaboardId uint64     `protobuf:"varint,60,opt,name=liveaboard_id,json=liveaboardId,proto3" json:"liveaboard_id,omitempty"`
-	Images       []*File    `protobuf:"bytes,70,rep,name=images,proto3" json:"images,omitempty"`
-	Address      *Address   `protobuf:"bytes,80,opt,name=address,proto3" json:"address,omitempty"`
-	CreatedAt    *time.Time `protobuf:"bytes,90,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt    *time.Time `protobuf:"bytes,100,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *SearchTripsResponse_TripTemplate) Reset()      { *m = SearchTripsResponse_TripTemplate{} }
-func (*SearchTripsResponse_TripTemplate) ProtoMessage() {}
-func (*SearchTripsResponse_TripTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{36, 1}
-}
-func (m *SearchTripsResponse_TripTemplate) XXX_Unmarshal(b []byte) error {
+func (m *UpdateHotelRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SearchTripsResponse_TripTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UpdateHotelRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SearchTripsResponse_TripTemplate.Marshal(b, m, deterministic)
+		return xxx_messageInfo_UpdateHotelRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -3395,107 +1420,198 @@ func (m *SearchTripsResponse_TripTemplate) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *SearchTripsResponse_TripTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SearchTripsResponse_TripTemplate.Merge(m, src)
+func (m *UpdateHotelRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateHotelRequest.Merge(m, src)
 }
-func (m *SearchTripsResponse_TripTemplate) XXX_Size() int {
+func (m *UpdateHotelRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *SearchTripsResponse_TripTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_SearchTripsResponse_TripTemplate.DiscardUnknown(m)
+func (m *UpdateHotelRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateHotelRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SearchTripsResponse_TripTemplate proto.InternalMessageInfo
+var xxx_messageInfo_UpdateHotelRequest proto.InternalMessageInfo
 
-func (m *SearchTripsResponse_TripTemplate) GetId() uint64 {
+func (m *UpdateHotelRequest) GetHotel() *Hotel {
 	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetDescription() string {
-	if m != nil {
-		return m.Description
-	}
-	return ""
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetTripType() TripType {
-	if m != nil {
-		return m.TripType
-	}
-	return ONSHORE
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetHotelId() uint64 {
-	if m != nil {
-		return m.HotelId
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetBoatId() uint64 {
-	if m != nil {
-		return m.BoatId
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetLiveaboardId() uint64 {
-	if m != nil {
-		return m.LiveaboardId
-	}
-	return 0
-}
-
-func (m *SearchTripsResponse_TripTemplate) GetImages() []*File {
-	if m != nil {
-		return m.Images
+		return m.Hotel
 	}
 	return nil
 }
 
-func (m *SearchTripsResponse_TripTemplate) GetAddress() *Address {
+type UpdateLiveaboardRequest struct {
+	Liveaboard *Liveaboard `protobuf:"bytes,10,opt,name=liveaboard,proto3" json:"liveaboard,omitempty"`
+}
+
+func (m *UpdateLiveaboardRequest) Reset()      { *m = UpdateLiveaboardRequest{} }
+func (*UpdateLiveaboardRequest) ProtoMessage() {}
+func (*UpdateLiveaboardRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{28}
+}
+func (m *UpdateLiveaboardRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateLiveaboardRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateLiveaboardRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateLiveaboardRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateLiveaboardRequest.Merge(m, src)
+}
+func (m *UpdateLiveaboardRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateLiveaboardRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateLiveaboardRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateLiveaboardRequest proto.InternalMessageInfo
+
+func (m *UpdateLiveaboardRequest) GetLiveaboard() *Liveaboard {
 	if m != nil {
-		return m.Address
+		return m.Liveaboard
 	}
 	return nil
 }
 
-func (m *SearchTripsResponse_TripTemplate) GetCreatedAt() *time.Time {
+type UpdateBoatRequest struct {
+	Boat *Boat `protobuf:"bytes,10,opt,name=boat,proto3" json:"boat,omitempty"`
+}
+
+func (m *UpdateBoatRequest) Reset()      { *m = UpdateBoatRequest{} }
+func (*UpdateBoatRequest) ProtoMessage() {}
+func (*UpdateBoatRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{29}
+}
+func (m *UpdateBoatRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateBoatRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateBoatRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateBoatRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateBoatRequest.Merge(m, src)
+}
+func (m *UpdateBoatRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateBoatRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateBoatRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateBoatRequest proto.InternalMessageInfo
+
+func (m *UpdateBoatRequest) GetBoat() *Boat {
 	if m != nil {
-		return m.CreatedAt
+		return m.Boat
 	}
 	return nil
 }
 
-func (m *SearchTripsResponse_TripTemplate) GetUpdatedAt() *time.Time {
+type UpdateDiveMasterRequest struct {
+	DiveMaster *DiveMaster `protobuf:"bytes,10,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
+}
+
+func (m *UpdateDiveMasterRequest) Reset()      { *m = UpdateDiveMasterRequest{} }
+func (*UpdateDiveMasterRequest) ProtoMessage() {}
+func (*UpdateDiveMasterRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{30}
+}
+func (m *UpdateDiveMasterRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateDiveMasterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateDiveMasterRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateDiveMasterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateDiveMasterRequest.Merge(m, src)
+}
+func (m *UpdateDiveMasterRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateDiveMasterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateDiveMasterRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateDiveMasterRequest proto.InternalMessageInfo
+
+func (m *UpdateDiveMasterRequest) GetDiveMaster() *DiveMaster {
 	if m != nil {
-		return m.UpdatedAt
+		return m.DiveMaster
+	}
+	return nil
+}
+
+type UpdateStaffRequest struct {
+	Staff *Staff `protobuf:"bytes,10,opt,name=staff,proto3" json:"staff,omitempty"`
+}
+
+func (m *UpdateStaffRequest) Reset()      { *m = UpdateStaffRequest{} }
+func (*UpdateStaffRequest) ProtoMessage() {}
+func (*UpdateStaffRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{31}
+}
+func (m *UpdateStaffRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateStaffRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateStaffRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateStaffRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateStaffRequest.Merge(m, src)
+}
+func (m *UpdateStaffRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateStaffRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateStaffRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateStaffRequest proto.InternalMessageInfo
+
+func (m *UpdateStaffRequest) GetStaff() *Staff {
+	if m != nil {
+		return m.Staff
 	}
 	return nil
 }
 
 func init() {
-	proto.RegisterType((*DiveMaster)(nil), "agency.DiveMaster")
-	proto.RegisterType((*DiveMasterFirstAndLastName)(nil), "agency.DiveMasterFirstAndLastName")
-	proto.RegisterType((*Staff)(nil), "agency.Staff")
-	proto.RegisterType((*DivingBoat)(nil), "agency.DivingBoat")
-	proto.RegisterType((*Amenity)(nil), "agency.Amenity")
-	proto.RegisterType((*RoomType)(nil), "agency.RoomType")
-	proto.RegisterType((*HotelAndBoatId)(nil), "agency.HotelAndBoatId")
-	proto.RegisterType((*TripTemplate)(nil), "agency.TripTemplate")
-	proto.RegisterType((*Trip)(nil), "agency.Trip")
-	proto.RegisterType((*Hotel)(nil), "agency.Hotel")
-	proto.RegisterType((*Liveaboard)(nil), "agency.Liveaboard")
 	proto.RegisterType((*AddDiveMasterRequest)(nil), "agency.AddDiveMasterRequest")
 	proto.RegisterType((*AddStaffRequest)(nil), "agency.AddStaffRequest")
 	proto.RegisterType((*AddTripTemplateRequest)(nil), "agency.AddTripTemplateRequest")
@@ -3505,708 +1621,112 @@ func init() {
 	proto.RegisterType((*AddLiveaboardRequest)(nil), "agency.AddLiveaboardRequest")
 	proto.RegisterType((*ListBoatsRequest)(nil), "agency.ListBoatsRequest")
 	proto.RegisterType((*ListBoatsResponse)(nil), "agency.ListBoatsResponse")
-	proto.RegisterType((*ListBoatsResponse_Boat)(nil), "agency.ListBoatsResponse.Boat")
 	proto.RegisterType((*ListDiveMastersRequest)(nil), "agency.ListDiveMastersRequest")
 	proto.RegisterType((*ListDiveMastersResponse)(nil), "agency.ListDiveMastersResponse")
-	proto.RegisterType((*ListDiveMastersResponse_DiveMaster)(nil), "agency.ListDiveMastersResponse.DiveMaster")
 	proto.RegisterType((*ListHotelsRequest)(nil), "agency.ListHotelsRequest")
 	proto.RegisterType((*ListHotelsResponse)(nil), "agency.ListHotelsResponse")
-	proto.RegisterType((*ListHotelsResponse_Hotel)(nil), "agency.ListHotelsResponse.Hotel")
 	proto.RegisterType((*ListLiveaboardsRequest)(nil), "agency.ListLiveaboardsRequest")
 	proto.RegisterType((*ListLiveaboardsResponse)(nil), "agency.ListLiveaboardsResponse")
-	proto.RegisterType((*ListLiveaboardsResponse_Liveaboard)(nil), "agency.ListLiveaboardsResponse.Liveaboard")
 	proto.RegisterType((*ListStaffsRequest)(nil), "agency.ListStaffsRequest")
 	proto.RegisterType((*ListStaffsResponse)(nil), "agency.ListStaffsResponse")
-	proto.RegisterType((*ListStaffsResponse_Staff)(nil), "agency.ListStaffsResponse.Staff")
 	proto.RegisterType((*ListTripTemplatesRequest)(nil), "agency.ListTripTemplatesRequest")
 	proto.RegisterType((*ListTripTemplatesResponse)(nil), "agency.ListTripTemplatesResponse")
-	proto.RegisterType((*ListTripTemplatesResponse_TripTemplate)(nil), "agency.ListTripTemplatesResponse.TripTemplate")
 	proto.RegisterType((*ListTripsRequest)(nil), "agency.ListTripsRequest")
 	proto.RegisterType((*ListTripsResponse)(nil), "agency.ListTripsResponse")
-	proto.RegisterType((*ListTripsResponse_Trip)(nil), "agency.ListTripsResponse.Trip")
 	proto.RegisterType((*ListTripsWithTemplatesRequest)(nil), "agency.ListTripsWithTemplatesRequest")
 	proto.RegisterType((*ListTripsWithTemplatesResponse)(nil), "agency.ListTripsWithTemplatesResponse")
-	proto.RegisterType((*ListTripsWithTemplatesResponse_Trip)(nil), "agency.ListTripsWithTemplatesResponse.Trip")
-	proto.RegisterType((*ListTripsWithTemplatesResponse_TripTemplate)(nil), "agency.ListTripsWithTemplatesResponse.TripTemplate")
 	proto.RegisterType((*SearchTripsOptions)(nil), "agency.SearchTripsOptions")
 	proto.RegisterType((*SearchTripsRequest)(nil), "agency.SearchTripsRequest")
 	proto.RegisterType((*SearchTripsResponse)(nil), "agency.SearchTripsResponse")
-	proto.RegisterType((*SearchTripsResponse_Trip)(nil), "agency.SearchTripsResponse.Trip")
-	proto.RegisterType((*SearchTripsResponse_TripTemplate)(nil), "agency.SearchTripsResponse.TripTemplate")
+	proto.RegisterType((*UpdateTripRequest)(nil), "agency.UpdateTripRequest")
+	proto.RegisterType((*UpdateHotelRequest)(nil), "agency.UpdateHotelRequest")
+	proto.RegisterType((*UpdateLiveaboardRequest)(nil), "agency.UpdateLiveaboardRequest")
+	proto.RegisterType((*UpdateBoatRequest)(nil), "agency.UpdateBoatRequest")
+	proto.RegisterType((*UpdateDiveMasterRequest)(nil), "agency.UpdateDiveMasterRequest")
+	proto.RegisterType((*UpdateStaffRequest)(nil), "agency.UpdateStaffRequest")
 }
 
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 2389 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xcd, 0x6f, 0x1b, 0xc7,
-	0x15, 0xd7, 0xae, 0x28, 0x7e, 0x3c, 0x8a, 0x94, 0x3d, 0x61, 0x64, 0x9a, 0x6e, 0xd6, 0x0a, 0x0d,
-	0x1b, 0xcc, 0x17, 0x2d, 0xd0, 0x8e, 0x01, 0xb7, 0x2e, 0x5c, 0x2a, 0xb6, 0x22, 0x25, 0x76, 0x6b,
-	0xac, 0x05, 0x34, 0xf0, 0x85, 0x58, 0x71, 0x87, 0xd4, 0xa2, 0xdc, 0x5d, 0x66, 0x77, 0xa4, 0x5a,
-	0xb7, 0xa2, 0xc7, 0x5e, 0xe2, 0x53, 0x81, 0x02, 0x3d, 0x15, 0x28, 0xd0, 0x43, 0x7b, 0x0e, 0x50,
-	0xa0, 0xc7, 0x16, 0x41, 0x7a, 0xf1, 0xa9, 0x48, 0x4f, 0xad, 0xe5, 0x4b, 0x8b, 0xe6, 0x90, 0x7f,
-	0xa0, 0x40, 0x31, 0x1f, 0xcb, 0x9d, 0x21, 0x97, 0x1f, 0x22, 0x0d, 0x24, 0x68, 0x7c, 0xdb, 0x99,
-	0x79, 0xf3, 0xf8, 0xe6, 0xbd, 0xdf, 0xfb, 0x98, 0x37, 0x84, 0x55, 0xab, 0x8b, 0xbd, 0xf6, 0x71,
-	0xbd, 0x1f, 0xf8, 0xc4, 0x47, 0x69, 0x3e, 0xaa, 0xe4, 0x5d, 0xdf, 0xc6, 0x3d, 0x3e, 0x59, 0xb9,
-	0xd0, 0xf5, 0xfd, 0x6e, 0x0f, 0x5f, 0x65, 0xa3, 0xfd, 0xc3, 0xce, 0x55, 0xec, 0xf6, 0x89, 0xd8,
-	0x51, 0xb9, 0x38, 0xbc, 0x48, 0x1c, 0x17, 0x87, 0xc4, 0x72, 0xfb, 0x82, 0xe0, 0x9d, 0xae, 0x43,
-	0x0e, 0x0e, 0xf7, 0xeb, 0x6d, 0xdf, 0xbd, 0xda, 0xf5, 0xbb, 0x7e, 0x4c, 0x49, 0x47, 0x6c, 0xc0,
-	0xbe, 0x38, 0x79, 0xf5, 0x73, 0x0d, 0xe0, 0x8e, 0x73, 0x84, 0xef, 0x5b, 0x21, 0xc1, 0x01, 0x7a,
-	0x0d, 0xa0, 0xe3, 0x04, 0x21, 0x69, 0x79, 0x96, 0x8b, 0xcb, 0xda, 0x86, 0x56, 0xcb, 0x99, 0x39,
-	0x36, 0xf3, 0x43, 0xcb, 0xc5, 0xe8, 0x02, 0xe4, 0x7a, 0x56, 0xb4, 0xaa, 0xb3, 0xd5, 0x2c, 0x9d,
-	0x60, 0x8b, 0x57, 0x60, 0xa5, 0x87, 0x8f, 0x70, 0xaf, 0xbc, 0xbc, 0xa1, 0xd5, 0x8a, 0x8d, 0x33,
-	0x75, 0x7e, 0xa8, 0x7b, 0x74, 0x6e, 0xef, 0xb8, 0x8f, 0x4d, 0xbe, 0x8c, 0xde, 0x86, 0x7c, 0x27,
-	0xf0, 0x3d, 0xd2, 0x72, 0x5c, 0xab, 0x8b, 0xcb, 0xa9, 0x0d, 0xad, 0x96, 0x6f, 0xe4, 0x05, 0xf5,
-	0xb6, 0xd3, 0xc3, 0x26, 0xb0, 0xf5, 0x5d, 0xba, 0x8c, 0xde, 0x04, 0xd8, 0xb7, 0xda, 0x3f, 0x11,
-	0xc4, 0x2b, 0xa3, 0xc4, 0x39, 0xba, 0xcc, 0x68, 0xab, 0x1f, 0x41, 0x25, 0x3e, 0xcb, 0x36, 0x95,
-	0xba, 0xe9, 0xd9, 0xf7, 0x22, 0xf9, 0x16, 0x38, 0x5b, 0xf5, 0x17, 0x1a, 0xac, 0x3c, 0x24, 0x56,
-	0xa7, 0xb3, 0x90, 0x86, 0x2a, 0x90, 0xed, 0xfb, 0xa1, 0x43, 0x1c, 0xdf, 0x63, 0x4a, 0xca, 0x99,
-	0x83, 0x31, 0x7a, 0x03, 0xd2, 0x5d, 0xec, 0xd9, 0x38, 0x60, 0x0a, 0x29, 0x36, 0xce, 0x8a, 0x33,
-	0xbe, 0xcf, 0x26, 0x99, 0xfe, 0x04, 0x41, 0xf5, 0x13, 0x9d, 0xd9, 0xcc, 0xf1, 0xba, 0x5b, 0xbe,
-	0x45, 0x10, 0x82, 0x94, 0x24, 0x0b, 0xfb, 0xa6, 0x3a, 0xde, 0xf7, 0x2d, 0xa1, 0xe2, 0xb0, 0xac,
-	0x6f, 0x2c, 0x8f, 0xe8, 0x98, 0xae, 0x33, 0xb5, 0x85, 0x68, 0x03, 0xf2, 0x36, 0x0e, 0xdb, 0x81,
-	0xd3, 0x97, 0x44, 0x93, 0xa7, 0xd0, 0x65, 0x28, 0x12, 0x9f, 0x58, 0xbd, 0x56, 0xdb, 0xea, 0x5b,
-	0x6d, 0x87, 0x1c, 0x33, 0x29, 0x0b, 0x66, 0x81, 0xcd, 0xbe, 0x27, 0x26, 0x29, 0x99, 0xed, 0x1c,
-	0xe1, 0x20, 0x26, 0x5b, 0xe1, 0x64, 0x6c, 0x56, 0x26, 0x0b, 0xa9, 0x32, 0x63, 0xb2, 0x34, 0x27,
-	0x63, 0xb3, 0x03, 0xb2, 0x1a, 0x64, 0x2c, 0xdb, 0x0e, 0x70, 0x18, 0x96, 0x33, 0xcc, 0xee, 0x45,
-	0x71, 0x80, 0x26, 0x9f, 0x35, 0xa3, 0xe5, 0xea, 0x6d, 0xc8, 0x34, 0x5d, 0xec, 0xd1, 0x4d, 0x49,
-	0xda, 0x18, 0x3a, 0x9f, 0x3e, 0x72, 0xbe, 0xea, 0x97, 0x1a, 0x64, 0x4d, 0xdf, 0x77, 0xa9, 0x9e,
-	0xe7, 0x63, 0x41, 0x2d, 0xef, 0x5a, 0x8f, 0x5b, 0xdd, 0x43, 0x1c, 0x12, 0xa6, 0xc2, 0x82, 0x99,
-	0x75, 0xad, 0xc7, 0xef, 0xd3, 0x31, 0x2a, 0xc1, 0x4a, 0x3f, 0x70, 0xda, 0x1c, 0xed, 0xba, 0xc9,
-	0x07, 0xd4, 0x4a, 0x81, 0xef, 0xbb, 0x91, 0x95, 0x56, 0x12, 0xac, 0x44, 0xd7, 0x85, 0x95, 0xde,
-	0x81, 0x9c, 0xc5, 0x0e, 0xe9, 0xe0, 0xb0, 0x9c, 0x66, 0xb4, 0x6b, 0x75, 0x11, 0x4e, 0xc4, 0xe9,
-	0xcd, 0x98, 0x82, 0x82, 0xed, 0xe3, 0x43, 0xcb, 0x23, 0x54, 0xbd, 0x19, 0x2e, 0x4e, 0x34, 0xae,
-	0xde, 0x81, 0xe2, 0x8e, 0x4f, 0x70, 0xaf, 0xe9, 0xd9, 0x14, 0x42, 0xbb, 0x36, 0x3a, 0x0f, 0xd9,
-	0x03, 0x3a, 0xd3, 0x72, 0x6c, 0x76, 0xee, 0x94, 0x99, 0x61, 0xe3, 0x5d, 0x1b, 0x9d, 0x83, 0x0c,
-	0xc7, 0x92, 0xcd, 0x8e, 0x9d, 0x32, 0xd3, 0x0c, 0x3a, 0x76, 0xf5, 0x4f, 0x3a, 0xac, 0xee, 0x05,
-	0x4e, 0x7f, 0x0f, 0xbb, 0xfd, 0x9e, 0x45, 0xe6, 0x55, 0xdc, 0x25, 0x48, 0x8f, 0x57, 0x80, 0x58,
-	0x42, 0x6f, 0x43, 0x8e, 0x04, 0x4e, 0xbf, 0x45, 0x8e, 0xfb, 0x98, 0xa1, 0xa5, 0xd8, 0x58, 0x13,
-	0x74, 0x4c, 0x04, 0xea, 0x1f, 0x59, 0x22, 0xbe, 0xd0, 0x7b, 0x70, 0x96, 0x9f, 0xc6, 0xf2, 0xec,
-	0x56, 0x24, 0x7c, 0x96, 0x61, 0x68, 0x3d, 0x52, 0x99, 0xaa, 0x80, 0x9d, 0x25, 0xb3, 0x78, 0xa0,
-	0xaa, 0xe4, 0x32, 0x14, 0x7a, 0xce, 0x11, 0xb6, 0xf6, 0x7d, 0x2b, 0xb0, 0x29, 0x83, 0x1c, 0x3d,
-	0xfd, 0xce, 0x92, 0xb9, 0x1a, 0x4f, 0xef, 0xda, 0x32, 0x4a, 0x4b, 0x13, 0x51, 0xba, 0x55, 0x84,
-	0xd5, 0x00, 0x87, 0x8e, 0x8d, 0xbd, 0x36, 0x6e, 0x39, 0x76, 0xf5, 0xb7, 0x3a, 0xa4, 0xa8, 0xf0,
-	0xe8, 0x3a, 0xa4, 0x3a, 0x81, 0xef, 0x32, 0xbd, 0xe5, 0x1b, 0x95, 0x3a, 0x8f, 0xf1, 0xf5, 0x28,
-	0x72, 0xd7, 0xf7, 0xa2, 0x18, 0xbf, 0x95, 0x7a, 0xf2, 0x8f, 0x8b, 0x9a, 0xc9, 0xa8, 0xd1, 0x26,
-	0xe8, 0xc4, 0x67, 0x0a, 0x9d, 0x65, 0x8f, 0x4e, 0x7c, 0xf4, 0x3a, 0xac, 0x52, 0x88, 0x0e, 0xbc,
-	0x8e, 0xa3, 0x34, 0xef, 0x5a, 0x8f, 0x07, 0x3e, 0x97, 0x0c, 0xd4, 0x2b, 0xb0, 0x46, 0x3d, 0xb8,
-	0xe5, 0xb2, 0xc8, 0xda, 0x72, 0x6c, 0x6e, 0xab, 0x14, 0x77, 0x6c, 0x1e, 0x6f, 0x77, 0xed, 0x10,
-	0xed, 0xc1, 0xab, 0x2c, 0xfa, 0x05, 0x38, 0xc4, 0xc1, 0x91, 0x45, 0xcd, 0xdb, 0xb2, 0x2d, 0xc2,
-	0x2d, 0x36, 0x8b, 0x94, 0xaf, 0xd0, 0xed, 0x66, 0xbc, 0xfb, 0x8e, 0x45, 0x70, 0xf5, 0xbf, 0x1a,
-	0xac, 0x30, 0x6b, 0xd1, 0xe0, 0xcb, 0xed, 0x2a, 0x07, 0x5f, 0x36, 0xc3, 0xe2, 0x2b, 0x82, 0x54,
-	0x48, 0xac, 0x80, 0xe9, 0xa4, 0x60, 0xb2, 0x6f, 0x09, 0x5d, 0xa9, 0xf1, 0xe8, 0xba, 0x0a, 0xcc,
-	0xd1, 0x18, 0xba, 0x22, 0x18, 0x9e, 0x89, 0x80, 0x12, 0xc5, 0x05, 0x33, 0x17, 0x88, 0xaf, 0x10,
-	0xbd, 0x15, 0x01, 0x4c, 0xc6, 0x76, 0x9a, 0xc9, 0x73, 0x86, 0x2d, 0xdc, 0x91, 0x00, 0x4e, 0x75,
-	0x7a, 0xe0, 0x7b, 0x98, 0xb9, 0x61, 0xce, 0xe4, 0x03, 0x19, 0x37, 0xd9, 0xc9, 0xd1, 0xed, 0xef,
-	0x3a, 0xc0, 0xbd, 0x01, 0xe4, 0xe6, 0xf4, 0xb2, 0x75, 0x48, 0xf7, 0xb0, 0xd7, 0x25, 0x07, 0xc2,
-	0xea, 0x62, 0x44, 0x85, 0xfb, 0xa9, 0x63, 0x93, 0x03, 0x11, 0xd0, 0xf9, 0x40, 0xd2, 0x5a, 0x7a,
-	0x56, 0xad, 0x65, 0xa6, 0x6b, 0x6d, 0x34, 0x8b, 0x64, 0x93, 0xb2, 0xc8, 0x45, 0xc8, 0xf3, 0x2c,
-	0x42, 0x77, 0x86, 0xcc, 0xed, 0x0a, 0x26, 0xb0, 0x29, 0xca, 0x35, 0xa4, 0x04, 0x3c, 0x7f, 0x70,
-	0x02, 0xe0, 0x04, 0x6c, 0x8a, 0x13, 0x48, 0xba, 0xcd, 0x4f, 0xd6, 0xed, 0x87, 0x50, 0x6a, 0xda,
-	0x76, 0x5c, 0x35, 0x98, 0xf8, 0x63, 0x16, 0xb0, 0xaf, 0x71, 0x19, 0x04, 0xe2, 0x85, 0x67, 0xa2,
-	0xe8, 0x70, 0x12, 0x3d, 0xc4, 0x1e, 0x50, 0xbd, 0x01, 0x6b, 0x4d, 0xdb, 0x66, 0x75, 0x42, 0xc4,
-	0xe7, 0x12, 0xac, 0x30, 0xb9, 0x04, 0x87, 0x42, 0xc4, 0x81, 0x13, 0xf1, 0xb5, 0x6a, 0x1f, 0xd6,
-	0x9b, 0xb6, 0x2d, 0x87, 0xd2, 0x68, 0xfb, 0x4d, 0x28, 0xf0, 0xb0, 0x27, 0xe6, 0x05, 0x9b, 0x52,
-	0xc4, 0x46, 0xd9, 0xb3, 0x4a, 0xe4, 0x60, 0x7c, 0x01, 0x72, 0x9c, 0x28, 0x0e, 0xdc, 0x59, 0x3e,
-	0xb1, 0x6b, 0x57, 0x5d, 0x28, 0x8a, 0x5f, 0x8c, 0x7e, 0x69, 0x03, 0x52, 0x74, 0xbb, 0xf8, 0x81,
-	0x55, 0xf9, 0x07, 0x4c, 0xb6, 0x32, 0x2a, 0x8b, 0x3e, 0xab, 0x2c, 0xb1, 0x96, 0x45, 0xcd, 0xa2,
-	0x6a, 0xd9, 0xf1, 0xba, 0x2c, 0x48, 0x27, 0x68, 0x39, 0xa2, 0x07, 0x7b, 0xf0, 0x2d, 0xb4, 0xcc,
-	0x02, 0x82, 0xa4, 0x65, 0xe6, 0x75, 0xc3, 0x5a, 0xe6, 0x44, 0x7c, 0xad, 0xfa, 0x01, 0x13, 0x22,
-	0x76, 0xa4, 0x68, 0x73, 0x03, 0x20, 0x0e, 0xe8, 0xc3, 0x32, 0x48, 0xe4, 0x12, 0x55, 0xf5, 0x07,
-	0x70, 0xe6, 0x9e, 0x13, 0x12, 0x2a, 0x4f, 0x18, 0xf1, 0x29, 0xc1, 0x4a, 0xcf, 0x71, 0x1d, 0x22,
-	0xf2, 0x27, 0x1f, 0x50, 0xbf, 0xf3, 0x3b, 0x9d, 0x10, 0x93, 0x28, 0x79, 0xf2, 0x51, 0xf5, 0xc9,
-	0x32, 0x9c, 0x95, 0x58, 0x84, 0x7d, 0xdf, 0x0b, 0x31, 0x6a, 0x40, 0x4a, 0xd2, 0x84, 0x11, 0x4b,
-	0x31, 0x44, 0x58, 0x67, 0x5a, 0x61, 0xb4, 0x95, 0xbf, 0xe8, 0x90, 0x62, 0x85, 0x60, 0x11, 0xf4,
-	0x41, 0xf6, 0xd6, 0x9d, 0x38, 0x50, 0x80, 0x14, 0x28, 0x62, 0xc7, 0x2e, 0x8d, 0x77, 0xec, 0x51,
-	0x3f, 0x7d, 0x75, 0xb6, 0x6a, 0x6f, 0x7d, 0xb6, 0x6a, 0xef, 0x5c, 0x52, 0xb5, 0x77, 0x1b, 0xa0,
-	0x1d, 0x60, 0x8b, 0x60, 0xbb, 0x65, 0x91, 0xb2, 0x31, 0x63, 0xc2, 0xc8, 0x89, 0x3d, 0x4d, 0x42,
-	0x19, 0x1c, 0xf6, 0xed, 0x88, 0x41, 0x6d, 0x56, 0x06, 0x62, 0x4f, 0x93, 0x54, 0xb7, 0x61, 0x9d,
-	0x2a, 0x3a, 0x76, 0xee, 0x39, 0x4d, 0xfb, 0xcb, 0x65, 0x38, 0x37, 0xc2, 0x48, 0x18, 0xf8, 0xc3,
-	0xa4, 0xb8, 0xf2, 0xa6, 0x6c, 0xe7, 0x84, 0x5d, 0x63, 0xe2, 0x4d, 0xe5, 0x0f, 0xba, 0x72, 0x79,
-	0x1b, 0xb6, 0xbf, 0x7a, 0x55, 0x81, 0x89, 0x57, 0x95, 0xd2, 0xb8, 0xcb, 0x9c, 0x31, 0xf9, 0x32,
-	0xf7, 0x06, 0xe4, 0x6c, 0xbf, 0x7d, 0xe8, 0x62, 0x8f, 0x84, 0xe5, 0xda, 0x28, 0xa4, 0xe2, 0xd5,
-	0x21, 0x03, 0x37, 0x16, 0x35, 0xf0, 0xad, 0xd3, 0x1b, 0xb8, 0xc9, 0x5d, 0x8e, 0x45, 0x85, 0x39,
-	0x6d, 0xfb, 0xab, 0x65, 0x40, 0x32, 0x0f, 0x61, 0xd6, 0x1b, 0x6a, 0x00, 0xda, 0x90, 0x0d, 0xaa,
-	0x92, 0x2a, 0x31, 0xa9, 0xf2, 0xb9, 0x1e, 0x95, 0x36, 0xb3, 0x38, 0xef, 0x50, 0x96, 0x2f, 0x8d,
-	0x66, 0xf9, 0x12, 0x4b, 0x37, 0x41, 0xc8, 0xcc, 0x56, 0x30, 0xf9, 0x20, 0x2e, 0x40, 0x6a, 0x63,
-	0x0a, 0x90, 0xc6, 0xc4, 0x24, 0x29, 0x05, 0x8d, 0x5b, 0xe3, 0x83, 0x86, 0x6a, 0xde, 0xed, 0x45,
-	0xcd, 0xfb, 0x60, 0x6e, 0xff, 0x8d, 0x43, 0xf6, 0x9c, 0x36, 0xfe, 0x4d, 0x8a, 0xfb, 0xaf, 0xc2,
-	0x48, 0x18, 0xfa, 0x83, 0x84, 0x64, 0xa1, 0xb8, 0x6f, 0xc2, 0xa6, 0x31, 0x49, 0xa4, 0xf2, 0xc7,
-	0x65, 0xa5, 0xae, 0x7b, 0x31, 0x08, 0x88, 0xeb, 0x3c, 0x83, 0x55, 0xf0, 0x23, 0x75, 0x5e, 0x8d,
-	0x17, 0xf6, 0xc3, 0x75, 0x5e, 0xe3, 0x34, 0xe9, 0xe0, 0xda, 0x0c, 0x65, 0xdb, 0xf5, 0x69, 0x65,
-	0xdb, 0xbb, 0x93, 0xca, 0xb6, 0x1b, 0x93, 0x11, 0xa9, 0x82, 0xed, 0xd6, 0xa2, 0x60, 0xdb, 0x9e,
-	0x3b, 0x96, 0xb0, 0x3a, 0x6e, 0x4e, 0x9c, 0xfd, 0x47, 0xe7, 0xb1, 0x24, 0xe2, 0x11, 0xc7, 0x12,
-	0xb9, 0x64, 0x54, 0x62, 0x89, 0x4a, 0xaa, 0x54, 0x91, 0x95, 0x5f, 0xeb, 0x51, 0x8f, 0xea, 0x45,
-	0x26, 0x02, 0xb9, 0x67, 0x65, 0x8c, 0xed, 0x59, 0xd5, 0xa6, 0xf4, 0xac, 0xbe, 0x01, 0xc1, 0x7f,
-	0x07, 0xca, 0x54, 0x83, 0x72, 0x95, 0x3a, 0xa7, 0xdd, 0xbe, 0x5c, 0x86, 0xf3, 0x09, 0xac, 0x06,
-	0x11, 0x22, 0x3b, 0x54, 0xad, 0xd7, 0x65, 0x0b, 0x26, 0x6e, 0x52, 0x6b, 0xe7, 0xc1, 0xfe, 0xca,
-	0xcf, 0x97, 0x87, 0x3a, 0x2c, 0x2f, 0x26, 0x46, 0x28, 0xcd, 0x14, 0x63, 0x5a, 0x33, 0x45, 0x6e,
-	0x0d, 0xd5, 0xc6, 0xb6, 0x86, 0x1a, 0x72, 0x6b, 0x08, 0x5d, 0x1a, 0xee, 0x9d, 0xdc, 0x62, 0xcb,
-	0x6a, 0xe7, 0x24, 0x0e, 0x3e, 0xdb, 0xb3, 0xa6, 0x95, 0x07, 0x8b, 0x02, 0xe7, 0xd1, 0xe9, 0x81,
-	0x23, 0x6a, 0x7d, 0xaa, 0x99, 0x39, 0x01, 0xf3, 0x49, 0x8a, 0x07, 0x0b, 0xc1, 0x22, 0xae, 0xf5,
-	0xa5, 0x1b, 0x97, 0x31, 0x0c, 0x12, 0x15, 0x1c, 0xfc, 0x0e, 0x56, 0xf9, 0xf3, 0xb2, 0x68, 0x19,
-	0x0d, 0x03, 0xa1, 0x06, 0x67, 0x94, 0xcb, 0x19, 0xd5, 0x79, 0x89, 0xad, 0x16, 0xe5, 0x9b, 0xd8,
-	0xae, 0xad, 0xf6, 0x29, 0x8d, 0x71, 0x7d, 0xca, 0x9a, 0xdc, 0xfe, 0xf9, 0x3e, 0xe4, 0x3a, 0x81,
-	0xef, 0xf2, 0x56, 0xce, 0xac, 0xbe, 0x9b, 0xa5, 0x5b, 0xee, 0x50, 0xd0, 0xde, 0x84, 0x0c, 0xf1,
-	0xf9, 0xe6, 0x59, 0xfd, 0x36, 0x4d, 0x7c, 0xb6, 0x75, 0x6c, 0x43, 0x69, 0x7b, 0x81, 0x86, 0xd2,
-	0x37, 0x00, 0x53, 0xf7, 0xe1, 0xb5, 0x81, 0x9d, 0x7f, 0xec, 0x90, 0x83, 0x05, 0x23, 0xd2, 0xbf,
-	0xb3, 0x60, 0x8c, 0xe3, 0x27, 0xd0, 0x76, 0x5b, 0x41, 0xdb, 0x5b, 0x23, 0x68, 0x4b, 0xdc, 0x25,
-	0x43, 0xef, 0x6f, 0xa9, 0xaf, 0x03, 0x7a, 0xef, 0xc2, 0xaa, 0x74, 0x5f, 0x8a, 0xca, 0x94, 0xa4,
-	0x46, 0x4c, 0x3e, 0xbe, 0x18, 0x85, 0x2a, 0x62, 0x6f, 0x2d, 0x82, 0xd8, 0xed, 0x17, 0x85, 0xd8,
-	0x07, 0x2f, 0x0e, 0xb1, 0x8f, 0x16, 0x45, 0xac, 0x7d, 0x6a, 0xc4, 0xa2, 0x8f, 0x86, 0xbb, 0x3f,
-	0x1e, 0xe3, 0x71, 0xed, 0x14, 0x40, 0x4a, 0x6e, 0x0e, 0x55, 0x7e, 0xff, 0x32, 0xc9, 0x49, 0x85,
-	0xef, 0x83, 0xd3, 0x14, 0xbe, 0x5f, 0x03, 0x10, 0xaa, 0x9f, 0xea, 0x80, 0x1e, 0x62, 0x2b, 0x68,
-	0x1f, 0x30, 0x73, 0xff, 0x88, 0x69, 0x3b, 0x44, 0x15, 0xc8, 0xb4, 0xfd, 0x43, 0x8f, 0x04, 0xc7,
-	0xbc, 0x31, 0xbd, 0xb3, 0x64, 0x46, 0x13, 0xa8, 0x04, 0x29, 0x76, 0x6d, 0xd0, 0xc5, 0x02, 0x1b,
-	0xa1, 0x32, 0xa4, 0x03, 0xdc, 0x1d, 0x3c, 0x38, 0xee, 0x2c, 0x99, 0x62, 0x4c, 0xc3, 0x1c, 0xbb,
-	0x36, 0x44, 0xad, 0x5d, 0x31, 0x52, 0x4d, 0xba, 0x36, 0xcd, 0xa4, 0xb7, 0x81, 0xde, 0x2d, 0x02,
-	0xc2, 0xdd, 0xaf, 0x34, 0xeb, 0x49, 0xd9, 0x1e, 0xe6, 0x74, 0xdf, 0x83, 0x2c, 0xf6, 0x6c, 0xbe,
-	0x7d, 0xd6, 0x7e, 0x54, 0x06, 0x7b, 0x36, 0xdd, 0xbc, 0x75, 0x16, 0xd6, 0x7a, 0x7e, 0x9b, 0xfb,
-	0x7f, 0xc7, 0xe9, 0x11, 0x1c, 0x54, 0x9f, 0x68, 0x8a, 0xe6, 0xa2, 0x50, 0x7f, 0x0f, 0x4a, 0x21,
-	0x9b, 0x6d, 0x51, 0xd1, 0xc3, 0x96, 0xcf, 0x35, 0x3a, 0x78, 0x0d, 0x8a, 0x3a, 0xc6, 0x23, 0x3a,
-	0x37, 0x51, 0x38, 0x6a, 0x87, 0x41, 0xe2, 0xd0, 0x93, 0x13, 0xc7, 0xb2, 0x92, 0x38, 0x3e, 0xcb,
-	0xc2, 0x2b, 0x8a, 0x48, 0x22, 0x5b, 0x5c, 0x57, 0xb2, 0xc5, 0x46, 0x82, 0x0c, 0x49, 0x29, 0xe2,
-	0xaf, 0x2f, 0x53, 0xc4, 0xb7, 0x39, 0x45, 0xdc, 0x4f, 0x4e, 0x11, 0xb5, 0x69, 0xe8, 0x79, 0x99,
-	0x17, 0xfe, 0x0f, 0xf2, 0x42, 0xe3, 0xd3, 0x1c, 0x14, 0x9a, 0xcc, 0xd0, 0x0f, 0x71, 0x70, 0x44,
-	0x1d, 0xf3, 0x2e, 0x14, 0x94, 0xb7, 0x35, 0xf4, 0x9d, 0xc1, 0xdf, 0x15, 0x12, 0x9e, 0xdc, 0x2a,
-	0xeb, 0x23, 0xbf, 0x76, 0xd7, 0xed, 0x93, 0x63, 0x1a, 0x86, 0xa3, 0x57, 0x35, 0x74, 0x4e, 0xe2,
-	0x20, 0xbf, 0xb3, 0x8d, 0xdd, 0xbc, 0xcb, 0x1e, 0x8b, 0x14, 0x18, 0x19, 0x12, 0x8f, 0x84, 0x37,
-	0xb7, 0xb1, 0xac, 0x6e, 0x42, 0x46, 0xec, 0x40, 0xeb, 0x43, 0x2c, 0xa6, 0x6d, 0x1d, 0x68, 0x22,
-	0xfa, 0xcf, 0xce, 0x90, 0x26, 0xd4, 0x67, 0xb1, 0x29, 0x9a, 0xe0, 0xfd, 0x62, 0x59, 0x13, 0xf2,
-	0x5b, 0xd8, 0x14, 0x19, 0xa4, 0x7e, 0xa3, 0x2c, 0xc3, 0xc8, 0xab, 0xd8, 0x58, 0x36, 0x5b, 0x90,
-	0x1b, 0xbc, 0x46, 0xa1, 0x72, 0xc2, 0x03, 0x15, 0xdf, 0x7e, 0x7e, 0xec, 0xd3, 0xd5, 0xa6, 0x86,
-	0xf6, 0x60, 0x6d, 0xe8, 0xa5, 0x03, 0x19, 0x63, 0x9f, 0x40, 0x38, 0xbf, 0x8b, 0x53, 0x9e, 0x48,
-	0x36, 0x35, 0x74, 0x17, 0x20, 0x6e, 0xb7, 0xa3, 0xf3, 0x49, 0x2d, 0x78, 0xce, 0xab, 0x32, 0xbe,
-	0x3b, 0x1f, 0x0b, 0x27, 0xf5, 0x71, 0x55, 0xe1, 0x46, 0xdb, 0xcb, 0xaa, 0x70, 0x09, 0x0d, 0xe0,
-	0x58, 0x38, 0xde, 0xbf, 0x53, 0x85, 0x53, 0x5a, 0x88, 0xaa, 0x70, 0x6a, 0xbb, 0x6f, 0x53, 0x43,
-	0x8f, 0xe2, 0x46, 0xc2, 0xa0, 0xc6, 0x46, 0x1b, 0x13, 0xfa, 0x4b, 0x9c, 0xe9, 0xeb, 0x53, 0x3b,
-	0x50, 0x9b, 0x5a, 0x64, 0x59, 0x16, 0x9f, 0x55, 0xcb, 0xca, 0xe5, 0x8a, 0x6a, 0x59, 0x25, 0x98,
-	0x6f, 0x6a, 0xc8, 0xe1, 0x2d, 0xf8, 0xd1, 0x8b, 0x00, 0xba, 0x3c, 0xed, 0xa2, 0xc0, 0xb9, 0x5f,
-	0x99, 0xed, 0x3e, 0xb1, 0xa9, 0xa1, 0x1d, 0xc8, 0x4b, 0x09, 0x05, 0x55, 0x12, 0xb3, 0x0c, 0x67,
-	0x7a, 0x61, 0x42, 0x06, 0xda, 0xd4, 0xb6, 0xbe, 0xfb, 0xf4, 0x99, 0xb1, 0xf4, 0xc5, 0x33, 0x63,
-	0xe9, 0xab, 0x67, 0x86, 0xf6, 0xb3, 0x13, 0x43, 0xfb, 0xdd, 0x89, 0xa1, 0x7d, 0x76, 0x62, 0x68,
-	0x4f, 0x4f, 0x0c, 0xed, 0x9f, 0x27, 0x86, 0xf6, 0xaf, 0x13, 0x63, 0xe9, 0xab, 0x13, 0x43, 0x7b,
-	0xf2, 0xdc, 0x58, 0x7a, 0xfa, 0xdc, 0x58, 0xfa, 0xe2, 0xb9, 0xb1, 0xf4, 0x28, 0x55, 0xbf, 0xda,
-	0xdf, 0xdf, 0x4f, 0x33, 0xf7, 0xb8, 0xf6, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x2b, 0x8b, 0x11,
-	0x0e, 0xd8, 0x29, 0x00, 0x00,
+	// 1187 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xdd, 0x4e, 0xe3, 0x46,
+	0x14, 0x8e, 0xd9, 0x2c, 0x3f, 0x27, 0xb0, 0x2c, 0xb3, 0x08, 0x82, 0x69, 0x0d, 0xb5, 0xd4, 0x0a,
+	0xa9, 0xdb, 0x40, 0xe9, 0x56, 0xa2, 0xed, 0xc5, 0x36, 0x11, 0x54, 0xd0, 0x82, 0x2a, 0x05, 0xaa,
+	0x4a, 0x7b, 0x13, 0x39, 0xf1, 0x24, 0x58, 0x4d, 0x62, 0xd7, 0x1e, 0x90, 0xb8, 0xeb, 0x23, 0xf0,
+	0x18, 0x7d, 0x83, 0xbe, 0x42, 0x2f, 0xb9, 0xdc, 0x5e, 0xb5, 0x84, 0x9b, 0x5e, 0xee, 0x23, 0xac,
+	0xe6, 0xcf, 0x9e, 0x71, 0xec, 0x8d, 0x15, 0xee, 0x3c, 0x3f, 0xe7, 0xf3, 0x37, 0xdf, 0x39, 0x33,
+	0xe7, 0x83, 0x45, 0xa7, 0x87, 0x87, 0x9d, 0x9b, 0x5a, 0x10, 0xfa, 0xc4, 0x47, 0xb3, 0x7c, 0x64,
+	0x56, 0x06, 0xbe, 0x8b, 0xfb, 0x7c, 0xd2, 0xdc, 0xec, 0xf9, 0x7e, 0xaf, 0x8f, 0x77, 0xd9, 0xa8,
+	0x7d, 0xd5, 0xdd, 0xc5, 0x83, 0x80, 0x88, 0x08, 0x73, 0x2b, 0xbd, 0x48, 0xbc, 0x01, 0x8e, 0x88,
+	0x33, 0x08, 0xc4, 0x86, 0x2f, 0x7a, 0x1e, 0xb9, 0xbc, 0x6a, 0xd7, 0x3a, 0xfe, 0x60, 0xb7, 0xe7,
+	0xf7, 0xfc, 0x64, 0x27, 0x1d, 0xb1, 0x01, 0xfb, 0xe2, 0xdb, 0xed, 0x1f, 0x61, 0xb5, 0xee, 0xba,
+	0x87, 0xde, 0x35, 0x3e, 0x73, 0x22, 0x82, 0xc3, 0x26, 0xfe, 0xfd, 0x0a, 0x47, 0x04, 0xed, 0x43,
+	0xc5, 0xf5, 0xae, 0x71, 0x6b, 0xc0, 0x66, 0xab, 0xc6, 0xb6, 0xb1, 0x53, 0xd9, 0x5f, 0xa9, 0x71,
+	0x9e, 0xca, 0x76, 0x70, 0xe3, 0x6f, 0xfb, 0x6b, 0x58, 0xae, 0xbb, 0xee, 0x39, 0x71, 0xba, 0x5d,
+	0x09, 0x63, 0xc3, 0xd3, 0x88, 0x8e, 0x05, 0xc0, 0xa2, 0x00, 0xe0, 0x7b, 0xf8, 0x92, 0xed, 0xc3,
+	0x5a, 0xdd, 0x75, 0x2f, 0x42, 0x2f, 0xb8, 0xc0, 0x83, 0xa0, 0xef, 0x10, 0x2c, 0xa3, 0x0f, 0x60,
+	0x89, 0x84, 0x5e, 0xd0, 0x22, 0x62, 0x5e, 0xa0, 0xbc, 0x10, 0x28, 0x5a, 0xc8, 0x22, 0x51, 0x46,
+	0x68, 0x13, 0x16, 0xb8, 0xb4, 0x2d, 0xcf, 0xad, 0xce, 0x6c, 0x1b, 0x3b, 0xe5, 0xe6, 0x3c, 0x9f,
+	0x38, 0x71, 0xed, 0xdf, 0xe0, 0x99, 0xf8, 0xa1, 0xfc, 0xd1, 0x16, 0x94, 0x69, 0xb8, 0xc0, 0xaf,
+	0x28, 0xf8, 0x4d, 0xb6, 0x30, 0xce, 0x64, 0xa6, 0x20, 0x13, 0xfb, 0x50, 0x0a, 0xec, 0x0d, 0x7b,
+	0x0d, 0xdf, 0x21, 0xf2, 0x97, 0x2f, 0x99, 0xc0, 0xde, 0xb0, 0xd7, 0x6a, 0xfb, 0x0e, 0x49, 0xfd,
+	0x99, 0x6d, 0x04, 0x37, 0x0e, 0x12, 0xd2, 0x1e, 0xfb, 0x04, 0xf7, 0x15, 0x69, 0x2f, 0xe9, 0x38,
+	0x25, 0x2d, 0xdf, 0xc3, 0x97, 0xec, 0x13, 0xf6, 0xf3, 0x53, 0xef, 0x1a, 0x3b, 0x6d, 0xdf, 0x09,
+	0x5d, 0x19, 0xfb, 0x25, 0x40, 0x3f, 0x9e, 0x4c, 0x25, 0x57, 0xd9, 0xad, 0x6c, 0xb2, 0xbf, 0x87,
+	0xe7, 0xa7, 0x5e, 0x44, 0x28, 0x9b, 0x48, 0xc2, 0xac, 0xc2, 0xd3, 0xbe, 0x37, 0xf0, 0x38, 0xfb,
+	0x72, 0x93, 0x0f, 0xd0, 0x1a, 0xcc, 0xfa, 0xdd, 0x6e, 0x84, 0x89, 0x10, 0x5e, 0x8c, 0xec, 0x57,
+	0xb0, 0xa2, 0x20, 0x44, 0x81, 0x3f, 0x8c, 0x30, 0x55, 0x3e, 0xef, 0xfc, 0x6c, 0xc1, 0xfe, 0x01,
+	0xd6, 0x68, 0x54, 0x52, 0x72, 0x53, 0xfe, 0xfd, 0x0c, 0xd6, 0xc7, 0x70, 0x04, 0x87, 0x69, 0x6a,
+	0xbd, 0xce, 0x0f, 0xc3, 0xd4, 0x9e, 0x92, 0xd1, 0x01, 0x20, 0x15, 0x42, 0x90, 0x29, 0x92, 0x56,
+	0xa1, 0x49, 0x92, 0xa9, 0x29, 0x19, 0x9c, 0x72, 0x4d, 0x34, 0x1c, 0x41, 0x63, 0x8a, 0x0a, 0x11,
+	0x92, 0xb0, 0xbb, 0xfd, 0x38, 0x49, 0x24, 0x44, 0x22, 0xc9, 0xc4, 0x47, 0xe4, 0x18, 0xaa, 0x34,
+	0x52, 0xbd, 0x88, 0x53, 0x8b, 0xb2, 0x91, 0x81, 0x24, 0xa8, 0xec, 0xc2, 0x7c, 0x91, 0xc7, 0x28,
+	0xde, 0x24, 0xaf, 0x0d, 0x5d, 0x7d, 0xdc, 0xb5, 0x11, 0x08, 0xc9, 0xb5, 0xf9, 0xe0, 0x83, 0x65,
+	0x9f, 0xc1, 0xc7, 0x71, 0xd4, 0xaf, 0x1e, 0xb9, 0x7c, 0xa4, 0x28, 0x67, 0x60, 0xe5, 0xc1, 0x09,
+	0x46, 0x9f, 0x6b, 0x8c, 0xd6, 0x15, 0x46, 0xea, 0x7e, 0xc1, 0xee, 0xaf, 0x19, 0x40, 0xe7, 0xd8,
+	0x09, 0x3b, 0x97, 0x0c, 0xf1, 0xe7, 0x80, 0x78, 0xfe, 0x30, 0x42, 0x26, 0xcc, 0x75, 0xfc, 0xab,
+	0x21, 0x09, 0x6f, 0x18, 0xcc, 0xc2, 0x71, 0xa9, 0x29, 0x27, 0xd0, 0x2a, 0x94, 0x3b, 0x1e, 0xb9,
+	0x61, 0xbc, 0xe8, 0x02, 0x1b, 0xa1, 0x2a, 0xcc, 0x86, 0xb8, 0xe7, 0xf9, 0xc3, 0xea, 0x13, 0x31,
+	0x2f, 0xc6, 0xf4, 0x24, 0xf4, 0xba, 0x86, 0x51, 0x15, 0xb6, 0x8d, 0x9d, 0xa5, 0xa6, 0x18, 0xa1,
+	0x97, 0xb0, 0xc0, 0x5f, 0xf2, 0x9b, 0x00, 0x57, 0x97, 0xb7, 0x8d, 0x9d, 0x67, 0xfb, 0xcb, 0x6a,
+	0x0a, 0x6f, 0x02, 0x9a, 0x3e, 0xf1, 0x85, 0x5e, 0x03, 0x44, 0xc4, 0x09, 0x49, 0xcb, 0xa5, 0x19,
+	0x5f, 0x65, 0x67, 0x33, 0x6b, 0xbc, 0x07, 0xd7, 0x64, 0x67, 0xad, 0x5d, 0xc8, 0x1e, 0xdc, 0x28,
+	0xdf, 0xfe, 0xbb, 0x65, 0x34, 0x17, 0x58, 0xcc, 0x21, 0x6d, 0x44, 0xdf, 0xc1, 0x3c, 0x1e, 0xba,
+	0x3c, 0xdc, 0x2a, 0x18, 0x3e, 0x87, 0x87, 0x2e, 0x0d, 0x6e, 0xac, 0xc0, 0x72, 0xdf, 0xef, 0x38,
+	0x54, 0x9c, 0x56, 0xd7, 0xeb, 0xd3, 0x77, 0xe7, 0xd6, 0xd0, 0x94, 0x93, 0xd9, 0x3c, 0x85, 0xd5,
+	0x88, 0xcd, 0xb6, 0x28, 0xf5, 0xa8, 0xe5, 0x73, 0x45, 0x45, 0x36, 0xcc, 0x9a, 0x70, 0x1d, 0xe3,
+	0x9a, 0x37, 0x51, 0x34, 0x9e, 0x87, 0xb8, 0x36, 0x66, 0xb2, 0x6b, 0xe3, 0x89, 0x56, 0x1b, 0x0d,
+	0x78, 0xa1, 0x31, 0x9a, 0xa6, 0x20, 0x5e, 0xc1, 0xca, 0x2f, 0x01, 0x15, 0x29, 0xab, 0x2b, 0x43,
+	0x5e, 0x91, 0x1f, 0x00, 0xe2, 0x51, 0xd9, 0x8d, 0x11, 0xf2, 0x5f, 0xd0, 0x53, 0x58, 0xe7, 0x91,
+	0x93, 0x7a, 0x23, 0x14, 0x79, 0xf9, 0x62, 0xf6, 0x6a, 0x83, 0x97, 0x9d, 0x0d, 0xf2, 0x3a, 0xdb,
+	0x99, 0xe4, 0x30, 0xd1, 0x7d, 0x41, 0x91, 0x8e, 0x14, 0x8b, 0x91, 0x6d, 0xc0, 0x20, 0xf7, 0xed,
+	0xdc, 0xff, 0x67, 0x11, 0x96, 0xea, 0xac, 0x40, 0xce, 0x71, 0x78, 0xed, 0x75, 0x30, 0x3a, 0x82,
+	0x25, 0xcd, 0x15, 0xa2, 0x8f, 0x64, 0x05, 0x65, 0x99, 0x45, 0x73, 0x6d, 0xac, 0xa4, 0x8f, 0xa8,
+	0x65, 0xa5, 0xc5, 0x2f, 0x0d, 0x21, 0x5a, 0x57, 0x10, 0x54, 0x86, 0xb9, 0xc1, 0x27, 0xcc, 0xf2,
+	0xa8, 0xcf, 0x2a, 0xb2, 0x14, 0x8c, 0x0c, 0xbf, 0x98, 0x0b, 0xf5, 0x0d, 0xcc, 0x89, 0x08, 0xb4,
+	0x96, 0x82, 0x98, 0x14, 0x1a, 0x2b, 0x21, 0x9c, 0x58, 0x5a, 0x09, 0xdd, 0xd5, 0x4d, 0x50, 0x82,
+	0x95, 0xa0, 0xa6, 0x84, 0x5a, 0xb8, 0x13, 0x38, 0x24, 0xb5, 0xa7, 0x71, 0x18, 0x2b, 0xe0, 0x5c,
+	0x98, 0xd7, 0x00, 0xc9, 0x1d, 0x43, 0x1b, 0x12, 0x63, 0xec, 0xde, 0xe5, 0x02, 0xd4, 0xa1, 0xa2,
+	0x5c, 0x37, 0x64, 0xea, 0x08, 0x85, 0x8e, 0xf2, 0x13, 0x3c, 0x4f, 0xdf, 0x3b, 0xb4, 0xa5, 0xe3,
+	0x4c, 0x71, 0x20, 0x96, 0x98, 0xd4, 0x81, 0x8a, 0x64, 0x25, 0x66, 0xa3, 0x54, 0x7a, 0x8a, 0x4d,
+	0xf1, 0x62, 0x8f, 0xd5, 0xe1, 0xf5, 0x9e, 0x52, 0xa7, 0x50, 0xc9, 0x37, 0x60, 0x21, 0x76, 0xc8,
+	0xa8, 0x2a, 0x01, 0xd2, 0xb6, 0xdb, 0xdc, 0xc8, 0x58, 0xe1, 0x8f, 0xee, 0x9e, 0x81, 0x2e, 0x60,
+	0x39, 0xe5, 0x73, 0x93, 0x6b, 0x93, 0x6d, 0xa4, 0xcd, 0xad, 0xdc, 0xf5, 0x18, 0xf5, 0x08, 0x20,
+	0xf1, 0xaa, 0x48, 0x23, 0xa0, 0x59, 0x60, 0xd3, 0xcc, 0x5a, 0x4a, 0x93, 0x53, 0x0c, 0xa7, 0x4e,
+	0x6e, 0xdc, 0xd1, 0xea, 0xe4, 0x32, 0x9c, 0x6a, 0x42, 0x8e, 0xbb, 0x46, 0x9d, 0x9c, 0x66, 0x46,
+	0x75, 0x72, 0xba, 0xc9, 0xdc, 0x33, 0xd0, 0x9b, 0xc4, 0x68, 0xc5, 0xf6, 0x06, 0x6d, 0xab, 0x21,
+	0x59, 0xee, 0xd2, 0xfc, 0xe4, 0x03, 0x3b, 0x62, 0x6c, 0x91, 0x59, 0xd6, 0x21, 0xf5, 0xcc, 0xaa,
+	0x6d, 0x5c, 0xcf, 0xac, 0xd6, 0x4e, 0xf7, 0x0c, 0xe4, 0x71, 0xd7, 0x3f, 0xee, 0xc1, 0xd0, 0xa7,
+	0x63, 0x61, 0x59, 0x96, 0xcf, 0xfc, 0x6c, 0xd2, 0xb6, 0xf8, 0x57, 0xc7, 0x50, 0x51, 0x5a, 0x3a,
+	0xca, 0xf2, 0x0f, 0x12, 0x74, 0x33, 0x73, 0x4d, 0x22, 0x35, 0xbe, 0xbd, 0xbb, 0xb7, 0x4a, 0x6f,
+	0xef, 0xad, 0xd2, 0xbb, 0x7b, 0xcb, 0xf8, 0x63, 0x64, 0x19, 0x7f, 0x8e, 0x2c, 0xe3, 0xef, 0x91,
+	0x65, 0xdc, 0x8d, 0x2c, 0xe3, 0xbf, 0x91, 0x65, 0xfc, 0x3f, 0xb2, 0x4a, 0xef, 0x46, 0x96, 0x71,
+	0xfb, 0x60, 0x95, 0xee, 0x1e, 0xac, 0xd2, 0xdb, 0x07, 0xab, 0xf4, 0xa6, 0x5c, 0xdb, 0x0d, 0xda,
+	0xed, 0x59, 0x76, 0x3d, 0xbe, 0x7a, 0x1f, 0x00, 0x00, 0xff, 0xff, 0x0b, 0xb8, 0x3d, 0x74, 0x34,
+	0x11, 0x00, 0x00,
 }
 
-func (this *DiveMaster) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DiveMaster)
-	if !ok {
-		that2, ok := that.(DiveMaster)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.FirstName != that1.FirstName {
-		return false
-	}
-	if this.LastName != that1.LastName {
-		return false
-	}
-	if this.Level != that1.Level {
-		return false
-	}
-	if !this.FrontImage.Equal(that1.FrontImage) {
-		return false
-	}
-	if !this.BackImage.Equal(that1.BackImage) {
-		return false
-	}
-	return true
-}
-func (this *DiveMasterFirstAndLastName) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DiveMasterFirstAndLastName)
-	if !ok {
-		that2, ok := that.(DiveMasterFirstAndLastName)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.FirstName != that1.FirstName {
-		return false
-	}
-	if this.LastName != that1.LastName {
-		return false
-	}
-	return true
-}
-func (this *Staff) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Staff)
-	if !ok {
-		that2, ok := that.(Staff)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.FirstName != that1.FirstName {
-		return false
-	}
-	if this.LastName != that1.LastName {
-		return false
-	}
-	if this.Position != that1.Position {
-		return false
-	}
-	if this.Gender != that1.Gender {
-		return false
-	}
-	return true
-}
-func (this *DivingBoat) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DivingBoat)
-	if !ok {
-		that2, ok := that.(DivingBoat)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if len(this.BoatImages) != len(that1.BoatImages) {
-		return false
-	}
-	for i := range this.BoatImages {
-		if !this.BoatImages[i].Equal(that1.BoatImages[i]) {
-			return false
-		}
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.TotalCapacity != that1.TotalCapacity {
-		return false
-	}
-	if this.DiverCapacity != that1.DiverCapacity {
-		return false
-	}
-	if this.StaffCapacity != that1.StaffCapacity {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	return true
-}
-func (this *Amenity) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Amenity)
-	if !ok {
-		that2, ok := that.(Amenity)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	return true
-}
-func (this *RoomType) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*RoomType)
-	if !ok {
-		that2, ok := that.(RoomType)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.MaxGuest != that1.MaxGuest {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if len(this.RoomImages) != len(that1.RoomImages) {
-		return false
-	}
-	for i := range this.RoomImages {
-		if !this.RoomImages[i].Equal(that1.RoomImages[i]) {
-			return false
-		}
-	}
-	if len(this.Amenities) != len(that1.Amenities) {
-		return false
-	}
-	for i := range this.Amenities {
-		if !this.Amenities[i].Equal(that1.Amenities[i]) {
-			return false
-		}
-	}
-	if this.Quantity != that1.Quantity {
-		return false
-	}
-	return true
-}
-func (this *HotelAndBoatId) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*HotelAndBoatId)
-	if !ok {
-		that2, ok := that.(HotelAndBoatId)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.HotelId != that1.HotelId {
-		return false
-	}
-	if this.BoatId != that1.BoatId {
-		return false
-	}
-	return true
-}
-func (this *TripTemplate) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*TripTemplate)
-	if !ok {
-		that2, ok := that.(TripTemplate)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if this.TripType != that1.TripType {
-		return false
-	}
-	if that1.ResidenceId == nil {
-		if this.ResidenceId != nil {
-			return false
-		}
-	} else if this.ResidenceId == nil {
-		return false
-	} else if !this.ResidenceId.Equal(that1.ResidenceId) {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	return true
-}
-func (this *TripTemplate_HotelAndBoatId) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*TripTemplate_HotelAndBoatId)
-	if !ok {
-		that2, ok := that.(TripTemplate_HotelAndBoatId)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.HotelAndBoatId.Equal(that1.HotelAndBoatId) {
-		return false
-	}
-	return true
-}
-func (this *TripTemplate_LiveaboardId) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*TripTemplate_LiveaboardId)
-	if !ok {
-		that2, ok := that.(TripTemplate_LiveaboardId)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.LiveaboardId != that1.LiveaboardId {
-		return false
-	}
-	return true
-}
-func (this *Trip) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Trip)
-	if !ok {
-		that2, ok := that.(Trip)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if that1.From == nil {
-		if this.From != nil {
-			return false
-		}
-	} else if !this.From.Equal(*that1.From) {
-		return false
-	}
-	if that1.To == nil {
-		if this.To != nil {
-			return false
-		}
-	} else if !this.To.Equal(*that1.To) {
-		return false
-	}
-	if this.MaxCapacity != that1.MaxCapacity {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if len(this.DiveMasterIds) != len(that1.DiveMasterIds) {
-		return false
-	}
-	for i := range this.DiveMasterIds {
-		if this.DiveMasterIds[i] != that1.DiveMasterIds[i] {
-			return false
-		}
-	}
-	if that1.LastReservationDate == nil {
-		if this.LastReservationDate != nil {
-			return false
-		}
-	} else if !this.LastReservationDate.Equal(*that1.LastReservationDate) {
-		return false
-	}
-	return true
-}
-func (this *Hotel) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Hotel)
-	if !ok {
-		that2, ok := that.(Hotel)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.HotelName != that1.HotelName {
-		return false
-	}
-	if this.Star != that1.Star {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if len(this.RoomTypes) != len(that1.RoomTypes) {
-		return false
-	}
-	for i := range this.RoomTypes {
-		if !this.RoomTypes[i].Equal(that1.RoomTypes[i]) {
-			return false
-		}
-	}
-	if this.HotelDescription != that1.HotelDescription {
-		return false
-	}
-	if this.Phone != that1.Phone {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	return true
-}
-func (this *Liveaboard) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Liveaboard)
-	if !ok {
-		that2, ok := that.(Liveaboard)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.Length != that1.Length {
-		return false
-	}
-	if this.Width != that1.Width {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if len(this.RoomTypes) != len(that1.RoomTypes) {
-		return false
-	}
-	for i := range this.RoomTypes {
-		if !this.RoomTypes[i].Equal(that1.RoomTypes[i]) {
-			return false
-		}
-	}
-	if this.TotalCapacity != that1.TotalCapacity {
-		return false
-	}
-	if this.DiverRooms != that1.DiverRooms {
-		return false
-	}
-	if this.StaffRooms != that1.StaffRooms {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	return true
-}
 func (this *AddDiveMasterRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -4432,64 +1952,6 @@ func (this *ListBoatsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListBoatsResponse_Boat) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListBoatsResponse_Boat)
-	if !ok {
-		that2, ok := that.(ListBoatsResponse_Boat)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if this.TotalCapacity != that1.TotalCapacity {
-		return false
-	}
-	if this.DiverCapacity != that1.DiverCapacity {
-		return false
-	}
-	if this.StaffCapacity != that1.StaffCapacity {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	return true
-}
 func (this *ListDiveMastersRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -4537,61 +1999,6 @@ func (this *ListDiveMastersResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.DiveMaster.Equal(that1.DiveMaster) {
-		return false
-	}
-	return true
-}
-func (this *ListDiveMastersResponse_DiveMaster) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListDiveMastersResponse_DiveMaster)
-	if !ok {
-		that2, ok := that.(ListDiveMastersResponse_DiveMaster)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.FirstName != that1.FirstName {
-		return false
-	}
-	if this.LastName != that1.LastName {
-		return false
-	}
-	if this.Level != that1.Level {
-		return false
-	}
-	if len(this.Documents) != len(that1.Documents) {
-		return false
-	}
-	for i := range this.Documents {
-		if !this.Documents[i].Equal(that1.Documents[i]) {
-			return false
-		}
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
 	return true
@@ -4647,67 +2054,6 @@ func (this *ListHotelsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListHotelsResponse_Hotel) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListHotelsResponse_Hotel)
-	if !ok {
-		that2, ok := that.(ListHotelsResponse_Hotel)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.Stars != that1.Stars {
-		return false
-	}
-	if this.Phone != that1.Phone {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	return true
-}
 func (this *ListLiveaboardsRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -4755,76 +2101,6 @@ func (this *ListLiveaboardsResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Liveaboard.Equal(that1.Liveaboard) {
-		return false
-	}
-	return true
-}
-func (this *ListLiveaboardsResponse_Liveaboard) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListLiveaboardsResponse_Liveaboard)
-	if !ok {
-		that2, ok := that.(ListLiveaboardsResponse_Liveaboard)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.Length != that1.Length {
-		return false
-	}
-	if this.Width != that1.Width {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if this.TotalCapacity != that1.TotalCapacity {
-		return false
-	}
-	if this.DiverRooms != that1.DiverRooms {
-		return false
-	}
-	if this.StaffRooms != that1.StaffRooms {
-		return false
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
 	return true
@@ -4880,56 +2156,6 @@ func (this *ListStaffsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListStaffsResponse_Staff) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListStaffsResponse_Staff)
-	if !ok {
-		that2, ok := that.(ListStaffsResponse_Staff)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.FirstName != that1.FirstName {
-		return false
-	}
-	if this.LastName != that1.LastName {
-		return false
-	}
-	if this.Position != that1.Position {
-		return false
-	}
-	if this.Gender != that1.Gender {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	return true
-}
 func (this *ListTripTemplatesRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -4977,70 +2203,6 @@ func (this *ListTripTemplatesResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Template.Equal(that1.Template) {
-		return false
-	}
-	return true
-}
-func (this *ListTripTemplatesResponse_TripTemplate) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListTripTemplatesResponse_TripTemplate)
-	if !ok {
-		that2, ok := that.(ListTripTemplatesResponse_TripTemplate)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.TripType != that1.TripType {
-		return false
-	}
-	if this.HotelId != that1.HotelId {
-		return false
-	}
-	if this.BoatId != that1.BoatId {
-		return false
-	}
-	if this.LiveaboardId != that1.LiveaboardId {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
 	return true
@@ -5096,74 +2258,6 @@ func (this *ListTripsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListTripsResponse_Trip) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListTripsResponse_Trip)
-	if !ok {
-		that2, ok := that.(ListTripsResponse_Trip)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.TripTemplateId != that1.TripTemplateId {
-		return false
-	}
-	if this.MaxGuest != that1.MaxGuest {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if that1.FromDate == nil {
-		if this.FromDate != nil {
-			return false
-		}
-	} else if !this.FromDate.Equal(*that1.FromDate) {
-		return false
-	}
-	if that1.ToDate == nil {
-		if this.ToDate != nil {
-			return false
-		}
-	} else if !this.ToDate.Equal(*that1.ToDate) {
-		return false
-	}
-	if that1.LastReservationDate == nil {
-		if this.LastReservationDate != nil {
-			return false
-		}
-	} else if !this.LastReservationDate.Equal(*that1.LastReservationDate) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	return true
-}
 func (this *ListTripsWithTemplatesRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -5211,152 +2305,6 @@ func (this *ListTripsWithTemplatesResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Trip.Equal(that1.Trip) {
-		return false
-	}
-	return true
-}
-func (this *ListTripsWithTemplatesResponse_Trip) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListTripsWithTemplatesResponse_Trip)
-	if !ok {
-		that2, ok := that.(ListTripsWithTemplatesResponse_Trip)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.TripTemplateId != that1.TripTemplateId {
-		return false
-	}
-	if this.MaxGuest != that1.MaxGuest {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if len(this.DiveMasters) != len(that1.DiveMasters) {
-		return false
-	}
-	for i := range this.DiveMasters {
-		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
-			return false
-		}
-	}
-	if that1.FromDate == nil {
-		if this.FromDate != nil {
-			return false
-		}
-	} else if !this.FromDate.Equal(*that1.FromDate) {
-		return false
-	}
-	if that1.ToDate == nil {
-		if this.ToDate != nil {
-			return false
-		}
-	} else if !this.ToDate.Equal(*that1.ToDate) {
-		return false
-	}
-	if that1.LastReservationDate == nil {
-		if this.LastReservationDate != nil {
-			return false
-		}
-	} else if !this.LastReservationDate.Equal(*that1.LastReservationDate) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	if !this.TripTemplate.Equal(that1.TripTemplate) {
-		return false
-	}
-	return true
-}
-func (this *ListTripsWithTemplatesResponse_TripTemplate) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ListTripsWithTemplatesResponse_TripTemplate)
-	if !ok {
-		that2, ok := that.(ListTripsWithTemplatesResponse_TripTemplate)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.TripType != that1.TripType {
-		return false
-	}
-	if this.HotelId != that1.HotelId {
-		return false
-	}
-	if this.BoatId != that1.BoatId {
-		return false
-	}
-	if this.LiveaboardId != that1.LiveaboardId {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
 		return false
 	}
 	return true
@@ -5537,14 +2485,14 @@ func (this *SearchTripsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SearchTripsResponse_Trip) Equal(that interface{}) bool {
+func (this *UpdateTripRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchTripsResponse_Trip)
+	that1, ok := that.(*UpdateTripRequest)
 	if !ok {
-		that2, ok := that.(SearchTripsResponse_Trip)
+		that2, ok := that.(UpdateTripRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5556,74 +2504,19 @@ func (this *SearchTripsResponse_Trip) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.TripTemplateId != that1.TripTemplateId {
-		return false
-	}
-	if this.MaxGuest != that1.MaxGuest {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if len(this.DiveMasters) != len(that1.DiveMasters) {
-		return false
-	}
-	for i := range this.DiveMasters {
-		if !this.DiveMasters[i].Equal(that1.DiveMasters[i]) {
-			return false
-		}
-	}
-	if that1.FromDate == nil {
-		if this.FromDate != nil {
-			return false
-		}
-	} else if !this.FromDate.Equal(*that1.FromDate) {
-		return false
-	}
-	if that1.ToDate == nil {
-		if this.ToDate != nil {
-			return false
-		}
-	} else if !this.ToDate.Equal(*that1.ToDate) {
-		return false
-	}
-	if that1.LastReservationDate == nil {
-		if this.LastReservationDate != nil {
-			return false
-		}
-	} else if !this.LastReservationDate.Equal(*that1.LastReservationDate) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	if !this.TripTemplate.Equal(that1.TripTemplate) {
+	if !this.Trip.Equal(that1.Trip) {
 		return false
 	}
 	return true
 }
-func (this *SearchTripsResponse_TripTemplate) Equal(that interface{}) bool {
+func (this *UpdateHotelRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SearchTripsResponse_TripTemplate)
+	that1, ok := that.(*UpdateHotelRequest)
 	if !ok {
-		that2, ok := that.(SearchTripsResponse_TripTemplate)
+		that2, ok := that.(UpdateHotelRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -5635,256 +2528,106 @@ func (this *SearchTripsResponse_TripTemplate) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Description != that1.Description {
-		return false
-	}
-	if this.TripType != that1.TripType {
-		return false
-	}
-	if this.HotelId != that1.HotelId {
-		return false
-	}
-	if this.BoatId != that1.BoatId {
-		return false
-	}
-	if this.LiveaboardId != that1.LiveaboardId {
-		return false
-	}
-	if len(this.Images) != len(that1.Images) {
-		return false
-	}
-	for i := range this.Images {
-		if !this.Images[i].Equal(that1.Images[i]) {
-			return false
-		}
-	}
-	if !this.Address.Equal(that1.Address) {
-		return false
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
+	if !this.Hotel.Equal(that1.Hotel) {
 		return false
 	}
 	return true
 }
-func (this *DiveMaster) GoString() string {
-	if this == nil {
-		return "nil"
+func (this *UpdateLiveaboardRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
 	}
-	s := make([]string, 0, 9)
-	s = append(s, "&pb.DiveMaster{")
-	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
-	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
-	s = append(s, "Level: "+fmt.Sprintf("%#v", this.Level)+",\n")
-	if this.FrontImage != nil {
-		s = append(s, "FrontImage: "+fmt.Sprintf("%#v", this.FrontImage)+",\n")
+
+	that1, ok := that.(*UpdateLiveaboardRequest)
+	if !ok {
+		that2, ok := that.(UpdateLiveaboardRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
-	if this.BackImage != nil {
-		s = append(s, "BackImage: "+fmt.Sprintf("%#v", this.BackImage)+",\n")
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
+	if !this.Liveaboard.Equal(that1.Liveaboard) {
+		return false
+	}
+	return true
 }
-func (this *DiveMasterFirstAndLastName) GoString() string {
-	if this == nil {
-		return "nil"
+func (this *UpdateBoatRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
 	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.DiveMasterFirstAndLastName{")
-	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
-	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
+
+	that1, ok := that.(*UpdateBoatRequest)
+	if !ok {
+		that2, ok := that.(UpdateBoatRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Boat.Equal(that1.Boat) {
+		return false
+	}
+	return true
 }
-func (this *Staff) GoString() string {
-	if this == nil {
-		return "nil"
+func (this *UpdateDiveMasterRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
 	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.Staff{")
-	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
-	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
-	s = append(s, "Position: "+fmt.Sprintf("%#v", this.Position)+",\n")
-	s = append(s, "Gender: "+fmt.Sprintf("%#v", this.Gender)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
+
+	that1, ok := that.(*UpdateDiveMasterRequest)
+	if !ok {
+		that2, ok := that.(UpdateDiveMasterRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.DiveMaster.Equal(that1.DiveMaster) {
+		return false
+	}
+	return true
 }
-func (this *DivingBoat) GoString() string {
-	if this == nil {
-		return "nil"
+func (this *UpdateStaffRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
 	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.DivingBoat{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	if this.BoatImages != nil {
-		s = append(s, "BoatImages: "+fmt.Sprintf("%#v", this.BoatImages)+",\n")
+
+	that1, ok := that.(*UpdateStaffRequest)
+	if !ok {
+		that2, ok := that.(UpdateStaffRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "TotalCapacity: "+fmt.Sprintf("%#v", this.TotalCapacity)+",\n")
-	s = append(s, "DiverCapacity: "+fmt.Sprintf("%#v", this.DiverCapacity)+",\n")
-	s = append(s, "StaffCapacity: "+fmt.Sprintf("%#v", this.StaffCapacity)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Amenity) GoString() string {
-	if this == nil {
-		return "nil"
+	if !this.Staff.Equal(that1.Staff) {
+		return false
 	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.Amenity{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *RoomType) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.RoomType{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	if this.RoomImages != nil {
-		s = append(s, "RoomImages: "+fmt.Sprintf("%#v", this.RoomImages)+",\n")
-	}
-	if this.Amenities != nil {
-		s = append(s, "Amenities: "+fmt.Sprintf("%#v", this.Amenities)+",\n")
-	}
-	s = append(s, "Quantity: "+fmt.Sprintf("%#v", this.Quantity)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *HotelAndBoatId) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.HotelAndBoatId{")
-	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
-	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.TripTemplate{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
-	if this.ResidenceId != nil {
-		s = append(s, "ResidenceId: "+fmt.Sprintf("%#v", this.ResidenceId)+",\n")
-	}
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *TripTemplate_HotelAndBoatId) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.TripTemplate_HotelAndBoatId{` +
-		`HotelAndBoatId:` + fmt.Sprintf("%#v", this.HotelAndBoatId) + `}`}, ", ")
-	return s
-}
-func (this *TripTemplate_LiveaboardId) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.TripTemplate_LiveaboardId{` +
-		`LiveaboardId:` + fmt.Sprintf("%#v", this.LiveaboardId) + `}`}, ", ")
-	return s
-}
-func (this *Trip) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 10)
-	s = append(s, "&pb.Trip{")
-	s = append(s, "From: "+fmt.Sprintf("%#v", this.From)+",\n")
-	s = append(s, "To: "+fmt.Sprintf("%#v", this.To)+",\n")
-	s = append(s, "MaxCapacity: "+fmt.Sprintf("%#v", this.MaxCapacity)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	s = append(s, "DiveMasterIds: "+fmt.Sprintf("%#v", this.DiveMasterIds)+",\n")
-	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Hotel) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.Hotel{")
-	s = append(s, "HotelName: "+fmt.Sprintf("%#v", this.HotelName)+",\n")
-	s = append(s, "Star: "+fmt.Sprintf("%#v", this.Star)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	if this.RoomTypes != nil {
-		s = append(s, "RoomTypes: "+fmt.Sprintf("%#v", this.RoomTypes)+",\n")
-	}
-	s = append(s, "HotelDescription: "+fmt.Sprintf("%#v", this.HotelDescription)+",\n")
-	s = append(s, "Phone: "+fmt.Sprintf("%#v", this.Phone)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Liveaboard) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 14)
-	s = append(s, "&pb.Liveaboard{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "Length: "+fmt.Sprintf("%#v", this.Length)+",\n")
-	s = append(s, "Width: "+fmt.Sprintf("%#v", this.Width)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	if this.RoomTypes != nil {
-		s = append(s, "RoomTypes: "+fmt.Sprintf("%#v", this.RoomTypes)+",\n")
-	}
-	s = append(s, "TotalCapacity: "+fmt.Sprintf("%#v", this.TotalCapacity)+",\n")
-	s = append(s, "DiverRooms: "+fmt.Sprintf("%#v", this.DiverRooms)+",\n")
-	s = append(s, "StaffRooms: "+fmt.Sprintf("%#v", this.StaffRooms)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
+	return true
 }
 func (this *AddDiveMasterRequest) GoString() string {
 	if this == nil {
@@ -5997,25 +2740,6 @@ func (this *ListBoatsResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListBoatsResponse_Boat) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 12)
-	s = append(s, "&pb.ListBoatsResponse_Boat{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "TotalCapacity: "+fmt.Sprintf("%#v", this.TotalCapacity)+",\n")
-	s = append(s, "DiverCapacity: "+fmt.Sprintf("%#v", this.DiverCapacity)+",\n")
-	s = append(s, "StaffCapacity: "+fmt.Sprintf("%#v", this.StaffCapacity)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func (this *ListDiveMastersRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -6036,24 +2760,6 @@ func (this *ListDiveMastersResponse) GoString() string {
 	if this.DiveMaster != nil {
 		s = append(s, "DiveMaster: "+fmt.Sprintf("%#v", this.DiveMaster)+",\n")
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ListDiveMastersResponse_DiveMaster) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.ListDiveMastersResponse_DiveMaster{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
-	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
-	s = append(s, "Level: "+fmt.Sprintf("%#v", this.Level)+",\n")
-	if this.Documents != nil {
-		s = append(s, "Documents: "+fmt.Sprintf("%#v", this.Documents)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -6080,28 +2786,6 @@ func (this *ListHotelsResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListHotelsResponse_Hotel) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 13)
-	s = append(s, "&pb.ListHotelsResponse_Hotel{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "Stars: "+fmt.Sprintf("%#v", this.Stars)+",\n")
-	s = append(s, "Phone: "+fmt.Sprintf("%#v", this.Phone)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func (this *ListLiveaboardsRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -6122,31 +2806,6 @@ func (this *ListLiveaboardsResponse) GoString() string {
 	if this.Liveaboard != nil {
 		s = append(s, "Liveaboard: "+fmt.Sprintf("%#v", this.Liveaboard)+",\n")
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ListLiveaboardsResponse_Liveaboard) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 16)
-	s = append(s, "&pb.ListLiveaboardsResponse_Liveaboard{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "Length: "+fmt.Sprintf("%#v", this.Length)+",\n")
-	s = append(s, "Width: "+fmt.Sprintf("%#v", this.Width)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "TotalCapacity: "+fmt.Sprintf("%#v", this.TotalCapacity)+",\n")
-	s = append(s, "DiverRooms: "+fmt.Sprintf("%#v", this.DiverRooms)+",\n")
-	s = append(s, "StaffRooms: "+fmt.Sprintf("%#v", this.StaffRooms)+",\n")
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -6173,22 +2832,6 @@ func (this *ListStaffsResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListStaffsResponse_Staff) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 11)
-	s = append(s, "&pb.ListStaffsResponse_Staff{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "FirstName: "+fmt.Sprintf("%#v", this.FirstName)+",\n")
-	s = append(s, "LastName: "+fmt.Sprintf("%#v", this.LastName)+",\n")
-	s = append(s, "Position: "+fmt.Sprintf("%#v", this.Position)+",\n")
-	s = append(s, "Gender: "+fmt.Sprintf("%#v", this.Gender)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func (this *ListTripTemplatesRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -6209,27 +2852,6 @@ func (this *ListTripTemplatesResponse) GoString() string {
 	if this.Template != nil {
 		s = append(s, "Template: "+fmt.Sprintf("%#v", this.Template)+",\n")
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ListTripTemplatesResponse_TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 14)
-	s = append(s, "&pb.ListTripTemplatesResponse_TripTemplate{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
-	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
-	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
-	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -6256,24 +2878,6 @@ func (this *ListTripsResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListTripsResponse_Trip) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 13)
-	s = append(s, "&pb.ListTripsResponse_Trip{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
-	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
-	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
-	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func (this *ListTripsWithTemplatesRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -6294,54 +2898,6 @@ func (this *ListTripsWithTemplatesResponse) GoString() string {
 	if this.Trip != nil {
 		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
 	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ListTripsWithTemplatesResponse_Trip) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 15)
-	s = append(s, "&pb.ListTripsWithTemplatesResponse_Trip{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
-	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	if this.DiveMasters != nil {
-		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
-	}
-	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
-	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
-	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	if this.TripTemplate != nil {
-		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ListTripsWithTemplatesResponse_TripTemplate) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 15)
-	s = append(s, "&pb.ListTripsWithTemplatesResponse_TripTemplate{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
-	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
-	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
-	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
-	}
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
-	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -6411,51 +2967,75 @@ func (this *SearchTripsResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SearchTripsResponse_Trip) GoString() string {
+func (this *UpdateTripRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 15)
-	s = append(s, "&pb.SearchTripsResponse_Trip{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "TripTemplateId: "+fmt.Sprintf("%#v", this.TripTemplateId)+",\n")
-	s = append(s, "MaxGuest: "+fmt.Sprintf("%#v", this.MaxGuest)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	if this.DiveMasters != nil {
-		s = append(s, "DiveMasters: "+fmt.Sprintf("%#v", this.DiveMasters)+",\n")
-	}
-	s = append(s, "FromDate: "+fmt.Sprintf("%#v", this.FromDate)+",\n")
-	s = append(s, "ToDate: "+fmt.Sprintf("%#v", this.ToDate)+",\n")
-	s = append(s, "LastReservationDate: "+fmt.Sprintf("%#v", this.LastReservationDate)+",\n")
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	if this.TripTemplate != nil {
-		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateTripRequest{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SearchTripsResponse_TripTemplate) GoString() string {
+func (this *UpdateHotelRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 15)
-	s = append(s, "&pb.SearchTripsResponse_TripTemplate{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Description: "+fmt.Sprintf("%#v", this.Description)+",\n")
-	s = append(s, "TripType: "+fmt.Sprintf("%#v", this.TripType)+",\n")
-	s = append(s, "HotelId: "+fmt.Sprintf("%#v", this.HotelId)+",\n")
-	s = append(s, "BoatId: "+fmt.Sprintf("%#v", this.BoatId)+",\n")
-	s = append(s, "LiveaboardId: "+fmt.Sprintf("%#v", this.LiveaboardId)+",\n")
-	if this.Images != nil {
-		s = append(s, "Images: "+fmt.Sprintf("%#v", this.Images)+",\n")
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateHotelRequest{")
+	if this.Hotel != nil {
+		s = append(s, "Hotel: "+fmt.Sprintf("%#v", this.Hotel)+",\n")
 	}
-	if this.Address != nil {
-		s = append(s, "Address: "+fmt.Sprintf("%#v", this.Address)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *UpdateLiveaboardRequest) GoString() string {
+	if this == nil {
+		return "nil"
 	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateLiveaboardRequest{")
+	if this.Liveaboard != nil {
+		s = append(s, "Liveaboard: "+fmt.Sprintf("%#v", this.Liveaboard)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *UpdateBoatRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateBoatRequest{")
+	if this.Boat != nil {
+		s = append(s, "Boat: "+fmt.Sprintf("%#v", this.Boat)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *UpdateDiveMasterRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateDiveMasterRequest{")
+	if this.DiveMaster != nil {
+		s = append(s, "DiveMaster: "+fmt.Sprintf("%#v", this.DiveMaster)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *UpdateStaffRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdateStaffRequest{")
+	if this.Staff != nil {
+		s = append(s, "Staff: "+fmt.Sprintf("%#v", this.Staff)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -6487,6 +3067,12 @@ type AgencyServiceClient interface {
 	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListBoats(ctx context.Context, in *ListBoatsRequest, opts ...grpc.CallOption) (AgencyService_ListBoatsClient, error)
 	ListDiveMasters(ctx context.Context, in *ListDiveMastersRequest, opts ...grpc.CallOption) (AgencyService_ListDiveMastersClient, error)
 	ListHotels(ctx context.Context, in *ListHotelsRequest, opts ...grpc.CallOption) (AgencyService_ListHotelsClient, error)
@@ -6563,6 +3149,60 @@ func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest,
 func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddLiveaboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateTrip", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateHotel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateLiveaboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateBoat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateDiveMaster", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateStaff", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -6866,6 +3506,12 @@ type AgencyServiceServer interface {
 	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*emptypb.Empty, error)
 	AddHotel(context.Context, *AddHotelRequest) (*emptypb.Empty, error)
 	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*emptypb.Empty, error)
+	UpdateTrip(context.Context, *UpdateTripRequest) (*emptypb.Empty, error)
+	UpdateHotel(context.Context, *UpdateHotelRequest) (*emptypb.Empty, error)
+	UpdateLiveaboard(context.Context, *UpdateLiveaboardRequest) (*emptypb.Empty, error)
+	UpdateBoat(context.Context, *UpdateBoatRequest) (*emptypb.Empty, error)
+	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*emptypb.Empty, error)
+	UpdateStaff(context.Context, *UpdateStaffRequest) (*emptypb.Empty, error)
 	ListBoats(*ListBoatsRequest, AgencyService_ListBoatsServer) error
 	ListDiveMasters(*ListDiveMastersRequest, AgencyService_ListDiveMastersServer) error
 	ListHotels(*ListHotelsRequest, AgencyService_ListHotelsServer) error
@@ -6901,6 +3547,24 @@ func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddH
 }
 func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveaboard not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateTrip(ctx context.Context, req *UpdateTripRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTrip not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateHotel(ctx context.Context, req *UpdateHotelRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHotel not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateLiveaboard(ctx context.Context, req *UpdateLiveaboardRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLiveaboard not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateBoat(ctx context.Context, req *UpdateBoatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBoat not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, req *UpdateDiveMasterRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiveMaster not implemented")
+}
+func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStaff not implemented")
 }
 func (*UnimplementedAgencyServiceServer) ListBoats(req *ListBoatsRequest, srv AgencyService_ListBoatsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListBoats not implemented")
@@ -7056,6 +3720,114 @@ func _AgencyService_AddLiveaboard_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgencyServiceServer).AddLiveaboard(ctx, req.(*AddLiveaboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateTrip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTripRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateTrip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateTrip",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateTrip(ctx, req.(*UpdateTripRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateHotel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHotelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateHotel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateHotel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateHotel(ctx, req.(*UpdateHotelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateLiveaboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLiveaboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateLiveaboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateLiveaboard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateLiveaboard(ctx, req.(*UpdateLiveaboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateBoat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBoatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateBoat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateBoat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateBoat(ctx, req.(*UpdateBoatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateDiveMaster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDiveMasterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateDiveMaster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateDiveMaster",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateDiveMaster(ctx, req.(*UpdateDiveMasterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_UpdateStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStaffRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).UpdateStaff(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/UpdateStaff",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).UpdateStaff(ctx, req.(*UpdateStaffRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -7281,6 +4053,30 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 			MethodName: "AddLiveaboard",
 			Handler:    _AgencyService_AddLiveaboard_Handler,
 		},
+		{
+			MethodName: "UpdateTrip",
+			Handler:    _AgencyService_UpdateTrip_Handler,
+		},
+		{
+			MethodName: "UpdateHotel",
+			Handler:    _AgencyService_UpdateHotel_Handler,
+		},
+		{
+			MethodName: "UpdateLiveaboard",
+			Handler:    _AgencyService_UpdateLiveaboard_Handler,
+		},
+		{
+			MethodName: "UpdateBoat",
+			Handler:    _AgencyService_UpdateBoat_Handler,
+		},
+		{
+			MethodName: "UpdateDiveMaster",
+			Handler:    _AgencyService_UpdateDiveMaster_Handler,
+		},
+		{
+			MethodName: "UpdateStaff",
+			Handler:    _AgencyService_UpdateStaff_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -7330,772 +4126,6 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Metadata: "agency.proto",
-}
-
-func (m *DiveMaster) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DiveMaster) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DiveMaster) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.BackImage != nil {
-		{
-			size, err := m.BackImage.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x2a
-	}
-	if m.FrontImage != nil {
-		{
-			size, err := m.FrontImage.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x22
-	}
-	if m.Level != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Level))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DiveMasterFirstAndLastName) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DiveMasterFirstAndLastName) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DiveMasterFirstAndLastName) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Staff) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Staff) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Staff) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Gender != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Gender))
-		i--
-		dAtA[i] = 0x20
-	}
-	if len(m.Position) > 0 {
-		i -= len(m.Position)
-		copy(dAtA[i:], m.Position)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Position)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DivingBoat) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DivingBoat) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DivingBoat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x3a
-	}
-	if m.StaffCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.StaffCapacity))
-		i--
-		dAtA[i] = 0x30
-	}
-	if m.DiverCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.DiverCapacity))
-		i--
-		dAtA[i] = 0x28
-	}
-	if m.TotalCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TotalCapacity))
-		i--
-		dAtA[i] = 0x20
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.BoatImages) > 0 {
-		for iNdEx := len(m.BoatImages) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.BoatImages[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Amenity) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Amenity) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Amenity) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *RoomType) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *RoomType) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *RoomType) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Quantity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Quantity))
-		i--
-		dAtA[i] = 0x38
-	}
-	if len(m.Amenities) > 0 {
-		for iNdEx := len(m.Amenities) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Amenities[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x32
-		}
-	}
-	if len(m.RoomImages) > 0 {
-		for iNdEx := len(m.RoomImages) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.RoomImages[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2a
-		}
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x25
-	}
-	if m.MaxGuest != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.MaxGuest))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *HotelAndBoatId) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *HotelAndBoatId) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *HotelAndBoatId) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.BoatId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.BoatId))
-		i--
-		dAtA[i] = 0x10
-	}
-	if m.HotelId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TripTemplate) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TripTemplate) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.ResidenceId != nil {
-		{
-			size := m.ResidenceId.Size()
-			i -= size
-			if _, err := m.ResidenceId.MarshalTo(dAtA[i:]); err != nil {
-				return 0, err
-			}
-		}
-	}
-	if m.TripType != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
-		i--
-		dAtA[i] = 0x30
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2a
-		}
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TripTemplate_HotelAndBoatId) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *TripTemplate_HotelAndBoatId) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.HotelAndBoatId != nil {
-		{
-			size, err := m.HotelAndBoatId.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x42
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TripTemplate_LiveaboardId) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *TripTemplate_LiveaboardId) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
-	i--
-	dAtA[i] = 0x48
-	return len(dAtA) - i, nil
-}
-func (m *Trip) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Trip) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.LastReservationDate != nil {
-		n6, err6 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err6 != nil {
-			return 0, err6
-		}
-		i -= n6
-		i = encodeVarintAgency(dAtA, i, uint64(n6))
-		i--
-		dAtA[i] = 0x32
-	}
-	if len(m.DiveMasterIds) > 0 {
-		dAtA8 := make([]byte, len(m.DiveMasterIds)*10)
-		var j7 int
-		for _, num := range m.DiveMasterIds {
-			for num >= 1<<7 {
-				dAtA8[j7] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j7++
-			}
-			dAtA8[j7] = uint8(num)
-			j7++
-		}
-		i -= j7
-		copy(dAtA[i:], dAtA8[:j7])
-		i = encodeVarintAgency(dAtA, i, uint64(j7))
-		i--
-		dAtA[i] = 0x2a
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x25
-	}
-	if m.MaxCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.MaxCapacity))
-		i--
-		dAtA[i] = 0x18
-	}
-	if m.To != nil {
-		n9, err9 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.To, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.To):])
-		if err9 != nil {
-			return 0, err9
-		}
-		i -= n9
-		i = encodeVarintAgency(dAtA, i, uint64(n9))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.From != nil {
-		n10, err10 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.From, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.From):])
-		if err10 != nil {
-			return 0, err10
-		}
-		i -= n10
-		i = encodeVarintAgency(dAtA, i, uint64(n10))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Hotel) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Hotel) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x42
-	}
-	if len(m.Phone) > 0 {
-		i -= len(m.Phone)
-		copy(dAtA[i:], m.Phone)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Phone)))
-		i--
-		dAtA[i] = 0x3a
-	}
-	if len(m.HotelDescription) > 0 {
-		i -= len(m.HotelDescription)
-		copy(dAtA[i:], m.HotelDescription)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.HotelDescription)))
-		i--
-		dAtA[i] = 0x32
-	}
-	if len(m.RoomTypes) > 0 {
-		for iNdEx := len(m.RoomTypes) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.RoomTypes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2a
-		}
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x22
-		}
-	}
-	if m.Star != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Star))
-		i--
-		dAtA[i] = 0x10
-	}
-	if len(m.HotelName) > 0 {
-		i -= len(m.HotelName)
-		copy(dAtA[i:], m.HotelName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.HotelName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Liveaboard) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Liveaboard) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x5a
-	}
-	if m.StaffRooms != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.StaffRooms))
-		i--
-		dAtA[i] = 0x50
-	}
-	if m.DiverRooms != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.DiverRooms))
-		i--
-		dAtA[i] = 0x48
-	}
-	if m.TotalCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TotalCapacity))
-		i--
-		dAtA[i] = 0x40
-	}
-	if len(m.RoomTypes) > 0 {
-		for iNdEx := len(m.RoomTypes) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.RoomTypes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3a
-		}
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x32
-		}
-	}
-	if m.Width != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Width))
-		i--
-		dAtA[i] = 0x20
-	}
-	if m.Length != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Length))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
 }
 
 func (m *AddDiveMasterRequest) Marshal() (dAtA []byte, err error) {
@@ -8428,102 +4458,6 @@ func (m *ListBoatsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBoatsResponse_Boat) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListBoatsResponse_Boat) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListBoatsResponse_Boat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n22, err22 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err22 != nil {
-			return 0, err22
-		}
-		i -= n22
-		i = encodeVarintAgency(dAtA, i, uint64(n22))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc2
-	}
-	if m.CreatedAt != nil {
-		n23, err23 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err23 != nil {
-			return 0, err23
-		}
-		i -= n23
-		i = encodeVarintAgency(dAtA, i, uint64(n23))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf2
-	}
-	if m.StaffCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.StaffCapacity))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xb8
-	}
-	if m.DiverCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.DiverCapacity))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xb0
-	}
-	if m.TotalCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TotalCapacity))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa8
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x1
-			i--
-			dAtA[i] = 0xa2
-		}
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *ListDiveMastersRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -8588,97 +4522,6 @@ func (m *ListDiveMastersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 		}
 		i--
 		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n25, err25 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err25 != nil {
-			return 0, err25
-		}
-		i -= n25
-		i = encodeVarintAgency(dAtA, i, uint64(n25))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if m.CreatedAt != nil {
-		n26, err26 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err26 != nil {
-			return 0, err26
-		}
-		i -= n26
-		i = encodeVarintAgency(dAtA, i, uint64(n26))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
-	}
-	if len(m.Documents) > 0 {
-		for iNdEx := len(m.Documents) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Documents[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2
-			i--
-			dAtA[i] = 0xc2
-		}
-	}
-	if m.Level != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Level))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -8751,120 +4594,6 @@ func (m *ListHotelsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListHotelsResponse_Hotel) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListHotelsResponse_Hotel) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListHotelsResponse_Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n28, err28 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err28 != nil {
-			return 0, err28
-		}
-		i -= n28
-		i = encodeVarintAgency(dAtA, i, uint64(n28))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if m.CreatedAt != nil {
-		n29, err29 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err29 != nil {
-			return 0, err29
-		}
-		i -= n29
-		i = encodeVarintAgency(dAtA, i, uint64(n29))
-		i--
-		dAtA[i] = 0x4
-		i--
-		dAtA[i] = 0xb2
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3
-			i--
-			dAtA[i] = 0xe2
-		}
-	}
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
-	}
-	if len(m.Phone) > 0 {
-		i -= len(m.Phone)
-		copy(dAtA[i:], m.Phone)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Phone)))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc2
-	}
-	if m.Stars != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Stars))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *ListLiveaboardsRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -8929,141 +4658,6 @@ func (m *ListLiveaboardsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 		}
 		i--
 		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n32, err32 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err32 != nil {
-			return 0, err32
-		}
-		i -= n32
-		i = encodeVarintAgency(dAtA, i, uint64(n32))
-		i--
-		dAtA[i] = 0x4
-		i--
-		dAtA[i] = 0xb2
-	}
-	if m.CreatedAt != nil {
-		n33, err33 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err33 != nil {
-			return 0, err33
-		}
-		i -= n33
-		i = encodeVarintAgency(dAtA, i, uint64(n33))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xb2
-	}
-	if m.StaffRooms != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.StaffRooms))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xa8
-	}
-	if m.DiverRooms != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.DiverRooms))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.TotalCapacity != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TotalCapacity))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x98
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3
-			i--
-			dAtA[i] = 0x92
-		}
-	}
-	if m.Width != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Width))))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc5
-	}
-	if m.Length != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Length))))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf5
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -9136,90 +4730,6 @@ func (m *ListStaffsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListStaffsResponse_Staff) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListStaffsResponse_Staff) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListStaffsResponse_Staff) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n36, err36 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err36 != nil {
-			return 0, err36
-		}
-		i -= n36
-		i = encodeVarintAgency(dAtA, i, uint64(n36))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if m.CreatedAt != nil {
-		n37, err37 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err37 != nil {
-			return 0, err37
-		}
-		i -= n37
-		i = encodeVarintAgency(dAtA, i, uint64(n37))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
-	}
-	if m.Gender != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Gender))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc0
-	}
-	if len(m.Position) > 0 {
-		i -= len(m.Position)
-		copy(dAtA[i:], m.Position)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Position)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf2
-	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *ListTripTemplatesRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -9284,118 +4794,6 @@ func (m *ListTripTemplatesResponse) MarshalToSizedBuffer(dAtA []byte) (int, erro
 		}
 		i--
 		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n39, err39 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err39 != nil {
-			return 0, err39
-		}
-		i -= n39
-		i = encodeVarintAgency(dAtA, i, uint64(n39))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.CreatedAt != nil {
-		n40, err40 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err40 != nil {
-			return 0, err40
-		}
-		i -= n40
-		i = encodeVarintAgency(dAtA, i, uint64(n40))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x4
-			i--
-			dAtA[i] = 0xb2
-		}
-	}
-	if m.LiveaboardId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe0
-	}
-	if m.BoatId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.BoatId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x90
-	}
-	if m.HotelId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc0
-	}
-	if m.TripType != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -9468,116 +4866,6 @@ func (m *ListTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListTripsResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n42, err42 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err42 != nil {
-			return 0, err42
-		}
-		i -= n42
-		i = encodeVarintAgency(dAtA, i, uint64(n42))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.CreatedAt != nil {
-		n43, err43 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err43 != nil {
-			return 0, err43
-		}
-		i -= n43
-		i = encodeVarintAgency(dAtA, i, uint64(n43))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if m.LastReservationDate != nil {
-		n44, err44 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err44 != nil {
-			return 0, err44
-		}
-		i -= n44
-		i = encodeVarintAgency(dAtA, i, uint64(n44))
-		i--
-		dAtA[i] = 0x4
-		i--
-		dAtA[i] = 0xb2
-	}
-	if m.ToDate != nil {
-		n45, err45 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
-		if err45 != nil {
-			return 0, err45
-		}
-		i -= n45
-		i = encodeVarintAgency(dAtA, i, uint64(n45))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if m.FromDate != nil {
-		n46, err46 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err46 != nil {
-			return 0, err46
-		}
-		i -= n46
-		i = encodeVarintAgency(dAtA, i, uint64(n46))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc5
-	}
-	if m.MaxGuest != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.MaxGuest))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if m.TripTemplateId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripTemplateId))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *ListTripsWithTemplatesRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -9646,272 +4934,6 @@ func (m *ListTripsWithTemplatesResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *ListTripsWithTemplatesResponse_Trip) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.TripTemplate != nil {
-		{
-			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xf2
-	}
-	if m.UpdatedAt != nil {
-		n49, err49 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err49 != nil {
-			return 0, err49
-		}
-		i -= n49
-		i = encodeVarintAgency(dAtA, i, uint64(n49))
-		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.CreatedAt != nil {
-		n50, err50 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err50 != nil {
-			return 0, err50
-		}
-		i -= n50
-		i = encodeVarintAgency(dAtA, i, uint64(n50))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.LastReservationDate != nil {
-		n51, err51 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err51 != nil {
-			return 0, err51
-		}
-		i -= n51
-		i = encodeVarintAgency(dAtA, i, uint64(n51))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if m.ToDate != nil {
-		n52, err52 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
-		if err52 != nil {
-			return 0, err52
-		}
-		i -= n52
-		i = encodeVarintAgency(dAtA, i, uint64(n52))
-		i--
-		dAtA[i] = 0x4
-		i--
-		dAtA[i] = 0xb2
-	}
-	if m.FromDate != nil {
-		n53, err53 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err53 != nil {
-			return 0, err53
-		}
-		i -= n53
-		i = encodeVarintAgency(dAtA, i, uint64(n53))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if len(m.DiveMasters) > 0 {
-		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3
-			i--
-			dAtA[i] = 0x92
-		}
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc5
-	}
-	if m.MaxGuest != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.MaxGuest))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if m.TripTemplateId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripTemplateId))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n54, err54 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err54 != nil {
-			return 0, err54
-		}
-		i -= n54
-		i = encodeVarintAgency(dAtA, i, uint64(n54))
-		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.CreatedAt != nil {
-		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err55 != nil {
-			return 0, err55
-		}
-		i -= n55
-		i = encodeVarintAgency(dAtA, i, uint64(n55))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.Address != nil {
-		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintAgency(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x4
-			i--
-			dAtA[i] = 0xb2
-		}
-	}
-	if m.LiveaboardId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe0
-	}
-	if m.BoatId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.BoatId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x90
-	}
-	if m.HotelId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc0
-	}
-	if m.TripType != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
-		i--
-		dAtA[i] = 0x52
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *SearchTripsOptions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -9933,24 +4955,24 @@ func (m *SearchTripsOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.EndDate != nil {
-		n57, err57 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
-		if err57 != nil {
-			return 0, err57
+		n17, err17 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
+		if err17 != nil {
+			return 0, err17
 		}
-		i -= n57
-		i = encodeVarintAgency(dAtA, i, uint64(n57))
+		i -= n17
+		i = encodeVarintAgency(dAtA, i, uint64(n17))
 		i--
 		dAtA[i] = 0x1
 		i--
 		dAtA[i] = 0xf2
 	}
 	if m.StartDate != nil {
-		n58, err58 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
-		if err58 != nil {
-			return 0, err58
+		n18, err18 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
+		if err18 != nil {
+			return 0, err18
 		}
-		i -= n58
-		i = encodeVarintAgency(dAtA, i, uint64(n58))
+		i -= n18
+		i = encodeVarintAgency(dAtA, i, uint64(n18))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -10100,7 +5122,7 @@ func (m *SearchTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
+func (m *UpdateTripRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10110,19 +5132,19 @@ func (m *SearchTripsResponse_Trip) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchTripsResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
+func (m *UpdateTripRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *UpdateTripRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.TripTemplate != nil {
+	if m.Trip != nil {
 		{
-			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -10130,117 +5152,12 @@ func (m *SearchTripsResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error
 			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xf2
-	}
-	if m.UpdatedAt != nil {
-		n62, err62 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err62 != nil {
-			return 0, err62
-		}
-		i -= n62
-		i = encodeVarintAgency(dAtA, i, uint64(n62))
-		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.CreatedAt != nil {
-		n63, err63 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err63 != nil {
-			return 0, err63
-		}
-		i -= n63
-		i = encodeVarintAgency(dAtA, i, uint64(n63))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.LastReservationDate != nil {
-		n64, err64 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.LastReservationDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate):])
-		if err64 != nil {
-			return 0, err64
-		}
-		i -= n64
-		i = encodeVarintAgency(dAtA, i, uint64(n64))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
-	}
-	if m.ToDate != nil {
-		n65, err65 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.ToDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate):])
-		if err65 != nil {
-			return 0, err65
-		}
-		i -= n65
-		i = encodeVarintAgency(dAtA, i, uint64(n65))
-		i--
-		dAtA[i] = 0x4
-		i--
-		dAtA[i] = 0xb2
-	}
-	if m.FromDate != nil {
-		n66, err66 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.FromDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate):])
-		if err66 != nil {
-			return 0, err66
-		}
-		i -= n66
-		i = encodeVarintAgency(dAtA, i, uint64(n66))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if len(m.DiveMasters) > 0 {
-		for iNdEx := len(m.DiveMasters) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.DiveMasters[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x3
-			i--
-			dAtA[i] = 0x92
-		}
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc5
-	}
-	if m.MaxGuest != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.MaxGuest))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if m.TripTemplateId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripTemplateId))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0x52
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *SearchTripsResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
+func (m *UpdateHotelRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -10250,43 +5167,19 @@ func (m *SearchTripsResponse_TripTemplate) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SearchTripsResponse_TripTemplate) MarshalTo(dAtA []byte) (int, error) {
+func (m *UpdateHotelRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SearchTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *UpdateHotelRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.UpdatedAt != nil {
-		n67, err67 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err67 != nil {
-			return 0, err67
-		}
-		i -= n67
-		i = encodeVarintAgency(dAtA, i, uint64(n67))
-		i--
-		dAtA[i] = 0x6
-		i--
-		dAtA[i] = 0xa2
-	}
-	if m.CreatedAt != nil {
-		n68, err68 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err68 != nil {
-			return 0, err68
-		}
-		i -= n68
-		i = encodeVarintAgency(dAtA, i, uint64(n68))
-		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0xd2
-	}
-	if m.Address != nil {
+	if m.Hotel != nil {
 		{
-			size, err := m.Address.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.Hotel.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -10294,74 +5187,147 @@ func (m *SearchTripsResponse_TripTemplate) MarshalToSizedBuffer(dAtA []byte) (in
 			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
 		i--
-		dAtA[i] = 0x5
-		i--
-		dAtA[i] = 0x82
+		dAtA[i] = 0x52
 	}
-	if len(m.Images) > 0 {
-		for iNdEx := len(m.Images) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Images[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintAgency(dAtA, i, uint64(size))
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateLiveaboardRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateLiveaboardRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateLiveaboardRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Liveaboard != nil {
+		{
+			size, err := m.Liveaboard.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
 			}
-			i--
-			dAtA[i] = 0x4
-			i--
-			dAtA[i] = 0xb2
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
 		}
-	}
-	if m.LiveaboardId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe0
-	}
-	if m.BoatId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.BoatId))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x90
-	}
-	if m.HotelId != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc0
-	}
-	if m.TripType != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.TripType))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf0
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa2
-	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintAgency(dAtA, i, uint64(len(m.Name)))
 		i--
 		dAtA[i] = 0x52
 	}
-	if m.Id != 0 {
-		i = encodeVarintAgency(dAtA, i, uint64(m.Id))
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateBoatRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateBoatRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateBoatRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Boat != nil {
+		{
+			size, err := m.Boat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
 		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateDiveMasterRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateDiveMasterRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateDiveMasterRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.DiveMaster != nil {
+		{
+			size, err := m.DiveMaster.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateStaffRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateStaffRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateStaffRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Staff != nil {
+		{
+			size, err := m.Staff.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
 	}
 	return len(dAtA) - i, nil
 }
@@ -10377,357 +5343,6 @@ func encodeVarintAgency(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *DiveMaster) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Level != 0 {
-		n += 1 + sovAgency(uint64(m.Level))
-	}
-	if m.FrontImage != nil {
-		l = m.FrontImage.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.BackImage != nil {
-		l = m.BackImage.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *DiveMasterFirstAndLastName) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *Staff) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Position)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Gender != 0 {
-		n += 1 + sovAgency(uint64(m.Gender))
-	}
-	return n
-}
-
-func (m *DivingBoat) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if len(m.BoatImages) > 0 {
-		for _, e := range m.BoatImages {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.TotalCapacity != 0 {
-		n += 1 + sovAgency(uint64(m.TotalCapacity))
-	}
-	if m.DiverCapacity != 0 {
-		n += 1 + sovAgency(uint64(m.DiverCapacity))
-	}
-	if m.StaffCapacity != 0 {
-		n += 1 + sovAgency(uint64(m.StaffCapacity))
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *Amenity) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *RoomType) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.MaxGuest != 0 {
-		n += 1 + sovAgency(uint64(m.MaxGuest))
-	}
-	if m.Price != 0 {
-		n += 5
-	}
-	if len(m.RoomImages) > 0 {
-		for _, e := range m.RoomImages {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if len(m.Amenities) > 0 {
-		for _, e := range m.Amenities {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.Quantity != 0 {
-		n += 1 + sovAgency(uint64(m.Quantity))
-	}
-	return n
-}
-
-func (m *HotelAndBoatId) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.HotelId != 0 {
-		n += 1 + sovAgency(uint64(m.HotelId))
-	}
-	if m.BoatId != 0 {
-		n += 1 + sovAgency(uint64(m.BoatId))
-	}
-	return n
-}
-
-func (m *TripTemplate) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.TripType != 0 {
-		n += 1 + sovAgency(uint64(m.TripType))
-	}
-	if m.ResidenceId != nil {
-		n += m.ResidenceId.Size()
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *TripTemplate_HotelAndBoatId) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.HotelAndBoatId != nil {
-		l = m.HotelAndBoatId.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-func (m *TripTemplate_LiveaboardId) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovAgency(uint64(m.LiveaboardId))
-	return n
-}
-func (m *Trip) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.From != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.From)
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.To != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.To)
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.MaxCapacity != 0 {
-		n += 1 + sovAgency(uint64(m.MaxCapacity))
-	}
-	if m.Price != 0 {
-		n += 5
-	}
-	if len(m.DiveMasterIds) > 0 {
-		l = 0
-		for _, e := range m.DiveMasterIds {
-			l += sovAgency(uint64(e))
-		}
-		n += 1 + sovAgency(uint64(l)) + l
-	}
-	if m.LastReservationDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate)
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *Hotel) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.HotelName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Star != 0 {
-		n += 1 + sovAgency(uint64(m.Star))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if len(m.RoomTypes) > 0 {
-		for _, e := range m.RoomTypes {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	l = len(m.HotelDescription)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Phone)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *Liveaboard) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if m.Length != 0 {
-		n += 1 + sovAgency(uint64(m.Length))
-	}
-	if m.Width != 0 {
-		n += 1 + sovAgency(uint64(m.Width))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if len(m.RoomTypes) > 0 {
-		for _, e := range m.RoomTypes {
-			l = e.Size()
-			n += 1 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.TotalCapacity != 0 {
-		n += 1 + sovAgency(uint64(m.TotalCapacity))
-	}
-	if m.DiverRooms != 0 {
-		n += 1 + sovAgency(uint64(m.DiverRooms))
-	}
-	if m.StaffRooms != 0 {
-		n += 1 + sovAgency(uint64(m.StaffRooms))
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
 func (m *AddDiveMasterRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -10854,45 +5469,6 @@ func (m *ListBoatsResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListBoatsResponse_Boat) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.TotalCapacity != 0 {
-		n += 2 + sovAgency(uint64(m.TotalCapacity))
-	}
-	if m.DiverCapacity != 0 {
-		n += 2 + sovAgency(uint64(m.DiverCapacity))
-	}
-	if m.StaffCapacity != 0 {
-		n += 2 + sovAgency(uint64(m.StaffCapacity))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
 func (m *ListDiveMastersRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -10917,43 +5493,6 @@ func (m *ListDiveMastersResponse) Size() (n int) {
 	if m.DiveMaster != nil {
 		l = m.DiveMaster.Size()
 		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *ListDiveMastersResponse_DiveMaster) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.Level != 0 {
-		n += 2 + sovAgency(uint64(m.Level))
-	}
-	if len(m.Documents) > 0 {
-		for _, e := range m.Documents {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -10986,51 +5525,6 @@ func (m *ListHotelsResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListHotelsResponse_Hotel) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.Stars != 0 {
-		n += 2 + sovAgency(uint64(m.Stars))
-	}
-	l = len(m.Phone)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
 func (m *ListLiveaboardsRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -11055,59 +5549,6 @@ func (m *ListLiveaboardsResponse) Size() (n int) {
 	if m.Liveaboard != nil {
 		l = m.Liveaboard.Size()
 		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *ListLiveaboardsResponse_Liveaboard) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.Length != 0 {
-		n += 6
-	}
-	if m.Width != 0 {
-		n += 6
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.TotalCapacity != 0 {
-		n += 2 + sovAgency(uint64(m.TotalCapacity))
-	}
-	if m.DiverRooms != 0 {
-		n += 2 + sovAgency(uint64(m.DiverRooms))
-	}
-	if m.StaffRooms != 0 {
-		n += 2 + sovAgency(uint64(m.StaffRooms))
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -11140,41 +5581,6 @@ func (m *ListStaffsResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListStaffsResponse_Staff) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Position)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.Gender != 0 {
-		n += 2 + sovAgency(uint64(m.Gender))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
 func (m *ListTripTemplatesRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -11199,52 +5605,6 @@ func (m *ListTripTemplatesResponse) Size() (n int) {
 	if m.Template != nil {
 		l = m.Template.Size()
 		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *ListTripTemplatesResponse_TripTemplate) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.TripType != 0 {
-		n += 2 + sovAgency(uint64(m.TripType))
-	}
-	if m.HotelId != 0 {
-		n += 2 + sovAgency(uint64(m.HotelId))
-	}
-	if m.BoatId != 0 {
-		n += 2 + sovAgency(uint64(m.BoatId))
-	}
-	if m.LiveaboardId != 0 {
-		n += 2 + sovAgency(uint64(m.LiveaboardId))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -11277,47 +5637,6 @@ func (m *ListTripsResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListTripsResponse_Trip) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	if m.TripTemplateId != 0 {
-		n += 2 + sovAgency(uint64(m.TripTemplateId))
-	}
-	if m.MaxGuest != 0 {
-		n += 2 + sovAgency(uint64(m.MaxGuest))
-	}
-	if m.Price != 0 {
-		n += 6
-	}
-	if m.FromDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.ToDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.LastReservationDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
 func (m *ListTripsWithTemplatesRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -11342,107 +5661,6 @@ func (m *ListTripsWithTemplatesResponse) Size() (n int) {
 	if m.Trip != nil {
 		l = m.Trip.Size()
 		n += 1 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *ListTripsWithTemplatesResponse_Trip) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	if m.TripTemplateId != 0 {
-		n += 2 + sovAgency(uint64(m.TripTemplateId))
-	}
-	if m.MaxGuest != 0 {
-		n += 2 + sovAgency(uint64(m.MaxGuest))
-	}
-	if m.Price != 0 {
-		n += 6
-	}
-	if len(m.DiveMasters) > 0 {
-		for _, e := range m.DiveMasters {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.FromDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.ToDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.LastReservationDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.TripTemplate != nil {
-		l = m.TripTemplate.Size()
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	return n
-}
-
-func (m *ListTripsWithTemplatesResponse_TripTemplate) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
-		n += 1 + l + sovAgency(uint64(l))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.TripType != 0 {
-		n += 2 + sovAgency(uint64(m.TripType))
-	}
-	if m.HotelId != 0 {
-		n += 2 + sovAgency(uint64(m.HotelId))
-	}
-	if m.BoatId != 0 {
-		n += 2 + sovAgency(uint64(m.BoatId))
-	}
-	if m.LiveaboardId != 0 {
-		n += 2 + sovAgency(uint64(m.LiveaboardId))
-	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -11535,103 +5753,80 @@ func (m *SearchTripsResponse) Size() (n int) {
 	return n
 }
 
-func (m *SearchTripsResponse_Trip) Size() (n int) {
+func (m *UpdateTripRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	if m.TripTemplateId != 0 {
-		n += 2 + sovAgency(uint64(m.TripTemplateId))
-	}
-	if m.MaxGuest != 0 {
-		n += 2 + sovAgency(uint64(m.MaxGuest))
-	}
-	if m.Price != 0 {
-		n += 6
-	}
-	if len(m.DiveMasters) > 0 {
-		for _, e := range m.DiveMasters {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
-	}
-	if m.FromDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.FromDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.ToDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.ToDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.LastReservationDate != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.LastReservationDate)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.TripTemplate != nil {
-		l = m.TripTemplate.Size()
-		n += 2 + l + sovAgency(uint64(l))
+	if m.Trip != nil {
+		l = m.Trip.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
 	return n
 }
 
-func (m *SearchTripsResponse_TripTemplate) Size() (n int) {
+func (m *UpdateHotelRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Id != 0 {
-		n += 1 + sovAgency(uint64(m.Id))
-	}
-	l = len(m.Name)
-	if l > 0 {
+	if m.Hotel != nil {
+		l = m.Hotel.Size()
 		n += 1 + l + sovAgency(uint64(l))
 	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 2 + l + sovAgency(uint64(l))
+	return n
+}
+
+func (m *UpdateLiveaboardRequest) Size() (n int) {
+	if m == nil {
+		return 0
 	}
-	if m.TripType != 0 {
-		n += 2 + sovAgency(uint64(m.TripType))
+	var l int
+	_ = l
+	if m.Liveaboard != nil {
+		l = m.Liveaboard.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.HotelId != 0 {
-		n += 2 + sovAgency(uint64(m.HotelId))
+	return n
+}
+
+func (m *UpdateBoatRequest) Size() (n int) {
+	if m == nil {
+		return 0
 	}
-	if m.BoatId != 0 {
-		n += 2 + sovAgency(uint64(m.BoatId))
+	var l int
+	_ = l
+	if m.Boat != nil {
+		l = m.Boat.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.LiveaboardId != 0 {
-		n += 2 + sovAgency(uint64(m.LiveaboardId))
+	return n
+}
+
+func (m *UpdateDiveMasterRequest) Size() (n int) {
+	if m == nil {
+		return 0
 	}
-	if len(m.Images) > 0 {
-		for _, e := range m.Images {
-			l = e.Size()
-			n += 2 + l + sovAgency(uint64(l))
-		}
+	var l int
+	_ = l
+	if m.DiveMaster != nil {
+		l = m.DiveMaster.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
-	if m.Address != nil {
-		l = m.Address.Size()
-		n += 2 + l + sovAgency(uint64(l))
+	return n
+}
+
+func (m *UpdateStaffRequest) Size() (n int) {
+	if m == nil {
+		return 0
 	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovAgency(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovAgency(uint64(l))
+	var l int
+	_ = l
+	if m.Staff != nil {
+		l = m.Staff.Size()
+		n += 1 + l + sovAgency(uint64(l))
 	}
 	return n
 }
@@ -11642,229 +5837,12 @@ func sovAgency(x uint64) (n int) {
 func sozAgency(x uint64) (n int) {
 	return sovAgency(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *DiveMaster) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DiveMaster{`,
-		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
-		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
-		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
-		`FrontImage:` + strings.Replace(fmt.Sprintf("%v", this.FrontImage), "File", "File", 1) + `,`,
-		`BackImage:` + strings.Replace(fmt.Sprintf("%v", this.BackImage), "File", "File", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DiveMasterFirstAndLastName) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DiveMasterFirstAndLastName{`,
-		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
-		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Staff) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Staff{`,
-		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
-		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
-		`Position:` + fmt.Sprintf("%v", this.Position) + `,`,
-		`Gender:` + fmt.Sprintf("%v", this.Gender) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DivingBoat) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForBoatImages := "[]*File{"
-	for _, f := range this.BoatImages {
-		repeatedStringForBoatImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForBoatImages += "}"
-	s := strings.Join([]string{`&DivingBoat{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`BoatImages:` + repeatedStringForBoatImages + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`TotalCapacity:` + fmt.Sprintf("%v", this.TotalCapacity) + `,`,
-		`DiverCapacity:` + fmt.Sprintf("%v", this.DiverCapacity) + `,`,
-		`StaffCapacity:` + fmt.Sprintf("%v", this.StaffCapacity) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Amenity) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Amenity{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *RoomType) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForRoomImages := "[]*File{"
-	for _, f := range this.RoomImages {
-		repeatedStringForRoomImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForRoomImages += "}"
-	repeatedStringForAmenities := "[]*Amenity{"
-	for _, f := range this.Amenities {
-		repeatedStringForAmenities += strings.Replace(f.String(), "Amenity", "Amenity", 1) + ","
-	}
-	repeatedStringForAmenities += "}"
-	s := strings.Join([]string{`&RoomType{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`RoomImages:` + repeatedStringForRoomImages + `,`,
-		`Amenities:` + repeatedStringForAmenities + `,`,
-		`Quantity:` + fmt.Sprintf("%v", this.Quantity) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *HotelAndBoatId) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&HotelAndBoatId{`,
-		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
-		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *TripTemplate) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&TripTemplate{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`ResidenceId:` + fmt.Sprintf("%v", this.ResidenceId) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *TripTemplate_HotelAndBoatId) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&TripTemplate_HotelAndBoatId{`,
-		`HotelAndBoatId:` + strings.Replace(fmt.Sprintf("%v", this.HotelAndBoatId), "HotelAndBoatId", "HotelAndBoatId", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *TripTemplate_LiveaboardId) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&TripTemplate_LiveaboardId{`,
-		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Trip) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Trip{`,
-		`From:` + strings.Replace(fmt.Sprintf("%v", this.From), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`To:` + strings.Replace(fmt.Sprintf("%v", this.To), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`MaxCapacity:` + fmt.Sprintf("%v", this.MaxCapacity) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`DiveMasterIds:` + fmt.Sprintf("%v", this.DiveMasterIds) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Hotel) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	repeatedStringForRoomTypes := "[]*RoomType{"
-	for _, f := range this.RoomTypes {
-		repeatedStringForRoomTypes += strings.Replace(f.String(), "RoomType", "RoomType", 1) + ","
-	}
-	repeatedStringForRoomTypes += "}"
-	s := strings.Join([]string{`&Hotel{`,
-		`HotelName:` + fmt.Sprintf("%v", this.HotelName) + `,`,
-		`Star:` + fmt.Sprintf("%v", this.Star) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`RoomTypes:` + repeatedStringForRoomTypes + `,`,
-		`HotelDescription:` + fmt.Sprintf("%v", this.HotelDescription) + `,`,
-		`Phone:` + fmt.Sprintf("%v", this.Phone) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Liveaboard) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	repeatedStringForRoomTypes := "[]*RoomType{"
-	for _, f := range this.RoomTypes {
-		repeatedStringForRoomTypes += strings.Replace(f.String(), "RoomType", "RoomType", 1) + ","
-	}
-	repeatedStringForRoomTypes += "}"
-	s := strings.Join([]string{`&Liveaboard{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`Length:` + fmt.Sprintf("%v", this.Length) + `,`,
-		`Width:` + fmt.Sprintf("%v", this.Width) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`RoomTypes:` + repeatedStringForRoomTypes + `,`,
-		`TotalCapacity:` + fmt.Sprintf("%v", this.TotalCapacity) + `,`,
-		`DiverRooms:` + fmt.Sprintf("%v", this.DiverRooms) + `,`,
-		`StaffRooms:` + fmt.Sprintf("%v", this.StaffRooms) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
 func (this *AddDiveMasterRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddDiveMasterRequest{`,
-		`DiveMaster:` + strings.Replace(this.DiveMaster.String(), "DiveMaster", "DiveMaster", 1) + `,`,
+		`DiveMaster:` + strings.Replace(fmt.Sprintf("%v", this.DiveMaster), "DiveMaster", "DiveMaster", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11874,7 +5852,7 @@ func (this *AddStaffRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddStaffRequest{`,
-		`Staff:` + strings.Replace(this.Staff.String(), "Staff", "Staff", 1) + `,`,
+		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "Staff", "Staff", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11884,7 +5862,7 @@ func (this *AddTripTemplateRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddTripTemplateRequest{`,
-		`TripTemplate:` + strings.Replace(this.TripTemplate.String(), "TripTemplate", "TripTemplate", 1) + `,`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "TripTemplate", "TripTemplate", 1) + `,`,
 		`AgencyId:` + fmt.Sprintf("%v", this.AgencyId) + `,`,
 		`}`,
 	}, "")
@@ -11895,8 +5873,8 @@ func (this *AddTripRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddTripRequest{`,
-		`Trip:` + strings.Replace(this.Trip.String(), "Trip", "Trip", 1) + `,`,
-		`TripTemplate:` + strings.Replace(this.TripTemplate.String(), "TripTemplate", "TripTemplate", 1) + `,`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "Trip", "Trip", 1) + `,`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "TripTemplate", "TripTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11906,7 +5884,7 @@ func (this *AddDivingBoatRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddDivingBoatRequest{`,
-		`DivingBoat:` + strings.Replace(this.DivingBoat.String(), "DivingBoat", "DivingBoat", 1) + `,`,
+		`DivingBoat:` + strings.Replace(fmt.Sprintf("%v", this.DivingBoat), "Boat", "Boat", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11916,7 +5894,7 @@ func (this *AddHotelRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddHotelRequest{`,
-		`Hotel:` + strings.Replace(this.Hotel.String(), "Hotel", "Hotel", 1) + `,`,
+		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "Hotel", "Hotel", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11926,7 +5904,7 @@ func (this *AddLiveaboardRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&AddLiveaboardRequest{`,
-		`Liveaboard:` + strings.Replace(this.Liveaboard.String(), "Liveaboard", "Liveaboard", 1) + `,`,
+		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "Liveaboard", "Liveaboard", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11947,29 +5925,7 @@ func (this *ListBoatsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListBoatsResponse{`,
-		`Boat:` + strings.Replace(fmt.Sprintf("%v", this.Boat), "ListBoatsResponse_Boat", "ListBoatsResponse_Boat", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListBoatsResponse_Boat) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&ListBoatsResponse_Boat{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`TotalCapacity:` + fmt.Sprintf("%v", this.TotalCapacity) + `,`,
-		`DiverCapacity:` + fmt.Sprintf("%v", this.DiverCapacity) + `,`,
-		`StaffCapacity:` + fmt.Sprintf("%v", this.StaffCapacity) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Boat:` + strings.Replace(fmt.Sprintf("%v", this.Boat), "Boat", "Boat", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11990,28 +5946,7 @@ func (this *ListDiveMastersResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListDiveMastersResponse{`,
-		`DiveMaster:` + strings.Replace(fmt.Sprintf("%v", this.DiveMaster), "ListDiveMastersResponse_DiveMaster", "ListDiveMastersResponse_DiveMaster", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListDiveMastersResponse_DiveMaster) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForDocuments := "[]*File{"
-	for _, f := range this.Documents {
-		repeatedStringForDocuments += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForDocuments += "}"
-	s := strings.Join([]string{`&ListDiveMastersResponse_DiveMaster{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
-		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
-		`Level:` + fmt.Sprintf("%v", this.Level) + `,`,
-		`Documents:` + repeatedStringForDocuments + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`DiveMaster:` + strings.Replace(fmt.Sprintf("%v", this.DiveMaster), "DiveMaster", "DiveMaster", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12032,30 +5967,7 @@ func (this *ListHotelsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListHotelsResponse{`,
-		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "ListHotelsResponse_Hotel", "ListHotelsResponse_Hotel", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListHotelsResponse_Hotel) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&ListHotelsResponse_Hotel{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`Stars:` + fmt.Sprintf("%v", this.Stars) + `,`,
-		`Phone:` + fmt.Sprintf("%v", this.Phone) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "Hotel", "Hotel", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12076,33 +5988,7 @@ func (this *ListLiveaboardsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListLiveaboardsResponse{`,
-		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "ListLiveaboardsResponse_Liveaboard", "ListLiveaboardsResponse_Liveaboard", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListLiveaboardsResponse_Liveaboard) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&ListLiveaboardsResponse_Liveaboard{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`Length:` + fmt.Sprintf("%v", this.Length) + `,`,
-		`Width:` + fmt.Sprintf("%v", this.Width) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`TotalCapacity:` + fmt.Sprintf("%v", this.TotalCapacity) + `,`,
-		`DiverRooms:` + fmt.Sprintf("%v", this.DiverRooms) + `,`,
-		`StaffRooms:` + fmt.Sprintf("%v", this.StaffRooms) + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "Liveaboard", "Liveaboard", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12123,23 +6009,7 @@ func (this *ListStaffsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListStaffsResponse{`,
-		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "ListStaffsResponse_Staff", "ListStaffsResponse_Staff", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListStaffsResponse_Staff) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&ListStaffsResponse_Staff{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`FirstName:` + fmt.Sprintf("%v", this.FirstName) + `,`,
-		`LastName:` + fmt.Sprintf("%v", this.LastName) + `,`,
-		`Position:` + fmt.Sprintf("%v", this.Position) + `,`,
-		`Gender:` + fmt.Sprintf("%v", this.Gender) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "Staff", "Staff", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12160,31 +6030,7 @@ func (this *ListTripTemplatesResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListTripTemplatesResponse{`,
-		`Template:` + strings.Replace(fmt.Sprintf("%v", this.Template), "ListTripTemplatesResponse_TripTemplate", "ListTripTemplatesResponse_TripTemplate", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListTripTemplatesResponse_TripTemplate) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&ListTripTemplatesResponse_TripTemplate{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
-		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
-		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Template:` + strings.Replace(fmt.Sprintf("%v", this.Template), "TripTemplate", "TripTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12205,25 +6051,7 @@ func (this *ListTripsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListTripsResponse{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "ListTripsResponse_Trip", "ListTripsResponse_Trip", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListTripsResponse_Trip) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&ListTripsResponse_Trip{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
-		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "Trip", "Trip", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12244,57 +6072,7 @@ func (this *ListTripsWithTemplatesResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&ListTripsWithTemplatesResponse{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "ListTripsWithTemplatesResponse_Trip", "ListTripsWithTemplatesResponse_Trip", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListTripsWithTemplatesResponse_Trip) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForDiveMasters := "[]*DiveMaster{"
-	for _, f := range this.DiveMasters {
-		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMaster", "DiveMaster", 1) + ","
-	}
-	repeatedStringForDiveMasters += "}"
-	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_Trip{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
-		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
-		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "ListTripsWithTemplatesResponse_TripTemplate", "ListTripsWithTemplatesResponse_TripTemplate", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ListTripsWithTemplatesResponse_TripTemplate) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
-	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&ListTripsWithTemplatesResponse_TripTemplate{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
-		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
-		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "TripWithTemplate", "TripWithTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12360,57 +6138,67 @@ func (this *SearchTripsResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&SearchTripsResponse{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "SearchTripsResponse_Trip", "SearchTripsResponse_Trip", 1) + `,`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "TripWithTemplate", "TripWithTemplate", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchTripsResponse_Trip) String() string {
+func (this *UpdateTripRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForDiveMasters := "[]*DiveMaster{"
-	for _, f := range this.DiveMasters {
-		repeatedStringForDiveMasters += strings.Replace(f.String(), "DiveMaster", "DiveMaster", 1) + ","
-	}
-	repeatedStringForDiveMasters += "}"
-	s := strings.Join([]string{`&SearchTripsResponse_Trip{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`TripTemplateId:` + fmt.Sprintf("%v", this.TripTemplateId) + `,`,
-		`MaxGuest:` + fmt.Sprintf("%v", this.MaxGuest) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
-		`FromDate:` + strings.Replace(fmt.Sprintf("%v", this.FromDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`ToDate:` + strings.Replace(fmt.Sprintf("%v", this.ToDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "SearchTripsResponse_TripTemplate", "SearchTripsResponse_TripTemplate", 1) + `,`,
+	s := strings.Join([]string{`&UpdateTripRequest{`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "Trip", "Trip", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *SearchTripsResponse_TripTemplate) String() string {
+func (this *UpdateHotelRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForImages := "[]*File{"
-	for _, f := range this.Images {
-		repeatedStringForImages += strings.Replace(fmt.Sprintf("%v", f), "File", "File", 1) + ","
+	s := strings.Join([]string{`&UpdateHotelRequest{`,
+		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "Hotel", "Hotel", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdateLiveaboardRequest) String() string {
+	if this == nil {
+		return "nil"
 	}
-	repeatedStringForImages += "}"
-	s := strings.Join([]string{`&SearchTripsResponse_TripTemplate{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
-		`BoatId:` + fmt.Sprintf("%v", this.BoatId) + `,`,
-		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
-		`Images:` + repeatedStringForImages + `,`,
-		`Address:` + strings.Replace(fmt.Sprintf("%v", this.Address), "Address", "Address", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+	s := strings.Join([]string{`&UpdateLiveaboardRequest{`,
+		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "Liveaboard", "Liveaboard", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdateBoatRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UpdateBoatRequest{`,
+		`Boat:` + strings.Replace(fmt.Sprintf("%v", this.Boat), "Boat", "Boat", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdateDiveMasterRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UpdateDiveMasterRequest{`,
+		`DiveMaster:` + strings.Replace(fmt.Sprintf("%v", this.DiveMaster), "DiveMaster", "DiveMaster", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdateStaffRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UpdateStaffRequest{`,
+		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "Staff", "Staff", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -12422,2268 +6210,6 @@ func valueToStringAgency(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
-}
-func (m *DiveMaster) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DiveMaster: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DiveMaster: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Level", wireType)
-			}
-			m.Level = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Level |= LevelType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FrontImage", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.FrontImage == nil {
-				m.FrontImage = &File{}
-			}
-			if err := m.FrontImage.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BackImage", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.BackImage == nil {
-				m.BackImage = &File{}
-			}
-			if err := m.BackImage.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DiveMasterFirstAndLastName) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DiveMasterFirstAndLastName: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DiveMasterFirstAndLastName: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Staff) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Staff: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Staff: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Position", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Position = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Gender", wireType)
-			}
-			m.Gender = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Gender |= GenderType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DivingBoat) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DivingBoat: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DivingBoat: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BoatImages", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.BoatImages = append(m.BoatImages, &File{})
-			if err := m.BoatImages[len(m.BoatImages)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalCapacity", wireType)
-			}
-			m.TotalCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiverCapacity", wireType)
-			}
-			m.DiverCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DiverCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StaffCapacity", wireType)
-			}
-			m.StaffCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StaffCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Amenity) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Amenity: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Amenity: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *RoomType) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RoomType: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RoomType: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxGuest", wireType)
-			}
-			m.MaxGuest = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxGuest |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RoomImages", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.RoomImages = append(m.RoomImages, &File{})
-			if err := m.RoomImages[len(m.RoomImages)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 6:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Amenities", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Amenities = append(m.Amenities, &Amenity{})
-			if err := m.Amenities[len(m.Amenities)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 7:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Quantity", wireType)
-			}
-			m.Quantity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Quantity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *HotelAndBoatId) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: HotelAndBoatId: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: HotelAndBoatId: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
-			}
-			m.HotelId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.HotelId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BoatId", wireType)
-			}
-			m.BoatId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.BoatId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TripTemplate) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
-			}
-			m.TripType = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripType |= TripType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 8:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelAndBoatId", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			v := &HotelAndBoatId{}
-			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			m.ResidenceId = &TripTemplate_HotelAndBoatId{v}
-			iNdEx = postIndex
-		case 9:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
-			}
-			var v uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.ResidenceId = &TripTemplate_LiveaboardId{v}
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Trip) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field From", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.From == nil {
-				m.From = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.From, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field To", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.To == nil {
-				m.To = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.To, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxCapacity", wireType)
-			}
-			m.MaxCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 5:
-			if wireType == 0 {
-				var v uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowAgency
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.DiveMasterIds = append(m.DiveMasterIds, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowAgency
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return ErrInvalidLengthAgency
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return ErrInvalidLengthAgency
-				}
-				if postIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				var elementCount int
-				var count int
-				for _, integer := range dAtA[iNdEx:postIndex] {
-					if integer < 128 {
-						count++
-					}
-				}
-				elementCount = count
-				if elementCount != 0 && len(m.DiveMasterIds) == 0 {
-					m.DiveMasterIds = make([]uint64, 0, elementCount)
-				}
-				for iNdEx < postIndex {
-					var v uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowAgency
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.DiveMasterIds = append(m.DiveMasterIds, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasterIds", wireType)
-			}
-		case 6:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.LastReservationDate == nil {
-				m.LastReservationDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.LastReservationDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Hotel) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Hotel: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Hotel: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HotelName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Star", wireType)
-			}
-			m.Star = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Star |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RoomTypes", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.RoomTypes = append(m.RoomTypes, &RoomType{})
-			if err := m.RoomTypes[len(m.RoomTypes)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 6:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelDescription", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HotelDescription = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Phone", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Phone = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 8:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Liveaboard) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Liveaboard: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Liveaboard: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Length", wireType)
-			}
-			m.Length = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Length |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Width", wireType)
-			}
-			m.Width = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Width |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 6:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RoomTypes", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.RoomTypes = append(m.RoomTypes, &RoomType{})
-			if err := m.RoomTypes[len(m.RoomTypes)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 8:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalCapacity", wireType)
-			}
-			m.TotalCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 9:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiverRooms", wireType)
-			}
-			m.DiverRooms = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DiverRooms |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StaffRooms", wireType)
-			}
-			m.StaffRooms = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StaffRooms |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 11:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *AddDiveMasterRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -15143,7 +6669,7 @@ func (m *AddDivingBoatRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.DivingBoat == nil {
-				m.DivingBoat = &DivingBoat{}
+				m.DivingBoat = &Boat{}
 			}
 			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -15489,273 +7015,9 @@ func (m *ListBoatsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Boat == nil {
-				m.Boat = &ListBoatsResponse_Boat{}
+				m.Boat = &Boat{}
 			}
 			if err := m.Boat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListBoatsResponse_Boat) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Boat: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Boat: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 21:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalCapacity", wireType)
-			}
-			m.TotalCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 22:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiverCapacity", wireType)
-			}
-			m.DiverCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DiverCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 23:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StaffCapacity", wireType)
-			}
-			m.StaffCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StaffCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 30:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 40:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -15927,267 +7189,9 @@ func (m *ListDiveMastersResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.DiveMaster == nil {
-				m.DiveMaster = &ListDiveMastersResponse_DiveMaster{}
+				m.DiveMaster = &DiveMaster{}
 			}
 			if err := m.DiveMaster.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListDiveMastersResponse_DiveMaster) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DiveMaster: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DiveMaster: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Level", wireType)
-			}
-			m.Level = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Level |= LevelType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Documents", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Documents = append(m.Documents, &File{})
-			if err := m.Documents[len(m.Documents)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -16359,335 +7363,9 @@ func (m *ListHotelsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Hotel == nil {
-				m.Hotel = &ListHotelsResponse_Hotel{}
+				m.Hotel = &Hotel{}
 			}
 			if err := m.Hotel.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListHotelsResponse_Hotel) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Hotel: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Hotel: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Stars", wireType)
-			}
-			m.Stars = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Stars |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Phone", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Phone = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -16859,363 +7537,9 @@ func (m *ListLiveaboardsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Liveaboard == nil {
-				m.Liveaboard = &ListLiveaboardsResponse_Liveaboard{}
+				m.Liveaboard = &Liveaboard{}
 			}
 			if err := m.Liveaboard.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListLiveaboardsResponse_Liveaboard) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Liveaboard: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Liveaboard: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Length", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Length = float32(math.Float32frombits(v))
-		case 40:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Width", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Width = float32(math.Float32frombits(v))
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 51:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalCapacity", wireType)
-			}
-			m.TotalCapacity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalCapacity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 52:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiverRooms", wireType)
-			}
-			m.DiverRooms = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DiverRooms |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 53:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StaffRooms", wireType)
-			}
-			m.StaffRooms = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StaffRooms |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 54:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -17387,265 +7711,9 @@ func (m *ListStaffsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Staff == nil {
-				m.Staff = &ListStaffsResponse_Staff{}
+				m.Staff = &Staff{}
 			}
 			if err := m.Staff.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListStaffsResponse_Staff) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Staff: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Staff: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Position", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Position = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 40:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Gender", wireType)
-			}
-			m.Gender = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Gender |= GenderType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -17817,324 +7885,9 @@ func (m *ListTripTemplatesResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Template == nil {
-				m.Template = &ListTripTemplatesResponse_TripTemplate{}
+				m.Template = &TripTemplate{}
 			}
 			if err := m.Template.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListTripTemplatesResponse_TripTemplate) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
-			}
-			m.TripType = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripType |= TripType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
-			}
-			m.HotelId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.HotelId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 50:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BoatId", wireType)
-			}
-			m.BoatId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.BoatId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 60:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
-			}
-			m.LiveaboardId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.LiveaboardId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 90:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -18306,307 +8059,9 @@ func (m *ListTripsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Trip == nil {
-				m.Trip = &ListTripsResponse_Trip{}
+				m.Trip = &Trip{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListTripsResponse_Trip) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplateId", wireType)
-			}
-			m.TripTemplateId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripTemplateId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxGuest", wireType)
-			}
-			m.MaxGuest = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxGuest |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.FromDate == nil {
-				m.FromDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.FromDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ToDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ToDate == nil {
-				m.ToDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.ToDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.LastReservationDate == nil {
-				m.LastReservationDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.LastReservationDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 90:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -18778,728 +8233,9 @@ func (m *ListTripsWithTemplatesResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Trip == nil {
-				m.Trip = &ListTripsWithTemplatesResponse_Trip{}
+				m.Trip = &TripWithTemplate{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListTripsWithTemplatesResponse_Trip) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplateId", wireType)
-			}
-			m.TripTemplateId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripTemplateId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxGuest", wireType)
-			}
-			m.MaxGuest = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxGuest |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DiveMasters = append(m.DiveMasters, &DiveMaster{})
-			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.FromDate == nil {
-				m.FromDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.FromDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ToDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ToDate == nil {
-				m.ToDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.ToDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.LastReservationDate == nil {
-				m.LastReservationDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.LastReservationDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 90:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 100:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 110:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.TripTemplate == nil {
-				m.TripTemplate = &ListTripsWithTemplatesResponse_TripTemplate{}
-			}
-			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAgency(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListTripsWithTemplatesResponse_TripTemplate) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAgency
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
-			}
-			m.TripType = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripType |= TripType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
-			}
-			m.HotelId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.HotelId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 50:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BoatId", wireType)
-			}
-			m.BoatId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.BoatId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 60:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
-			}
-			m.LiveaboardId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.LiveaboardId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Address == nil {
-				m.Address = &Address{}
-			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 90:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 100:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -19963,7 +8699,7 @@ func (m *SearchTripsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Trip == nil {
-				m.Trip = &SearchTripsResponse_Trip{}
+				m.Trip = &TripWithTemplate{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -19990,7 +8726,7 @@ func (m *SearchTripsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchTripsResponse_Trip) Unmarshal(dAtA []byte) error {
+func (m *UpdateTripRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20013,83 +8749,15 @@ func (m *SearchTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
+			return fmt.Errorf("proto: UpdateTripRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: UpdateTripRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplateId", wireType)
-			}
-			m.TripTemplateId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripTemplateId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxGuest", wireType)
-			}
-			m.MaxGuest = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxGuest |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 50:
+		case 10:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiveMasters", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20116,224 +8784,10 @@ func (m *SearchTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.DiveMasters = append(m.DiveMasters, &DiveMaster{})
-			if err := m.DiveMasters[len(m.DiveMasters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if m.Trip == nil {
+				m.Trip = &Trip{}
 			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.FromDate == nil {
-				m.FromDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.FromDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ToDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.ToDate == nil {
-				m.ToDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.ToDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 80:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastReservationDate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.LastReservationDate == nil {
-				m.LastReservationDate = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.LastReservationDate, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 90:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 100:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 110:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.TripTemplate == nil {
-				m.TripTemplate = &SearchTripsResponse_TripTemplate{}
-			}
-			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -20358,7 +8812,7 @@ func (m *SearchTripsResponse_Trip) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
+func (m *UpdateHotelRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20381,174 +8835,15 @@ func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: TripTemplate: wiretype end group for non-group")
+			return fmt.Errorf("proto: UpdateHotelRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TripTemplate: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: UpdateHotelRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		case 10:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Name = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 20:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAgency
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAgency
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 30:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripType", wireType)
-			}
-			m.TripType = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripType |= TripType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
-			}
-			m.HotelId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.HotelId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 50:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field BoatId", wireType)
-			}
-			m.BoatId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.BoatId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 60:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
-			}
-			m.LiveaboardId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAgency
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.LiveaboardId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 70:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Images", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Hotel", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20575,14 +8870,66 @@ func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Images = append(m.Images, &File{})
-			if err := m.Images[len(m.Images)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if m.Hotel == nil {
+				m.Hotel = &Hotel{}
+			}
+			if err := m.Hotel.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		case 80:
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateLiveaboardRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateLiveaboardRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateLiveaboardRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Liveaboard", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20609,16 +8956,66 @@ func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Address == nil {
-				m.Address = &Address{}
+			if m.Liveaboard == nil {
+				m.Liveaboard = &Liveaboard{}
 			}
-			if err := m.Address.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Liveaboard.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		case 90:
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateBoatRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateBoatRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateBoatRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Boat", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20645,16 +9042,66 @@ func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
+			if m.Boat == nil {
+				m.Boat = &Boat{}
 			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Boat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		case 100:
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateDiveMasterRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateDiveMasterRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateDiveMasterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMaster", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20681,10 +9128,96 @@ func (m *SearchTripsResponse_TripTemplate) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
+			if m.DiveMaster == nil {
+				m.DiveMaster = &DiveMaster{}
 			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DiveMaster.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateStaffRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateStaffRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateStaffRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Staff", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Staff == nil {
+				m.Staff = &Staff{}
+			}
+			if err := m.Staff.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

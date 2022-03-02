@@ -20,7 +20,7 @@ type AgencyService interface {
 	AddStaff(context.Context, *pb.Staff) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
 	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip) error
-	AddDivingBoat(context.Context, *pb.DivingBoat) error
+	AddDivingBoat(context.Context, *pb.Boat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 
@@ -87,22 +87,9 @@ func (service *agencyService) AddDiveMaster(ctx context.Context, diveMaster *pb.
 
 	newDiveMaster.AgencyID = agency.ID
 
-	var reader *bytes.Reader
-	var objectID string
-
-	if diveMaster.FrontImage.GetFile() != nil {
-		reader = bytes.NewReader(diveMaster.FrontImage.File)
-		objectID, err = service.media.Put(diveMaster.FrontImage.Filename, media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
-		}
-		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
-	}
-
-	if diveMaster.BackImage.GetFile() != nil {
-		reader = bytes.NewReader(diveMaster.BackImage.File)
-		objectID, err = service.media.Put(diveMaster.BackImage.Filename, media.PUBLIC_READ, reader)
+	for _, image := range diveMaster.GetDocuments() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
 		if err != nil {
 			return err
@@ -136,9 +123,9 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 
 	newHotel := model.Hotel{
 		Address:     hotelAddress,
-		Name:        hotel.GetHotelName(),
-		Description: hotel.GetHotelDescription(),
-		Stars:       hotel.GetStar(),
+		Name:        hotel.GetName(),
+		Description: hotel.GetDescription(),
+		Stars:       hotel.GetStars(),
 		Phone:       hotel.GetPhone(),
 		AgencyID:    agency.ID,
 	}
@@ -240,11 +227,9 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	}
 
 	if newTripTemplate.Type == model.ONSHORE {
-		onShoreInfo := tripTemplate.GetHotelAndBoatId()
+		newTripTemplate.HotelID = uint(tripTemplate.GetHotelId())
 
-		newTripTemplate.HotelID = uint(onShoreInfo.GetHotelId())
-
-		newTripTemplate.BoatID = uint(onShoreInfo.GetBoatId())
+		newTripTemplate.BoatID = uint(tripTemplate.GetBoatId())
 	} else {
 		newTripTemplate.LiveaboardID = uint(tripTemplate.GetLiveaboardId())
 	}
@@ -270,10 +255,10 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		}
 
 		newTrip := model.Trip{
-			MaxGuest:            trip.GetMaxCapacity(),
+			MaxGuest:            trip.GetMaxGuest(),
 			Price:               trip.GetPrice(),
-			StartDate:           trip.GetFrom(),
-			EndDate:             trip.GetTo(),
+			StartDate:           trip.GetStartDate(),
+			EndDate:             trip.GetEndDate(),
 			LastReservationDate: trip.GetLastReservationDate(),
 			TripTemplateID:      newTripTemplate.ID,
 			AgencyID:            agency.ID,
@@ -303,7 +288,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	return err
 }
 
-func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.DivingBoat) error {
+func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.Boat) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
@@ -331,7 +316,7 @@ func (service *agencyService) AddDivingBoat(ctx context.Context, divingBoat *pb.
 		AgencyID:      agency.ID,
 	}
 
-	for _, image := range divingBoat.GetBoatImages() {
+	for _, image := range divingBoat.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
 		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
@@ -368,8 +353,8 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		Address:       divingBoatAddress,
 		Name:          liveaboard.GetName(),
 		Description:   liveaboard.GetDescription(),
-		Length:        liveaboard.GetLength(),
-		Width:         liveaboard.GetWidth(),
+		Length:        uint32(liveaboard.GetLength()),
+		Width:         uint32(liveaboard.GetWidth()),
 		TotalCapacity: liveaboard.GetTotalCapacity(),
 		DiverRooms:    liveaboard.GetDiverRooms(),
 		StaffRooms:    liveaboard.GetStaffRooms(),
