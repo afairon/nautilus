@@ -3,6 +3,7 @@ package fs
 import (
 	"io"
 	"io/ioutil"
+	"net/url"
 	"os"
 	"path"
 
@@ -12,19 +13,24 @@ import (
 
 type Client struct {
 	DataPath string
-	BaseURL  string
+	BaseURL  *url.URL
 }
 
 // NewStore creates a new filesystem media storage.
-func NewStore(DataPath, BaseURL string) media.Store {
+func NewStore(DataPath, BaseURL string) (media.Store, error) {
+	base, err := url.Parse(BaseURL)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Client{
 		DataPath: path.Clean(DataPath),
-		BaseURL:  path.Clean(BaseURL),
-	}
+		BaseURL:  base,
+	}, nil
 }
 
 // NewStoreFromConfig creates a new filesystem media storage from configuration.
-func NewStoreFromConfig(conf *config.FS) media.Store {
+func NewStoreFromConfig(conf *config.FS) (media.Store, error) {
 	return NewStore(
 		conf.Path,
 		conf.Base,
@@ -65,7 +71,14 @@ func (c *Client) Put(filename string, perm media.Permission, reader io.ReadSeeke
 
 // Get returns an url to the object relative to the endpoint.
 func (c *Client) Get(filename string, signed bool) string {
-	return path.Join(c.BaseURL, filename)
+	// Clone base url
+	link, err := url.Parse(c.BaseURL.String())
+	if err != nil {
+		return ""
+	}
+
+	link.Path = path.Join(link.Path, filename)
+	return link.String()
 }
 
 // Delete deletes the file if it exists.

@@ -81,7 +81,10 @@ func run(conf *config.Config) error {
 		}
 	} else {
 		log.Info("Using FS object storage backend.")
-		mediaStorage = fs.NewStoreFromConfig(conf.GetFS())
+		mediaStorage, err = fs.NewStoreFromConfig(conf.GetFS())
+		if err != nil {
+			return err
+		}
 	}
 
 	addr := fmt.Sprintf("%s:%d", conf.GetGRPC().Address, conf.GetGRPC().Port)
