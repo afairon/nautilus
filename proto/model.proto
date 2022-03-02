@@ -128,3 +128,131 @@ message LiveaboardComment {
     google.protobuf.Timestamp created_at = 40 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 50 [(gogoproto.stdtime) = true];
 }
+
+// Boat
+message Boat {
+    uint64 id = 1;
+    string name = 10;
+    string description = 11;
+    repeated File images = 20;
+    uint32 total_capacity = 21;
+    uint32 diver_capacity = 22;
+    uint32 staff_capacity = 23;
+    Address address = 24;
+    google.protobuf.Timestamp created_at = 30 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 40 [(gogoproto.stdtime) = true];
+}
+
+// DiveMaster
+message DiveMaster {
+    uint64 id = 1;
+    string first_name = 10;
+    string last_name = 20;
+    LevelType level = 30;
+    repeated File documents = 40;
+    google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
+}
+
+// Hotel
+message Hotel {
+    uint64 id = 1;
+    string name = 10;
+    string description = 20;
+    uint32 stars = 30;
+    string phone = 40;
+    Address address = 50;
+    repeated File images = 60;
+    google.protobuf.Timestamp created_at = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
+}
+
+// Liveaboard
+message Liveaboard {
+    uint64 id = 1;
+    string name = 10;
+    string description = 20;
+    float length = 30;
+    float width = 40;
+    repeated File images = 50;
+    uint32 total_capacity = 51;
+    uint32 diver_rooms = 52;
+    uint32 staff_rooms = 53;
+    Address address = 54;
+    google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
+}
+
+// Staff
+message Staff {
+    uint64 id = 1;
+    string first_name = 10;
+    string last_name = 20;
+    string position = 30;
+    GenderType gender = 40;
+    google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
+}
+
+// TripTemplate
+message TripTemplate {
+    uint64 id = 1;
+    string name = 10;
+    string description = 20;
+    TripType trip_type = 30;
+    uint64 hotel_id = 40;
+    uint64 boat_id = 50;
+    uint64 liveaboard_id = 60;
+    repeated File images = 70;
+    google.protobuf.Timestamp created_at = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 90 [(gogoproto.stdtime) = true];
+}
+
+// Trip
+message Trip {
+    uint64 id = 1;
+    uint64 trip_template_id = 20;
+    uint32 max_guest = 30;
+    float price = 40;
+    repeated DiveMaster dive_masters = 50;
+    google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+}
+
+// TripWithTemplate
+message TripWithTemplate {
+    uint64 id = 1;
+    uint64 trip_template_id = 20;
+    TripTemplate trip_template = 25;
+    uint32 max_guest = 30;
+    float price = 40;
+    repeated DiveMaster dive_masters = 50;
+    google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+}
+
+// Amenity
+message Amenity {
+    string name = 1;
+    string description = 2;
+}
+
+// RoomType
+message RoomType {
+    uint64 id = 1;
+    string name = 10;
+    string description = 20;
+    uint32 max_guest = 30;
+    float price = 40;
+    uint32 quantity = 50;
+    repeated File room_images = 60;
+    repeated Amenity amenities = 70;
+    google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+}
