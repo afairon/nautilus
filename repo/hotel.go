@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -10,6 +11,7 @@ import (
 // HotelRepository defines interface for interaction
 // with the hotel repository.
 type HotelRepository interface {
+	UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
 	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error)
 	GetHotel(ctx context.Context, id uint) (*model.Hotel, error)
 }
@@ -90,4 +92,28 @@ func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hote
 
 	result := repo.db.First(&hotel, id)
 	return &hotel, result.Error
+}
+
+func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error) {
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Model(hotel).Omit("Coordinate", "AddressID", "RoomTypes").Updates(hotel).Error; err != nil {
+			return err
+		}
+
+		fmt.Println("Updated hotel")
+
+		if err := tx.Model(hotel).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&hotel.Address); err != nil {
+			return err
+		}
+
+		fmt.Println("Updated address of hotel")
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return hotel, nil
 }

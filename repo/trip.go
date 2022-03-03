@@ -12,7 +12,7 @@ import (
 // with the trip repository.
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
-	UpdateTripByAgency(ctx context.Context, id uint64, trip *model.Trip) (*model.Trip, error)
+	UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
@@ -294,13 +294,13 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	return trips, nil
 }
 
-func (repo *tripRepository) UpdateTripByAgency(ctx context.Context, id uint64, trip *model.Trip) (*model.Trip, error) {
+func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := repo.db.Model(trip).Omit("ReservationRoomTypes", "TripTemplate", "TripTemplateID").Updates(trip).Error; err != nil {
+		if err := tx.Model(trip).Omit("ReservationRoomTypes", "TripTemplate", "TripTemplateID").Updates(trip).Error; err != nil {
 			return err
 		}
 
-		if err := repo.db.Model(trip).Association("DiveMasters").Replace(trip.DiveMasters); err != nil {
+		if err := tx.Model(trip).Association("DiveMasters").Replace(trip.DiveMasters); err != nil {
 			return err
 		}
 

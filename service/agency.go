@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/afairon/nautilus/internal/media"
@@ -10,6 +11,7 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/session"
+	"github.com/lib/pq"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
@@ -693,13 +695,71 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) err
 		newTrip.DiveMasters = append(newTrip.DiveMasters, dm)
 	}
 
-	_, err = service.repo.Trip.UpdateTripByAgency(ctx, uint64(agency.ID), &newTrip)
+	_, err = service.repo.Trip.UpdateTrip(ctx, &newTrip)
 
 	return err
 }
 
-func (service *agencyService) UpdateHotel(context.Context, *pb.Hotel) error {
-	return status.Error(codes.Unimplemented, "Unimplemented")
+func (service *agencyService) UpdateHotel(ctx context.Context, hotel *pb.Hotel) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	oldHotel, err := service.repo.Hotel.GetHotel(ctx, uint(hotel.Id))
+
+	if err != nil {
+		return err
+	}
+
+	// remove the old images.
+	for _, image := range oldHotel.Images {
+		service.media.Delete(image)
+	}
+
+	fmt.Println("Deleted old hotel images")
+
+	newHotel := model.Hotel{
+		Model: &gorm.Model{
+			ID: uint(hotel.GetId()),
+		},
+		Address: model.Address{
+			Model: &gorm.Model{
+				ID: uint(hotel.GetAddress().GetId()),
+			},
+			AddressLine_1: hotel.GetAddress().GetAddressLine_1(),
+			AddressLine_2: hotel.GetAddress().GetAddressLine_2(),
+			City:          hotel.GetAddress().GetCity(),
+			Postcode:      hotel.GetAddress().GetPostcode(),
+			Region:        hotel.GetAddress().GetRegion(),
+			Country:       hotel.GetAddress().GetCountry(),
+		},
+		Name:        hotel.GetName(),
+		Description: hotel.GetDescription(),
+		Stars:       hotel.GetStars(),
+		Phone:       hotel.GetPhone(),
+		AgencyID:    agency.ID,
+	}
+
+	newHotel.Images = make(pq.StringArray, 0, len(hotel.GetImages()))
+
+	for _, image := range hotel.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newHotel.Images = append(newHotel.Images, objectID)
+	}
+
+	fmt.Println("Preparing to update hotel")
+
+	_, err = service.repo.Hotel.UpdateHotel(ctx, &newHotel)
+
+	return err
 }
 
 func (service *agencyService) UpdateLiveaboard(context.Context, *pb.Liveaboard) error {
