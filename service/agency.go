@@ -12,6 +12,7 @@ import (
 	"github.com/afairon/nautilus/session"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"gorm.io/gorm"
 )
 
 // AgencyService defines operations on agency.
@@ -23,6 +24,13 @@ type AgencyService interface {
 	AddDivingBoat(context.Context, *pb.Boat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
+
+	UpdateTrip(context.Context, *pb.Trip) error
+	UpdateHotel(context.Context, *pb.Hotel) error
+	UpdateLiveaboard(context.Context, *pb.Liveaboard) error
+	UpdateBoat(context.Context, *pb.Boat) error
+	UpdateDiveMaster(context.Context, *pb.DiveMaster) error
+	UpdateStaff(context.Context, *pb.Staff) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
@@ -635,4 +643,72 @@ func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOption
 	}
 
 	return trips, nil
+}
+
+func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	newTrip := model.Trip{
+		Model: &gorm.Model{
+			ID: uint(trip.GetId()),
+		},
+		MaxGuest:            trip.GetMaxGuest(),
+		CurrentGuest:        trip.GetCurentGuest(),
+		Price:               trip.GetPrice(),
+		StartDate:           trip.GetStartDate(),
+		EndDate:             trip.GetEndDate(),
+		LastReservationDate: trip.GetLastReservationDate(),
+		AgencyID:            agency.ID,
+	}
+
+	newTrip.DiveMasters = make([]model.DiveMaster, 0, len(trip.GetDiveMasters()))
+
+	for _, diveMaster := range trip.GetDiveMasters() {
+		dm := model.DiveMaster{
+			Model: &gorm.Model{
+				ID: uint(diveMaster.GetId()),
+			},
+			FirstName: diveMaster.GetFirstName(),
+			LastName:  diveMaster.GetLastName(),
+			Level:     model.LevelType(diveMaster.GetLevel()),
+			Documents: []string{},
+			AgencyID:  agency.ID,
+		}
+
+		for _, image := range diveMaster.GetDocuments() {
+			reader := bytes.NewReader(image.GetFile())
+			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
+
+			if err != nil {
+				return err
+			}
+
+			dm.Documents = append(dm.Documents, objectID)
+		}
+
+		newTrip.DiveMasters = append(newTrip.DiveMasters, dm)
+	}
+
+	_, err = service.repo.Trip.UpdateTripByAgency(ctx, uint64(agency.ID), &newTrip)
+
+	return err
+}
+func (service *agencyService) UpdateHotel(context.Context, *pb.Hotel) error {
+	return status.Error(codes.Unimplemented, "Unimplemented")
+}
+func (service *agencyService) UpdateLiveaboard(context.Context, *pb.Liveaboard) error {
+	return status.Error(codes.Unimplemented, "Unimplemented")
+}
+func (service *agencyService) UpdateBoat(context.Context, *pb.Boat) error {
+	return status.Error(codes.Unimplemented, "Unimplemented")
+}
+func (service *agencyService) UpdateDiveMaster(context.Context, *pb.DiveMaster) error {
+	return status.Error(codes.Unimplemented, "Unimplemented")
+}
+func (service *agencyService) UpdateStaff(context.Context, *pb.Staff) error {
+	return status.Error(codes.Unimplemented, "Unimplemented")
 }

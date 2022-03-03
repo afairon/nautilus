@@ -216,6 +216,7 @@ message Trip {
     uint64 id = 1;
     uint64 trip_template_id = 20;
     uint32 max_guest = 30;
+    uint32 curent_guest = 35;
     float price = 40;
     repeated DiveMaster dive_masters = 50;
     repeated uint64 dive_master_ids = 55;

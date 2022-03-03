@@ -534,8 +534,14 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 	return nil
 }
 
-func (handler *AgencyHandler) UpdateTrip(context.Context, *pb.UpdateTripRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "UpdateTrip unimplemented")
+func (handler *AgencyHandler) UpdateTrip(ctx context.Context, req *pb.UpdateTripRequest) (*emptypb.Empty, error) {
+	err := handler.agencyService.UpdateTrip(ctx, req.GetTrip())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }
 
 func (handler *AgencyHandler) UpdateHotel(context.Context, *pb.UpdateHotelRequest) (*emptypb.Empty, error) {

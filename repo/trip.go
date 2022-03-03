@@ -12,6 +12,7 @@ import (
 // with the trip repository.
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
+	UpdateTripByAgency(ctx context.Context, id uint64, trip *model.Trip) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
@@ -291,4 +292,12 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	}*/
 
 	return trips, nil
+}
+
+func (repo *tripRepository) UpdateTripByAgency(ctx context.Context, id uint64, trip *model.Trip) (*model.Trip, error) {
+	if result := repo.db.Model(trip).Omit("ReservationRoomTypes", "TripTemplate", "TripTemplateID", "DiveMasters").Updates(trip); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trip, nil
 }
