@@ -3,7 +3,6 @@ package service
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/afairon/nautilus/internal/media"
@@ -718,8 +717,6 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *pb.Hotel) 
 		service.media.Delete(image)
 	}
 
-	fmt.Println("Deleted old hotel images")
-
 	newHotel := model.Hotel{
 		Model: &gorm.Model{
 			ID: uint(hotel.GetId()),
@@ -755,15 +752,68 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *pb.Hotel) 
 		newHotel.Images = append(newHotel.Images, objectID)
 	}
 
-	fmt.Println("Preparing to update hotel")
-
 	_, err = service.repo.Hotel.UpdateHotel(ctx, &newHotel)
 
 	return err
 }
 
-func (service *agencyService) UpdateLiveaboard(context.Context, *pb.Liveaboard) error {
-	return status.Error(codes.Unimplemented, "Unimplemented")
+func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	oldLiveaboard, err := service.repo.Liveaboard.GetLiveaboard(ctx, liveaboard.GetId())
+
+	if err != nil {
+		return err
+	}
+
+	// remove the old images.
+	for _, image := range oldLiveaboard.Images {
+		service.media.Delete(image)
+	}
+
+	newLiveaboard := model.Liveaboard{
+		Model: &gorm.Model{ID: uint(liveaboard.GetId())},
+		Address: model.Address{
+			Model: &gorm.Model{
+				ID: uint(liveaboard.GetAddress().GetId()),
+			},
+			AddressLine_1: liveaboard.GetAddress().GetAddressLine_1(),
+			AddressLine_2: liveaboard.GetAddress().GetAddressLine_2(),
+			City:          liveaboard.GetAddress().GetCity(),
+			Postcode:      liveaboard.GetAddress().GetPostcode(),
+			Region:        liveaboard.GetAddress().GetRegion(),
+			Country:       liveaboard.GetAddress().GetCountry(),
+		},
+		Name:          liveaboard.GetName(),
+		Description:   liveaboard.GetDescription(),
+		Length:        uint32(liveaboard.GetLength()),
+		Width:         uint32(liveaboard.GetWidth()),
+		TotalCapacity: liveaboard.GetTotalCapacity(),
+		DiverRooms:    liveaboard.GetDiverRooms(),
+		StaffRooms:    liveaboard.GetStaffRooms(),
+		AgencyID:      agency.ID,
+	}
+
+	newLiveaboard.Images = make(pq.StringArray, 0, len(liveaboard.GetImages()))
+
+	for _, image := range liveaboard.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
+	}
+
+	_, err = service.repo.Liveaboard.UpdateLiveaboard(ctx, &newLiveaboard)
+
+	return err
 }
 
 func (service *agencyService) UpdateBoat(context.Context, *pb.Boat) error {

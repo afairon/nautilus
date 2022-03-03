@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -100,13 +99,9 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 			return err
 		}
 
-		fmt.Println("Updated hotel")
-
 		if err := tx.Model(hotel).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&hotel.Address); err != nil {
 			return err
 		}
-
-		fmt.Println("Updated address of hotel")
 
 		return nil
 	})

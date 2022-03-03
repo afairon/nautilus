@@ -10,7 +10,9 @@ import (
 // LiveaboardRepository defines interface for interaction
 // with the liveaboard repository.
 type LiveaboardRepository interface {
+	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error)
 	ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Liveaboard, error)
+	GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error)
 }
 
 // liveaboardRepository implements LiveaboardRepository interface.
@@ -74,4 +76,34 @@ func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, i
 
 	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Where("agency_id = ?", id).Find(&liveaboards)
 	return liveaboards, result.Error
+}
+
+func (repo *liveaboardRepository) GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error) {
+	var liveaboard model.Liveaboard
+
+	if err := repo.db.First(&liveaboard, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &liveaboard, nil
+}
+
+func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Model(liveaboard).Omit("Coordinate", "AddressID", "RoomTypes").Updates(liveaboard).Error; err != nil {
+			return err
+		}
+
+		if err := tx.Model(liveaboard).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&liveaboard.Address); err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return liveaboard, nil
 }
