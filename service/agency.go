@@ -26,12 +26,12 @@ type AgencyService interface {
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 
-	UpdateTrip(context.Context, *pb.Trip) error
-	UpdateHotel(context.Context, *pb.Hotel) error
-	UpdateLiveaboard(context.Context, *pb.Liveaboard) error
-	UpdateBoat(context.Context, *pb.Boat) error
-	UpdateDiveMaster(context.Context, *pb.DiveMaster) error
-	UpdateStaff(context.Context, *pb.Staff) error
+	UpdateTrip(ctx context.Context, trip *pb.Trip) error
+	UpdateHotel(ctx context.Context, hotel *pb.Hotel) error
+	UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error
+	UpdateBoat(ctx context.Context, boat *pb.Boat) error
+	UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error
+	UpdateStaff(ctx context.Context, staff *pb.Staff) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
@@ -816,8 +816,63 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 	return err
 }
 
-func (service *agencyService) UpdateBoat(context.Context, *pb.Boat) error {
-	return status.Error(codes.Unimplemented, "Unimplemented")
+func (service *agencyService) UpdateBoat(ctx context.Context, boat *pb.Boat) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	oldBoat, err := service.repo.Boat.GetBoat(ctx, uint(boat.GetId()))
+
+	if err != nil {
+		return err
+	}
+
+	// remove the old images.
+	for _, image := range oldBoat.Images {
+		service.media.Delete(image)
+	}
+
+	newBoat := model.Boat{
+		Model: &gorm.Model{
+			ID: uint(boat.GetId()),
+		},
+		Address: model.Address{
+			Model: &gorm.Model{
+				ID: uint(boat.GetAddress().GetId()),
+			},
+			AddressLine_1: boat.GetAddress().GetAddressLine_1(),
+			AddressLine_2: boat.GetAddress().GetAddressLine_2(),
+			City:          boat.GetAddress().GetCity(),
+			Postcode:      boat.GetAddress().GetPostcode(),
+			Region:        boat.GetAddress().GetRegion(),
+			Country:       boat.GetAddress().GetCountry(),
+		},
+		Name:          boat.GetName(),
+		Description:   boat.GetDescription(),
+		TotalCapacity: boat.GetTotalCapacity(),
+		DiverCapacity: boat.GetDiverCapacity(),
+		StaffCapacity: boat.GetStaffCapacity(),
+		AgencyID:      agency.ID,
+	}
+
+	newBoat.Images = make(pq.StringArray, 0, len(boat.GetImages()))
+
+	for _, image := range boat.GetImages() {
+		reader := bytes.NewReader(image.GetFile())
+		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newBoat.Images = append(newBoat.Images, objectID)
+	}
+
+	_, err = service.repo.Boat.UpdateBoat(ctx, &newBoat)
+
+	return err
 }
 
 func (service *agencyService) UpdateDiveMaster(context.Context, *pb.DiveMaster) error {

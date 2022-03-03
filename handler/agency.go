@@ -564,8 +564,14 @@ func (handler *AgencyHandler) UpdateLiveaboard(ctx context.Context, req *pb.Upda
 	return &empty.Empty{}, nil
 }
 
-func (handler *AgencyHandler) UpdateBoat(context.Context, *pb.UpdateBoatRequest) (*emptypb.Empty, error) {
-	return nil, status.Error(codes.Unimplemented, "UpdateBoat unimplemented")
+func (handler *AgencyHandler) UpdateBoat(ctx context.Context, req *pb.UpdateBoatRequest) (*emptypb.Empty, error) {
+	err := handler.agencyService.UpdateBoat(ctx, req.GetBoat())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
 }
 
 func (handler *AgencyHandler) UpdateDiveMaster(context.Context, *pb.UpdateDiveMasterRequest) (*emptypb.Empty, error) {

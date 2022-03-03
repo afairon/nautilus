@@ -10,6 +10,7 @@ import (
 // BoatRepository defines interface for interaction
 // with the boat repository.
 type BoatRepository interface {
+	UpdateBoat(ctx context.Context, boat *model.Boat) (*model.Boat, error)
 	ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Boat, error)
 	GetBoat(ctx context.Context, id uint) (*model.Boat, error)
 }
@@ -82,4 +83,24 @@ func (repo *boatRepository) GetBoat(ctx context.Context, id uint) (*model.Boat, 
 
 	result := repo.db.First(&boat, id)
 	return &boat, result.Error
+}
+
+func (repo *boatRepository) UpdateBoat(ctx context.Context, boat *model.Boat) (*model.Boat, error) {
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Model(boat).Session(&gorm.Session{FullSaveAssociations: true}).Omit("AddressID", "Amenities").Updates(boat).Error; err != nil {
+			return err
+		}
+
+		// if err := tx.Model(boat).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&boat.Address); err != nil {
+		// 	return err
+		// }
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return boat, nil
 }
