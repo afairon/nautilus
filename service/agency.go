@@ -697,18 +697,23 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) err
 
 	return err
 }
+
 func (service *agencyService) UpdateHotel(context.Context, *pb.Hotel) error {
 	return status.Error(codes.Unimplemented, "Unimplemented")
 }
+
 func (service *agencyService) UpdateLiveaboard(context.Context, *pb.Liveaboard) error {
 	return status.Error(codes.Unimplemented, "Unimplemented")
 }
+
 func (service *agencyService) UpdateBoat(context.Context, *pb.Boat) error {
 	return status.Error(codes.Unimplemented, "Unimplemented")
 }
+
 func (service *agencyService) UpdateDiveMaster(context.Context, *pb.DiveMaster) error {
 	return status.Error(codes.Unimplemented, "Unimplemented")
 }
+
 func (service *agencyService) UpdateStaff(context.Context, *pb.Staff) error {
 	return status.Error(codes.Unimplemented, "Unimplemented")
 }

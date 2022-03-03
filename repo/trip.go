@@ -295,8 +295,20 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 }
 
 func (repo *tripRepository) UpdateTripByAgency(ctx context.Context, id uint64, trip *model.Trip) (*model.Trip, error) {
-	if result := repo.db.Model(trip).Omit("ReservationRoomTypes", "TripTemplate", "TripTemplateID", "DiveMasters").Updates(trip); result.Error != nil {
-		return nil, result.Error
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := repo.db.Model(trip).Omit("ReservationRoomTypes", "TripTemplate", "TripTemplateID").Updates(trip).Error; err != nil {
+			return err
+		}
+
+		if err := repo.db.Model(trip).Association("DiveMasters").Replace(trip.DiveMasters); err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
 	}
 
 	return trip, nil
