@@ -919,6 +919,23 @@ func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *
 	return err
 }
 
-func (service *agencyService) UpdateStaff(context.Context, *pb.Staff) error {
-	return status.Error(codes.Unimplemented, "Unimplemented")
+func (service *agencyService) UpdateStaff(ctx context.Context, staff *pb.Staff) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	newStaff := model.Staff{
+		Model:     &gorm.Model{ID: uint(staff.GetId())},
+		FirstName: staff.GetFirstName(),
+		LastName:  staff.GetLastName(),
+		Position:  staff.GetPosition(),
+		Gender:    model.GenderType(staff.GetGender()),
+		AgencyID:  agency.ID,
+	}
+
+	_, err = service.repo.Staff.UpdateStaff(ctx, &newStaff)
+
+	return err
 }

@@ -14,6 +14,9 @@ import (
 type StaffRepository interface {
 	Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
 	Get(ctx context.Context, id uint64) (*entity.Staff, error)
+
+	UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
+
 	ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Staff, error)
 }
 
@@ -104,4 +107,12 @@ func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, 
 	}
 
 	return staffs, nil
+}
+
+func (repo *staffRepository) UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error) {
+	if err := repo.db.Model(staff).Omit("AgencyID").Updates(staff).Error; err != nil {
+		return nil, err
+	}
+
+	return staff, nil
 }
