@@ -87,13 +87,13 @@ func (repo *boatRepository) GetBoat(ctx context.Context, id uint) (*model.Boat, 
 
 func (repo *boatRepository) UpdateBoat(ctx context.Context, boat *model.Boat) (*model.Boat, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Model(boat).Session(&gorm.Session{FullSaveAssociations: true}).Omit("AddressID", "Amenities").Updates(boat).Error; err != nil {
+		if err := tx.Model(boat).Omit("AddressId", "Amenities").Updates(boat).Error; err != nil {
 			return err
 		}
 
-		// if err := tx.Model(boat).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&boat.Address); err != nil {
-		// 	return err
-		// }
+		if err := tx.Model(boat).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&boat.Address); err != nil {
+			return err
+		}
 
 		return nil
 	})
