@@ -10,6 +10,8 @@ import (
 // DiveMasterRepository defines interface for interaction
 // with the divemaster repository.
 type DiveMasterRepository interface {
+	GetDiveMaster(ctx context.Context, id uint) (*model.DiveMaster, error)
+	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
 	ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
 }
 
@@ -74,4 +76,22 @@ func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, i
 
 	result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&diveMasters)
 	return diveMasters, result.Error
+}
+
+func (repo *diveMasterRepository) UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error) {
+	if err := repo.db.Model(diveMaster).Omit("AgencyID").Updates(diveMaster).Error; err != nil {
+		return nil, err
+	}
+
+	return diveMaster, nil
+}
+
+func (repo *diveMasterRepository) GetDiveMaster(ctx context.Context, id uint) (*model.DiveMaster, error) {
+	var diveMaster model.DiveMaster
+
+	if result := repo.db.First(&diveMaster, id); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &diveMaster, nil
 }

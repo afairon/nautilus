@@ -875,8 +875,48 @@ func (service *agencyService) UpdateBoat(ctx context.Context, boat *pb.Boat) err
 	return err
 }
 
-func (service *agencyService) UpdateDiveMaster(context.Context, *pb.DiveMaster) error {
-	return status.Error(codes.Unimplemented, "Unimplemented")
+func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	oldDiveMaster, err := service.repo.DiveMaster.GetDiveMaster(ctx, uint(diveMaster.GetId()))
+
+	if err != nil {
+		return err
+	}
+
+	// remove the old images.
+	for _, image := range oldDiveMaster.Documents {
+		service.media.Delete(image)
+	}
+
+	newDiveMaster := model.DiveMaster{
+		Model:     &gorm.Model{ID: uint(diveMaster.GetId())},
+		FirstName: diveMaster.GetFirstName(),
+		LastName:  diveMaster.GetLastName(),
+		Level:     model.LevelType(diveMaster.GetLevel()),
+		AgencyID:  agency.ID,
+	}
+
+	newDiveMaster.Documents = make(pq.StringArray, 0, len(diveMaster.GetDocuments()))
+
+	for _, document := range diveMaster.GetDocuments() {
+		reader := bytes.NewReader(document.GetFile())
+		objectID, err := service.media.Put(document.GetFilename(), media.PUBLIC_READ, reader)
+
+		if err != nil {
+			return err
+		}
+
+		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
+	}
+
+	_, err = service.repo.DiveMaster.UpdateDiveMaster(ctx, &newDiveMaster)
+
+	return err
 }
 
 func (service *agencyService) UpdateStaff(context.Context, *pb.Staff) error {
