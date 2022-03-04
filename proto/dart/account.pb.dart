@@ -91,6 +91,153 @@ class AccountRequest extends $pb.GeneratedMessage {
   $6.Diver ensureDiver() => $_ensure(1);
 }
 
+enum UpdateRequest_Type {
+  admin, 
+  agency, 
+  diver, 
+  notSet
+}
+
+class UpdateRequest extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, UpdateRequest_Type> _UpdateRequest_TypeByTag = {
+    1 : UpdateRequest_Type.admin,
+    5 : UpdateRequest_Type.agency,
+    10 : UpdateRequest_Type.diver,
+    0 : UpdateRequest_Type.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
+    ..oo(0, [1, 5, 10])
+    ..aOM<$6.Admin>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'admin', subBuilder: $6.Admin.create)
+    ..aOM<$6.Agency>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agency', subBuilder: $6.Agency.create)
+    ..aOM<$6.Diver>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diver', subBuilder: $6.Diver.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateRequest._() : super();
+  factory UpdateRequest({
+    $6.Admin? admin,
+    $6.Agency? agency,
+    $6.Diver? diver,
+  }) {
+    final _result = create();
+    if (admin != null) {
+      _result.admin = admin;
+    }
+    if (agency != null) {
+      _result.agency = agency;
+    }
+    if (diver != null) {
+      _result.diver = diver;
+    }
+    return _result;
+  }
+  factory UpdateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateRequest clone() => UpdateRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateRequest copyWith(void Function(UpdateRequest) updates) => super.copyWith((message) => updates(message as UpdateRequest)) as UpdateRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateRequest create() => UpdateRequest._();
+  UpdateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateRequest> createRepeated() => $pb.PbList<UpdateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateRequest>(create);
+  static UpdateRequest? _defaultInstance;
+
+  UpdateRequest_Type whichType() => _UpdateRequest_TypeByTag[$_whichOneof(0)]!;
+  void clearType() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $6.Admin get admin => $_getN(0);
+  @$pb.TagNumber(1)
+  set admin($6.Admin v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAdmin() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAdmin() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.Admin ensureAdmin() => $_ensure(0);
+
+  @$pb.TagNumber(5)
+  $6.Agency get agency => $_getN(1);
+  @$pb.TagNumber(5)
+  set agency($6.Agency v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAgency() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearAgency() => clearField(5);
+  @$pb.TagNumber(5)
+  $6.Agency ensureAgency() => $_ensure(1);
+
+  @$pb.TagNumber(10)
+  $6.Diver get diver => $_getN(2);
+  @$pb.TagNumber(10)
+  set diver($6.Diver v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasDiver() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearDiver() => clearField(10);
+  @$pb.TagNumber(10)
+  $6.Diver ensureDiver() => $_ensure(2);
+}
+
+class UpdateAccountRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateAccountRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
+    ..aOM<$6.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $6.Account.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateAccountRequest._() : super();
+  factory UpdateAccountRequest({
+    $6.Account? account,
+  }) {
+    final _result = create();
+    if (account != null) {
+      _result.account = account;
+    }
+    return _result;
+  }
+  factory UpdateAccountRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateAccountRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateAccountRequest clone() => UpdateAccountRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateAccountRequest copyWith(void Function(UpdateAccountRequest) updates) => super.copyWith((message) => updates(message as UpdateAccountRequest)) as UpdateAccountRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateAccountRequest create() => UpdateAccountRequest._();
+  UpdateAccountRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateAccountRequest> createRepeated() => $pb.PbList<UpdateAccountRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateAccountRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateAccountRequest>(create);
+  static UpdateAccountRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.Account get account => $_getN(0);
+  @$pb.TagNumber(1)
+  set account($6.Account v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccount() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.Account ensureAccount() => $_ensure(0);
+}
+
 class LoginRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LoginRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')

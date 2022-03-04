@@ -14,6 +14,7 @@ import (
 // with the agency repository.
 type AgencyRepository interface {
 	Create(ctx context.Context, agency *model.Agency) (*model.Agency, error)
+	Update(ctx context.Context, agency *model.Agency) error
 	CreateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
 	CreateRoomType(ctx context.Context, roomType *model.RoomType, isHotel bool) (*model.RoomType, error)
@@ -47,6 +48,59 @@ func (repo *agencyRepository) Create(ctx context.Context, agency *model.Agency) 
 	result := repo.db.Create(agency)
 
 	return agency, result.Error
+}
+
+// Update updates agency record.
+func (repo *agencyRepository) Update(ctx context.Context, agency *model.Agency) error {
+	return repo.db.Transaction(func(tx *gorm.DB) error {
+		if agency.Coordinate == nil {
+			if err := repo.db.Model(agency).Session(&gorm.Session{FullSaveAssociations: true}).Omit("Account").Updates(map[string]interface{}{
+				"Name":      agency.Name,
+				"Phone":     agency.Phone,
+				"Documents": agency.Documents,
+				"Lat":       nil,
+				"Long":      nil,
+			}).Error; err != nil {
+				return err
+			}
+		} else {
+			if err := repo.db.Model(agency).Session(&gorm.Session{FullSaveAssociations: true}).Omit("Account").Updates(map[string]interface{}{
+				"Name":      agency.Name,
+				"Phone":     agency.Phone,
+				"Documents": agency.Documents,
+				"Lat":       agency.Coordinate.Lat,
+				"Long":      agency.Coordinate.Long,
+			}).Error; err != nil {
+				return err
+			}
+		}
+
+		if agency.Account == nil {
+			return nil
+		}
+
+		columns := []string{}
+
+		if agency.Account.Email == "" {
+			columns = append(columns, "Email")
+		}
+		if agency.Account.Username == "" {
+			columns = append(columns, "Username")
+		}
+		if agency.Account.Password == "" {
+			columns = append(columns, "Password")
+		}
+
+		if err := repo.db.Model(agency.Account).Omit(columns...).Updates(map[string]interface{}{
+			"Email":    agency.Account.Email,
+			"Username": agency.Account.Username,
+			"Password": agency.Account.Password,
+		}).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
 }
 
 // CreateDiveMaster creates an dive master record and returns the newly created record.z

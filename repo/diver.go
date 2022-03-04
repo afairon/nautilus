@@ -14,6 +14,7 @@ import (
 // with the diver repository.
 type DiverRepository interface {
 	Create(ctx context.Context, diver *model.Diver) (*model.Diver, error)
+	Update(ctx context.Context, diver *model.Diver) error
 	Get(ctx context.Context, id uint64) (*entity.Diver, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error)
 }
@@ -47,6 +48,48 @@ func (repo *diverRepository) Create(ctx context.Context, diver *model.Diver) (*m
 	result := repo.db.Create(diver)
 
 	return diver, result.Error
+}
+
+// Update updates diver record.
+func (repo *diverRepository) Update(ctx context.Context, diver *model.Diver) error {
+	return repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := repo.db.Model(diver).Omit("Account").Updates(map[string]interface{}{
+			"FirstName": diver.FirstName,
+			"LastName":  diver.LastName,
+			"Phone":     diver.Phone,
+			"BirthDate": diver.BirthDate,
+			"Level":     diver.Level,
+			"Documents": diver.Documents,
+		}).Error; err != nil {
+			return err
+		}
+
+		if diver.Account == nil {
+			return nil
+		}
+
+		columns := []string{}
+
+		if diver.Account.Email == "" {
+			columns = append(columns, "Email")
+		}
+		if diver.Account.Username == "" {
+			columns = append(columns, "Username")
+		}
+		if diver.Account.Password == "" {
+			columns = append(columns, "Password")
+		}
+
+		if err := repo.db.Model(diver.Account).Omit(columns...).Updates(map[string]interface{}{
+			"Email":    diver.Account.Email,
+			"Username": diver.Account.Username,
+			"Password": diver.Account.Password,
+		}).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
 }
 
 // Get retrieves the diver record by its id.

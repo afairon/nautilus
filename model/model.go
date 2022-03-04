@@ -3,6 +3,7 @@ package model
 import (
 	"time"
 
+	"github.com/afairon/nautilus/pb"
 	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
@@ -78,8 +79,37 @@ func (t TripType) EnumIndex() int {
 	return int(t)
 }
 
+type File struct {
+	gorm.Model
+	UUID     string
+	Filename string
+	Buffer   []byte
+	URL      string
+	Private  bool
+}
+
+func (f *File) From(file *pb.File) {
+	if file == nil {
+		return
+	}
+	f.UUID = f.Filename
+	f.Filename = file.Filename
+	f.URL = file.Link
+	f.Buffer = file.File
+}
+
+func (f *File) GetProto() *pb.File {
+	file := pb.File{
+		Filename: f.Filename,
+		Link:     f.URL,
+		File:     f.Buffer,
+	}
+
+	return &file
+}
+
 type Address struct {
-	*gorm.Model
+	gorm.Model
 	AddressLine_1 string `gorm:"not null" json:"address_line_1,omitempty"`
 	AddressLine_2 string `gorm:"not null" json:"address_line_2,omitempty"`
 	City          string `gorm:"not null" json:"city,omitempty"`
@@ -88,30 +118,108 @@ type Address struct {
 	Country       string `gorm:"not null" json:"country,omitempty"`
 }
 
+func (a *Address) From(address *pb.Address) {
+	if address == nil {
+		return
+	}
+	a.ID = uint(address.Id)
+	a.AddressLine_1 = address.AddressLine_1
+	a.AddressLine_2 = address.AddressLine_2
+	a.City = address.City
+	a.Postcode = address.Postcode
+	a.Region = address.Region
+	a.Country = address.Country
+}
+
+func (a *Address) GetProto() *pb.Address {
+	address := pb.Address{
+		Id:            uint64(a.ID),
+		AddressLine_1: a.AddressLine_1,
+		AddressLine_2: a.AddressLine_2,
+		City:          a.City,
+		Postcode:      a.Postcode,
+		Region:        a.Region,
+		Country:       a.Country,
+		CreatedAt:     &a.CreatedAt,
+		UpdatedAt:     &a.UpdatedAt,
+	}
+
+	return &address
+}
+
 type Coordinate struct {
 	Lat  float32
 	Long float32
 }
 
+func (c *Coordinate) From(coordinate *pb.Coordinate) {
+	if coordinate == nil {
+		return
+	}
+	c.Lat = coordinate.Lat
+	c.Long = coordinate.Long
+}
+
+func (c *Coordinate) GetProto() *pb.Coordinate {
+	coordinate := pb.Coordinate{
+		Lat:  c.Lat,
+		Long: c.Long,
+	}
+
+	return &coordinate
+}
+
 type Account struct {
-	*gorm.Model
-	Email    string      `gorm:"unique;not null;" json:"email,omitempty"`
-	Username string      `gorm:"not null" json:"username,omitempty"`
-	Password string      `gorm:"not null" json:"-"`
-	Verified bool        `gorm:"default:false;not null" json:"verified,omitempty"`
-	Type     AccountType `gorm:"not null" json:"type,omitempty"`
-	Active   bool        `gorm:"default:true;not null" json:"active,omitempty"`
-	AgencyID uint        `gorm:"default:null" json:"-"`
-	DiverID  uint        `gorm:"default:null" json:"-"`
-	AdminID  uint        `gorm:"default:null" json:"-"`
+	gorm.Model
+	Email       string      `gorm:"unique;not null;" json:"email,omitempty"`
+	Username    string      `gorm:"not null" json:"username,omitempty"`
+	Password    string      `gorm:"not null" json:"-"`
+	OldPassword string      `gorm:"-" json:"-"`
+	Verified    bool        `gorm:"default:false;not null" json:"verified,omitempty"`
+	Type        AccountType `gorm:"not null" json:"type,omitempty"`
+	Active      bool        `gorm:"default:true;not null" json:"active,omitempty"`
+	AgencyID    uint        `gorm:"default:null" json:"-"`
+	DiverID     uint        `gorm:"default:null" json:"-"`
+	AdminID     uint        `gorm:"default:null" json:"-"`
 }
 
 func (a *Account) GetType() AccountType {
 	return a.Type
 }
 
+func (a *Account) From(account *pb.Account) {
+	if account == nil {
+		return
+	}
+	a.ID = uint(account.Id)
+	a.Email = account.Email
+	a.Username = account.Username
+	a.Password = account.Password
+	a.OldPassword = account.OldPassword
+	a.Verified = account.Verified
+	a.Type = AccountType(account.Type)
+	a.Active = account.Active
+}
+
+func (a *Account) GetProto() *pb.Account {
+	account := pb.Account{
+		Id:          uint64(a.ID),
+		Email:       a.Email,
+		Username:    a.Username,
+		Password:    a.Password,
+		OldPassword: a.OldPassword,
+		Verified:    a.Verified,
+		Type:        pb.AccountType(a.Type),
+		Active:      a.Active,
+		CreatedAt:   &a.CreatedAt,
+		UpdatedAt:   &a.UpdatedAt,
+	}
+
+	return &account
+}
+
 type Agency struct {
-	*gorm.Model
+	gorm.Model
 	*Coordinate   `gorm:"embedded"`
 	AddressID     uint           `json:"-"`
 	Address       Address        `json:"address,omitempty"`
@@ -126,10 +234,70 @@ type Agency struct {
 	Liveaboards   []Liveaboard   `json:"liveaboards,omitempty"`
 	Hotels        []Hotel        `json:"hotels,omitempty"`
 	Trips         []Trip         `json:"trips,omitempty"`
+	Files         []*File        `gorm:"-" json:"-"`
 }
 
 func (a *Agency) GetAccount() *Account {
 	return a.Account
+}
+
+func (a *Agency) From(agency *pb.Agency) {
+	if agency == nil {
+		return
+	}
+	a.ID = uint(agency.Id)
+	a.Address.From(&agency.Address)
+	a.Name = agency.Name
+	a.Phone = agency.Phone
+	if agency.Coordinate != nil {
+		if a.Coordinate == nil {
+			a.Coordinate = &Coordinate{}
+		}
+		a.Coordinate.From(agency.Coordinate)
+	}
+	if agency.Account != nil {
+		if a.Account == nil {
+			a.Account = &Account{}
+		}
+		a.Account.From(agency.Account)
+	}
+	if len(agency.Documents) > 0 {
+		a.Files = make([]*File, 0, len(agency.Documents))
+		for _, doc := range agency.Documents {
+			file := File{}
+			file.From(&doc)
+			a.Files = append(a.Files, &file)
+		}
+	}
+}
+
+func (a *Agency) GetProto() *pb.Agency {
+	agency := pb.Agency{
+		Id:        uint64(a.ID),
+		Address:   *a.Address.GetProto(),
+		Name:      a.Name,
+		Phone:     a.Phone,
+		CreatedAt: &a.CreatedAt,
+		UpdatedAt: &a.UpdatedAt,
+	}
+	if a.Coordinate != nil {
+		agency.Coordinate = a.Coordinate.GetProto()
+	}
+	if a.Account != nil {
+		agency.Account = a.Account.GetProto()
+	}
+	if len(a.Files) > 0 {
+		agency.Documents = make([]pb.File, 0, len(a.Files))
+		for _, f := range a.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			agency.Documents = append(agency.Documents, file)
+		}
+	}
+
+	return &agency
 }
 
 type Admin struct {
@@ -140,8 +308,35 @@ func (a *Admin) GetAccount() *Account {
 	return a.Account
 }
 
+func (a *Admin) From(admin *pb.Admin) {
+	if admin == nil {
+		return
+	}
+	if admin.Account == nil {
+		return
+	}
+
+	if a.Account == nil {
+		a.Account = &Account{}
+	}
+
+	a.Account.From(admin.Account)
+}
+
+func (a *Admin) GetProto() *pb.Admin {
+	admin := pb.Admin{}
+
+	if a.Account == nil {
+		return &admin
+	}
+
+	admin.Account = a.Account.GetProto()
+
+	return &admin
+}
+
 type Diver struct {
-	*gorm.Model
+	gorm.Model
 	Account      *Account       `json:"account,omitempty"`
 	Level        LevelType      `gorm:"not null" json:"level,omitempty"`
 	FirstName    string         `gorm:"not null" json:"firstname,omitempty"`
@@ -150,10 +345,65 @@ type Diver struct {
 	BirthDate    time.Time      `gorm:"not null" json:"birthdate,omitempty"`
 	Documents    pq.StringArray `gorm:"type:text" json:"documents,omitempty"`
 	Reservations []Reservation  `json:"reservations,omitempty"`
+	Files        []*File        `gorm:"-" json:"-"`
 }
 
 func (d *Diver) GetAccount() *Account {
 	return d.Account
+}
+
+func (d *Diver) From(diver *pb.Diver) {
+	if diver == nil {
+		return
+	}
+	d.ID = uint(diver.Id)
+	d.Level = LevelType(diver.Level)
+	d.FirstName = diver.FirstName
+	d.LastName = diver.LastName
+	d.Phone = diver.Phone
+	d.BirthDate = diver.BirthDate
+	if diver.Account != nil {
+		if d.Account == nil {
+			d.Account = &Account{}
+		}
+		d.Account.From(diver.Account)
+	}
+	if len(diver.Documents) > 0 {
+		d.Files = make([]*File, 0, len(diver.Documents))
+		for _, doc := range diver.Documents {
+			file := File{}
+			file.From(&doc)
+			d.Files = append(d.Files, &file)
+		}
+	}
+}
+
+func (d *Diver) GetProto() *pb.Diver {
+	diver := pb.Diver{
+		Id:        uint64(d.ID),
+		Level:     pb.LevelType(d.Level),
+		FirstName: d.FirstName,
+		LastName:  d.LastName,
+		Phone:     d.Phone,
+		BirthDate: d.BirthDate,
+		CreatedAt: &d.CreatedAt,
+		UpdatedAt: &d.CreatedAt,
+	}
+	if d.Account != nil {
+		diver.Account = d.Account.GetProto()
+	}
+	if len(d.Files) > 0 {
+		diver.Documents = make([]pb.File, 0, len(d.Files))
+		for _, f := range d.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			diver.Documents = append(diver.Documents, file)
+		}
+	}
+
+	return &diver
 }
 
 type DiveMaster struct {

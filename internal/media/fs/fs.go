@@ -93,12 +93,13 @@ func (c *Client) Delete(filename string) error {
 
 // permission returns os filemode.
 func permission(permission media.Permission) os.FileMode {
-	switch permission {
-	case media.PRIVATE:
-		return 0600
-	case media.PUBLIC_READ:
-		return 0644
-	default:
-		return 0600
-	}
+	// switch permission {
+	// case media.PRIVATE:
+	// 	return 0600
+	// case media.PUBLIC_READ:
+	// 	return 0644
+	// default:
+	// 	return 0600
+	// }
+	return 0644
 }

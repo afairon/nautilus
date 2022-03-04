@@ -47,6 +47,36 @@ class AgencyServiceClient extends $grpc.Client {
           '/agency.AgencyService/AddLiveaboard',
           ($2.AddLiveaboardRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateTrip =
+      $grpc.ClientMethod<$2.UpdateTripRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateTrip',
+          ($2.UpdateTripRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateHotel =
+      $grpc.ClientMethod<$2.UpdateHotelRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateHotel',
+          ($2.UpdateHotelRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateLiveaboard =
+      $grpc.ClientMethod<$2.UpdateLiveaboardRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateLiveaboard',
+          ($2.UpdateLiveaboardRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateBoat =
+      $grpc.ClientMethod<$2.UpdateBoatRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateBoat',
+          ($2.UpdateBoatRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateDiveMaster =
+      $grpc.ClientMethod<$2.UpdateDiveMasterRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateDiveMaster',
+          ($2.UpdateDiveMasterRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateStaff =
+      $grpc.ClientMethod<$2.UpdateStaffRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateStaff',
+          ($2.UpdateStaffRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
   static final _$listBoats =
       $grpc.ClientMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
           '/agency.AgencyService/ListBoats',
@@ -141,6 +171,38 @@ class AgencyServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Empty> addLiveaboard($2.AddLiveaboardRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$addLiveaboard, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateTrip($2.UpdateTripRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateTrip, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateHotel($2.UpdateHotelRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateHotel, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateLiveaboard(
+      $2.UpdateLiveaboardRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateLiveaboard, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateBoat($2.UpdateBoatRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateBoat, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateDiveMaster(
+      $2.UpdateDiveMasterRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateDiveMaster, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateStaff($2.UpdateStaffRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateStaff, request, options: options);
   }
 
   $grpc.ResponseStream<$2.ListBoatsResponse> listBoats(
@@ -273,6 +335,52 @@ abstract class AgencyServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.AddLiveaboardRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateTripRequest, $1.Empty>(
+        'UpdateTrip',
+        updateTrip_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.UpdateTripRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateHotelRequest, $1.Empty>(
+        'UpdateHotel',
+        updateHotel_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateHotelRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateLiveaboardRequest, $1.Empty>(
+        'UpdateLiveaboard',
+        updateLiveaboard_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateLiveaboardRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateBoatRequest, $1.Empty>(
+        'UpdateBoat',
+        updateBoat_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $2.UpdateBoatRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateDiveMasterRequest, $1.Empty>(
+        'UpdateDiveMaster',
+        updateDiveMaster_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateDiveMasterRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateStaffRequest, $1.Empty>(
+        'UpdateStaff',
+        updateStaff_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateStaffRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
         'ListBoats',
         listBoats_Pre,
@@ -383,6 +491,36 @@ abstract class AgencyServiceBase extends $grpc.Service {
     return addLiveaboard(call, await request);
   }
 
+  $async.Future<$1.Empty> updateTrip_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateTripRequest> request) async {
+    return updateTrip(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateHotel_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateHotelRequest> request) async {
+    return updateHotel(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateLiveaboard_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateLiveaboardRequest> request) async {
+    return updateLiveaboard(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateBoat_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateBoatRequest> request) async {
+    return updateBoat(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateDiveMaster_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateDiveMasterRequest> request) async {
+    return updateDiveMaster(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateStaff_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateStaffRequest> request) async {
+    return updateStaff(call, await request);
+  }
+
   $async.Stream<$2.ListBoatsResponse> listBoats_Pre($grpc.ServiceCall call,
       $async.Future<$2.ListBoatsRequest> request) async* {
     yield* listBoats(call, await request);
@@ -446,6 +584,18 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.AddHotelRequest request);
   $async.Future<$1.Empty> addLiveaboard(
       $grpc.ServiceCall call, $2.AddLiveaboardRequest request);
+  $async.Future<$1.Empty> updateTrip(
+      $grpc.ServiceCall call, $2.UpdateTripRequest request);
+  $async.Future<$1.Empty> updateHotel(
+      $grpc.ServiceCall call, $2.UpdateHotelRequest request);
+  $async.Future<$1.Empty> updateLiveaboard(
+      $grpc.ServiceCall call, $2.UpdateLiveaboardRequest request);
+  $async.Future<$1.Empty> updateBoat(
+      $grpc.ServiceCall call, $2.UpdateBoatRequest request);
+  $async.Future<$1.Empty> updateDiveMaster(
+      $grpc.ServiceCall call, $2.UpdateDiveMasterRequest request);
+  $async.Future<$1.Empty> updateStaff(
+      $grpc.ServiceCall call, $2.UpdateStaffRequest request);
   $async.Stream<$2.ListBoatsResponse> listBoats(
       $grpc.ServiceCall call, $2.ListBoatsRequest request);
   $async.Stream<$2.ListDiveMastersResponse> listDiveMasters(

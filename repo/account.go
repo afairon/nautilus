@@ -2,22 +2,23 @@ package repo
 
 import (
 	"context"
-	"errors"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // AccountRepository defines interface for interaction
 // with the account repository.
 type AccountRepository interface {
-	// Create(ctx context.Context, account *entity.Account) (*entity.Account, error)
-	Get(ctx context.Context, id uint64) (*model.Account, error)
-	GetByEmail(ctx context.Context, email string) (*model.Account, error)
-	GetByUsername(ctx context.Context, username string) (*model.Account, error)
-	GetAdminAccount(ctx context.Context, id uint64) (*model.Admin, error)
-	GetAgencyAccount(ctx context.Context, id uint64) (*model.Agency, error)
-	GetDiverAccount(ctx context.Context, id uint64) (*model.Diver, error)
+	Create(ctx context.Context, account *model.Account) (*model.Account, error)
+	Update(ctx context.Context, account *model.Account) error
+	FindByID(ctx context.Context, id uint64) (*model.Account, error)
+	FindByEmail(ctx context.Context, email string) (*model.Account, error)
+	FindByUsername(ctx context.Context, username string) (*model.Account, error)
+	FindAdminByAccountID(ctx context.Context, id uint64) (*model.Admin, error)
+	FindAgencyByAccountID(ctx context.Context, id uint64) (*model.Agency, error)
+	FindDiverByAccountID(ctx context.Context, id uint64) (*model.Diver, error)
 	List(ctx context.Context, limit, offset uint64) ([]*model.Account, error)
 }
 
@@ -35,23 +36,42 @@ func NewAccountRepository(db *gorm.DB) *accountRepository {
 
 // Create creates an account record and returns the newly created record.
 func (repo *accountRepository) Create(ctx context.Context, account *model.Account) (*model.Account, error) {
-	// var result model.Account
-
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.account
-	// 		(username, email, "password", "type")
-	// 	VALUES
-	// 		($1, LOWER($2), $3, $4)
-	// 	RETURNING id, username, email, "type", verified, active, created_on, updated_on
-	// `, account.Username, account.Email, account.Password, account.Type)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	if result := repo.db.Create(account); result.Error != nil {
+		return nil, result.Error
+	}
+	return account, nil
 }
 
-// Get retrieves the account record by its id.
-func (repo *accountRepository) Get(ctx context.Context, id uint64) (*model.Account, error) {
+// Update updates account record.
+func (repo *accountRepository) Update(ctx context.Context, account *model.Account) error {
+	columns := []string{}
+
+	if account.Email == "" {
+		columns = append(columns, "Email")
+	}
+	if account.Username == "" {
+		columns = append(columns, "Username")
+	}
+	if account.Password == "" {
+		columns = append(columns, "Password")
+	}
+
+	if err := repo.db.Model(account).Omit(columns...).Updates(map[string]interface{}{
+		"Email":    account.Email,
+		"Username": account.Username,
+		"Password": account.Password,
+		"Verified": account.Verified,
+		"Type":     account.Type,
+		"Active":   account.Active,
+	}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FindByID retrieves the account record by its id.
+func (repo *accountRepository) FindByID(ctx context.Context, id uint64) (*model.Account, error) {
 	var account model.Account
 
 	if result := repo.db.Take(&account, id); result.Error != nil {
@@ -61,8 +81,8 @@ func (repo *accountRepository) Get(ctx context.Context, id uint64) (*model.Accou
 	return &account, nil
 }
 
-// GetByEmail retrieves the account record by its email.
-func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*model.Account, error) {
+// FindByEmail retrieves the account record by its email.
+func (repo *accountRepository) FindByEmail(ctx context.Context, email string) (*model.Account, error) {
 	var account model.Account
 
 	if result := repo.db.Where("LOWER(email) = ?", email).Take(&account); result.Error != nil {
@@ -72,8 +92,8 @@ func (repo *accountRepository) GetByEmail(ctx context.Context, email string) (*m
 	return &account, nil
 }
 
-// GetByUsername retrieves the account record by its username.
-func (repo *accountRepository) GetByUsername(ctx context.Context, username string) (*model.Account, error) {
+// FindByUsername retrieves the account record by its username.
+func (repo *accountRepository) FindByUsername(ctx context.Context, username string) (*model.Account, error) {
 	var account model.Account
 
 	if result := repo.db.Where("accounts.username = ?", username).Take(&account); result.Error != nil {
@@ -83,8 +103,8 @@ func (repo *accountRepository) GetByUsername(ctx context.Context, username strin
 	return &account, nil
 }
 
-// GetAdminAccount retrieves admin account.
-func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (*model.Admin, error) {
+// FindAdminByAccountID retrieves admin account.
+func (repo *accountRepository) FindAdminByAccountID(ctx context.Context, id uint64) (*model.Admin, error) {
 	var admin model.Admin
 
 	if result := repo.db.Table("accounts").Where("accounts.id = ? AND accounts.type = ?", id, model.ADMIN).Take(&admin); result.Error != nil {
@@ -94,8 +114,8 @@ func (repo *accountRepository) GetAdminAccount(ctx context.Context, id uint64) (
 	return &admin, nil
 }
 
-// GetAgencyAccount retrieves agency account.
-func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) (*model.Agency, error) {
+// FindAgencyByAccountID retrieves agency account.
+func (repo *accountRepository) FindAgencyByAccountID(ctx context.Context, id uint64) (*model.Agency, error) {
 	var agency model.Agency
 
 	if result := repo.db.Preload("Account").Preload("Address").Joins("JOIN accounts ON accounts.agency_id = agencies.id").Where("accounts.id = ?", id).Take(&agency); result.Error != nil {
@@ -105,11 +125,11 @@ func (repo *accountRepository) GetAgencyAccount(ctx context.Context, id uint64) 
 	return &agency, nil
 }
 
-// GetDiverAccount retrieves diver account.
-func (repo *accountRepository) GetDiverAccount(ctx context.Context, id uint64) (*model.Diver, error) {
+// FindDiverByAccountID retrieves diver account.
+func (repo *accountRepository) FindDiverByAccountID(ctx context.Context, id uint64) (*model.Diver, error) {
 	var diver model.Diver
 
-	if result := repo.db.Preload("Account").Joins("JOIN accounts ON accounts.diver_id = divers.id").Where("accounts.id = ?", id).Take(&diver); result.Error != nil {
+	if result := repo.db.Preload(clause.Associations).Joins("JOIN accounts ON accounts.diver_id = divers.id").Where("accounts.id = ?", id).Take(&diver); result.Error != nil {
 		return nil, result.Error
 	}
 

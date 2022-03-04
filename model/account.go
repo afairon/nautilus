@@ -6,86 +6,174 @@ import (
 	"strings"
 
 	pass "github.com/afairon/nautilus/internal/password"
-	"github.com/afairon/nautilus/pb"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"gorm.io/gorm"
 )
 
-// SetUsername sets username only if the username is valid.
-func (m *Account) SetUsername(username string) error {
-	// Username is empty.
-	if strings.TrimSpace(username) == "" {
-		return errors.New("username: empty")
-	}
-
-	// Username contains space.
-	if strings.Contains(username, " ") {
-		return errors.New("username: contains space")
-	}
-
-	m.Username = username
-
-	return nil
-}
-
-// SetEmail sets the email only if the email is valid.
-func (m *Account) SetEmail(email string) error {
-	email = strings.ToLower(email)
-	_, err := mail.ParseAddress(email)
-	if err != nil {
-		return err
-	}
-
-	m.Email = email
-	return nil
-}
+var (
+	ErrEmptyUsername        = errors.New("username: empty")
+	ErrUsernameContainSpace = errors.New("username: contains space")
+	ErrMissingAccount       = status.Error(codes.InvalidArgument, "missing account")
+)
 
 // CheckPassword compares the password and the hash.
 func (m *Account) CheckPassword(password string) bool {
 	return pass.CheckPasswordHash(password, m.Password)
 }
 
-// SetPassword checks if the password is sufficiently strong,
-// if so it hashes the password and stores the hash as the
-// password attribute.
-func (m *Account) SetPassword(password string) error {
-	err := pass.ValidatePassword(password)
-	if err != nil {
-		return err
-	}
-	var hash string
-
-	if hash, err = pass.HashPassword(password); err != nil {
-		return err
+// validUsername checks if username is not empty and does not contain spaces.
+func (a *Account) validUsername() error {
+	// Username is empty.
+	if strings.TrimSpace(a.Username) == "" {
+		return ErrEmptyUsername
 	}
 
-	m.Password = hash
+	// Username contains space.
+	if strings.Contains(a.Username, " ") {
+		return ErrUsernameContainSpace
+	}
+
 	return nil
 }
 
-// SetAccount checks if the username is valid, the email is valid,
-// and the password is valid.
-func (m *Account) SetAccount(src *pb.Account) error {
-	if src == nil {
-		return status.Error(codes.InvalidArgument, "missing account")
-	}
-	// Set a valid username.
-	err := m.SetUsername(src.GetUsername())
+// validEmail checks if email is valid.
+func (a *Account) validEmail() error {
+	a.Email = strings.ToLower(a.Email)
+
+	_, err := mail.ParseAddress(a.Email)
 	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
+		// Invalid email
+		return err
 	}
 
-	// Set a valid email.
-	err = m.SetEmail(strings.ToLower(src.GetEmail()))
+	return nil
+}
+
+// validPassword checks if password is valid.
+func (a *Account) validPassword() error {
+	err := pass.ValidatePassword(a.Password)
 	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
+		// Invalid password
+		return err
 	}
 
-	// Set a valid password.
-	err = m.SetPassword(src.GetPassword())
+	return nil
+}
+
+// Verify checks if username, email, and password are valid.
+func (a *Account) Verify() error {
+	// Verify username
+	err := a.validUsername()
 	if err != nil {
-		return status.Error(codes.InvalidArgument, err.Error())
+		return err
 	}
+
+	// Verify email
+	err = a.validEmail()
+	if err != nil {
+		return err
+	}
+
+	// Verify password
+	err = a.validPassword()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// BeforeCreate checks user account information and hash password.
+func (a *Account) BeforeCreate(tx *gorm.DB) error {
+	err := a.Verify()
+	if err != nil {
+		return err
+	}
+
+	var hash string
+
+	if hash, err = pass.HashPassword(a.Password); err != nil {
+		return err
+	}
+
+	a.Password = hash
+
+	return nil
+}
+
+// BeforeUpdate updates non empty fields.
+func (a *Account) BeforeUpdate(tx *gorm.DB) error {
+	var err error
+
+	if a.Username != "" {
+		if err = a.validUsername(); err != nil {
+			return err
+		}
+	}
+
+	if a.Email != "" {
+		if err = a.validEmail(); err != nil {
+			return err
+		}
+	}
+
+	if a.Password != "" {
+		if err = a.validPassword(); err != nil {
+			return err
+		}
+
+		var hash string
+
+		if hash, err = pass.HashPassword(a.Password); err != nil {
+			return err
+		}
+
+		a.Password = hash
+		tx.Statement.SetColumn("Password", hash)
+	}
+
+	return nil
+}
+
+// Verify checks if agency has a valid account.
+func (a *Agency) Verify() error {
+	if a.Account == nil {
+		return ErrMissingAccount
+	}
+
+	return a.Account.Verify()
+}
+
+// BeforeCreate checks agency information.
+func (a *Agency) BeforeCreate(tx *gorm.DB) error {
+	err := a.Verify()
+	if err != nil {
+		return err
+	}
+
+	a.Account.Type = AGENCY
+
+	return nil
+}
+
+// Verify checks if diver has a valid account.
+func (d *Diver) Verify() error {
+	if d.Account == nil {
+		return ErrMissingAccount
+	}
+
+	return d.Account.Verify()
+}
+
+// BeforeCreate checks diver information.
+func (d *Diver) BeforeCreate(tx *gorm.DB) error {
+	err := d.Verify()
+	if err != nil {
+		return err
+	}
+
+	d.Account.Type = DIVER
 
 	return nil
 }

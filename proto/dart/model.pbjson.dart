@@ -76,6 +76,7 @@ const Account$json = const {
     const {'1': 'username', '3': 10, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'email', '3': 20, '4': 1, '5': 9, '10': 'email'},
     const {'1': 'password', '3': 30, '4': 1, '5': 9, '10': 'password'},
+    const {'1': 'old_password', '3': 35, '4': 1, '5': 9, '10': 'oldPassword'},
     const {'1': 'type', '3': 40, '4': 1, '5': 14, '6': '.model.AccountType', '10': 'type'},
     const {'1': 'verified', '3': 50, '4': 1, '5': 8, '10': 'verified'},
     const {'1': 'active', '3': 60, '4': 1, '5': 8, '10': 'active'},
@@ -85,7 +86,7 @@ const Account$json = const {
 };
 
 /// Descriptor for `Account`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List accountDescriptor = $convert.base64Decode('CgdBY2NvdW50Eg4KAmlkGAEgASgEUgJpZBIaCgh1c2VybmFtZRgKIAEoCVIIdXNlcm5hbWUSFAoFZW1haWwYFCABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGB4gASgJUghwYXNzd29yZBImCgR0eXBlGCggASgOMhIubW9kZWwuQWNjb3VudFR5cGVSBHR5cGUSGgoIdmVyaWZpZWQYMiABKAhSCHZlcmlmaWVkEhYKBmFjdGl2ZRg8IAEoCFIGYWN0aXZlEj8KCmNyZWF0ZWRfYXQYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+final $typed_data.Uint8List accountDescriptor = $convert.base64Decode('CgdBY2NvdW50Eg4KAmlkGAEgASgEUgJpZBIaCgh1c2VybmFtZRgKIAEoCVIIdXNlcm5hbWUSFAoFZW1haWwYFCABKAlSBWVtYWlsEhoKCHBhc3N3b3JkGB4gASgJUghwYXNzd29yZBIhCgxvbGRfcGFzc3dvcmQYIyABKAlSC29sZFBhc3N3b3JkEiYKBHR5cGUYKCABKA4yEi5tb2RlbC5BY2NvdW50VHlwZVIEdHlwZRIaCgh2ZXJpZmllZBgyIAEoCFIIdmVyaWZpZWQSFgoGYWN0aXZlGDwgASgIUgZhY3RpdmUSPwoKY3JlYXRlZF9hdBhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
 @$core.Deprecated('Use adminDescriptor instead')
 const Admin$json = const {
   '1': 'Admin',
@@ -114,6 +115,17 @@ const Address$json = const {
 
 /// Descriptor for `Address`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addressDescriptor = $convert.base64Decode('CgdBZGRyZXNzEg4KAmlkGAEgASgEUgJpZBIkCg5hZGRyZXNzX2xpbmVfMRgKIAEoCVIMYWRkcmVzc0xpbmUxEiQKDmFkZHJlc3NfbGluZV8yGBQgASgJUgxhZGRyZXNzTGluZTISEgoEY2l0eRgeIAEoCVIEY2l0eRIaCghwb3N0Y29kZRgoIAEoCVIIcG9zdGNvZGUSFgoGcmVnaW9uGDIgASgJUgZyZWdpb24SGAoHY291bnRyeRg8IAEoCVIHY291bnRyeRI/CgpjcmVhdGVkX2F0GEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+@$core.Deprecated('Use coordinateDescriptor instead')
+const Coordinate$json = const {
+  '1': 'Coordinate',
+  '2': const [
+    const {'1': 'lat', '3': 1, '4': 1, '5': 2, '10': 'lat'},
+    const {'1': 'long', '3': 2, '4': 1, '5': 2, '10': 'long'},
+  ],
+};
+
+/// Descriptor for `Coordinate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List coordinateDescriptor = $convert.base64Decode('CgpDb29yZGluYXRlEhAKA2xhdBgBIAEoAlIDbGF0EhIKBGxvbmcYAiABKAJSBGxvbmc=');
 @$core.Deprecated('Use agencyDescriptor instead')
 const Agency$json = const {
   '1': 'Agency',
@@ -123,6 +135,7 @@ const Agency$json = const {
     const {'1': 'phone', '3': 20, '4': 1, '5': 9, '10': 'phone'},
     const {'1': 'account', '3': 30, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
     const {'1': 'address', '3': 40, '4': 1, '5': 11, '6': '.model.Address', '8': const {}, '10': 'address'},
+    const {'1': 'coordinate', '3': 45, '4': 1, '5': 11, '6': '.model.Coordinate', '10': 'coordinate'},
     const {'1': 'documents', '3': 50, '4': 3, '5': 11, '6': '.model.File', '8': const {}, '10': 'documents'},
     const {'1': 'created_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
     const {'1': 'updated_at', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
@@ -130,7 +143,7 @@ const Agency$json = const {
 };
 
 /// Descriptor for `Agency`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEigKB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50UgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEigKB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50UgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEjEKCmNvb3JkaW5hdGUYLSABKAsyES5tb2RlbC5Db29yZGluYXRlUgpjb29yZGluYXRlEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
 @$core.Deprecated('Use diverDescriptor instead')
 const Diver$json = const {
   '1': 'Diver',
@@ -195,3 +208,186 @@ const LiveaboardComment$json = const {
 
 /// Descriptor for `LiveaboardComment`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List liveaboardCommentDescriptor = $convert.base64Decode('ChFMaXZlYWJvYXJkQ29tbWVudBIOCgJpZBgBIAEoBFICaWQSGAoHY29tbWVudBgKIAEoCVIHY29tbWVudBIUCgVzdGFycxgUIAEoDVIFc3RhcnMSJQoOcmVzZXJ2YXRpb25faWQYHiABKARSDXJlc2VydmF0aW9uSWQSPwoKY3JlYXRlZF9hdBgoIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GDIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
+@$core.Deprecated('Use boatDescriptor instead')
+const Boat$json = const {
+  '1': 'Boat',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 11, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'images', '3': 20, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'total_capacity', '3': 21, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_capacity', '3': 22, '4': 1, '5': 13, '10': 'diverCapacity'},
+    const {'1': 'staff_capacity', '3': 23, '4': 1, '5': 13, '10': 'staffCapacity'},
+    const {'1': 'address', '3': 24, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'created_at', '3': 30, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Boat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List boatDescriptor = $convert.base64Decode('CgRCb2F0Eg4KAmlkGAEgASgEUgJpZBISCgRuYW1lGAogASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW9uGAsgASgJUgtkZXNjcmlwdGlvbhIjCgZpbWFnZXMYFCADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSJQoOdG90YWxfY2FwYWNpdHkYFSABKA1SDXRvdGFsQ2FwYWNpdHkSJQoOZGl2ZXJfY2FwYWNpdHkYFiABKA1SDWRpdmVyQ2FwYWNpdHkSJQoOc3RhZmZfY2FwYWNpdHkYFyABKA1SDXN0YWZmQ2FwYWNpdHkSKAoHYWRkcmVzcxgYIAEoCzIOLm1vZGVsLkFkZHJlc3NSB2FkZHJlc3MSPwoKY3JlYXRlZF9hdBgeIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GCggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
+@$core.Deprecated('Use diveMasterDescriptor instead')
+const DiveMaster$json = const {
+  '1': 'DiveMaster',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'first_name', '3': 10, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 20, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'level', '3': 30, '4': 1, '5': 14, '6': '.model.LevelType', '10': 'level'},
+    const {'1': 'documents', '3': 40, '4': 3, '5': 11, '6': '.model.File', '10': 'documents'},
+    const {'1': 'created_at', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `DiveMaster`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List diveMasterDescriptor = $convert.base64Decode('CgpEaXZlTWFzdGVyEg4KAmlkGAEgASgEUgJpZBIdCgpmaXJzdF9uYW1lGAogASgJUglmaXJzdE5hbWUSGwoJbGFzdF9uYW1lGBQgASgJUghsYXN0TmFtZRImCgVsZXZlbBgeIAEoDjIQLm1vZGVsLkxldmVsVHlwZVIFbGV2ZWwSKQoJZG9jdW1lbnRzGCggAygLMgsubW9kZWwuRmlsZVIJZG9jdW1lbnRzEj8KCmNyZWF0ZWRfYXQYMiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+@$core.Deprecated('Use hotelDescriptor instead')
+const Hotel$json = const {
+  '1': 'Hotel',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'stars', '3': 30, '4': 1, '5': 13, '10': 'stars'},
+    const {'1': 'phone', '3': 40, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'address', '3': 50, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'images', '3': 60, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'room_types', '3': 65, '4': 3, '5': 11, '6': '.model.RoomType', '10': 'roomTypes'},
+    const {'1': 'created_at', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Hotel`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List hotelDescriptor = $convert.base64Decode('CgVIb3RlbBIOCgJpZBgBIAEoBFICaWQSEgoEbmFtZRgKIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgUIAEoCVILZGVzY3JpcHRpb24SFAoFc3RhcnMYHiABKA1SBXN0YXJzEhQKBXBob25lGCggASgJUgVwaG9uZRIoCgdhZGRyZXNzGDIgASgLMg4ubW9kZWwuQWRkcmVzc1IHYWRkcmVzcxIjCgZpbWFnZXMYPCADKAsyCy5tb2RlbC5GaWxlUgZpbWFnZXMSLgoKcm9vbV90eXBlcxhBIAMoCzIPLm1vZGVsLlJvb21UeXBlUglyb29tVHlwZXMSPwoKY3JlYXRlZF9hdBhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
+@$core.Deprecated('Use liveaboardDescriptor instead')
+const Liveaboard$json = const {
+  '1': 'Liveaboard',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'length', '3': 30, '4': 1, '5': 2, '10': 'length'},
+    const {'1': 'width', '3': 40, '4': 1, '5': 2, '10': 'width'},
+    const {'1': 'images', '3': 50, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'total_capacity', '3': 51, '4': 1, '5': 13, '10': 'totalCapacity'},
+    const {'1': 'diver_rooms', '3': 52, '4': 1, '5': 13, '10': 'diverRooms'},
+    const {'1': 'staff_rooms', '3': 53, '4': 1, '5': 13, '10': 'staffRooms'},
+    const {'1': 'address', '3': 54, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'room_types', '3': 55, '4': 3, '5': 11, '6': '.model.RoomType', '10': 'roomTypes'},
+    const {'1': 'created_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Liveaboard`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List liveaboardDescriptor = $convert.base64Decode('CgpMaXZlYWJvYXJkEg4KAmlkGAEgASgEUgJpZBISCgRuYW1lGAogASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW9uGBQgASgJUgtkZXNjcmlwdGlvbhIWCgZsZW5ndGgYHiABKAJSBmxlbmd0aBIUCgV3aWR0aBgoIAEoAlIFd2lkdGgSIwoGaW1hZ2VzGDIgAygLMgsubW9kZWwuRmlsZVIGaW1hZ2VzEiUKDnRvdGFsX2NhcGFjaXR5GDMgASgNUg10b3RhbENhcGFjaXR5Eh8KC2RpdmVyX3Jvb21zGDQgASgNUgpkaXZlclJvb21zEh8KC3N0YWZmX3Jvb21zGDUgASgNUgpzdGFmZlJvb21zEigKB2FkZHJlc3MYNiABKAsyDi5tb2RlbC5BZGRyZXNzUgdhZGRyZXNzEi4KCnJvb21fdHlwZXMYNyADKAsyDy5tb2RlbC5Sb29tVHlwZVIJcm9vbVR5cGVzEj8KCmNyZWF0ZWRfYXQYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+@$core.Deprecated('Use staffDescriptor instead')
+const Staff$json = const {
+  '1': 'Staff',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'first_name', '3': 10, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 20, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'position', '3': 30, '4': 1, '5': 9, '10': 'position'},
+    const {'1': 'gender', '3': 40, '4': 1, '5': 14, '6': '.model.GenderType', '10': 'gender'},
+    const {'1': 'created_at', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Staff`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List staffDescriptor = $convert.base64Decode('CgVTdGFmZhIOCgJpZBgBIAEoBFICaWQSHQoKZmlyc3RfbmFtZRgKIAEoCVIJZmlyc3ROYW1lEhsKCWxhc3RfbmFtZRgUIAEoCVIIbGFzdE5hbWUSGgoIcG9zaXRpb24YHiABKAlSCHBvc2l0aW9uEikKBmdlbmRlchgoIAEoDjIRLm1vZGVsLkdlbmRlclR5cGVSBmdlbmRlchI/CgpjcmVhdGVkX2F0GDIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+@$core.Deprecated('Use tripTemplateDescriptor instead')
+const TripTemplate$json = const {
+  '1': 'TripTemplate',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'trip_type', '3': 30, '4': 1, '5': 14, '6': '.model.TripType', '10': 'tripType'},
+    const {'1': 'hotel_id', '3': 40, '4': 1, '5': 4, '10': 'hotelId'},
+    const {'1': 'boat_id', '3': 50, '4': 1, '5': 4, '10': 'boatId'},
+    const {'1': 'liveaboard_id', '3': 60, '4': 1, '5': 4, '10': 'liveaboardId'},
+    const {'1': 'images', '3': 70, '4': 3, '5': 11, '6': '.model.File', '10': 'images'},
+    const {'1': 'address', '3': 80, '4': 1, '5': 11, '6': '.model.Address', '10': 'address'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `TripTemplate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tripTemplateDescriptor = $convert.base64Decode('CgxUcmlwVGVtcGxhdGUSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YFCABKAlSC2Rlc2NyaXB0aW9uEiwKCXRyaXBfdHlwZRgeIAEoDjIPLm1vZGVsLlRyaXBUeXBlUgh0cmlwVHlwZRIZCghob3RlbF9pZBgoIAEoBFIHaG90ZWxJZBIXCgdib2F0X2lkGDIgASgEUgZib2F0SWQSIwoNbGl2ZWFib2FyZF9pZBg8IAEoBFIMbGl2ZWFib2FyZElkEiMKBmltYWdlcxhGIAMoCzILLm1vZGVsLkZpbGVSBmltYWdlcxIoCgdhZGRyZXNzGFAgASgLMg4ubW9kZWwuQWRkcmVzc1IHYWRkcmVzcxI/CgpjcmVhdGVkX2F0GFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYZCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+@$core.Deprecated('Use tripDescriptor instead')
+const Trip$json = const {
+  '1': 'Trip',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.model.DiveMaster', '10': 'diveMasters'},
+    const {'1': 'dive_master_ids', '3': 55, '4': 3, '5': 4, '10': 'diveMasterIds'},
+    const {'1': 'start_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'startDate'},
+    const {'1': 'end_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'endDate'},
+    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Trip`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tripDescriptor = $convert.base64Decode('CgRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBIbCgltYXhfZ3Vlc3QYHiABKA1SCG1heEd1ZXN0EiEKDGN1cmVudF9ndWVzdBgjIAEoDVILY3VyZW50R3Vlc3QSFAoFcHJpY2UYKCABKAJSBXByaWNlEjQKDGRpdmVfbWFzdGVycxgyIAMoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSC2RpdmVNYXN0ZXJzEiYKD2RpdmVfbWFzdGVyX2lkcxg3IAMoBFINZGl2ZU1hc3RlcklkcxI/CgpzdGFydF9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJc3RhcnREYXRlEjsKCGVuZF9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIHZW5kRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+@$core.Deprecated('Use tripWithTemplateDescriptor instead')
+const TripWithTemplate$json = const {
+  '1': 'TripWithTemplate',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
+    const {'1': 'trip_template', '3': 25, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.model.DiveMaster', '10': 'diveMasters'},
+    const {'1': 'from_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'fromDate'},
+    const {'1': 'to_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'toDate'},
+    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `TripWithTemplate`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('ChBUcmlwV2l0aFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIUCgVwcmljZRgoIAEoAlIFcHJpY2USNAoMZGl2ZV9tYXN0ZXJzGDIgAygLMhEubW9kZWwuRGl2ZU1hc3RlclILZGl2ZU1hc3RlcnMSPQoJZnJvbV9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIIZnJvbURhdGUSOQoHdG9fZGF0ZRhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSBnRvRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+@$core.Deprecated('Use amenityDescriptor instead')
+const Amenity$json = const {
+  '1': 'Amenity',
+  '2': const [
+    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
+  ],
+};
+
+/// Descriptor for `Amenity`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List amenityDescriptor = $convert.base64Decode('CgdBbWVuaXR5EhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9u');
+@$core.Deprecated('Use roomTypeDescriptor instead')
+const RoomType$json = const {
+  '1': 'RoomType',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'quantity', '3': 50, '4': 1, '5': 13, '10': 'quantity'},
+    const {'1': 'room_images', '3': 60, '4': 3, '5': 11, '6': '.model.File', '10': 'roomImages'},
+    const {'1': 'amenities', '3': 70, '4': 3, '5': 11, '6': '.model.Amenity', '10': 'amenities'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `RoomType`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List roomTypeDescriptor = $convert.base64Decode('CghSb29tVHlwZRIOCgJpZBgBIAEoBFICaWQSEgoEbmFtZRgKIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgUIAEoCVILZGVzY3JpcHRpb24SGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIUCgVwcmljZRgoIAEoAlIFcHJpY2USGgoIcXVhbnRpdHkYMiABKA1SCHF1YW50aXR5EiwKC3Jvb21faW1hZ2VzGDwgAygLMgsubW9kZWwuRmlsZVIKcm9vbUltYWdlcxIsCglhbWVuaXRpZXMYRiADKAsyDi5tb2RlbC5BbWVuaXR5UglhbWVuaXRpZXMSPwoKY3JlYXRlZF9hdBhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GGQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');

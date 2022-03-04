@@ -11,6 +11,10 @@ option go_package = "./pb";
 service Account {
     // Create is used to create agency and diver account.
     rpc Create (AccountRequest) returns (google.protobuf.Empty) {}
+    // Update is used to update user account and profile.
+    rpc Update (UpdateRequest) returns (google.protobuf.Empty) {}
+    // UpdateAccount is used to update account only.
+    rpc UpdateAccount (UpdateAccountRequest) returns (google.protobuf.Empty) {}
 
     // Login is used to authenticate the user.
     // The client supplies the server with credentials and the server
@@ -28,6 +32,20 @@ message AccountRequest {
         model.Agency agency = 1;
         model.Diver diver = 5;
     }
+}
+
+// UpdateRequest
+message UpdateRequest {
+    oneof type {
+        model.Admin admin = 1;
+        model.Agency agency = 5;
+        model.Diver diver = 10;
+    }
+}
+
+// UpdateAccountRequest
+message UpdateAccountRequest {
+    model.Account account = 1;
 }
 
 // LoginRequest

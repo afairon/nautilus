@@ -28,18 +28,72 @@ func (handler *AccountHandler) Create(ctx context.Context, req *pb.AccountReques
 	// Get account request type.
 	switch t := req.GetType().(type) {
 	case *pb.AccountRequest_Agency:
-		err := handler.service.CreateAgencyAccount(ctx, t.Agency)
+		agency := model.Agency{}
+		agency.From(t.Agency)
+		err := handler.service.CreateAgencyAccount(ctx, &agency)
 		if err != nil {
 			return nil, err
 		}
 	case *pb.AccountRequest_Diver:
-		err := handler.service.CreateDiverAccount(ctx, t.Diver)
+		diver := model.Diver{}
+		diver.From(t.Diver)
+		err := handler.service.CreateDiverAccount(ctx, &diver)
 		if err != nil {
 			return nil, err
 		}
 	default:
 		// Cannot determine type of account
 		return nil, status.Error(codes.InvalidArgument, "account: invalid request")
+	}
+
+	return &empty.Empty{}, nil
+}
+
+// Update updates user account and profile.
+func (handler *AccountHandler) Update(ctx context.Context, req *pb.UpdateRequest) (*empty.Empty, error) {
+	// Get account update request type
+	switch t := req.GetType().(type) {
+	case *pb.UpdateRequest_Admin:
+		admin := model.Admin{}
+		admin.From(t.Admin)
+		err := handler.service.UpdateAdminAccount(ctx, &admin)
+		if err != nil {
+			return nil, err
+		}
+	case *pb.UpdateRequest_Agency:
+		agency := model.Agency{}
+		agency.From(t.Agency)
+		err := handler.service.UpdateAgencyAccount(ctx, &agency)
+		if err != nil {
+			return nil, err
+		}
+	case *pb.UpdateRequest_Diver:
+		diver := model.Diver{}
+		diver.From(t.Diver)
+		err := handler.service.UpdateDiverAccount(ctx, &diver)
+		if err != nil {
+			return nil, err
+		}
+	default:
+		// Cannot determine type of account
+		return nil, status.Error(codes.InvalidArgument, "account: invalid request")
+	}
+
+	return &empty.Empty{}, nil
+}
+
+// UpdateAccount updates user account only.
+func (handler *AccountHandler) UpdateAccount(ctx context.Context, req *pb.UpdateAccountRequest) (*empty.Empty, error) {
+	if req.Account == nil {
+		return nil, status.Error(codes.InvalidArgument, "account: invalid request")
+	}
+
+	account := model.Account{}
+	account.From(req.Account)
+
+	err := handler.service.UpdateAccount(ctx, &account)
+	if err != nil {
+		return nil, err
 	}
 
 	return &empty.Empty{}, nil
@@ -70,75 +124,23 @@ func (handler *AccountHandler) GetProfile(ctx context.Context, req *empty.Empty)
 	case *model.Admin:
 		return &pb.GetProfileResponse{
 			Profile: &pb.GetProfileResponse_Admin{
-				Admin: &pb.Admin{
-					Account: &pb.Account{
-						Id:        uint64(v.Account.ID),
-						Username:  v.Account.Username,
-						Email:     v.Account.Email,
-						Type:      pb.AccountType(v.Account.Type),
-						Verified:  v.Account.Verified,
-						Active:    v.Account.Active,
-						CreatedAt: &v.CreatedAt,
-						UpdatedAt: &v.UpdatedAt,
-					},
-				},
+				Admin: v.GetProto(),
 			},
 		}, nil
 	case *model.Agency:
-		return &pb.GetProfileResponse{
+		profile := pb.GetProfileResponse{
 			Profile: &pb.GetProfileResponse_Agency{
-				Agency: &pb.Agency{
-					Id:    uint64(v.ID),
-					Name:  v.Name,
-					Phone: v.Phone,
-					Account: &pb.Account{
-						Id:        uint64(v.Account.ID),
-						Username:  v.Account.Username,
-						Email:     v.Account.Email,
-						Type:      pb.AccountType(v.Account.Type),
-						Verified:  v.Account.Verified,
-						Active:    v.Account.Active,
-						CreatedAt: &v.CreatedAt,
-						UpdatedAt: &v.UpdatedAt,
-					},
-					Address: pb.Address{
-						AddressLine_1: v.Address.AddressLine_1,
-						AddressLine_2: v.Address.AddressLine_2,
-						City:          v.Address.City,
-						Postcode:      v.Address.Postcode,
-						Region:        v.Address.Region,
-						Country:       v.Address.Country,
-					},
-					CreatedAt: &v.CreatedAt,
-					UpdatedAt: &v.UpdatedAt,
-				},
+				Agency: v.GetProto(),
 			},
-		}, nil
+		}
+		return &profile, nil
 	case *model.Diver:
-		return &pb.GetProfileResponse{
+		profile := pb.GetProfileResponse{
 			Profile: &pb.GetProfileResponse_Diver{
-				Diver: &pb.Diver{
-					Id:        uint64(v.ID),
-					FirstName: v.FirstName,
-					LastName:  v.LastName,
-					Phone:     v.Phone,
-					BirthDate: v.BirthDate,
-					Level:     pb.LevelType(v.Level),
-					Account: &pb.Account{
-						Id:        uint64(v.Account.ID),
-						Username:  v.Account.Username,
-						Email:     v.Account.Email,
-						Type:      pb.AccountType(v.Account.Type),
-						Verified:  v.Account.Verified,
-						Active:    v.Account.Active,
-						CreatedAt: &v.CreatedAt,
-						UpdatedAt: &v.UpdatedAt,
-					},
-					CreatedAt: &v.CreatedAt,
-					UpdatedAt: &v.UpdatedAt,
-				},
+				Diver: v.GetProto(),
 			},
-		}, nil
+		}
+		return &profile, nil
 	}
 
 	return nil, status.Error(codes.InvalidArgument, "GetProfile: cannot get profile")

@@ -48,6 +48,7 @@ message Account {
     string username = 10;
     string email = 20;
     string password = 30;
+    string old_password = 35;
     AccountType type = 40;
     bool verified = 50;
     bool active = 60;
@@ -73,6 +74,12 @@ message Address {
     google.protobuf.Timestamp updated_at = 80 [(gogoproto.stdtime) = true];
 }
 
+// Coordinate
+message Coordinate {
+    float lat = 1;
+    float long = 2;
+}
+
 // Agency
 message Agency {
     uint64 id = 1;
@@ -80,6 +87,7 @@ message Agency {
     string phone = 20;
     Account account = 30;
     Address address = 40 [(gogoproto.nullable) = false];
+    Coordinate coordinate = 45;
     repeated File documents = 50 [(gogoproto.nullable) = false];
     google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];

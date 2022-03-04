@@ -15,6 +15,8 @@ import (
 // accessRoles defines the permission and roles for different services.
 // Services that are available to everyone should not be defined in here.
 var accessRoles = map[string][]model.AccountType{
+	"/account.Account/Update":                           {model.ADMIN, model.AGENCY, model.DIVER},
+	"/account.Account/UpdateAccount":                    {model.ADMIN, model.AGENCY, model.DIVER},
 	"/account.Account/GetProfile":                       {model.ADMIN, model.AGENCY, model.DIVER},
 	"/agency.AgencyService/AddDiveMaster":               {model.AGENCY},
 	"/agency.AgencyService/AddHotel":                    {model.AGENCY},

@@ -22,6 +22,31 @@ const AccountRequest$json = const {
 
 /// Descriptor for `AccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountRequestDescriptor = $convert.base64Decode('Cg5BY2NvdW50UmVxdWVzdBInCgZhZ2VuY3kYASABKAsyDS5tb2RlbC5BZ2VuY3lIAFIGYWdlbmN5EiQKBWRpdmVyGAUgASgLMgwubW9kZWwuRGl2ZXJIAFIFZGl2ZXJCBgoEdHlwZQ==');
+@$core.Deprecated('Use updateRequestDescriptor instead')
+const UpdateRequest$json = const {
+  '1': 'UpdateRequest',
+  '2': const [
+    const {'1': 'admin', '3': 1, '4': 1, '5': 11, '6': '.model.Admin', '9': 0, '10': 'admin'},
+    const {'1': 'agency', '3': 5, '4': 1, '5': 11, '6': '.model.Agency', '9': 0, '10': 'agency'},
+    const {'1': 'diver', '3': 10, '4': 1, '5': 11, '6': '.model.Diver', '9': 0, '10': 'diver'},
+  ],
+  '8': const [
+    const {'1': 'type'},
+  ],
+};
+
+/// Descriptor for `UpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateRequestDescriptor = $convert.base64Decode('Cg1VcGRhdGVSZXF1ZXN0EiQKBWFkbWluGAEgASgLMgwubW9kZWwuQWRtaW5IAFIFYWRtaW4SJwoGYWdlbmN5GAUgASgLMg0ubW9kZWwuQWdlbmN5SABSBmFnZW5jeRIkCgVkaXZlchgKIAEoCzIMLm1vZGVsLkRpdmVySABSBWRpdmVyQgYKBHR5cGU=');
+@$core.Deprecated('Use updateAccountRequestDescriptor instead')
+const UpdateAccountRequest$json = const {
+  '1': 'UpdateAccountRequest',
+  '2': const [
+    const {'1': 'account', '3': 1, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
+  ],
+};
+
+/// Descriptor for `UpdateAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateAccountRequestDescriptor = $convert.base64Decode('ChRVcGRhdGVBY2NvdW50UmVxdWVzdBIoCgdhY2NvdW50GAEgASgLMg4ubW9kZWwuQWNjb3VudFIHYWNjb3VudA==');
 @$core.Deprecated('Use loginRequestDescriptor instead')
 const LoginRequest$json = const {
   '1': 'LoginRequest',

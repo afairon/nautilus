@@ -19,6 +19,15 @@ class AccountClient extends $grpc.Client {
       '/account.Account/Create',
       ($0.AccountRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$update = $grpc.ClientMethod<$0.UpdateRequest, $1.Empty>(
+      '/account.Account/Update',
+      ($0.UpdateRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateAccount =
+      $grpc.ClientMethod<$0.UpdateAccountRequest, $1.Empty>(
+          '/account.Account/UpdateAccount',
+          ($0.UpdateAccountRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
   static final _$login = $grpc.ClientMethod<$0.LoginRequest, $0.LoginResponse>(
       '/account.Account/Login',
       ($0.LoginRequest value) => value.writeToBuffer(),
@@ -38,6 +47,16 @@ class AccountClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Empty> create($0.AccountRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$create, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> update($0.UpdateRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$update, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateAccount($0.UpdateAccountRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateAccount, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.LoginResponse> login($0.LoginRequest request,
@@ -62,6 +81,21 @@ abstract class AccountServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.AccountRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateRequest, $1.Empty>(
+        'Update',
+        update_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateAccountRequest, $1.Empty>(
+        'UpdateAccount',
+        updateAccount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.UpdateAccountRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.LoginRequest, $0.LoginResponse>(
         'Login',
         login_Pre,
@@ -83,6 +117,16 @@ abstract class AccountServiceBase extends $grpc.Service {
     return create(call, await request);
   }
 
+  $async.Future<$1.Empty> update_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.UpdateRequest> request) async {
+    return update(call, await request);
+  }
+
+  $async.Future<$1.Empty> updateAccount_Pre($grpc.ServiceCall call,
+      $async.Future<$0.UpdateAccountRequest> request) async {
+    return updateAccount(call, await request);
+  }
+
   $async.Future<$0.LoginResponse> login_Pre(
       $grpc.ServiceCall call, $async.Future<$0.LoginRequest> request) async {
     return login(call, await request);
@@ -95,6 +139,10 @@ abstract class AccountServiceBase extends $grpc.Service {
 
   $async.Future<$1.Empty> create(
       $grpc.ServiceCall call, $0.AccountRequest request);
+  $async.Future<$1.Empty> update(
+      $grpc.ServiceCall call, $0.UpdateRequest request);
+  $async.Future<$1.Empty> updateAccount(
+      $grpc.ServiceCall call, $0.UpdateAccountRequest request);
   $async.Future<$0.LoginResponse> login(
       $grpc.ServiceCall call, $0.LoginRequest request);
   $async.Future<$0.GetProfileResponse> getProfile(
