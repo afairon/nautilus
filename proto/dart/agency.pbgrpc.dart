@@ -125,6 +125,12 @@ class AgencyServiceClient extends $grpc.Client {
       ($2.ListTripsWithTemplatesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $2.ListTripsWithTemplatesResponse.fromBuffer(value));
+  static final _$listRoomTypes =
+      $grpc.ClientMethod<$2.ListRoomTypesRequest, $2.ListRoomTypesResponse>(
+          '/agency.AgencyService/ListRoomTypes',
+          ($2.ListRoomTypesRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $2.ListRoomTypesResponse.fromBuffer(value));
   static final _$searchTrips =
       $grpc.ClientMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
           '/agency.AgencyService/SearchTrips',
@@ -266,6 +272,14 @@ class AgencyServiceClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listTripsWithTemplates, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListRoomTypesResponse> listRoomTypes(
+      $2.ListRoomTypesRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listRoomTypes, $async.Stream.fromIterable([request]),
         options: options);
   }
 
@@ -446,6 +460,15 @@ abstract class AgencyServiceBase extends $grpc.Service {
             $2.ListTripsWithTemplatesRequest.fromBuffer(value),
         ($2.ListTripsWithTemplatesResponse value) => value.writeToBuffer()));
     $addMethod(
+        $grpc.ServiceMethod<$2.ListRoomTypesRequest, $2.ListRoomTypesResponse>(
+            'ListRoomTypes',
+            listRoomTypes_Pre,
+            false,
+            true,
+            ($core.List<$core.int> value) =>
+                $2.ListRoomTypesRequest.fromBuffer(value),
+            ($2.ListRoomTypesResponse value) => value.writeToBuffer()));
+    $addMethod(
         $grpc.ServiceMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
             'SearchTrips',
             searchTrips_Pre,
@@ -565,6 +588,12 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* listTripsWithTemplates(call, await request);
   }
 
+  $async.Stream<$2.ListRoomTypesResponse> listRoomTypes_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.ListRoomTypesRequest> request) async* {
+    yield* listRoomTypes(call, await request);
+  }
+
   $async.Stream<$2.SearchTripsResponse> searchTrips_Pre($grpc.ServiceCall call,
       $async.Future<$2.SearchTripsRequest> request) async* {
     yield* searchTrips(call, await request);
@@ -612,6 +641,8 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.ListTripsRequest request);
   $async.Stream<$2.ListTripsWithTemplatesResponse> listTripsWithTemplates(
       $grpc.ServiceCall call, $2.ListTripsWithTemplatesRequest request);
+  $async.Stream<$2.ListRoomTypesResponse> listRoomTypes(
+      $grpc.ServiceCall call, $2.ListRoomTypesRequest request);
   $async.Stream<$2.SearchTripsResponse> searchTrips(
       $grpc.ServiceCall call, $2.SearchTripsRequest request);
 }

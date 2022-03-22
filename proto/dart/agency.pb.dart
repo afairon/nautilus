@@ -1268,6 +1268,159 @@ class ListTripsWithTemplatesResponse extends $pb.GeneratedMessage {
   $6.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
+enum ListRoomTypesRequest_Id {
+  hotelId, 
+  liveaboardId, 
+  notSet
+}
+
+class ListRoomTypesRequest extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, ListRoomTypesRequest_Id> _ListRoomTypesRequest_IdByTag = {
+    1 : ListRoomTypesRequest_Id.hotelId,
+    10 : ListRoomTypesRequest_Id.liveaboardId,
+    0 : ListRoomTypesRequest_Id.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomTypesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..oo(0, [1, 10])
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListRoomTypesRequest._() : super();
+  factory ListRoomTypesRequest({
+    $fixnum.Int64? hotelId,
+    $fixnum.Int64? liveaboardId,
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (hotelId != null) {
+      _result.hotelId = hotelId;
+    }
+    if (liveaboardId != null) {
+      _result.liveaboardId = liveaboardId;
+    }
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListRoomTypesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomTypesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomTypesRequest clone() => ListRoomTypesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomTypesRequest copyWith(void Function(ListRoomTypesRequest) updates) => super.copyWith((message) => updates(message as ListRoomTypesRequest)) as ListRoomTypesRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListRoomTypesRequest create() => ListRoomTypesRequest._();
+  ListRoomTypesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListRoomTypesRequest> createRepeated() => $pb.PbList<ListRoomTypesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomTypesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomTypesRequest>(create);
+  static ListRoomTypesRequest? _defaultInstance;
+
+  ListRoomTypesRequest_Id whichId() => _ListRoomTypesRequest_IdByTag[$_whichOneof(0)]!;
+  void clearId() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get hotelId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set hotelId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasHotelId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearHotelId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get liveaboardId => $_getI64(1);
+  @$pb.TagNumber(10)
+  set liveaboardId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasLiveaboardId() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearLiveaboardId() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get limit => $_getI64(2);
+  @$pb.TagNumber(20)
+  set limit($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasLimit() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearLimit() => clearField(20);
+
+  @$pb.TagNumber(25)
+  $fixnum.Int64 get offset => $_getI64(3);
+  @$pb.TagNumber(25)
+  set offset($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasOffset() => $_has(3);
+  @$pb.TagNumber(25)
+  void clearOffset() => clearField(25);
+}
+
+class ListRoomTypesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomTypesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$6.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $6.RoomType.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListRoomTypesResponse._() : super();
+  factory ListRoomTypesResponse({
+    $6.RoomType? roomType,
+  }) {
+    final _result = create();
+    if (roomType != null) {
+      _result.roomType = roomType;
+    }
+    return _result;
+  }
+  factory ListRoomTypesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomTypesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomTypesResponse clone() => ListRoomTypesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomTypesResponse copyWith(void Function(ListRoomTypesResponse) updates) => super.copyWith((message) => updates(message as ListRoomTypesResponse)) as ListRoomTypesResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListRoomTypesResponse create() => ListRoomTypesResponse._();
+  ListRoomTypesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListRoomTypesResponse> createRepeated() => $pb.PbList<ListRoomTypesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomTypesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomTypesResponse>(create);
+  static ListRoomTypesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.RoomType get roomType => $_getN(0);
+  @$pb.TagNumber(1)
+  set roomType($6.RoomType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomType() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.RoomType ensureRoomType() => $_ensure(0);
+}
+
 enum SearchTripsOptions_LocationFilter {
   country, 
   city, 

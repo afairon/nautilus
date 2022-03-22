@@ -248,6 +248,32 @@ const ListTripsWithTemplatesResponse$json = const {
 
 /// Descriptor for `ListTripsWithTemplatesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listTripsWithTemplatesResponseDescriptor = $convert.base64Decode('Ch5MaXN0VHJpcHNXaXRoVGVtcGxhdGVzUmVzcG9uc2USKwoEdHJpcBgBIAEoCzIXLm1vZGVsLlRyaXBXaXRoVGVtcGxhdGVSBHRyaXA=');
+@$core.Deprecated('Use listRoomTypesRequestDescriptor instead')
+const ListRoomTypesRequest$json = const {
+  '1': 'ListRoomTypesRequest',
+  '2': const [
+    const {'1': 'hotel_id', '3': 1, '4': 1, '5': 4, '9': 0, '10': 'hotelId'},
+    const {'1': 'liveaboard_id', '3': 10, '4': 1, '5': 4, '9': 0, '10': 'liveaboardId'},
+    const {'1': 'limit', '3': 20, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 25, '4': 1, '5': 4, '10': 'offset'},
+  ],
+  '8': const [
+    const {'1': 'id'},
+  ],
+};
+
+/// Descriptor for `ListRoomTypesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomTypesRequestDescriptor = $convert.base64Decode('ChRMaXN0Um9vbVR5cGVzUmVxdWVzdBIbCghob3RlbF9pZBgBIAEoBEgAUgdob3RlbElkEiUKDWxpdmVhYm9hcmRfaWQYCiABKARIAFIMbGl2ZWFib2FyZElkEhQKBWxpbWl0GBQgASgEUgVsaW1pdBIWCgZvZmZzZXQYGSABKARSBm9mZnNldEIECgJpZA==');
+@$core.Deprecated('Use listRoomTypesResponseDescriptor instead')
+const ListRoomTypesResponse$json = const {
+  '1': 'ListRoomTypesResponse',
+  '2': const [
+    const {'1': 'room_type', '3': 1, '4': 1, '5': 11, '6': '.model.RoomType', '10': 'roomType'},
+  ],
+};
+
+/// Descriptor for `ListRoomTypesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomTypesResponseDescriptor = $convert.base64Decode('ChVMaXN0Um9vbVR5cGVzUmVzcG9uc2USLAoJcm9vbV90eXBlGAEgASgLMg8ubW9kZWwuUm9vbVR5cGVSCHJvb21UeXBl');
 @$core.Deprecated('Use searchTripsOptionsDescriptor instead')
 const SearchTripsOptions$json = const {
   '1': 'SearchTripsOptions',
