@@ -941,3 +941,11 @@ func (service *agencyService) UpdateStaff(ctx context.Context, staff *pb.Staff) 
 
 	return err
 }
+
+func (service *agencyService) ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
+	roomTypes := service.repo.Agency.
+}
+
+func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
+
+}

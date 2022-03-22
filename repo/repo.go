@@ -21,6 +21,7 @@ type Queries struct {
 	Staff        StaffRepository
 	TripTemplate TripTemplateRepository
 	Trip         TripRepository
+	RoomType     RoomTypeRepository
 }
 
 // newQueries creates a new repository manager.
@@ -39,6 +40,7 @@ func newQueries(db *gorm.DB) *Queries {
 		Staff:        NewStaffRepository(db),
 		TripTemplate: NewTripTemplateRepository(db),
 		Trip:         NewTripRepository(db),
+		RoomType:     NewRoomTypeRepository(db),
 	}
 }
 
