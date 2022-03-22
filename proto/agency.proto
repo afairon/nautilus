@@ -34,6 +34,7 @@ service AgencyService {
     rpc ListTripTemplates (ListTripTemplatesRequest) returns (stream ListTripTemplatesResponse);
     rpc ListTrips (ListTripsRequest) returns (stream ListTripsResponse);
     rpc ListTripsWithTemplates(ListTripsWithTemplatesRequest) returns (stream ListTripsWithTemplatesResponse);
+    rpc ListRoomTypes(ListRoomTypesRequest) returns (stream ListRoomTypesResponse);
 
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 }
@@ -154,6 +155,15 @@ message ListTripsWithTemplatesRequest {
 // ListTripsWithTemplatesResponse
 message ListTripsWithTemplatesResponse {
     model.TripWithTemplate trip = 1;
+}
+
+message ListRoomTypesRequest {
+    oneof id {
+        uint64 hotel_id = 1;
+        uint64 liveaboard_id = 10;
+    }
+    uint64 limit = 20;
+    uint64 offset = 25;
 }
 
 message SearchTripsOptions {
