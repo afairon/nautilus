@@ -468,7 +468,17 @@ type Trip struct {
 	ReservationRoomTypes []ReservationRoomType `gorm:"foreignKey:TripID"`
 	TripTemplateID       uint                  `gorm:"not null"`
 	TripTemplate         TripTemplate
+	DiveSites            []DiveSite
 	AgencyID             uint `gorm:"not null"`
+}
+
+type DiveSite struct {
+	*gorm.Model
+	Name        string `gorm:"not null"`
+	Description string
+	MinDepth    uint32
+	MaxDepth    uint32
+	TripID      uint `gorm:"not null"`
 }
 
 type Reservation struct {
