@@ -609,6 +609,34 @@ func (service *agencyService) ListTripsWithTemplates(ctx context.Context, limit,
 	return trips, nil
 }
 
+func (service *agencyService) ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	roomTypes, err := service.repo.RoomType.ListRoomTypesByHotelID(ctx, id, limit, offset)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return roomTypes, nil
+}
+
+func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	roomTypes, err := service.repo.RoomType.ListRoomTypesByLiveaboardID(ctx, id, limit, offset)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return roomTypes, nil
+}
+
 func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
 	if limit > 20 || limit == 0 {
 		limit = 20
@@ -940,12 +968,4 @@ func (service *agencyService) UpdateStaff(ctx context.Context, staff *pb.Staff) 
 	_, err = service.repo.Staff.UpdateStaff(ctx, &newStaff)
 
 	return err
-}
-
-func (service *agencyService) ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
-	roomTypes := service.repo.Agency.
-}
-
-func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error) {
-
 }
