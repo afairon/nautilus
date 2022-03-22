@@ -2251,6 +2251,7 @@ class Trip extends $pb.GeneratedMessage {
     ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..pc<DiveMaster>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMaster.create)
     ..p<$fixnum.Int64>(55, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasterIds', $pb.PbFieldType.PU6)
+    ..pc<DiveSite>(56, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveSites', $pb.PbFieldType.PM, subBuilder: DiveSite.create)
     ..aOM<$5.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $5.Timestamp.create)
     ..aOM<$5.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $5.Timestamp.create)
@@ -2268,6 +2269,7 @@ class Trip extends $pb.GeneratedMessage {
     $core.double? price,
     $core.Iterable<DiveMaster>? diveMasters,
     $core.Iterable<$fixnum.Int64>? diveMasterIds,
+    $core.Iterable<DiveSite>? diveSites,
     $5.Timestamp? startDate,
     $5.Timestamp? endDate,
     $5.Timestamp? lastReservationDate,
@@ -2295,6 +2297,9 @@ class Trip extends $pb.GeneratedMessage {
     }
     if (diveMasterIds != null) {
       _result.diveMasterIds.addAll(diveMasterIds);
+    }
+    if (diveSites != null) {
+      _result.diveSites.addAll(diveSites);
     }
     if (startDate != null) {
       _result.startDate = startDate;
@@ -2385,60 +2390,63 @@ class Trip extends $pb.GeneratedMessage {
   @$pb.TagNumber(55)
   $core.List<$fixnum.Int64> get diveMasterIds => $_getList(6);
 
+  @$pb.TagNumber(56)
+  $core.List<DiveSite> get diveSites => $_getList(7);
+
   @$pb.TagNumber(60)
-  $5.Timestamp get startDate => $_getN(7);
+  $5.Timestamp get startDate => $_getN(8);
   @$pb.TagNumber(60)
   set startDate($5.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasStartDate() => $_has(7);
+  $core.bool hasStartDate() => $_has(8);
   @$pb.TagNumber(60)
   void clearStartDate() => clearField(60);
   @$pb.TagNumber(60)
-  $5.Timestamp ensureStartDate() => $_ensure(7);
+  $5.Timestamp ensureStartDate() => $_ensure(8);
 
   @$pb.TagNumber(70)
-  $5.Timestamp get endDate => $_getN(8);
+  $5.Timestamp get endDate => $_getN(9);
   @$pb.TagNumber(70)
   set endDate($5.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasEndDate() => $_has(8);
+  $core.bool hasEndDate() => $_has(9);
   @$pb.TagNumber(70)
   void clearEndDate() => clearField(70);
   @$pb.TagNumber(70)
-  $5.Timestamp ensureEndDate() => $_ensure(8);
+  $5.Timestamp ensureEndDate() => $_ensure(9);
 
   @$pb.TagNumber(80)
-  $5.Timestamp get lastReservationDate => $_getN(9);
+  $5.Timestamp get lastReservationDate => $_getN(10);
   @$pb.TagNumber(80)
   set lastReservationDate($5.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasLastReservationDate() => $_has(9);
+  $core.bool hasLastReservationDate() => $_has(10);
   @$pb.TagNumber(80)
   void clearLastReservationDate() => clearField(80);
   @$pb.TagNumber(80)
-  $5.Timestamp ensureLastReservationDate() => $_ensure(9);
+  $5.Timestamp ensureLastReservationDate() => $_ensure(10);
 
   @$pb.TagNumber(90)
-  $5.Timestamp get createdAt => $_getN(10);
+  $5.Timestamp get createdAt => $_getN(11);
   @$pb.TagNumber(90)
   set createdAt($5.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasCreatedAt() => $_has(10);
+  $core.bool hasCreatedAt() => $_has(11);
   @$pb.TagNumber(90)
   void clearCreatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $5.Timestamp ensureCreatedAt() => $_ensure(10);
+  $5.Timestamp ensureCreatedAt() => $_ensure(11);
 
   @$pb.TagNumber(100)
-  $5.Timestamp get updatedAt => $_getN(11);
+  $5.Timestamp get updatedAt => $_getN(12);
   @$pb.TagNumber(100)
   set updatedAt($5.Timestamp v) { setField(100, v); }
   @$pb.TagNumber(100)
-  $core.bool hasUpdatedAt() => $_has(11);
+  $core.bool hasUpdatedAt() => $_has(12);
   @$pb.TagNumber(100)
   void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
-  $5.Timestamp ensureUpdatedAt() => $_ensure(11);
+  $5.Timestamp ensureUpdatedAt() => $_ensure(12);
 }
 
 class TripWithTemplate extends $pb.GeneratedMessage {
@@ -2858,5 +2866,154 @@ class RoomType extends $pb.GeneratedMessage {
   void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
   $5.Timestamp ensureUpdatedAt() => $_ensure(9);
+}
+
+class DiveSite extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DiveSite', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..a<$core.int>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'minDepth', $pb.PbFieldType.OU3)
+    ..a<$core.int>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxDepth', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$5.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $5.Timestamp.create)
+    ..aOM<$5.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $5.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  DiveSite._() : super();
+  factory DiveSite({
+    $fixnum.Int64? id,
+    $core.String? name,
+    $core.String? description,
+    $core.int? minDepth,
+    $core.int? maxDepth,
+    $fixnum.Int64? tripId,
+    $5.Timestamp? createdAt,
+    $5.Timestamp? updatedAt,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (description != null) {
+      _result.description = description;
+    }
+    if (minDepth != null) {
+      _result.minDepth = minDepth;
+    }
+    if (maxDepth != null) {
+      _result.maxDepth = maxDepth;
+    }
+    if (tripId != null) {
+      _result.tripId = tripId;
+    }
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
+    }
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
+    }
+    return _result;
+  }
+  factory DiveSite.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DiveSite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DiveSite clone() => DiveSite()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DiveSite copyWith(void Function(DiveSite) updates) => super.copyWith((message) => updates(message as DiveSite)) as DiveSite; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DiveSite create() => DiveSite._();
+  DiveSite createEmptyInstance() => create();
+  static $pb.PbList<DiveSite> createRepeated() => $pb.PbList<DiveSite>();
+  @$core.pragma('dart2js:noInline')
+  static DiveSite getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DiveSite>(create);
+  static DiveSite? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(5)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(5)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(5)
+  void clearName() => clearField(5);
+
+  @$pb.TagNumber(10)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(10)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearDescription() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.int get minDepth => $_getIZ(3);
+  @$pb.TagNumber(20)
+  set minDepth($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasMinDepth() => $_has(3);
+  @$pb.TagNumber(20)
+  void clearMinDepth() => clearField(20);
+
+  @$pb.TagNumber(25)
+  $core.int get maxDepth => $_getIZ(4);
+  @$pb.TagNumber(25)
+  set maxDepth($core.int v) { $_setUnsignedInt32(4, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasMaxDepth() => $_has(4);
+  @$pb.TagNumber(25)
+  void clearMaxDepth() => clearField(25);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get tripId => $_getI64(5);
+  @$pb.TagNumber(30)
+  set tripId($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasTripId() => $_has(5);
+  @$pb.TagNumber(30)
+  void clearTripId() => clearField(30);
+
+  @$pb.TagNumber(90)
+  $5.Timestamp get createdAt => $_getN(6);
+  @$pb.TagNumber(90)
+  set createdAt($5.Timestamp v) { setField(90, v); }
+  @$pb.TagNumber(90)
+  $core.bool hasCreatedAt() => $_has(6);
+  @$pb.TagNumber(90)
+  void clearCreatedAt() => clearField(90);
+  @$pb.TagNumber(90)
+  $5.Timestamp ensureCreatedAt() => $_ensure(6);
+
+  @$pb.TagNumber(100)
+  $5.Timestamp get updatedAt => $_getN(7);
+  @$pb.TagNumber(100)
+  set updatedAt($5.Timestamp v) { setField(100, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasUpdatedAt() => $_has(7);
+  @$pb.TagNumber(100)
+  void clearUpdatedAt() => clearField(100);
+  @$pb.TagNumber(100)
+  $5.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 

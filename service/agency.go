@@ -275,6 +275,19 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 			AgencyID:            agency.ID,
 		}
 
+		newTrip.DiveSites = make([]model.DiveSite, 0, len(trip.GetDiveSites()))
+
+		for _, diveSite := range trip.GetDiveSites() {
+			ds := model.DiveSite{
+				Name:        diveSite.Name,
+				Description: diveSite.Description,
+				MinDepth:    diveSite.MinDepth,
+				MaxDepth:    diveSite.MaxDepth,
+			}
+
+			newTrip.DiveSites = append(newTrip.DiveSites, ds)
+		}
+
 		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
 
 		if err != nil {

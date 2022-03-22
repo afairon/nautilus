@@ -59,7 +59,7 @@ func InitGormStore(host string, port int, user, password, dbname string, ssl boo
 		&model.DiveMaster{}, &model.Staff{}, &model.Boat{}, &model.TripTemplate{},
 		&model.Liveaboard{}, &model.Hotel{}, &model.Reservation{}, &model.HotelComment{},
 		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
-		&model.RoomType{})
+		&model.RoomType{}, &model.DiveSite{})
 
 	err = Migrate(GormStore)
 
