@@ -41,6 +41,8 @@ type AgencyService interface {
 	ListTripTemplates(ctx context.Context, limit, offset uint64) ([]*model.TripTemplate, error)
 	ListTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
+	ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
+	ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
 
 	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 }

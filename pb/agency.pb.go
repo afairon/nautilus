@@ -9,11 +9,11 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	empty "github.com/golang/protobuf/ptypes/empty"
-	_ "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1119,6 +1119,152 @@ func (m *ListTripsWithTemplatesResponse) GetTrip() *TripWithTemplate {
 	return nil
 }
 
+// ListRoomTypesRequest
+type ListRoomTypesRequest struct {
+	// Types that are valid to be assigned to Id:
+	//	*ListRoomTypesRequest_HotelId
+	//	*ListRoomTypesRequest_LiveaboardId
+	Id     isListRoomTypesRequest_Id `protobuf_oneof:"id"`
+	Limit  uint64                    `protobuf:"varint,20,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset uint64                    `protobuf:"varint,25,opt,name=offset,proto3" json:"offset,omitempty"`
+}
+
+func (m *ListRoomTypesRequest) Reset()      { *m = ListRoomTypesRequest{} }
+func (*ListRoomTypesRequest) ProtoMessage() {}
+func (*ListRoomTypesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{23}
+}
+func (m *ListRoomTypesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListRoomTypesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListRoomTypesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListRoomTypesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListRoomTypesRequest.Merge(m, src)
+}
+func (m *ListRoomTypesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListRoomTypesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListRoomTypesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListRoomTypesRequest proto.InternalMessageInfo
+
+type isListRoomTypesRequest_Id interface {
+	isListRoomTypesRequest_Id()
+	Equal(interface{}) bool
+	MarshalTo([]byte) (int, error)
+	Size() int
+}
+
+type ListRoomTypesRequest_HotelId struct {
+	HotelId uint64 `protobuf:"varint,1,opt,name=hotel_id,json=hotelId,proto3,oneof" json:"hotel_id,omitempty"`
+}
+type ListRoomTypesRequest_LiveaboardId struct {
+	LiveaboardId uint64 `protobuf:"varint,10,opt,name=liveaboard_id,json=liveaboardId,proto3,oneof" json:"liveaboard_id,omitempty"`
+}
+
+func (*ListRoomTypesRequest_HotelId) isListRoomTypesRequest_Id()      {}
+func (*ListRoomTypesRequest_LiveaboardId) isListRoomTypesRequest_Id() {}
+
+func (m *ListRoomTypesRequest) GetId() isListRoomTypesRequest_Id {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
+
+func (m *ListRoomTypesRequest) GetHotelId() uint64 {
+	if x, ok := m.GetId().(*ListRoomTypesRequest_HotelId); ok {
+		return x.HotelId
+	}
+	return 0
+}
+
+func (m *ListRoomTypesRequest) GetLiveaboardId() uint64 {
+	if x, ok := m.GetId().(*ListRoomTypesRequest_LiveaboardId); ok {
+		return x.LiveaboardId
+	}
+	return 0
+}
+
+func (m *ListRoomTypesRequest) GetLimit() uint64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *ListRoomTypesRequest) GetOffset() uint64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*ListRoomTypesRequest) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*ListRoomTypesRequest_HotelId)(nil),
+		(*ListRoomTypesRequest_LiveaboardId)(nil),
+	}
+}
+
+// ListRoomTypesResponse
+type ListRoomTypesResponse struct {
+	RoomType *RoomType `protobuf:"bytes,1,opt,name=room_type,json=roomType,proto3" json:"room_type,omitempty"`
+}
+
+func (m *ListRoomTypesResponse) Reset()      { *m = ListRoomTypesResponse{} }
+func (*ListRoomTypesResponse) ProtoMessage() {}
+func (*ListRoomTypesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{24}
+}
+func (m *ListRoomTypesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListRoomTypesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListRoomTypesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListRoomTypesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListRoomTypesResponse.Merge(m, src)
+}
+func (m *ListRoomTypesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListRoomTypesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListRoomTypesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListRoomTypesResponse proto.InternalMessageInfo
+
+func (m *ListRoomTypesResponse) GetRoomType() *RoomType {
+	if m != nil {
+		return m.RoomType
+	}
+	return nil
+}
+
 type SearchTripsOptions struct {
 	// allow either country or city for location filtering
 	//
@@ -1136,7 +1282,7 @@ type SearchTripsOptions struct {
 func (m *SearchTripsOptions) Reset()      { *m = SearchTripsOptions{} }
 func (*SearchTripsOptions) ProtoMessage() {}
 func (*SearchTripsOptions) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{23}
+	return fileDescriptor_614a4be5fd9deed0, []int{25}
 }
 func (m *SearchTripsOptions) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1260,7 +1406,7 @@ type SearchTripsRequest struct {
 func (m *SearchTripsRequest) Reset()      { *m = SearchTripsRequest{} }
 func (*SearchTripsRequest) ProtoMessage() {}
 func (*SearchTripsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{24}
+	return fileDescriptor_614a4be5fd9deed0, []int{26}
 }
 func (m *SearchTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1317,7 +1463,7 @@ type SearchTripsResponse struct {
 func (m *SearchTripsResponse) Reset()      { *m = SearchTripsResponse{} }
 func (*SearchTripsResponse) ProtoMessage() {}
 func (*SearchTripsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{25}
+	return fileDescriptor_614a4be5fd9deed0, []int{27}
 }
 func (m *SearchTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1360,7 +1506,7 @@ type UpdateTripRequest struct {
 func (m *UpdateTripRequest) Reset()      { *m = UpdateTripRequest{} }
 func (*UpdateTripRequest) ProtoMessage() {}
 func (*UpdateTripRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{26}
+	return fileDescriptor_614a4be5fd9deed0, []int{28}
 }
 func (m *UpdateTripRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1403,7 +1549,7 @@ type UpdateHotelRequest struct {
 func (m *UpdateHotelRequest) Reset()      { *m = UpdateHotelRequest{} }
 func (*UpdateHotelRequest) ProtoMessage() {}
 func (*UpdateHotelRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{27}
+	return fileDescriptor_614a4be5fd9deed0, []int{29}
 }
 func (m *UpdateHotelRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1446,7 +1592,7 @@ type UpdateLiveaboardRequest struct {
 func (m *UpdateLiveaboardRequest) Reset()      { *m = UpdateLiveaboardRequest{} }
 func (*UpdateLiveaboardRequest) ProtoMessage() {}
 func (*UpdateLiveaboardRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{28}
+	return fileDescriptor_614a4be5fd9deed0, []int{30}
 }
 func (m *UpdateLiveaboardRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1489,7 +1635,7 @@ type UpdateBoatRequest struct {
 func (m *UpdateBoatRequest) Reset()      { *m = UpdateBoatRequest{} }
 func (*UpdateBoatRequest) ProtoMessage() {}
 func (*UpdateBoatRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{29}
+	return fileDescriptor_614a4be5fd9deed0, []int{31}
 }
 func (m *UpdateBoatRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1532,7 +1678,7 @@ type UpdateDiveMasterRequest struct {
 func (m *UpdateDiveMasterRequest) Reset()      { *m = UpdateDiveMasterRequest{} }
 func (*UpdateDiveMasterRequest) ProtoMessage() {}
 func (*UpdateDiveMasterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{30}
+	return fileDescriptor_614a4be5fd9deed0, []int{32}
 }
 func (m *UpdateDiveMasterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1575,7 +1721,7 @@ type UpdateStaffRequest struct {
 func (m *UpdateStaffRequest) Reset()      { *m = UpdateStaffRequest{} }
 func (*UpdateStaffRequest) ProtoMessage() {}
 func (*UpdateStaffRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{31}
+	return fileDescriptor_614a4be5fd9deed0, []int{33}
 }
 func (m *UpdateStaffRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1635,6 +1781,8 @@ func init() {
 	proto.RegisterType((*ListTripsResponse)(nil), "agency.ListTripsResponse")
 	proto.RegisterType((*ListTripsWithTemplatesRequest)(nil), "agency.ListTripsWithTemplatesRequest")
 	proto.RegisterType((*ListTripsWithTemplatesResponse)(nil), "agency.ListTripsWithTemplatesResponse")
+	proto.RegisterType((*ListRoomTypesRequest)(nil), "agency.ListRoomTypesRequest")
+	proto.RegisterType((*ListRoomTypesResponse)(nil), "agency.ListRoomTypesResponse")
 	proto.RegisterType((*SearchTripsOptions)(nil), "agency.SearchTripsOptions")
 	proto.RegisterType((*SearchTripsRequest)(nil), "agency.SearchTripsRequest")
 	proto.RegisterType((*SearchTripsResponse)(nil), "agency.SearchTripsResponse")
@@ -1649,82 +1797,88 @@ func init() {
 func init() { proto.RegisterFile("agency.proto", fileDescriptor_614a4be5fd9deed0) }
 
 var fileDescriptor_614a4be5fd9deed0 = []byte{
-	// 1187 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xdd, 0x4e, 0xe3, 0x46,
-	0x14, 0x8e, 0xd9, 0x2c, 0x3f, 0x27, 0xb0, 0x2c, 0xb3, 0x08, 0x82, 0x69, 0x0d, 0xb5, 0xd4, 0x0a,
-	0xa9, 0xdb, 0x40, 0xe9, 0x56, 0xa2, 0xed, 0xc5, 0x36, 0x11, 0x54, 0xd0, 0x82, 0x2a, 0x05, 0xaa,
-	0x4a, 0x7b, 0x13, 0x39, 0xf1, 0x24, 0x58, 0x4d, 0x62, 0xd7, 0x1e, 0x90, 0xb8, 0xeb, 0x23, 0xf0,
-	0x18, 0x7d, 0x83, 0xbe, 0x42, 0x2f, 0xb9, 0xdc, 0x5e, 0xb5, 0x84, 0x9b, 0x5e, 0xee, 0x23, 0xac,
-	0xe6, 0xcf, 0x9e, 0x71, 0xec, 0x8d, 0x15, 0xee, 0x3c, 0x3f, 0xe7, 0xf3, 0x37, 0xdf, 0x39, 0x33,
-	0xe7, 0x83, 0x45, 0xa7, 0x87, 0x87, 0x9d, 0x9b, 0x5a, 0x10, 0xfa, 0xc4, 0x47, 0xb3, 0x7c, 0x64,
-	0x56, 0x06, 0xbe, 0x8b, 0xfb, 0x7c, 0xd2, 0xdc, 0xec, 0xf9, 0x7e, 0xaf, 0x8f, 0x77, 0xd9, 0xa8,
-	0x7d, 0xd5, 0xdd, 0xc5, 0x83, 0x80, 0x88, 0x08, 0x73, 0x2b, 0xbd, 0x48, 0xbc, 0x01, 0x8e, 0x88,
-	0x33, 0x08, 0xc4, 0x86, 0x2f, 0x7a, 0x1e, 0xb9, 0xbc, 0x6a, 0xd7, 0x3a, 0xfe, 0x60, 0xb7, 0xe7,
-	0xf7, 0xfc, 0x64, 0x27, 0x1d, 0xb1, 0x01, 0xfb, 0xe2, 0xdb, 0xed, 0x1f, 0x61, 0xb5, 0xee, 0xba,
-	0x87, 0xde, 0x35, 0x3e, 0x73, 0x22, 0x82, 0xc3, 0x26, 0xfe, 0xfd, 0x0a, 0x47, 0x04, 0xed, 0x43,
-	0xc5, 0xf5, 0xae, 0x71, 0x6b, 0xc0, 0x66, 0xab, 0xc6, 0xb6, 0xb1, 0x53, 0xd9, 0x5f, 0xa9, 0x71,
-	0x9e, 0xca, 0x76, 0x70, 0xe3, 0x6f, 0xfb, 0x6b, 0x58, 0xae, 0xbb, 0xee, 0x39, 0x71, 0xba, 0x5d,
-	0x09, 0x63, 0xc3, 0xd3, 0x88, 0x8e, 0x05, 0xc0, 0xa2, 0x00, 0xe0, 0x7b, 0xf8, 0x92, 0xed, 0xc3,
-	0x5a, 0xdd, 0x75, 0x2f, 0x42, 0x2f, 0xb8, 0xc0, 0x83, 0xa0, 0xef, 0x10, 0x2c, 0xa3, 0x0f, 0x60,
-	0x89, 0x84, 0x5e, 0xd0, 0x22, 0x62, 0x5e, 0xa0, 0xbc, 0x10, 0x28, 0x5a, 0xc8, 0x22, 0x51, 0x46,
-	0x68, 0x13, 0x16, 0xb8, 0xb4, 0x2d, 0xcf, 0xad, 0xce, 0x6c, 0x1b, 0x3b, 0xe5, 0xe6, 0x3c, 0x9f,
-	0x38, 0x71, 0xed, 0xdf, 0xe0, 0x99, 0xf8, 0xa1, 0xfc, 0xd1, 0x16, 0x94, 0x69, 0xb8, 0xc0, 0xaf,
-	0x28, 0xf8, 0x4d, 0xb6, 0x30, 0xce, 0x64, 0xa6, 0x20, 0x13, 0xfb, 0x50, 0x0a, 0xec, 0x0d, 0x7b,
-	0x0d, 0xdf, 0x21, 0xf2, 0x97, 0x2f, 0x99, 0xc0, 0xde, 0xb0, 0xd7, 0x6a, 0xfb, 0x0e, 0x49, 0xfd,
-	0x99, 0x6d, 0x04, 0x37, 0x0e, 0x12, 0xd2, 0x1e, 0xfb, 0x04, 0xf7, 0x15, 0x69, 0x2f, 0xe9, 0x38,
-	0x25, 0x2d, 0xdf, 0xc3, 0x97, 0xec, 0x13, 0xf6, 0xf3, 0x53, 0xef, 0x1a, 0x3b, 0x6d, 0xdf, 0x09,
-	0x5d, 0x19, 0xfb, 0x25, 0x40, 0x3f, 0x9e, 0x4c, 0x25, 0x57, 0xd9, 0xad, 0x6c, 0xb2, 0xbf, 0x87,
-	0xe7, 0xa7, 0x5e, 0x44, 0x28, 0x9b, 0x48, 0xc2, 0xac, 0xc2, 0xd3, 0xbe, 0x37, 0xf0, 0x38, 0xfb,
-	0x72, 0x93, 0x0f, 0xd0, 0x1a, 0xcc, 0xfa, 0xdd, 0x6e, 0x84, 0x89, 0x10, 0x5e, 0x8c, 0xec, 0x57,
-	0xb0, 0xa2, 0x20, 0x44, 0x81, 0x3f, 0x8c, 0x30, 0x55, 0x3e, 0xef, 0xfc, 0x6c, 0xc1, 0xfe, 0x01,
-	0xd6, 0x68, 0x54, 0x52, 0x72, 0x53, 0xfe, 0xfd, 0x0c, 0xd6, 0xc7, 0x70, 0x04, 0x87, 0x69, 0x6a,
-	0xbd, 0xce, 0x0f, 0xc3, 0xd4, 0x9e, 0x92, 0xd1, 0x01, 0x20, 0x15, 0x42, 0x90, 0x29, 0x92, 0x56,
-	0xa1, 0x49, 0x92, 0xa9, 0x29, 0x19, 0x9c, 0x72, 0x4d, 0x34, 0x1c, 0x41, 0x63, 0x8a, 0x0a, 0x11,
-	0x92, 0xb0, 0xbb, 0xfd, 0x38, 0x49, 0x24, 0x44, 0x22, 0xc9, 0xc4, 0x47, 0xe4, 0x18, 0xaa, 0x34,
-	0x52, 0xbd, 0x88, 0x53, 0x8b, 0xb2, 0x91, 0x81, 0x24, 0xa8, 0xec, 0xc2, 0x7c, 0x91, 0xc7, 0x28,
-	0xde, 0x24, 0xaf, 0x0d, 0x5d, 0x7d, 0xdc, 0xb5, 0x11, 0x08, 0xc9, 0xb5, 0xf9, 0xe0, 0x83, 0x65,
-	0x9f, 0xc1, 0xc7, 0x71, 0xd4, 0xaf, 0x1e, 0xb9, 0x7c, 0xa4, 0x28, 0x67, 0x60, 0xe5, 0xc1, 0x09,
-	0x46, 0x9f, 0x6b, 0x8c, 0xd6, 0x15, 0x46, 0xea, 0x7e, 0xc1, 0xee, 0xaf, 0x19, 0x40, 0xe7, 0xd8,
-	0x09, 0x3b, 0x97, 0x0c, 0xf1, 0xe7, 0x80, 0x78, 0xfe, 0x30, 0x42, 0x26, 0xcc, 0x75, 0xfc, 0xab,
-	0x21, 0x09, 0x6f, 0x18, 0xcc, 0xc2, 0x71, 0xa9, 0x29, 0x27, 0xd0, 0x2a, 0x94, 0x3b, 0x1e, 0xb9,
-	0x61, 0xbc, 0xe8, 0x02, 0x1b, 0xa1, 0x2a, 0xcc, 0x86, 0xb8, 0xe7, 0xf9, 0xc3, 0xea, 0x13, 0x31,
-	0x2f, 0xc6, 0xf4, 0x24, 0xf4, 0xba, 0x86, 0x51, 0x15, 0xb6, 0x8d, 0x9d, 0xa5, 0xa6, 0x18, 0xa1,
-	0x97, 0xb0, 0xc0, 0x5f, 0xf2, 0x9b, 0x00, 0x57, 0x97, 0xb7, 0x8d, 0x9d, 0x67, 0xfb, 0xcb, 0x6a,
-	0x0a, 0x6f, 0x02, 0x9a, 0x3e, 0xf1, 0x85, 0x5e, 0x03, 0x44, 0xc4, 0x09, 0x49, 0xcb, 0xa5, 0x19,
-	0x5f, 0x65, 0x67, 0x33, 0x6b, 0xbc, 0x07, 0xd7, 0x64, 0x67, 0xad, 0x5d, 0xc8, 0x1e, 0xdc, 0x28,
-	0xdf, 0xfe, 0xbb, 0x65, 0x34, 0x17, 0x58, 0xcc, 0x21, 0x6d, 0x44, 0xdf, 0xc1, 0x3c, 0x1e, 0xba,
-	0x3c, 0xdc, 0x2a, 0x18, 0x3e, 0x87, 0x87, 0x2e, 0x0d, 0x6e, 0xac, 0xc0, 0x72, 0xdf, 0xef, 0x38,
-	0x54, 0x9c, 0x56, 0xd7, 0xeb, 0xd3, 0x77, 0xe7, 0xd6, 0xd0, 0x94, 0x93, 0xd9, 0x3c, 0x85, 0xd5,
-	0x88, 0xcd, 0xb6, 0x28, 0xf5, 0xa8, 0xe5, 0x73, 0x45, 0x45, 0x36, 0xcc, 0x9a, 0x70, 0x1d, 0xe3,
-	0x9a, 0x37, 0x51, 0x34, 0x9e, 0x87, 0xb8, 0x36, 0x66, 0xb2, 0x6b, 0xe3, 0x89, 0x56, 0x1b, 0x0d,
-	0x78, 0xa1, 0x31, 0x9a, 0xa6, 0x20, 0x5e, 0xc1, 0xca, 0x2f, 0x01, 0x15, 0x29, 0xab, 0x2b, 0x43,
-	0x5e, 0x91, 0x1f, 0x00, 0xe2, 0x51, 0xd9, 0x8d, 0x11, 0xf2, 0x5f, 0xd0, 0x53, 0x58, 0xe7, 0x91,
-	0x93, 0x7a, 0x23, 0x14, 0x79, 0xf9, 0x62, 0xf6, 0x6a, 0x83, 0x97, 0x9d, 0x0d, 0xf2, 0x3a, 0xdb,
-	0x99, 0xe4, 0x30, 0xd1, 0x7d, 0x41, 0x91, 0x8e, 0x14, 0x8b, 0x91, 0x6d, 0xc0, 0x20, 0xf7, 0xed,
-	0xdc, 0xff, 0x67, 0x11, 0x96, 0xea, 0xac, 0x40, 0xce, 0x71, 0x78, 0xed, 0x75, 0x30, 0x3a, 0x82,
-	0x25, 0xcd, 0x15, 0xa2, 0x8f, 0x64, 0x05, 0x65, 0x99, 0x45, 0x73, 0x6d, 0xac, 0xa4, 0x8f, 0xa8,
-	0x65, 0xa5, 0xc5, 0x2f, 0x0d, 0x21, 0x5a, 0x57, 0x10, 0x54, 0x86, 0xb9, 0xc1, 0x27, 0xcc, 0xf2,
-	0xa8, 0xcf, 0x2a, 0xb2, 0x14, 0x8c, 0x0c, 0xbf, 0x98, 0x0b, 0xf5, 0x0d, 0xcc, 0x89, 0x08, 0xb4,
-	0x96, 0x82, 0x98, 0x14, 0x1a, 0x2b, 0x21, 0x9c, 0x58, 0x5a, 0x09, 0xdd, 0xd5, 0x4d, 0x50, 0x82,
-	0x95, 0xa0, 0xa6, 0x84, 0x5a, 0xb8, 0x13, 0x38, 0x24, 0xb5, 0xa7, 0x71, 0x18, 0x2b, 0xe0, 0x5c,
-	0x98, 0xd7, 0x00, 0xc9, 0x1d, 0x43, 0x1b, 0x12, 0x63, 0xec, 0xde, 0xe5, 0x02, 0xd4, 0xa1, 0xa2,
-	0x5c, 0x37, 0x64, 0xea, 0x08, 0x85, 0x8e, 0xf2, 0x13, 0x3c, 0x4f, 0xdf, 0x3b, 0xb4, 0xa5, 0xe3,
-	0x4c, 0x71, 0x20, 0x96, 0x98, 0xd4, 0x81, 0x8a, 0x64, 0x25, 0x66, 0xa3, 0x54, 0x7a, 0x8a, 0x4d,
-	0xf1, 0x62, 0x8f, 0xd5, 0xe1, 0xf5, 0x9e, 0x52, 0xa7, 0x50, 0xc9, 0x37, 0x60, 0x21, 0x76, 0xc8,
-	0xa8, 0x2a, 0x01, 0xd2, 0xb6, 0xdb, 0xdc, 0xc8, 0x58, 0xe1, 0x8f, 0xee, 0x9e, 0x81, 0x2e, 0x60,
-	0x39, 0xe5, 0x73, 0x93, 0x6b, 0x93, 0x6d, 0xa4, 0xcd, 0xad, 0xdc, 0xf5, 0x18, 0xf5, 0x08, 0x20,
-	0xf1, 0xaa, 0x48, 0x23, 0xa0, 0x59, 0x60, 0xd3, 0xcc, 0x5a, 0x4a, 0x93, 0x53, 0x0c, 0xa7, 0x4e,
-	0x6e, 0xdc, 0xd1, 0xea, 0xe4, 0x32, 0x9c, 0x6a, 0x42, 0x8e, 0xbb, 0x46, 0x9d, 0x9c, 0x66, 0x46,
-	0x75, 0x72, 0xba, 0xc9, 0xdc, 0x33, 0xd0, 0x9b, 0xc4, 0x68, 0xc5, 0xf6, 0x06, 0x6d, 0xab, 0x21,
-	0x59, 0xee, 0xd2, 0xfc, 0xe4, 0x03, 0x3b, 0x62, 0x6c, 0x91, 0x59, 0xd6, 0x21, 0xf5, 0xcc, 0xaa,
-	0x6d, 0x5c, 0xcf, 0xac, 0xd6, 0x4e, 0xf7, 0x0c, 0xe4, 0x71, 0xd7, 0x3f, 0xee, 0xc1, 0xd0, 0xa7,
-	0x63, 0x61, 0x59, 0x96, 0xcf, 0xfc, 0x6c, 0xd2, 0xb6, 0xf8, 0x57, 0xc7, 0x50, 0x51, 0x5a, 0x3a,
-	0xca, 0xf2, 0x0f, 0x12, 0x74, 0x33, 0x73, 0x4d, 0x22, 0x35, 0xbe, 0xbd, 0xbb, 0xb7, 0x4a, 0x6f,
-	0xef, 0xad, 0xd2, 0xbb, 0x7b, 0xcb, 0xf8, 0x63, 0x64, 0x19, 0x7f, 0x8e, 0x2c, 0xe3, 0xef, 0x91,
-	0x65, 0xdc, 0x8d, 0x2c, 0xe3, 0xbf, 0x91, 0x65, 0xfc, 0x3f, 0xb2, 0x4a, 0xef, 0x46, 0x96, 0x71,
-	0xfb, 0x60, 0x95, 0xee, 0x1e, 0xac, 0xd2, 0xdb, 0x07, 0xab, 0xf4, 0xa6, 0x5c, 0xdb, 0x0d, 0xda,
-	0xed, 0x59, 0x76, 0x3d, 0xbe, 0x7a, 0x1f, 0x00, 0x00, 0xff, 0xff, 0x0b, 0xb8, 0x3d, 0x74, 0x34,
-	0x11, 0x00, 0x00,
+	// 1284 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x57, 0xdd, 0x6e, 0xe3, 0x44,
+	0x14, 0x8e, 0xbb, 0xd9, 0xfe, 0x9c, 0x34, 0xdb, 0xed, 0x6c, 0x68, 0x53, 0x97, 0x75, 0x8b, 0xa5,
+	0x45, 0x2b, 0xb1, 0xa4, 0x4b, 0x59, 0xa4, 0x02, 0x17, 0x4b, 0xa2, 0x16, 0xb5, 0xd0, 0x82, 0x94,
+	0x16, 0x21, 0xed, 0x4d, 0xe4, 0xc4, 0x4e, 0x6a, 0x91, 0x64, 0x8c, 0x3d, 0xad, 0xd4, 0x3b, 0x9e,
+	0x00, 0xf5, 0x31, 0xe0, 0x09, 0x78, 0x05, 0x2e, 0x7b, 0xb9, 0x77, 0xd0, 0xf4, 0x86, 0xcb, 0x7d,
+	0x04, 0x34, 0x7f, 0xf6, 0x8c, 0x63, 0x6f, 0xa2, 0xf4, 0x2e, 0x33, 0x73, 0xce, 0xe7, 0xef, 0x7c,
+	0x73, 0x66, 0xe6, 0x0b, 0x2c, 0x3b, 0x3d, 0x6f, 0xd8, 0xb9, 0xaa, 0x05, 0x21, 0x26, 0x18, 0xcd,
+	0xf3, 0x91, 0x59, 0x1a, 0x60, 0xd7, 0xeb, 0xf3, 0x49, 0x73, 0xb3, 0x87, 0x71, 0xaf, 0xef, 0xed,
+	0xb0, 0x51, 0xfb, 0xa2, 0xbb, 0xe3, 0x0d, 0x02, 0x22, 0x32, 0xcc, 0xad, 0xf4, 0x22, 0xf1, 0x07,
+	0x5e, 0x44, 0x9c, 0x41, 0x20, 0x02, 0x3e, 0xed, 0xf9, 0xe4, 0xfc, 0xa2, 0x5d, 0xeb, 0xe0, 0xc1,
+	0x4e, 0x0f, 0xf7, 0x70, 0x12, 0x49, 0x47, 0x6c, 0xc0, 0x7e, 0xf1, 0x70, 0xfb, 0x3b, 0xa8, 0xd4,
+	0x5d, 0x77, 0xdf, 0xbf, 0xf4, 0x4e, 0x9c, 0x88, 0x78, 0x61, 0xd3, 0xfb, 0xf5, 0xc2, 0x8b, 0x08,
+	0xda, 0x85, 0x92, 0xeb, 0x5f, 0x7a, 0xad, 0x01, 0x9b, 0xad, 0x1a, 0xdb, 0xc6, 0xf3, 0xd2, 0xee,
+	0x6a, 0x8d, 0xf3, 0x54, 0xc2, 0xc1, 0x8d, 0x7f, 0xdb, 0x5f, 0xc0, 0x4a, 0xdd, 0x75, 0x4f, 0x89,
+	0xd3, 0xed, 0x4a, 0x18, 0x1b, 0x1e, 0x46, 0x74, 0x2c, 0x00, 0x96, 0x05, 0x00, 0x8f, 0xe1, 0x4b,
+	0x36, 0x86, 0xb5, 0xba, 0xeb, 0x9e, 0x85, 0x7e, 0x70, 0xe6, 0x0d, 0x82, 0xbe, 0x43, 0x3c, 0x99,
+	0xbd, 0x07, 0x65, 0x12, 0xfa, 0x41, 0x8b, 0x88, 0x79, 0x81, 0xf2, 0x44, 0xa0, 0x68, 0x29, 0xcb,
+	0x44, 0x19, 0xa1, 0x4d, 0x58, 0xe2, 0xd2, 0xb6, 0x7c, 0xb7, 0x3a, 0xb7, 0x6d, 0x3c, 0x2f, 0x36,
+	0x17, 0xf9, 0xc4, 0x91, 0x6b, 0xff, 0x02, 0x8f, 0xc4, 0x07, 0xe5, 0x87, 0xb6, 0xa0, 0x48, 0xd3,
+	0x05, 0x7e, 0x49, 0xc1, 0x6f, 0xb2, 0x85, 0x71, 0x26, 0x73, 0x53, 0x32, 0xb1, 0xf7, 0xa5, 0xc0,
+	0xfe, 0xb0, 0xd7, 0xc0, 0x0e, 0x91, 0x9f, 0x7c, 0xc1, 0x04, 0xf6, 0x87, 0xbd, 0x56, 0x1b, 0x3b,
+	0x24, 0xf5, 0x65, 0x16, 0x08, 0x6e, 0x9c, 0x24, 0xa4, 0x3d, 0xc4, 0xc4, 0xeb, 0x2b, 0xd2, 0x9e,
+	0xd3, 0x71, 0x4a, 0x5a, 0x1e, 0xc3, 0x97, 0xec, 0x23, 0xf6, 0xf1, 0x63, 0xff, 0xd2, 0x73, 0xda,
+	0xd8, 0x09, 0x5d, 0x99, 0xfb, 0x19, 0x40, 0x3f, 0x9e, 0x4c, 0x6d, 0xae, 0x12, 0xad, 0x04, 0xd9,
+	0xdf, 0xc0, 0xe3, 0x63, 0x3f, 0x22, 0x94, 0x4d, 0x24, 0x61, 0x2a, 0xf0, 0xb0, 0xef, 0x0f, 0x7c,
+	0xce, 0xbe, 0xd8, 0xe4, 0x03, 0xb4, 0x06, 0xf3, 0xb8, 0xdb, 0x8d, 0x3c, 0x22, 0x84, 0x17, 0x23,
+	0xfb, 0x15, 0xac, 0x2a, 0x08, 0x51, 0x80, 0x87, 0x91, 0x47, 0x95, 0xcf, 0xab, 0x9f, 0x2d, 0xd8,
+	0xdf, 0xc2, 0x1a, 0xcd, 0x4a, 0x5a, 0x6e, 0xc6, 0xaf, 0x9f, 0xc0, 0xfa, 0x18, 0x8e, 0xe0, 0x30,
+	0x4b, 0xaf, 0xd7, 0x79, 0x31, 0x4c, 0xed, 0x19, 0x19, 0xed, 0x01, 0x52, 0x21, 0x04, 0x99, 0x69,
+	0xb6, 0x55, 0x68, 0x92, 0xec, 0xd4, 0x8c, 0x0c, 0x8e, 0xb9, 0x26, 0x1a, 0x8e, 0xa0, 0x31, 0x43,
+	0x87, 0x08, 0x49, 0xd8, 0xd9, 0xbe, 0x9f, 0x24, 0x12, 0x22, 0x91, 0x64, 0xe2, 0x25, 0x72, 0x08,
+	0x55, 0x9a, 0xa9, 0x1e, 0xc4, 0x99, 0x45, 0xd9, 0xc8, 0x40, 0x12, 0x54, 0x76, 0x60, 0x71, 0x9a,
+	0xcb, 0x28, 0x0e, 0x92, 0xc7, 0x86, 0xae, 0xde, 0xef, 0xd8, 0x08, 0x84, 0xe4, 0xd8, 0xbc, 0xf7,
+	0xc2, 0xb2, 0x4f, 0xe0, 0x69, 0x9c, 0xf5, 0xb3, 0x4f, 0xce, 0xef, 0x29, 0xca, 0x09, 0x58, 0x79,
+	0x70, 0x82, 0xd1, 0x27, 0x1a, 0xa3, 0x75, 0x85, 0x91, 0x1a, 0x2f, 0xd8, 0xfd, 0x6e, 0x40, 0x85,
+	0xe2, 0x35, 0x31, 0x1e, 0x9c, 0x5d, 0x05, 0x09, 0xab, 0x4d, 0x58, 0x64, 0x2d, 0x4e, 0xaf, 0x6d,
+	0x46, 0xec, 0xb0, 0xd0, 0x5c, 0x60, 0x33, 0x47, 0x2e, 0x7a, 0x06, 0xe5, 0xa4, 0xdd, 0x68, 0x04,
+	0x88, 0x88, 0xe5, 0x64, 0xfa, 0xc8, 0x4d, 0x2a, 0xab, 0x64, 0x57, 0xb6, 0xa1, 0x56, 0xd6, 0x28,
+	0xc2, 0x9c, 0xef, 0xda, 0x07, 0xf0, 0x41, 0x8a, 0x8f, 0x28, 0xeb, 0x05, 0x2c, 0x85, 0x18, 0x0f,
+	0x5a, 0xe4, 0x2a, 0x90, 0x3b, 0xbe, 0x22, 0x6a, 0x93, 0xc1, 0xcd, 0xc5, 0x50, 0xfc, 0xb2, 0xff,
+	0x9a, 0x03, 0x74, 0xea, 0x39, 0x61, 0xe7, 0x9c, 0x29, 0xf5, 0x63, 0x40, 0x7c, 0x3c, 0x8c, 0x90,
+	0x09, 0x0b, 0x1d, 0x7c, 0x31, 0x24, 0xe1, 0x15, 0x83, 0x58, 0xa2, 0x45, 0x89, 0x09, 0x54, 0x81,
+	0x62, 0xc7, 0x27, 0x57, 0x4c, 0x6f, 0xba, 0xc0, 0x46, 0xa8, 0x0a, 0xf3, 0xa1, 0xd7, 0xf3, 0xf1,
+	0xb0, 0xfa, 0x40, 0xcc, 0x8b, 0x31, 0xad, 0x83, 0x5e, 0x43, 0x61, 0xc4, 0xaa, 0x2f, 0x37, 0xc5,
+	0x88, 0x12, 0xe5, 0x2f, 0x14, 0x25, 0xba, 0xb2, 0x6d, 0x3c, 0x7f, 0x14, 0x13, 0x65, 0xad, 0xc9,
+	0x88, 0x12, 0xf1, 0x0b, 0xbd, 0x06, 0x88, 0x88, 0x13, 0x92, 0x96, 0x4b, 0x3b, 0xb9, 0xc2, 0xea,
+	0x32, 0x6b, 0xdc, 0x5b, 0xd4, 0xa4, 0x63, 0xa8, 0x9d, 0x49, 0x6f, 0xd1, 0x28, 0x5e, 0xff, 0xb3,
+	0x65, 0x34, 0x97, 0x58, 0xce, 0x3e, 0x7d, 0x60, 0xbf, 0x86, 0x45, 0x6f, 0xe8, 0xf2, 0x74, 0x6b,
+	0xca, 0xf4, 0x05, 0x6f, 0xe8, 0xd2, 0xe4, 0xc6, 0x2a, 0xac, 0xf4, 0x71, 0xc7, 0xa1, 0xe2, 0xb4,
+	0xba, 0x7e, 0x9f, 0xde, 0xa7, 0xd7, 0x86, 0xa6, 0x9c, 0xec, 0x87, 0x63, 0xa8, 0x44, 0x6c, 0xb6,
+	0x45, 0xa9, 0x47, 0x2d, 0xcc, 0x15, 0x15, 0x3b, 0x61, 0xd6, 0x84, 0x9b, 0x1a, 0xd7, 0xbc, 0x89,
+	0xa2, 0xf1, 0x7d, 0x88, 0x3b, 0x63, 0x2e, 0xbb, 0x33, 0x1e, 0x68, 0x3d, 0xdf, 0x80, 0x27, 0x1a,
+	0xa3, 0x59, 0x1a, 0xfd, 0x15, 0xac, 0xfe, 0x14, 0x50, 0x91, 0xb2, 0xdc, 0x06, 0xe4, 0x1d, 0xde,
+	0x3d, 0x40, 0x3c, 0x2b, 0xfb, 0xc1, 0x87, 0xfc, 0x97, 0xe1, 0x18, 0xd6, 0x79, 0xe6, 0xa4, 0x37,
+	0x1f, 0xa6, 0xb9, 0xd1, 0x63, 0xf6, 0xaa, 0x71, 0x91, 0x2f, 0x36, 0xe4, 0xbd, 0xd8, 0x27, 0x92,
+	0xc3, 0x44, 0x57, 0x09, 0xd3, 0xbc, 0xb4, 0xb1, 0x18, 0xd9, 0xc6, 0x12, 0x72, 0xdf, 0x84, 0xdd,
+	0x3f, 0xcb, 0x50, 0xae, 0xb3, 0x06, 0x39, 0xf5, 0xc2, 0x4b, 0xbf, 0xe3, 0xa1, 0x03, 0x28, 0x6b,
+	0x6e, 0x17, 0x7d, 0x28, 0x3b, 0x28, 0xcb, 0x04, 0x9b, 0x6b, 0x63, 0x2d, 0x7d, 0x40, 0xad, 0x38,
+	0x6d, 0x7e, 0x69, 0x74, 0xd1, 0xba, 0x82, 0xa0, 0x32, 0xcc, 0x4d, 0x3e, 0x62, 0x56, 0x4e, 0x7d,
+	0x2e, 0x90, 0xa5, 0x60, 0x64, 0xf8, 0xe0, 0x5c, 0xa8, 0x2f, 0x61, 0x41, 0x64, 0xa0, 0xb5, 0x14,
+	0xc4, 0xa4, 0xd4, 0x58, 0x09, 0xe1, 0x30, 0xd3, 0x4a, 0xe8, 0x6e, 0x75, 0x82, 0x12, 0xac, 0x05,
+	0x35, 0x25, 0xd4, 0xc6, 0x9d, 0xc0, 0x21, 0xe9, 0x3d, 0x8d, 0xc3, 0x58, 0x03, 0xe7, 0xc2, 0xbc,
+	0x06, 0x48, 0xce, 0x18, 0xda, 0x90, 0x18, 0x63, 0xe7, 0x2e, 0x17, 0xa0, 0x0e, 0x25, 0xe5, 0xb8,
+	0x21, 0x53, 0x47, 0x98, 0xaa, 0x94, 0xef, 0xe1, 0x71, 0xfa, 0xdc, 0xa1, 0x2d, 0x1d, 0x67, 0x86,
+	0x82, 0xd8, 0xc6, 0xa4, 0x0a, 0x9a, 0x66, 0x57, 0x62, 0x36, 0x4a, 0xa7, 0xa7, 0xd8, 0x4c, 0xdf,
+	0xec, 0xb1, 0x3a, 0xbc, 0xdf, 0x53, 0xea, 0x4c, 0xd5, 0xf2, 0x0d, 0x58, 0x8a, 0x9d, 0x3f, 0xaa,
+	0x4a, 0x80, 0xf4, 0xdf, 0x09, 0x73, 0x23, 0x63, 0x85, 0x5f, 0xba, 0x2f, 0x0d, 0x74, 0x06, 0x2b,
+	0x29, 0xff, 0x9e, 0x1c, 0x9b, 0xec, 0x3f, 0x08, 0xe6, 0x56, 0xee, 0x7a, 0x8c, 0x7a, 0x00, 0x90,
+	0x78, 0x70, 0xa4, 0x11, 0xd0, 0xac, 0xbd, 0x69, 0x66, 0x2d, 0xa5, 0xc9, 0x29, 0x46, 0x5a, 0x27,
+	0x37, 0xee, 0xd4, 0x75, 0x72, 0x19, 0x0e, 0x3c, 0x21, 0xc7, 0xdd, 0xb0, 0x4e, 0x4e, 0x33, 0xd9,
+	0x3a, 0x39, 0xdd, 0x3c, 0xbf, 0x34, 0xd0, 0x9b, 0xc4, 0x40, 0xc6, 0xb6, 0x0d, 0x6d, 0xab, 0x29,
+	0x59, 0xae, 0xd9, 0xfc, 0xe8, 0x3d, 0x11, 0x31, 0xb6, 0xd8, 0x59, 0xf6, 0x42, 0xea, 0x3b, 0xab,
+	0x3e, 0xe3, 0xfa, 0xce, 0x6a, 0xcf, 0xe9, 0x4b, 0x03, 0xf9, 0xfc, 0xdf, 0xcc, 0xb8, 0xb7, 0x44,
+	0xcf, 0xc6, 0xd2, 0xb2, 0xac, 0xac, 0xf9, 0xf1, 0xa4, 0xb0, 0xf8, 0x53, 0x3f, 0x40, 0x59, 0xb3,
+	0x79, 0xc9, 0x8d, 0x93, 0xe5, 0x46, 0xcd, 0xa7, 0x39, 0xab, 0x31, 0xde, 0x21, 0x94, 0x14, 0x8b,
+	0x80, 0xb2, 0xfc, 0x88, 0xc4, 0xda, 0xcc, 0x5c, 0x93, 0x48, 0x8d, 0xaf, 0x6e, 0x6e, 0xad, 0xc2,
+	0xdb, 0x5b, 0xab, 0xf0, 0xee, 0xd6, 0x32, 0x7e, 0x1b, 0x59, 0xc6, 0x1f, 0x23, 0xcb, 0xf8, 0x7b,
+	0x64, 0x19, 0x37, 0x23, 0xcb, 0xf8, 0x77, 0x64, 0x19, 0xff, 0x8d, 0xac, 0xc2, 0xbb, 0x91, 0x65,
+	0x5c, 0xdf, 0x59, 0x85, 0x9b, 0x3b, 0xab, 0xf0, 0xf6, 0xce, 0x2a, 0xbc, 0x29, 0xd6, 0x76, 0x82,
+	0x76, 0x7b, 0x9e, 0x1d, 0xb7, 0xcf, 0xff, 0x0f, 0x00, 0x00, 0xff, 0xff, 0x78, 0xab, 0x7a, 0x78,
+	0x5c, 0x12, 0x00, 0x00,
 }
 
 func (this *AddDiveMasterRequest) Equal(that interface{}) bool {
@@ -2305,6 +2459,114 @@ func (this *ListTripsWithTemplatesResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Trip.Equal(that1.Trip) {
+		return false
+	}
+	return true
+}
+func (this *ListRoomTypesRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomTypesRequest)
+	if !ok {
+		that2, ok := that.(ListRoomTypesRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if that1.Id == nil {
+		if this.Id != nil {
+			return false
+		}
+	} else if this.Id == nil {
+		return false
+	} else if !this.Id.Equal(that1.Id) {
+		return false
+	}
+	if this.Limit != that1.Limit {
+		return false
+	}
+	if this.Offset != that1.Offset {
+		return false
+	}
+	return true
+}
+func (this *ListRoomTypesRequest_HotelId) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomTypesRequest_HotelId)
+	if !ok {
+		that2, ok := that.(ListRoomTypesRequest_HotelId)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.HotelId != that1.HotelId {
+		return false
+	}
+	return true
+}
+func (this *ListRoomTypesRequest_LiveaboardId) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomTypesRequest_LiveaboardId)
+	if !ok {
+		that2, ok := that.(ListRoomTypesRequest_LiveaboardId)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.LiveaboardId != that1.LiveaboardId {
+		return false
+	}
+	return true
+}
+func (this *ListRoomTypesResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomTypesResponse)
+	if !ok {
+		that2, ok := that.(ListRoomTypesResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.RoomType.Equal(that1.RoomType) {
 		return false
 	}
 	return true
@@ -2901,6 +3163,48 @@ func (this *ListTripsWithTemplatesResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *ListRoomTypesRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 8)
+	s = append(s, "&pb.ListRoomTypesRequest{")
+	if this.Id != nil {
+		s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	}
+	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
+	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListRoomTypesRequest_HotelId) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.ListRoomTypesRequest_HotelId{` +
+		`HotelId:` + fmt.Sprintf("%#v", this.HotelId) + `}`}, ", ")
+	return s
+}
+func (this *ListRoomTypesRequest_LiveaboardId) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&pb.ListRoomTypesRequest_LiveaboardId{` +
+		`LiveaboardId:` + fmt.Sprintf("%#v", this.LiveaboardId) + `}`}, ", ")
+	return s
+}
+func (this *ListRoomTypesResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.ListRoomTypesResponse{")
+	if this.RoomType != nil {
+		s = append(s, "RoomType: "+fmt.Sprintf("%#v", this.RoomType)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *SearchTripsOptions) GoString() string {
 	if this == nil {
 		return "nil"
@@ -3060,19 +3364,19 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AgencyServiceClient interface {
-	AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListBoats(ctx context.Context, in *ListBoatsRequest, opts ...grpc.CallOption) (AgencyService_ListBoatsClient, error)
 	ListDiveMasters(ctx context.Context, in *ListDiveMastersRequest, opts ...grpc.CallOption) (AgencyService_ListDiveMastersClient, error)
 	ListHotels(ctx context.Context, in *ListHotelsRequest, opts ...grpc.CallOption) (AgencyService_ListHotelsClient, error)
@@ -3081,6 +3385,7 @@ type AgencyServiceClient interface {
 	ListTripTemplates(ctx context.Context, in *ListTripTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripTemplatesClient, error)
 	ListTrips(ctx context.Context, in *ListTripsRequest, opts ...grpc.CallOption) (AgencyService_ListTripsClient, error)
 	ListTripsWithTemplates(ctx context.Context, in *ListTripsWithTemplatesRequest, opts ...grpc.CallOption) (AgencyService_ListTripsWithTemplatesClient, error)
+	ListRoomTypes(ctx context.Context, in *ListRoomTypesRequest, opts ...grpc.CallOption) (AgencyService_ListRoomTypesClient, error)
 	SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error)
 }
 
@@ -3092,8 +3397,8 @@ func NewAgencyServiceClient(cc *grpc.ClientConn) AgencyServiceClient {
 	return &agencyServiceClient{cc}
 }
 
-func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDiveMaster", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3101,8 +3406,8 @@ func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMast
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddStaff", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3110,8 +3415,8 @@ func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest,
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTripTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3119,8 +3424,8 @@ func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTe
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTrip", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3128,8 +3433,8 @@ func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, o
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDivingBoat", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3137,8 +3442,8 @@ func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBo
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddHotel", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3146,8 +3451,8 @@ func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest,
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddLiveaboard", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3155,8 +3460,8 @@ func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboa
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateTrip", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3164,8 +3469,8 @@ func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequ
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateHotel", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3173,8 +3478,8 @@ func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRe
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateLiveaboard", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3182,8 +3487,8 @@ func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLi
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateBoat", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3191,8 +3496,8 @@ func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequ
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateDiveMaster", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3200,8 +3505,8 @@ func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDi
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateStaff", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3465,8 +3770,40 @@ func (x *agencyServiceListTripsWithTemplatesClient) Recv() (*ListTripsWithTempla
 	return m, nil
 }
 
+func (c *agencyServiceClient) ListRoomTypes(ctx context.Context, in *ListRoomTypesRequest, opts ...grpc.CallOption) (AgencyService_ListRoomTypesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[8], "/agency.AgencyService/ListRoomTypes", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &agencyServiceListRoomTypesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AgencyService_ListRoomTypesClient interface {
+	Recv() (*ListRoomTypesResponse, error)
+	grpc.ClientStream
+}
+
+type agencyServiceListRoomTypesClient struct {
+	grpc.ClientStream
+}
+
+func (x *agencyServiceListRoomTypesClient) Recv() (*ListRoomTypesResponse, error) {
+	m := new(ListRoomTypesResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *agencyServiceClient) SearchTrips(ctx context.Context, in *SearchTripsRequest, opts ...grpc.CallOption) (AgencyService_SearchTripsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[8], "/agency.AgencyService/SearchTrips", opts...)
+	stream, err := c.cc.NewStream(ctx, &_AgencyService_serviceDesc.Streams[9], "/agency.AgencyService/SearchTrips", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3499,19 +3836,19 @@ func (x *agencyServiceSearchTripsClient) Recv() (*SearchTripsResponse, error) {
 
 // AgencyServiceServer is the server API for AgencyService service.
 type AgencyServiceServer interface {
-	AddDiveMaster(context.Context, *AddDiveMasterRequest) (*empty.Empty, error)
-	AddStaff(context.Context, *AddStaffRequest) (*empty.Empty, error)
-	AddTripTemplate(context.Context, *AddTripTemplateRequest) (*empty.Empty, error)
-	AddTrip(context.Context, *AddTripRequest) (*empty.Empty, error)
-	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*empty.Empty, error)
-	AddHotel(context.Context, *AddHotelRequest) (*empty.Empty, error)
-	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*empty.Empty, error)
-	UpdateTrip(context.Context, *UpdateTripRequest) (*empty.Empty, error)
-	UpdateHotel(context.Context, *UpdateHotelRequest) (*empty.Empty, error)
-	UpdateLiveaboard(context.Context, *UpdateLiveaboardRequest) (*empty.Empty, error)
-	UpdateBoat(context.Context, *UpdateBoatRequest) (*empty.Empty, error)
-	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*empty.Empty, error)
-	UpdateStaff(context.Context, *UpdateStaffRequest) (*empty.Empty, error)
+	AddDiveMaster(context.Context, *AddDiveMasterRequest) (*emptypb.Empty, error)
+	AddStaff(context.Context, *AddStaffRequest) (*emptypb.Empty, error)
+	AddTripTemplate(context.Context, *AddTripTemplateRequest) (*emptypb.Empty, error)
+	AddTrip(context.Context, *AddTripRequest) (*emptypb.Empty, error)
+	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*emptypb.Empty, error)
+	AddHotel(context.Context, *AddHotelRequest) (*emptypb.Empty, error)
+	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*emptypb.Empty, error)
+	UpdateTrip(context.Context, *UpdateTripRequest) (*emptypb.Empty, error)
+	UpdateHotel(context.Context, *UpdateHotelRequest) (*emptypb.Empty, error)
+	UpdateLiveaboard(context.Context, *UpdateLiveaboardRequest) (*emptypb.Empty, error)
+	UpdateBoat(context.Context, *UpdateBoatRequest) (*emptypb.Empty, error)
+	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*emptypb.Empty, error)
+	UpdateStaff(context.Context, *UpdateStaffRequest) (*emptypb.Empty, error)
 	ListBoats(*ListBoatsRequest, AgencyService_ListBoatsServer) error
 	ListDiveMasters(*ListDiveMastersRequest, AgencyService_ListDiveMastersServer) error
 	ListHotels(*ListHotelsRequest, AgencyService_ListHotelsServer) error
@@ -3520,6 +3857,7 @@ type AgencyServiceServer interface {
 	ListTripTemplates(*ListTripTemplatesRequest, AgencyService_ListTripTemplatesServer) error
 	ListTrips(*ListTripsRequest, AgencyService_ListTripsServer) error
 	ListTripsWithTemplates(*ListTripsWithTemplatesRequest, AgencyService_ListTripsWithTemplatesServer) error
+	ListRoomTypes(*ListRoomTypesRequest, AgencyService_ListRoomTypesServer) error
 	SearchTrips(*SearchTripsRequest, AgencyService_SearchTripsServer) error
 }
 
@@ -3527,43 +3865,43 @@ type AgencyServiceServer interface {
 type UnimplementedAgencyServiceServer struct {
 }
 
-func (*UnimplementedAgencyServiceServer) AddDiveMaster(ctx context.Context, req *AddDiveMasterRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddDiveMaster(ctx context.Context, req *AddDiveMasterRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddDiveMaster not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddStaff(ctx context.Context, req *AddStaffRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddStaff(ctx context.Context, req *AddStaffRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStaff not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddTripTemplate(ctx context.Context, req *AddTripTemplateRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddTripTemplate(ctx context.Context, req *AddTripTemplateRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddTripTemplate not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddTrip(ctx context.Context, req *AddTripRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddTrip(ctx context.Context, req *AddTripRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddTrip not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddDivingBoat(ctx context.Context, req *AddDivingBoatRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddDivingBoat(ctx context.Context, req *AddDivingBoatRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddDivingBoat not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddHotelRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddHotelRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddHotel not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveaboard not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateTrip(ctx context.Context, req *UpdateTripRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateTrip(ctx context.Context, req *UpdateTripRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTrip not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateHotel(ctx context.Context, req *UpdateHotelRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateHotel(ctx context.Context, req *UpdateHotelRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHotel not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateLiveaboard(ctx context.Context, req *UpdateLiveaboardRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateLiveaboard(ctx context.Context, req *UpdateLiveaboardRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLiveaboard not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateBoat(ctx context.Context, req *UpdateBoatRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateBoat(ctx context.Context, req *UpdateBoatRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBoat not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, req *UpdateDiveMasterRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, req *UpdateDiveMasterRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiveMaster not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*empty.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStaff not implemented")
 }
 func (*UnimplementedAgencyServiceServer) ListBoats(req *ListBoatsRequest, srv AgencyService_ListBoatsServer) error {
@@ -3589,6 +3927,9 @@ func (*UnimplementedAgencyServiceServer) ListTrips(req *ListTripsRequest, srv Ag
 }
 func (*UnimplementedAgencyServiceServer) ListTripsWithTemplates(req *ListTripsWithTemplatesRequest, srv AgencyService_ListTripsWithTemplatesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListTripsWithTemplates not implemented")
+}
+func (*UnimplementedAgencyServiceServer) ListRoomTypes(req *ListRoomTypesRequest, srv AgencyService_ListRoomTypesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListRoomTypes not implemented")
 }
 func (*UnimplementedAgencyServiceServer) SearchTrips(req *SearchTripsRequest, srv AgencyService_SearchTripsServer) error {
 	return status.Errorf(codes.Unimplemented, "method SearchTrips not implemented")
@@ -4000,6 +4341,27 @@ func (x *agencyServiceListTripsWithTemplatesServer) Send(m *ListTripsWithTemplat
 	return x.ServerStream.SendMsg(m)
 }
 
+func _AgencyService_ListRoomTypes_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRoomTypesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AgencyServiceServer).ListRoomTypes(m, &agencyServiceListRoomTypesServer{stream})
+}
+
+type AgencyService_ListRoomTypesServer interface {
+	Send(*ListRoomTypesResponse) error
+	grpc.ServerStream
+}
+
+type agencyServiceListRoomTypesServer struct {
+	grpc.ServerStream
+}
+
+func (x *agencyServiceListRoomTypesServer) Send(m *ListRoomTypesResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _AgencyService_SearchTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SearchTripsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -4117,6 +4479,11 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListTripsWithTemplates",
 			Handler:       _AgencyService_ListTripsWithTemplates_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListRoomTypes",
+			Handler:       _AgencyService_ListRoomTypes_Handler,
 			ServerStreams: true,
 		},
 		{
@@ -4934,6 +5301,111 @@ func (m *ListTripsWithTemplatesResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
+func (m *ListRoomTypesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListRoomTypesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomTypesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Offset != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xc8
+	}
+	if m.Limit != 0 {
+		i = encodeVarintAgency(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa0
+	}
+	if m.Id != nil {
+		{
+			size := m.Id.Size()
+			i -= size
+			if _, err := m.Id.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListRoomTypesRequest_HotelId) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomTypesRequest_HotelId) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i = encodeVarintAgency(dAtA, i, uint64(m.HotelId))
+	i--
+	dAtA[i] = 0x8
+	return len(dAtA) - i, nil
+}
+func (m *ListRoomTypesRequest_LiveaboardId) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomTypesRequest_LiveaboardId) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i = encodeVarintAgency(dAtA, i, uint64(m.LiveaboardId))
+	i--
+	dAtA[i] = 0x50
+	return len(dAtA) - i, nil
+}
+func (m *ListRoomTypesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListRoomTypesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomTypesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.RoomType != nil {
+		{
+			size, err := m.RoomType.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *SearchTripsOptions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -4955,24 +5427,24 @@ func (m *SearchTripsOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.EndDate != nil {
-		n17, err17 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
-		if err17 != nil {
-			return 0, err17
+		n18, err18 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.EndDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.EndDate):])
+		if err18 != nil {
+			return 0, err18
 		}
-		i -= n17
-		i = encodeVarintAgency(dAtA, i, uint64(n17))
+		i -= n18
+		i = encodeVarintAgency(dAtA, i, uint64(n18))
 		i--
 		dAtA[i] = 0x1
 		i--
 		dAtA[i] = 0xf2
 	}
 	if m.StartDate != nil {
-		n18, err18 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
-		if err18 != nil {
-			return 0, err18
+		n19, err19 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StartDate, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.StartDate):])
+		if err19 != nil {
+			return 0, err19
 		}
-		i -= n18
-		i = encodeVarintAgency(dAtA, i, uint64(n18))
+		i -= n19
+		i = encodeVarintAgency(dAtA, i, uint64(n19))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -5665,6 +6137,55 @@ func (m *ListTripsWithTemplatesResponse) Size() (n int) {
 	return n
 }
 
+func (m *ListRoomTypesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != nil {
+		n += m.Id.Size()
+	}
+	if m.Limit != 0 {
+		n += 2 + sovAgency(uint64(m.Limit))
+	}
+	if m.Offset != 0 {
+		n += 2 + sovAgency(uint64(m.Offset))
+	}
+	return n
+}
+
+func (m *ListRoomTypesRequest_HotelId) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 1 + sovAgency(uint64(m.HotelId))
+	return n
+}
+func (m *ListRoomTypesRequest_LiveaboardId) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += 1 + sovAgency(uint64(m.LiveaboardId))
+	return n
+}
+func (m *ListRoomTypesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.RoomType != nil {
+		l = m.RoomType.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func (m *SearchTripsOptions) Size() (n int) {
 	if m == nil {
 		return 0
@@ -6077,6 +6598,48 @@ func (this *ListTripsWithTemplatesResponse) String() string {
 	}, "")
 	return s
 }
+func (this *ListRoomTypesRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomTypesRequest{`,
+		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
+		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListRoomTypesRequest_HotelId) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomTypesRequest_HotelId{`,
+		`HotelId:` + fmt.Sprintf("%v", this.HotelId) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListRoomTypesRequest_LiveaboardId) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomTypesRequest_LiveaboardId{`,
+		`LiveaboardId:` + fmt.Sprintf("%v", this.LiveaboardId) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListRoomTypesResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomTypesResponse{`,
+		`RoomType:` + strings.Replace(fmt.Sprintf("%v", this.RoomType), "RoomType", "RoomType", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *SearchTripsOptions) String() string {
 	if this == nil {
 		return "nil"
@@ -6085,8 +6648,8 @@ func (this *SearchTripsOptions) String() string {
 		`LocationFilter:` + fmt.Sprintf("%v", this.LocationFilter) + `,`,
 		`Divers:` + fmt.Sprintf("%v", this.Divers) + `,`,
 		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
-		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -8236,6 +8799,220 @@ func (m *ListTripsWithTemplatesResponse) Unmarshal(dAtA []byte) error {
 				m.Trip = &TripWithTemplate{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListRoomTypesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListRoomTypesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListRoomTypesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HotelId", wireType)
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Id = &ListRoomTypesRequest_HotelId{v}
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LiveaboardId", wireType)
+			}
+			var v uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Id = &ListRoomTypesRequest_LiveaboardId{v}
+		case 20:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 25:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListRoomTypesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListRoomTypesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListRoomTypesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RoomType", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.RoomType == nil {
+				m.RoomType = &RoomType{}
+			}
+			if err := m.RoomType.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
