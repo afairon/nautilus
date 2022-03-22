@@ -157,6 +157,7 @@ message ListTripsWithTemplatesResponse {
     model.TripWithTemplate trip = 1;
 }
 
+// ListRoomTypesRequest
 message ListRoomTypesRequest {
     oneof id {
         uint64 hotel_id = 1;
@@ -164,6 +165,11 @@ message ListRoomTypesRequest {
     }
     uint64 limit = 20;
     uint64 offset = 25;
+}
+
+// ListRoomTypesResponse
+message ListRoomTypesResponse {
+    model.RoomType room_type = 1;
 }
 
 message SearchTripsOptions {
