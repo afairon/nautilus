@@ -25,7 +25,6 @@ func (handler *HotelHandler) GetHotel(ctx context.Context, req *pb.GetHotelReque
 		return nil, err
 	}
 
-	// TODO return address of hotel too
 	resp := &pb.GetHotelResponse{
 		Hotel: &pb.Hotel{
 			Id:          uint64(hotel.ID),
@@ -33,6 +32,7 @@ func (handler *HotelHandler) GetHotel(ctx context.Context, req *pb.GetHotelReque
 			Description: hotel.Description,
 			Stars:       hotel.Stars,
 			Phone:       hotel.Phone,
+			Address:     hotel.Address.GetProto(),
 			CreatedAt:   &hotel.CreatedAt,
 			UpdatedAt:   &hotel.UpdatedAt,
 		},

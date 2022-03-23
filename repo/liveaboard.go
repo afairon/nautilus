@@ -81,7 +81,7 @@ func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, i
 func (repo *liveaboardRepository) GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error) {
 	var liveaboard model.Liveaboard
 
-	if err := repo.db.First(&liveaboard, id).Error; err != nil {
+	if err := repo.db.Preload("Address").First(&liveaboard, id).Error; err != nil {
 		return nil, err
 	}
 

@@ -89,7 +89,7 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hotel, error) {
 	var hotel model.Hotel
 
-	if err := repo.db.First(&hotel, id).Error; err != nil {
+	if err := repo.db.Preload("Address").First(&hotel, id).Error; err != nil {
 		return nil, err
 	}
 

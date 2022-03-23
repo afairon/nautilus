@@ -25,7 +25,6 @@ func (handler *LiveaboardHandler) GetLiveaboard(ctx context.Context, req *pb.Get
 		return nil, err
 	}
 
-	// TODO return address of liveaboard too
 	resp := &pb.GetLiveaboardResponse{
 		Liveaboard: &pb.Liveaboard{
 			Id:            uint64(liveaboard.ID),
@@ -36,6 +35,7 @@ func (handler *LiveaboardHandler) GetLiveaboard(ctx context.Context, req *pb.Get
 			TotalCapacity: liveaboard.TotalCapacity,
 			DiverRooms:    liveaboard.DiverRooms,
 			StaffRooms:    liveaboard.StaffRooms,
+			Address:       liveaboard.Address.GetProto(),
 			CreatedAt:     &liveaboard.CreatedAt,
 			UpdatedAt:     &liveaboard.UpdatedAt,
 		},
