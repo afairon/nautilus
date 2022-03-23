@@ -10,7 +10,7 @@ import (
 
 // HotelService defines operations on hotel.
 type HotelService interface {
-	GetHotel(ctx context.Context, id, limit, offset uint64) (*model.Hotel, error)
+	GetHotel(ctx context.Context, id uint64) (*model.Hotel, error)
 }
 
 // hotelService implements HotelService interface above.

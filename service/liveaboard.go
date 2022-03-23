@@ -10,7 +10,7 @@ import (
 
 // LiveaboardService defines operations on liveaboard.
 type LiveaboardService interface {
-	GetLiveaboard(ctx context.Context, id, limit, offset uint64) (*model.Liveaboard, error)
+	GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error)
 }
 
 // liveaboardService implements LiveaboardService interface above.

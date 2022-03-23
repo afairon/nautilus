@@ -15,5 +15,5 @@ message GetLiveaboardRequest {
 }
 
 message GetLiveaboardResponse {
-    model.Liveaboard liveabaord = 1;
+    model.Liveaboard liveaboard = 1;
 }
