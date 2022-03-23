@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package hotel;
+
+import "model.proto";
+
+option go_package = "./pb";
+
+service HotelService {
+    rpc GetHotel(GetHotelRequest) returns (GetHotelResponse);
+}
+
+message GetHotelRequest {
+    uint64 id = 1;
+}
+
+message GetHotelResponse {
+    model.Hotel hotel = 1;
+}

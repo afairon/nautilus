@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package liveaboard;
+
+import "model.proto";
+
+option go_package = "./pb";
+
+service LiveaboardService {
+    rpc GetLiveaboard(GetLiveaboardRequest) returns (GetLiveaboardResponse);
+}
+
+message GetLiveaboardRequest {
+    uint64 id = 1;
+}
+
+message GetLiveaboardResponse {
+    model.Liveaboard liveabaord = 1;
+}

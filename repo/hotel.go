@@ -89,8 +89,11 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hotel, error) {
 	var hotel model.Hotel
 
-	result := repo.db.First(&hotel, id)
-	return &hotel, result.Error
+	if err := repo.db.First(&hotel, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &hotel, nil
 }
 
 func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error) {
