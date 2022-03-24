@@ -244,6 +244,7 @@ message TripWithTemplate {
     uint32 max_guest = 30;
     float price = 40;
     repeated DiveMaster dive_masters = 50;
+    repeated DiveSite dive_sites = 56;
     google.protobuf.Timestamp from_date = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp to_date = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];

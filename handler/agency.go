@@ -558,6 +558,23 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 			},
 		}
 
+		if len(trip.DiveSites) > 0 {
+			resp.Trip.DiveSites = make([]*pb.DiveSite, 0, len(trip.DiveSites))
+
+			for _, ds := range trip.DiveSites {
+				resp.Trip.DiveSites = append(resp.Trip.DiveSites, &pb.DiveSite{
+					Id:          uint64(ds.ID),
+					Name:        ds.Name,
+					Description: ds.Description,
+					MinDepth:    ds.MinDepth,
+					MaxDepth:    ds.MaxDepth,
+					TripId:      uint64(ds.TripID),
+					CreatedAt:   &ds.CreatedAt,
+					UpdatedAt:   &ds.UpdatedAt,
+				})
+			}
+		}
+
 		if len(trip.DiveMasters) > 0 {
 			resp.Trip.DiveMasters = make([]*pb.DiveMaster, 0, len(trip.DiveMasters))
 			for _, dive_master := range trip.DiveMasters {

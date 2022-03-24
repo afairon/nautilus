@@ -151,6 +151,7 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	result.Preload("TripTemplate.Hotel")
 	result.Preload("TripTemplate.Liveaboard")
 	result.Preload("TripTemplate.Boat")
+	result.Preload("DiveSites")
 	result.Joins("JOIN trip_templates ON trip_templates.id = trips.trip_template_id")
 	result.Joins("JOIN addresses ON addresses.id = trip_templates.address_id")
 	result.Joins("LEFT JOIN hotels ON hotels.id = trip_templates.hotel_id")
