@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $8;
+import 'model.pb.dart' as $9;
 
 class GetLiveaboardRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetLiveaboardRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'liveaboard'), createEmptyInstance: create)
@@ -61,13 +61,13 @@ class GetLiveaboardRequest extends $pb.GeneratedMessage {
 
 class GetLiveaboardResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetLiveaboardResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'liveaboard'), createEmptyInstance: create)
-    ..aOM<$8.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $8.Liveaboard.create)
+    ..aOM<$9.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $9.Liveaboard.create)
     ..hasRequiredFields = false
   ;
 
   GetLiveaboardResponse._() : super();
   factory GetLiveaboardResponse({
-    $8.Liveaboard? liveaboard,
+    $9.Liveaboard? liveaboard,
   }) {
     final _result = create();
     if (liveaboard != null) {
@@ -97,14 +97,14 @@ class GetLiveaboardResponse extends $pb.GeneratedMessage {
   static GetLiveaboardResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Liveaboard get liveaboard => $_getN(0);
+  $9.Liveaboard get liveaboard => $_getN(0);
   @$pb.TagNumber(1)
-  set liveaboard($8.Liveaboard v) { setField(1, v); }
+  set liveaboard($9.Liveaboard v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLiveaboard() => $_has(0);
   @$pb.TagNumber(1)
   void clearLiveaboard() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Liveaboard ensureLiveaboard() => $_ensure(0);
+  $9.Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 

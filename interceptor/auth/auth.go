@@ -44,6 +44,7 @@ var accessRoles = map[string][]model.AccountType{
 	"/reservation.ReservationService/GetReservation":    {model.AGENCY, model.DIVER},
 	"/hotel.HotelService/GetHotel":                      {model.AGENCY},
 	"/liveaboard.LiveaboardService/GetLiveaboard":       {model.AGENCY},
+	"/trip.TripService/ListValidTrips":                  {model.DIVER},
 }
 
 // AuthFunc is a function type authorizing users to access certain services.

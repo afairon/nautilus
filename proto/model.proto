@@ -242,6 +242,7 @@ message TripWithTemplate {
     uint64 trip_template_id = 20;
     TripTemplate trip_template = 25;
     uint32 max_guest = 30;
+    uint32 curent_guest = 35;
     float price = 40;
     repeated DiveMaster dive_masters = 50;
     repeated DiveSite dive_sites = 56;

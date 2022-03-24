@@ -415,6 +415,18 @@ type DiveMaster struct {
 	AgencyID  uint           `gorm:"not null"`
 }
 
+func (dm *DiveMaster) GetProto() *pb.DiveMaster {
+	// might have to add documents to the returning object
+	return &pb.DiveMaster{
+		Id:        uint64(dm.ID),
+		FirstName: dm.FirstName,
+		LastName:  dm.LastName,
+		Level:     pb.LevelType(dm.Level),
+		CreatedAt: &dm.CreatedAt,
+		UpdatedAt: &dm.UpdatedAt,
+	}
+}
+
 type Staff struct {
 	*gorm.Model
 	FirstName string     `gorm:"not null"`
@@ -456,6 +468,33 @@ type TripTemplate struct {
 	Boat         Boat
 }
 
+func (tt *TripTemplate) GetProto() *pb.TripTemplate {
+	tripTemplate := pb.TripTemplate{
+		Id:           uint64(tt.ID),
+		Name:         tt.Name,
+		Description:  tt.Description,
+		TripType:     pb.TripType(tt.Type),
+		HotelId:      uint64(tt.HotelID),
+		BoatId:       uint64(tt.BoatID),
+		LiveaboardId: uint64(tt.LiveaboardID),
+		Address:      tt.Address.GetProto(),
+		CreatedAt:    &tt.CreatedAt,
+		UpdatedAt:    &tt.UpdatedAt,
+	}
+
+	if len(tt.Images) > 0 {
+		tripTemplate.Images = make([]*pb.File, 0, len(tt.Images))
+		for _, link := range tt.Images {
+			file := &pb.File{
+				Link: link,
+			}
+			tripTemplate.Images = append(tripTemplate.Images, file)
+		}
+	}
+
+	return &tripTemplate
+}
+
 type Trip struct {
 	*gorm.Model
 	MaxGuest             uint32                `gorm:"not null"`
@@ -472,6 +511,39 @@ type Trip struct {
 	AgencyID             uint `gorm:"not null"`
 }
 
+func (t *Trip) GetProto() *pb.TripWithTemplate {
+	trip := pb.TripWithTemplate{
+		Id:                  uint64(t.ID),
+		TripTemplateId:      uint64(t.TripTemplateID),
+		TripTemplate:        t.TripTemplate.GetProto(),
+		MaxGuest:            t.MaxGuest,
+		CurentGuest:         t.CurrentGuest,
+		Price:               t.Price,
+		FromDate:            &t.CreatedAt,
+		ToDate:              &t.UpdatedAt,
+		LastReservationDate: t.LastReservationDate,
+		CreatedAt:           &t.CreatedAt,
+		UpdatedAt:           &t.UpdatedAt,
+	}
+
+	if len(t.DiveSites) > 0 {
+		trip.DiveSites = make([]*pb.DiveSite, 0, len(t.DiveSites))
+
+		for _, ds := range t.DiveSites {
+			trip.DiveSites = append(trip.DiveSites, ds.GetProto())
+		}
+	}
+
+	if len(t.DiveMasters) > 0 {
+		trip.DiveMasters = make([]*pb.DiveMaster, 0, len(t.DiveMasters))
+		for _, diveMaster := range t.DiveMasters {
+			trip.DiveMasters = append(trip.DiveMasters, diveMaster.GetProto())
+		}
+	}
+
+	return &trip
+}
+
 type DiveSite struct {
 	*gorm.Model
 	Name        string `gorm:"not null"`
@@ -479,6 +551,19 @@ type DiveSite struct {
 	MinDepth    uint32
 	MaxDepth    uint32
 	TripID      uint `gorm:"not null"`
+}
+
+func (d *DiveSite) GetProto() *pb.DiveSite {
+	return &pb.DiveSite{
+		Id:          uint64(d.ID),
+		Name:        d.Name,
+		Description: d.Description,
+		MinDepth:    d.MinDepth,
+		MaxDepth:    d.MaxDepth,
+		TripId:      uint64(d.TripID),
+		CreatedAt:   &d.CreatedAt,
+		UpdatedAt:   &d.UpdatedAt,
+	}
 }
 
 type Reservation struct {

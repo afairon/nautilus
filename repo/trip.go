@@ -15,7 +15,8 @@ type TripRepository interface {
 	UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
-	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, start_time, end_time *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
+	ListTrips(ctx context.Context, lastReservationDate *time.Time, limit, offset uint64) ([]*model.Trip, error)
+	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 
 // tripRepository implements TripRepository interface.
@@ -116,7 +117,33 @@ func (repo *tripRepository) ListTripsWithTemplatesByAgency(ctx context.Context, 
 	return trips, nil
 }
 
-func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, region string, divers uint32, start_date, end_date *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error) {
+func (repo *tripRepository) ListTrips(ctx context.Context, lastReservationDate *time.Time, limit, offset uint64) ([]*model.Trip, error) {
+	var trips []*model.Trip
+
+	result := repo.db.Preload("DiveMasters")
+	result.Preload("TripTemplate.Address")
+	result.Preload("TripTemplate.Hotel")
+	result.Preload("TripTemplate.Liveaboard")
+	result.Preload("TripTemplate.Boat")
+	result.Preload("DiveSites")
+	// result.Joins("JOIN trip_templates ON trip_templates.id = trips.trip_template_id")
+	// result.Joins("JOIN addresses ON addresses.id = trip_templates.address_id")
+	// result.Joins("LEFT JOIN hotels ON hotels.id = trip_templates.hotel_id")
+	// result.Joins("LEFT JOIN boats ON boats.id = trip_templates.boat_id")
+	// result.Joins("LEFT JOIN liveaboards ON liveaboards.id = trip_templates.liveaboard_id")
+	result.Where("trips.current_guest < trips.max_guest")
+	result.Where("trips.last_reservation_date >= ?", *lastReservationDate)
+
+	result.Find(&trips)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
+func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, region string, divers uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error) {
 	// tx := repo.db.Model(&model.Trip{}).Preload("TripTemplate.Address").Find(&trip)
 	// fmt.Println(tx)
 	// fmt.Printf("trip: %+v\n", trip)
@@ -165,12 +192,12 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	}
 	result.Where("trips.max_guest >= ?", divers)
 	result.Where("addresses.country ILIKE ? OR addresses.city ILIKE ? OR addresses.region ILIKE ?", country, city, region)
-	if end_date != nil {
-		result.Where("trips.start_date BETWEEN ? AND ?", *start_date, *end_date)
-		result.Where("trips.end_date BETWEEN ? AND ?", *start_date, *end_date)
+	if endDate != nil {
+		result.Where("trips.start_date BETWEEN ? AND ?", *startDate, *endDate)
+		result.Where("trips.end_date BETWEEN ? AND ?", *startDate, *endDate)
 	} else {
-		result.Where("trips.start_date >= ?", *start_date)
-		result.Where("trips.end_date >= ?", *start_date)
+		result.Where("trips.start_date >= ?", *startDate)
+		result.Where("trips.end_date >= ?", *startDate)
 	}
 	result.Find(&trips)
 

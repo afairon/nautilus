@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $8;
+import 'model.pb.dart' as $9;
 
 class GetHotelRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'hotel'), createEmptyInstance: create)
@@ -61,13 +61,13 @@ class GetHotelRequest extends $pb.GeneratedMessage {
 
 class GetHotelResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetHotelResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'hotel'), createEmptyInstance: create)
-    ..aOM<$8.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $8.Hotel.create)
+    ..aOM<$9.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $9.Hotel.create)
     ..hasRequiredFields = false
   ;
 
   GetHotelResponse._() : super();
   factory GetHotelResponse({
-    $8.Hotel? hotel,
+    $9.Hotel? hotel,
   }) {
     final _result = create();
     if (hotel != null) {
@@ -97,14 +97,14 @@ class GetHotelResponse extends $pb.GeneratedMessage {
   static GetHotelResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Hotel get hotel => $_getN(0);
+  $9.Hotel get hotel => $_getN(0);
   @$pb.TagNumber(1)
-  set hotel($8.Hotel v) { setField(1, v); }
+  set hotel($9.Hotel v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasHotel() => $_has(0);
   @$pb.TagNumber(1)
   void clearHotel() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Hotel ensureHotel() => $_ensure(0);
+  $9.Hotel ensureHotel() => $_ensure(0);
 }
 
