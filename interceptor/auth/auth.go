@@ -42,8 +42,8 @@ var accessRoles = map[string][]model.AccountType{
 	"/comment.CommentService/CreateComment":             {model.DIVER},
 	"/reservation.ReservationService/CreateReservation": {model.DIVER},
 	"/reservation.ReservationService/GetReservation":    {model.AGENCY, model.DIVER},
-	"/hotel.HotelService/GetHotel":                      {model.AGENCY},
-	"/liveaboard.LiveaboardService/GetLiveaboard":       {model.AGENCY},
+	"/hotel.HotelService/GetHotel":                      {model.AGENCY, model.DIVER},
+	"/liveaboard.LiveaboardService/GetLiveaboard":       {model.AGENCY, model.DIVER},
 	"/trip.TripService/ListValidTrips":                  {model.DIVER},
 }
 
