@@ -34,9 +34,14 @@ func (service *tripService) ListValidTrips(ctx context.Context, limit, offset ui
 	lastReservationDate := &now
 
 	trips, err := service.repo.Trip.ListTrips(ctx, lastReservationDate, limit, offset)
-
 	if err != nil {
 		return nil, err
+	}
+
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
 	}
 
 	return trips, nil
