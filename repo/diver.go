@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
@@ -15,7 +14,7 @@ import (
 type DiverRepository interface {
 	Create(ctx context.Context, diver *model.Diver) (*model.Diver, error)
 	Update(ctx context.Context, diver *model.Diver) error
-	Get(ctx context.Context, id uint64) (*entity.Diver, error)
+	Get(ctx context.Context, id uint64) (*model.Diver, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Diver, error)
 }
 
@@ -93,20 +92,14 @@ func (repo *diverRepository) Update(ctx context.Context, diver *model.Diver) err
 }
 
 // Get retrieves the diver record by its id.
-func (repo *diverRepository) Get(ctx context.Context, id uint64) (*entity.Diver, error) {
-	// var result entity.Diver
+func (repo *diverRepository) Get(ctx context.Context, id uint64) (*model.Diver, error) {
+	var diver model.Diver
 
-	// err := repo.db.GetContext(ctx, result, `
-	// 	SELECT
-	// 		id, first_name, last_name, phone, birth_date, level, account_id, documents, created_on, updated_on
-	// 	FROM
-	// 		public.diver
-	// 	WHERE
-	// 		id = $1
-	// `, id)
+	if result := repo.db.First(&diver, id); result.Error != nil {
+		return nil, result.Error
+	}
 
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	return &diver, nil
 }
 
 // List returns list of divers.

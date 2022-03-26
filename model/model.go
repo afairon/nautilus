@@ -668,3 +668,12 @@ type ReservationRoomType struct {
 	DiverNo       uint
 	Quantity      uint
 }
+
+// This type will not be a table in the database
+type ReportTrip struct {
+	Trip           Trip
+	TripTemplateID uint64
+	TripTemplate   TripTemplate
+	PlacesLeft     uint32
+	Divers         []*Diver
+}

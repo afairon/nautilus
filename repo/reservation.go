@@ -11,6 +11,7 @@ import (
 // with the reservation repository.
 type ReservationRepository interface {
 	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
+	GetReservationsByTrip(ctx context.Context, id uint64) ([]*model.Reservation, error)
 	BookRoom(ctx context.Context, room *model.ReservationRoomType) (*model.ReservationRoomType, error)
 }
 
@@ -43,6 +44,16 @@ func (repo *reservationRepository) CreateReservation(ctx context.Context, reserv
 	result := repo.db.Create(reservation)
 
 	return reservation, result.Error
+}
+
+func (repo *reservationRepository) GetReservationsByTrip(ctx context.Context, id uint64) ([]*model.Reservation, error) {
+	var reservations []*model.Reservation
+
+	if result := repo.db.Where("trip_id = ?", id).Find(&reservations); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return reservations, nil
 }
 
 // BookRoom creates a booked room record and returns the newly created record.

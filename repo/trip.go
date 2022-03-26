@@ -16,6 +16,7 @@ type TripRepository interface {
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTrips(ctx context.Context, lastReservationDate *time.Time, limit, offset uint64) ([]*model.Trip, error)
+	ListUnfullTripsByAgency(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 
@@ -126,11 +127,28 @@ func (repo *tripRepository) ListTrips(ctx context.Context, lastReservationDate *
 	result.Preload("TripTemplate.Liveaboard")
 	result.Preload("TripTemplate.Boat")
 	result.Preload("DiveSites")
-	// result.Joins("JOIN trip_templates ON trip_templates.id = trips.trip_template_id")
-	// result.Joins("JOIN addresses ON addresses.id = trip_templates.address_id")
-	// result.Joins("LEFT JOIN hotels ON hotels.id = trip_templates.hotel_id")
-	// result.Joins("LEFT JOIN boats ON boats.id = trip_templates.boat_id")
-	// result.Joins("LEFT JOIN liveaboards ON liveaboards.id = trip_templates.liveaboard_id")
+	result.Where("trips.current_guest < trips.max_guest")
+	result.Where("trips.last_reservation_date >= ?", *lastReservationDate)
+
+	result.Find(&trips)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
+func (repo *tripRepository) ListUnfullTripsByAgencyListTrips(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error) {
+	var trips []*model.Trip
+
+	result := repo.db.Preload("DiveMasters")
+	result.Preload("TripTemplate.Address")
+	result.Preload("TripTemplate.Hotel")
+	result.Preload("TripTemplate.Liveaboard")
+	result.Preload("TripTemplate.Boat")
+	result.Preload("DiveSites")
+	result.Where("agency_id = ?", id)
 	result.Where("trips.current_guest < trips.max_guest")
 	result.Where("trips.last_reservation_date >= ?", *lastReservationDate)
 

@@ -662,3 +662,9 @@ func (handler *AgencyHandler) UpdateStaff(ctx context.Context, req *pb.UpdateSta
 
 	return &empty.Empty{}, nil
 }
+
+func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrentTripsReportRequest, srv pb.AgencyService_GenerateCurrentTripsReportServer) error {
+	ctx := srv.Context()
+	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx)
+
+}

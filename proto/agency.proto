@@ -37,6 +37,8 @@ service AgencyService {
     rpc ListRoomTypes(ListRoomTypesRequest) returns (stream ListRoomTypesResponse);
 
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
+
+    rpc GenerateCurrentTripsReport(GenerateCurrentTripsReportRequest) returns (stream GenerateCurrentTripsReportResponse);
 }
 
 message AddDiveMasterRequest {
@@ -217,4 +219,29 @@ message UpdateDiveMasterRequest {
 
 message UpdateStaffRequest {
     model.Staff staff = 10;
+}
+
+message GenerateCurrentTripsReportRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+message GenerateCurrentTripsReportResponse {
+    Report report = 1;
+    
+    message Report {
+        uint64 id = 1;
+        uint64 trip_template_id = 20;
+        model.TripTemplate trip_template = 25;
+        uint32 max_guest = 30;
+        uint32 curent_guest = 35;
+        uint32 places_left = 36;
+        float price = 40;
+        repeated model.Diver divers = 45;
+        google.protobuf.Timestamp start_date = 60 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp end_date = 70 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
+        google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
+    }
 }
