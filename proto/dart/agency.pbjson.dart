@@ -375,3 +375,45 @@ const UpdateStaffRequest$json = const {
 
 /// Descriptor for `UpdateStaffRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStaffRequestDescriptor = $convert.base64Decode('ChJVcGRhdGVTdGFmZlJlcXVlc3QSIgoFc3RhZmYYCiABKAsyDC5tb2RlbC5TdGFmZlIFc3RhZmY=');
+@$core.Deprecated('Use generateCurrentTripsReportRequestDescriptor instead')
+const GenerateCurrentTripsReportRequest$json = const {
+  '1': 'GenerateCurrentTripsReportRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `GenerateCurrentTripsReportRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateCurrentTripsReportRequestDescriptor = $convert.base64Decode('CiFHZW5lcmF0ZUN1cnJlbnRUcmlwc1JlcG9ydFJlcXVlc3QSFAoFbGltaXQYASABKARSBWxpbWl0EhYKBm9mZnNldBgCIAEoBFIGb2Zmc2V0');
+@$core.Deprecated('Use generateCurrentTripsReportResponseDescriptor instead')
+const GenerateCurrentTripsReportResponse$json = const {
+  '1': 'GenerateCurrentTripsReportResponse',
+  '2': const [
+    const {'1': 'report', '3': 1, '4': 1, '5': 11, '6': '.agency.GenerateCurrentTripsReportResponse.ReportTrip', '10': 'report'},
+  ],
+  '3': const [GenerateCurrentTripsReportResponse_ReportTrip$json],
+};
+
+@$core.Deprecated('Use generateCurrentTripsReportResponseDescriptor instead')
+const GenerateCurrentTripsReportResponse_ReportTrip$json = const {
+  '1': 'ReportTrip',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
+    const {'1': 'trip_template', '3': 25, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
+    const {'1': 'places_left', '3': 36, '4': 1, '5': 13, '10': 'placesLeft'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'divers', '3': 45, '4': 3, '5': 11, '6': '.model.Diver', '10': 'divers'},
+    const {'1': 'start_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'startDate'},
+    const {'1': 'end_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'endDate'},
+    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `GenerateCurrentTripsReportResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateCurrentTripsReportResponseDescriptor = $convert.base64Decode('CiJHZW5lcmF0ZUN1cnJlbnRUcmlwc1JlcG9ydFJlc3BvbnNlEk0KBnJlcG9ydBgBIAEoCzI1LmFnZW5jeS5HZW5lcmF0ZUN1cnJlbnRUcmlwc1JlcG9ydFJlc3BvbnNlLlJlcG9ydFRyaXBSBnJlcG9ydBrzBAoKUmVwb3J0VHJpcBIOCgJpZBgBIAEoBFICaWQSKAoQdHJpcF90ZW1wbGF0ZV9pZBgUIAEoBFIOdHJpcFRlbXBsYXRlSWQSOAoNdHJpcF90ZW1wbGF0ZRgZIAEoCzITLm1vZGVsLlRyaXBUZW1wbGF0ZVIMdHJpcFRlbXBsYXRlEhsKCW1heF9ndWVzdBgeIAEoDVIIbWF4R3Vlc3QSIQoMY3VyZW50X2d1ZXN0GCMgASgNUgtjdXJlbnRHdWVzdBIfCgtwbGFjZXNfbGVmdBgkIAEoDVIKcGxhY2VzTGVmdBIUCgVwcmljZRgoIAEoAlIFcHJpY2USJAoGZGl2ZXJzGC0gAygLMgwubW9kZWwuRGl2ZXJSBmRpdmVycxI/CgpzdGFydF9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJc3RhcnREYXRlEjsKCGVuZF9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIHZW5kRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');

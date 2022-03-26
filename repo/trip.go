@@ -139,7 +139,7 @@ func (repo *tripRepository) ListTrips(ctx context.Context, lastReservationDate *
 	return trips, nil
 }
 
-func (repo *tripRepository) ListUnfullTripsByAgencyListTrips(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error) {
+func (repo *tripRepository) ListUnfullTripsByAgency(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error) {
 	var trips []*model.Trip
 
 	result := repo.db.Preload("DiveMasters")
@@ -152,7 +152,7 @@ func (repo *tripRepository) ListUnfullTripsByAgencyListTrips(ctx context.Context
 	result.Where("trips.current_guest < trips.max_guest")
 	result.Where("trips.last_reservation_date >= ?", *lastReservationDate)
 
-	result.Find(&trips)
+	result.Limit(int(limit)).Offset(int(offset)).Find(&trips)
 
 	if result.Error != nil {
 		return nil, result.Error

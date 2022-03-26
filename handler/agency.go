@@ -665,6 +665,19 @@ func (handler *AgencyHandler) UpdateStaff(ctx context.Context, req *pb.UpdateSta
 
 func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrentTripsReportRequest, srv pb.AgencyService_GenerateCurrentTripsReportServer) error {
 	ctx := srv.Context()
-	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx)
+	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx, req.GetLimit(), req.GetOffset())
 
+	if err != nil {
+		return err
+	}
+
+	for _, reportTrip := range reportTrips {
+		resp := &pb.GenerateCurrentTripsReportResponse{
+			Report: reportTrip.GetProto(),
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
 }

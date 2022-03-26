@@ -137,6 +137,13 @@ class AgencyServiceClient extends $grpc.Client {
           ($2.SearchTripsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $2.SearchTripsResponse.fromBuffer(value));
+  static final _$generateCurrentTripsReport = $grpc.ClientMethod<
+          $2.GenerateCurrentTripsReportRequest,
+          $2.GenerateCurrentTripsReportResponse>(
+      '/agency.AgencyService/GenerateCurrentTripsReport',
+      ($2.GenerateCurrentTripsReportRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.GenerateCurrentTripsReportResponse.fromBuffer(value));
 
   AgencyServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -288,6 +295,14 @@ class AgencyServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$searchTrips, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.GenerateCurrentTripsReportResponse>
+      generateCurrentTripsReport($2.GenerateCurrentTripsReportRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$generateCurrentTripsReport, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -477,6 +492,16 @@ abstract class AgencyServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $2.SearchTripsRequest.fromBuffer(value),
             ($2.SearchTripsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GenerateCurrentTripsReportRequest,
+            $2.GenerateCurrentTripsReportResponse>(
+        'GenerateCurrentTripsReport',
+        generateCurrentTripsReport_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.GenerateCurrentTripsReportRequest.fromBuffer(value),
+        ($2.GenerateCurrentTripsReportResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> addDiveMaster_Pre($grpc.ServiceCall call,
@@ -599,6 +624,12 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* searchTrips(call, await request);
   }
 
+  $async.Stream<$2.GenerateCurrentTripsReportResponse>
+      generateCurrentTripsReport_Pre($grpc.ServiceCall call,
+          $async.Future<$2.GenerateCurrentTripsReportRequest> request) async* {
+    yield* generateCurrentTripsReport(call, await request);
+  }
+
   $async.Future<$1.Empty> addDiveMaster(
       $grpc.ServiceCall call, $2.AddDiveMasterRequest request);
   $async.Future<$1.Empty> addStaff(
@@ -645,4 +676,7 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.ListRoomTypesRequest request);
   $async.Stream<$2.SearchTripsResponse> searchTrips(
       $grpc.ServiceCall call, $2.SearchTripsRequest request);
+  $async.Stream<$2.GenerateCurrentTripsReportResponse>
+      generateCurrentTripsReport(
+          $grpc.ServiceCall call, $2.GenerateCurrentTripsReportRequest request);
 }

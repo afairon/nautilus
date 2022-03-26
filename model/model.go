@@ -673,7 +673,34 @@ type ReservationRoomType struct {
 type ReportTrip struct {
 	Trip           Trip
 	TripTemplateID uint64
-	TripTemplate   TripTemplate
 	PlacesLeft     uint32
 	Divers         []*Diver
+}
+
+func (rt *ReportTrip) GetProto() *pb.GenerateCurrentTripsReportResponse_ReportTrip {
+	reportTrip := pb.GenerateCurrentTripsReportResponse_ReportTrip{
+		Id:                  uint64(rt.Trip.ID),
+		TripTemplateId:      uint64(rt.Trip.TripTemplate.ID),
+		TripTemplate:        rt.Trip.TripTemplate.GetProto(),
+		MaxGuest:            rt.Trip.MaxGuest,
+		CurentGuest:         rt.Trip.CurrentGuest,
+		PlacesLeft:          rt.PlacesLeft,
+		Price:               rt.Trip.Price,
+		Divers:              []*pb.Diver{},
+		StartDate:           rt.Trip.StartDate,
+		EndDate:             rt.Trip.EndDate,
+		LastReservationDate: rt.Trip.LastReservationDate,
+		CreatedAt:           &rt.Trip.CreatedAt,
+		UpdatedAt:           &rt.Trip.UpdatedAt,
+	}
+
+	if len(rt.Divers) > 0 {
+		reportTrip.Divers = make([]*pb.Diver, 0, len(rt.Divers))
+
+		for _, d := range rt.Divers {
+			reportTrip.Divers = append(reportTrip.Divers, d.GetProto())
+		}
+	}
+
+	return &reportTrip
 }

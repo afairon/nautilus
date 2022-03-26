@@ -227,9 +227,9 @@ message GenerateCurrentTripsReportRequest {
 }
 
 message GenerateCurrentTripsReportResponse {
-    Report report = 1;
+    ReportTrip report = 1;
     
-    message Report {
+    message ReportTrip {
         uint64 id = 1;
         uint64 trip_template_id = 20;
         model.TripTemplate trip_template = 25;

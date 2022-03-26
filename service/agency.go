@@ -1021,7 +1021,6 @@ func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, li
 			rt := &model.ReportTrip{
 				Trip:           *trip,
 				TripTemplateID: uint64(trip.TripTemplateID),
-				TripTemplate:   trip.TripTemplate,
 			}
 
 			placesLeft := trip.MaxGuest - trip.CurrentGuest
