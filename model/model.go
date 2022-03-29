@@ -677,8 +677,8 @@ type ReportTrip struct {
 	Divers         []*Diver
 }
 
-func (rt *ReportTrip) GetProto() *pb.GenerateCurrentTripsReportResponse_ReportTrip {
-	reportTrip := pb.GenerateCurrentTripsReportResponse_ReportTrip{
+func (rt *ReportTrip) GetProto() *pb.ReportTrip {
+	reportTrip := pb.ReportTrip{
 		Id:                  uint64(rt.Trip.ID),
 		TripTemplateId:      uint64(rt.Trip.TripTemplate.ID),
 		TripTemplate:        rt.Trip.TripTemplate.GetProto(),
