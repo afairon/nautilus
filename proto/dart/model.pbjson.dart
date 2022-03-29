@@ -411,3 +411,25 @@ const DiveSite$json = const {
 
 /// Descriptor for `DiveSite`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List diveSiteDescriptor = $convert.base64Decode('CghEaXZlU2l0ZRIOCgJpZBgBIAEoBFICaWQSEgoEbmFtZRgFIAEoCVIEbmFtZRIgCgtkZXNjcmlwdGlvbhgKIAEoCVILZGVzY3JpcHRpb24SGwoJbWluX2RlcHRoGBQgASgNUghtaW5EZXB0aBIbCgltYXhfZGVwdGgYGSABKA1SCG1heERlcHRoEhcKB3RyaXBfaWQYHiABKARSBnRyaXBJZBI/CgpjcmVhdGVkX2F0GFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYZCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+@$core.Deprecated('Use reportTripDescriptor instead')
+const ReportTrip$json = const {
+  '1': 'ReportTrip',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
+    const {'1': 'trip_template', '3': 25, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
+    const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
+    const {'1': 'places_left', '3': 36, '4': 1, '5': 13, '10': 'placesLeft'},
+    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'divers', '3': 45, '4': 3, '5': 11, '6': '.model.Diver', '10': 'divers'},
+    const {'1': 'start_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'startDate'},
+    const {'1': 'end_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'endDate'},
+    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
+    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `ReportTrip`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List reportTripDescriptor = $convert.base64Decode('CgpSZXBvcnRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0Eh8KC3BsYWNlc19sZWZ0GCQgASgNUgpwbGFjZXNMZWZ0EhQKBXByaWNlGCggASgCUgVwcmljZRIkCgZkaXZlcnMYLSADKAsyDC5tb2RlbC5EaXZlclIGZGl2ZXJzEj8KCnN0YXJ0X2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUglzdGFydERhdGUSOwoIZW5kX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgdlbmREYXRlElQKFWxhc3RfcmVzZXJ2YXRpb25fZGF0ZRhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSE2xhc3RSZXNlcnZhdGlvbkRhdGUSPwoKY3JlYXRlZF9hdBhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GGQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');

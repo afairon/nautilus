@@ -3039,3 +3039,224 @@ class DiveSite extends $pb.GeneratedMessage {
   $8.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
+class ReportTrip extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReportTrip', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplateId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<TripTemplate>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: TripTemplate.create)
+    ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
+    ..a<$core.int>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'curentGuest', $pb.PbFieldType.OU3)
+    ..a<$core.int>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placesLeft', $pb.PbFieldType.OU3)
+    ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
+    ..pc<Diver>(45, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divers', $pb.PbFieldType.PM, subBuilder: Diver.create)
+    ..aOM<$8.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $8.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  ReportTrip._() : super();
+  factory ReportTrip({
+    $fixnum.Int64? id,
+    $fixnum.Int64? tripTemplateId,
+    TripTemplate? tripTemplate,
+    $core.int? maxGuest,
+    $core.int? curentGuest,
+    $core.int? placesLeft,
+    $core.double? price,
+    $core.Iterable<Diver>? divers,
+    $8.Timestamp? startDate,
+    $8.Timestamp? endDate,
+    $8.Timestamp? lastReservationDate,
+    $8.Timestamp? createdAt,
+    $8.Timestamp? updatedAt,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (tripTemplateId != null) {
+      _result.tripTemplateId = tripTemplateId;
+    }
+    if (tripTemplate != null) {
+      _result.tripTemplate = tripTemplate;
+    }
+    if (maxGuest != null) {
+      _result.maxGuest = maxGuest;
+    }
+    if (curentGuest != null) {
+      _result.curentGuest = curentGuest;
+    }
+    if (placesLeft != null) {
+      _result.placesLeft = placesLeft;
+    }
+    if (price != null) {
+      _result.price = price;
+    }
+    if (divers != null) {
+      _result.divers.addAll(divers);
+    }
+    if (startDate != null) {
+      _result.startDate = startDate;
+    }
+    if (endDate != null) {
+      _result.endDate = endDate;
+    }
+    if (lastReservationDate != null) {
+      _result.lastReservationDate = lastReservationDate;
+    }
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
+    }
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
+    }
+    return _result;
+  }
+  factory ReportTrip.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReportTrip.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ReportTrip clone() => ReportTrip()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ReportTrip copyWith(void Function(ReportTrip) updates) => super.copyWith((message) => updates(message as ReportTrip)) as ReportTrip; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReportTrip create() => ReportTrip._();
+  ReportTrip createEmptyInstance() => create();
+  static $pb.PbList<ReportTrip> createRepeated() => $pb.PbList<ReportTrip>();
+  @$core.pragma('dart2js:noInline')
+  static ReportTrip getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReportTrip>(create);
+  static ReportTrip? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get tripTemplateId => $_getI64(1);
+  @$pb.TagNumber(20)
+  set tripTemplateId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasTripTemplateId() => $_has(1);
+  @$pb.TagNumber(20)
+  void clearTripTemplateId() => clearField(20);
+
+  @$pb.TagNumber(25)
+  TripTemplate get tripTemplate => $_getN(2);
+  @$pb.TagNumber(25)
+  set tripTemplate(TripTemplate v) { setField(25, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasTripTemplate() => $_has(2);
+  @$pb.TagNumber(25)
+  void clearTripTemplate() => clearField(25);
+  @$pb.TagNumber(25)
+  TripTemplate ensureTripTemplate() => $_ensure(2);
+
+  @$pb.TagNumber(30)
+  $core.int get maxGuest => $_getIZ(3);
+  @$pb.TagNumber(30)
+  set maxGuest($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasMaxGuest() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearMaxGuest() => clearField(30);
+
+  @$pb.TagNumber(35)
+  $core.int get curentGuest => $_getIZ(4);
+  @$pb.TagNumber(35)
+  set curentGuest($core.int v) { $_setUnsignedInt32(4, v); }
+  @$pb.TagNumber(35)
+  $core.bool hasCurentGuest() => $_has(4);
+  @$pb.TagNumber(35)
+  void clearCurentGuest() => clearField(35);
+
+  @$pb.TagNumber(36)
+  $core.int get placesLeft => $_getIZ(5);
+  @$pb.TagNumber(36)
+  set placesLeft($core.int v) { $_setUnsignedInt32(5, v); }
+  @$pb.TagNumber(36)
+  $core.bool hasPlacesLeft() => $_has(5);
+  @$pb.TagNumber(36)
+  void clearPlacesLeft() => clearField(36);
+
+  @$pb.TagNumber(40)
+  $core.double get price => $_getN(6);
+  @$pb.TagNumber(40)
+  set price($core.double v) { $_setFloat(6, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasPrice() => $_has(6);
+  @$pb.TagNumber(40)
+  void clearPrice() => clearField(40);
+
+  @$pb.TagNumber(45)
+  $core.List<Diver> get divers => $_getList(7);
+
+  @$pb.TagNumber(60)
+  $8.Timestamp get startDate => $_getN(8);
+  @$pb.TagNumber(60)
+  set startDate($8.Timestamp v) { setField(60, v); }
+  @$pb.TagNumber(60)
+  $core.bool hasStartDate() => $_has(8);
+  @$pb.TagNumber(60)
+  void clearStartDate() => clearField(60);
+  @$pb.TagNumber(60)
+  $8.Timestamp ensureStartDate() => $_ensure(8);
+
+  @$pb.TagNumber(70)
+  $8.Timestamp get endDate => $_getN(9);
+  @$pb.TagNumber(70)
+  set endDate($8.Timestamp v) { setField(70, v); }
+  @$pb.TagNumber(70)
+  $core.bool hasEndDate() => $_has(9);
+  @$pb.TagNumber(70)
+  void clearEndDate() => clearField(70);
+  @$pb.TagNumber(70)
+  $8.Timestamp ensureEndDate() => $_ensure(9);
+
+  @$pb.TagNumber(80)
+  $8.Timestamp get lastReservationDate => $_getN(10);
+  @$pb.TagNumber(80)
+  set lastReservationDate($8.Timestamp v) { setField(80, v); }
+  @$pb.TagNumber(80)
+  $core.bool hasLastReservationDate() => $_has(10);
+  @$pb.TagNumber(80)
+  void clearLastReservationDate() => clearField(80);
+  @$pb.TagNumber(80)
+  $8.Timestamp ensureLastReservationDate() => $_ensure(10);
+
+  @$pb.TagNumber(90)
+  $8.Timestamp get createdAt => $_getN(11);
+  @$pb.TagNumber(90)
+  set createdAt($8.Timestamp v) { setField(90, v); }
+  @$pb.TagNumber(90)
+  $core.bool hasCreatedAt() => $_has(11);
+  @$pb.TagNumber(90)
+  void clearCreatedAt() => clearField(90);
+  @$pb.TagNumber(90)
+  $8.Timestamp ensureCreatedAt() => $_ensure(11);
+
+  @$pb.TagNumber(100)
+  $8.Timestamp get updatedAt => $_getN(12);
+  @$pb.TagNumber(100)
+  set updatedAt($8.Timestamp v) { setField(100, v); }
+  @$pb.TagNumber(100)
+  $core.bool hasUpdatedAt() => $_has(12);
+  @$pb.TagNumber(100)
+  void clearUpdatedAt() => clearField(100);
+  @$pb.TagNumber(100)
+  $8.Timestamp ensureUpdatedAt() => $_ensure(12);
+}
+

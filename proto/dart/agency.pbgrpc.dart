@@ -144,6 +144,13 @@ class AgencyServiceClient extends $grpc.Client {
       ($2.GenerateCurrentTripsReportRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $2.GenerateCurrentTripsReportResponse.fromBuffer(value));
+  static final _$generateYearlyEndedTripsReport = $grpc.ClientMethod<
+          $2.GenerateYearlyEndedTripsReportRequest,
+          $2.GenerateYearlyEndedTripsReportResponse>(
+      '/agency.AgencyService/GenerateYearlyEndedTripsReport',
+      ($2.GenerateYearlyEndedTripsReportRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.GenerateYearlyEndedTripsReportResponse.fromBuffer(value));
 
   AgencyServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -303,6 +310,15 @@ class AgencyServiceClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$generateCurrentTripsReport, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.GenerateYearlyEndedTripsReportResponse>
+      generateYearlyEndedTripsReport(
+          $2.GenerateYearlyEndedTripsReportRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$generateYearlyEndedTripsReport, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -502,6 +518,16 @@ abstract class AgencyServiceBase extends $grpc.Service {
             $2.GenerateCurrentTripsReportRequest.fromBuffer(value),
         ($2.GenerateCurrentTripsReportResponse value) =>
             value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.GenerateYearlyEndedTripsReportRequest,
+            $2.GenerateYearlyEndedTripsReportResponse>(
+        'GenerateYearlyEndedTripsReport',
+        generateYearlyEndedTripsReport_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.GenerateYearlyEndedTripsReportRequest.fromBuffer(value),
+        ($2.GenerateYearlyEndedTripsReportResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Future<$1.Empty> addDiveMaster_Pre($grpc.ServiceCall call,
@@ -630,6 +656,14 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* generateCurrentTripsReport(call, await request);
   }
 
+  $async.Stream<$2.GenerateYearlyEndedTripsReportResponse>
+      generateYearlyEndedTripsReport_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$2.GenerateYearlyEndedTripsReportRequest>
+              request) async* {
+    yield* generateYearlyEndedTripsReport(call, await request);
+  }
+
   $async.Future<$1.Empty> addDiveMaster(
       $grpc.ServiceCall call, $2.AddDiveMasterRequest request);
   $async.Future<$1.Empty> addStaff(
@@ -679,4 +713,7 @@ abstract class AgencyServiceBase extends $grpc.Service {
   $async.Stream<$2.GenerateCurrentTripsReportResponse>
       generateCurrentTripsReport(
           $grpc.ServiceCall call, $2.GenerateCurrentTripsReportRequest request);
+  $async.Stream<$2.GenerateYearlyEndedTripsReportResponse>
+      generateYearlyEndedTripsReport($grpc.ServiceCall call,
+          $2.GenerateYearlyEndedTripsReportRequest request);
 }

@@ -40,7 +40,7 @@ service AgencyService {
 
     rpc GenerateCurrentTripsReport(GenerateCurrentTripsReportRequest) returns (stream GenerateCurrentTripsReportResponse);
     // GenerateYearlyEndedTripsReport generates reports for trips that have already ended
-    rpc GenerateYearlyEndedTripsReport(GenerateEndedTripsReportRequest) returns (stream GenerateEndedTripsReportResponse);
+    rpc GenerateYearlyEndedTripsReport(GenerateYearlyEndedTripsReportRequest) returns (stream GenerateYearlyEndedTripsReportResponse);
 }
 
 message AddDiveMasterRequest {
@@ -232,12 +232,12 @@ message GenerateCurrentTripsReportResponse {
     model.ReportTrip report = 1;
 }
 
-message GenerateEndedTripsReportRequest {
+message GenerateYearlyEndedTripsReportRequest {
     uint64 limit = 1;
     uint64 offset = 2;
     uint32 years = 10;
 }
 
-message GenerateEndedTripsReportResponse {
+message GenerateYearlyEndedTripsReportResponse {
     repeated model.ReportTrip reports = 1;
 }

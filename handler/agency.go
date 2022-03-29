@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -682,7 +683,7 @@ func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrent
 	return nil
 }
 
-func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateEndedTripsReportRequest, srv pb.AgencyService_GenerateYearlyEndedTripsReportServer) error {
+func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateYearlyEndedTripsReportRequest, srv pb.AgencyService_GenerateYearlyEndedTripsReportServer) error {
 	ctx := srv.Context()
 	yearlyReportTrips, err := handler.agencyService.GenerateYearlyEndedTripsReport(ctx, req.GetYears(), req.GetLimit(), req.GetOffset())
 
@@ -697,11 +698,14 @@ func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateEnd
 			rts = append(rts, reportTrip.GetProto())
 		}
 
-		resp := &pb.GenerateEndedTripsReportResponse{
+		resp := &pb.GenerateYearlyEndedTripsReportResponse{
 			Reports: rts,
 		}
 
+		fmt.Printf("%+v\n", resp)
+
 		srv.Send(resp)
+
 	}
 
 	return nil

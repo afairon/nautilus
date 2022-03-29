@@ -1082,7 +1082,6 @@ func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context
 		start := time.Date(y, 1, 1, 0, 0, 0, 0, end.Location())
 		i := 0
 
-		// do-while loop
 		for {
 			trips, err := service.repo.Trip.ListEndedTripsOverPeriod(ctx, &start, &end, uint64(agency.ID), limit, offset)
 			i += 1
