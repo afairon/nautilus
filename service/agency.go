@@ -596,6 +596,12 @@ func (service *agencyService) ListTrips(ctx context.Context, limit, offset uint6
 		return nil, err
 	}
 
+	for _, trip := range trips {
+		for idx, id := range trip.TripTemplate.Images {
+			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		}
+	}
+
 	return trips, nil
 }
 
@@ -631,9 +637,14 @@ func (service *agencyService) ListRoomTypesByHotelID(ctx context.Context, id, li
 	}
 
 	roomTypes, err := service.repo.RoomType.ListRoomTypesByHotelID(ctx, id, limit, offset)
-
 	if err != nil {
 		return nil, err
+	}
+
+	for _, roomType := range roomTypes {
+		for idx, id := range roomType.Images {
+			roomType.Images[idx] = service.media.Get(id, false)
+		}
 	}
 
 	return roomTypes, nil
@@ -645,9 +656,14 @@ func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, i
 	}
 
 	roomTypes, err := service.repo.RoomType.ListRoomTypesByLiveaboardID(ctx, id, limit, offset)
-
 	if err != nil {
 		return nil, err
+	}
+
+	for _, roomType := range roomTypes {
+		for idx, id := range roomType.Images {
+			roomType.Images[idx] = service.media.Get(id, false)
+		}
 	}
 
 	return roomTypes, nil
