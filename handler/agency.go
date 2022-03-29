@@ -2,7 +2,6 @@ package handler
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -701,8 +700,6 @@ func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateYea
 		resp := &pb.GenerateYearlyEndedTripsReportResponse{
 			Reports: rts,
 		}
-
-		fmt.Printf("%+v\n", resp)
 
 		srv.Send(resp)
 
