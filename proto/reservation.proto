@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 option go_package = "./pb";
 
 service ReservationService {
-    rpc CreateReservation (CreateReservationRequest) returns (Reservation) {}
+    rpc CreateReservation (CreateReservationRequest) returns (CreateReservationResponse) {}
     rpc GetReservation (GetReservationRequest) returns (Reservation) {}
 }
 
@@ -31,6 +31,10 @@ message Reservation {
 }
 
 message CreateReservationRequest {
+    Reservation reservation = 1;
+}
+
+message CreateReservationResponse {
     Reservation reservation = 1;
 }
 

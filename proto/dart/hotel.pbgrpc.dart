@@ -10,23 +10,23 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'hotel.pb.dart' as $4;
+import 'hotel.pb.dart' as $5;
 export 'hotel.pb.dart';
 
 class HotelServiceClient extends $grpc.Client {
   static final _$getHotel =
-      $grpc.ClientMethod<$4.GetHotelRequest, $4.GetHotelResponse>(
+      $grpc.ClientMethod<$5.GetHotelRequest, $5.GetHotelResponse>(
           '/hotel.HotelService/GetHotel',
-          ($4.GetHotelRequest value) => value.writeToBuffer(),
+          ($5.GetHotelRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $4.GetHotelResponse.fromBuffer(value));
+              $5.GetHotelResponse.fromBuffer(value));
 
   HotelServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$4.GetHotelResponse> getHotel($4.GetHotelRequest request,
+  $grpc.ResponseFuture<$5.GetHotelResponse> getHotel($5.GetHotelRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getHotel, request, options: options);
   }
@@ -36,20 +36,20 @@ abstract class HotelServiceBase extends $grpc.Service {
   $core.String get $name => 'hotel.HotelService';
 
   HotelServiceBase() {
-    $addMethod($grpc.ServiceMethod<$4.GetHotelRequest, $4.GetHotelResponse>(
+    $addMethod($grpc.ServiceMethod<$5.GetHotelRequest, $5.GetHotelResponse>(
         'GetHotel',
         getHotel_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $4.GetHotelRequest.fromBuffer(value),
-        ($4.GetHotelResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $5.GetHotelRequest.fromBuffer(value),
+        ($5.GetHotelResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$4.GetHotelResponse> getHotel_Pre(
-      $grpc.ServiceCall call, $async.Future<$4.GetHotelRequest> request) async {
+  $async.Future<$5.GetHotelResponse> getHotel_Pre(
+      $grpc.ServiceCall call, $async.Future<$5.GetHotelRequest> request) async {
     return getHotel(call, await request);
   }
 
-  $async.Future<$4.GetHotelResponse> getHotel(
-      $grpc.ServiceCall call, $4.GetHotelRequest request);
+  $async.Future<$5.GetHotelResponse> getHotel(
+      $grpc.ServiceCall call, $5.GetHotelRequest request);
 }

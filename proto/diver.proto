@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package diver;
+
+import "model.proto";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./pb";
+
+service DiverService {
+    // List the trips that the diver has made reservation for
+    rpc ListBookedTrips(ListBookedTripsRequest) returns (stream ListBookedTripsResponse);
+}
+
+message ListBookedTripsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+message ListBookedTripsResponse {
+    model.TripWithTemplate trip = 1;
+}

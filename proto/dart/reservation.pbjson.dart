@@ -47,6 +47,16 @@ const CreateReservationRequest$json = const {
 
 /// Descriptor for `CreateReservationRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createReservationRequestDescriptor = $convert.base64Decode('ChhDcmVhdGVSZXNlcnZhdGlvblJlcXVlc3QSOgoLcmVzZXJ2YXRpb24YASABKAsyGC5yZXNlcnZhdGlvbi5SZXNlcnZhdGlvblILcmVzZXJ2YXRpb24=');
+@$core.Deprecated('Use createReservationResponseDescriptor instead')
+const CreateReservationResponse$json = const {
+  '1': 'CreateReservationResponse',
+  '2': const [
+    const {'1': 'reservation', '3': 1, '4': 1, '5': 11, '6': '.reservation.Reservation', '10': 'reservation'},
+  ],
+};
+
+/// Descriptor for `CreateReservationResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createReservationResponseDescriptor = $convert.base64Decode('ChlDcmVhdGVSZXNlcnZhdGlvblJlc3BvbnNlEjoKC3Jlc2VydmF0aW9uGAEgASgLMhgucmVzZXJ2YXRpb24uUmVzZXJ2YXRpb25SC3Jlc2VydmF0aW9u');
 @$core.Deprecated('Use getReservationRequestDescriptor instead')
 const GetReservationRequest$json = const {
   '1': 'GetReservationRequest',

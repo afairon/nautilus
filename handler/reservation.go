@@ -22,13 +22,18 @@ func NewReservationHandler(service service.ReservationService) *ReservationHandl
 }
 
 // Create handles reservation creation. It delegates the comment creation to reservationService.
-func (handler *ReservationHandler) CreateReservation(ctx context.Context, req *pb.CreateReservationRequest) (*pb.Reservation, error) {
+func (handler *ReservationHandler) CreateReservation(ctx context.Context, req *pb.CreateReservationRequest) (*pb.CreateReservationResponse, error) {
 	reservation, err := handler.service.CreateReservation(ctx, req.Reservation)
+
 	if err != nil {
 		return nil, err
 	}
 
-	return reservation, nil
+	resp := pb.CreateReservationResponse{
+		Reservation: reservation,
+	}
+
+	return &resp, nil
 }
 
 // GetReservation retrieves reservation by id.
