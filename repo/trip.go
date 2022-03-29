@@ -17,6 +17,7 @@ type TripRepository interface {
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTrips(ctx context.Context, lastReservationDate *time.Time, limit, offset uint64) ([]*model.Trip, error)
 	ListUnfullTripsByAgency(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
+	ListEndedTripsOverPeriod(ctx context.Context, startDate, endDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 

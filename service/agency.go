@@ -47,6 +47,7 @@ type AgencyService interface {
 	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 
 	GenerateCurrentTripsReport(ctx context.Context, limit, offset uint64) ([]*model.ReportTrip, error)
+	GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([]*model.ReportTrip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -1004,6 +1005,82 @@ func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, li
 		lastReservationDate := &now
 
 		trips, err := service.repo.Trip.ListUnfullTripsByAgency(ctx, lastReservationDate, uint64(agency.ID), limit, offset)
+
+		if err != nil {
+			return err
+		}
+
+		reportTrips = make([]*model.ReportTrip, 0, len(trips))
+
+		for _, trip := range trips {
+
+			for idx, id := range trip.TripTemplate.Images {
+				trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+			}
+
+			// create a new trip which will be inside the report
+			rt := &model.ReportTrip{
+				Trip:           *trip,
+				TripTemplateID: uint64(trip.TripTemplateID),
+			}
+
+			placesLeft := trip.MaxGuest - trip.CurrentGuest
+			rt.PlacesLeft = placesLeft
+
+			reservations, err := query.Reservation.GetReservationsByTrip(ctx, uint64(trip.ID))
+
+			if err != nil {
+				return err
+			}
+
+			rt.Divers = make([]*model.Diver, 0, len(reservations))
+
+			// get the divers in each reservation
+			for _, reservation := range reservations {
+				diver, err := query.Diver.Get(ctx, uint64(reservation.DiverID))
+
+				if err != nil {
+					return err
+				}
+
+				rt.Divers = append(rt.Divers, diver)
+			}
+
+			reportTrips = append(reportTrips, rt)
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return reportTrips, nil
+}
+
+func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([]*model.ReportTrip, error) {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	var reportTrips []*model.ReportTrip
+
+	// This transaction generates report (model.ReportTrip) by returning trips with divers that went to each of these trips
+	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
+		// Must at least call ListEndedTripsOverPeriod once like do while loop
+		// In other words, at least get the report for the trips that have ended in this year.
+		now := time.Now()
+		y, _, _ := now.Date()
+		startOfYear := time.Date(y, 1, 1, 0, 0, 0, 0, now.Location())
+
+		trips, err := service.repo.Trip.ListEndedTripsOverPeriod(ctx, &startOfYear, &now, uint64(agency.ID), limit, offset)
 
 		if err != nil {
 			return err

@@ -39,7 +39,8 @@ service AgencyService {
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 
     rpc GenerateCurrentTripsReport(GenerateCurrentTripsReportRequest) returns (stream GenerateCurrentTripsReportResponse);
-    rpc GenerateEndedTripsReport(GenerateEndedTripsReportRequest) returns (stream GenerateEndedTripsReportResponse);
+    // GenerateYearlyEndedTripsReport generates reports for trips that have already ended
+    rpc GenerateYearlyEndedTripsReport(GenerateEndedTripsReportRequest) returns (stream GenerateEndedTripsReportResponse);
 }
 
 message AddDiveMasterRequest {
@@ -234,6 +235,7 @@ message GenerateCurrentTripsReportResponse {
 message GenerateEndedTripsReportRequest {
     uint64 limit = 1;
     uint64 offset = 2;
+    uint32 years = 10;
 }
 
 message GenerateEndedTripsReportResponse {
