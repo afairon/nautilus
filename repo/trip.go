@@ -162,6 +162,27 @@ func (repo *tripRepository) ListUnfullTripsByAgency(ctx context.Context, lastRes
 	return trips, nil
 }
 
+func (repo *tripRepository) ListEndedTripsOverPeriod(ctx context.Context, startDate, endDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error) {
+	var trips []*model.Trip
+
+	result := repo.db.Preload("DiveMasters")
+	result.Preload("TripTemplate.Address")
+	result.Preload("TripTemplate.Hotel")
+	result.Preload("TripTemplate.Liveaboard")
+	result.Preload("TripTemplate.Boat")
+	result.Preload("DiveSites")
+	result.Where("agency_id = ?", id)
+	result.Where("trips.last_reservation_date BETWEEN ? AND ?", *startDate, *endDate)
+
+	result.Limit(int(limit)).Offset(int(offset)).Find(&trips)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return trips, nil
+}
+
 func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, region string, divers uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error) {
 	// tx := repo.db.Model(&model.Trip{}).Preload("TripTemplate.Address").Find(&trip)
 	// fmt.Println(tx)

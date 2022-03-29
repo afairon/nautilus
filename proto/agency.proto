@@ -239,5 +239,5 @@ message GenerateEndedTripsReportRequest {
 }
 
 message GenerateEndedTripsReportResponse {
-    model.ReportTrip report = 1;
+    repeated model.ReportTrip reports = 1;
 }

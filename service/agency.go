@@ -47,7 +47,7 @@ type AgencyService interface {
 	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 
 	GenerateCurrentTripsReport(ctx context.Context, limit, offset uint64) ([]*model.ReportTrip, error)
-	GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([]*model.ReportTrip, error)
+	GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([][]*model.ReportTrip, error)
 }
 
 // agencyService implements AgencyService interface above.
@@ -1059,7 +1059,7 @@ func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, li
 	return reportTrips, nil
 }
 
-func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([]*model.ReportTrip, error) {
+func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context, years uint32, limit, offset uint64) ([][]*model.ReportTrip, error) {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
@@ -1070,59 +1070,77 @@ func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context
 		limit = 20
 	}
 
-	var reportTrips []*model.ReportTrip
+	yearlyReportTrips := make([][]*model.ReportTrip, 0, years+1)
 
 	// This transaction generates report (model.ReportTrip) by returning trips with divers that went to each of these trips
 	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
 		// Must at least call ListEndedTripsOverPeriod once like do while loop
 		// In other words, at least get the report for the trips that have ended in this year.
-		now := time.Now()
-		y, _, _ := now.Date()
-		startOfYear := time.Date(y, 1, 1, 0, 0, 0, 0, now.Location())
+		end := time.Now()
+		y, _, _ := end.Date()
+		// The first day of the year "y"
+		start := time.Date(y, 1, 1, 0, 0, 0, 0, end.Location())
+		i := 0
 
-		trips, err := service.repo.Trip.ListEndedTripsOverPeriod(ctx, &startOfYear, &now, uint64(agency.ID), limit, offset)
-
-		if err != nil {
-			return err
-		}
-
-		reportTrips = make([]*model.ReportTrip, 0, len(trips))
-
-		for _, trip := range trips {
-
-			for idx, id := range trip.TripTemplate.Images {
-				trip.TripTemplate.Images[idx] = service.media.Get(id, false)
-			}
-
-			// create a new trip which will be inside the report
-			rt := &model.ReportTrip{
-				Trip:           *trip,
-				TripTemplateID: uint64(trip.TripTemplateID),
-			}
-
-			placesLeft := trip.MaxGuest - trip.CurrentGuest
-			rt.PlacesLeft = placesLeft
-
-			reservations, err := query.Reservation.GetReservationsByTrip(ctx, uint64(trip.ID))
+		// do-while loop
+		for {
+			trips, err := service.repo.Trip.ListEndedTripsOverPeriod(ctx, &start, &end, uint64(agency.ID), limit, offset)
+			i += 1
 
 			if err != nil {
 				return err
 			}
 
-			rt.Divers = make([]*model.Diver, 0, len(reservations))
+			reportTrips := make([]*model.ReportTrip, 0, len(trips))
 
-			// get the divers in each reservation
-			for _, reservation := range reservations {
-				diver, err := query.Diver.Get(ctx, uint64(reservation.DiverID))
+			for _, trip := range trips {
+
+				for idx, id := range trip.TripTemplate.Images {
+					trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+				}
+
+				// create a new trip which will be inside the report
+				rt := &model.ReportTrip{
+					Trip:           *trip,
+					TripTemplateID: uint64(trip.TripTemplateID),
+				}
+
+				placesLeft := trip.MaxGuest - trip.CurrentGuest
+				rt.PlacesLeft = placesLeft
+
+				reservations, err := query.Reservation.GetReservationsByTrip(ctx, uint64(trip.ID))
 
 				if err != nil {
 					return err
 				}
 
-				rt.Divers = append(rt.Divers, diver)
+				rt.Divers = make([]*model.Diver, 0, len(reservations))
+
+				// get the divers in each reservation
+				for _, reservation := range reservations {
+					diver, err := query.Diver.Get(ctx, uint64(reservation.DiverID))
+
+					if err != nil {
+						return err
+					}
+
+					rt.Divers = append(rt.Divers, diver)
+				}
+
+				reportTrips = append(reportTrips, rt)
 			}
 
-			reportTrips = append(reportTrips, rt)
+			yearlyReportTrips = append(yearlyReportTrips, reportTrips)
+
+			if uint32(i) > years {
+				break
+			}
+
+			// end -> subtracting the first date of the year by one is the end of the previous year
+			end = start.AddDate(0, 0, -1)
+			y, _, _ := end.Date()
+			// get the start date of the new "end" year
+			start = time.Date(y, 1, 1, 0, 0, 0, 0, end.Location())
 		}
 
 		return nil
@@ -1132,5 +1150,5 @@ func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context
 		return nil, err
 	}
 
-	return reportTrips, nil
+	return yearlyReportTrips, nil
 }

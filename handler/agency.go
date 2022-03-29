@@ -684,15 +684,21 @@ func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrent
 
 func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateEndedTripsReportRequest, srv pb.AgencyService_GenerateYearlyEndedTripsReportServer) error {
 	ctx := srv.Context()
-	reportTrips, err := handler.agencyService.GenerateYearlyEndedTripsReport(ctx, req.GetYears(), req.GetLimit(), req.GetOffset())
+	yearlyReportTrips, err := handler.agencyService.GenerateYearlyEndedTripsReport(ctx, req.GetYears(), req.GetLimit(), req.GetOffset())
 
 	if err != nil {
 		return err
 	}
 
-	for _, reportTrip := range reportTrips {
+	for _, reportTrips := range yearlyReportTrips {
+		rts := make([]*pb.ReportTrip, 0, len(reportTrips))
+
+		for _, reportTrip := range reportTrips {
+			rts = append(rts, reportTrip.GetProto())
+		}
+
 		resp := &pb.GenerateEndedTripsReportResponse{
-			Report: reportTrip.GetProto(),
+			Reports: rts,
 		}
 
 		srv.Send(resp)
