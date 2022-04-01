@@ -3,7 +3,6 @@ package service
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/afairon/nautilus/internal/media"
@@ -1187,7 +1186,6 @@ func (service *agencyService) GenerateIncomingTripsReport(ctx context.Context, w
 	// This transaction generates report (model.ReportTrip) by returning trips with divers that went to each of these trips
 	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
 		start := time.Now().AddDate(0, 0, int(7*weeks))
-		fmt.Printf("%+v\n", start)
 
 		trips, err := service.repo.Trip.ListIncomingTripsOverPeriod(ctx, &start, nil, uint64(agency.ID), limit, offset)
 
