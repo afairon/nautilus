@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// TODO check that the same diver cannot make reservations for the same trip
 func (r *Reservation) BeforeSave(tx *gorm.DB) error {
 	// check if the reservation time is before the last reservation date.
 	var trip Trip

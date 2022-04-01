@@ -418,3 +418,25 @@ const GenerateYearlyEndedTripsReportResponse$json = const {
 
 /// Descriptor for `GenerateYearlyEndedTripsReportResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List generateYearlyEndedTripsReportResponseDescriptor = $convert.base64Decode('CiZHZW5lcmF0ZVllYXJseUVuZGVkVHJpcHNSZXBvcnRSZXNwb25zZRIrCgdyZXBvcnRzGAEgAygLMhEubW9kZWwuUmVwb3J0VHJpcFIHcmVwb3J0cw==');
+@$core.Deprecated('Use generateIncomingTripsReportRequestDescriptor instead')
+const GenerateIncomingTripsReportRequest$json = const {
+  '1': 'GenerateIncomingTripsReportRequest',
+  '2': const [
+    const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
+    const {'1': 'weeks', '3': 10, '4': 1, '5': 13, '10': 'weeks'},
+  ],
+};
+
+/// Descriptor for `GenerateIncomingTripsReportRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateIncomingTripsReportRequestDescriptor = $convert.base64Decode('CiJHZW5lcmF0ZUluY29taW5nVHJpcHNSZXBvcnRSZXF1ZXN0EhQKBWxpbWl0GAEgASgEUgVsaW1pdBIWCgZvZmZzZXQYAiABKARSBm9mZnNldBIUCgV3ZWVrcxgKIAEoDVIFd2Vla3M=');
+@$core.Deprecated('Use generateIncomingTripsReportResponseDescriptor instead')
+const GenerateIncomingTripsReportResponse$json = const {
+  '1': 'GenerateIncomingTripsReportResponse',
+  '2': const [
+    const {'1': 'report', '3': 1, '4': 1, '5': 11, '6': '.model.ReportTrip', '10': 'report'},
+  ],
+};
+
+/// Descriptor for `GenerateIncomingTripsReportResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List generateIncomingTripsReportResponseDescriptor = $convert.base64Decode('CiNHZW5lcmF0ZUluY29taW5nVHJpcHNSZXBvcnRSZXNwb25zZRIpCgZyZXBvcnQYASABKAsyES5tb2RlbC5SZXBvcnRUcmlwUgZyZXBvcnQ=');

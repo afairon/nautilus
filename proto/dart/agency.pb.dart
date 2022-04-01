@@ -2219,3 +2219,127 @@ class GenerateYearlyEndedTripsReportResponse extends $pb.GeneratedMessage {
   $core.List<$10.ReportTrip> get reports => $_getList(0);
 }
 
+class GenerateIncomingTripsReportRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateIncomingTripsReportRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'weeks', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  GenerateIncomingTripsReportRequest._() : super();
+  factory GenerateIncomingTripsReportRequest({
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+    $core.int? weeks,
+  }) {
+    final _result = create();
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    if (weeks != null) {
+      _result.weeks = weeks;
+    }
+    return _result;
+  }
+  factory GenerateIncomingTripsReportRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GenerateIncomingTripsReportRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GenerateIncomingTripsReportRequest clone() => GenerateIncomingTripsReportRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GenerateIncomingTripsReportRequest copyWith(void Function(GenerateIncomingTripsReportRequest) updates) => super.copyWith((message) => updates(message as GenerateIncomingTripsReportRequest)) as GenerateIncomingTripsReportRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GenerateIncomingTripsReportRequest create() => GenerateIncomingTripsReportRequest._();
+  GenerateIncomingTripsReportRequest createEmptyInstance() => create();
+  static $pb.PbList<GenerateIncomingTripsReportRequest> createRepeated() => $pb.PbList<GenerateIncomingTripsReportRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GenerateIncomingTripsReportRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GenerateIncomingTripsReportRequest>(create);
+  static GenerateIncomingTripsReportRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get limit => $_getI64(0);
+  @$pb.TagNumber(1)
+  set limit($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get offset => $_getI64(1);
+  @$pb.TagNumber(2)
+  set offset($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOffset() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOffset() => clearField(2);
+
+  @$pb.TagNumber(10)
+  $core.int get weeks => $_getIZ(2);
+  @$pb.TagNumber(10)
+  set weeks($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasWeeks() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearWeeks() => clearField(10);
+}
+
+class GenerateIncomingTripsReportResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateIncomingTripsReportResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$10.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'report', subBuilder: $10.ReportTrip.create)
+    ..hasRequiredFields = false
+  ;
+
+  GenerateIncomingTripsReportResponse._() : super();
+  factory GenerateIncomingTripsReportResponse({
+    $10.ReportTrip? report,
+  }) {
+    final _result = create();
+    if (report != null) {
+      _result.report = report;
+    }
+    return _result;
+  }
+  factory GenerateIncomingTripsReportResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GenerateIncomingTripsReportResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GenerateIncomingTripsReportResponse clone() => GenerateIncomingTripsReportResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GenerateIncomingTripsReportResponse copyWith(void Function(GenerateIncomingTripsReportResponse) updates) => super.copyWith((message) => updates(message as GenerateIncomingTripsReportResponse)) as GenerateIncomingTripsReportResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GenerateIncomingTripsReportResponse create() => GenerateIncomingTripsReportResponse._();
+  GenerateIncomingTripsReportResponse createEmptyInstance() => create();
+  static $pb.PbList<GenerateIncomingTripsReportResponse> createRepeated() => $pb.PbList<GenerateIncomingTripsReportResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GenerateIncomingTripsReportResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GenerateIncomingTripsReportResponse>(create);
+  static GenerateIncomingTripsReportResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $10.ReportTrip get report => $_getN(0);
+  @$pb.TagNumber(1)
+  set report($10.ReportTrip v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReport() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReport() => clearField(1);
+  @$pb.TagNumber(1)
+  $10.ReportTrip ensureReport() => $_ensure(0);
+}
+

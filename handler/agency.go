@@ -707,3 +707,22 @@ func (handler *AgencyHandler) GenerateYearlyEndedTripsReport(req *pb.GenerateYea
 
 	return nil
 }
+
+func (handler *AgencyHandler) GenerateIncomingTripsReport(req *pb.GenerateIncomingTripsReportRequest, srv pb.AgencyService_GenerateIncomingTripsReportServer) error {
+	ctx := srv.Context()
+	reportTrips, err := handler.agencyService.GenerateIncomingTripsReport(ctx, req.GetWeeks(), req.GetLimit(), req.GetOffset())
+
+	if err != nil {
+		return err
+	}
+
+	for _, reportTrip := range reportTrips {
+		resp := &pb.GenerateIncomingTripsReportResponse{
+			Report: reportTrip.GetProto(),
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
+}
