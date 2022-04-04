@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $9;
+import 'google/protobuf/timestamp.pb.dart' as $10;
 
 class Reservation_Room extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Reservation.Room', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'reservation'), createEmptyInstance: create)
@@ -109,8 +109,8 @@ class Reservation extends $pb.GeneratedMessage {
     ..a<$core.double>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..a<$fixnum.Int64>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'totalDivers', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pc<Reservation_Room>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rooms', $pb.PbFieldType.PM, subBuilder: Reservation_Room.create)
-    ..aOM<$9.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $9.Timestamp.create)
-    ..aOM<$9.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$10.Timestamp>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$10.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $10.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -122,8 +122,8 @@ class Reservation extends $pb.GeneratedMessage {
     $core.double? price,
     $fixnum.Int64? totalDivers,
     $core.Iterable<Reservation_Room>? rooms,
-    $9.Timestamp? createdAt,
-    $9.Timestamp? updatedAt,
+    $10.Timestamp? createdAt,
+    $10.Timestamp? updatedAt,
   }) {
     final _result = create();
     if (id != null) {
@@ -222,26 +222,26 @@ class Reservation extends $pb.GeneratedMessage {
   $core.List<Reservation_Room> get rooms => $_getList(5);
 
   @$pb.TagNumber(50)
-  $9.Timestamp get createdAt => $_getN(6);
+  $10.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(50)
-  set createdAt($9.Timestamp v) { setField(50, v); }
+  set createdAt($10.Timestamp v) { setField(50, v); }
   @$pb.TagNumber(50)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(50)
   void clearCreatedAt() => clearField(50);
   @$pb.TagNumber(50)
-  $9.Timestamp ensureCreatedAt() => $_ensure(6);
+  $10.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(60)
-  $9.Timestamp get updatedAt => $_getN(7);
+  $10.Timestamp get updatedAt => $_getN(7);
   @$pb.TagNumber(60)
-  set updatedAt($9.Timestamp v) { setField(60, v); }
+  set updatedAt($10.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
   $core.bool hasUpdatedAt() => $_has(7);
   @$pb.TagNumber(60)
   void clearUpdatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $9.Timestamp ensureUpdatedAt() => $_ensure(7);
+  $10.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
 class CreateReservationRequest extends $pb.GeneratedMessage {

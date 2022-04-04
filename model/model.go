@@ -611,6 +611,18 @@ type Amenity struct {
 	Description string `gorm:"not null"`
 }
 
+func (a *Amenity) GetProto() *pb.Amenity {
+	amenity := pb.Amenity{
+		Id:          uint64(a.ID),
+		Name:        a.Name,
+		Description: a.Description,
+		CreatedAt:   &a.CreatedAt,
+		UpdatedAt:   &a.UpdatedAt,
+	}
+
+	return &amenity
+}
+
 func (a *Amenity) From(amenity *pb.Amenity) {
 	if amenity == nil {
 		return

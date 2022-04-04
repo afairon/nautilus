@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $10;
+import 'model.pb.dart' as $11;
 
 class ListBookedTripsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBookedTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
@@ -75,13 +75,13 @@ class ListBookedTripsRequest extends $pb.GeneratedMessage {
 
 class ListBookedTripsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBookedTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
-    ..aOM<$10.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $10.TripWithTemplate.create)
+    ..aOM<$11.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $11.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   ListBookedTripsResponse._() : super();
   factory ListBookedTripsResponse({
-    $10.TripWithTemplate? trip,
+    $11.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -111,14 +111,14 @@ class ListBookedTripsResponse extends $pb.GeneratedMessage {
   static ListBookedTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $10.TripWithTemplate get trip => $_getN(0);
+  $11.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($10.TripWithTemplate v) { setField(1, v); }
+  set trip($11.TripWithTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $10.TripWithTemplate ensureTrip() => $_ensure(0);
+  $11.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 

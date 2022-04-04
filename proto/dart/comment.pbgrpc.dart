@@ -10,36 +10,36 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'comment.pb.dart' as $3;
+import 'comment.pb.dart' as $4;
 export 'comment.pb.dart';
 
 class CommentServiceClient extends $grpc.Client {
   static final _$createComment =
-      $grpc.ClientMethod<$3.CreateCommentRequest, $3.CreateCommentResponse>(
+      $grpc.ClientMethod<$4.CreateCommentRequest, $4.CreateCommentResponse>(
           '/comment.CommentService/CreateComment',
-          ($3.CreateCommentRequest value) => value.writeToBuffer(),
+          ($4.CreateCommentRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $3.CreateCommentResponse.fromBuffer(value));
+              $4.CreateCommentResponse.fromBuffer(value));
   static final _$getComment =
-      $grpc.ClientMethod<$3.GetCommentRequest, $3.GetCommentResponse>(
+      $grpc.ClientMethod<$4.GetCommentRequest, $4.GetCommentResponse>(
           '/comment.CommentService/GetComment',
-          ($3.GetCommentRequest value) => value.writeToBuffer(),
+          ($4.GetCommentRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $3.GetCommentResponse.fromBuffer(value));
+              $4.GetCommentResponse.fromBuffer(value));
 
   CommentServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$3.CreateCommentResponse> createComment(
-      $3.CreateCommentRequest request,
+  $grpc.ResponseFuture<$4.CreateCommentResponse> createComment(
+      $4.CreateCommentRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createComment, request, options: options);
   }
 
-  $grpc.ResponseFuture<$3.GetCommentResponse> getComment(
-      $3.GetCommentRequest request,
+  $grpc.ResponseFuture<$4.GetCommentResponse> getComment(
+      $4.GetCommentRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getComment, request, options: options);
   }
@@ -50,36 +50,36 @@ abstract class CommentServiceBase extends $grpc.Service {
 
   CommentServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$3.CreateCommentRequest, $3.CreateCommentResponse>(
+        $grpc.ServiceMethod<$4.CreateCommentRequest, $4.CreateCommentResponse>(
             'CreateComment',
             createComment_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $3.CreateCommentRequest.fromBuffer(value),
-            ($3.CreateCommentResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$3.GetCommentRequest, $3.GetCommentResponse>(
+                $4.CreateCommentRequest.fromBuffer(value),
+            ($4.CreateCommentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$4.GetCommentRequest, $4.GetCommentResponse>(
         'GetComment',
         getComment_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $3.GetCommentRequest.fromBuffer(value),
-        ($3.GetCommentResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $4.GetCommentRequest.fromBuffer(value),
+        ($4.GetCommentResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$3.CreateCommentResponse> createComment_Pre(
+  $async.Future<$4.CreateCommentResponse> createComment_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$3.CreateCommentRequest> request) async {
+      $async.Future<$4.CreateCommentRequest> request) async {
     return createComment(call, await request);
   }
 
-  $async.Future<$3.GetCommentResponse> getComment_Pre($grpc.ServiceCall call,
-      $async.Future<$3.GetCommentRequest> request) async {
+  $async.Future<$4.GetCommentResponse> getComment_Pre($grpc.ServiceCall call,
+      $async.Future<$4.GetCommentRequest> request) async {
     return getComment(call, await request);
   }
 
-  $async.Future<$3.CreateCommentResponse> createComment(
-      $grpc.ServiceCall call, $3.CreateCommentRequest request);
-  $async.Future<$3.GetCommentResponse> getComment(
-      $grpc.ServiceCall call, $3.GetCommentRequest request);
+  $async.Future<$4.CreateCommentResponse> createComment(
+      $grpc.ServiceCall call, $4.CreateCommentRequest request);
+  $async.Future<$4.GetCommentResponse> getComment(
+      $grpc.ServiceCall call, $4.GetCommentRequest request);
 }

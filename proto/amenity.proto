@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package amenity;
+
+import "model.proto";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./pb";
+
+service AmenityService {
+    rpc ListAmenities(ListAmenitiesRequest) returns (stream ListAmenitiesResponse){}
+}
+
+message ListAmenitiesRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+message ListAmenitiesResponse {
+    model.Amenity amenities = 1;
+}
