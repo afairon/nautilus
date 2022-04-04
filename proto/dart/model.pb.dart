@@ -2666,22 +2666,37 @@ class TripWithTemplate extends $pb.GeneratedMessage {
 
 class Amenity extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Amenity', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
+    ..aOM<$9.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $9.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   Amenity._() : super();
   factory Amenity({
+    $fixnum.Int64? id,
     $core.String? name,
     $core.String? description,
+    $9.Timestamp? createdAt,
+    $9.Timestamp? updatedAt,
   }) {
     final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
     if (name != null) {
       _result.name = name;
     }
     if (description != null) {
       _result.description = description;
+    }
+    if (createdAt != null) {
+      _result.createdAt = createdAt;
+    }
+    if (updatedAt != null) {
+      _result.updatedAt = updatedAt;
     }
     return _result;
   }
@@ -2707,22 +2722,53 @@ class Amenity extends $pb.GeneratedMessage {
   static Amenity? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearId() => clearField(1);
 
-  @$pb.TagNumber(2)
-  $core.String get description => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set description($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasDescription() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDescription() => clearField(2);
+  @$pb.TagNumber(10)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(10)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearName() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(20)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearDescription() => clearField(20);
+
+  @$pb.TagNumber(30)
+  $9.Timestamp get createdAt => $_getN(3);
+  @$pb.TagNumber(30)
+  set createdAt($9.Timestamp v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasCreatedAt() => $_has(3);
+  @$pb.TagNumber(30)
+  void clearCreatedAt() => clearField(30);
+  @$pb.TagNumber(30)
+  $9.Timestamp ensureCreatedAt() => $_ensure(3);
+
+  @$pb.TagNumber(40)
+  $9.Timestamp get updatedAt => $_getN(4);
+  @$pb.TagNumber(40)
+  set updatedAt($9.Timestamp v) { setField(40, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasUpdatedAt() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearUpdatedAt() => clearField(40);
+  @$pb.TagNumber(40)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(4);
 }
 
 class RoomType extends $pb.GeneratedMessage {

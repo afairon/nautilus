@@ -255,8 +255,11 @@ message TripWithTemplate {
 
 // Amenity
 message Amenity {
-    string name = 1;
-    string description = 2;
+    uint64 id  = 1;
+    string name = 10;
+    string description = 20;
+    google.protobuf.Timestamp created_at = 30 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 40 [(gogoproto.stdtime) = true];
 }
 
 // RoomType

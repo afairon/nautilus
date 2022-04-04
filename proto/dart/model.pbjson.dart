@@ -368,13 +368,16 @@ final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('
 const Amenity$json = const {
   '1': 'Amenity',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'description', '3': 2, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'name', '3': 10, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 20, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'created_at', '3': 30, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 40, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `Amenity`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List amenityDescriptor = $convert.base64Decode('CgdBbWVuaXR5EhIKBG5hbWUYASABKAlSBG5hbWUSIAoLZGVzY3JpcHRpb24YAiABKAlSC2Rlc2NyaXB0aW9u');
+final $typed_data.Uint8List amenityDescriptor = $convert.base64Decode('CgdBbWVuaXR5Eg4KAmlkGAEgASgEUgJpZBISCgRuYW1lGAogASgJUgRuYW1lEiAKC2Rlc2NyaXB0aW9uGBQgASgJUgtkZXNjcmlwdGlvbhI/CgpjcmVhdGVkX2F0GB4gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYKCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
 @$core.Deprecated('Use roomTypeDescriptor instead')
 const RoomType$json = const {
   '1': 'RoomType',

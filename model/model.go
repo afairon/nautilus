@@ -446,7 +446,6 @@ type Boat struct {
 	DiverCapacity uint32         `gorm:"not null"`
 	StaffCapacity uint32         `gorm:"not null"`
 	Images        pq.StringArray `gorm:"type:text"`
-	Amenities     []Amenity      `gorm:"many2many:boat_amenity_link;"`
 	AgencyID      uint           `gorm:"not null"`
 }
 
@@ -607,9 +606,18 @@ type TripComment struct {
 }
 
 type Amenity struct {
-	*gorm.Model
+	gorm.Model
 	Name        string `gorm:"unique;not null"`
 	Description string `gorm:"not null"`
+}
+
+func (a *Amenity) From(amenity *pb.Amenity) {
+	if amenity == nil {
+		return
+	}
+	a.ID = uint(amenity.Id)
+	a.Name = amenity.Name
+	a.Description = amenity.Description
 }
 
 type Liveaboard struct {
