@@ -409,12 +409,12 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
 	}
 
-	roomTypes := []model.RoomType{}
 	pbRoomTypes := liveaboard.GetRoomTypes()
+	roomTypes := make([]model.RoomType, 0, len(pbRoomTypes))
 
 	// Copy room types information
 	for _, rt := range pbRoomTypes {
-		tempRoomType := model.RoomType{
+		roomType := model.RoomType{
 			Name:        rt.GetName(),
 			Description: rt.GetDescription(),
 			MaxGuest:    rt.GetMaxGuest(),
@@ -431,10 +431,19 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 				return err
 			}
 
-			tempRoomType.Images = append(tempRoomType.Images, objectID)
+			roomType.Images = append(roomType.Images, objectID)
 		}
 
-		roomTypes = append(roomTypes, tempRoomType)
+		amenities := make([]model.Amenity, 0, len(rt.GetAmenities()))
+		// set amenities of room types
+		for _, a := range rt.GetAmenities() {
+			amenity := model.Amenity{}
+			amenity.From(a)
+			amenities = append(amenities, amenity)
+		}
+
+		roomType.Amenities = amenities
+		roomTypes = append(roomTypes, roomType)
 	}
 
 	// set room types of hotel
