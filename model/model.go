@@ -576,6 +576,7 @@ type Reservation struct {
 	TripID            uint
 	Trip              Trip
 	RoomTypes         []RoomType `gorm:"many2many:reservation_room_types;"`
+	Payment           Payment
 }
 
 type LiveaboardComment struct {
@@ -674,6 +675,15 @@ type Hotel struct {
 	Images      pq.StringArray `gorm:"type:text"`
 	RoomTypes   []RoomType
 	AgencyID    uint `gorm:"not null"`
+}
+
+type Payment struct {
+	gorm.Model
+	PaymentSlip   pq.StringArray `gorm:"type:text"`
+	Verified      bool
+	DiverID       uint
+	Diver         Diver
+	ReservationID uint
 }
 
 type DiveMasterTrip struct {
