@@ -436,3 +436,19 @@ const ReportTrip$json = const {
 
 /// Descriptor for `ReportTrip`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reportTripDescriptor = $convert.base64Decode('CgpSZXBvcnRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0Eh8KC3BsYWNlc19sZWZ0GCQgASgNUgpwbGFjZXNMZWZ0EhQKBXByaWNlGCggASgCUgVwcmljZRIkCgZkaXZlcnMYLSADKAsyDC5tb2RlbC5EaXZlclIGZGl2ZXJzEj8KCnN0YXJ0X2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUglzdGFydERhdGUSOwoIZW5kX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgdlbmREYXRlElQKFWxhc3RfcmVzZXJ2YXRpb25fZGF0ZRhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSE2xhc3RSZXNlcnZhdGlvbkRhdGUSPwoKY3JlYXRlZF9hdBhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GGQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
+@$core.Deprecated('Use paymentDescriptor instead')
+const Payment$json = const {
+  '1': 'Payment',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+    const {'1': 'payment_slip', '3': 10, '4': 1, '5': 11, '6': '.model.File', '10': 'paymentSlip'},
+    const {'1': 'verified', '3': 20, '4': 1, '5': 8, '10': 'verified'},
+    const {'1': 'diver', '3': 30, '4': 1, '5': 11, '6': '.model.Diver', '10': 'diver'},
+    const {'1': 'reservation_id', '3': 40, '4': 1, '5': 4, '10': 'reservationId'},
+    const {'1': 'created_at', '3': 50, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
+  ],
+};
+
+/// Descriptor for `Payment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List paymentDescriptor = $convert.base64Decode('CgdQYXltZW50Eg4KAmlkGAEgASgEUgJpZBIuCgxwYXltZW50X3NsaXAYCiABKAsyCy5tb2RlbC5GaWxlUgtwYXltZW50U2xpcBIaCgh2ZXJpZmllZBgUIAEoCFIIdmVyaWZpZWQSIgoFZGl2ZXIYHiABKAsyDC5tb2RlbC5EaXZlclIFZGl2ZXISJQoOcmVzZXJ2YXRpb25faWQYKCABKARSDXJlc2VydmF0aW9uSWQSPwoKY3JlYXRlZF9hdBgyIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');

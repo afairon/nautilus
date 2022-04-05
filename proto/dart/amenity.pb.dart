@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $11;
+import 'model.pb.dart' as $12;
 
 class ListAmenitiesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListAmenitiesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'amenity'), createEmptyInstance: create)
@@ -75,13 +75,13 @@ class ListAmenitiesRequest extends $pb.GeneratedMessage {
 
 class ListAmenitiesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListAmenitiesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'amenity'), createEmptyInstance: create)
-    ..aOM<$11.Amenity>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amenities', subBuilder: $11.Amenity.create)
+    ..aOM<$12.Amenity>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amenities', subBuilder: $12.Amenity.create)
     ..hasRequiredFields = false
   ;
 
   ListAmenitiesResponse._() : super();
   factory ListAmenitiesResponse({
-    $11.Amenity? amenities,
+    $12.Amenity? amenities,
   }) {
     final _result = create();
     if (amenities != null) {
@@ -111,14 +111,14 @@ class ListAmenitiesResponse extends $pb.GeneratedMessage {
   static ListAmenitiesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $11.Amenity get amenities => $_getN(0);
+  $12.Amenity get amenities => $_getN(0);
   @$pb.TagNumber(1)
-  set amenities($11.Amenity v) { setField(1, v); }
+  set amenities($12.Amenity v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAmenities() => $_has(0);
   @$pb.TagNumber(1)
   void clearAmenities() => clearField(1);
   @$pb.TagNumber(1)
-  $11.Amenity ensureAmenities() => $_ensure(0);
+  $12.Amenity ensureAmenities() => $_ensure(0);
 }
 
