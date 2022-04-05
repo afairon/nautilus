@@ -302,3 +302,13 @@ message ReportTrip {
     google.protobuf.Timestamp created_at = 90 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 100 [(gogoproto.stdtime) = true];
 }
+
+message Payment {
+    uint64 id = 1;
+    repeated File images = 10;
+    bool verified = 20;
+    model.Diver diver = 30;
+    uint64 reservation_id = 40;
+    google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
+}
