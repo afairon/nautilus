@@ -18,3 +18,23 @@ const MakePaymentRequest$json = const {
 
 /// Descriptor for `MakePaymentRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List makePaymentRequestDescriptor = $convert.base64Decode('ChJNYWtlUGF5bWVudFJlcXVlc3QSKAoHcGF5bWVudBgBIAEoCzIOLm1vZGVsLlBheW1lbnRSB3BheW1lbnQ=');
+@$core.Deprecated('Use updatePaymentRequestDescriptor instead')
+const UpdatePaymentRequest$json = const {
+  '1': 'UpdatePaymentRequest',
+  '2': const [
+    const {'1': 'payment', '3': 10, '4': 1, '5': 11, '6': '.model.Payment', '10': 'payment'},
+  ],
+};
+
+/// Descriptor for `UpdatePaymentRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePaymentRequestDescriptor = $convert.base64Decode('ChRVcGRhdGVQYXltZW50UmVxdWVzdBIoCgdwYXltZW50GAogASgLMg4ubW9kZWwuUGF5bWVudFIHcGF5bWVudA==');
+@$core.Deprecated('Use updatePaymentStatusRequestDescriptor instead')
+const UpdatePaymentStatusRequest$json = const {
+  '1': 'UpdatePaymentStatusRequest',
+  '2': const [
+    const {'1': 'payment', '3': 10, '4': 1, '5': 11, '6': '.model.Payment', '10': 'payment'},
+  ],
+};
+
+/// Descriptor for `UpdatePaymentStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePaymentStatusRequestDescriptor = $convert.base64Decode('ChpVcGRhdGVQYXltZW50U3RhdHVzUmVxdWVzdBIoCgdwYXltZW50GAogASgLMg4ubW9kZWwuUGF5bWVudFIHcGF5bWVudA==');

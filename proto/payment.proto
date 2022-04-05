@@ -11,8 +11,18 @@ option go_package = "./pb";
 
 service PaymentService {
     rpc MakePayment(MakePaymentRequest) returns (google.protobuf.Empty);
+    rpc UpdatePaymentSlip(UpdatePaymentRequest) returns (google.protobuf.Empty);
+    rpc UpdatePaymentStatus(UpdatePaymentStatusRequest) returns (google.protobuf.Empty);
 }
 
 message MakePaymentRequest {
     model.Payment payment = 1;
+}
+
+message UpdatePaymentRequest {
+    model.Payment payment = 10;
+}
+
+message UpdatePaymentStatusRequest {
+    model.Payment payment = 10;
 }

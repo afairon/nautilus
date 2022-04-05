@@ -13,6 +13,8 @@ import (
 // PaymentService defines operations on payment.
 type PaymentService interface {
 	MakePayment(ctx context.Context, payment *model.Payment) error
+	UpdatePaymentSlip(ctx context.Context, payment *model.Payment) error
+	UpdatePaymentStatus(ctx context.Context, payment *model.Payment) error
 }
 
 // paymentService implements AgencyService interface above.
@@ -51,6 +53,51 @@ func (service *paymentService) MakePayment(ctx context.Context, payment *model.P
 	}
 
 	_, err = service.repo.Payment.Create(ctx, payment)
+
+	return err
+}
+
+func (service *paymentService) UpdatePaymentSlip(ctx context.Context, payment *model.Payment) error {
+	diver, err := getDiverInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	payment.DiverID = diver.ID
+	payment.Diver = *diver
+
+	if payment.File != nil {
+		payment.PaymentSlip = make(pq.StringArray, 0, 1)
+		reader := bytes.NewReader(payment.File.Buffer)
+		objectID, err := service.media.Put(payment.File.Filename, media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		payment.PaymentSlip = append(payment.PaymentSlip, objectID)
+	}
+
+	_, err = service.repo.Payment.UpdatePaymentSlip(ctx, payment)
+
+	return err
+}
+
+func (service *paymentService) UpdatePaymentStatus(ctx context.Context, payment *model.Payment) error {
+	if payment.File != nil {
+		payment.PaymentSlip = make(pq.StringArray, 0, 1)
+		reader := bytes.NewReader(payment.File.Buffer)
+		objectID, err := service.media.Put(payment.File.Filename, media.PRIVATE, reader)
+
+		if err != nil {
+			return err
+		}
+
+		payment.PaymentSlip = append(payment.PaymentSlip, objectID)
+	}
+
+	_, err := service.repo.Payment.UpdatePaymentStatus(ctx, payment)
 
 	return err
 }

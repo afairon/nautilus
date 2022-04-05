@@ -72,28 +72,120 @@ func (m *MakePaymentRequest) GetPayment() *Payment {
 	return nil
 }
 
+type UpdatePaymentRequest struct {
+	Payment *Payment `protobuf:"bytes,10,opt,name=payment,proto3" json:"payment,omitempty"`
+}
+
+func (m *UpdatePaymentRequest) Reset()      { *m = UpdatePaymentRequest{} }
+func (*UpdatePaymentRequest) ProtoMessage() {}
+func (*UpdatePaymentRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6362648dfa63d410, []int{1}
+}
+func (m *UpdatePaymentRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdatePaymentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdatePaymentRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdatePaymentRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdatePaymentRequest.Merge(m, src)
+}
+func (m *UpdatePaymentRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdatePaymentRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdatePaymentRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdatePaymentRequest proto.InternalMessageInfo
+
+func (m *UpdatePaymentRequest) GetPayment() *Payment {
+	if m != nil {
+		return m.Payment
+	}
+	return nil
+}
+
+type UpdatePaymentStatusRequest struct {
+	Payment *Payment `protobuf:"bytes,10,opt,name=payment,proto3" json:"payment,omitempty"`
+}
+
+func (m *UpdatePaymentStatusRequest) Reset()      { *m = UpdatePaymentStatusRequest{} }
+func (*UpdatePaymentStatusRequest) ProtoMessage() {}
+func (*UpdatePaymentStatusRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6362648dfa63d410, []int{2}
+}
+func (m *UpdatePaymentStatusRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdatePaymentStatusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdatePaymentStatusRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdatePaymentStatusRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdatePaymentStatusRequest.Merge(m, src)
+}
+func (m *UpdatePaymentStatusRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdatePaymentStatusRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdatePaymentStatusRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdatePaymentStatusRequest proto.InternalMessageInfo
+
+func (m *UpdatePaymentStatusRequest) GetPayment() *Payment {
+	if m != nil {
+		return m.Payment
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*MakePaymentRequest)(nil), "payment.MakePaymentRequest")
+	proto.RegisterType((*UpdatePaymentRequest)(nil), "payment.UpdatePaymentRequest")
+	proto.RegisterType((*UpdatePaymentStatusRequest)(nil), "payment.UpdatePaymentStatusRequest")
 }
 
 func init() { proto.RegisterFile("payment.proto", fileDescriptor_6362648dfa63d410) }
 
 var fileDescriptor_6362648dfa63d410 = []byte{
-	// 219 bytes of a gzipped FileDescriptorProto
+	// 282 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2d, 0x48, 0xac, 0xcc,
 	0x4d, 0xcd, 0x2b, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x87, 0x72, 0xa5, 0xb8, 0x73,
 	0xf3, 0x53, 0x52, 0x73, 0x20, 0xa2, 0x52, 0xd2, 0xe9, 0xf9, 0xf9, 0xe9, 0x39, 0xa9, 0xfa, 0x60,
 	0x5e, 0x52, 0x69, 0x9a, 0x7e, 0x6a, 0x6e, 0x41, 0x49, 0x25, 0x44, 0x52, 0xc9, 0x8e, 0x4b, 0xc8,
 	0x37, 0x31, 0x3b, 0x35, 0x00, 0xa2, 0x31, 0x28, 0xb5, 0xb0, 0x34, 0xb5, 0xb8, 0x44, 0x48, 0x83,
 	0x0b, 0x66, 0x94, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0xb7, 0x11, 0x9f, 0x1e, 0xc4, 0x44, 0x98, 0x3a,
-	0x98, 0xb4, 0x51, 0x08, 0x17, 0x1f, 0x54, 0x2c, 0x38, 0xb5, 0xa8, 0x2c, 0x33, 0x39, 0x55, 0xc8,
-	0x89, 0x8b, 0x1b, 0xc9, 0x44, 0x21, 0x69, 0x3d, 0x98, 0x1b, 0x31, 0xed, 0x91, 0x12, 0xd3, 0x83,
-	0xb8, 0x4d, 0x0f, 0xe6, 0x36, 0x3d, 0x57, 0x90, 0xdb, 0x9c, 0xac, 0x2e, 0x3c, 0x94, 0x63, 0xb8,
-	0xf1, 0x50, 0x8e, 0xe1, 0xc3, 0x43, 0x39, 0xc6, 0x86, 0x47, 0x72, 0x8c, 0x2b, 0x1e, 0xc9, 0x31,
-	0x9e, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x2f, 0x1e, 0xc9,
-	0x31, 0x7c, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e,
-	0xcb, 0x31, 0x44, 0xb1, 0xe8, 0xe9, 0x17, 0x24, 0x25, 0xb1, 0x81, 0xcd, 0x32, 0x06, 0x04, 0x00,
-	0x00, 0xff, 0xff, 0xe0, 0xda, 0xb9, 0xd9, 0x1c, 0x01, 0x00, 0x00,
+	0x98, 0xb4, 0x92, 0x03, 0x97, 0x48, 0x68, 0x41, 0x4a, 0x62, 0x09, 0x1e, 0x13, 0xb8, 0xf0, 0x9b,
+	0xe0, 0xc6, 0x25, 0x85, 0x62, 0x42, 0x70, 0x49, 0x62, 0x49, 0x69, 0x31, 0xc9, 0xe6, 0x18, 0x7d,
+	0x61, 0xe4, 0xe2, 0x83, 0x19, 0x91, 0x5a, 0x54, 0x96, 0x99, 0x9c, 0x2a, 0xe4, 0xc4, 0xc5, 0x8d,
+	0xe4, 0x39, 0x21, 0x69, 0x3d, 0x58, 0x70, 0x61, 0x7a, 0x59, 0x4a, 0x4c, 0x0f, 0x12, 0x4c, 0x7a,
+	0xb0, 0x60, 0xd2, 0x73, 0x05, 0x05, 0x93, 0x90, 0x17, 0x97, 0x20, 0xaa, 0xf3, 0x72, 0x32, 0x0b,
+	0x84, 0x64, 0xe1, 0x26, 0x61, 0xf3, 0x3c, 0x4e, 0xb3, 0x82, 0xb8, 0x84, 0xb1, 0x78, 0x55, 0x48,
+	0x19, 0xbb, 0x69, 0x28, 0x01, 0x81, 0xcb, 0x4c, 0x27, 0xab, 0x0b, 0x0f, 0xe5, 0x18, 0x6e, 0x3c,
+	0x94, 0x63, 0xf8, 0xf0, 0x50, 0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72, 0x8c, 0x27,
+	0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8b, 0x47, 0x72, 0x0c,
+	0x1f, 0x1e, 0xc9, 0x31, 0x4e, 0x78, 0x2c, 0xc7, 0x70, 0xe1, 0xb1, 0x1c, 0xc3, 0x8d, 0xc7, 0x72,
+	0x0c, 0x51, 0x2c, 0x7a, 0xfa, 0x05, 0x49, 0x49, 0x6c, 0x60, 0xb3, 0x8c, 0x01, 0x01, 0x00, 0x00,
+	0xff, 0xff, 0x31, 0x5d, 0x88, 0x97, 0x47, 0x02, 0x00, 0x00,
 }
 
 func (this *MakePaymentRequest) Equal(that interface{}) bool {
@@ -104,6 +196,54 @@ func (this *MakePaymentRequest) Equal(that interface{}) bool {
 	that1, ok := that.(*MakePaymentRequest)
 	if !ok {
 		that2, ok := that.(MakePaymentRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Payment.Equal(that1.Payment) {
+		return false
+	}
+	return true
+}
+func (this *UpdatePaymentRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*UpdatePaymentRequest)
+	if !ok {
+		that2, ok := that.(UpdatePaymentRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Payment.Equal(that1.Payment) {
+		return false
+	}
+	return true
+}
+func (this *UpdatePaymentStatusRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*UpdatePaymentStatusRequest)
+	if !ok {
+		that2, ok := that.(UpdatePaymentStatusRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -132,6 +272,30 @@ func (this *MakePaymentRequest) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *UpdatePaymentRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdatePaymentRequest{")
+	if this.Payment != nil {
+		s = append(s, "Payment: "+fmt.Sprintf("%#v", this.Payment)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *UpdatePaymentStatusRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.UpdatePaymentStatusRequest{")
+	if this.Payment != nil {
+		s = append(s, "Payment: "+fmt.Sprintf("%#v", this.Payment)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringPayment(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -154,6 +318,8 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PaymentServiceClient interface {
 	MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type paymentServiceClient struct {
@@ -173,9 +339,29 @@ func (c *paymentServiceClient) MakePayment(ctx context.Context, in *MakePaymentR
 	return out, nil
 }
 
+func (c *paymentServiceClient) UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/payment.PaymentService/UpdatePaymentSlip", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/payment.PaymentService/UpdatePaymentStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServiceServer is the server API for PaymentService service.
 type PaymentServiceServer interface {
 	MakePayment(context.Context, *MakePaymentRequest) (*emptypb.Empty, error)
+	UpdatePaymentSlip(context.Context, *UpdatePaymentRequest) (*emptypb.Empty, error)
+	UpdatePaymentStatus(context.Context, *UpdatePaymentStatusRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedPaymentServiceServer can be embedded to have forward compatible implementations.
@@ -184,6 +370,12 @@ type UnimplementedPaymentServiceServer struct {
 
 func (*UnimplementedPaymentServiceServer) MakePayment(ctx context.Context, req *MakePaymentRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakePayment not implemented")
+}
+func (*UnimplementedPaymentServiceServer) UpdatePaymentSlip(ctx context.Context, req *UpdatePaymentRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentSlip not implemented")
+}
+func (*UnimplementedPaymentServiceServer) UpdatePaymentStatus(ctx context.Context, req *UpdatePaymentStatusRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentStatus not implemented")
 }
 
 func RegisterPaymentServiceServer(s *grpc.Server, srv PaymentServiceServer) {
@@ -208,6 +400,42 @@ func _PaymentService_MakePayment_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentService_UpdatePaymentSlip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).UpdatePaymentSlip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/payment.PaymentService/UpdatePaymentSlip",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).UpdatePaymentSlip(ctx, req.(*UpdatePaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_UpdatePaymentStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).UpdatePaymentStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/payment.PaymentService/UpdatePaymentStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).UpdatePaymentStatus(ctx, req.(*UpdatePaymentStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _PaymentService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "payment.PaymentService",
 	HandlerType: (*PaymentServiceServer)(nil),
@@ -215,6 +443,14 @@ var _PaymentService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MakePayment",
 			Handler:    _PaymentService_MakePayment_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentSlip",
+			Handler:    _PaymentService_UpdatePaymentSlip_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentStatus",
+			Handler:    _PaymentService_UpdatePaymentStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -256,6 +492,76 @@ func (m *MakePaymentRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *UpdatePaymentRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdatePaymentRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdatePaymentRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Payment != nil {
+		{
+			size, err := m.Payment.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintPayment(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdatePaymentStatusRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdatePaymentStatusRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdatePaymentStatusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Payment != nil {
+		{
+			size, err := m.Payment.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintPayment(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintPayment(dAtA []byte, offset int, v uint64) int {
 	offset -= sovPayment(v)
 	base := offset
@@ -280,6 +586,32 @@ func (m *MakePaymentRequest) Size() (n int) {
 	return n
 }
 
+func (m *UpdatePaymentRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Payment != nil {
+		l = m.Payment.Size()
+		n += 1 + l + sovPayment(uint64(l))
+	}
+	return n
+}
+
+func (m *UpdatePaymentStatusRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Payment != nil {
+		l = m.Payment.Size()
+		n += 1 + l + sovPayment(uint64(l))
+	}
+	return n
+}
+
 func sovPayment(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -291,6 +623,26 @@ func (this *MakePaymentRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&MakePaymentRequest{`,
+		`Payment:` + strings.Replace(fmt.Sprintf("%v", this.Payment), "Payment", "Payment", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdatePaymentRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UpdatePaymentRequest{`,
+		`Payment:` + strings.Replace(fmt.Sprintf("%v", this.Payment), "Payment", "Payment", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *UpdatePaymentStatusRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&UpdatePaymentStatusRequest{`,
 		`Payment:` + strings.Replace(fmt.Sprintf("%v", this.Payment), "Payment", "Payment", 1) + `,`,
 		`}`,
 	}, "")
@@ -334,6 +686,178 @@ func (m *MakePaymentRequest) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Payment", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPayment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPayment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Payment == nil {
+				m.Payment = &Payment{}
+			}
+			if err := m.Payment.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPayment(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdatePaymentRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPayment
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdatePaymentRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdatePaymentRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Payment", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPayment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPayment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Payment == nil {
+				m.Payment = &Payment{}
+			}
+			if err := m.Payment.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPayment(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdatePaymentStatusRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPayment
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdatePaymentStatusRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdatePaymentStatusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Payment", wireType)
 			}

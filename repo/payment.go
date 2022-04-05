@@ -11,6 +11,8 @@ import (
 // with the payment repository.
 type PaymentRepository interface {
 	Create(ctx context.Context, payment *model.Payment) (*model.Payment, error)
+	UpdatePaymentSlip(ctx context.Context, payment *model.Payment) (*model.Payment, error)
+	UpdatePaymentStatus(ctx context.Context, payment *model.Payment) (*model.Payment, error)
 }
 
 // paymentRepository implements AgencyRepository interface.
@@ -27,6 +29,22 @@ func NewPaymentRepository(db *gorm.DB) *paymentRepository {
 
 func (repo *paymentRepository) Create(ctx context.Context, payment *model.Payment) (*model.Payment, error) {
 	if result := repo.db.Omit("Diver").Create(payment); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return payment, nil
+}
+
+func (repo *paymentRepository) UpdatePaymentSlip(ctx context.Context, payment *model.Payment) (*model.Payment, error) {
+	if result := repo.db.Model(payment).Select("PaymentSlip").Updates(payment); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return payment, nil
+}
+
+func (repo *paymentRepository) UpdatePaymentStatus(ctx context.Context, payment *model.Payment) (*model.Payment, error) {
+	if result := repo.db.Model(payment).Select("Verified").Updates(payment); result.Error != nil {
 		return nil, result.Error
 	}
 

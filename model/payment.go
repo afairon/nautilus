@@ -14,7 +14,7 @@ var (
 )
 
 // check: only one payment can be made for one reservation and the diver is paying for his/her reservation
-func (p *Payment) BeforeSave(tx *gorm.DB) error {
+func (p *Payment) BeforeCreate(tx *gorm.DB) error {
 	// check if the reservation of the payment exists
 	result := tx.Where("id = ? AND diver_id = ?", p.ReservationID, p.DiverID).First(&Reservation{})
 
@@ -22,7 +22,7 @@ func (p *Payment) BeforeSave(tx *gorm.DB) error {
 		return ErrReservationNotFound
 	}
 
-	// check if payment is already made once
+	// check if payment is already created once
 	result = tx.Where("reservation_id = ?", p.ReservationID).First(&Payment{})
 
 	if !errors.Is(result.Error, gorm.ErrRecordNotFound) {

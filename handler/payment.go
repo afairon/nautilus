@@ -31,3 +31,27 @@ func (handler *PaymentHandler) MakePayment(ctx context.Context, req *pb.MakePaym
 
 	return &emptypb.Empty{}, nil
 }
+
+func (handler *PaymentHandler) UpdatePaymentSlip(ctx context.Context, req *pb.UpdatePaymentRequest) (*emptypb.Empty, error) {
+	payment := model.Payment{}
+	payment.From(req.GetPayment())
+	err := handler.paymentService.UpdatePaymentSlip(ctx, &payment)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *PaymentHandler) UpdatePaymentStatus(ctx context.Context, req *pb.UpdatePaymentStatusRequest) (*emptypb.Empty, error) {
+	payment := model.Payment{}
+	payment.From(req.GetPayment())
+	err := handler.paymentService.UpdatePaymentStatus(ctx, &payment)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}

@@ -60,3 +60,101 @@ class MakePaymentRequest extends $pb.GeneratedMessage {
   $12.Payment ensurePayment() => $_ensure(0);
 }
 
+class UpdatePaymentRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdatePaymentRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
+    ..aOM<$12.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $12.Payment.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdatePaymentRequest._() : super();
+  factory UpdatePaymentRequest({
+    $12.Payment? payment,
+  }) {
+    final _result = create();
+    if (payment != null) {
+      _result.payment = payment;
+    }
+    return _result;
+  }
+  factory UpdatePaymentRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdatePaymentRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdatePaymentRequest clone() => UpdatePaymentRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdatePaymentRequest copyWith(void Function(UpdatePaymentRequest) updates) => super.copyWith((message) => updates(message as UpdatePaymentRequest)) as UpdatePaymentRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdatePaymentRequest create() => UpdatePaymentRequest._();
+  UpdatePaymentRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdatePaymentRequest> createRepeated() => $pb.PbList<UpdatePaymentRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePaymentRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePaymentRequest>(create);
+  static UpdatePaymentRequest? _defaultInstance;
+
+  @$pb.TagNumber(10)
+  $12.Payment get payment => $_getN(0);
+  @$pb.TagNumber(10)
+  set payment($12.Payment v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasPayment() => $_has(0);
+  @$pb.TagNumber(10)
+  void clearPayment() => clearField(10);
+  @$pb.TagNumber(10)
+  $12.Payment ensurePayment() => $_ensure(0);
+}
+
+class UpdatePaymentStatusRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdatePaymentStatusRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
+    ..aOM<$12.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $12.Payment.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdatePaymentStatusRequest._() : super();
+  factory UpdatePaymentStatusRequest({
+    $12.Payment? payment,
+  }) {
+    final _result = create();
+    if (payment != null) {
+      _result.payment = payment;
+    }
+    return _result;
+  }
+  factory UpdatePaymentStatusRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdatePaymentStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdatePaymentStatusRequest clone() => UpdatePaymentStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdatePaymentStatusRequest copyWith(void Function(UpdatePaymentStatusRequest) updates) => super.copyWith((message) => updates(message as UpdatePaymentStatusRequest)) as UpdatePaymentStatusRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdatePaymentStatusRequest create() => UpdatePaymentStatusRequest._();
+  UpdatePaymentStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdatePaymentStatusRequest> createRepeated() => $pb.PbList<UpdatePaymentStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePaymentStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePaymentStatusRequest>(create);
+  static UpdatePaymentStatusRequest? _defaultInstance;
+
+  @$pb.TagNumber(10)
+  $12.Payment get payment => $_getN(0);
+  @$pb.TagNumber(10)
+  set payment($12.Payment v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasPayment() => $_has(0);
+  @$pb.TagNumber(10)
+  void clearPayment() => clearField(10);
+  @$pb.TagNumber(10)
+  $12.Payment ensurePayment() => $_ensure(0);
+}
+
