@@ -26,7 +26,7 @@ func NewPaymentRepository(db *gorm.DB) *paymentRepository {
 }
 
 func (repo *paymentRepository) Create(ctx context.Context, payment *model.Payment) (*model.Payment, error) {
-	if result := repo.db.Create(payment); result.Error != nil {
+	if result := repo.db.Omit("Diver").Create(payment); result.Error != nil {
 		return nil, result.Error
 	}
 
