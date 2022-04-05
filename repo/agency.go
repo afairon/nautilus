@@ -31,7 +31,7 @@ type AgencyRepository interface {
 	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
 }
 
-// Agency implements AgencyRepository interface.
+// agencyRepository implements AgencyRepository interface.
 type agencyRepository struct {
 	db *gorm.DB
 }

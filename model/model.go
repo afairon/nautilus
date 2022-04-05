@@ -695,7 +695,9 @@ func (p *Payment) From(payment *pb.Payment) {
 	p.ID = uint(payment.Id)
 	p.Verified = payment.Verified
 	p.DiverID = uint(payment.Diver.Id)
-	p.Diver.From(payment.Diver)
+	if payment.Diver != nil {
+		p.Diver.From(payment.Diver)
+	}
 	p.ReservationID = uint(payment.ReservationId)
 
 	if payment.PaymentSlip != nil {
