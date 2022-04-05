@@ -11,6 +11,7 @@ import (
 // with the payment repository.
 type PaymentRepository interface {
 	Create(ctx context.Context, payment *model.Payment) (*model.Payment, error)
+	GetPaymentByDiverAndReservation(ctx context.Context, reservationId uint64) (*model.Payment, error)
 	UpdatePaymentSlip(ctx context.Context, payment *model.Payment) (*model.Payment, error)
 	UpdatePaymentStatus(ctx context.Context, payment *model.Payment) (*model.Payment, error)
 }
@@ -33,6 +34,16 @@ func (repo *paymentRepository) Create(ctx context.Context, payment *model.Paymen
 	}
 
 	return payment, nil
+}
+
+func (repo *paymentRepository) GetPaymentByDiverAndReservation(ctx context.Context, reservationId uint64) (*model.Payment, error) {
+	var payment model.Payment
+
+	if result := repo.db.Preload("Diver").Where("reservation_id = ?", reservationId).First(&payment); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &payment, nil
 }
 
 func (repo *paymentRepository) UpdatePaymentSlip(ctx context.Context, payment *model.Payment) (*model.Payment, error) {

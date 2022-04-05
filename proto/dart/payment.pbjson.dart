@@ -38,3 +38,23 @@ const UpdatePaymentStatusRequest$json = const {
 
 /// Descriptor for `UpdatePaymentStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePaymentStatusRequestDescriptor = $convert.base64Decode('ChpVcGRhdGVQYXltZW50U3RhdHVzUmVxdWVzdBIoCgdwYXltZW50GAogASgLMg4ubW9kZWwuUGF5bWVudFIHcGF5bWVudA==');
+@$core.Deprecated('Use getPaymentByReservationRequestDescriptor instead')
+const GetPaymentByReservationRequest$json = const {
+  '1': 'GetPaymentByReservationRequest',
+  '2': const [
+    const {'1': 'reservation_id', '3': 20, '4': 1, '5': 4, '10': 'reservationId'},
+  ],
+};
+
+/// Descriptor for `GetPaymentByReservationRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPaymentByReservationRequestDescriptor = $convert.base64Decode('Ch5HZXRQYXltZW50QnlSZXNlcnZhdGlvblJlcXVlc3QSJQoOcmVzZXJ2YXRpb25faWQYFCABKARSDXJlc2VydmF0aW9uSWQ=');
+@$core.Deprecated('Use getPaymentByReservationResponseDescriptor instead')
+const GetPaymentByReservationResponse$json = const {
+  '1': 'GetPaymentByReservationResponse',
+  '2': const [
+    const {'1': 'payment', '3': 10, '4': 1, '5': 11, '6': '.model.Payment', '10': 'payment'},
+  ],
+};
+
+/// Descriptor for `GetPaymentByReservationResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPaymentByReservationResponseDescriptor = $convert.base64Decode('Ch9HZXRQYXltZW50QnlSZXNlcnZhdGlvblJlc3BvbnNlEigKB3BheW1lbnQYCiABKAsyDi5tb2RlbC5QYXltZW50UgdwYXltZW50');

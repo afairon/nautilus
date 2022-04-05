@@ -707,6 +707,28 @@ func (p *Payment) From(payment *pb.Payment) {
 	}
 }
 
+func (p *Payment) GetProto() *pb.Payment {
+	payment := pb.Payment{
+		Id:            uint64(p.ID),
+		Verified:      p.Verified,
+		Diver:         p.Diver.GetProto(),
+		ReservationId: uint64(p.ReservationID),
+		CreatedAt:     &p.CreatedAt,
+		UpdatedAt:     &p.UpdatedAt,
+	}
+
+	if p.File != nil {
+		file := pb.File{
+			Filename: p.File.Filename,
+			Link:     p.File.URL,
+		}
+
+		payment.PaymentSlip = &file
+	}
+
+	return &payment
+}
+
 type DiveMasterTrip struct {
 	TripID       uint `gorm:"primaryKey"`
 	DiveMasterID uint `gorm:"primaryKey"`

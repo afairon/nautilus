@@ -12,7 +12,7 @@ option go_package = "./pb";
 service PaymentService {
     rpc MakePayment(MakePaymentRequest) returns (google.protobuf.Empty);
     
-    rpc GetPaymentByDiverAndReservation(GetPaymentByDiverAndReservationRequest) returns (GetPaymentByDiverAndReservationResponse);
+    rpc GetPaymentByReservation(GetPaymentByReservationRequest) returns (GetPaymentByReservationResponse);
 
     rpc UpdatePaymentSlip(UpdatePaymentRequest) returns (google.protobuf.Empty);
     rpc UpdatePaymentStatus(UpdatePaymentStatusRequest) returns (google.protobuf.Empty);
@@ -30,11 +30,10 @@ message UpdatePaymentStatusRequest {
     model.Payment payment = 10;
 }
 
-message GetPaymentByDiverAndReservationRequest {
-    uint64 diver_id = 10;
+message GetPaymentByReservationRequest {
     uint64 reservation_id = 20;
 }
 
-message GetPaymentByDiverAndReservationResponse {
+message GetPaymentByReservationResponse {
     model.Payment payment = 10;
 }

@@ -13,6 +13,7 @@ import (
 // PaymentService defines operations on payment.
 type PaymentService interface {
 	MakePayment(ctx context.Context, payment *model.Payment) error
+	GetPaymentByReservation(ctx context.Context, reservationId uint64) (*model.Payment, error)
 	UpdatePaymentSlip(ctx context.Context, payment *model.Payment) error
 	UpdatePaymentStatus(ctx context.Context, payment *model.Payment) error
 }
@@ -100,4 +101,22 @@ func (service *paymentService) UpdatePaymentStatus(ctx context.Context, payment 
 	_, err := service.repo.Payment.UpdatePaymentStatus(ctx, payment)
 
 	return err
+}
+
+func (service *paymentService) GetPaymentByReservation(ctx context.Context, reservationId uint64) (*model.Payment, error) {
+	payment, err := service.repo.Payment.GetPaymentByDiverAndReservation(ctx, reservationId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if len(payment.PaymentSlip) > 0 {
+		file := model.File{
+			Filename: payment.PaymentSlip[0],
+			URL:      service.media.Get(payment.PaymentSlip[0], true),
+		}
+		payment.File = &file
+	}
+
+	return payment, nil
 }

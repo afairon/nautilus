@@ -158,34 +158,127 @@ func (m *UpdatePaymentStatusRequest) GetPayment() *Payment {
 	return nil
 }
 
+type GetPaymentByReservationRequest struct {
+	ReservationId uint64 `protobuf:"varint,20,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
+}
+
+func (m *GetPaymentByReservationRequest) Reset()      { *m = GetPaymentByReservationRequest{} }
+func (*GetPaymentByReservationRequest) ProtoMessage() {}
+func (*GetPaymentByReservationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6362648dfa63d410, []int{3}
+}
+func (m *GetPaymentByReservationRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetPaymentByReservationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetPaymentByReservationRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetPaymentByReservationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPaymentByReservationRequest.Merge(m, src)
+}
+func (m *GetPaymentByReservationRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetPaymentByReservationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPaymentByReservationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPaymentByReservationRequest proto.InternalMessageInfo
+
+func (m *GetPaymentByReservationRequest) GetReservationId() uint64 {
+	if m != nil {
+		return m.ReservationId
+	}
+	return 0
+}
+
+type GetPaymentByReservationResponse struct {
+	Payment *Payment `protobuf:"bytes,10,opt,name=payment,proto3" json:"payment,omitempty"`
+}
+
+func (m *GetPaymentByReservationResponse) Reset()      { *m = GetPaymentByReservationResponse{} }
+func (*GetPaymentByReservationResponse) ProtoMessage() {}
+func (*GetPaymentByReservationResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6362648dfa63d410, []int{4}
+}
+func (m *GetPaymentByReservationResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetPaymentByReservationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetPaymentByReservationResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetPaymentByReservationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPaymentByReservationResponse.Merge(m, src)
+}
+func (m *GetPaymentByReservationResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetPaymentByReservationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPaymentByReservationResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPaymentByReservationResponse proto.InternalMessageInfo
+
+func (m *GetPaymentByReservationResponse) GetPayment() *Payment {
+	if m != nil {
+		return m.Payment
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*MakePaymentRequest)(nil), "payment.MakePaymentRequest")
 	proto.RegisterType((*UpdatePaymentRequest)(nil), "payment.UpdatePaymentRequest")
 	proto.RegisterType((*UpdatePaymentStatusRequest)(nil), "payment.UpdatePaymentStatusRequest")
+	proto.RegisterType((*GetPaymentByReservationRequest)(nil), "payment.GetPaymentByReservationRequest")
+	proto.RegisterType((*GetPaymentByReservationResponse)(nil), "payment.GetPaymentByReservationResponse")
 }
 
 func init() { proto.RegisterFile("payment.proto", fileDescriptor_6362648dfa63d410) }
 
 var fileDescriptor_6362648dfa63d410 = []byte{
-	// 282 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2d, 0x48, 0xac, 0xcc,
-	0x4d, 0xcd, 0x2b, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x87, 0x72, 0xa5, 0xb8, 0x73,
-	0xf3, 0x53, 0x52, 0x73, 0x20, 0xa2, 0x52, 0xd2, 0xe9, 0xf9, 0xf9, 0xe9, 0x39, 0xa9, 0xfa, 0x60,
-	0x5e, 0x52, 0x69, 0x9a, 0x7e, 0x6a, 0x6e, 0x41, 0x49, 0x25, 0x44, 0x52, 0xc9, 0x8e, 0x4b, 0xc8,
-	0x37, 0x31, 0x3b, 0x35, 0x00, 0xa2, 0x31, 0x28, 0xb5, 0xb0, 0x34, 0xb5, 0xb8, 0x44, 0x48, 0x83,
-	0x0b, 0x66, 0x94, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0xb7, 0x11, 0x9f, 0x1e, 0xc4, 0x44, 0x98, 0x3a,
-	0x98, 0xb4, 0x92, 0x03, 0x97, 0x48, 0x68, 0x41, 0x4a, 0x62, 0x09, 0x1e, 0x13, 0xb8, 0xf0, 0x9b,
-	0xe0, 0xc6, 0x25, 0x85, 0x62, 0x42, 0x70, 0x49, 0x62, 0x49, 0x69, 0x31, 0xc9, 0xe6, 0x18, 0x7d,
-	0x61, 0xe4, 0xe2, 0x83, 0x19, 0x91, 0x5a, 0x54, 0x96, 0x99, 0x9c, 0x2a, 0xe4, 0xc4, 0xc5, 0x8d,
-	0xe4, 0x39, 0x21, 0x69, 0x3d, 0x58, 0x70, 0x61, 0x7a, 0x59, 0x4a, 0x4c, 0x0f, 0x12, 0x4c, 0x7a,
-	0xb0, 0x60, 0xd2, 0x73, 0x05, 0x05, 0x93, 0x90, 0x17, 0x97, 0x20, 0xaa, 0xf3, 0x72, 0x32, 0x0b,
-	0x84, 0x64, 0xe1, 0x26, 0x61, 0xf3, 0x3c, 0x4e, 0xb3, 0x82, 0xb8, 0x84, 0xb1, 0x78, 0x55, 0x48,
-	0x19, 0xbb, 0x69, 0x28, 0x01, 0x81, 0xcb, 0x4c, 0x27, 0xab, 0x0b, 0x0f, 0xe5, 0x18, 0x6e, 0x3c,
-	0x94, 0x63, 0xf8, 0xf0, 0x50, 0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72, 0x8c, 0x27,
-	0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8b, 0x47, 0x72, 0x0c,
-	0x1f, 0x1e, 0xc9, 0x31, 0x4e, 0x78, 0x2c, 0xc7, 0x70, 0xe1, 0xb1, 0x1c, 0xc3, 0x8d, 0xc7, 0x72,
-	0x0c, 0x51, 0x2c, 0x7a, 0xfa, 0x05, 0x49, 0x49, 0x6c, 0x60, 0xb3, 0x8c, 0x01, 0x01, 0x00, 0x00,
-	0xff, 0xff, 0x31, 0x5d, 0x88, 0x97, 0x47, 0x02, 0x00, 0x00,
+	// 358 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0x41, 0x4b, 0x02, 0x51,
+	0x10, 0xc7, 0xf7, 0x85, 0x14, 0x8c, 0x28, 0xf4, 0x92, 0x92, 0x95, 0x26, 0x31, 0xa2, 0x3d, 0xad,
+	0x60, 0xb7, 0x0e, 0x11, 0x42, 0x49, 0x45, 0x10, 0x1b, 0x5d, 0xba, 0xc4, 0xda, 0xbe, 0x64, 0x69,
+	0xf5, 0xbd, 0x76, 0x9f, 0x82, 0xb7, 0x3e, 0x42, 0x1f, 0xa3, 0x8f, 0xd2, 0xd1, 0xa3, 0xc7, 0x7c,
+	0x5e, 0x3a, 0xfa, 0x11, 0x22, 0xd7, 0x67, 0x4a, 0xae, 0xd5, 0x71, 0xfe, 0x33, 0xf3, 0x63, 0x66,
+	0xfe, 0x03, 0x19, 0xe1, 0x76, 0x9b, 0xac, 0x25, 0x6d, 0x11, 0x72, 0xc9, 0xe9, 0xda, 0x24, 0x34,
+	0xd3, 0x4d, 0xee, 0xb1, 0x20, 0x56, 0xcd, 0x42, 0x83, 0xf3, 0x46, 0xc0, 0xca, 0xe3, 0xa8, 0xde,
+	0x7e, 0x28, 0xb3, 0xa6, 0x90, 0xdd, 0x38, 0x59, 0x3a, 0x02, 0x7a, 0xe9, 0x3e, 0xb2, 0xab, 0xb8,
+	0xd1, 0x61, 0x4f, 0x6d, 0x16, 0x49, 0x6a, 0x81, 0x46, 0xe5, 0x49, 0x91, 0x58, 0xe9, 0x4a, 0xd6,
+	0x8e, 0x89, 0xba, 0x4e, 0xa7, 0x4b, 0xc7, 0x90, 0xbb, 0x11, 0x9e, 0x2b, 0x97, 0x10, 0x60, 0x39,
+	0xe1, 0x14, 0xcc, 0x39, 0xc2, 0xb5, 0x74, 0x65, 0x3b, 0xfa, 0x3f, 0xa7, 0x06, 0x58, 0x63, 0x72,
+	0x22, 0x57, 0xbb, 0x0e, 0x8b, 0x58, 0xd8, 0x71, 0xa5, 0xcf, 0x5b, 0x9a, 0xb5, 0x07, 0xd9, 0xf0,
+	0x5b, 0xbd, 0xf3, 0xbd, 0x7c, 0xae, 0x48, 0xac, 0x94, 0x93, 0x99, 0x51, 0xcf, 0xbc, 0xd2, 0x05,
+	0xec, 0x24, 0x82, 0x22, 0xc1, 0x5b, 0x11, 0xfb, 0xfb, 0x54, 0x15, 0xb5, 0x02, 0x59, 0xbd, 0x18,
+	0x0b, 0x3b, 0xfe, 0x3d, 0xa3, 0x55, 0x48, 0xcf, 0x9c, 0x9c, 0x16, 0x6c, 0x6d, 0xe2, 0x4f, 0x23,
+	0xcc, 0x4d, 0x3b, 0x36, 0xcf, 0xd6, 0xe6, 0xd9, 0x27, 0x5f, 0xe6, 0xd1, 0x00, 0xb6, 0x12, 0x66,
+	0xa4, 0xfb, 0x53, 0xde, 0xf2, 0x73, 0x98, 0xd6, 0xef, 0x85, 0x93, 0x75, 0xcf, 0x61, 0x7d, 0xde,
+	0xa2, 0xc0, 0x17, 0x74, 0x7b, 0xda, 0xbe, 0xe8, 0x01, 0x12, 0x27, 0x77, 0x60, 0x63, 0x81, 0xdd,
+	0x74, 0x77, 0x31, 0x6d, 0xee, 0x19, 0x92, 0x98, 0xd5, 0xc3, 0xde, 0x00, 0x8d, 0xfe, 0x00, 0x8d,
+	0xd1, 0x00, 0xc9, 0xb3, 0x42, 0xf2, 0xaa, 0x90, 0xbc, 0x29, 0x24, 0x3d, 0x85, 0xe4, 0x5d, 0x21,
+	0xf9, 0x50, 0x68, 0x8c, 0x14, 0x92, 0x97, 0x21, 0x1a, 0xbd, 0x21, 0x1a, 0xfd, 0x21, 0x1a, 0xb7,
+	0x29, 0xbb, 0x2c, 0xea, 0xf5, 0xd5, 0x31, 0xeb, 0xe0, 0x33, 0x00, 0x00, 0xff, 0xff, 0x7e, 0x9f,
+	0x47, 0x2b, 0x4b, 0x03, 0x00, 0x00,
 }
 
 func (this *MakePaymentRequest) Equal(that interface{}) bool {
@@ -260,6 +353,54 @@ func (this *UpdatePaymentStatusRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *GetPaymentByReservationRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetPaymentByReservationRequest)
+	if !ok {
+		that2, ok := that.(GetPaymentByReservationRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.ReservationId != that1.ReservationId {
+		return false
+	}
+	return true
+}
+func (this *GetPaymentByReservationResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetPaymentByReservationResponse)
+	if !ok {
+		that2, ok := that.(GetPaymentByReservationResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Payment.Equal(that1.Payment) {
+		return false
+	}
+	return true
+}
 func (this *MakePaymentRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -296,6 +437,28 @@ func (this *UpdatePaymentStatusRequest) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *GetPaymentByReservationRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.GetPaymentByReservationRequest{")
+	s = append(s, "ReservationId: "+fmt.Sprintf("%#v", this.ReservationId)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *GetPaymentByReservationResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.GetPaymentByReservationResponse{")
+	if this.Payment != nil {
+		s = append(s, "Payment: "+fmt.Sprintf("%#v", this.Payment)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringPayment(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -318,6 +481,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PaymentServiceClient interface {
 	MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetPaymentByReservation(ctx context.Context, in *GetPaymentByReservationRequest, opts ...grpc.CallOption) (*GetPaymentByReservationResponse, error)
 	UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -333,6 +497,15 @@ func NewPaymentServiceClient(cc *grpc.ClientConn) PaymentServiceClient {
 func (c *paymentServiceClient) MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/payment.PaymentService/MakePayment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) GetPaymentByReservation(ctx context.Context, in *GetPaymentByReservationRequest, opts ...grpc.CallOption) (*GetPaymentByReservationResponse, error) {
+	out := new(GetPaymentByReservationResponse)
+	err := c.cc.Invoke(ctx, "/payment.PaymentService/GetPaymentByReservation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -360,6 +533,7 @@ func (c *paymentServiceClient) UpdatePaymentStatus(ctx context.Context, in *Upda
 // PaymentServiceServer is the server API for PaymentService service.
 type PaymentServiceServer interface {
 	MakePayment(context.Context, *MakePaymentRequest) (*emptypb.Empty, error)
+	GetPaymentByReservation(context.Context, *GetPaymentByReservationRequest) (*GetPaymentByReservationResponse, error)
 	UpdatePaymentSlip(context.Context, *UpdatePaymentRequest) (*emptypb.Empty, error)
 	UpdatePaymentStatus(context.Context, *UpdatePaymentStatusRequest) (*emptypb.Empty, error)
 }
@@ -370,6 +544,9 @@ type UnimplementedPaymentServiceServer struct {
 
 func (*UnimplementedPaymentServiceServer) MakePayment(ctx context.Context, req *MakePaymentRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakePayment not implemented")
+}
+func (*UnimplementedPaymentServiceServer) GetPaymentByReservation(ctx context.Context, req *GetPaymentByReservationRequest) (*GetPaymentByReservationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentByReservation not implemented")
 }
 func (*UnimplementedPaymentServiceServer) UpdatePaymentSlip(ctx context.Context, req *UpdatePaymentRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentSlip not implemented")
@@ -396,6 +573,24 @@ func _PaymentService_MakePayment_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServiceServer).MakePayment(ctx, req.(*MakePaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_GetPaymentByReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentByReservationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).GetPaymentByReservation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/payment.PaymentService/GetPaymentByReservation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).GetPaymentByReservation(ctx, req.(*GetPaymentByReservationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -443,6 +638,10 @@ var _PaymentService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MakePayment",
 			Handler:    _PaymentService_MakePayment_Handler,
+		},
+		{
+			MethodName: "GetPaymentByReservation",
+			Handler:    _PaymentService_GetPaymentByReservation_Handler,
 		},
 		{
 			MethodName: "UpdatePaymentSlip",
@@ -562,6 +761,71 @@ func (m *UpdatePaymentStatusRequest) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
+func (m *GetPaymentByReservationRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetPaymentByReservationRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetPaymentByReservationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ReservationId != 0 {
+		i = encodeVarintPayment(dAtA, i, uint64(m.ReservationId))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa0
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetPaymentByReservationResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetPaymentByReservationResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetPaymentByReservationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Payment != nil {
+		{
+			size, err := m.Payment.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintPayment(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintPayment(dAtA []byte, offset int, v uint64) int {
 	offset -= sovPayment(v)
 	base := offset
@@ -612,6 +876,31 @@ func (m *UpdatePaymentStatusRequest) Size() (n int) {
 	return n
 }
 
+func (m *GetPaymentByReservationRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ReservationId != 0 {
+		n += 2 + sovPayment(uint64(m.ReservationId))
+	}
+	return n
+}
+
+func (m *GetPaymentByReservationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Payment != nil {
+		l = m.Payment.Size()
+		n += 1 + l + sovPayment(uint64(l))
+	}
+	return n
+}
+
 func sovPayment(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -643,6 +932,26 @@ func (this *UpdatePaymentStatusRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&UpdatePaymentStatusRequest{`,
+		`Payment:` + strings.Replace(fmt.Sprintf("%v", this.Payment), "Payment", "Payment", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetPaymentByReservationRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetPaymentByReservationRequest{`,
+		`ReservationId:` + fmt.Sprintf("%v", this.ReservationId) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetPaymentByReservationResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetPaymentByReservationResponse{`,
 		`Payment:` + strings.Replace(fmt.Sprintf("%v", this.Payment), "Payment", "Payment", 1) + `,`,
 		`}`,
 	}, "")
@@ -855,6 +1164,161 @@ func (m *UpdatePaymentStatusRequest) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: UpdatePaymentStatusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Payment", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPayment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPayment
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Payment == nil {
+				m.Payment = &Payment{}
+			}
+			if err := m.Payment.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPayment(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetPaymentByReservationRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPayment
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetPaymentByReservationRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetPaymentByReservationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 20:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReservationId", wireType)
+			}
+			m.ReservationId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPayment
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReservationId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPayment(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthPayment
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetPaymentByReservationResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPayment
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetPaymentByReservationResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetPaymentByReservationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 10:

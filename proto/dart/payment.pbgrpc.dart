@@ -20,6 +20,13 @@ class PaymentServiceClient extends $grpc.Client {
           '/payment.PaymentService/MakePayment',
           ($8.MakePaymentRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$getPaymentByReservation = $grpc.ClientMethod<
+          $8.GetPaymentByReservationRequest,
+          $8.GetPaymentByReservationResponse>(
+      '/payment.PaymentService/GetPaymentByReservation',
+      ($8.GetPaymentByReservationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $8.GetPaymentByReservationResponse.fromBuffer(value));
   static final _$updatePaymentSlip =
       $grpc.ClientMethod<$8.UpdatePaymentRequest, $1.Empty>(
           '/payment.PaymentService/UpdatePaymentSlip',
@@ -39,6 +46,13 @@ class PaymentServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Empty> makePayment($8.MakePaymentRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$makePayment, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$8.GetPaymentByReservationResponse>
+      getPaymentByReservation($8.GetPaymentByReservationRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getPaymentByReservation, request,
+        options: options);
   }
 
   $grpc.ResponseFuture<$1.Empty> updatePaymentSlip(
@@ -66,6 +80,15 @@ abstract class PaymentServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $8.MakePaymentRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$8.GetPaymentByReservationRequest,
+            $8.GetPaymentByReservationResponse>(
+        'GetPaymentByReservation',
+        getPaymentByReservation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $8.GetPaymentByReservationRequest.fromBuffer(value),
+        ($8.GetPaymentByReservationResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$8.UpdatePaymentRequest, $1.Empty>(
         'UpdatePaymentSlip',
         updatePaymentSlip_Pre,
@@ -89,6 +112,12 @@ abstract class PaymentServiceBase extends $grpc.Service {
     return makePayment(call, await request);
   }
 
+  $async.Future<$8.GetPaymentByReservationResponse> getPaymentByReservation_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$8.GetPaymentByReservationRequest> request) async {
+    return getPaymentByReservation(call, await request);
+  }
+
   $async.Future<$1.Empty> updatePaymentSlip_Pre($grpc.ServiceCall call,
       $async.Future<$8.UpdatePaymentRequest> request) async {
     return updatePaymentSlip(call, await request);
@@ -101,6 +130,8 @@ abstract class PaymentServiceBase extends $grpc.Service {
 
   $async.Future<$1.Empty> makePayment(
       $grpc.ServiceCall call, $8.MakePaymentRequest request);
+  $async.Future<$8.GetPaymentByReservationResponse> getPaymentByReservation(
+      $grpc.ServiceCall call, $8.GetPaymentByReservationRequest request);
   $async.Future<$1.Empty> updatePaymentSlip(
       $grpc.ServiceCall call, $8.UpdatePaymentRequest request);
   $async.Future<$1.Empty> updatePaymentStatus(

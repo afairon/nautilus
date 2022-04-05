@@ -55,3 +55,17 @@ func (handler *PaymentHandler) UpdatePaymentStatus(ctx context.Context, req *pb.
 
 	return &emptypb.Empty{}, nil
 }
+
+func (handler *PaymentHandler) GetPaymentByReservation(ctx context.Context, req *pb.GetPaymentByReservationRequest) (*pb.GetPaymentByReservationResponse, error) {
+	payment, err := handler.paymentService.GetPaymentByReservation(ctx, req.GetReservationId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &pb.GetPaymentByReservationResponse{
+		Payment: payment.GetProto(),
+	}
+
+	return resp, nil
+}
