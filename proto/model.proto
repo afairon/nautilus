@@ -305,7 +305,7 @@ message ReportTrip {
 
 message Payment {
     uint64 id = 1;
-    repeated File images = 10;
+    File payment_slip = 10;
     bool verified = 20;
     model.Diver diver = 30;
     uint64 reservation_id = 40;

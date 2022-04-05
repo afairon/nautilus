@@ -684,6 +684,25 @@ type Payment struct {
 	DiverID       uint
 	Diver         Diver
 	ReservationID uint
+	File          *File `gorm:"-" json:"-"`
+}
+
+func (p *Payment) From(payment *pb.Payment) {
+	if payment == nil {
+		return
+	}
+
+	p.ID = uint(payment.Id)
+	p.Verified = payment.Verified
+	p.DiverID = uint(payment.Diver.Id)
+	p.Diver.From(payment.Diver)
+	p.ReservationID = uint(payment.ReservationId)
+
+	if payment.PaymentSlip != nil {
+		file := File{}
+		file.From(payment.PaymentSlip)
+		p.File = &file
+	}
 }
 
 type DiveMasterTrip struct {

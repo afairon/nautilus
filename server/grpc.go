@@ -104,6 +104,7 @@ func registerServices(server *grpc.Server, db *gorm.DB, session session.Session,
 	tripService := service.NewTripService(repo, media)
 	diverService := service.NewDiverService(repo, media)
 	amenityService := service.NewAmenityService(repo)
+	paymentservice := service.NewPaymentService(repo, media)
 
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
 	pb.RegisterAgencyServiceServer(server, handler.NewAgencyHandler(agencyService))
@@ -114,4 +115,5 @@ func registerServices(server *grpc.Server, db *gorm.DB, session session.Session,
 	pb.RegisterTripServiceServer(server, handler.NewTripHandler(tripService))
 	pb.RegisterDiverServiceServer(server, handler.NewDiverHandler(diverService))
 	pb.RegisterAmenityServiceServer(server, handler.NewAmenityHandler(amenityService))
+	pb.RegisterPaymentServiceServer(server, handler.NewPaymentHandler(paymentservice))
 }

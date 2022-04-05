@@ -5,7 +5,6 @@ package payment;
 import "model.proto";
 
 import "google/protobuf/empty.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option go_package = "./pb";
 
