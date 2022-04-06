@@ -10,6 +10,7 @@ import (
 // RoomTypeRepository defines interface for interaction
 // with the reservation repository.
 type RoomTypeRepository interface {
+	Get(ctx context.Context, id uint64) (*model.RoomType, error)
 	ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
 	ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
 }
@@ -43,4 +44,14 @@ func (repo *roomTypeRepository) ListRoomTypesByLiveaboardID(ctx context.Context,
 	}
 
 	return roomTypes, nil
+}
+
+func (repo *roomTypeRepository) Get(ctx context.Context, id uint64) (*model.RoomType, error) {
+	var roomType model.RoomType
+
+	if result := repo.db.First(&roomType, id); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &roomType, nil
 }

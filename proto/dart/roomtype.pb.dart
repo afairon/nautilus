@@ -275,3 +275,99 @@ class ListRoomsOfReservationResponse extends $pb.GeneratedMessage {
   $13.ReservationRoom ensureRoom() => $_ensure(0);
 }
 
+class GetRoomTypeRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetRoomTypeRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypeId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  GetRoomTypeRequest._() : super();
+  factory GetRoomTypeRequest({
+    $fixnum.Int64? roomTypeId,
+  }) {
+    final _result = create();
+    if (roomTypeId != null) {
+      _result.roomTypeId = roomTypeId;
+    }
+    return _result;
+  }
+  factory GetRoomTypeRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetRoomTypeRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetRoomTypeRequest clone() => GetRoomTypeRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetRoomTypeRequest copyWith(void Function(GetRoomTypeRequest) updates) => super.copyWith((message) => updates(message as GetRoomTypeRequest)) as GetRoomTypeRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetRoomTypeRequest create() => GetRoomTypeRequest._();
+  GetRoomTypeRequest createEmptyInstance() => create();
+  static $pb.PbList<GetRoomTypeRequest> createRepeated() => $pb.PbList<GetRoomTypeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetRoomTypeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRoomTypeRequest>(create);
+  static GetRoomTypeRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get roomTypeId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set roomTypeId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomTypeId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomTypeId() => clearField(1);
+}
+
+class GetRoomTypeResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetRoomTypeResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
+    ..aOM<$13.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $13.RoomType.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetRoomTypeResponse._() : super();
+  factory GetRoomTypeResponse({
+    $13.RoomType? roomType,
+  }) {
+    final _result = create();
+    if (roomType != null) {
+      _result.roomType = roomType;
+    }
+    return _result;
+  }
+  factory GetRoomTypeResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetRoomTypeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetRoomTypeResponse clone() => GetRoomTypeResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetRoomTypeResponse copyWith(void Function(GetRoomTypeResponse) updates) => super.copyWith((message) => updates(message as GetRoomTypeResponse)) as GetRoomTypeResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetRoomTypeResponse create() => GetRoomTypeResponse._();
+  GetRoomTypeResponse createEmptyInstance() => create();
+  static $pb.PbList<GetRoomTypeResponse> createRepeated() => $pb.PbList<GetRoomTypeResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetRoomTypeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRoomTypeResponse>(create);
+  static GetRoomTypeResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.RoomType get roomType => $_getN(0);
+  @$pb.TagNumber(1)
+  set roomType($13.RoomType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoomType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoomType() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.RoomType ensureRoomType() => $_ensure(0);
+}
+

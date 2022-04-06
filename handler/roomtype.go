@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/afairon/nautilus/model"
@@ -73,4 +74,18 @@ func (handler *RoomTypeHandler) ListRoomsOfReservation(req *pb.ListRoomsOfReserv
 	}
 
 	return nil
+}
+
+func (handler *RoomTypeHandler) GetRoomType(ctx context.Context, req *pb.GetRoomTypeRequest) (*pb.GetRoomTypeResponse, error) {
+	roomType, err := handler.roomTypeService.GetRoomType(ctx, req.GetRoomTypeId())
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &pb.GetRoomTypeResponse{
+		RoomType: roomType.GetProto(),
+	}
+
+	return resp, nil
 }

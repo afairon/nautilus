@@ -9,6 +9,7 @@ import (
 )
 
 type RoomTypeService interface {
+	GetRoomType(ctx context.Context, roomTypeId uint64) (*model.RoomType, error)
 	// Should these two methods be refactored to one method?
 	ListRoomTypesByHotelAndTrip(ctx context.Context, hotelId, tripId, limit, offset uint64) ([]*model.RoomType, error)
 	ListRoomTypesByLiveaboardAndTrip(ctx context.Context, liveaboardId, tripId, limit, offset uint64) ([]*model.RoomType, error)
@@ -153,4 +154,14 @@ func (service *roomTypeService) ListRoomsOfReservation(ctx context.Context, rese
 	}
 
 	return roomsOfReservation, nil
+}
+
+func (service *roomTypeService) GetRoomType(ctx context.Context, roomTypeId uint64) (*model.RoomType, error) {
+	roomType, err := service.repo.RoomType.Get(ctx, roomTypeId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return roomType, nil
 }

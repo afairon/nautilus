@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 option go_package = "./pb";
 
 service RoomTypeService {
+    rpc GetRoomType(GetRoomTypeRequest) returns (GetRoomTypeResponse);
     // this method returns room types with quantity of each room typetaken into account
     rpc ListRoomTypesByTrip(ListRoomTypesByTripRequest) returns (stream ListRoomTypesByTripResponse);
     rpc ListRoomsOfReservation(ListRoomsOfReservationRequest) returns (stream ListRoomsOfReservationResponse);
@@ -37,4 +38,12 @@ message ListRoomsOfReservationRequest {
 
 message ListRoomsOfReservationResponse {
     model.ReservationRoom room = 1;
+}
+
+message GetRoomTypeRequest {
+    uint64 room_type_id = 1;
+}
+
+message GetRoomTypeResponse {
+    model.RoomType room_type = 1;
 }
