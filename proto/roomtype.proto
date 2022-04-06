@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package roomtype;
+
+import "model.proto";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./pb";
+
+service RoomTypeService {
+    rpc ListRoomTypesByTrip(ListRoomTypesByTripRequest) returns (stream ListRoomTypesByTripResponse);
+}
+
+// ListRoomTypesRequest
+message ListRoomTypesByTripRequest {
+    oneof id {
+        uint64 hotel_id = 1;
+        uint64 liveaboard_id = 10;
+    }
+    uint64 trip_id = 15;
+    uint64 limit = 20;
+    uint64 offset = 25;
+}
+
+// ListRoomTypesResponse
+message ListRoomTypesByTripResponse {
+    model.RoomType room_type = 1;
+}

@@ -675,6 +675,7 @@ type RoomType struct {
 	Amenities    []Amenity      `gorm:"many2many:room_amenity_link;"`
 	LiveaboardID uint           `gorm:"default:null"`
 	HotelID      uint           `gorm:"default:null"`
+	Files        []*File        `gorm:"-" json:"-"`
 }
 
 type Hotel struct {
