@@ -17,7 +17,7 @@ func NewDiverHandler(diverservice service.DiverService) *DiverHandler {
 	}
 }
 
-func (handler *DiverHandler) ListReservationAndBookedTrips(req *pb.ListReservationsWithTripsRequest, srv pb.DiverService_ListReservationsWithTripsServer) error {
+func (handler *DiverHandler) ListReservationsWithTrips(req *pb.ListReservationsWithTripsRequest, srv pb.DiverService_ListReservationsWithTripsServer) error {
 	ctx := srv.Context()
 
 	reservations, err := handler.diverService.ListReservationsWithTrips(ctx, req.GetLimit(), req.GetOffset())

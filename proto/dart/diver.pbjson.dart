@@ -8,24 +8,25 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
-@$core.Deprecated('Use listBookedTripsRequestDescriptor instead')
-const ListBookedTripsRequest$json = const {
-  '1': 'ListBookedTripsRequest',
+@$core.Deprecated('Use listReservationsWithTripsRequestDescriptor instead')
+const ListReservationsWithTripsRequest$json = const {
+  '1': 'ListReservationsWithTripsRequest',
   '2': const [
     const {'1': 'limit', '3': 1, '4': 1, '5': 4, '10': 'limit'},
     const {'1': 'offset', '3': 2, '4': 1, '5': 4, '10': 'offset'},
   ],
 };
 
-/// Descriptor for `ListBookedTripsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listBookedTripsRequestDescriptor = $convert.base64Decode('ChZMaXN0Qm9va2VkVHJpcHNSZXF1ZXN0EhQKBWxpbWl0GAEgASgEUgVsaW1pdBIWCgZvZmZzZXQYAiABKARSBm9mZnNldA==');
-@$core.Deprecated('Use listBookedTripsResponseDescriptor instead')
-const ListBookedTripsResponse$json = const {
-  '1': 'ListBookedTripsResponse',
+/// Descriptor for `ListReservationsWithTripsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listReservationsWithTripsRequestDescriptor = $convert.base64Decode('CiBMaXN0UmVzZXJ2YXRpb25zV2l0aFRyaXBzUmVxdWVzdBIUCgVsaW1pdBgBIAEoBFIFbGltaXQSFgoGb2Zmc2V0GAIgASgEUgZvZmZzZXQ=');
+@$core.Deprecated('Use listReservationsWithTripsResponseDescriptor instead')
+const ListReservationsWithTripsResponse$json = const {
+  '1': 'ListReservationsWithTripsResponse',
   '2': const [
     const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripWithTemplate', '10': 'trip'},
+    const {'1': 'reservation', '3': 10, '4': 1, '5': 11, '6': '.model.Reservation', '10': 'reservation'},
   ],
 };
 
-/// Descriptor for `ListBookedTripsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listBookedTripsResponseDescriptor = $convert.base64Decode('ChdMaXN0Qm9va2VkVHJpcHNSZXNwb25zZRIrCgR0cmlwGAEgASgLMhcubW9kZWwuVHJpcFdpdGhUZW1wbGF0ZVIEdHJpcA==');
+/// Descriptor for `ListReservationsWithTripsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listReservationsWithTripsResponseDescriptor = $convert.base64Decode('CiFMaXN0UmVzZXJ2YXRpb25zV2l0aFRyaXBzUmVzcG9uc2USKwoEdHJpcBgBIAEoCzIXLm1vZGVsLlRyaXBXaXRoVGVtcGxhdGVSBHRyaXASNAoLcmVzZXJ2YXRpb24YCiABKAsyEi5tb2RlbC5SZXNlcnZhdGlvblILcmVzZXJ2YXRpb24=');

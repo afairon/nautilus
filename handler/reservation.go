@@ -37,6 +37,6 @@ func (handler *ReservationHandler) CreateReservation(ctx context.Context, req *p
 }
 
 // GetReservation retrieves reservation by id.
-func (handler *ReservationHandler) GetReservation(ctx context.Context, req *pb.GetReservationRequest) (*pb.Reservation, error) {
+func (handler *ReservationHandler) GetReservation(ctx context.Context, req *pb.GetReservationRequest) (*pb.GetReservationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "GetReservation unimplemented")
 }

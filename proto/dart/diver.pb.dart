@@ -12,15 +12,15 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'model.pb.dart' as $12;
 
-class ListBookedTripsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBookedTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
+class ListReservationsWithTripsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListReservationsWithTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
-  ListBookedTripsRequest._() : super();
-  factory ListBookedTripsRequest({
+  ListReservationsWithTripsRequest._() : super();
+  factory ListReservationsWithTripsRequest({
     $fixnum.Int64? limit,
     $fixnum.Int64? offset,
   }) {
@@ -33,26 +33,26 @@ class ListBookedTripsRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory ListBookedTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListBookedTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ListReservationsWithTripsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListReservationsWithTripsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ListBookedTripsRequest clone() => ListBookedTripsRequest()..mergeFromMessage(this);
+  ListReservationsWithTripsRequest clone() => ListReservationsWithTripsRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ListBookedTripsRequest copyWith(void Function(ListBookedTripsRequest) updates) => super.copyWith((message) => updates(message as ListBookedTripsRequest)) as ListBookedTripsRequest; // ignore: deprecated_member_use
+  ListReservationsWithTripsRequest copyWith(void Function(ListReservationsWithTripsRequest) updates) => super.copyWith((message) => updates(message as ListReservationsWithTripsRequest)) as ListReservationsWithTripsRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListBookedTripsRequest create() => ListBookedTripsRequest._();
-  ListBookedTripsRequest createEmptyInstance() => create();
-  static $pb.PbList<ListBookedTripsRequest> createRepeated() => $pb.PbList<ListBookedTripsRequest>();
+  static ListReservationsWithTripsRequest create() => ListReservationsWithTripsRequest._();
+  ListReservationsWithTripsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListReservationsWithTripsRequest> createRepeated() => $pb.PbList<ListReservationsWithTripsRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListBookedTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListBookedTripsRequest>(create);
-  static ListBookedTripsRequest? _defaultInstance;
+  static ListReservationsWithTripsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListReservationsWithTripsRequest>(create);
+  static ListReservationsWithTripsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get limit => $_getI64(0);
@@ -73,42 +73,47 @@ class ListBookedTripsRequest extends $pb.GeneratedMessage {
   void clearOffset() => clearField(2);
 }
 
-class ListBookedTripsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBookedTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
+class ListReservationsWithTripsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListReservationsWithTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
     ..aOM<$12.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $12.TripWithTemplate.create)
+    ..aOM<$12.Reservation>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $12.Reservation.create)
     ..hasRequiredFields = false
   ;
 
-  ListBookedTripsResponse._() : super();
-  factory ListBookedTripsResponse({
+  ListReservationsWithTripsResponse._() : super();
+  factory ListReservationsWithTripsResponse({
     $12.TripWithTemplate? trip,
+    $12.Reservation? reservation,
   }) {
     final _result = create();
     if (trip != null) {
       _result.trip = trip;
     }
+    if (reservation != null) {
+      _result.reservation = reservation;
+    }
     return _result;
   }
-  factory ListBookedTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListBookedTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ListReservationsWithTripsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListReservationsWithTripsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ListBookedTripsResponse clone() => ListBookedTripsResponse()..mergeFromMessage(this);
+  ListReservationsWithTripsResponse clone() => ListReservationsWithTripsResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ListBookedTripsResponse copyWith(void Function(ListBookedTripsResponse) updates) => super.copyWith((message) => updates(message as ListBookedTripsResponse)) as ListBookedTripsResponse; // ignore: deprecated_member_use
+  ListReservationsWithTripsResponse copyWith(void Function(ListReservationsWithTripsResponse) updates) => super.copyWith((message) => updates(message as ListReservationsWithTripsResponse)) as ListReservationsWithTripsResponse; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListBookedTripsResponse create() => ListBookedTripsResponse._();
-  ListBookedTripsResponse createEmptyInstance() => create();
-  static $pb.PbList<ListBookedTripsResponse> createRepeated() => $pb.PbList<ListBookedTripsResponse>();
+  static ListReservationsWithTripsResponse create() => ListReservationsWithTripsResponse._();
+  ListReservationsWithTripsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListReservationsWithTripsResponse> createRepeated() => $pb.PbList<ListReservationsWithTripsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListBookedTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListBookedTripsResponse>(create);
-  static ListBookedTripsResponse? _defaultInstance;
+  static ListReservationsWithTripsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListReservationsWithTripsResponse>(create);
+  static ListReservationsWithTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   $12.TripWithTemplate get trip => $_getN(0);
@@ -120,5 +125,16 @@ class ListBookedTripsResponse extends $pb.GeneratedMessage {
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
   $12.TripWithTemplate ensureTrip() => $_ensure(0);
+
+  @$pb.TagNumber(10)
+  $12.Reservation get reservation => $_getN(1);
+  @$pb.TagNumber(10)
+  set reservation($12.Reservation v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasReservation() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearReservation() => clearField(10);
+  @$pb.TagNumber(10)
+  $12.Reservation ensureReservation() => $_ensure(1);
 }
 

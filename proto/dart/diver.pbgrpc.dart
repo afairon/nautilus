@@ -14,23 +14,24 @@ import 'diver.pb.dart' as $5;
 export 'diver.pb.dart';
 
 class DiverServiceClient extends $grpc.Client {
-  static final _$listBookedTrips =
-      $grpc.ClientMethod<$5.ListBookedTripsRequest, $5.ListBookedTripsResponse>(
-          '/diver.DiverService/ListBookedTrips',
-          ($5.ListBookedTripsRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $5.ListBookedTripsResponse.fromBuffer(value));
+  static final _$listReservationsWithTrips = $grpc.ClientMethod<
+          $5.ListReservationsWithTripsRequest,
+          $5.ListReservationsWithTripsResponse>(
+      '/diver.DiverService/ListReservationsWithTrips',
+      ($5.ListReservationsWithTripsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $5.ListReservationsWithTripsResponse.fromBuffer(value));
 
   DiverServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseStream<$5.ListBookedTripsResponse> listBookedTrips(
-      $5.ListBookedTripsRequest request,
-      {$grpc.CallOptions? options}) {
+  $grpc.ResponseStream<$5.ListReservationsWithTripsResponse>
+      listReservationsWithTrips($5.ListReservationsWithTripsRequest request,
+          {$grpc.CallOptions? options}) {
     return $createStreamingCall(
-        _$listBookedTrips, $async.Stream.fromIterable([request]),
+        _$listReservationsWithTrips, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -39,23 +40,23 @@ abstract class DiverServiceBase extends $grpc.Service {
   $core.String get $name => 'diver.DiverService';
 
   DiverServiceBase() {
-    $addMethod($grpc.ServiceMethod<$5.ListBookedTripsRequest,
-            $5.ListBookedTripsResponse>(
-        'ListBookedTrips',
-        listBookedTrips_Pre,
+    $addMethod($grpc.ServiceMethod<$5.ListReservationsWithTripsRequest,
+            $5.ListReservationsWithTripsResponse>(
+        'ListReservationsWithTrips',
+        listReservationsWithTrips_Pre,
         false,
         true,
         ($core.List<$core.int> value) =>
-            $5.ListBookedTripsRequest.fromBuffer(value),
-        ($5.ListBookedTripsResponse value) => value.writeToBuffer()));
+            $5.ListReservationsWithTripsRequest.fromBuffer(value),
+        ($5.ListReservationsWithTripsResponse value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$5.ListBookedTripsResponse> listBookedTrips_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$5.ListBookedTripsRequest> request) async* {
-    yield* listBookedTrips(call, await request);
+  $async.Stream<$5.ListReservationsWithTripsResponse>
+      listReservationsWithTrips_Pre($grpc.ServiceCall call,
+          $async.Future<$5.ListReservationsWithTripsRequest> request) async* {
+    yield* listReservationsWithTrips(call, await request);
   }
 
-  $async.Stream<$5.ListBookedTripsResponse> listBookedTrips(
-      $grpc.ServiceCall call, $5.ListBookedTripsRequest request);
+  $async.Stream<$5.ListReservationsWithTripsResponse> listReservationsWithTrips(
+      $grpc.ServiceCall call, $5.ListReservationsWithTripsRequest request);
 }

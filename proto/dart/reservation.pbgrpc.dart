@@ -21,10 +21,11 @@ class ReservationServiceClient extends $grpc.Client {
       ($core.List<$core.int> value) =>
           $9.CreateReservationResponse.fromBuffer(value));
   static final _$getReservation =
-      $grpc.ClientMethod<$9.GetReservationRequest, $9.Reservation>(
+      $grpc.ClientMethod<$9.GetReservationRequest, $9.GetReservationResponse>(
           '/reservation.ReservationService/GetReservation',
           ($9.GetReservationRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $9.Reservation.fromBuffer(value));
+          ($core.List<$core.int> value) =>
+              $9.GetReservationResponse.fromBuffer(value));
 
   ReservationServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -37,7 +38,7 @@ class ReservationServiceClient extends $grpc.Client {
     return $createUnaryCall(_$createReservation, request, options: options);
   }
 
-  $grpc.ResponseFuture<$9.Reservation> getReservation(
+  $grpc.ResponseFuture<$9.GetReservationResponse> getReservation(
       $9.GetReservationRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getReservation, request, options: options);
@@ -57,14 +58,15 @@ abstract class ReservationServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $9.CreateReservationRequest.fromBuffer(value),
         ($9.CreateReservationResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$9.GetReservationRequest, $9.Reservation>(
+    $addMethod($grpc.ServiceMethod<$9.GetReservationRequest,
+            $9.GetReservationResponse>(
         'GetReservation',
         getReservation_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
             $9.GetReservationRequest.fromBuffer(value),
-        ($9.Reservation value) => value.writeToBuffer()));
+        ($9.GetReservationResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$9.CreateReservationResponse> createReservation_Pre(
@@ -73,13 +75,14 @@ abstract class ReservationServiceBase extends $grpc.Service {
     return createReservation(call, await request);
   }
 
-  $async.Future<$9.Reservation> getReservation_Pre($grpc.ServiceCall call,
+  $async.Future<$9.GetReservationResponse> getReservation_Pre(
+      $grpc.ServiceCall call,
       $async.Future<$9.GetReservationRequest> request) async {
     return getReservation(call, await request);
   }
 
   $async.Future<$9.CreateReservationResponse> createReservation(
       $grpc.ServiceCall call, $9.CreateReservationRequest request);
-  $async.Future<$9.Reservation> getReservation(
+  $async.Future<$9.GetReservationResponse> getReservation(
       $grpc.ServiceCall call, $9.GetReservationRequest request);
 }
