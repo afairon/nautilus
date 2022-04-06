@@ -29,22 +29,22 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type ListBookedTripsRequest struct {
+type ListReservationsWithTripsRequest struct {
 	Limit  uint64 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
 }
 
-func (m *ListBookedTripsRequest) Reset()      { *m = ListBookedTripsRequest{} }
-func (*ListBookedTripsRequest) ProtoMessage() {}
-func (*ListBookedTripsRequest) Descriptor() ([]byte, []int) {
+func (m *ListReservationsWithTripsRequest) Reset()      { *m = ListReservationsWithTripsRequest{} }
+func (*ListReservationsWithTripsRequest) ProtoMessage() {}
+func (*ListReservationsWithTripsRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_765ae613bf716c8b, []int{0}
 }
-func (m *ListBookedTripsRequest) XXX_Unmarshal(b []byte) error {
+func (m *ListReservationsWithTripsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListBookedTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ListReservationsWithTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListBookedTripsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ListReservationsWithTripsRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -54,47 +54,48 @@ func (m *ListBookedTripsRequest) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *ListBookedTripsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListBookedTripsRequest.Merge(m, src)
+func (m *ListReservationsWithTripsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListReservationsWithTripsRequest.Merge(m, src)
 }
-func (m *ListBookedTripsRequest) XXX_Size() int {
+func (m *ListReservationsWithTripsRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListBookedTripsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListBookedTripsRequest.DiscardUnknown(m)
+func (m *ListReservationsWithTripsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListReservationsWithTripsRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListBookedTripsRequest proto.InternalMessageInfo
+var xxx_messageInfo_ListReservationsWithTripsRequest proto.InternalMessageInfo
 
-func (m *ListBookedTripsRequest) GetLimit() uint64 {
+func (m *ListReservationsWithTripsRequest) GetLimit() uint64 {
 	if m != nil {
 		return m.Limit
 	}
 	return 0
 }
 
-func (m *ListBookedTripsRequest) GetOffset() uint64 {
+func (m *ListReservationsWithTripsRequest) GetOffset() uint64 {
 	if m != nil {
 		return m.Offset
 	}
 	return 0
 }
 
-type ListBookedTripsResponse struct {
-	Trip *TripWithTemplate `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+type ListReservationsWithTripsResponse struct {
+	Trip        *TripWithTemplate `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+	Reservation *Reservation      `protobuf:"bytes,10,opt,name=reservation,proto3" json:"reservation,omitempty"`
 }
 
-func (m *ListBookedTripsResponse) Reset()      { *m = ListBookedTripsResponse{} }
-func (*ListBookedTripsResponse) ProtoMessage() {}
-func (*ListBookedTripsResponse) Descriptor() ([]byte, []int) {
+func (m *ListReservationsWithTripsResponse) Reset()      { *m = ListReservationsWithTripsResponse{} }
+func (*ListReservationsWithTripsResponse) ProtoMessage() {}
+func (*ListReservationsWithTripsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_765ae613bf716c8b, []int{1}
 }
-func (m *ListBookedTripsResponse) XXX_Unmarshal(b []byte) error {
+func (m *ListReservationsWithTripsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListBookedTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ListReservationsWithTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListBookedTripsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ListReservationsWithTripsResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -104,62 +105,70 @@ func (m *ListBookedTripsResponse) XXX_Marshal(b []byte, deterministic bool) ([]b
 		return b[:n], nil
 	}
 }
-func (m *ListBookedTripsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListBookedTripsResponse.Merge(m, src)
+func (m *ListReservationsWithTripsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListReservationsWithTripsResponse.Merge(m, src)
 }
-func (m *ListBookedTripsResponse) XXX_Size() int {
+func (m *ListReservationsWithTripsResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListBookedTripsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListBookedTripsResponse.DiscardUnknown(m)
+func (m *ListReservationsWithTripsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListReservationsWithTripsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListBookedTripsResponse proto.InternalMessageInfo
+var xxx_messageInfo_ListReservationsWithTripsResponse proto.InternalMessageInfo
 
-func (m *ListBookedTripsResponse) GetTrip() *TripWithTemplate {
+func (m *ListReservationsWithTripsResponse) GetTrip() *TripWithTemplate {
 	if m != nil {
 		return m.Trip
 	}
 	return nil
 }
 
+func (m *ListReservationsWithTripsResponse) GetReservation() *Reservation {
+	if m != nil {
+		return m.Reservation
+	}
+	return nil
+}
+
 func init() {
-	proto.RegisterType((*ListBookedTripsRequest)(nil), "diver.ListBookedTripsRequest")
-	proto.RegisterType((*ListBookedTripsResponse)(nil), "diver.ListBookedTripsResponse")
+	proto.RegisterType((*ListReservationsWithTripsRequest)(nil), "diver.ListReservationsWithTripsRequest")
+	proto.RegisterType((*ListReservationsWithTripsResponse)(nil), "diver.ListReservationsWithTripsResponse")
 }
 
 func init() { proto.RegisterFile("diver.proto", fileDescriptor_765ae613bf716c8b) }
 
 var fileDescriptor_765ae613bf716c8b = []byte{
-	// 280 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x90, 0x3f, 0x4b, 0xc3, 0x40,
-	0x18, 0xc6, 0xef, 0x24, 0xed, 0x70, 0x11, 0x84, 0x43, 0xda, 0x12, 0xf1, 0x45, 0x3a, 0x09, 0x42,
-	0x22, 0x75, 0x73, 0x2c, 0xd2, 0xc9, 0x29, 0x16, 0x04, 0x37, 0x63, 0xde, 0xd4, 0xc3, 0xc4, 0x3b,
-	0x73, 0xd7, 0x82, 0x9b, 0x1f, 0xc1, 0x8f, 0xe1, 0x47, 0x71, 0xcc, 0xd8, 0xd1, 0x5c, 0x16, 0xc7,
-	0x7e, 0x04, 0xe9, 0x9d, 0x93, 0x7f, 0xc6, 0xdf, 0xfb, 0x3c, 0x3c, 0x3c, 0xcf, 0xcb, 0xc2, 0x5c,
-	0xac, 0xb0, 0x8e, 0x55, 0x2d, 0x8d, 0xe4, 0x3d, 0x07, 0x51, 0x58, 0xc9, 0x1c, 0x4b, 0x7f, 0x8b,
-	0x0e, 0x16, 0x52, 0x2e, 0x4a, 0x4c, 0x1c, 0x65, 0xcb, 0x22, 0xc1, 0x4a, 0x99, 0x67, 0x2f, 0x8e,
-	0x67, 0x6c, 0x70, 0x29, 0xb4, 0x99, 0x4a, 0xf9, 0x80, 0xf9, 0xbc, 0x16, 0x4a, 0xa7, 0xf8, 0xb4,
-	0x44, 0x6d, 0xf8, 0x3e, 0xeb, 0x95, 0xa2, 0x12, 0x66, 0x44, 0x8f, 0xe8, 0x71, 0x90, 0x7a, 0xe0,
-	0x03, 0xd6, 0x97, 0x45, 0xa1, 0xd1, 0x8c, 0x76, 0xdc, 0xf9, 0x9b, 0xc6, 0x33, 0x36, 0xfc, 0x95,
-	0xa3, 0x95, 0x7c, 0xd4, 0xc8, 0x4f, 0x58, 0x60, 0x6a, 0xa1, 0x5c, 0x4e, 0x38, 0x19, 0xc6, 0xbe,
-	0xdb, 0xd6, 0x73, 0x2d, 0xcc, 0xfd, 0x1c, 0x2b, 0x55, 0xde, 0x1a, 0x4c, 0x9d, 0x69, 0x92, 0xb1,
-	0xdd, 0x8b, 0xed, 0x84, 0x2b, 0xac, 0x57, 0xe2, 0x0e, 0x79, 0xca, 0xf6, 0x7e, 0xe4, 0xf2, 0xc3,
-	0xd8, 0x2f, 0xfe, 0xbb, 0x77, 0x04, 0xff, 0xc9, 0xbe, 0xce, 0x29, 0x9d, 0x9e, 0x37, 0x2d, 0x90,
-	0x75, 0x0b, 0x64, 0xd3, 0x02, 0x7d, 0xb1, 0x40, 0xdf, 0x2c, 0xd0, 0x77, 0x0b, 0xb4, 0xb1, 0x40,
-	0x3f, 0x2c, 0xd0, 0x4f, 0x0b, 0x64, 0x63, 0x81, 0xbe, 0x76, 0x40, 0x9a, 0x0e, 0xc8, 0xba, 0x03,
-	0x72, 0x13, 0xc4, 0x89, 0xca, 0xb2, 0xbe, 0x7b, 0xdb, 0xd9, 0x57, 0x00, 0x00, 0x00, 0xff, 0xff,
-	0xdb, 0xd4, 0x7d, 0x3c, 0x76, 0x01, 0x00, 0x00,
+	// 304 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x31, 0x4f, 0x42, 0x31,
+	0x14, 0x85, 0x7b, 0x0d, 0x30, 0xf4, 0x39, 0x35, 0x46, 0x11, 0x93, 0x1b, 0x64, 0x91, 0xc4, 0xe4,
+	0x61, 0xd0, 0xc9, 0xd1, 0x38, 0x3a, 0x98, 0xa7, 0x89, 0x89, 0x1b, 0xc8, 0x05, 0x9b, 0xbc, 0x47,
+	0x6b, 0x5b, 0x48, 0xdc, 0x98, 0x9c, 0xfd, 0x19, 0xfe, 0x14, 0x47, 0x46, 0x46, 0x29, 0x8b, 0x23,
+	0x3f, 0xc1, 0xd0, 0x92, 0xc8, 0xa2, 0x8c, 0xe7, 0xf6, 0xbb, 0xa7, 0xa7, 0xa7, 0x3c, 0xe9, 0xc9,
+	0x31, 0x99, 0x54, 0x1b, 0xe5, 0x94, 0x28, 0x07, 0x51, 0x4b, 0x0a, 0xd5, 0xa3, 0x3c, 0xce, 0x6a,
+	0x47, 0x03, 0xa5, 0x06, 0x39, 0xb5, 0x82, 0xea, 0x8e, 0xfa, 0x2d, 0x2a, 0xb4, 0x7b, 0x8d, 0x87,
+	0x8d, 0x5b, 0x5e, 0xbf, 0x91, 0xd6, 0x65, 0x64, 0xc9, 0x8c, 0x3b, 0x4e, 0xaa, 0xa1, 0x7d, 0x90,
+	0xee, 0xf9, 0xde, 0x48, 0x6d, 0x33, 0x7a, 0x19, 0x91, 0x75, 0x62, 0x8f, 0x97, 0x73, 0x59, 0x48,
+	0x57, 0x85, 0x3a, 0x34, 0x4b, 0x59, 0x14, 0x62, 0x9f, 0x57, 0x54, 0xbf, 0x6f, 0xc9, 0x55, 0x77,
+	0xc2, 0x78, 0xad, 0x1a, 0x6f, 0xc0, 0x8f, 0xff, 0xb1, 0xb4, 0x5a, 0x0d, 0x2d, 0x89, 0x53, 0x5e,
+	0x72, 0x46, 0xea, 0x60, 0x99, 0xb4, 0x0f, 0xd2, 0x18, 0x78, 0xc5, 0x04, 0x96, 0x0a, 0x9d, 0x77,
+	0x1c, 0x65, 0x01, 0x12, 0x17, 0x3c, 0x31, 0xbf, 0x6e, 0x55, 0x1e, 0x76, 0xc4, 0x7a, 0x67, 0xe3,
+	0x9e, 0x6c, 0x13, 0x6b, 0x4f, 0x80, 0xef, 0x5e, 0xaf, 0xea, 0xb8, 0x23, 0x33, 0x96, 0x4f, 0x24,
+	0x34, 0x3f, 0xfc, 0x33, 0x98, 0x38, 0x49, 0x63, 0x8f, 0xdb, 0xda, 0xa8, 0x35, 0xb7, 0x83, 0xf1,
+	0x8d, 0x67, 0x70, 0x75, 0x39, 0x9d, 0x23, 0x9b, 0xcd, 0x91, 0x2d, 0xe7, 0x08, 0x13, 0x8f, 0xf0,
+	0xe1, 0x11, 0x3e, 0x3d, 0xc2, 0xd4, 0x23, 0x7c, 0x79, 0x84, 0x6f, 0x8f, 0x6c, 0xe9, 0x11, 0xde,
+	0x17, 0xc8, 0xa6, 0x0b, 0x64, 0xb3, 0x05, 0xb2, 0xc7, 0x52, 0xda, 0xd2, 0xdd, 0x6e, 0x25, 0x7c,
+	0xd0, 0xf9, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xed, 0x9f, 0xa7, 0xd1, 0xe0, 0x01, 0x00, 0x00,
 }
 
-func (this *ListBookedTripsRequest) Equal(that interface{}) bool {
+func (this *ListReservationsWithTripsRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListBookedTripsRequest)
+	that1, ok := that.(*ListReservationsWithTripsRequest)
 	if !ok {
-		that2, ok := that.(ListBookedTripsRequest)
+		that2, ok := that.(ListReservationsWithTripsRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -179,14 +188,14 @@ func (this *ListBookedTripsRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListBookedTripsResponse) Equal(that interface{}) bool {
+func (this *ListReservationsWithTripsResponse) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListBookedTripsResponse)
+	that1, ok := that.(*ListReservationsWithTripsResponse)
 	if !ok {
-		that2, ok := that.(ListBookedTripsResponse)
+		that2, ok := that.(ListReservationsWithTripsResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -201,27 +210,33 @@ func (this *ListBookedTripsResponse) Equal(that interface{}) bool {
 	if !this.Trip.Equal(that1.Trip) {
 		return false
 	}
+	if !this.Reservation.Equal(that1.Reservation) {
+		return false
+	}
 	return true
 }
-func (this *ListBookedTripsRequest) GoString() string {
+func (this *ListReservationsWithTripsRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&pb.ListBookedTripsRequest{")
+	s = append(s, "&pb.ListReservationsWithTripsRequest{")
 	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
 	s = append(s, "Offset: "+fmt.Sprintf("%#v", this.Offset)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListBookedTripsResponse) GoString() string {
+func (this *ListReservationsWithTripsResponse) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.ListBookedTripsResponse{")
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.ListReservationsWithTripsResponse{")
 	if this.Trip != nil {
 		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
+	if this.Reservation != nil {
+		s = append(s, "Reservation: "+fmt.Sprintf("%#v", this.Reservation)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -248,7 +263,8 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DiverServiceClient interface {
 	// List the trips that the diver has made reservation for
-	ListBookedTrips(ctx context.Context, in *ListBookedTripsRequest, opts ...grpc.CallOption) (DiverService_ListBookedTripsClient, error)
+	// This should be refactored to two endpoints?
+	ListReservationsWithTrips(ctx context.Context, in *ListReservationsWithTripsRequest, opts ...grpc.CallOption) (DiverService_ListReservationsWithTripsClient, error)
 }
 
 type diverServiceClient struct {
@@ -259,12 +275,12 @@ func NewDiverServiceClient(cc *grpc.ClientConn) DiverServiceClient {
 	return &diverServiceClient{cc}
 }
 
-func (c *diverServiceClient) ListBookedTrips(ctx context.Context, in *ListBookedTripsRequest, opts ...grpc.CallOption) (DiverService_ListBookedTripsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_DiverService_serviceDesc.Streams[0], "/diver.DiverService/ListBookedTrips", opts...)
+func (c *diverServiceClient) ListReservationsWithTrips(ctx context.Context, in *ListReservationsWithTripsRequest, opts ...grpc.CallOption) (DiverService_ListReservationsWithTripsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DiverService_serviceDesc.Streams[0], "/diver.DiverService/ListReservationsWithTrips", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &diverServiceListBookedTripsClient{stream}
+	x := &diverServiceListReservationsWithTripsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -274,17 +290,17 @@ func (c *diverServiceClient) ListBookedTrips(ctx context.Context, in *ListBooked
 	return x, nil
 }
 
-type DiverService_ListBookedTripsClient interface {
-	Recv() (*ListBookedTripsResponse, error)
+type DiverService_ListReservationsWithTripsClient interface {
+	Recv() (*ListReservationsWithTripsResponse, error)
 	grpc.ClientStream
 }
 
-type diverServiceListBookedTripsClient struct {
+type diverServiceListReservationsWithTripsClient struct {
 	grpc.ClientStream
 }
 
-func (x *diverServiceListBookedTripsClient) Recv() (*ListBookedTripsResponse, error) {
-	m := new(ListBookedTripsResponse)
+func (x *diverServiceListReservationsWithTripsClient) Recv() (*ListReservationsWithTripsResponse, error) {
+	m := new(ListReservationsWithTripsResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -294,39 +310,40 @@ func (x *diverServiceListBookedTripsClient) Recv() (*ListBookedTripsResponse, er
 // DiverServiceServer is the server API for DiverService service.
 type DiverServiceServer interface {
 	// List the trips that the diver has made reservation for
-	ListBookedTrips(*ListBookedTripsRequest, DiverService_ListBookedTripsServer) error
+	// This should be refactored to two endpoints?
+	ListReservationsWithTrips(*ListReservationsWithTripsRequest, DiverService_ListReservationsWithTripsServer) error
 }
 
 // UnimplementedDiverServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedDiverServiceServer struct {
 }
 
-func (*UnimplementedDiverServiceServer) ListBookedTrips(req *ListBookedTripsRequest, srv DiverService_ListBookedTripsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListBookedTrips not implemented")
+func (*UnimplementedDiverServiceServer) ListReservationsWithTrips(req *ListReservationsWithTripsRequest, srv DiverService_ListReservationsWithTripsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListReservationsWithTrips not implemented")
 }
 
 func RegisterDiverServiceServer(s *grpc.Server, srv DiverServiceServer) {
 	s.RegisterService(&_DiverService_serviceDesc, srv)
 }
 
-func _DiverService_ListBookedTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListBookedTripsRequest)
+func _DiverService_ListReservationsWithTrips_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListReservationsWithTripsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(DiverServiceServer).ListBookedTrips(m, &diverServiceListBookedTripsServer{stream})
+	return srv.(DiverServiceServer).ListReservationsWithTrips(m, &diverServiceListReservationsWithTripsServer{stream})
 }
 
-type DiverService_ListBookedTripsServer interface {
-	Send(*ListBookedTripsResponse) error
+type DiverService_ListReservationsWithTripsServer interface {
+	Send(*ListReservationsWithTripsResponse) error
 	grpc.ServerStream
 }
 
-type diverServiceListBookedTripsServer struct {
+type diverServiceListReservationsWithTripsServer struct {
 	grpc.ServerStream
 }
 
-func (x *diverServiceListBookedTripsServer) Send(m *ListBookedTripsResponse) error {
+func (x *diverServiceListReservationsWithTripsServer) Send(m *ListReservationsWithTripsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -336,15 +353,15 @@ var _DiverService_serviceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "ListBookedTrips",
-			Handler:       _DiverService_ListBookedTrips_Handler,
+			StreamName:    "ListReservationsWithTrips",
+			Handler:       _DiverService_ListReservationsWithTrips_Handler,
 			ServerStreams: true,
 		},
 	},
 	Metadata: "diver.proto",
 }
 
-func (m *ListBookedTripsRequest) Marshal() (dAtA []byte, err error) {
+func (m *ListReservationsWithTripsRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -354,12 +371,12 @@ func (m *ListBookedTripsRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListBookedTripsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListReservationsWithTripsRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListBookedTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListReservationsWithTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -377,7 +394,7 @@ func (m *ListBookedTripsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBookedTripsResponse) Marshal() (dAtA []byte, err error) {
+func (m *ListReservationsWithTripsResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -387,16 +404,28 @@ func (m *ListBookedTripsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListBookedTripsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *ListReservationsWithTripsResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListBookedTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ListReservationsWithTripsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.Reservation != nil {
+		{
+			size, err := m.Reservation.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintDiver(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
+	}
 	if m.Trip != nil {
 		{
 			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
@@ -423,7 +452,7 @@ func encodeVarintDiver(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *ListBookedTripsRequest) Size() (n int) {
+func (m *ListReservationsWithTripsRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -438,7 +467,7 @@ func (m *ListBookedTripsRequest) Size() (n int) {
 	return n
 }
 
-func (m *ListBookedTripsResponse) Size() (n int) {
+func (m *ListReservationsWithTripsResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -446,6 +475,10 @@ func (m *ListBookedTripsResponse) Size() (n int) {
 	_ = l
 	if m.Trip != nil {
 		l = m.Trip.Size()
+		n += 1 + l + sovDiver(uint64(l))
+	}
+	if m.Reservation != nil {
+		l = m.Reservation.Size()
 		n += 1 + l + sovDiver(uint64(l))
 	}
 	return n
@@ -457,23 +490,24 @@ func sovDiver(x uint64) (n int) {
 func sozDiver(x uint64) (n int) {
 	return sovDiver(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *ListBookedTripsRequest) String() string {
+func (this *ListReservationsWithTripsRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListBookedTripsRequest{`,
+	s := strings.Join([]string{`&ListReservationsWithTripsRequest{`,
 		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
 		`Offset:` + fmt.Sprintf("%v", this.Offset) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ListBookedTripsResponse) String() string {
+func (this *ListReservationsWithTripsResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListBookedTripsResponse{`,
+	s := strings.Join([]string{`&ListReservationsWithTripsResponse{`,
 		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "TripWithTemplate", "TripWithTemplate", 1) + `,`,
+		`Reservation:` + strings.Replace(fmt.Sprintf("%v", this.Reservation), "Reservation", "Reservation", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -486,7 +520,7 @@ func valueToStringDiver(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *ListBookedTripsRequest) Unmarshal(dAtA []byte) error {
+func (m *ListReservationsWithTripsRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -509,10 +543,10 @@ func (m *ListBookedTripsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListBookedTripsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListReservationsWithTripsRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBookedTripsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListReservationsWithTripsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -574,7 +608,7 @@ func (m *ListBookedTripsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListBookedTripsResponse) Unmarshal(dAtA []byte) error {
+func (m *ListReservationsWithTripsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -597,10 +631,10 @@ func (m *ListBookedTripsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListBookedTripsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListReservationsWithTripsResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBookedTripsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListReservationsWithTripsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -636,6 +670,42 @@ func (m *ListBookedTripsResponse) Unmarshal(dAtA []byte) error {
 				m.Trip = &TripWithTemplate{}
 			}
 			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reservation", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Reservation == nil {
+				m.Reservation = &Reservation{}
+			}
+			if err := m.Reservation.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

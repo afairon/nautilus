@@ -17,22 +17,23 @@ func NewDiverHandler(diverservice service.DiverService) *DiverHandler {
 	}
 }
 
-func (handler *DiverHandler) ListBookedTrips(req *pb.ListBookedTripsRequest, srv pb.DiverService_ListBookedTripsServer) error {
+func (handler *DiverHandler) ListReservationAndBookedTrips(req *pb.ListReservationsWithTripsRequest, srv pb.DiverService_ListReservationsWithTripsServer) error {
 	ctx := srv.Context()
 
-	trips, err := handler.diverService.ListBookedTrips(ctx, req.GetLimit(), req.GetOffset())
+	reservations, err := handler.diverService.ListReservationsWithTrips(ctx, req.GetLimit(), req.GetOffset())
 
 	if err != nil {
 		return err
 	}
 
-	if len(trips) == 0 {
+	if len(reservations) == 0 {
 		return status.Error(codes.NotFound, "ListTrips: not found")
 	}
 
-	for _, trip := range trips {
-		resp := &pb.ListBookedTripsResponse{
-			Trip: trip.GetProto(),
+	for _, reservation := range reservations {
+		resp := &pb.ListReservationsWithTripsResponse{
+			Trip:        reservation.Trip.GetProto(),
+			Reservation: reservation.GetProto(),
 		}
 
 		srv.Send(resp)

@@ -12,6 +12,7 @@ import (
 type ReservationRepository interface {
 	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
 	GetReservationsByTrip(ctx context.Context, id uint64) ([]*model.Reservation, error)
+	ListReservationsByDiver(ctx context.Context, id, limit, offset uint64) ([]*model.Reservation, error)
 	BookRoom(ctx context.Context, room *model.ReservationRoomType) (*model.ReservationRoomType, error)
 }
 
@@ -73,4 +74,23 @@ func (repo *reservationRepository) BookRoom(ctx context.Context, room *model.Res
 	result := repo.db.Create(room)
 
 	return room, result.Error
+}
+
+func (repo *reservationRepository) ListReservationsByDiver(ctx context.Context, id, limit, offset uint64) ([]*model.Reservation, error) {
+	var reservations []*model.Reservation
+
+	result := repo.db.Preload("Trip.TripTemplate.Address")
+	result.Preload("Trip.TripTemplate.Hotel")
+	result.Preload("Trip.TripTemplate.Liveaboard")
+	result.Preload("Trip.TripTemplate.Boat")
+	result.Preload("Trip.DiveSites")
+	result.Where("diver_id = ?", id)
+
+	result.Limit(int(limit)).Offset(int(offset)).Find(&reservations)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return reservations, nil
 }

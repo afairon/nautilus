@@ -579,6 +579,20 @@ type Reservation struct {
 	Payment           Payment
 }
 
+func (r *Reservation) GetProto() *pb.Reservation {
+	reservation := pb.Reservation{
+		Id:          uint64(r.ID),
+		TripId:      uint64(r.TripID),
+		DiverId:     uint64(r.DiverID),
+		Price:       r.Price,
+		TotalDivers: uint64(r.TotalDivers),
+		CreatedAt:   &r.CreatedAt,
+		UpdatedAt:   &r.UpdatedAt,
+	}
+
+	return &reservation
+}
+
 type LiveaboardComment struct {
 	*gorm.Model
 	DiverID       uint

@@ -5,11 +5,9 @@ package pb
 
 import (
 	context "context"
-	encoding_binary "encoding/binary"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,186 +17,18 @@ import (
 	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
-	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
-var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
-
-type Reservation struct {
-	Id          uint64              `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TripId      uint64              `protobuf:"varint,10,opt,name=trip_id,json=tripId,proto3" json:"trip_id,omitempty"`
-	DiverId     uint64              `protobuf:"varint,20,opt,name=diver_id,json=diverId,proto3" json:"diver_id,omitempty"`
-	Price       float32             `protobuf:"fixed32,30,opt,name=price,proto3" json:"price,omitempty"`
-	TotalDivers uint64              `protobuf:"varint,35,opt,name=total_divers,json=totalDivers,proto3" json:"total_divers,omitempty"`
-	Rooms       []*Reservation_Room `protobuf:"bytes,40,rep,name=rooms,proto3" json:"rooms,omitempty"`
-	CreatedAt   *time.Time          `protobuf:"bytes,50,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
-	UpdatedAt   *time.Time          `protobuf:"bytes,60,opt,name=updated_at,json=updatedAt,proto3,stdtime" json:"updated_at,omitempty"`
-}
-
-func (m *Reservation) Reset()      { *m = Reservation{} }
-func (*Reservation) ProtoMessage() {}
-func (*Reservation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c1b272c5347b2042, []int{0}
-}
-func (m *Reservation) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Reservation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Reservation.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Reservation) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Reservation.Merge(m, src)
-}
-func (m *Reservation) XXX_Size() int {
-	return m.Size()
-}
-func (m *Reservation) XXX_DiscardUnknown() {
-	xxx_messageInfo_Reservation.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Reservation proto.InternalMessageInfo
-
-func (m *Reservation) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *Reservation) GetTripId() uint64 {
-	if m != nil {
-		return m.TripId
-	}
-	return 0
-}
-
-func (m *Reservation) GetDiverId() uint64 {
-	if m != nil {
-		return m.DiverId
-	}
-	return 0
-}
-
-func (m *Reservation) GetPrice() float32 {
-	if m != nil {
-		return m.Price
-	}
-	return 0
-}
-
-func (m *Reservation) GetTotalDivers() uint64 {
-	if m != nil {
-		return m.TotalDivers
-	}
-	return 0
-}
-
-func (m *Reservation) GetRooms() []*Reservation_Room {
-	if m != nil {
-		return m.Rooms
-	}
-	return nil
-}
-
-func (m *Reservation) GetCreatedAt() *time.Time {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return nil
-}
-
-func (m *Reservation) GetUpdatedAt() *time.Time {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return nil
-}
-
-type Reservation_Room struct {
-	Id         uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	RoomTypeId uint64 `protobuf:"varint,10,opt,name=room_type_id,json=roomTypeId,proto3" json:"room_type_id,omitempty"`
-	NoDivers   uint32 `protobuf:"varint,20,opt,name=no_divers,json=noDivers,proto3" json:"no_divers,omitempty"`
-	Quantity   uint32 `protobuf:"varint,40,opt,name=quantity,proto3" json:"quantity,omitempty"`
-}
-
-func (m *Reservation_Room) Reset()      { *m = Reservation_Room{} }
-func (*Reservation_Room) ProtoMessage() {}
-func (*Reservation_Room) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c1b272c5347b2042, []int{0, 0}
-}
-func (m *Reservation_Room) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Reservation_Room) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Reservation_Room.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Reservation_Room) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Reservation_Room.Merge(m, src)
-}
-func (m *Reservation_Room) XXX_Size() int {
-	return m.Size()
-}
-func (m *Reservation_Room) XXX_DiscardUnknown() {
-	xxx_messageInfo_Reservation_Room.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Reservation_Room proto.InternalMessageInfo
-
-func (m *Reservation_Room) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *Reservation_Room) GetRoomTypeId() uint64 {
-	if m != nil {
-		return m.RoomTypeId
-	}
-	return 0
-}
-
-func (m *Reservation_Room) GetNoDivers() uint32 {
-	if m != nil {
-		return m.NoDivers
-	}
-	return 0
-}
-
-func (m *Reservation_Room) GetQuantity() uint32 {
-	if m != nil {
-		return m.Quantity
-	}
-	return 0
-}
 
 type CreateReservationRequest struct {
 	Reservation *Reservation `protobuf:"bytes,1,opt,name=reservation,proto3" json:"reservation,omitempty"`
@@ -207,7 +37,7 @@ type CreateReservationRequest struct {
 func (m *CreateReservationRequest) Reset()      { *m = CreateReservationRequest{} }
 func (*CreateReservationRequest) ProtoMessage() {}
 func (*CreateReservationRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c1b272c5347b2042, []int{1}
+	return fileDescriptor_c1b272c5347b2042, []int{0}
 }
 func (m *CreateReservationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -250,7 +80,7 @@ type CreateReservationResponse struct {
 func (m *CreateReservationResponse) Reset()      { *m = CreateReservationResponse{} }
 func (*CreateReservationResponse) ProtoMessage() {}
 func (*CreateReservationResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c1b272c5347b2042, []int{2}
+	return fileDescriptor_c1b272c5347b2042, []int{1}
 }
 func (m *CreateReservationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -293,7 +123,7 @@ type GetReservationRequest struct {
 func (m *GetReservationRequest) Reset()      { *m = GetReservationRequest{} }
 func (*GetReservationRequest) ProtoMessage() {}
 func (*GetReservationRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c1b272c5347b2042, []int{3}
+	return fileDescriptor_c1b272c5347b2042, []int{2}
 }
 func (m *GetReservationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -329,143 +159,82 @@ func (m *GetReservationRequest) GetId() uint64 {
 	return 0
 }
 
+type GetReservationResponse struct {
+	Reservation *Reservation `protobuf:"bytes,1,opt,name=reservation,proto3" json:"reservation,omitempty"`
+}
+
+func (m *GetReservationResponse) Reset()      { *m = GetReservationResponse{} }
+func (*GetReservationResponse) ProtoMessage() {}
+func (*GetReservationResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c1b272c5347b2042, []int{3}
+}
+func (m *GetReservationResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetReservationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetReservationResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetReservationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetReservationResponse.Merge(m, src)
+}
+func (m *GetReservationResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetReservationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetReservationResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetReservationResponse proto.InternalMessageInfo
+
+func (m *GetReservationResponse) GetReservation() *Reservation {
+	if m != nil {
+		return m.Reservation
+	}
+	return nil
+}
+
 func init() {
-	proto.RegisterType((*Reservation)(nil), "reservation.Reservation")
-	proto.RegisterType((*Reservation_Room)(nil), "reservation.Reservation.Room")
 	proto.RegisterType((*CreateReservationRequest)(nil), "reservation.CreateReservationRequest")
 	proto.RegisterType((*CreateReservationResponse)(nil), "reservation.CreateReservationResponse")
 	proto.RegisterType((*GetReservationRequest)(nil), "reservation.GetReservationRequest")
+	proto.RegisterType((*GetReservationResponse)(nil), "reservation.GetReservationResponse")
 }
 
 func init() { proto.RegisterFile("reservation.proto", fileDescriptor_c1b272c5347b2042) }
 
 var fileDescriptor_c1b272c5347b2042 = []byte{
-	// 510 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x52, 0xc1, 0x6e, 0xd3, 0x40,
-	0x14, 0xf4, 0xb6, 0x69, 0x9b, 0x3e, 0x97, 0x4a, 0x5d, 0x15, 0xe1, 0x1a, 0xb1, 0x35, 0x46, 0x80,
-	0x2f, 0x38, 0x92, 0x7b, 0xab, 0x90, 0x50, 0x0b, 0x12, 0xca, 0x0d, 0x99, 0x0a, 0x24, 0x2e, 0x91,
-	0x93, 0x5d, 0xcc, 0x4a, 0xb5, 0xd7, 0xb1, 0xd7, 0x91, 0x72, 0xe3, 0x13, 0xfa, 0x19, 0x7c, 0x00,
-	0x1f, 0xc1, 0x81, 0x43, 0x8e, 0xbd, 0x41, 0x9c, 0x0b, 0xc7, 0x7e, 0x02, 0xf2, 0x3a, 0x56, 0x1c,
-	0x9a, 0x08, 0x24, 0x6e, 0x9e, 0xb7, 0xf3, 0xc6, 0x33, 0xa3, 0x07, 0x07, 0x29, 0xcb, 0x58, 0x3a,
-	0x0a, 0x24, 0x17, 0xb1, 0x9b, 0xa4, 0x42, 0x0a, 0xac, 0x37, 0x46, 0xe6, 0xb3, 0x90, 0xcb, 0x4f,
-	0x79, 0xdf, 0x1d, 0x88, 0xa8, 0x13, 0x8a, 0x50, 0x74, 0x14, 0xa7, 0x9f, 0x7f, 0x54, 0x48, 0x01,
-	0xf5, 0x55, 0xed, 0x9a, 0xc7, 0xa1, 0x10, 0xe1, 0x25, 0x5b, 0xb0, 0x24, 0x8f, 0x58, 0x26, 0x83,
-	0x28, 0xa9, 0x08, 0xf6, 0xd7, 0x4d, 0xd0, 0xfd, 0x85, 0x3e, 0xde, 0x87, 0x0d, 0x4e, 0x0d, 0x64,
-	0x21, 0xa7, 0xe5, 0x6f, 0x70, 0x8a, 0xef, 0xc1, 0x8e, 0x4c, 0x79, 0xd2, 0xe3, 0xd4, 0x00, 0x35,
-	0xdc, 0x2e, 0x61, 0x97, 0xe2, 0x23, 0x68, 0x53, 0x3e, 0x62, 0x69, 0xf9, 0x72, 0xa8, 0x5e, 0x76,
-	0x14, 0xee, 0x52, 0x7c, 0x08, 0x5b, 0x49, 0xca, 0x07, 0xcc, 0x20, 0x16, 0x72, 0x36, 0xfc, 0x0a,
-	0xe0, 0x87, 0xb0, 0x27, 0x85, 0x0c, 0x2e, 0x7b, 0x8a, 0x96, 0x19, 0x8f, 0xd4, 0x92, 0xae, 0x66,
-	0xaf, 0xd4, 0x08, 0x9f, 0xc0, 0x56, 0x2a, 0x44, 0x94, 0x19, 0x8e, 0xb5, 0xe9, 0xe8, 0xde, 0x03,
-	0xb7, 0x59, 0x86, 0xdf, 0xfc, 0x16, 0x22, 0xf2, 0x2b, 0x2e, 0x7e, 0x01, 0x30, 0x48, 0x59, 0x20,
-	0x19, 0xed, 0x05, 0xd2, 0xf0, 0x2c, 0xe4, 0xe8, 0x9e, 0xe9, 0x56, 0xb9, 0xdd, 0x3a, 0xb7, 0x7b,
-	0x51, 0xe7, 0x3e, 0x6f, 0x5d, 0xfd, 0x38, 0x46, 0xfe, 0xee, 0x7c, 0xe7, 0x4c, 0x96, 0x02, 0x79,
-	0x42, 0x6b, 0x81, 0xe7, 0xff, 0x2a, 0x30, 0xdf, 0x39, 0x93, 0xe6, 0x10, 0x5a, 0xa5, 0xa1, 0x5b,
-	0xdd, 0x59, 0xb0, 0x57, 0x5a, 0xec, 0xc9, 0x71, 0xc2, 0x16, 0x05, 0x42, 0x39, 0xbb, 0x18, 0x27,
-	0xac, 0x4b, 0xf1, 0x7d, 0xd8, 0x8d, 0x45, 0x5d, 0x48, 0xd9, 0xe2, 0x1d, 0xbf, 0x1d, 0x8b, 0x79,
-	0x1b, 0x26, 0xb4, 0x87, 0x79, 0x10, 0x4b, 0x2e, 0xc7, 0x86, 0x53, 0xbd, 0xd5, 0xd8, 0x7e, 0x07,
-	0xc6, 0x4b, 0x15, 0xa0, 0xd1, 0x8a, 0xcf, 0x86, 0x39, 0xcb, 0x24, 0x3e, 0x85, 0xe6, 0xc5, 0x28,
-	0x3f, 0xba, 0x67, 0xac, 0xeb, 0xd2, 0x6f, 0x92, 0xed, 0xf7, 0x70, 0xb4, 0x42, 0x37, 0x4b, 0x44,
-	0x9c, 0xb1, 0xff, 0x12, 0x7e, 0x0a, 0x77, 0x5f, 0x33, 0xb9, 0xc2, 0xed, 0x1f, 0xa5, 0x79, 0xdf,
-	0x11, 0xe0, 0x06, 0xed, 0x2d, 0x4b, 0x47, 0xe5, 0xf5, 0x50, 0x38, 0xb8, 0x65, 0x0c, 0x3f, 0x5e,
-	0xfa, 0xf7, 0xba, 0x42, 0xcc, 0x27, 0x7f, 0xa3, 0x55, 0xf9, 0x6c, 0x0d, 0xbf, 0x81, 0xfd, 0x65,
-	0x97, 0xd8, 0x5e, 0xda, 0x5d, 0x19, 0xc1, 0x5c, 0x5b, 0x81, 0xad, 0x9d, 0x9f, 0x4e, 0xa6, 0x44,
-	0xbb, 0x9e, 0x12, 0xed, 0x66, 0x4a, 0xd0, 0xe7, 0x82, 0xa0, 0x2f, 0x05, 0x41, 0xdf, 0x0a, 0x82,
-	0x26, 0x05, 0x41, 0x3f, 0x0b, 0x82, 0x7e, 0x15, 0x44, 0xbb, 0x29, 0x08, 0xba, 0x9a, 0x11, 0x6d,
-	0x32, 0x23, 0xda, 0xf5, 0x8c, 0x68, 0x1f, 0x5a, 0x6e, 0x27, 0xe9, 0xf7, 0xb7, 0xd5, 0xf1, 0x9d,
-	0xfc, 0x0e, 0x00, 0x00, 0xff, 0xff, 0xa6, 0xab, 0x3b, 0x0d, 0x14, 0x04, 0x00, 0x00,
+	// 316 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2c, 0x4a, 0x2d, 0x4e,
+	0x2d, 0x2a, 0x4b, 0x2c, 0xc9, 0xcc, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x46,
+	0x12, 0x92, 0xe2, 0xce, 0xcd, 0x4f, 0x49, 0xcd, 0x81, 0xc8, 0x48, 0xe9, 0xa6, 0x67, 0x96, 0x64,
+	0x94, 0x26, 0xe9, 0x25, 0xe7, 0xe7, 0xea, 0xa7, 0xe7, 0xa7, 0xe7, 0xeb, 0x83, 0x85, 0x93, 0x4a,
+	0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x2a, 0x97, 0x4f, 0xcf, 0xcf, 0x4f, 0xcf, 0x49, 0x45,
+	0xa8, 0x2a, 0xc9, 0xcc, 0x4d, 0x2d, 0x2e, 0x49, 0xcc, 0x2d, 0x80, 0x28, 0x50, 0x0a, 0xe0, 0x92,
+	0x70, 0x2e, 0x4a, 0x4d, 0x2c, 0x49, 0x0d, 0x42, 0xd8, 0x18, 0x94, 0x5a, 0x58, 0x9a, 0x5a, 0x5c,
+	0x22, 0x64, 0xc2, 0x85, 0xec, 0x0e, 0x09, 0x46, 0x05, 0x46, 0x0d, 0x6e, 0x23, 0x21, 0x3d, 0x88,
+	0x73, 0x90, 0xd5, 0x23, 0x2b, 0x53, 0x0a, 0xe4, 0x92, 0xc4, 0x62, 0x62, 0x71, 0x41, 0x7e, 0x5e,
+	0x71, 0x2a, 0x99, 0x46, 0xaa, 0x73, 0x89, 0xba, 0xa7, 0x96, 0x60, 0x71, 0x21, 0x1f, 0x17, 0x53,
+	0x66, 0x0a, 0xd8, 0x14, 0x96, 0x20, 0xa6, 0xcc, 0x14, 0x25, 0x3f, 0x2e, 0x31, 0x74, 0x85, 0x94,
+	0x58, 0x6c, 0x74, 0x9d, 0x91, 0x4b, 0x08, 0x49, 0x32, 0x38, 0xb5, 0xa8, 0x2c, 0x33, 0x39, 0x55,
+	0x28, 0x85, 0x4b, 0x10, 0xc3, 0x8b, 0x42, 0xaa, 0x7a, 0xc8, 0xf1, 0x88, 0x2b, 0x50, 0xa5, 0xd4,
+	0x08, 0x29, 0x83, 0x38, 0x58, 0x89, 0x41, 0x28, 0x9a, 0x8b, 0x0f, 0xd5, 0x33, 0x42, 0x4a, 0x28,
+	0x7a, 0xb1, 0x06, 0x89, 0x94, 0x32, 0x5e, 0x35, 0x30, 0xc3, 0x9d, 0xac, 0x2e, 0x3c, 0x94, 0x63,
+	0xb8, 0xf1, 0x50, 0x8e, 0xe1, 0xc3, 0x43, 0x39, 0xc6, 0x86, 0x47, 0x72, 0x8c, 0x2b, 0x1e, 0xc9,
+	0x31, 0x9e, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x2f, 0x1e,
+	0xc9, 0x31, 0x7c, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37,
+	0x1e, 0xcb, 0x31, 0x44, 0xb1, 0xe8, 0xe9, 0x17, 0x24, 0x25, 0xb1, 0x81, 0x93, 0x8e, 0x31, 0x20,
+	0x00, 0x00, 0xff, 0xff, 0x04, 0xf4, 0x80, 0xff, 0xb9, 0x02, 0x00, 0x00,
 }
 
-func (this *Reservation) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Reservation)
-	if !ok {
-		that2, ok := that.(Reservation)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.TripId != that1.TripId {
-		return false
-	}
-	if this.DiverId != that1.DiverId {
-		return false
-	}
-	if this.Price != that1.Price {
-		return false
-	}
-	if this.TotalDivers != that1.TotalDivers {
-		return false
-	}
-	if len(this.Rooms) != len(that1.Rooms) {
-		return false
-	}
-	for i := range this.Rooms {
-		if !this.Rooms[i].Equal(that1.Rooms[i]) {
-			return false
-		}
-	}
-	if that1.CreatedAt == nil {
-		if this.CreatedAt != nil {
-			return false
-		}
-	} else if !this.CreatedAt.Equal(*that1.CreatedAt) {
-		return false
-	}
-	if that1.UpdatedAt == nil {
-		if this.UpdatedAt != nil {
-			return false
-		}
-	} else if !this.UpdatedAt.Equal(*that1.UpdatedAt) {
-		return false
-	}
-	return true
-}
-func (this *Reservation_Room) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Reservation_Room)
-	if !ok {
-		that2, ok := that.(Reservation_Room)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	if this.RoomTypeId != that1.RoomTypeId {
-		return false
-	}
-	if this.NoDivers != that1.NoDivers {
-		return false
-	}
-	if this.Quantity != that1.Quantity {
-		return false
-	}
-	return true
-}
 func (this *CreateReservationRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -538,37 +307,29 @@ func (this *GetReservationRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *Reservation) GoString() string {
-	if this == nil {
-		return "nil"
+func (this *GetReservationResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
 	}
-	s := make([]string, 0, 12)
-	s = append(s, "&pb.Reservation{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "TripId: "+fmt.Sprintf("%#v", this.TripId)+",\n")
-	s = append(s, "DiverId: "+fmt.Sprintf("%#v", this.DiverId)+",\n")
-	s = append(s, "Price: "+fmt.Sprintf("%#v", this.Price)+",\n")
-	s = append(s, "TotalDivers: "+fmt.Sprintf("%#v", this.TotalDivers)+",\n")
-	if this.Rooms != nil {
-		s = append(s, "Rooms: "+fmt.Sprintf("%#v", this.Rooms)+",\n")
+
+	that1, ok := that.(*GetReservationResponse)
+	if !ok {
+		that2, ok := that.(GetReservationResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
 	}
-	s = append(s, "CreatedAt: "+fmt.Sprintf("%#v", this.CreatedAt)+",\n")
-	s = append(s, "UpdatedAt: "+fmt.Sprintf("%#v", this.UpdatedAt)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Reservation_Room) GoString() string {
-	if this == nil {
-		return "nil"
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
 	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.Reservation_Room{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "RoomTypeId: "+fmt.Sprintf("%#v", this.RoomTypeId)+",\n")
-	s = append(s, "NoDivers: "+fmt.Sprintf("%#v", this.NoDivers)+",\n")
-	s = append(s, "Quantity: "+fmt.Sprintf("%#v", this.Quantity)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
+	if !this.Reservation.Equal(that1.Reservation) {
+		return false
+	}
+	return true
 }
 func (this *CreateReservationRequest) GoString() string {
 	if this == nil {
@@ -604,6 +365,18 @@ func (this *GetReservationRequest) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *GetReservationResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.GetReservationResponse{")
+	if this.Reservation != nil {
+		s = append(s, "Reservation: "+fmt.Sprintf("%#v", this.Reservation)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringReservation(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -626,7 +399,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ReservationServiceClient interface {
 	CreateReservation(ctx context.Context, in *CreateReservationRequest, opts ...grpc.CallOption) (*CreateReservationResponse, error)
-	GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*Reservation, error)
+	GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*GetReservationResponse, error)
 }
 
 type reservationServiceClient struct {
@@ -646,8 +419,8 @@ func (c *reservationServiceClient) CreateReservation(ctx context.Context, in *Cr
 	return out, nil
 }
 
-func (c *reservationServiceClient) GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*Reservation, error) {
-	out := new(Reservation)
+func (c *reservationServiceClient) GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*GetReservationResponse, error) {
+	out := new(GetReservationResponse)
 	err := c.cc.Invoke(ctx, "/reservation.ReservationService/GetReservation", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -658,7 +431,7 @@ func (c *reservationServiceClient) GetReservation(ctx context.Context, in *GetRe
 // ReservationServiceServer is the server API for ReservationService service.
 type ReservationServiceServer interface {
 	CreateReservation(context.Context, *CreateReservationRequest) (*CreateReservationResponse, error)
-	GetReservation(context.Context, *GetReservationRequest) (*Reservation, error)
+	GetReservation(context.Context, *GetReservationRequest) (*GetReservationResponse, error)
 }
 
 // UnimplementedReservationServiceServer can be embedded to have forward compatible implementations.
@@ -668,7 +441,7 @@ type UnimplementedReservationServiceServer struct {
 func (*UnimplementedReservationServiceServer) CreateReservation(ctx context.Context, req *CreateReservationRequest) (*CreateReservationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReservation not implemented")
 }
-func (*UnimplementedReservationServiceServer) GetReservation(ctx context.Context, req *GetReservationRequest) (*Reservation, error) {
+func (*UnimplementedReservationServiceServer) GetReservation(ctx context.Context, req *GetReservationRequest) (*GetReservationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReservation not implemented")
 }
 
@@ -727,148 +500,6 @@ var _ReservationService_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "reservation.proto",
-}
-
-func (m *Reservation) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Reservation) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Reservation) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.UpdatedAt != nil {
-		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.UpdatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt):])
-		if err1 != nil {
-			return 0, err1
-		}
-		i -= n1
-		i = encodeVarintReservation(dAtA, i, uint64(n1))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0xe2
-	}
-	if m.CreatedAt != nil {
-		n2, err2 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt):])
-		if err2 != nil {
-			return 0, err2
-		}
-		i -= n2
-		i = encodeVarintReservation(dAtA, i, uint64(n2))
-		i--
-		dAtA[i] = 0x3
-		i--
-		dAtA[i] = 0x92
-	}
-	if len(m.Rooms) > 0 {
-		for iNdEx := len(m.Rooms) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Rooms[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintReservation(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2
-			i--
-			dAtA[i] = 0xc2
-		}
-	}
-	if m.TotalDivers != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.TotalDivers))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0x98
-	}
-	if m.Price != 0 {
-		i -= 4
-		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Price))))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf5
-	}
-	if m.DiverId != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.DiverId))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.TripId != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.TripId))
-		i--
-		dAtA[i] = 0x50
-	}
-	if m.Id != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Reservation_Room) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Reservation_Room) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Reservation_Room) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Quantity != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.Quantity))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0xc0
-	}
-	if m.NoDivers != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.NoDivers))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xa0
-	}
-	if m.RoomTypeId != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.RoomTypeId))
-		i--
-		dAtA[i] = 0x50
-	}
-	if m.Id != 0 {
-		i = encodeVarintReservation(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
 }
 
 func (m *CreateReservationRequest) Marshal() (dAtA []byte, err error) {
@@ -969,6 +600,41 @@ func (m *GetReservationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *GetReservationResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetReservationResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetReservationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Reservation != nil {
+		{
+			size, err := m.Reservation.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintReservation(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintReservation(dAtA []byte, offset int, v uint64) int {
 	offset -= sovReservation(v)
 	base := offset
@@ -980,65 +646,6 @@ func encodeVarintReservation(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *Reservation) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovReservation(uint64(m.Id))
-	}
-	if m.TripId != 0 {
-		n += 1 + sovReservation(uint64(m.TripId))
-	}
-	if m.DiverId != 0 {
-		n += 2 + sovReservation(uint64(m.DiverId))
-	}
-	if m.Price != 0 {
-		n += 6
-	}
-	if m.TotalDivers != 0 {
-		n += 2 + sovReservation(uint64(m.TotalDivers))
-	}
-	if len(m.Rooms) > 0 {
-		for _, e := range m.Rooms {
-			l = e.Size()
-			n += 2 + l + sovReservation(uint64(l))
-		}
-	}
-	if m.CreatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
-		n += 2 + l + sovReservation(uint64(l))
-	}
-	if m.UpdatedAt != nil {
-		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.UpdatedAt)
-		n += 2 + l + sovReservation(uint64(l))
-	}
-	return n
-}
-
-func (m *Reservation_Room) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovReservation(uint64(m.Id))
-	}
-	if m.RoomTypeId != 0 {
-		n += 1 + sovReservation(uint64(m.RoomTypeId))
-	}
-	if m.NoDivers != 0 {
-		n += 2 + sovReservation(uint64(m.NoDivers))
-	}
-	if m.Quantity != 0 {
-		n += 2 + sovReservation(uint64(m.Quantity))
-	}
-	return n
-}
-
 func (m *CreateReservationRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1077,53 +684,31 @@ func (m *GetReservationRequest) Size() (n int) {
 	return n
 }
 
+func (m *GetReservationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Reservation != nil {
+		l = m.Reservation.Size()
+		n += 1 + l + sovReservation(uint64(l))
+	}
+	return n
+}
+
 func sovReservation(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozReservation(x uint64) (n int) {
 	return sovReservation(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *Reservation) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForRooms := "[]*Reservation_Room{"
-	for _, f := range this.Rooms {
-		repeatedStringForRooms += strings.Replace(fmt.Sprintf("%v", f), "Reservation_Room", "Reservation_Room", 1) + ","
-	}
-	repeatedStringForRooms += "}"
-	s := strings.Join([]string{`&Reservation{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`TripId:` + fmt.Sprintf("%v", this.TripId) + `,`,
-		`DiverId:` + fmt.Sprintf("%v", this.DiverId) + `,`,
-		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
-		`TotalDivers:` + fmt.Sprintf("%v", this.TotalDivers) + `,`,
-		`Rooms:` + repeatedStringForRooms + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Reservation_Room) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Reservation_Room{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`RoomTypeId:` + fmt.Sprintf("%v", this.RoomTypeId) + `,`,
-		`NoDivers:` + fmt.Sprintf("%v", this.NoDivers) + `,`,
-		`Quantity:` + fmt.Sprintf("%v", this.Quantity) + `,`,
-		`}`,
-	}, "")
-	return s
-}
 func (this *CreateReservationRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
 	s := strings.Join([]string{`&CreateReservationRequest{`,
-		`Reservation:` + strings.Replace(this.Reservation.String(), "Reservation", "Reservation", 1) + `,`,
+		`Reservation:` + strings.Replace(fmt.Sprintf("%v", this.Reservation), "Reservation", "Reservation", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1133,7 +718,7 @@ func (this *CreateReservationResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&CreateReservationResponse{`,
-		`Reservation:` + strings.Replace(this.Reservation.String(), "Reservation", "Reservation", 1) + `,`,
+		`Reservation:` + strings.Replace(fmt.Sprintf("%v", this.Reservation), "Reservation", "Reservation", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1148,6 +733,16 @@ func (this *GetReservationRequest) String() string {
 	}, "")
 	return s
 }
+func (this *GetReservationResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetReservationResponse{`,
+		`Reservation:` + strings.Replace(fmt.Sprintf("%v", this.Reservation), "Reservation", "Reservation", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func valueToStringReservation(v interface{}) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -1155,375 +750,6 @@ func valueToStringReservation(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
-}
-func (m *Reservation) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowReservation
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Reservation: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Reservation: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TripId", wireType)
-			}
-			m.TripId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TripId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DiverId", wireType)
-			}
-			m.DiverId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DiverId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 30:
-			if wireType != 5 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Price", wireType)
-			}
-			var v uint32
-			if (iNdEx + 4) > l {
-				return io.ErrUnexpectedEOF
-			}
-			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-			iNdEx += 4
-			m.Price = float32(math.Float32frombits(v))
-		case 35:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TotalDivers", wireType)
-			}
-			m.TotalDivers = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.TotalDivers |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Rooms", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthReservation
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthReservation
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Rooms = append(m.Rooms, &Reservation_Room{})
-			if err := m.Rooms[len(m.Rooms)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 50:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthReservation
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthReservation
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.CreatedAt == nil {
-				m.CreatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 60:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthReservation
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthReservation
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.UpdatedAt == nil {
-				m.UpdatedAt = new(time.Time)
-			}
-			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.UpdatedAt, dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipReservation(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthReservation
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Reservation_Room) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowReservation
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Room: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Room: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 10:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RoomTypeId", wireType)
-			}
-			m.RoomTypeId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.RoomTypeId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 20:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NoDivers", wireType)
-			}
-			m.NoDivers = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.NoDivers |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 40:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Quantity", wireType)
-			}
-			m.Quantity = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowReservation
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Quantity |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipReservation(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthReservation
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *CreateReservationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -1745,6 +971,92 @@ func (m *GetReservationRequest) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipReservation(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthReservation
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetReservationResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowReservation
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetReservationResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetReservationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Reservation", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowReservation
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthReservation
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthReservation
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Reservation == nil {
+				m.Reservation = &Reservation{}
+			}
+			if err := m.Reservation.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipReservation(dAtA[iNdEx:])

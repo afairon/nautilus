@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package reservation;
 
+import "model.proto";
+
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -9,35 +11,21 @@ option go_package = "./pb";
 
 service ReservationService {
     rpc CreateReservation (CreateReservationRequest) returns (CreateReservationResponse) {}
-    rpc GetReservation (GetReservationRequest) returns (Reservation) {}
-}
-
-message Reservation {
-    uint64 id = 1;
-    uint64 trip_id = 10;
-    uint64 diver_id = 20;
-    float price = 30;
-    uint64 total_divers = 35;
-    repeated Room rooms = 40;
-    google.protobuf.Timestamp created_at = 50 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp updated_at = 60 [(gogoproto.stdtime) = true];
-
-    message Room {
-        uint64 id = 1;
-        uint64 room_type_id = 10;
-        uint32 no_divers = 20;
-        uint32 quantity = 40;
-    }
+    rpc GetReservation (GetReservationRequest) returns (GetReservationResponse) {}
 }
 
 message CreateReservationRequest {
-    Reservation reservation = 1;
+    model.Reservation reservation = 1;
 }
 
 message CreateReservationResponse {
-    Reservation reservation = 1;
+    model.Reservation reservation = 1;
 }
 
 message GetReservationRequest {
     uint64 id = 1;
+}
+
+message GetReservationResponse {
+    model.Reservation reservation = 1;
 }

@@ -9,7 +9,7 @@ import (
 )
 
 type DiverService interface {
-	ListBookedTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
+	ListReservationsWithTrips(ctx context.Context, limit, offset uint64) ([]*model.Reservation, error)
 }
 
 type diverService struct {
@@ -24,7 +24,7 @@ func NewDiverService(repo *repo.Repo, media media.Store) *diverService {
 	}
 }
 
-func (service *diverService) ListBookedTrips(ctx context.Context, limit, offset uint64) ([]*model.Trip, error) {
+func (service *diverService) ListReservationsWithTrips(ctx context.Context, limit, offset uint64) ([]*model.Reservation, error) {
 	diver, err := getDiverInformationFromContext(ctx)
 
 	if err != nil {
@@ -35,17 +35,17 @@ func (service *diverService) ListBookedTrips(ctx context.Context, limit, offset 
 		limit = 20
 	}
 
-	trips, err := service.repo.Trip.ListBookedTripsByDiver(ctx, uint64(diver.ID), limit, offset)
+	reservations, err := service.repo.Reservation.ListReservationsByDiver(ctx, uint64(diver.ID), limit, offset)
 
 	if err != nil {
 		return nil, err
 	}
 
-	for _, trip := range trips {
-		for idx, id := range trip.TripTemplate.Images {
-			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+	for _, reservation := range reservations {
+		for idx, id := range reservation.Trip.TripTemplate.Images {
+			reservation.Trip.TripTemplate.Images[idx] = service.media.Get(id, false)
 		}
 	}
 
-	return trips, nil
+	return reservations, nil
 }

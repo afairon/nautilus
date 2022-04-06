@@ -19,7 +19,6 @@ type TripRepository interface {
 	ListUnfullTripsByAgency(ctx context.Context, lastReservationDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
 	ListEndedTripsOverPeriod(ctx context.Context, startDate, endDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
 	ListIncomingTripsOverPeriod(ctx context.Context, startDate, endDate *time.Time, id, limit, offset uint64) ([]*model.Trip, error)
-	ListBookedTripsByDiver(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	SearchTrips(ctx context.Context, country, city, region string, diver_rooms uint32, startDate, endDate *time.Time, tripType model.TripType, limit, offset uint) ([]*model.Trip, error)
 }
 
@@ -204,31 +203,6 @@ func (repo *tripRepository) ListIncomingTripsOverPeriod(ctx context.Context, sta
 
 	if result.Error != nil {
 		return nil, result.Error
-	}
-
-	return trips, nil
-}
-
-func (repo *tripRepository) ListBookedTripsByDiver(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error) {
-	var reservations []*model.Reservation
-
-	result := repo.db.Preload("Trip.TripTemplate.Address")
-	result.Preload("Trip.TripTemplate.Hotel")
-	result.Preload("Trip.TripTemplate.Liveaboard")
-	result.Preload("Trip.TripTemplate.Boat")
-	result.Preload("Trip.DiveSites")
-	result.Where("diver_id = ?", id)
-
-	result.Limit(int(limit)).Offset(int(offset)).Find(&reservations)
-
-	if result.Error != nil {
-		return nil, result.Error
-	}
-
-	trips := make([]*model.Trip, 0, len(reservations))
-
-	for _, reservation := range reservations {
-		trips = append(trips, &reservation.Trip)
 	}
 
 	return trips, nil
