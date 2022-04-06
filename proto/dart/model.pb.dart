@@ -3677,3 +3677,106 @@ class Reservation extends $pb.GeneratedMessage {
   $12.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
+class ReservationRoom extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReservationRoom', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservationId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypeId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'noDivers', $pb.PbFieldType.OU3)
+    ..a<$core.int>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quantity', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  ReservationRoom._() : super();
+  factory ReservationRoom({
+    $fixnum.Int64? reservationId,
+    $fixnum.Int64? roomTypeId,
+    $fixnum.Int64? tripId,
+    $core.int? noDivers,
+    $core.int? quantity,
+  }) {
+    final _result = create();
+    if (reservationId != null) {
+      _result.reservationId = reservationId;
+    }
+    if (roomTypeId != null) {
+      _result.roomTypeId = roomTypeId;
+    }
+    if (tripId != null) {
+      _result.tripId = tripId;
+    }
+    if (noDivers != null) {
+      _result.noDivers = noDivers;
+    }
+    if (quantity != null) {
+      _result.quantity = quantity;
+    }
+    return _result;
+  }
+  factory ReservationRoom.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReservationRoom.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ReservationRoom clone() => ReservationRoom()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ReservationRoom copyWith(void Function(ReservationRoom) updates) => super.copyWith((message) => updates(message as ReservationRoom)) as ReservationRoom; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReservationRoom create() => ReservationRoom._();
+  ReservationRoom createEmptyInstance() => create();
+  static $pb.PbList<ReservationRoom> createRepeated() => $pb.PbList<ReservationRoom>();
+  @$core.pragma('dart2js:noInline')
+  static ReservationRoom getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReservationRoom>(create);
+  static ReservationRoom? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get reservationId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set reservationId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReservationId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReservationId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get roomTypeId => $_getI64(1);
+  @$pb.TagNumber(10)
+  set roomTypeId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasRoomTypeId() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearRoomTypeId() => clearField(10);
+
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get tripId => $_getI64(2);
+  @$pb.TagNumber(15)
+  set tripId($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasTripId() => $_has(2);
+  @$pb.TagNumber(15)
+  void clearTripId() => clearField(15);
+
+  @$pb.TagNumber(20)
+  $core.int get noDivers => $_getIZ(3);
+  @$pb.TagNumber(20)
+  set noDivers($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasNoDivers() => $_has(3);
+  @$pb.TagNumber(20)
+  void clearNoDivers() => clearField(20);
+
+  @$pb.TagNumber(40)
+  $core.int get quantity => $_getIZ(4);
+  @$pb.TagNumber(40)
+  set quantity($core.int v) { $_setUnsignedInt32(4, v); }
+  @$pb.TagNumber(40)
+  $core.bool hasQuantity() => $_has(4);
+  @$pb.TagNumber(40)
+  void clearQuantity() => clearField(40);
+}
+

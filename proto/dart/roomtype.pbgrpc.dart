@@ -20,6 +20,13 @@ class RoomTypeServiceClient extends $grpc.Client {
       ($10.ListRoomTypesByTripRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $10.ListRoomTypesByTripResponse.fromBuffer(value));
+  static final _$listRoomsOfReservation = $grpc.ClientMethod<
+          $10.ListRoomsOfReservationRequest,
+          $10.ListRoomsOfReservationResponse>(
+      '/roomtype.RoomTypeService/ListRoomsOfReservation',
+      ($10.ListRoomsOfReservationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $10.ListRoomsOfReservationResponse.fromBuffer(value));
 
   RoomTypeServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -31,6 +38,14 @@ class RoomTypeServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listRoomTypesByTrip, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$10.ListRoomsOfReservationResponse>
+      listRoomsOfReservation($10.ListRoomsOfReservationRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listRoomsOfReservation, $async.Stream.fromIterable([request]),
         options: options);
   }
 }
@@ -48,6 +63,15 @@ abstract class RoomTypeServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $10.ListRoomTypesByTripRequest.fromBuffer(value),
         ($10.ListRoomTypesByTripResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$10.ListRoomsOfReservationRequest,
+            $10.ListRoomsOfReservationResponse>(
+        'ListRoomsOfReservation',
+        listRoomsOfReservation_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $10.ListRoomsOfReservationRequest.fromBuffer(value),
+        ($10.ListRoomsOfReservationResponse value) => value.writeToBuffer()));
   }
 
   $async.Stream<$10.ListRoomTypesByTripResponse> listRoomTypesByTrip_Pre(
@@ -56,6 +80,14 @@ abstract class RoomTypeServiceBase extends $grpc.Service {
     yield* listRoomTypesByTrip(call, await request);
   }
 
+  $async.Stream<$10.ListRoomsOfReservationResponse> listRoomsOfReservation_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$10.ListRoomsOfReservationRequest> request) async* {
+    yield* listRoomsOfReservation(call, await request);
+  }
+
   $async.Stream<$10.ListRoomTypesByTripResponse> listRoomTypesByTrip(
       $grpc.ServiceCall call, $10.ListRoomTypesByTripRequest request);
+  $async.Stream<$10.ListRoomsOfReservationResponse> listRoomsOfReservation(
+      $grpc.ServiceCall call, $10.ListRoomsOfReservationRequest request);
 }

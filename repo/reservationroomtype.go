@@ -11,6 +11,7 @@ import (
 // with the reservationroomtype repository.
 type ReservationRoomTypeRepository interface {
 	ListReservationRoomTypesByRoomTypeAndTrip(ctx context.Context, roomTypeId, tripId uint64) ([]*model.ReservationRoomType, error)
+	ListReservationRoomTypesByReservation(ctx context.Context, reservationId uint64) ([]*model.ReservationRoomType, error)
 }
 
 // reservaitonRoomTypeRepository implements AgencyRepository interface.
@@ -33,4 +34,14 @@ func (repo *reservaitonRoomTypeRepository) ListReservationRoomTypesByRoomTypeAnd
 	}
 
 	return reservations, nil
+}
+
+func (repo *reservaitonRoomTypeRepository) ListReservationRoomTypesByReservation(ctx context.Context, reservationId uint64) ([]*model.ReservationRoomType, error) {
+	var reservationRoomTypes []*model.ReservationRoomType
+
+	if result := repo.db.Where("reservation_id = ?", reservationId).Find(&reservationRoomTypes); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return reservationRoomTypes, nil
 }

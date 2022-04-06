@@ -179,3 +179,99 @@ class ListRoomTypesByTripResponse extends $pb.GeneratedMessage {
   $13.RoomType ensureRoomType() => $_ensure(0);
 }
 
+class ListRoomsOfReservationRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomsOfReservationRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservationId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListRoomsOfReservationRequest._() : super();
+  factory ListRoomsOfReservationRequest({
+    $fixnum.Int64? reservationId,
+  }) {
+    final _result = create();
+    if (reservationId != null) {
+      _result.reservationId = reservationId;
+    }
+    return _result;
+  }
+  factory ListRoomsOfReservationRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomsOfReservationRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomsOfReservationRequest clone() => ListRoomsOfReservationRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomsOfReservationRequest copyWith(void Function(ListRoomsOfReservationRequest) updates) => super.copyWith((message) => updates(message as ListRoomsOfReservationRequest)) as ListRoomsOfReservationRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListRoomsOfReservationRequest create() => ListRoomsOfReservationRequest._();
+  ListRoomsOfReservationRequest createEmptyInstance() => create();
+  static $pb.PbList<ListRoomsOfReservationRequest> createRepeated() => $pb.PbList<ListRoomsOfReservationRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomsOfReservationRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomsOfReservationRequest>(create);
+  static ListRoomsOfReservationRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get reservationId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set reservationId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReservationId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReservationId() => clearField(1);
+}
+
+class ListRoomsOfReservationResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomsOfReservationResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
+    ..aOM<$13.ReservationRoom>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'room', subBuilder: $13.ReservationRoom.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListRoomsOfReservationResponse._() : super();
+  factory ListRoomsOfReservationResponse({
+    $13.ReservationRoom? room,
+  }) {
+    final _result = create();
+    if (room != null) {
+      _result.room = room;
+    }
+    return _result;
+  }
+  factory ListRoomsOfReservationResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListRoomsOfReservationResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListRoomsOfReservationResponse clone() => ListRoomsOfReservationResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListRoomsOfReservationResponse copyWith(void Function(ListRoomsOfReservationResponse) updates) => super.copyWith((message) => updates(message as ListRoomsOfReservationResponse)) as ListRoomsOfReservationResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListRoomsOfReservationResponse create() => ListRoomsOfReservationResponse._();
+  ListRoomsOfReservationResponse createEmptyInstance() => create();
+  static $pb.PbList<ListRoomsOfReservationResponse> createRepeated() => $pb.PbList<ListRoomsOfReservationResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListRoomsOfReservationResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListRoomsOfReservationResponse>(create);
+  static ListRoomsOfReservationResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.ReservationRoom get room => $_getN(0);
+  @$pb.TagNumber(1)
+  set room($13.ReservationRoom v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRoom() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRoom() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.ReservationRoom ensureRoom() => $_ensure(0);
+}
+

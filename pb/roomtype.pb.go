@@ -184,38 +184,131 @@ func (m *ListRoomTypesByTripResponse) GetRoomType() *RoomType {
 	return nil
 }
 
+type ListRoomsOfReservationRequest struct {
+	ReservationId uint64 `protobuf:"varint,1,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
+}
+
+func (m *ListRoomsOfReservationRequest) Reset()      { *m = ListRoomsOfReservationRequest{} }
+func (*ListRoomsOfReservationRequest) ProtoMessage() {}
+func (*ListRoomsOfReservationRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2f11f6044003c223, []int{2}
+}
+func (m *ListRoomsOfReservationRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListRoomsOfReservationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListRoomsOfReservationRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListRoomsOfReservationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListRoomsOfReservationRequest.Merge(m, src)
+}
+func (m *ListRoomsOfReservationRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListRoomsOfReservationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListRoomsOfReservationRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListRoomsOfReservationRequest proto.InternalMessageInfo
+
+func (m *ListRoomsOfReservationRequest) GetReservationId() uint64 {
+	if m != nil {
+		return m.ReservationId
+	}
+	return 0
+}
+
+type ListRoomsOfReservationResponse struct {
+	Room *ReservationRoom `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
+}
+
+func (m *ListRoomsOfReservationResponse) Reset()      { *m = ListRoomsOfReservationResponse{} }
+func (*ListRoomsOfReservationResponse) ProtoMessage() {}
+func (*ListRoomsOfReservationResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2f11f6044003c223, []int{3}
+}
+func (m *ListRoomsOfReservationResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListRoomsOfReservationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListRoomsOfReservationResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListRoomsOfReservationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListRoomsOfReservationResponse.Merge(m, src)
+}
+func (m *ListRoomsOfReservationResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListRoomsOfReservationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListRoomsOfReservationResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListRoomsOfReservationResponse proto.InternalMessageInfo
+
+func (m *ListRoomsOfReservationResponse) GetRoom() *ReservationRoom {
+	if m != nil {
+		return m.Room
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*ListRoomTypesByTripRequest)(nil), "roomtype.ListRoomTypesByTripRequest")
 	proto.RegisterType((*ListRoomTypesByTripResponse)(nil), "roomtype.ListRoomTypesByTripResponse")
+	proto.RegisterType((*ListRoomsOfReservationRequest)(nil), "roomtype.ListRoomsOfReservationRequest")
+	proto.RegisterType((*ListRoomsOfReservationResponse)(nil), "roomtype.ListRoomsOfReservationResponse")
 }
 
 func init() { proto.RegisterFile("roomtype.proto", fileDescriptor_2f11f6044003c223) }
 
 var fileDescriptor_2f11f6044003c223 = []byte{
-	// 364 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0xb1, 0x4e, 0x02, 0x31,
-	0x18, 0xc7, 0xaf, 0x06, 0x01, 0x8b, 0x4a, 0x52, 0x89, 0xe2, 0x91, 0x54, 0x43, 0x24, 0x71, 0xd0,
-	0xc3, 0xe0, 0xe6, 0xc8, 0x24, 0xd1, 0xe9, 0x64, 0x72, 0x21, 0x1c, 0x2d, 0x47, 0x93, 0x3b, 0xbf,
-	0x7a, 0x57, 0x30, 0x6c, 0x3e, 0x82, 0x8f, 0xe1, 0xe2, 0x7b, 0x38, 0x32, 0x32, 0xca, 0xb1, 0x38,
-	0xf2, 0x08, 0xe6, 0x5a, 0x90, 0x05, 0xe3, 0xf6, 0xfd, 0x7f, 0xf9, 0xb5, 0xf9, 0xf2, 0xff, 0xf0,
-	0x7e, 0x04, 0x10, 0xaa, 0xb1, 0xe4, 0x8e, 0x8c, 0x40, 0x01, 0xc9, 0xaf, 0xb2, 0x5d, 0x08, 0x81,
-	0xf1, 0xc0, 0x60, 0xfb, 0xd2, 0x17, 0x6a, 0x30, 0xf4, 0x9c, 0x1e, 0x84, 0x75, 0x1f, 0x7c, 0xa8,
-	0x6b, 0xec, 0x0d, 0xfb, 0x3a, 0xe9, 0xa0, 0xa7, 0xa5, 0x7e, 0xe2, 0x03, 0xf8, 0x01, 0x5f, 0x5b,
-	0x4a, 0x84, 0x3c, 0x56, 0xdd, 0x50, 0x1a, 0xa1, 0xfa, 0x81, 0xb0, 0x7d, 0x2f, 0x62, 0xe5, 0x02,
-	0x84, 0xed, 0xb1, 0xe4, 0x71, 0x73, 0xdc, 0x8e, 0x84, 0x74, 0xf9, 0xf3, 0x90, 0xc7, 0x8a, 0x54,
-	0x70, 0x7e, 0x00, 0x8a, 0x07, 0x1d, 0xc1, 0xca, 0xe8, 0x14, 0x9d, 0x67, 0x6e, 0x2d, 0x37, 0xa7,
-	0x49, 0x8b, 0x91, 0x1a, 0xde, 0x0b, 0xc4, 0x88, 0x77, 0x3d, 0xe8, 0x46, 0x2c, 0x35, 0xf0, 0xd2,
-	0xd8, 0x5d, 0xe3, 0x16, 0x23, 0x47, 0x38, 0xa7, 0x22, 0x21, 0x53, 0xa1, 0x98, 0x0a, 0x6e, 0x36,
-	0x8d, 0x2d, 0x46, 0x4a, 0x78, 0x3b, 0x10, 0xa1, 0x50, 0xe5, 0x92, 0xc6, 0x26, 0x90, 0x43, 0x9c,
-	0x85, 0x7e, 0x3f, 0xe6, 0xaa, 0x7c, 0x6c, 0x6c, 0x93, 0x9a, 0x19, 0xbc, 0x25, 0x58, 0xf5, 0x0e,
-	0x57, 0x36, 0xae, 0x1b, 0x4b, 0x78, 0x8a, 0x39, 0xb9, 0xc0, 0x3b, 0x69, 0x6f, 0x9d, 0xb4, 0x38,
-	0xbd, 0x70, 0xa1, 0x51, 0x74, 0x4c, 0x7f, 0xab, 0x27, 0xae, 0x6e, 0x36, 0x9d, 0x1a, 0x2f, 0xb8,
-	0xb8, 0xa2, 0x0f, 0x3c, 0x1a, 0x89, 0x1e, 0x27, 0x0c, 0x1f, 0x6c, 0xf8, 0x9f, 0x9c, 0x39, 0xbf,
-	0xe7, 0xf9, 0xbb, 0x2d, 0xbb, 0xf6, 0x8f, 0x65, 0x96, 0xbc, 0x42, 0xcd, 0x9b, 0xc9, 0x8c, 0x5a,
-	0xd3, 0x19, 0xb5, 0x16, 0x33, 0x8a, 0x5e, 0x13, 0x8a, 0xde, 0x13, 0x8a, 0x3e, 0x13, 0x8a, 0x26,
-	0x09, 0x45, 0x5f, 0x09, 0x45, 0xdf, 0x09, 0xb5, 0x16, 0x09, 0x45, 0x6f, 0x73, 0x6a, 0x4d, 0xe6,
-	0xd4, 0x9a, 0xce, 0xa9, 0xf5, 0x98, 0x71, 0xea, 0xd2, 0xf3, 0xb2, 0xfa, 0x70, 0xd7, 0x3f, 0x01,
-	0x00, 0x00, 0xff, 0xff, 0xa4, 0x5d, 0x31, 0xd0, 0x31, 0x02, 0x00, 0x00,
+	// 447 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0x41, 0x6b, 0x13, 0x41,
+	0x18, 0x86, 0x77, 0x24, 0xa6, 0xf5, 0xab, 0x6d, 0x60, 0x2c, 0x31, 0x6e, 0x71, 0x94, 0x60, 0xb0,
+	0x88, 0x6e, 0xa4, 0xde, 0x3c, 0xe6, 0x20, 0x06, 0x0b, 0xc2, 0xda, 0x93, 0x97, 0x92, 0xed, 0x4c,
+	0xb6, 0x03, 0x3b, 0xfd, 0xd6, 0x99, 0x49, 0x20, 0x37, 0x7f, 0x82, 0x3f, 0xc3, 0x8b, 0xff, 0xc3,
+	0x63, 0x8e, 0x3d, 0x9a, 0x0d, 0x88, 0xc7, 0xfe, 0x04, 0x99, 0xd9, 0x6c, 0x53, 0xe8, 0x96, 0xdc,
+	0xe6, 0x7d, 0x79, 0xf6, 0x9b, 0xf7, 0x7b, 0x77, 0x60, 0x4f, 0x23, 0x2a, 0x3b, 0xcb, 0x45, 0x94,
+	0x6b, 0xb4, 0x48, 0xb7, 0x2b, 0x1d, 0xee, 0x28, 0xe4, 0x22, 0x2b, 0xed, 0xf0, 0x4d, 0x2a, 0xed,
+	0xf9, 0x24, 0x89, 0xce, 0x50, 0xf5, 0x53, 0x4c, 0xb1, 0xef, 0xed, 0x64, 0x32, 0xf6, 0xca, 0x0b,
+	0x7f, 0x5a, 0xe1, 0xcf, 0x52, 0xc4, 0x34, 0x13, 0x6b, 0xca, 0x4a, 0x25, 0x8c, 0x1d, 0xa9, 0xbc,
+	0x04, 0xba, 0xbf, 0x08, 0x84, 0xc7, 0xd2, 0xd8, 0x18, 0x51, 0x9d, 0xcc, 0x72, 0x61, 0x06, 0xb3,
+	0x13, 0x2d, 0xf3, 0x58, 0x7c, 0x9b, 0x08, 0x63, 0xe9, 0x01, 0x6c, 0x9f, 0xa3, 0x15, 0xd9, 0xa9,
+	0xe4, 0x1d, 0xf2, 0x9c, 0x1c, 0x36, 0x3e, 0x06, 0xf1, 0x96, 0x77, 0x86, 0x9c, 0xf6, 0x60, 0x37,
+	0x93, 0x53, 0x31, 0x4a, 0x70, 0xa4, 0xb9, 0x23, 0x60, 0x45, 0x3c, 0x5c, 0xdb, 0x43, 0x4e, 0x1f,
+	0xc3, 0x96, 0xd5, 0x32, 0x77, 0x40, 0xcb, 0x01, 0x71, 0xd3, 0xc9, 0x21, 0xa7, 0xfb, 0x70, 0x3f,
+	0x93, 0x4a, 0xda, 0xce, 0xbe, 0xb7, 0x4b, 0x41, 0xdb, 0xd0, 0xc4, 0xf1, 0xd8, 0x08, 0xdb, 0x79,
+	0x52, 0xd2, 0xa5, 0x1a, 0x34, 0xe0, 0x9e, 0xe4, 0xdd, 0x4f, 0x70, 0x50, 0x1b, 0xd7, 0xe4, 0x78,
+	0x61, 0x04, 0x7d, 0x0d, 0x0f, 0x5c, 0x6f, 0xa7, 0xae, 0x38, 0x1f, 0x78, 0xe7, 0xa8, 0x15, 0x95,
+	0xfd, 0x55, 0x9f, 0xc4, 0xbe, 0x59, 0x77, 0xea, 0x7e, 0x80, 0xa7, 0xd5, 0x30, 0xf3, 0x79, 0x1c,
+	0x0b, 0x23, 0xf4, 0x74, 0x64, 0x25, 0x5e, 0x54, 0xeb, 0xf7, 0x60, 0x4f, 0xaf, 0xdd, 0xeb, 0x12,
+	0xe2, 0xdd, 0x1b, 0xee, 0x90, 0x77, 0x8f, 0x81, 0xdd, 0x35, 0x67, 0x95, 0xeb, 0x15, 0x34, 0xdc,
+	0xad, 0xab, 0x48, 0xed, 0x2a, 0xd2, 0x0d, 0x12, 0x51, 0xc5, 0x9e, 0x39, 0xfa, 0x4b, 0xa0, 0x55,
+	0x85, 0xfd, 0x22, 0xf4, 0x54, 0x9e, 0x09, 0xca, 0xe1, 0x51, 0xcd, 0xda, 0xf4, 0x45, 0x74, 0xfd,
+	0x6a, 0xee, 0xfe, 0x89, 0x61, 0x6f, 0x03, 0x55, 0x66, 0x7c, 0x4b, 0xa8, 0x82, 0x76, 0xfd, 0x1e,
+	0xf4, 0xe5, 0xed, 0x11, 0xb5, 0x8d, 0x85, 0x87, 0x9b, 0xc1, 0xea, 0xba, 0xc1, 0xfb, 0xf9, 0x82,
+	0x05, 0x97, 0x0b, 0x16, 0x5c, 0x2d, 0x18, 0xf9, 0x5e, 0x30, 0xf2, 0xb3, 0x60, 0xe4, 0x77, 0xc1,
+	0xc8, 0xbc, 0x60, 0xe4, 0x4f, 0xc1, 0xc8, 0xbf, 0x82, 0x05, 0x57, 0x05, 0x23, 0x3f, 0x96, 0x2c,
+	0x98, 0x2f, 0x59, 0x70, 0xb9, 0x64, 0xc1, 0xd7, 0x46, 0xd4, 0xcf, 0x93, 0xa4, 0xe9, 0x9f, 0xef,
+	0xbb, 0xff, 0x01, 0x00, 0x00, 0xff, 0xff, 0x9f, 0xe7, 0xc1, 0xde, 0x37, 0x03, 0x00, 0x00,
 }
 
 func (this *ListRoomTypesByTripRequest) Equal(that interface{}) bool {
@@ -329,6 +422,54 @@ func (this *ListRoomTypesByTripResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *ListRoomsOfReservationRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomsOfReservationRequest)
+	if !ok {
+		that2, ok := that.(ListRoomsOfReservationRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.ReservationId != that1.ReservationId {
+		return false
+	}
+	return true
+}
+func (this *ListRoomsOfReservationResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ListRoomsOfReservationResponse)
+	if !ok {
+		that2, ok := that.(ListRoomsOfReservationResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Room.Equal(that1.Room) {
+		return false
+	}
+	return true
+}
 func (this *ListRoomTypesByTripRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -372,6 +513,28 @@ func (this *ListRoomTypesByTripResponse) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *ListRoomsOfReservationRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.ListRoomsOfReservationRequest{")
+	s = append(s, "ReservationId: "+fmt.Sprintf("%#v", this.ReservationId)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ListRoomsOfReservationResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.ListRoomsOfReservationResponse{")
+	if this.Room != nil {
+		s = append(s, "Room: "+fmt.Sprintf("%#v", this.Room)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringRoomtype(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -393,7 +556,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RoomTypeServiceClient interface {
+	// this method returns room types with quantity of each room typetaken into account
 	ListRoomTypesByTrip(ctx context.Context, in *ListRoomTypesByTripRequest, opts ...grpc.CallOption) (RoomTypeService_ListRoomTypesByTripClient, error)
+	ListRoomsOfReservation(ctx context.Context, in *ListRoomsOfReservationRequest, opts ...grpc.CallOption) (RoomTypeService_ListRoomsOfReservationClient, error)
 }
 
 type roomTypeServiceClient struct {
@@ -436,9 +601,43 @@ func (x *roomTypeServiceListRoomTypesByTripClient) Recv() (*ListRoomTypesByTripR
 	return m, nil
 }
 
+func (c *roomTypeServiceClient) ListRoomsOfReservation(ctx context.Context, in *ListRoomsOfReservationRequest, opts ...grpc.CallOption) (RoomTypeService_ListRoomsOfReservationClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_RoomTypeService_serviceDesc.Streams[1], "/roomtype.RoomTypeService/ListRoomsOfReservation", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &roomTypeServiceListRoomsOfReservationClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type RoomTypeService_ListRoomsOfReservationClient interface {
+	Recv() (*ListRoomsOfReservationResponse, error)
+	grpc.ClientStream
+}
+
+type roomTypeServiceListRoomsOfReservationClient struct {
+	grpc.ClientStream
+}
+
+func (x *roomTypeServiceListRoomsOfReservationClient) Recv() (*ListRoomsOfReservationResponse, error) {
+	m := new(ListRoomsOfReservationResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // RoomTypeServiceServer is the server API for RoomTypeService service.
 type RoomTypeServiceServer interface {
+	// this method returns room types with quantity of each room typetaken into account
 	ListRoomTypesByTrip(*ListRoomTypesByTripRequest, RoomTypeService_ListRoomTypesByTripServer) error
+	ListRoomsOfReservation(*ListRoomsOfReservationRequest, RoomTypeService_ListRoomsOfReservationServer) error
 }
 
 // UnimplementedRoomTypeServiceServer can be embedded to have forward compatible implementations.
@@ -447,6 +646,9 @@ type UnimplementedRoomTypeServiceServer struct {
 
 func (*UnimplementedRoomTypeServiceServer) ListRoomTypesByTrip(req *ListRoomTypesByTripRequest, srv RoomTypeService_ListRoomTypesByTripServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListRoomTypesByTrip not implemented")
+}
+func (*UnimplementedRoomTypeServiceServer) ListRoomsOfReservation(req *ListRoomsOfReservationRequest, srv RoomTypeService_ListRoomsOfReservationServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListRoomsOfReservation not implemented")
 }
 
 func RegisterRoomTypeServiceServer(s *grpc.Server, srv RoomTypeServiceServer) {
@@ -474,6 +676,27 @@ func (x *roomTypeServiceListRoomTypesByTripServer) Send(m *ListRoomTypesByTripRe
 	return x.ServerStream.SendMsg(m)
 }
 
+func _RoomTypeService_ListRoomsOfReservation_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRoomsOfReservationRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RoomTypeServiceServer).ListRoomsOfReservation(m, &roomTypeServiceListRoomsOfReservationServer{stream})
+}
+
+type RoomTypeService_ListRoomsOfReservationServer interface {
+	Send(*ListRoomsOfReservationResponse) error
+	grpc.ServerStream
+}
+
+type roomTypeServiceListRoomsOfReservationServer struct {
+	grpc.ServerStream
+}
+
+func (x *roomTypeServiceListRoomsOfReservationServer) Send(m *ListRoomsOfReservationResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _RoomTypeService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "roomtype.RoomTypeService",
 	HandlerType: (*RoomTypeServiceServer)(nil),
@@ -482,6 +705,11 @@ var _RoomTypeService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListRoomTypesByTrip",
 			Handler:       _RoomTypeService_ListRoomTypesByTrip_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListRoomsOfReservation",
+			Handler:       _RoomTypeService_ListRoomsOfReservation_Handler,
 			ServerStreams: true,
 		},
 	},
@@ -598,6 +826,69 @@ func (m *ListRoomTypesByTripResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
+func (m *ListRoomsOfReservationRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListRoomsOfReservationRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomsOfReservationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ReservationId != 0 {
+		i = encodeVarintRoomtype(dAtA, i, uint64(m.ReservationId))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListRoomsOfReservationResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListRoomsOfReservationResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListRoomsOfReservationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Room != nil {
+		{
+			size, err := m.Room.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintRoomtype(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintRoomtype(dAtA []byte, offset int, v uint64) int {
 	offset -= sovRoomtype(v)
 	base := offset
@@ -661,6 +952,31 @@ func (m *ListRoomTypesByTripResponse) Size() (n int) {
 	return n
 }
 
+func (m *ListRoomsOfReservationRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ReservationId != 0 {
+		n += 1 + sovRoomtype(uint64(m.ReservationId))
+	}
+	return n
+}
+
+func (m *ListRoomsOfReservationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Room != nil {
+		l = m.Room.Size()
+		n += 1 + l + sovRoomtype(uint64(l))
+	}
+	return n
+}
+
 func sovRoomtype(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -706,6 +1022,26 @@ func (this *ListRoomTypesByTripResponse) String() string {
 	}
 	s := strings.Join([]string{`&ListRoomTypesByTripResponse{`,
 		`RoomType:` + strings.Replace(fmt.Sprintf("%v", this.RoomType), "RoomType", "RoomType", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListRoomsOfReservationRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomsOfReservationRequest{`,
+		`ReservationId:` + fmt.Sprintf("%v", this.ReservationId) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ListRoomsOfReservationResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ListRoomsOfReservationResponse{`,
+		`Room:` + strings.Replace(fmt.Sprintf("%v", this.Room), "ReservationRoom", "ReservationRoom", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -927,6 +1263,161 @@ func (m *ListRoomTypesByTripResponse) Unmarshal(dAtA []byte) error {
 				m.RoomType = &RoomType{}
 			}
 			if err := m.RoomType.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipRoomtype(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthRoomtype
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListRoomsOfReservationRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowRoomtype
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListRoomsOfReservationRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListRoomsOfReservationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReservationId", wireType)
+			}
+			m.ReservationId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowRoomtype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReservationId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipRoomtype(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthRoomtype
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListRoomsOfReservationResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowRoomtype
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListRoomsOfReservationResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListRoomsOfReservationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Room", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowRoomtype
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthRoomtype
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthRoomtype
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Room == nil {
+				m.Room = &ReservationRoom{}
+			}
+			if err := m.Room.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

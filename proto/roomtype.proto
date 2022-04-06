@@ -12,6 +12,7 @@ option go_package = "./pb";
 service RoomTypeService {
     // this method returns room types with quantity of each room typetaken into account
     rpc ListRoomTypesByTrip(ListRoomTypesByTripRequest) returns (stream ListRoomTypesByTripResponse);
+    rpc ListRoomsOfReservation(ListRoomsOfReservationRequest) returns (stream ListRoomsOfReservationResponse);
 }
 
 // ListRoomTypesRequest
@@ -28,4 +29,12 @@ message ListRoomTypesByTripRequest {
 // ListRoomTypesResponse
 message ListRoomTypesByTripResponse {
     model.RoomType room_type = 1;
+}
+
+message ListRoomsOfReservationRequest {
+    uint64 reservation_id = 1;
+}
+
+message ListRoomsOfReservationResponse {
+    model.ReservationRoom room = 1;
 }

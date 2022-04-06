@@ -52,3 +52,25 @@ func (handler *RoomTypeHandler) ListRoomTypesByTrip(req *pb.ListRoomTypesByTripR
 
 	return nil
 }
+func (handler *RoomTypeHandler) ListRoomsOfReservation(req *pb.ListRoomsOfReservationRequest, srv pb.RoomTypeService_ListRoomsOfReservationServer) error {
+	ctx := srv.Context()
+	reservationRooms, err := handler.roomTypeService.ListRoomsOfReservation(ctx, req.GetReservationId())
+
+	if err != nil {
+		return err
+	}
+
+	if len(reservationRooms) == 0 {
+		return status.Error(codes.NotFound, "ListRoomsOfReservation: not found")
+	}
+
+	for _, reservationRoom := range reservationRooms {
+		resp := &pb.ListRoomsOfReservationResponse{
+			Room: reservationRoom.GetProto(),
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
+}

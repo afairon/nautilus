@@ -35,3 +35,23 @@ const ListRoomTypesByTripResponse$json = const {
 
 /// Descriptor for `ListRoomTypesByTripResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRoomTypesByTripResponseDescriptor = $convert.base64Decode('ChtMaXN0Um9vbVR5cGVzQnlUcmlwUmVzcG9uc2USLAoJcm9vbV90eXBlGAEgASgLMg8ubW9kZWwuUm9vbVR5cGVSCHJvb21UeXBl');
+@$core.Deprecated('Use listRoomsOfReservationRequestDescriptor instead')
+const ListRoomsOfReservationRequest$json = const {
+  '1': 'ListRoomsOfReservationRequest',
+  '2': const [
+    const {'1': 'reservation_id', '3': 1, '4': 1, '5': 4, '10': 'reservationId'},
+  ],
+};
+
+/// Descriptor for `ListRoomsOfReservationRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomsOfReservationRequestDescriptor = $convert.base64Decode('Ch1MaXN0Um9vbXNPZlJlc2VydmF0aW9uUmVxdWVzdBIlCg5yZXNlcnZhdGlvbl9pZBgBIAEoBFINcmVzZXJ2YXRpb25JZA==');
+@$core.Deprecated('Use listRoomsOfReservationResponseDescriptor instead')
+const ListRoomsOfReservationResponse$json = const {
+  '1': 'ListRoomsOfReservationResponse',
+  '2': const [
+    const {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.model.ReservationRoom', '10': 'room'},
+  ],
+};
+
+/// Descriptor for `ListRoomsOfReservationResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listRoomsOfReservationResponseDescriptor = $convert.base64Decode('Ch5MaXN0Um9vbXNPZlJlc2VydmF0aW9uUmVzcG9uc2USKgoEcm9vbRgBIAEoCzIWLm1vZGVsLlJlc2VydmF0aW9uUm9vbVIEcm9vbQ==');

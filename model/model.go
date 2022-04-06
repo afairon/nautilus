@@ -787,6 +787,16 @@ type ReservationRoomType struct {
 	Quantity      uint
 }
 
+func (rrt *ReservationRoomType) GetProto() *pb.ReservationRoom {
+	return &pb.ReservationRoom{
+		ReservationId: uint64(rrt.ReservationID),
+		RoomTypeId:    uint64(rrt.RoomTypeID),
+		TripId:        uint64(rrt.TripID),
+		NoDivers:      uint32(rrt.DiverNo),
+		Quantity:      uint32(rrt.Quantity),
+	}
+}
+
 // This type will not be a table in the database
 type ReportTrip struct {
 	Trip           Trip

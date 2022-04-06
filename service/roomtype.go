@@ -12,6 +12,7 @@ type RoomTypeService interface {
 	// Should these two methods be refactored to one method?
 	ListRoomTypesByHotelAndTrip(ctx context.Context, hotelId, tripId, limit, offset uint64) ([]*model.RoomType, error)
 	ListRoomTypesByLiveaboardAndTrip(ctx context.Context, liveaboardId, tripId, limit, offset uint64) ([]*model.RoomType, error)
+	ListRoomsOfReservation(ctx context.Context, reservationId uint64) ([]*model.ReservationRoomType, error)
 }
 
 type roomTypeService struct {
@@ -142,4 +143,14 @@ func (service *roomTypeService) ListRoomTypesByLiveaboardAndTrip(ctx context.Con
 	}
 
 	return roomTypes, nil
+}
+
+func (service *roomTypeService) ListRoomsOfReservation(ctx context.Context, reservationId uint64) ([]*model.ReservationRoomType, error) {
+	roomsOfReservation, err := service.repo.ReservationRoomType.ListReservationRoomTypesByReservation(ctx, reservationId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return roomsOfReservation, nil
 }

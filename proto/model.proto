@@ -330,3 +330,13 @@ message Reservation {
         uint32 quantity = 40;
     }
 }
+
+// room information of a reservation
+// ReservationRoom means room of reservation
+message ReservationRoom {
+    uint64 reservation_id = 1;
+    uint64 room_type_id = 10;
+    uint64 trip_id = 15;
+    uint32 no_divers = 20;
+    uint32 quantity = 40;
+}

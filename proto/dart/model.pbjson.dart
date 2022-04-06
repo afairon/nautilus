@@ -481,3 +481,17 @@ const Reservation_Room$json = const {
 
 /// Descriptor for `Reservation`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reservationDescriptor = $convert.base64Decode('CgtSZXNlcnZhdGlvbhIOCgJpZBgBIAEoBFICaWQSFwoHdHJpcF9pZBgKIAEoBFIGdHJpcElkEhkKCGRpdmVyX2lkGBQgASgEUgdkaXZlcklkEhQKBXByaWNlGB4gASgCUgVwcmljZRIhCgx0b3RhbF9kaXZlcnMYIyABKARSC3RvdGFsRGl2ZXJzEi0KBXJvb21zGCggAygLMhcubW9kZWwuUmVzZXJ2YXRpb24uUm9vbVIFcm9vbXMSPwoKY3JlYXRlZF9hdBgyIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0GnEKBFJvb20SDgoCaWQYASABKARSAmlkEiAKDHJvb21fdHlwZV9pZBgKIAEoBFIKcm9vbVR5cGVJZBIbCglub19kaXZlcnMYFCABKA1SCG5vRGl2ZXJzEhoKCHF1YW50aXR5GCggASgNUghxdWFudGl0eQ==');
+@$core.Deprecated('Use reservationRoomDescriptor instead')
+const ReservationRoom$json = const {
+  '1': 'ReservationRoom',
+  '2': const [
+    const {'1': 'reservation_id', '3': 1, '4': 1, '5': 4, '10': 'reservationId'},
+    const {'1': 'room_type_id', '3': 10, '4': 1, '5': 4, '10': 'roomTypeId'},
+    const {'1': 'trip_id', '3': 15, '4': 1, '5': 4, '10': 'tripId'},
+    const {'1': 'no_divers', '3': 20, '4': 1, '5': 13, '10': 'noDivers'},
+    const {'1': 'quantity', '3': 40, '4': 1, '5': 13, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `ReservationRoom`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List reservationRoomDescriptor = $convert.base64Decode('Cg9SZXNlcnZhdGlvblJvb20SJQoOcmVzZXJ2YXRpb25faWQYASABKARSDXJlc2VydmF0aW9uSWQSIAoMcm9vbV90eXBlX2lkGAogASgEUgpyb29tVHlwZUlkEhcKB3RyaXBfaWQYDyABKARSBnRyaXBJZBIbCglub19kaXZlcnMYFCABKA1SCG5vRGl2ZXJzEhoKCHF1YW50aXR5GCggASgNUghxdWFudGl0eQ==');
