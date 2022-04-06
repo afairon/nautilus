@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 option go_package = "./pb";
 
 service RoomTypeService {
+    // this method returns room types with quantity of each room typetaken into account
     rpc ListRoomTypesByTrip(ListRoomTypesByTripRequest) returns (stream ListRoomTypesByTripResponse);
 }
 
