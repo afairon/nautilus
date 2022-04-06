@@ -678,6 +678,36 @@ type RoomType struct {
 	Files        []*File        `gorm:"-" json:"-"`
 }
 
+func (r *RoomType) GetProto() *pb.RoomType {
+	roomType := pb.RoomType{
+		Id:          uint64(r.ID),
+		Name:        r.Name,
+		Description: r.Description,
+		MaxGuest:    r.MaxGuest,
+		Price:       r.Price,
+		Quantity:    r.Quantity,
+		CreatedAt:   &r.CreatedAt,
+		UpdatedAt:   &r.UpdatedAt,
+	}
+	if len(r.Amenities) > 0 {
+		for _, amenity := range r.Amenities {
+			roomType.Amenities = append(roomType.Amenities, amenity.GetProto())
+		}
+	}
+	if len(r.Files) > 0 {
+		roomType.RoomImages = make([]*pb.File, 0, len(r.Files))
+		for _, f := range r.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			roomType.RoomImages = append(roomType.RoomImages, &file)
+		}
+	}
+
+	return &roomType
+}
+
 type Hotel struct {
 	*gorm.Model
 	Coordinate  Coordinate `gorm:"embedded"`

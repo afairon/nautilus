@@ -34,16 +34,17 @@ func (service *roomTypeService) ListRoomTypesByHotelAndTrip(ctx context.Context,
 	var roomTypes []*model.RoomType
 
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
-		roomTypes, err := service.repo.RoomType.ListRoomTypesByHotelID(ctx, hotelId, limit, offset)
+		rts, err := query.RoomType.ListRoomTypesByHotelID(ctx, hotelId, limit, offset)
+		roomTypes = make([]*model.RoomType, 0, len(rts))
 
 		if err != nil {
 			return err
 		}
 
 		// reduce the quantity of each room type from the reservations of each room type
-		for _, roomType := range roomTypes {
+		for _, roomType := range rts {
 			// get reservations for each roomType in a specific trip
-			reservations, err := service.repo.ReservationRoomType.ListReservationRoomTypesByRoomTypeAndTrip(ctx, uint64(roomType.ID), tripId)
+			reservations, err := query.ReservationRoomType.ListReservationRoomTypesByRoomTypeAndTrip(ctx, uint64(roomType.ID), tripId)
 
 			if err != nil {
 				return err
@@ -69,6 +70,9 @@ func (service *roomTypeService) ListRoomTypesByHotelAndTrip(ctx context.Context,
 					roomType.Files = append(roomType.Files, &file)
 				}
 			}
+
+			// append to the variable "roomTypes" outside the transaction function scope.
+			roomTypes = append(roomTypes, roomType)
 		}
 
 		return nil
@@ -89,16 +93,17 @@ func (service *roomTypeService) ListRoomTypesByLiveaboardAndTrip(ctx context.Con
 	var roomTypes []*model.RoomType
 
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
-		roomTypes, err := service.repo.RoomType.ListRoomTypesByLiveaboardID(ctx, liveaboardId, limit, offset)
+		rts, err := query.RoomType.ListRoomTypesByHotelID(ctx, liveaboardId, limit, offset)
+		roomTypes = make([]*model.RoomType, 0, len(rts))
 
 		if err != nil {
 			return err
 		}
 
 		// reduce the quantity of each room type from the reservations of each room type
-		for _, roomType := range roomTypes {
+		for _, roomType := range rts {
 			// get reservations for each roomType in a specific trip
-			reservations, err := service.repo.ReservationRoomType.ListReservationRoomTypesByRoomTypeAndTrip(ctx, uint64(roomType.ID), tripId)
+			reservations, err := query.ReservationRoomType.ListReservationRoomTypesByRoomTypeAndTrip(ctx, uint64(roomType.ID), tripId)
 
 			if err != nil {
 				return err
@@ -124,6 +129,9 @@ func (service *roomTypeService) ListRoomTypesByLiveaboardAndTrip(ctx context.Con
 					roomType.Files = append(roomType.Files, &file)
 				}
 			}
+
+			// append to the variable "roomTypes" outside the transaction function scope.
+			roomTypes = append(roomTypes, roomType)
 		}
 
 		return nil

@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
@@ -25,12 +27,12 @@ func (handler *RoomTypeHandler) ListRoomTypesByTrip(req *pb.ListRoomTypesByTripR
 
 	switch t := req.GetId().(type) {
 	case *pb.ListRoomTypesByTripRequest_HotelId:
-		roomTypes, err = handler.roomTypeService.ListRoomTypesByHotelIDAndTrip(ctx, t.HotelId, req.GetTripId(), req.GetLimit(), req.GetOffset())
+		roomTypes, err = handler.roomTypeService.ListRoomTypesByHotelAndTrip(ctx, t.HotelId, req.GetTripId(), req.GetLimit(), req.GetOffset())
 		if err != nil {
 			return err
 		}
 	case *pb.ListRoomTypesByTripRequest_LiveaboardId:
-		roomTypes, err = handler.roomTypeService.ListRoomTypesByHotelID(ctx, t.LiveaboardId, req.GetTripId(), req.GetLimit(), req.GetOffset())
+		roomTypes, err = handler.roomTypeService.ListRoomTypesByHotelAndTrip(ctx, t.LiveaboardId, req.GetTripId(), req.GetLimit(), req.GetOffset())
 		if err != nil {
 			return err
 		}
@@ -40,27 +42,9 @@ func (handler *RoomTypeHandler) ListRoomTypesByTrip(req *pb.ListRoomTypesByTripR
 	}
 
 	for _, roomType := range roomTypes {
+		fmt.Printf("%+v\n", roomType)
 		resp := &pb.ListRoomTypesByTripResponse{
-			RoomType: &pb.RoomType{
-				Id:          uint64(roomType.ID),
-				Name:        roomType.Name,
-				Description: roomType.Description,
-				MaxGuest:    roomType.MaxGuest,
-				Price:       roomType.Price,
-				Quantity:    roomType.Quantity,
-				CreatedAt:   &roomType.CreatedAt,
-				UpdatedAt:   &roomType.UpdatedAt,
-			},
-		}
-
-		if len(roomType.Images) > 0 {
-			resp.RoomType.RoomImages = make([]*pb.File, 0, len(roomType.Images))
-			for _, link := range roomType.Images {
-				file := &pb.File{
-					Link: link,
-				}
-				resp.RoomType.RoomImages = append(resp.RoomType.RoomImages, file)
-			}
+			RoomType: roomType.GetProto(),
 		}
 
 		srv.Send(resp)
