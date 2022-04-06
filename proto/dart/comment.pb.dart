@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $12;
+import 'model.pb.dart' as $13;
 
 enum CreateCommentRequest_Type {
   trip, 
@@ -28,17 +28,17 @@ class CreateCommentRequest extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateCommentRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'comment'), createEmptyInstance: create)
     ..oo(0, [1, 5, 10])
-    ..aOM<$12.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $12.TripComment.create)
-    ..aOM<$12.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $12.HotelComment.create)
-    ..aOM<$12.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $12.LiveaboardComment.create)
+    ..aOM<$13.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripComment.create)
+    ..aOM<$13.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.HotelComment.create)
+    ..aOM<$13.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.LiveaboardComment.create)
     ..hasRequiredFields = false
   ;
 
   CreateCommentRequest._() : super();
   factory CreateCommentRequest({
-    $12.TripComment? trip,
-    $12.HotelComment? hotel,
-    $12.LiveaboardComment? liveaboard,
+    $13.TripComment? trip,
+    $13.HotelComment? hotel,
+    $13.LiveaboardComment? liveaboard,
   }) {
     final _result = create();
     if (trip != null) {
@@ -77,37 +77,37 @@ class CreateCommentRequest extends $pb.GeneratedMessage {
   void clearType() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $12.TripComment get trip => $_getN(0);
+  $13.TripComment get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($12.TripComment v) { setField(1, v); }
+  set trip($13.TripComment v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $12.TripComment ensureTrip() => $_ensure(0);
+  $13.TripComment ensureTrip() => $_ensure(0);
 
   @$pb.TagNumber(5)
-  $12.HotelComment get hotel => $_getN(1);
+  $13.HotelComment get hotel => $_getN(1);
   @$pb.TagNumber(5)
-  set hotel($12.HotelComment v) { setField(5, v); }
+  set hotel($13.HotelComment v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasHotel() => $_has(1);
   @$pb.TagNumber(5)
   void clearHotel() => clearField(5);
   @$pb.TagNumber(5)
-  $12.HotelComment ensureHotel() => $_ensure(1);
+  $13.HotelComment ensureHotel() => $_ensure(1);
 
   @$pb.TagNumber(10)
-  $12.LiveaboardComment get liveaboard => $_getN(2);
+  $13.LiveaboardComment get liveaboard => $_getN(2);
   @$pb.TagNumber(10)
-  set liveaboard($12.LiveaboardComment v) { setField(10, v); }
+  set liveaboard($13.LiveaboardComment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasLiveaboard() => $_has(2);
   @$pb.TagNumber(10)
   void clearLiveaboard() => clearField(10);
   @$pb.TagNumber(10)
-  $12.LiveaboardComment ensureLiveaboard() => $_ensure(2);
+  $13.LiveaboardComment ensureLiveaboard() => $_ensure(2);
 }
 
 enum CreateCommentResponse_Type {
@@ -126,17 +126,17 @@ class CreateCommentResponse extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateCommentResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'comment'), createEmptyInstance: create)
     ..oo(0, [1, 5, 10])
-    ..aOM<$12.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $12.TripComment.create)
-    ..aOM<$12.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $12.HotelComment.create)
-    ..aOM<$12.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $12.LiveaboardComment.create)
+    ..aOM<$13.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripComment.create)
+    ..aOM<$13.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.HotelComment.create)
+    ..aOM<$13.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.LiveaboardComment.create)
     ..hasRequiredFields = false
   ;
 
   CreateCommentResponse._() : super();
   factory CreateCommentResponse({
-    $12.TripComment? trip,
-    $12.HotelComment? hotel,
-    $12.LiveaboardComment? liveaboard,
+    $13.TripComment? trip,
+    $13.HotelComment? hotel,
+    $13.LiveaboardComment? liveaboard,
   }) {
     final _result = create();
     if (trip != null) {
@@ -175,37 +175,37 @@ class CreateCommentResponse extends $pb.GeneratedMessage {
   void clearType() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $12.TripComment get trip => $_getN(0);
+  $13.TripComment get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($12.TripComment v) { setField(1, v); }
+  set trip($13.TripComment v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $12.TripComment ensureTrip() => $_ensure(0);
+  $13.TripComment ensureTrip() => $_ensure(0);
 
   @$pb.TagNumber(5)
-  $12.HotelComment get hotel => $_getN(1);
+  $13.HotelComment get hotel => $_getN(1);
   @$pb.TagNumber(5)
-  set hotel($12.HotelComment v) { setField(5, v); }
+  set hotel($13.HotelComment v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasHotel() => $_has(1);
   @$pb.TagNumber(5)
   void clearHotel() => clearField(5);
   @$pb.TagNumber(5)
-  $12.HotelComment ensureHotel() => $_ensure(1);
+  $13.HotelComment ensureHotel() => $_ensure(1);
 
   @$pb.TagNumber(10)
-  $12.LiveaboardComment get liveaboard => $_getN(2);
+  $13.LiveaboardComment get liveaboard => $_getN(2);
   @$pb.TagNumber(10)
-  set liveaboard($12.LiveaboardComment v) { setField(10, v); }
+  set liveaboard($13.LiveaboardComment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasLiveaboard() => $_has(2);
   @$pb.TagNumber(10)
   void clearLiveaboard() => clearField(10);
   @$pb.TagNumber(10)
-  $12.LiveaboardComment ensureLiveaboard() => $_ensure(2);
+  $13.LiveaboardComment ensureLiveaboard() => $_ensure(2);
 }
 
 class GetCommentRequest_Trip extends $pb.GeneratedMessage {
@@ -463,17 +463,17 @@ class GetCommentResponse extends $pb.GeneratedMessage {
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetCommentResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'comment'), createEmptyInstance: create)
     ..oo(0, [1, 5, 10])
-    ..aOM<$12.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $12.TripComment.create)
-    ..aOM<$12.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $12.HotelComment.create)
-    ..aOM<$12.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $12.LiveaboardComment.create)
+    ..aOM<$13.TripComment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripComment.create)
+    ..aOM<$13.HotelComment>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.HotelComment.create)
+    ..aOM<$13.LiveaboardComment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.LiveaboardComment.create)
     ..hasRequiredFields = false
   ;
 
   GetCommentResponse._() : super();
   factory GetCommentResponse({
-    $12.TripComment? trip,
-    $12.HotelComment? hotel,
-    $12.LiveaboardComment? liveaboard,
+    $13.TripComment? trip,
+    $13.HotelComment? hotel,
+    $13.LiveaboardComment? liveaboard,
   }) {
     final _result = create();
     if (trip != null) {
@@ -512,36 +512,36 @@ class GetCommentResponse extends $pb.GeneratedMessage {
   void clearType() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  $12.TripComment get trip => $_getN(0);
+  $13.TripComment get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($12.TripComment v) { setField(1, v); }
+  set trip($13.TripComment v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $12.TripComment ensureTrip() => $_ensure(0);
+  $13.TripComment ensureTrip() => $_ensure(0);
 
   @$pb.TagNumber(5)
-  $12.HotelComment get hotel => $_getN(1);
+  $13.HotelComment get hotel => $_getN(1);
   @$pb.TagNumber(5)
-  set hotel($12.HotelComment v) { setField(5, v); }
+  set hotel($13.HotelComment v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasHotel() => $_has(1);
   @$pb.TagNumber(5)
   void clearHotel() => clearField(5);
   @$pb.TagNumber(5)
-  $12.HotelComment ensureHotel() => $_ensure(1);
+  $13.HotelComment ensureHotel() => $_ensure(1);
 
   @$pb.TagNumber(10)
-  $12.LiveaboardComment get liveaboard => $_getN(2);
+  $13.LiveaboardComment get liveaboard => $_getN(2);
   @$pb.TagNumber(10)
-  set liveaboard($12.LiveaboardComment v) { setField(10, v); }
+  set liveaboard($13.LiveaboardComment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasLiveaboard() => $_has(2);
   @$pb.TagNumber(10)
   void clearLiveaboard() => clearField(10);
   @$pb.TagNumber(10)
-  $12.LiveaboardComment ensureLiveaboard() => $_ensure(2);
+  $13.LiveaboardComment ensureLiveaboard() => $_ensure(2);
 }
 

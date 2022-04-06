@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $12;
+import 'model.pb.dart' as $13;
 
 class ListReservationsWithTripsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListReservationsWithTripsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
@@ -75,15 +75,15 @@ class ListReservationsWithTripsRequest extends $pb.GeneratedMessage {
 
 class ListReservationsWithTripsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListReservationsWithTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
-    ..aOM<$12.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $12.TripWithTemplate.create)
-    ..aOM<$12.Reservation>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $12.Reservation.create)
+    ..aOM<$13.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
+    ..aOM<$13.Reservation>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $13.Reservation.create)
     ..hasRequiredFields = false
   ;
 
   ListReservationsWithTripsResponse._() : super();
   factory ListReservationsWithTripsResponse({
-    $12.TripWithTemplate? trip,
-    $12.Reservation? reservation,
+    $13.TripWithTemplate? trip,
+    $13.Reservation? reservation,
   }) {
     final _result = create();
     if (trip != null) {
@@ -116,25 +116,25 @@ class ListReservationsWithTripsResponse extends $pb.GeneratedMessage {
   static ListReservationsWithTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.TripWithTemplate get trip => $_getN(0);
+  $13.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($12.TripWithTemplate v) { setField(1, v); }
+  set trip($13.TripWithTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $12.TripWithTemplate ensureTrip() => $_ensure(0);
+  $13.TripWithTemplate ensureTrip() => $_ensure(0);
 
   @$pb.TagNumber(10)
-  $12.Reservation get reservation => $_getN(1);
+  $13.Reservation get reservation => $_getN(1);
   @$pb.TagNumber(10)
-  set reservation($12.Reservation v) { setField(10, v); }
+  set reservation($13.Reservation v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasReservation() => $_has(1);
   @$pb.TagNumber(10)
   void clearReservation() => clearField(10);
   @$pb.TagNumber(10)
-  $12.Reservation ensureReservation() => $_ensure(1);
+  $13.Reservation ensureReservation() => $_ensure(1);
 }
 

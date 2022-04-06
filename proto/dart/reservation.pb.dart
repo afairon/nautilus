@@ -10,17 +10,17 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $12;
+import 'model.pb.dart' as $13;
 
 class CreateReservationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateReservationRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'reservation'), createEmptyInstance: create)
-    ..aOM<$12.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $12.Reservation.create)
+    ..aOM<$13.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $13.Reservation.create)
     ..hasRequiredFields = false
   ;
 
   CreateReservationRequest._() : super();
   factory CreateReservationRequest({
-    $12.Reservation? reservation,
+    $13.Reservation? reservation,
   }) {
     final _result = create();
     if (reservation != null) {
@@ -50,26 +50,26 @@ class CreateReservationRequest extends $pb.GeneratedMessage {
   static CreateReservationRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.Reservation get reservation => $_getN(0);
+  $13.Reservation get reservation => $_getN(0);
   @$pb.TagNumber(1)
-  set reservation($12.Reservation v) { setField(1, v); }
+  set reservation($13.Reservation v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReservation() => $_has(0);
   @$pb.TagNumber(1)
   void clearReservation() => clearField(1);
   @$pb.TagNumber(1)
-  $12.Reservation ensureReservation() => $_ensure(0);
+  $13.Reservation ensureReservation() => $_ensure(0);
 }
 
 class CreateReservationResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateReservationResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'reservation'), createEmptyInstance: create)
-    ..aOM<$12.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $12.Reservation.create)
+    ..aOM<$13.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $13.Reservation.create)
     ..hasRequiredFields = false
   ;
 
   CreateReservationResponse._() : super();
   factory CreateReservationResponse({
-    $12.Reservation? reservation,
+    $13.Reservation? reservation,
   }) {
     final _result = create();
     if (reservation != null) {
@@ -99,15 +99,15 @@ class CreateReservationResponse extends $pb.GeneratedMessage {
   static CreateReservationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.Reservation get reservation => $_getN(0);
+  $13.Reservation get reservation => $_getN(0);
   @$pb.TagNumber(1)
-  set reservation($12.Reservation v) { setField(1, v); }
+  set reservation($13.Reservation v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReservation() => $_has(0);
   @$pb.TagNumber(1)
   void clearReservation() => clearField(1);
   @$pb.TagNumber(1)
-  $12.Reservation ensureReservation() => $_ensure(0);
+  $13.Reservation ensureReservation() => $_ensure(0);
 }
 
 class GetReservationRequest extends $pb.GeneratedMessage {
@@ -159,13 +159,13 @@ class GetReservationRequest extends $pb.GeneratedMessage {
 
 class GetReservationResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetReservationResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'reservation'), createEmptyInstance: create)
-    ..aOM<$12.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $12.Reservation.create)
+    ..aOM<$13.Reservation>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservation', subBuilder: $13.Reservation.create)
     ..hasRequiredFields = false
   ;
 
   GetReservationResponse._() : super();
   factory GetReservationResponse({
-    $12.Reservation? reservation,
+    $13.Reservation? reservation,
   }) {
     final _result = create();
     if (reservation != null) {
@@ -195,14 +195,14 @@ class GetReservationResponse extends $pb.GeneratedMessage {
   static GetReservationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $12.Reservation get reservation => $_getN(0);
+  $13.Reservation get reservation => $_getN(0);
   @$pb.TagNumber(1)
-  set reservation($12.Reservation v) { setField(1, v); }
+  set reservation($13.Reservation v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReservation() => $_has(0);
   @$pb.TagNumber(1)
   void clearReservation() => clearField(1);
   @$pb.TagNumber(1)
-  $12.Reservation ensureReservation() => $_ensure(0);
+  $13.Reservation ensureReservation() => $_ensure(0);
 }
 
