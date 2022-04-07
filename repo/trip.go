@@ -194,7 +194,11 @@ func (repo *tripRepository) ListIncomingTripsOverPeriod(ctx context.Context, sta
 	result.Preload("TripTemplate.Boat")
 	result.Preload("DiveSites")
 	result.Where("agency_id = ?", id)
-	result.Where("trips.start_date <= ?", *startDate)
+
+	if startDate != nil {
+		result.Where("trips.start_date >= ?", *startDate)
+	}
+
 	if endDate != nil {
 		result.Where("trips.end_date <= ?", *endDate)
 	}

@@ -3095,6 +3095,7 @@ class ReportTrip extends $pb.GeneratedMessage {
     ..a<$core.int>(36, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placesLeft', $pb.PbFieldType.OU3)
     ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..pc<Diver>(45, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divers', $pb.PbFieldType.PM, subBuilder: Diver.create)
+    ..pc<Reservation>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reservations', $pb.PbFieldType.PM, subBuilder: Reservation.create)
     ..aOM<$12.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $12.Timestamp.create)
     ..aOM<$12.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $12.Timestamp.create)
     ..aOM<$12.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $12.Timestamp.create)
@@ -3113,6 +3114,7 @@ class ReportTrip extends $pb.GeneratedMessage {
     $core.int? placesLeft,
     $core.double? price,
     $core.Iterable<Diver>? divers,
+    $core.Iterable<Reservation>? reservations,
     $12.Timestamp? startDate,
     $12.Timestamp? endDate,
     $12.Timestamp? lastReservationDate,
@@ -3143,6 +3145,9 @@ class ReportTrip extends $pb.GeneratedMessage {
     }
     if (divers != null) {
       _result.divers.addAll(divers);
+    }
+    if (reservations != null) {
+      _result.reservations.addAll(reservations);
     }
     if (startDate != null) {
       _result.startDate = startDate;
@@ -3250,60 +3255,63 @@ class ReportTrip extends $pb.GeneratedMessage {
   @$pb.TagNumber(45)
   $core.List<Diver> get divers => $_getList(7);
 
+  @$pb.TagNumber(50)
+  $core.List<Reservation> get reservations => $_getList(8);
+
   @$pb.TagNumber(60)
-  $12.Timestamp get startDate => $_getN(8);
+  $12.Timestamp get startDate => $_getN(9);
   @$pb.TagNumber(60)
   set startDate($12.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasStartDate() => $_has(8);
+  $core.bool hasStartDate() => $_has(9);
   @$pb.TagNumber(60)
   void clearStartDate() => clearField(60);
   @$pb.TagNumber(60)
-  $12.Timestamp ensureStartDate() => $_ensure(8);
+  $12.Timestamp ensureStartDate() => $_ensure(9);
 
   @$pb.TagNumber(70)
-  $12.Timestamp get endDate => $_getN(9);
+  $12.Timestamp get endDate => $_getN(10);
   @$pb.TagNumber(70)
   set endDate($12.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasEndDate() => $_has(9);
+  $core.bool hasEndDate() => $_has(10);
   @$pb.TagNumber(70)
   void clearEndDate() => clearField(70);
   @$pb.TagNumber(70)
-  $12.Timestamp ensureEndDate() => $_ensure(9);
+  $12.Timestamp ensureEndDate() => $_ensure(10);
 
   @$pb.TagNumber(80)
-  $12.Timestamp get lastReservationDate => $_getN(10);
+  $12.Timestamp get lastReservationDate => $_getN(11);
   @$pb.TagNumber(80)
   set lastReservationDate($12.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasLastReservationDate() => $_has(10);
+  $core.bool hasLastReservationDate() => $_has(11);
   @$pb.TagNumber(80)
   void clearLastReservationDate() => clearField(80);
   @$pb.TagNumber(80)
-  $12.Timestamp ensureLastReservationDate() => $_ensure(10);
+  $12.Timestamp ensureLastReservationDate() => $_ensure(11);
 
   @$pb.TagNumber(90)
-  $12.Timestamp get createdAt => $_getN(11);
+  $12.Timestamp get createdAt => $_getN(12);
   @$pb.TagNumber(90)
   set createdAt($12.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasCreatedAt() => $_has(11);
+  $core.bool hasCreatedAt() => $_has(12);
   @$pb.TagNumber(90)
   void clearCreatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $12.Timestamp ensureCreatedAt() => $_ensure(11);
+  $12.Timestamp ensureCreatedAt() => $_ensure(12);
 
   @$pb.TagNumber(100)
-  $12.Timestamp get updatedAt => $_getN(12);
+  $12.Timestamp get updatedAt => $_getN(13);
   @$pb.TagNumber(100)
   set updatedAt($12.Timestamp v) { setField(100, v); }
   @$pb.TagNumber(100)
-  $core.bool hasUpdatedAt() => $_has(12);
+  $core.bool hasUpdatedAt() => $_has(13);
   @$pb.TagNumber(100)
   void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
-  $12.Timestamp ensureUpdatedAt() => $_ensure(12);
+  $12.Timestamp ensureUpdatedAt() => $_ensure(13);
 }
 
 class Payment extends $pb.GeneratedMessage {

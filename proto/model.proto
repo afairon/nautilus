@@ -296,6 +296,7 @@ message ReportTrip {
     uint32 places_left = 36;
     float price = 40;
     repeated model.Diver divers = 45;
+    repeated model.Reservation reservations = 50;
     google.protobuf.Timestamp start_date = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp end_date = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];

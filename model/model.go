@@ -803,6 +803,7 @@ type ReportTrip struct {
 	TripTemplateID uint64
 	PlacesLeft     uint32
 	Divers         []*Diver
+	Reservations   []*Reservation
 }
 
 func (rt *ReportTrip) GetProto() *pb.ReportTrip {
@@ -822,8 +823,13 @@ func (rt *ReportTrip) GetProto() *pb.ReportTrip {
 		UpdatedAt:           &rt.Trip.UpdatedAt,
 	}
 
-	if len(rt.Divers) > 0 {
+	if len(rt.Reservations) > 0 {
+		reportTrip.Reservations = make([]*pb.Reservation, 0, len(rt.Reservations))
 		reportTrip.Divers = make([]*pb.Diver, 0, len(rt.Divers))
+
+		for _, r := range rt.Reservations {
+			reportTrip.Reservations = append(reportTrip.Reservations, r.GetProto())
+		}
 
 		for _, d := range rt.Divers {
 			reportTrip.Divers = append(reportTrip.Divers, d.GetProto())
