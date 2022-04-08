@@ -12,6 +12,7 @@ import (
 type ReservationRepository interface {
 	CreateReservation(ctx context.Context, reservation *model.Reservation) (*model.Reservation, error)
 	GetReservationsByTrip(ctx context.Context, id uint64) ([]*model.Reservation, error)
+	GetReservationByDiverAndTrip(ctx context.Context, diverId, tripId uint64) (*model.Reservation, error)
 	ListReservationsByDiver(ctx context.Context, id, limit, offset uint64) ([]*model.Reservation, error)
 	BookRoom(ctx context.Context, room *model.ReservationRoomType) (*model.ReservationRoomType, error)
 }
@@ -55,6 +56,16 @@ func (repo *reservationRepository) GetReservationsByTrip(ctx context.Context, id
 	}
 
 	return reservations, nil
+}
+
+func (repo *reservationRepository) GetReservationByDiverAndTrip(ctx context.Context, diverId, tripId uint64) (*model.Reservation, error) {
+	var reservation *model.Reservation
+
+	if result := repo.db.Where("diver_id = ? AND trip_id = ?", diverId, tripId).First(&reservation); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return reservation, nil
 }
 
 // BookRoom creates a booked room record and returns the newly created record.

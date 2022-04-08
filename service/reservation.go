@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -9,6 +10,7 @@ import (
 	"github.com/afairon/nautilus/session"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"gorm.io/gorm"
 )
 
 // ReservationService defines operations on reservation.
@@ -106,6 +108,16 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 	// })
 
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
+		diverReservation, err := query.Reservation.GetReservationByDiverAndTrip(ctx, reservation.GetDiverId(), reservation.GetTripId())
+
+		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+			return err
+		}
+
+		if diverReservation != nil {
+			return status.Error(codes.AlreadyExists, "already made reservation for this trip")
+		}
+
 		newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
 
 		if err != nil {
