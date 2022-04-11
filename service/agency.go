@@ -272,11 +272,11 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
 
 		// create trip template
-		_, err = query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
+		// _, err = query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
 
-		if err != nil {
-			return err
-		}
+		// if err != nil {
+		// 	return err
+		// }
 
 		newTrip := model.Trip{
 			MaxGuest:            trip.GetMaxGuest(),
@@ -284,7 +284,7 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 			StartDate:           trip.GetStartDate(),
 			EndDate:             trip.GetEndDate(),
 			LastReservationDate: trip.GetLastReservationDate(),
-			TripTemplateID:      newTripTemplate.ID,
+			TripTemplate:        newTripTemplate,
 			AgencyID:            agency.ID,
 		}
 
