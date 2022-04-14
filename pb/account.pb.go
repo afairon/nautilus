@@ -7,10 +7,10 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1011,17 +1011,17 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AccountClient interface {
 	// Create is used to create agency and diver account.
-	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Update is used to update user account and profile.
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// UpdateAccount is used to update account only.
-	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Login is used to authenticate the user.
 	// The client supplies the server with credentials and the server
 	// creates a session and sends back a token.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	// GetProfile takes the token and returns profile associated with the token.
-	GetProfile(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error)
+	GetProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error)
 }
 
 type accountClient struct {
@@ -1032,8 +1032,8 @@ func NewAccountClient(cc *grpc.ClientConn) AccountClient {
 	return &accountClient{cc}
 }
 
-func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/account.Account/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1041,8 +1041,8 @@ func (c *accountClient) Create(ctx context.Context, in *AccountRequest, opts ...
 	return out, nil
 }
 
-func (c *accountClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *accountClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/account.Account/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1050,8 +1050,8 @@ func (c *accountClient) Update(ctx context.Context, in *UpdateRequest, opts ...g
 	return out, nil
 }
 
-func (c *accountClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *accountClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/account.Account/UpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1068,7 +1068,7 @@ func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 	return out, nil
 }
 
-func (c *accountClient) GetProfile(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error) {
+func (c *accountClient) GetProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetProfileResponse, error) {
 	out := new(GetProfileResponse)
 	err := c.cc.Invoke(ctx, "/account.Account/GetProfile", in, out, opts...)
 	if err != nil {
@@ -1080,36 +1080,36 @@ func (c *accountClient) GetProfile(ctx context.Context, in *empty.Empty, opts ..
 // AccountServer is the server API for Account service.
 type AccountServer interface {
 	// Create is used to create agency and diver account.
-	Create(context.Context, *AccountRequest) (*empty.Empty, error)
+	Create(context.Context, *AccountRequest) (*emptypb.Empty, error)
 	// Update is used to update user account and profile.
-	Update(context.Context, *UpdateRequest) (*empty.Empty, error)
+	Update(context.Context, *UpdateRequest) (*emptypb.Empty, error)
 	// UpdateAccount is used to update account only.
-	UpdateAccount(context.Context, *UpdateAccountRequest) (*empty.Empty, error)
+	UpdateAccount(context.Context, *UpdateAccountRequest) (*emptypb.Empty, error)
 	// Login is used to authenticate the user.
 	// The client supplies the server with credentials and the server
 	// creates a session and sends back a token.
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// GetProfile takes the token and returns profile associated with the token.
-	GetProfile(context.Context, *empty.Empty) (*GetProfileResponse, error)
+	GetProfile(context.Context, *emptypb.Empty) (*GetProfileResponse, error)
 }
 
 // UnimplementedAccountServer can be embedded to have forward compatible implementations.
 type UnimplementedAccountServer struct {
 }
 
-func (*UnimplementedAccountServer) Create(ctx context.Context, req *AccountRequest) (*empty.Empty, error) {
+func (*UnimplementedAccountServer) Create(ctx context.Context, req *AccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (*UnimplementedAccountServer) Update(ctx context.Context, req *UpdateRequest) (*empty.Empty, error) {
+func (*UnimplementedAccountServer) Update(ctx context.Context, req *UpdateRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (*UnimplementedAccountServer) UpdateAccount(ctx context.Context, req *UpdateAccountRequest) (*empty.Empty, error) {
+func (*UnimplementedAccountServer) UpdateAccount(ctx context.Context, req *UpdateAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
 func (*UnimplementedAccountServer) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (*UnimplementedAccountServer) GetProfile(ctx context.Context, req *empty.Empty) (*GetProfileResponse, error) {
+func (*UnimplementedAccountServer) GetProfile(ctx context.Context, req *emptypb.Empty) (*GetProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
 }
 
@@ -1190,7 +1190,7 @@ func _Account_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 }
 
 func _Account_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(empty.Empty)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1202,7 +1202,7 @@ func _Account_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/account.Account/GetProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServer).GetProfile(ctx, req.(*empty.Empty))
+		return srv.(AccountServer).GetProfile(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
