@@ -231,96 +231,11 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *pb.TripWithTemp
 		return err
 	}
 
-	addr := trip.TripTemplate.GetAddress()
+	newTrip := model.Trip{}
+	newTrip.From(trip)
+	newTrip.AgencyID = agency.ID
 
-	tripTemplateAddress := model.Address{
-		AddressLine_1: addr.GetAddressLine_1(),
-		AddressLine_2: addr.GetAddressLine_2(),
-		City:          addr.GetCity(),
-		Postcode:      addr.GetPostcode(),
-		Region:        addr.GetRegion(),
-		Country:       addr.GetCountry(),
-	}
-
-	newTripTemplate := model.TripTemplate{
-		Name:        trip.TripTemplate.GetName(),
-		Description: trip.TripTemplate.GetDescription(),
-		Type:        model.TripType(trip.TripTemplate.GetTripType()),
-		Address:     tripTemplateAddress,
-		AgencyID:    agency.ID,
-	}
-
-	if newTripTemplate.Type == model.ONSHORE {
-		newTripTemplate.HotelID = uint(trip.TripTemplate.GetHotelId())
-
-		newTripTemplate.BoatID = uint(trip.TripTemplate.GetBoatId())
-	} else {
-		newTripTemplate.LiveaboardID = uint(trip.TripTemplate.GetLiveaboardId())
-	}
-
-	for _, image := range trip.TripTemplate.GetImages() {
-		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
-		}
-
-		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
-	}
-
-	newTrip := model.Trip{
-		MaxGuest:            trip.GetMaxGuest(),
-		Price:               trip.GetPrice(),
-		StartDate:           trip.GetStartDate(),
-		EndDate:             trip.GetEndDate(),
-		LastReservationDate: trip.GetLastReservationDate(),
-		TripTemplate:        newTripTemplate,
-		AgencyID:            agency.ID,
-	}
-
-	newTrip.DiveSites = make([]model.DiveSite, 0, len(trip.GetDiveSites()))
-
-	for _, diveSite := range trip.GetDiveSites() {
-		ds := model.DiveSite{
-			Name:        diveSite.Name,
-			Description: diveSite.Description,
-			MinDepth:    diveSite.MinDepth,
-			MaxDepth:    diveSite.MaxDepth,
-		}
-
-		newTrip.DiveSites = append(newTrip.DiveSites, ds)
-	}
-
-	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
-
-		// create trip template
-		// _, err = query.Agency.CreateTripTemplate(ctx, &newTripTemplate)
-
-		// if err != nil {
-		// 	return err
-		// }
-
-		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
-
-		if err != nil {
-			return err
-		}
-
-		for _, diveMaster := range trip.GetDiveMasters() {
-			diveMasterTripLink := model.DiveMasterTrip{
-				TripID:       createdTrip.ID,
-				DiveMasterID: uint(diveMaster.Id),
-			}
-			_, err = query.Agency.CreateDiveMasterTripLink(ctx, &diveMasterTripLink)
-
-			if err != nil {
-				return err
-			}
-		}
-
-		return err
-	})
+	_, err = service.repo.Agency.CreateTrip(ctx, &newTrip)
 
 	return err
 }
