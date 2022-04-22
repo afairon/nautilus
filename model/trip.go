@@ -61,7 +61,7 @@ func (t *Trip) BeforeSave(tx *gorm.DB) error {
 		}
 
 	case OFFSHORE:
-		result.Where("trip_templates.liveaboard_id = ?", t.TripTemplate.LiveaboardID, t.StartDate)
+		result.Where("trip_templates.liveaboard_id = ?", t.TripTemplate.LiveaboardID)
 		result.Find(&trips)
 
 		if result.Error != nil && !errors.Is(result.Error, gorm.ErrRecordNotFound) {

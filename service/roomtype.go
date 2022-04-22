@@ -95,7 +95,7 @@ func (service *roomTypeService) ListRoomTypesByLiveaboardAndTrip(ctx context.Con
 	var roomTypes []*model.RoomType
 
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
-		rts, err := query.RoomType.ListRoomTypesByHotelID(ctx, liveaboardId, limit, offset)
+		rts, err := query.RoomType.ListRoomTypesByLiveaboardID(ctx, liveaboardId, limit, offset)
 		roomTypes = make([]*model.RoomType, 0, len(rts))
 
 		if err != nil {

@@ -33,7 +33,7 @@ func (handler *RoomTypeHandler) ListRoomTypesByTrip(req *pb.ListRoomTypesByTripR
 			return err
 		}
 	case *pb.ListRoomTypesByTripRequest_LiveaboardId:
-		roomTypes, err = handler.roomTypeService.ListRoomTypesByHotelAndTrip(ctx, t.LiveaboardId, req.GetTripId(), req.GetLimit(), req.GetOffset())
+		roomTypes, err = handler.roomTypeService.ListRoomTypesByLiveaboardAndTrip(ctx, t.LiveaboardId, req.GetTripId(), req.GetLimit(), req.GetOffset())
 		if err != nil {
 			return err
 		}
