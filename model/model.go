@@ -573,18 +573,20 @@ func (tt *TripTemplate) GetProto() *pb.TripTemplate {
 
 type Trip struct {
 	gorm.Model
-	MaxGuest             uint32                `gorm:"not null"`
-	CurrentGuest         uint32                `gorm:"not null;default:0"`
-	Price                float32               `gorm:"not null;check:price_checker,price > 0"`
-	StartDate            *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
-	EndDate              *time.Time            `gorm:"not null"`
-	LastReservationDate  *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
-	DiveMasters          []DiveMaster          `gorm:"many2many:dive_master_trips;"`
-	ReservationRoomTypes []ReservationRoomType `gorm:"foreignKey:TripID"`
-	TripTemplateID       uint                  `gorm:"not null"`
-	TripTemplate         TripTemplate
-	DiveSites            []DiveSite
-	AgencyID             uint `gorm:"not null"`
+	MaxGuest                     uint32                `gorm:"not null"`
+	CurrentGuest                 uint32                `gorm:"not null;default:0"`
+	Price                        float32               `gorm:"not null;check:price_checker,price > 0"`
+	StartDate                    *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
+	EndDate                      *time.Time            `gorm:"not null"`
+	LastReservationDate          *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
+	DiveMasters                  []DiveMaster          `gorm:"many2many:dive_master_trips;"`
+	ReservationRoomTypes         []ReservationRoomType `gorm:"foreignKey:TripID"`
+	TripTemplateID               uint                  `gorm:"not null"`
+	TripTemplate                 TripTemplate
+	DiveSites                    []DiveSite
+	HotelRoomTypeTripPrices      []HotelRoomTypeTripPrice
+	LiveaboardRoomTypeTripPrices []LiveaboardRoomTypeTripPrice
+	AgencyID                     uint `gorm:"not null"`
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
@@ -1077,4 +1079,58 @@ func (rt *ReportTrip) GetProto() *pb.ReportTrip {
 	}
 
 	return &reportTrip
+}
+
+type HotelRoomTypeTripPrice struct {
+	HotelID    uint64
+	Hotel      Hotel
+	RoomTypeID uint64
+	RoomType   RoomType
+	TripID     uint64
+	Price      float32
+}
+
+func (l *HotelRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
+	if l == nil {
+		return
+	}
+
+	l.HotelID = link.GetHotelId()
+	l.RoomTypeID = link.GetRoomTypeId()
+	l.Price = link.GetPrice()
+}
+
+func (l *HotelRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
+	return &pb.RoomTypeTripPrice{
+		HotelId:    l.HotelID,
+		RoomTypeId: l.RoomTypeID,
+		Price:      l.Price,
+	}
+}
+
+type LiveaboardRoomTypeTripPrice struct {
+	LiveaboardID uint64
+	Liveaboard   Liveaboard
+	RoomTypeID   uint64
+	RoomType     RoomType
+	TripID       uint64
+	Price        float32
+}
+
+func (l *LiveaboardRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
+	if l == nil {
+		return
+	}
+
+	l.LiveaboardID = link.GetLiveaboardId()
+	l.RoomTypeID = link.GetRoomTypeId()
+	l.Price = link.GetPrice()
+}
+
+func (l *LiveaboardRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
+	return &pb.RoomTypeTripPrice{
+		LiveaboardId: l.LiveaboardID,
+		RoomTypeId:   l.RoomTypeID,
+		Price:        l.Price,
+	}
 }

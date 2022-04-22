@@ -341,3 +341,10 @@ message ReservationRoom {
     uint32 no_divers = 20;
     uint32 quantity = 40;
 }
+
+message RoomTypeTripPrice {
+    uint64 hotel_id = 1;
+    uint64 liveaboard_id = 2;
+    uint64 room_type_id = 10;
+    float price = 20;
+}
