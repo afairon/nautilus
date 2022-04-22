@@ -232,13 +232,14 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip) err
 	}
 
 	trip.AgencyID = agency.ID
+	trip.TripTemplate.AgencyID = agency.ID
 
 	// Save trip template's files.
 	if len(trip.TripTemplate.Files) > 0 {
 		trip.TripTemplate.Images = make(pq.StringArray, 0, len(trip.TripTemplate.Files))
 		for _, doc := range trip.TripTemplate.Files {
 			reader := bytes.NewReader(doc.Buffer)
-			objectID, err := service.media.Put(doc.Filename, media.PRIVATE, reader)
+			objectID, err := service.media.Put(doc.Filename, media.PUBLIC_READ, reader)
 			if err != nil {
 				return err
 			}

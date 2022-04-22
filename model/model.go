@@ -599,6 +599,11 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 	t.StartDate = trip.GetStartDate()
 	t.EndDate = trip.GetEndDate()
 	t.LastReservationDate = trip.GetLastReservationDate()
+	t.TripTemplateID = uint(trip.GetTripTemplateId())
+
+	tripTemplate := TripTemplate{}
+	tripTemplate.From(trip.GetTripTemplate())
+	t.TripTemplate = tripTemplate
 
 	if len(trip.GetDiveMasters()) > 0 {
 		t.DiveMasters = make([]DiveMaster, 0, len(trip.GetDiveMasters()))
