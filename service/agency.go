@@ -799,7 +799,7 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *pb.Hotel) 
 	}
 
 	newHotel := model.Hotel{
-		Model: &gorm.Model{
+		Model: gorm.Model{
 			ID: uint(hotel.GetId()),
 		},
 		Address: model.Address{
@@ -857,7 +857,7 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 	}
 
 	newLiveaboard := model.Liveaboard{
-		Model: &gorm.Model{ID: uint(liveaboard.GetId())},
+		Model: gorm.Model{ID: uint(liveaboard.GetId())},
 		Address: model.Address{
 			Model: gorm.Model{
 				ID: uint(liveaboard.GetAddress().GetId()),
@@ -916,7 +916,7 @@ func (service *agencyService) UpdateBoat(ctx context.Context, boat *pb.Boat) err
 	}
 
 	newBoat := model.Boat{
-		Model: &gorm.Model{
+		Model: gorm.Model{
 			ID: uint(boat.GetId()),
 		},
 		Address: model.Address{

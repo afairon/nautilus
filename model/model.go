@@ -455,7 +455,7 @@ type Staff struct {
 }
 
 type Boat struct {
-	*gorm.Model
+	gorm.Model
 	AddressID     uint
 	Address       Address
 	Name          string         `gorm:"not null"`
@@ -466,6 +466,30 @@ type Boat struct {
 	Images        pq.StringArray `gorm:"type:text"`
 	AgencyID      uint           `gorm:"not null"`
 	Files         []*File        `gorm:"-" json:"-"`
+}
+
+func (b *Boat) From(boat *pb.Boat) {
+	b.ID = uint(boat.GetId())
+	b.AddressID = uint(boat.Address.GetId())
+	b.Name = boat.GetName()
+	b.Description = boat.GetDescription()
+	b.TotalCapacity = boat.GetTotalCapacity()
+	b.DiverCapacity = boat.GetDiverCapacity()
+	b.StaffCapacity = boat.GetStaffCapacity()
+
+	addr := Address{}
+	addr.From(boat.GetAddress())
+	b.Address = addr
+
+	if len(boat.GetImages()) > 0 {
+		b.Files = make([]*File, 0, len(boat.GetImages()))
+
+		for _, doc := range boat.GetImages() {
+			file := File{}
+			file.From(doc)
+			b.Files = append(b.Files, &file)
+		}
+	}
 }
 
 type TripTemplate struct {
@@ -495,17 +519,28 @@ func (tt *TripTemplate) From(tripTemplate *pb.TripTemplate) {
 	tt.Name = tripTemplate.GetName()
 	tt.Description = tripTemplate.GetDescription()
 	tt.Type = TripType(tripTemplate.GetTripType())
+	tt.AddressID = uint(tripTemplate.GetAddress().GetId())
+
+	addr := Address{}
+	addr.From(tripTemplate.GetAddress())
+	tt.Address = addr
 
 	switch tt.Type {
 	case ONSHORE:
-		hotel := Hotel{}
-		boat = Boat{}
-
 		tt.HotelID = uint(tripTemplate.GetHotelId())
 		tt.BoatID = uint(tripTemplate.BoatId)
-
 	case OFFSHORE:
 		tt.LiveaboardID = uint(tripTemplate.GetLiveaboardId())
+	}
+
+	if len(tripTemplate.GetImages()) > 0 {
+		tt.Files = make([]*File, 0, len(tripTemplate.GetImages()))
+
+		for _, doc := range tripTemplate.GetImages() {
+			file := File{}
+			file.From(doc)
+			tt.Files = append(tt.Files, &file)
+		}
 	}
 }
 
@@ -576,6 +611,14 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 		}
 	}
 
+	if len(trip.GetDiveSites()) > 0 {
+		t.DiveSites = make([]DiveSite, 0, len(trip.GetDiveSites()))
+
+		for _, diveSite := range trip.GetDiveSites() {
+			ds := DiveSite{}
+			ds.From(diveSite)
+		}
+	}
 }
 
 func (t *Trip) GetProto() *pb.TripWithTemplate {
@@ -612,12 +655,25 @@ func (t *Trip) GetProto() *pb.TripWithTemplate {
 }
 
 type DiveSite struct {
-	*gorm.Model
+	gorm.Model
 	Name        string `gorm:"not null"`
 	Description string
 	MinDepth    uint32
 	MaxDepth    uint32
 	TripID      uint `gorm:"not null"`
+}
+
+func (ds *DiveSite) From(diveSite *pb.DiveSite) {
+	if ds == nil {
+		return
+	}
+
+	ds.ID = uint(diveSite.GetId())
+	ds.Name = diveSite.GetName()
+	ds.Description = diveSite.GetDescription()
+	ds.MinDepth = diveSite.GetMinDepth()
+	ds.MaxDepth = diveSite.GetMaxDepth()
+	ds.TripID = uint(diveSite.GetTripId())
 }
 
 func (d *DiveSite) GetProto() *pb.DiveSite {
@@ -716,7 +772,7 @@ func (a *Amenity) From(amenity *pb.Amenity) {
 }
 
 type Liveaboard struct {
-	*gorm.Model
+	gorm.Model
 	AddressID uint
 	Address   Address
 	*Coordinate
@@ -731,6 +787,47 @@ type Liveaboard struct {
 	RoomTypes     []RoomType
 	AgencyID      uint    `gorm:"not null"`
 	Files         []*File `gorm:"-" json:"-"`
+}
+
+func (l *Liveaboard) From(liveaboard *pb.Liveaboard) {
+	if l == nil {
+		return
+	}
+
+	l.ID = uint(liveaboard.GetId())
+	l.AddressID = uint(liveaboard.Address.GetId())
+	l.Name = liveaboard.GetName()
+	l.Description = liveaboard.GetDescription()
+	l.Length = uint32(liveaboard.GetLength())
+	l.Width = uint32(liveaboard.GetWidth())
+	l.TotalCapacity = liveaboard.GetTotalCapacity()
+	l.DiverRooms = liveaboard.GetDiverRooms()
+	l.StaffRooms = liveaboard.GetStaffRooms()
+
+	addr := Address{}
+	addr.From(liveaboard.GetAddress())
+	l.Address = addr
+
+	if len(liveaboard.GetRoomTypes()) > 0 {
+		l.RoomTypes = make([]RoomType, 0, len(liveaboard.GetRoomTypes()))
+
+		for _, roomType := range liveaboard.GetRoomTypes() {
+			rt := RoomType{}
+			rt.From(roomType)
+			l.RoomTypes = append(l.RoomTypes, rt)
+		}
+	}
+
+	if len(liveaboard.GetImages()) > 0 {
+		l.Files = make([]*File, 0, len(liveaboard.GetImages()))
+
+		for _, doc := range liveaboard.GetImages() {
+			file := File{}
+			file.From(doc)
+			l.Files = append(l.Files, &file)
+		}
+
+	}
 }
 
 type RoomType struct {
