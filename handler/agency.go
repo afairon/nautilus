@@ -59,7 +59,10 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddTrip(ctx, req.GetTrip())
+	trip := model.Trip{}
+	trip.From(req.GetTrip())
+
+	err := handler.agencyService.AddTrip(ctx, &trip)
 
 	if err != nil {
 		return nil, err

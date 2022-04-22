@@ -21,7 +21,7 @@ type AgencyService interface {
 	AddDiveMaster(context.Context, *pb.DiveMaster) error
 	AddStaff(context.Context, *pb.Staff) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
-	AddTrip(context.Context, *pb.TripWithTemplate) error
+	AddTrip(context.Context, *model.Trip) error
 	AddDivingBoat(context.Context, *pb.Boat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
@@ -224,18 +224,29 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 	return status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
 }
 
-func (service *agencyService) AddTrip(ctx context.Context, trip *pb.TripWithTemplate) error {
+func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	newTrip := model.Trip{}
-	newTrip.From(trip)
-	newTrip.AgencyID = agency.ID
+	trip.AgencyID = agency.ID
 
-	_, err = service.repo.Agency.CreateTrip(ctx, &newTrip)
+	// Save trip template's files.
+	if len(trip.TripTemplate.Files) > 0 {
+		trip.TripTemplate.Images = make(pq.StringArray, 0, len(trip.TripTemplate.Files))
+		for _, doc := range trip.TripTemplate.Files {
+			reader := bytes.NewReader(doc.Buffer)
+			objectID, err := service.media.Put(doc.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			trip.TripTemplate.Images = append(trip.TripTemplate.Images, objectID)
+		}
+	}
+
+	_, err = service.repo.Agency.CreateTrip(ctx, trip)
 
 	return err
 }

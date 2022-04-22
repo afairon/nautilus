@@ -584,8 +584,7 @@ type Trip struct {
 	TripTemplateID       uint                  `gorm:"not null"`
 	TripTemplate         TripTemplate
 	DiveSites            []DiveSite
-	AgencyID             uint    `gorm:"not null"`
-	Files                []*File `gorm:"-" json:"-"`
+	AgencyID             uint `gorm:"not null"`
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
