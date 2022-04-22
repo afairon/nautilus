@@ -21,7 +21,7 @@ type AgencyService interface {
 	AddDiveMaster(context.Context, *pb.DiveMaster) error
 	AddStaff(context.Context, *pb.Staff) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
-	AddTrip(context.Context, *pb.TripTemplate, *pb.Trip) error
+	AddTrip(context.Context, *pb.TripWithTemplate) error
 	AddDivingBoat(context.Context, *pb.Boat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
@@ -224,14 +224,14 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 	return status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
 }
 
-func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.TripTemplate, trip *pb.Trip) error {
+func (service *agencyService) AddTrip(ctx context.Context, trip *pb.TripWithTemplate) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	addr := tripTemplate.GetAddress()
+	addr := trip.TripTemplate.GetAddress()
 
 	tripTemplateAddress := model.Address{
 		AddressLine_1: addr.GetAddressLine_1(),
@@ -243,22 +243,22 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 	}
 
 	newTripTemplate := model.TripTemplate{
-		Name:        tripTemplate.GetName(),
-		Description: tripTemplate.GetDescription(),
-		Type:        model.TripType(tripTemplate.GetTripType()),
+		Name:        trip.TripTemplate.GetName(),
+		Description: trip.TripTemplate.GetDescription(),
+		Type:        model.TripType(trip.TripTemplate.GetTripType()),
 		Address:     tripTemplateAddress,
 		AgencyID:    agency.ID,
 	}
 
 	if newTripTemplate.Type == model.ONSHORE {
-		newTripTemplate.HotelID = uint(tripTemplate.GetHotelId())
+		newTripTemplate.HotelID = uint(trip.TripTemplate.GetHotelId())
 
-		newTripTemplate.BoatID = uint(tripTemplate.GetBoatId())
+		newTripTemplate.BoatID = uint(trip.TripTemplate.GetBoatId())
 	} else {
-		newTripTemplate.LiveaboardID = uint(tripTemplate.GetLiveaboardId())
+		newTripTemplate.LiveaboardID = uint(trip.TripTemplate.GetLiveaboardId())
 	}
 
-	for _, image := range tripTemplate.GetImages() {
+	for _, image := range trip.TripTemplate.GetImages() {
 		reader := bytes.NewReader(image.GetFile())
 		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
 
@@ -267,6 +267,29 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		}
 
 		newTripTemplate.Images = append(newTripTemplate.Images, objectID)
+	}
+
+	newTrip := model.Trip{
+		MaxGuest:            trip.GetMaxGuest(),
+		Price:               trip.GetPrice(),
+		StartDate:           trip.GetStartDate(),
+		EndDate:             trip.GetEndDate(),
+		LastReservationDate: trip.GetLastReservationDate(),
+		TripTemplate:        newTripTemplate,
+		AgencyID:            agency.ID,
+	}
+
+	newTrip.DiveSites = make([]model.DiveSite, 0, len(trip.GetDiveSites()))
+
+	for _, diveSite := range trip.GetDiveSites() {
+		ds := model.DiveSite{
+			Name:        diveSite.Name,
+			Description: diveSite.Description,
+			MinDepth:    diveSite.MinDepth,
+			MaxDepth:    diveSite.MaxDepth,
+		}
+
+		newTrip.DiveSites = append(newTrip.DiveSites, ds)
 	}
 
 	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
@@ -278,39 +301,16 @@ func (service *agencyService) AddTrip(ctx context.Context, tripTemplate *pb.Trip
 		// 	return err
 		// }
 
-		newTrip := model.Trip{
-			MaxGuest:            trip.GetMaxGuest(),
-			Price:               trip.GetPrice(),
-			StartDate:           trip.GetStartDate(),
-			EndDate:             trip.GetEndDate(),
-			LastReservationDate: trip.GetLastReservationDate(),
-			TripTemplate:        newTripTemplate,
-			AgencyID:            agency.ID,
-		}
-
-		newTrip.DiveSites = make([]model.DiveSite, 0, len(trip.GetDiveSites()))
-
-		for _, diveSite := range trip.GetDiveSites() {
-			ds := model.DiveSite{
-				Name:        diveSite.Name,
-				Description: diveSite.Description,
-				MinDepth:    diveSite.MinDepth,
-				MaxDepth:    diveSite.MaxDepth,
-			}
-
-			newTrip.DiveSites = append(newTrip.DiveSites, ds)
-		}
-
 		createdTrip, err := query.Agency.CreateTrip(ctx, &newTrip)
 
 		if err != nil {
 			return err
 		}
 
-		for _, diveMaster := range trip.GetDiveMasterIds() {
+		for _, diveMaster := range trip.GetDiveMasters() {
 			diveMasterTripLink := model.DiveMasterTrip{
 				TripID:       createdTrip.ID,
-				DiveMasterID: uint(diveMaster),
+				DiveMasterID: uint(diveMaster.Id),
 			}
 			_, err = query.Agency.CreateDiveMasterTripLink(ctx, &diveMasterTripLink)
 
@@ -735,7 +735,7 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) err
 	}
 
 	newTrip := model.Trip{
-		Model: &gorm.Model{
+		Model: gorm.Model{
 			ID: uint(trip.GetId()),
 		},
 		MaxGuest:            trip.GetMaxGuest(),
@@ -751,7 +751,7 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) err
 
 	for _, diveMaster := range trip.GetDiveMasters() {
 		dm := model.DiveMaster{
-			Model: &gorm.Model{
+			Model: gorm.Model{
 				ID: uint(diveMaster.GetId()),
 			},
 			FirstName: diveMaster.GetFirstName(),
@@ -975,7 +975,7 @@ func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *
 	}
 
 	newDiveMaster := model.DiveMaster{
-		Model:     &gorm.Model{ID: uint(diveMaster.GetId())},
+		Model:     gorm.Model{ID: uint(diveMaster.GetId())},
 		FirstName: diveMaster.GetFirstName(),
 		LastName:  diveMaster.GetLastName(),
 		Level:     model.LevelType(diveMaster.GetLevel()),

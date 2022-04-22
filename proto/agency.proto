@@ -58,8 +58,7 @@ message AddTripTemplateRequest {
 }
 
 message AddTripRequest {
-    model.Trip trip = 1;
-    model.TripTemplate trip_template = 2;
+    model.TripWithTemplate trip = 1;
 }
 
 message AddDivingBoatRequest {

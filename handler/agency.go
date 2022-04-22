@@ -59,7 +59,7 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
-	err := handler.agencyService.AddTrip(ctx, req.GetTripTemplate(), req.GetTrip())
+	err := handler.agencyService.AddTrip(ctx, req.GetTrip())
 
 	if err != nil {
 		return nil, err
@@ -399,8 +399,8 @@ func (handler *AgencyHandler) ListTripsWithTemplates(req *pb.ListTripsWithTempla
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
 				Price:               trip.Price,
-				FromDate:            trip.StartDate,
-				ToDate:              trip.EndDate,
+				StartDate:           trip.StartDate,
+				EndDate:             trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,
@@ -528,8 +528,8 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
 				Price:               trip.Price,
-				FromDate:            trip.StartDate,
-				ToDate:              trip.EndDate,
+				StartDate:           trip.StartDate,
+				EndDate:             trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,
 				CreatedAt:           &trip.CreatedAt,
 				UpdatedAt:           &trip.UpdatedAt,

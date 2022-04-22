@@ -407,12 +407,30 @@ func (d *Diver) GetProto() *pb.Diver {
 }
 
 type DiveMaster struct {
-	*gorm.Model
+	gorm.Model
 	FirstName string         `gorm:"not null"`
 	LastName  string         `gorm:"not null"`
 	Level     LevelType      `gorm:"not null"`
 	Documents pq.StringArray `gorm:"type:text"`
 	AgencyID  uint           `gorm:"not null"`
+	Files     []*File        `gorm:"-" json:"-"`
+}
+
+func (dm *DiveMaster) From(diveMaster *pb.DiveMaster) {
+	dm.ID = uint(diveMaster.GetId())
+	dm.FirstName = diveMaster.GetFirstName()
+	dm.LastName = diveMaster.GetLastName()
+	dm.Level = LevelType(diveMaster.GetLevel())
+
+	if len(diveMaster.GetDocuments()) > 0 {
+		dm.Files = make([]*File, 0, len(diveMaster.GetDocuments()))
+
+		for _, doc := range diveMaster.GetDocuments() {
+			file := File{}
+			file.From(doc)
+			dm.Files = append(dm.Files, &file)
+		}
+	}
 }
 
 func (dm *DiveMaster) GetProto() *pb.DiveMaster {
@@ -447,10 +465,11 @@ type Boat struct {
 	StaffCapacity uint32         `gorm:"not null"`
 	Images        pq.StringArray `gorm:"type:text"`
 	AgencyID      uint           `gorm:"not null"`
+	Files         []*File        `gorm:"-" json:"-"`
 }
 
 type TripTemplate struct {
-	*gorm.Model
+	gorm.Model
 	Name         string         `gorm:"not null"`
 	Description  string         `gorm:"not null"`
 	Type         TripType       `gorm:"not null"`
@@ -465,6 +484,29 @@ type TripTemplate struct {
 	Liveaboard   Liveaboard
 	BoatID       uint `gorm:"default:null"`
 	Boat         Boat
+	Files        []*File `gorm:"-" json:"-"`
+}
+
+func (tt *TripTemplate) From(tripTemplate *pb.TripTemplate) {
+	if tt == nil {
+		return
+	}
+	tt.ID = uint(tripTemplate.GetId())
+	tt.Name = tripTemplate.GetName()
+	tt.Description = tripTemplate.GetDescription()
+	tt.Type = TripType(tripTemplate.GetTripType())
+
+	switch tt.Type {
+	case ONSHORE:
+		hotel := Hotel{}
+		boat = Boat{}
+
+		tt.HotelID = uint(tripTemplate.GetHotelId())
+		tt.BoatID = uint(tripTemplate.BoatId)
+
+	case OFFSHORE:
+		tt.LiveaboardID = uint(tripTemplate.GetLiveaboardId())
+	}
 }
 
 func (tt *TripTemplate) GetProto() *pb.TripTemplate {
@@ -495,7 +537,7 @@ func (tt *TripTemplate) GetProto() *pb.TripTemplate {
 }
 
 type Trip struct {
-	*gorm.Model
+	gorm.Model
 	MaxGuest             uint32                `gorm:"not null"`
 	CurrentGuest         uint32                `gorm:"not null;default:0"`
 	Price                float32               `gorm:"not null;check:price_checker,price > 0"`
@@ -507,7 +549,33 @@ type Trip struct {
 	TripTemplateID       uint                  `gorm:"not null"`
 	TripTemplate         TripTemplate
 	DiveSites            []DiveSite
-	AgencyID             uint `gorm:"not null"`
+	AgencyID             uint    `gorm:"not null"`
+	Files                []*File `gorm:"-" json:"-"`
+}
+
+func (t *Trip) From(trip *pb.TripWithTemplate) {
+	if t == nil {
+		return
+	}
+
+	t.ID = uint(trip.GetId())
+	t.MaxGuest = trip.GetMaxGuest()
+	t.CurrentGuest = trip.GetCurentGuest()
+	t.Price = trip.GetPrice()
+	t.StartDate = trip.GetStartDate()
+	t.EndDate = trip.GetEndDate()
+	t.LastReservationDate = trip.GetLastReservationDate()
+
+	if len(trip.GetDiveMasters()) > 0 {
+		t.DiveMasters = make([]DiveMaster, 0, len(trip.GetDiveMasters()))
+
+		for _, diveMaster := range trip.GetDiveMasters() {
+			dm := DiveMaster{}
+			dm.From(diveMaster)
+			t.DiveMasters = append(t.DiveMasters, dm)
+		}
+	}
+
 }
 
 func (t *Trip) GetProto() *pb.TripWithTemplate {
@@ -518,8 +586,8 @@ func (t *Trip) GetProto() *pb.TripWithTemplate {
 		MaxGuest:            t.MaxGuest,
 		CurentGuest:         t.CurrentGuest,
 		Price:               t.Price,
-		FromDate:            t.StartDate,
-		ToDate:              t.EndDate,
+		StartDate:           t.StartDate,
+		EndDate:             t.EndDate,
 		LastReservationDate: t.LastReservationDate,
 		CreatedAt:           &t.CreatedAt,
 		UpdatedAt:           &t.UpdatedAt,
@@ -661,11 +729,12 @@ type Liveaboard struct {
 	StaffRooms    uint32         `gorm:"not null"`
 	Images        pq.StringArray `gorm:"type:text"`
 	RoomTypes     []RoomType
-	AgencyID      uint `gorm:"not null"`
+	AgencyID      uint    `gorm:"not null"`
+	Files         []*File `gorm:"-" json:"-"`
 }
 
 type RoomType struct {
-	*gorm.Model
+	gorm.Model
 	Name         string         `gorm:"not null"`
 	Description  string         `gorm:"not null"`
 	MaxGuest     uint32         `gorm:"not null;check:max_guest_checker,max_guest > 0"`
@@ -676,6 +745,37 @@ type RoomType struct {
 	LiveaboardID uint           `gorm:"default:null"`
 	HotelID      uint           `gorm:"default:null"`
 	Files        []*File        `gorm:"-" json:"-"`
+}
+
+func (rt *RoomType) From(roomType *pb.RoomType) {
+	if rt == nil {
+		return
+	}
+
+	rt.ID = uint(roomType.GetId())
+	rt.Name = roomType.GetName()
+	rt.Description = roomType.GetDescription()
+	rt.MaxGuest = roomType.GetMaxGuest()
+	rt.Price = roomType.GetPrice()
+	rt.Quantity = roomType.GetQuantity()
+
+	if len(roomType.RoomImages) > 0 {
+		rt.Files = make([]*File, 0, len(roomType.GetRoomImages()))
+		for _, doc := range roomType.GetRoomImages() {
+			file := File{}
+			file.From(doc)
+			rt.Files = append(rt.Files, &file)
+		}
+	}
+
+	if len(roomType.GetAmenities()) > 0 {
+		rt.Amenities = make([]Amenity, 0, len(roomType.GetAmenities()))
+		for _, amenity := range roomType.GetAmenities() {
+			am := Amenity{}
+			am.From(amenity)
+			rt.Amenities = append(rt.Amenities, am)
+		}
+	}
 }
 
 func (r *RoomType) GetProto() *pb.RoomType {
@@ -709,7 +809,7 @@ func (r *RoomType) GetProto() *pb.RoomType {
 }
 
 type Hotel struct {
-	*gorm.Model
+	gorm.Model
 	Coordinate  Coordinate `gorm:"embedded"`
 	AddressID   uint
 	Address     Address
@@ -719,7 +819,46 @@ type Hotel struct {
 	Phone       string         `gorm:"not null"`
 	Images      pq.StringArray `gorm:"type:text"`
 	RoomTypes   []RoomType
-	AgencyID    uint `gorm:"not null"`
+	AgencyID    uint    `gorm:"not null"`
+	Files       []*File `gorm:"-" json:"-"`
+}
+
+func (h *Hotel) From(hotel *pb.Hotel) {
+	if h == nil {
+		return
+	}
+
+	h.ID = uint(hotel.GetId())
+	h.AddressID = uint(hotel.Address.GetId())
+	h.Name = hotel.GetName()
+	h.Description = hotel.GetDescription()
+	h.Stars = hotel.GetStars()
+	h.Phone = hotel.GetPhone()
+
+	addr := Address{}
+	addr.From(hotel.GetAddress())
+	h.Address = addr
+
+	if len(hotel.GetRoomTypes()) > 0 {
+		h.RoomTypes = make([]RoomType, 0, len(hotel.GetRoomTypes()))
+
+		for _, roomType := range hotel.GetRoomTypes() {
+			rt := RoomType{}
+			rt.From(roomType)
+			h.RoomTypes = append(h.RoomTypes, rt)
+		}
+	}
+
+	if len(hotel.GetImages()) > 0 {
+		h.Files = make([]*File, 0, len(hotel.GetImages()))
+
+		for _, doc := range hotel.GetImages() {
+			file := File{}
+			file.From(doc)
+			h.Files = append(h.Files, &file)
+		}
+
+	}
 }
 
 type Payment struct {
