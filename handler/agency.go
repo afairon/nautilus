@@ -60,9 +60,30 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
 	trip := model.Trip{}
-	trip.From(req.GetTrip())
+	trip.From(req.Trip)
+	var roomTypePrices []model.RoomTypeTripPrice
 
-	err := handler.agencyService.AddTrip(ctx, &trip)
+	switch req.Trip.TripTemplate.TripType {
+	case pb.ONSHORE:
+		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.GetTripRoomTypePrices()))
+
+		for _, roomTypePrice := range req.GetTripRoomTypePrices() {
+			rtp := &model.HotelRoomTypeTripPrice{}
+			rtp.From(roomTypePrice)
+			roomTypePrices = append(roomTypePrices, rtp)
+		}
+	case pb.OFFSHORE:
+		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.GetTripRoomTypePrices()))
+
+		for _, roomTypePrice := range req.GetTripRoomTypePrices() {
+			rtp := model.LiveaboardRoomTypeTripPrice{}
+			rtp.From(roomTypePrice)
+			roomTypePrices = append(roomTypePrices, &rtp)
+		}
+
+	}
+
+	err := handler.agencyService.AddTrip(ctx, &trip, roomTypePrices)
 
 	if err != nil {
 		return nil, err

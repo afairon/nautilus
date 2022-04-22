@@ -21,7 +21,7 @@ type AgencyService interface {
 	AddDiveMaster(context.Context, *pb.DiveMaster) error
 	AddStaff(context.Context, *pb.Staff) error
 	AddTripTemplate(context.Context, *pb.AddTripTemplateRequest) error
-	AddTrip(context.Context, *model.Trip) error
+	AddTrip(context.Context, *model.Trip, []model.RoomTypeTripPrice) error
 	AddDivingBoat(context.Context, *pb.Boat) error
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
@@ -224,7 +224,7 @@ func (service *agencyService) AddTripTemplate(ctx context.Context, req *pb.AddTr
 	return status.Error(codes.Unimplemented, "AddTripTemplate unimplemented")
 }
 
-func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip) error {
+func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip, roomTypePrices []model.RoomTypeTripPrice) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
@@ -244,6 +244,29 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip) err
 				return err
 			}
 			trip.TripTemplate.Images = append(trip.TripTemplate.Images, objectID)
+		}
+	}
+
+	switch trip.TripTemplate.Type {
+	case model.ONSHORE:
+		if len(roomTypePrices) > 0 {
+			trip.HotelRoomTypeTripPrices = make([]model.HotelRoomTypeTripPrice, 0, len(roomTypePrices))
+
+			for _, roomTypePrice := range roomTypePrices {
+				if v, ok := roomTypePrice.(*model.HotelRoomTypeTripPrice); ok {
+					trip.HotelRoomTypeTripPrices = append(trip.HotelRoomTypeTripPrices, *v)
+				}
+			}
+		}
+	case model.OFFSHORE:
+		if len(roomTypePrices) > 0 {
+			trip.LiveaboardRoomTypeTripPrices = make([]model.LiveaboardRoomTypeTripPrice, 0, len(roomTypePrices))
+
+			for _, roomTypePrice := range roomTypePrices {
+				if v, ok := roomTypePrice.(*model.LiveaboardRoomTypeTripPrice); ok {
+					trip.LiveaboardRoomTypeTripPrices = append(trip.LiveaboardRoomTypeTripPrices, *v)
+				}
+			}
 		}
 	}
 

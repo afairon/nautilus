@@ -587,6 +587,7 @@ type Trip struct {
 	HotelRoomTypeTripPrices      []HotelRoomTypeTripPrice
 	LiveaboardRoomTypeTripPrices []LiveaboardRoomTypeTripPrice
 	AgencyID                     uint `gorm:"not null"`
+	RoomTypeTripPrices           []RoomTypeTripPrice
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
@@ -1081,13 +1082,22 @@ func (rt *ReportTrip) GetProto() *pb.ReportTrip {
 	return &reportTrip
 }
 
+// RoomTypeTripPrice for ONSHORE and OFFSHORE trips
+type RoomTypeTripPrice interface {
+	Type() TripType
+}
+
 type HotelRoomTypeTripPrice struct {
-	HotelID    uint64
+	HotelID    uint64 `gorm:"primaryKey"`
 	Hotel      Hotel
-	RoomTypeID uint64
+	RoomTypeID uint64 `gorm:"primaryKey"`
 	RoomType   RoomType
-	TripID     uint64
+	TripID     uint64 `gorm:"primaryKey"`
 	Price      float32
+}
+
+func (h *HotelRoomTypeTripPrice) Type() TripType {
+	return ONSHORE
 }
 
 func (l *HotelRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
@@ -1102,7 +1112,6 @@ func (l *HotelRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
 
 func (l *HotelRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 	return &pb.RoomTypeTripPrice{
-		HotelId:    l.HotelID,
 		RoomTypeId: l.RoomTypeID,
 		Price:      l.Price,
 	}
@@ -1117,6 +1126,10 @@ type LiveaboardRoomTypeTripPrice struct {
 	Price        float32
 }
 
+func (l *LiveaboardRoomTypeTripPrice) Type() TripType {
+	return OFFSHORE
+}
+
 func (l *LiveaboardRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
 	if l == nil {
 		return
@@ -1129,8 +1142,7 @@ func (l *LiveaboardRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
 
 func (l *LiveaboardRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 	return &pb.RoomTypeTripPrice{
-		LiveaboardId: l.LiveaboardID,
-		RoomTypeId:   l.RoomTypeID,
-		Price:        l.Price,
+		RoomTypeId: l.RoomTypeID,
+		Price:      l.Price,
 	}
 }
