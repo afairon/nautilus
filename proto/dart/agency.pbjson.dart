@@ -43,13 +43,13 @@ final $typed_data.Uint8List addTripTemplateRequestDescriptor = $convert.base64De
 const AddTripRequest$json = const {
   '1': 'AddTripRequest',
   '2': const [
-    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.Trip', '10': 'trip'},
-    const {'1': 'trip_template', '3': 2, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripWithTemplate', '10': 'trip'},
+    const {'1': 'trip_room_type_prices', '3': 2, '4': 3, '5': 11, '6': '.model.RoomTypeTripPrice', '10': 'tripRoomTypePrices'},
   ],
 };
 
 /// Descriptor for `AddTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addTripRequestDescriptor = $convert.base64Decode('Cg5BZGRUcmlwUmVxdWVzdBIfCgR0cmlwGAEgASgLMgsubW9kZWwuVHJpcFIEdHJpcBI4Cg10cmlwX3RlbXBsYXRlGAIgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGU=');
+final $typed_data.Uint8List addTripRequestDescriptor = $convert.base64Decode('Cg5BZGRUcmlwUmVxdWVzdBIrCgR0cmlwGAEgASgLMhcubW9kZWwuVHJpcFdpdGhUZW1wbGF0ZVIEdHJpcBJLChV0cmlwX3Jvb21fdHlwZV9wcmljZXMYAiADKAsyGC5tb2RlbC5Sb29tVHlwZVRyaXBQcmljZVISdHJpcFJvb21UeXBlUHJpY2Vz');
 @$core.Deprecated('Use addDivingBoatRequestDescriptor instead')
 const AddDivingBoatRequest$json = const {
   '1': 'AddDivingBoatRequest',

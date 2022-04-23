@@ -586,8 +586,7 @@ type Trip struct {
 	DiveSites                    []DiveSite
 	HotelRoomTypeTripPrices      []HotelRoomTypeTripPrice
 	LiveaboardRoomTypeTripPrices []LiveaboardRoomTypeTripPrice
-	AgencyID                     uint                `gorm:"not null"`
-	RoomTypeTripPrices           []RoomTypeTripPrice `gorm:"-" json:"-"`
+	AgencyID                     uint `gorm:"not null"`
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
@@ -1090,9 +1089,9 @@ type RoomTypeTripPrice interface {
 type HotelRoomTypeTripPrice struct {
 	HotelID    uint64
 	Hotel      Hotel
-	RoomTypeID uint64 `gorm:"index:idx_member"`
+	RoomTypeID uint64 `gorm:"uniqueIndex:hotel_room_type_trip_index"`
 	RoomType   RoomType
-	TripID     uint64 `gorm:"index:idx_member"`
+	TripID     uint64 `gorm:"uniqueIndex:hotel_room_type_trip_index"`
 	Price      float32
 }
 
@@ -1120,9 +1119,9 @@ func (l *HotelRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 type LiveaboardRoomTypeTripPrice struct {
 	LiveaboardID uint64
 	Liveaboard   Liveaboard
-	RoomTypeID   uint64 `gorm:"index:idx_member"`
+	RoomTypeID   uint64 `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
 	RoomType     RoomType
-	TripID       uint64 `gorm:"index:idx_member"`
+	TripID       uint64 `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
 	Price        float32
 }
 

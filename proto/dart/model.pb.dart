@@ -2459,8 +2459,8 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..pc<DiveMaster>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMaster.create)
     ..pc<DiveSite>(56, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveSites', $pb.PbFieldType.PM, subBuilder: DiveSite.create)
-    ..aOM<$12.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fromDate', subBuilder: $12.Timestamp.create)
-    ..aOM<$12.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'toDate', subBuilder: $12.Timestamp.create)
+    ..aOM<$12.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $12.Timestamp.create)
+    ..aOM<$12.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $12.Timestamp.create)
     ..aOM<$12.Timestamp>(80, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastReservationDate', subBuilder: $12.Timestamp.create)
     ..aOM<$12.Timestamp>(90, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $12.Timestamp.create)
     ..aOM<$12.Timestamp>(100, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $12.Timestamp.create)
@@ -2477,8 +2477,8 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     $core.double? price,
     $core.Iterable<DiveMaster>? diveMasters,
     $core.Iterable<DiveSite>? diveSites,
-    $12.Timestamp? fromDate,
-    $12.Timestamp? toDate,
+    $12.Timestamp? startDate,
+    $12.Timestamp? endDate,
     $12.Timestamp? lastReservationDate,
     $12.Timestamp? createdAt,
     $12.Timestamp? updatedAt,
@@ -2508,11 +2508,11 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     if (diveSites != null) {
       _result.diveSites.addAll(diveSites);
     }
-    if (fromDate != null) {
-      _result.fromDate = fromDate;
+    if (startDate != null) {
+      _result.startDate = startDate;
     }
-    if (toDate != null) {
-      _result.toDate = toDate;
+    if (endDate != null) {
+      _result.endDate = endDate;
     }
     if (lastReservationDate != null) {
       _result.lastReservationDate = lastReservationDate;
@@ -2609,26 +2609,26 @@ class TripWithTemplate extends $pb.GeneratedMessage {
   $core.List<DiveSite> get diveSites => $_getList(7);
 
   @$pb.TagNumber(60)
-  $12.Timestamp get fromDate => $_getN(8);
+  $12.Timestamp get startDate => $_getN(8);
   @$pb.TagNumber(60)
-  set fromDate($12.Timestamp v) { setField(60, v); }
+  set startDate($12.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasFromDate() => $_has(8);
+  $core.bool hasStartDate() => $_has(8);
   @$pb.TagNumber(60)
-  void clearFromDate() => clearField(60);
+  void clearStartDate() => clearField(60);
   @$pb.TagNumber(60)
-  $12.Timestamp ensureFromDate() => $_ensure(8);
+  $12.Timestamp ensureStartDate() => $_ensure(8);
 
   @$pb.TagNumber(70)
-  $12.Timestamp get toDate => $_getN(9);
+  $12.Timestamp get endDate => $_getN(9);
   @$pb.TagNumber(70)
-  set toDate($12.Timestamp v) { setField(70, v); }
+  set endDate($12.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasToDate() => $_has(9);
+  $core.bool hasEndDate() => $_has(9);
   @$pb.TagNumber(70)
-  void clearToDate() => clearField(70);
+  void clearEndDate() => clearField(70);
   @$pb.TagNumber(70)
-  $12.Timestamp ensureToDate() => $_ensure(9);
+  $12.Timestamp ensureEndDate() => $_ensure(9);
 
   @$pb.TagNumber(80)
   $12.Timestamp get lastReservationDate => $_getN(10);
@@ -3786,5 +3786,94 @@ class ReservationRoom extends $pb.GeneratedMessage {
   $core.bool hasQuantity() => $_has(4);
   @$pb.TagNumber(40)
   void clearQuantity() => clearField(40);
+}
+
+class RoomTypeTripPrice extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RoomTypeTripPrice', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotelId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboardId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomTypeId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
+    ..hasRequiredFields = false
+  ;
+
+  RoomTypeTripPrice._() : super();
+  factory RoomTypeTripPrice({
+    $fixnum.Int64? hotelId,
+    $fixnum.Int64? liveaboardId,
+    $fixnum.Int64? roomTypeId,
+    $core.double? price,
+  }) {
+    final _result = create();
+    if (hotelId != null) {
+      _result.hotelId = hotelId;
+    }
+    if (liveaboardId != null) {
+      _result.liveaboardId = liveaboardId;
+    }
+    if (roomTypeId != null) {
+      _result.roomTypeId = roomTypeId;
+    }
+    if (price != null) {
+      _result.price = price;
+    }
+    return _result;
+  }
+  factory RoomTypeTripPrice.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RoomTypeTripPrice.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RoomTypeTripPrice clone() => RoomTypeTripPrice()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RoomTypeTripPrice copyWith(void Function(RoomTypeTripPrice) updates) => super.copyWith((message) => updates(message as RoomTypeTripPrice)) as RoomTypeTripPrice; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RoomTypeTripPrice create() => RoomTypeTripPrice._();
+  RoomTypeTripPrice createEmptyInstance() => create();
+  static $pb.PbList<RoomTypeTripPrice> createRepeated() => $pb.PbList<RoomTypeTripPrice>();
+  @$core.pragma('dart2js:noInline')
+  static RoomTypeTripPrice getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RoomTypeTripPrice>(create);
+  static RoomTypeTripPrice? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get hotelId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set hotelId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasHotelId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearHotelId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get liveaboardId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set liveaboardId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLiveaboardId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLiveaboardId() => clearField(2);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get roomTypeId => $_getI64(2);
+  @$pb.TagNumber(10)
+  set roomTypeId($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasRoomTypeId() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearRoomTypeId() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $core.double get price => $_getN(3);
+  @$pb.TagNumber(20)
+  set price($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(20)
+  void clearPrice() => clearField(20);
 }
 

@@ -247,30 +247,45 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip, roo
 		}
 	}
 
-	switch trip.TripTemplate.Type {
-	case model.ONSHORE:
-		if len(roomTypePrices) > 0 {
-			trip.HotelRoomTypeTripPrices = make([]model.HotelRoomTypeTripPrice, 0, len(roomTypePrices))
+	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
+		trip, err = query.Agency.CreateTrip(ctx, trip)
 
-			for _, roomTypePrice := range roomTypePrices {
-				if v, ok := roomTypePrice.(*model.HotelRoomTypeTripPrice); ok {
-					trip.HotelRoomTypeTripPrices = append(trip.HotelRoomTypeTripPrices, *v)
+		if err != nil {
+			return err
+		}
+
+		switch trip.TripTemplate.Type {
+		case model.ONSHORE:
+			if len(roomTypePrices) > 0 {
+				for _, roomTypePrice := range roomTypePrices {
+					if v, ok := roomTypePrice.(*model.HotelRoomTypeTripPrice); ok {
+						v.TripID = uint64(trip.ID)
+						_, err = query.HotelRoomTypeTripPrice.Create(ctx, v)
+
+						if err != nil {
+							return err
+						}
+					}
+				}
+			}
+		case model.OFFSHORE:
+			if len(roomTypePrices) > 0 {
+
+				for _, roomTypePrice := range roomTypePrices {
+					if v, ok := roomTypePrice.(*model.LiveaboardRoomTypeTripPrice); ok {
+						v.TripID = uint64(trip.ID)
+						_, err = query.LiveaboardRoomTypeTripPrice.Create(ctx, v)
+					}
+
+					if err != nil {
+						return err
+					}
 				}
 			}
 		}
-	case model.OFFSHORE:
-		if len(roomTypePrices) > 0 {
-			trip.LiveaboardRoomTypeTripPrices = make([]model.LiveaboardRoomTypeTripPrice, 0, len(roomTypePrices))
 
-			for _, roomTypePrice := range roomTypePrices {
-				if v, ok := roomTypePrice.(*model.LiveaboardRoomTypeTripPrice); ok {
-					trip.LiveaboardRoomTypeTripPrices = append(trip.LiveaboardRoomTypeTripPrices, *v)
-				}
-			}
-		}
-	}
-
-	_, err = service.repo.Agency.CreateTrip(ctx, trip)
+		return nil
+	})
 
 	return err
 }
