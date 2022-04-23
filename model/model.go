@@ -595,33 +595,33 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 		return
 	}
 
-	t.ID = uint(trip.GetId())
-	t.MaxGuest = trip.GetMaxGuest()
-	t.CurrentGuest = trip.GetCurentGuest()
-	t.Price = trip.GetPrice()
-	t.StartDate = trip.GetStartDate()
-	t.EndDate = trip.GetEndDate()
-	t.LastReservationDate = trip.GetLastReservationDate()
-	t.TripTemplateID = uint(trip.GetTripTemplateId())
+	t.ID = uint(trip.Id)
+	t.MaxGuest = trip.MaxGuest
+	t.CurrentGuest = trip.CurentGuest
+	t.Price = trip.Price
+	t.StartDate = trip.StartDate
+	t.EndDate = trip.EndDate
+	t.LastReservationDate = trip.LastReservationDate
+	t.TripTemplateID = uint(trip.TripTemplate.Id)
 
 	tripTemplate := TripTemplate{}
-	tripTemplate.From(trip.GetTripTemplate())
+	tripTemplate.From(trip.TripTemplate)
 	t.TripTemplate = tripTemplate
 
-	if len(trip.GetDiveMasters()) > 0 {
-		t.DiveMasters = make([]DiveMaster, 0, len(trip.GetDiveMasters()))
+	if len(trip.DiveMasters) > 0 {
+		t.DiveMasters = make([]DiveMaster, 0, len(trip.DiveMasters))
 
-		for _, diveMaster := range trip.GetDiveMasters() {
+		for _, diveMaster := range trip.DiveMasters {
 			dm := DiveMaster{}
 			dm.From(diveMaster)
 			t.DiveMasters = append(t.DiveMasters, dm)
 		}
 	}
 
-	if len(trip.GetDiveSites()) > 0 {
-		t.DiveSites = make([]DiveSite, 0, len(trip.GetDiveSites()))
+	if len(trip.DiveSites) > 0 {
+		t.DiveSites = make([]DiveSite, 0, len(trip.DiveSites))
 
-		for _, diveSite := range trip.GetDiveSites() {
+		for _, diveSite := range trip.DiveSites {
 			ds := DiveSite{}
 			ds.From(diveSite)
 		}
@@ -1088,11 +1088,11 @@ type RoomTypeTripPrice interface {
 }
 
 type HotelRoomTypeTripPrice struct {
-	HotelID    uint64 `gorm:"primaryKey"`
+	HotelID    uint64
 	Hotel      Hotel
-	RoomTypeID uint64 `gorm:"primaryKey"`
+	RoomTypeID uint64 `gorm:"index:idx_member"`
 	RoomType   RoomType
-	TripID     uint64 `gorm:"primaryKey"`
+	TripID     uint64 `gorm:"index:idx_member"`
 	Price      float32
 }
 
@@ -1120,9 +1120,9 @@ func (l *HotelRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 type LiveaboardRoomTypeTripPrice struct {
 	LiveaboardID uint64
 	Liveaboard   Liveaboard
-	RoomTypeID   uint64
+	RoomTypeID   uint64 `gorm:"index:idx_member"`
 	RoomType     RoomType
-	TripID       uint64
+	TripID       uint64 `gorm:"index:idx_member"`
 	Price        float32
 }
 
