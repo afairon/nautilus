@@ -586,8 +586,8 @@ type Trip struct {
 	DiveSites                    []DiveSite
 	HotelRoomTypeTripPrices      []HotelRoomTypeTripPrice
 	LiveaboardRoomTypeTripPrices []LiveaboardRoomTypeTripPrice
-	AgencyID                     uint `gorm:"not null"`
-	RoomTypeTripPrices           []RoomTypeTripPrice
+	AgencyID                     uint                `gorm:"not null"`
+	RoomTypeTripPrices           []RoomTypeTripPrice `gorm:"-" json:"-"`
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
