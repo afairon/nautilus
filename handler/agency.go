@@ -65,17 +65,17 @@ func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripReques
 
 	switch req.Trip.TripTemplate.TripType {
 	case pb.ONSHORE:
-		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.GetTripRoomTypePrices()))
+		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.Trip.TripRoomTypePrices))
 
-		for _, roomTypePrice := range req.GetTripRoomTypePrices() {
+		for _, roomTypePrice := range req.Trip.TripRoomTypePrices {
 			rtp := &model.HotelRoomTypeTripPrice{}
 			rtp.From(roomTypePrice)
 			roomTypePrices = append(roomTypePrices, rtp)
 		}
 	case pb.OFFSHORE:
-		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.GetTripRoomTypePrices()))
+		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.Trip.TripRoomTypePrices))
 
-		for _, roomTypePrice := range req.GetTripRoomTypePrices() {
+		for _, roomTypePrice := range req.Trip.TripRoomTypePrices {
 			rtp := model.LiveaboardRoomTypeTripPrice{}
 			rtp.From(roomTypePrice)
 			roomTypePrices = append(roomTypePrices, &rtp)

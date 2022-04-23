@@ -44,12 +44,11 @@ const AddTripRequest$json = const {
   '1': 'AddTripRequest',
   '2': const [
     const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripWithTemplate', '10': 'trip'},
-    const {'1': 'trip_room_type_prices', '3': 2, '4': 3, '5': 11, '6': '.model.RoomTypeTripPrice', '10': 'tripRoomTypePrices'},
   ],
 };
 
 /// Descriptor for `AddTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addTripRequestDescriptor = $convert.base64Decode('Cg5BZGRUcmlwUmVxdWVzdBIrCgR0cmlwGAEgASgLMhcubW9kZWwuVHJpcFdpdGhUZW1wbGF0ZVIEdHJpcBJLChV0cmlwX3Jvb21fdHlwZV9wcmljZXMYAiADKAsyGC5tb2RlbC5Sb29tVHlwZVRyaXBQcmljZVISdHJpcFJvb21UeXBlUHJpY2Vz');
+final $typed_data.Uint8List addTripRequestDescriptor = $convert.base64Decode('Cg5BZGRUcmlwUmVxdWVzdBIrCgR0cmlwGAEgASgLMhcubW9kZWwuVHJpcFdpdGhUZW1wbGF0ZVIEdHJpcA==');
 @$core.Deprecated('Use addDivingBoatRequestDescriptor instead')
 const AddDivingBoatRequest$json = const {
   '1': 'AddDivingBoatRequest',

@@ -179,21 +179,16 @@ class AddTripTemplateRequest extends $pb.GeneratedMessage {
 class AddTripRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..aOM<$13.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
-    ..pc<$13.RoomTypeTripPrice>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripRoomTypePrices', $pb.PbFieldType.PM, subBuilder: $13.RoomTypeTripPrice.create)
     ..hasRequiredFields = false
   ;
 
   AddTripRequest._() : super();
   factory AddTripRequest({
     $13.TripWithTemplate? trip,
-    $core.Iterable<$13.RoomTypeTripPrice>? tripRoomTypePrices,
   }) {
     final _result = create();
     if (trip != null) {
       _result.trip = trip;
-    }
-    if (tripRoomTypePrices != null) {
-      _result.tripRoomTypePrices.addAll(tripRoomTypePrices);
     }
     return _result;
   }
@@ -228,9 +223,6 @@ class AddTripRequest extends $pb.GeneratedMessage {
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
   $13.TripWithTemplate ensureTrip() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $core.List<$13.RoomTypeTripPrice> get tripRoomTypePrices => $_getList(1);
 }
 
 class AddDivingBoatRequest extends $pb.GeneratedMessage {

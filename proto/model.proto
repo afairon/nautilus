@@ -246,6 +246,7 @@ message TripWithTemplate {
     float price = 40;
     repeated DiveMaster dive_masters = 50;
     repeated DiveSite dive_sites = 56;
+    repeated model.RoomTypeTripPrice trip_room_type_prices = 57;
     google.protobuf.Timestamp start_date = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp end_date = 70 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp last_reservation_date = 80 [(gogoproto.stdtime) = true];

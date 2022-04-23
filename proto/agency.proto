@@ -59,7 +59,6 @@ message AddTripTemplateRequest {
 
 message AddTripRequest {
     model.TripWithTemplate trip = 1;
-    repeated model.RoomTypeTripPrice trip_room_type_prices = 2;
 }
 
 message AddDivingBoatRequest {

@@ -354,6 +354,7 @@ const TripWithTemplate$json = const {
     const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
     const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.model.DiveMaster', '10': 'diveMasters'},
     const {'1': 'dive_sites', '3': 56, '4': 3, '5': 11, '6': '.model.DiveSite', '10': 'diveSites'},
+    const {'1': 'trip_room_type_prices', '3': 57, '4': 3, '5': 11, '6': '.model.RoomTypeTripPrice', '10': 'tripRoomTypePrices'},
     const {'1': 'start_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'startDate'},
     const {'1': 'end_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'endDate'},
     const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
@@ -363,7 +364,7 @@ const TripWithTemplate$json = const {
 };
 
 /// Descriptor for `TripWithTemplate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('ChBUcmlwV2l0aFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0EhQKBXByaWNlGCggASgCUgVwcmljZRI0CgxkaXZlX21hc3RlcnMYMiADKAsyES5tb2RlbC5EaXZlTWFzdGVyUgtkaXZlTWFzdGVycxIuCgpkaXZlX3NpdGVzGDggAygLMg8ubW9kZWwuRGl2ZVNpdGVSCWRpdmVTaXRlcxI/CgpzdGFydF9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJc3RhcnREYXRlEjsKCGVuZF9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIHZW5kRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('ChBUcmlwV2l0aFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0EhQKBXByaWNlGCggASgCUgVwcmljZRI0CgxkaXZlX21hc3RlcnMYMiADKAsyES5tb2RlbC5EaXZlTWFzdGVyUgtkaXZlTWFzdGVycxIuCgpkaXZlX3NpdGVzGDggAygLMg8ubW9kZWwuRGl2ZVNpdGVSCWRpdmVTaXRlcxJLChV0cmlwX3Jvb21fdHlwZV9wcmljZXMYOSADKAsyGC5tb2RlbC5Sb29tVHlwZVRyaXBQcmljZVISdHJpcFJvb21UeXBlUHJpY2VzEj8KCnN0YXJ0X2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUglzdGFydERhdGUSOwoIZW5kX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgdlbmREYXRlElQKFWxhc3RfcmVzZXJ2YXRpb25fZGF0ZRhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSE2xhc3RSZXNlcnZhdGlvbkRhdGUSPwoKY3JlYXRlZF9hdBhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GGQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
 @$core.Deprecated('Use amenityDescriptor instead')
 const Amenity$json = const {
   '1': 'Amenity',
