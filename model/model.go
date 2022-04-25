@@ -512,7 +512,7 @@ type TripTemplate struct {
 }
 
 func (tt *TripTemplate) From(tripTemplate *pb.TripTemplate) {
-	if tt == nil {
+	if tripTemplate == nil {
 		return
 	}
 	tt.ID = uint(tripTemplate.GetId())
@@ -598,16 +598,24 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
 	t.Price = trip.Price
-	t.StartDate = trip.StartDate
-	t.EndDate = trip.EndDate
-	t.LastReservationDate = trip.LastReservationDate
-	t.TripTemplateID = uint(trip.TripTemplate.Id)
+	if t.StartDate != nil {
+		t.StartDate = trip.StartDate
+	}
+	if t.EndDate != nil {
+		t.EndDate = trip.EndDate
+	}
+	if t.LastReservationDate != nil {
+		t.LastReservationDate = trip.LastReservationDate
+	}
+	if trip.TripTemplate != nil {
+		t.TripTemplateID = uint(trip.TripTemplate.Id)
 
-	tripTemplate := TripTemplate{}
-	tripTemplate.From(trip.TripTemplate)
-	t.TripTemplate = tripTemplate
+		tripTemplate := TripTemplate{}
+		tripTemplate.From(trip.TripTemplate)
+		t.TripTemplate = tripTemplate
+	}
 
-	if len(trip.DiveMasters) > 0 {
+	if trip.DiveMasters != nil && len(trip.DiveMasters) > 0 {
 		t.DiveMasters = make([]DiveMaster, 0, len(trip.DiveMasters))
 
 		for _, diveMaster := range trip.DiveMasters {
@@ -617,12 +625,35 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 		}
 	}
 
-	if len(trip.DiveSites) > 0 {
+	if trip.DiveMasters != nil && len(trip.DiveSites) > 0 {
 		t.DiveSites = make([]DiveSite, 0, len(trip.DiveSites))
 
 		for _, diveSite := range trip.DiveSites {
 			ds := DiveSite{}
 			ds.From(diveSite)
+		}
+	}
+
+	if trip.TripRoomTypePrices != nil && len(trip.TripRoomTypePrices) > 0 && t.ID != 0 {
+		switch t.TripTemplate.Type {
+		case ONSHORE:
+			t.HotelRoomTypeTripPrices = make([]HotelRoomTypeTripPrice, 0, len(trip.TripRoomTypePrices))
+
+			for _, roomTypePrice := range trip.TripRoomTypePrices {
+				rtp := HotelRoomTypeTripPrice{}
+				rtp.From(roomTypePrice)
+				rtp.TripID = uint64(t.ID)
+				t.HotelRoomTypeTripPrices = append(t.HotelRoomTypeTripPrices, rtp)
+			}
+		case OFFSHORE:
+			t.LiveaboardRoomTypeTripPrices = make([]LiveaboardRoomTypeTripPrice, 0, len(trip.TripRoomTypePrices))
+
+			for _, roomTypePrice := range trip.TripRoomTypePrices {
+				rtp := LiveaboardRoomTypeTripPrice{}
+				rtp.From(roomTypePrice)
+				rtp.TripID = uint64(t.ID)
+				t.LiveaboardRoomTypeTripPrices = append(t.LiveaboardRoomTypeTripPrices, rtp)
+			}
 		}
 	}
 }

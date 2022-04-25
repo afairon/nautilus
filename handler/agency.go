@@ -628,7 +628,9 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 }
 
 func (handler *AgencyHandler) UpdateTrip(ctx context.Context, req *pb.UpdateTripRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateTrip(ctx, req.GetTrip())
+	trip := model.Trip{}
+	trip.From(req.Trip)
+	err := handler.agencyService.UpdateTrip(ctx, &trip)
 
 	if err != nil {
 		return nil, err

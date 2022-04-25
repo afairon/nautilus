@@ -26,7 +26,7 @@ type AgencyService interface {
 	AddHotel(context.Context, *pb.Hotel) error
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 
-	UpdateTrip(ctx context.Context, trip *pb.Trip) error
+	UpdateTrip(ctx context.Context, trip *model.Trip) error
 	UpdateHotel(ctx context.Context, hotel *pb.Hotel) error
 	UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error
 	UpdateBoat(ctx context.Context, boat *pb.Boat) error
@@ -692,55 +692,24 @@ func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOption
 	return trips, nil
 }
 
-func (service *agencyService) UpdateTrip(ctx context.Context, trip *pb.Trip) error {
+func (service *agencyService) UpdateTrip(ctx context.Context, trip *model.Trip) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	newTrip := model.Trip{
-		Model: gorm.Model{
-			ID: uint(trip.GetId()),
-		},
-		MaxGuest:            trip.GetMaxGuest(),
-		CurrentGuest:        trip.GetCurentGuest(),
-		Price:               trip.GetPrice(),
-		StartDate:           trip.GetStartDate(),
-		EndDate:             trip.GetEndDate(),
-		LastReservationDate: trip.GetLastReservationDate(),
-		AgencyID:            agency.ID,
+	oldTrip, err := service.repo.Trip.Get(ctx, uint64(trip.ID))
+
+	if err != nil {
+		return err
 	}
 
-	newTrip.DiveMasters = make([]model.DiveMaster, 0, len(trip.GetDiveMasters()))
-
-	for _, diveMaster := range trip.GetDiveMasters() {
-		dm := model.DiveMaster{
-			Model: gorm.Model{
-				ID: uint(diveMaster.GetId()),
-			},
-			FirstName: diveMaster.GetFirstName(),
-			LastName:  diveMaster.GetLastName(),
-			Level:     model.LevelType(diveMaster.GetLevel()),
-			Documents: []string{},
-			AgencyID:  agency.ID,
-		}
-
-		for _, image := range diveMaster.GetDocuments() {
-			reader := bytes.NewReader(image.GetFile())
-			objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
-
-			if err != nil {
-				return err
-			}
-
-			dm.Documents = append(dm.Documents, objectID)
-		}
-
-		newTrip.DiveMasters = append(newTrip.DiveMasters, dm)
+	if oldTrip.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "this trip does not belong to this agency")
 	}
 
-	_, err = service.repo.Trip.UpdateTrip(ctx, &newTrip)
+	_, err = service.repo.Trip.UpdateTrip(ctx, trip)
 
 	return err
 }

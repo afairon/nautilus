@@ -200,7 +200,7 @@ message SearchTripsResponse {
 }
 
 message UpdateTripRequest {
-    model.Trip trip = 10;
+    model.TripWithTemplate trip = 10;
 }
 
 message UpdateHotelRequest {
