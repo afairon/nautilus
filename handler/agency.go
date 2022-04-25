@@ -640,7 +640,10 @@ func (handler *AgencyHandler) UpdateTrip(ctx context.Context, req *pb.UpdateTrip
 }
 
 func (handler *AgencyHandler) UpdateHotel(ctx context.Context, req *pb.UpdateHotelRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateHotel(ctx, req.GetHotel())
+	hotel := model.Hotel{}
+	hotel.From(req.Hotel)
+
+	err := handler.agencyService.UpdateHotel(ctx, &hotel)
 
 	if err != nil {
 		return nil, err

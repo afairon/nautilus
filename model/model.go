@@ -886,25 +886,25 @@ func (rt *RoomType) From(roomType *pb.RoomType) {
 		return
 	}
 
-	rt.ID = uint(roomType.GetId())
-	rt.Name = roomType.GetName()
-	rt.Description = roomType.GetDescription()
-	rt.MaxGuest = roomType.GetMaxGuest()
-	rt.Price = roomType.GetPrice()
-	rt.Quantity = roomType.GetQuantity()
+	rt.ID = uint(roomType.Id)
+	rt.Name = roomType.Name
+	rt.Description = roomType.Description
+	rt.MaxGuest = roomType.MaxGuest
+	rt.Price = roomType.Price
+	rt.Quantity = roomType.Quantity
 
-	if len(roomType.RoomImages) > 0 {
-		rt.Files = make([]*File, 0, len(roomType.GetRoomImages()))
-		for _, doc := range roomType.GetRoomImages() {
+	if roomType.RoomImages != nil && len(roomType.RoomImages) > 0 {
+		rt.Files = make([]*File, 0, len(roomType.RoomImages))
+		for _, doc := range roomType.RoomImages {
 			file := File{}
 			file.From(doc)
 			rt.Files = append(rt.Files, &file)
 		}
 	}
 
-	if len(roomType.GetAmenities()) > 0 {
-		rt.Amenities = make([]Amenity, 0, len(roomType.GetAmenities()))
-		for _, amenity := range roomType.GetAmenities() {
+	if len(roomType.Amenities) > 0 {
+		rt.Amenities = make([]Amenity, 0, len(roomType.Amenities))
+		for _, amenity := range roomType.Amenities {
 			am := Amenity{}
 			am.From(amenity)
 			rt.Amenities = append(rt.Amenities, am)
@@ -962,31 +962,33 @@ func (h *Hotel) From(hotel *pb.Hotel) {
 		return
 	}
 
-	h.ID = uint(hotel.GetId())
-	h.AddressID = uint(hotel.Address.GetId())
-	h.Name = hotel.GetName()
-	h.Description = hotel.GetDescription()
-	h.Stars = hotel.GetStars()
-	h.Phone = hotel.GetPhone()
+	h.ID = uint(hotel.Id)
+	h.Name = hotel.Name
+	h.Description = hotel.Description
+	h.Stars = hotel.Stars
+	h.Phone = hotel.Phone
 
-	addr := Address{}
-	addr.From(hotel.GetAddress())
-	h.Address = addr
+	if hotel.Address != nil {
+		h.AddressID = uint(hotel.Address.Id)
+		addr := Address{}
+		addr.From(hotel.Address)
+		h.Address = addr
+	}
 
-	if len(hotel.GetRoomTypes()) > 0 {
-		h.RoomTypes = make([]RoomType, 0, len(hotel.GetRoomTypes()))
+	if h.RoomTypes != nil && len(hotel.RoomTypes) > 0 {
+		h.RoomTypes = make([]RoomType, 0, len(hotel.RoomTypes))
 
-		for _, roomType := range hotel.GetRoomTypes() {
+		for _, roomType := range hotel.RoomTypes {
 			rt := RoomType{}
 			rt.From(roomType)
 			h.RoomTypes = append(h.RoomTypes, rt)
 		}
 	}
 
-	if len(hotel.GetImages()) > 0 {
-		h.Files = make([]*File, 0, len(hotel.GetImages()))
+	if len(hotel.Images) > 0 {
+		h.Files = make([]*File, 0, len(hotel.Images))
 
-		for _, doc := range hotel.GetImages() {
+		for _, doc := range hotel.Images {
 			file := File{}
 			file.From(doc)
 			h.Files = append(h.Files, &file)

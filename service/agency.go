@@ -27,7 +27,7 @@ type AgencyService interface {
 	AddLiveaboard(context.Context, *pb.Liveaboard) error
 
 	UpdateTrip(ctx context.Context, trip *model.Trip) error
-	UpdateHotel(ctx context.Context, hotel *pb.Hotel) error
+	UpdateHotel(ctx context.Context, hotel *model.Hotel) error
 	UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error
 	UpdateBoat(ctx context.Context, boat *pb.Boat) error
 	UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error
@@ -705,6 +705,7 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *model.Trip) 
 		return err
 	}
 
+	// check if the trip belongs to the agency called the service
 	if oldTrip.AgencyID != agency.ID {
 		return status.Error(codes.InvalidArgument, "this trip does not belong to this agency")
 	}
@@ -714,60 +715,80 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *model.Trip) 
 	return err
 }
 
-func (service *agencyService) UpdateHotel(ctx context.Context, hotel *pb.Hotel) error {
+func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hotel) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	oldHotel, err := service.repo.Hotel.GetHotel(ctx, uint(hotel.Id))
+	oldHotel, err := service.repo.Hotel.GetHotel(ctx, hotel.ID)
 
 	if err != nil {
 		return err
 	}
 
-	// remove the old images.
-	for _, image := range oldHotel.Images {
-		service.media.Delete(image)
+	// check if the hotel belongs to the agency called the service
+	if oldHotel.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the hotel does not belong to this agency")
 	}
 
-	newHotel := model.Hotel{
-		Model: gorm.Model{
-			ID: uint(hotel.GetId()),
-		},
-		Address: model.Address{
-			Model: gorm.Model{
-				ID: uint(hotel.GetAddress().GetId()),
-			},
-			AddressLine_1: hotel.GetAddress().GetAddressLine_1(),
-			AddressLine_2: hotel.GetAddress().GetAddressLine_2(),
-			City:          hotel.GetAddress().GetCity(),
-			Postcode:      hotel.GetAddress().GetPostcode(),
-			Region:        hotel.GetAddress().GetRegion(),
-			Country:       hotel.GetAddress().GetCountry(),
-		},
-		Name:        hotel.GetName(),
-		Description: hotel.GetDescription(),
-		Stars:       hotel.GetStars(),
-		Phone:       hotel.GetPhone(),
-		AgencyID:    agency.ID,
+	oldHotelDocs := map[string]struct{}{}
+	for _, doc := range oldHotel.Images {
+		oldHotelDocs[doc] = struct{}{}
 	}
 
-	newHotel.Images = make(pq.StringArray, 0, len(hotel.GetImages()))
-
-	for _, image := range hotel.GetImages() {
-		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
+	oldRoomTypesDocs := map[string]struct{}{}
+	for _, roomType := range oldHotel.RoomTypes {
+		for _, doc := range roomType.Images {
+			oldRoomTypesDocs[doc] = struct{}{}
 		}
-
-		newHotel.Images = append(newHotel.Images, objectID)
+	}
+	for _, f := range hotel.Files {
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			hotel.Images = append(hotel.Images, objectID)
+			continue
+		}
+		_, ok := oldHotelDocs[f.Filename]
+		if !ok {
+			continue
+		}
+		agency.Documents = append(agency.Documents, f.Filename)
 	}
 
-	_, err = service.repo.Hotel.UpdateHotel(ctx, &newHotel)
+	defer func() {
+		if err != nil {
+			// Delete hotels' and room types' files when save failed.
+			for _, doc := range hotel.Images {
+				_, ok := oldHotelDocs[doc]
+				// skip old images
+				if ok {
+					continue
+				}
+				service.media.Delete(doc)
+			}
+		} else {
+			for _, doc := range hotel.Images {
+				_, ok := oldHotelDocs[doc]
+				if ok {
+					// Remove files from list to delete
+					delete(oldHotelDocs, doc)
+				}
+			}
+
+			for doc := range oldHotelDocs {
+				// Delete files that are no longer needed
+				service.media.Delete(doc)
+			}
+		}
+	}()
+
+	_, err = service.repo.Hotel.UpdateHotel(ctx, hotel)
 
 	return err
 }
