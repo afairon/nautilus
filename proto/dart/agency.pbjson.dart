@@ -318,12 +318,12 @@ final $typed_data.Uint8List searchTripsResponseDescriptor = $convert.base64Decod
 const UpdateTripRequest$json = const {
   '1': 'UpdateTripRequest',
   '2': const [
-    const {'1': 'trip', '3': 10, '4': 1, '5': 11, '6': '.model.Trip', '10': 'trip'},
+    const {'1': 'trip', '3': 10, '4': 1, '5': 11, '6': '.model.TripWithTemplate', '10': 'trip'},
   ],
 };
 
 /// Descriptor for `UpdateTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateTripRequestDescriptor = $convert.base64Decode('ChFVcGRhdGVUcmlwUmVxdWVzdBIfCgR0cmlwGAogASgLMgsubW9kZWwuVHJpcFIEdHJpcA==');
+final $typed_data.Uint8List updateTripRequestDescriptor = $convert.base64Decode('ChFVcGRhdGVUcmlwUmVxdWVzdBIrCgR0cmlwGAogASgLMhcubW9kZWwuVHJpcFdpdGhUZW1wbGF0ZVIEdHJpcA==');
 @$core.Deprecated('Use updateHotelRequestDescriptor instead')
 const UpdateHotelRequest$json = const {
   '1': 'UpdateHotelRequest',

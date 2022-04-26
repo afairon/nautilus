@@ -13,7 +13,6 @@ import (
 	"github.com/lib/pq"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"gorm.io/gorm"
 )
 
 // AgencyService defines operations on agency.
@@ -31,7 +30,7 @@ type AgencyService interface {
 	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
 	UpdateBoat(ctx context.Context, boat *model.Boat) error
 	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
-	UpdateStaff(ctx context.Context, staff *pb.Staff) error
+	UpdateStaff(ctx context.Context, staff *model.Staff) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
@@ -1101,23 +1100,26 @@ func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *
 	return err
 }
 
-func (service *agencyService) UpdateStaff(ctx context.Context, staff *pb.Staff) error {
+func (service *agencyService) UpdateStaff(ctx context.Context, staff *model.Staff) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	newStaff := model.Staff{
-		Model:     &gorm.Model{ID: uint(staff.GetId())},
-		FirstName: staff.GetFirstName(),
-		LastName:  staff.GetLastName(),
-		Position:  staff.GetPosition(),
-		Gender:    model.GenderType(staff.GetGender()),
-		AgencyID:  agency.ID,
+	oldStaff, err := service.repo.Staff.Get(ctx, uint64(staff.ID))
+
+	if err != nil {
+		return err
 	}
 
-	_, err = service.repo.Staff.UpdateStaff(ctx, &newStaff)
+	if oldStaff.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the staff does not belong to this agency")
+	}
+
+	staff.AgencyID = oldStaff.AgencyID
+
+	_, err = service.repo.Staff.UpdateStaff(ctx, staff)
 
 	return err
 }

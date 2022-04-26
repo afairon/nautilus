@@ -446,12 +446,24 @@ func (dm *DiveMaster) GetProto() *pb.DiveMaster {
 }
 
 type Staff struct {
-	*gorm.Model
+	gorm.Model
 	FirstName string     `gorm:"not null"`
 	LastName  string     `gorm:"not null"`
 	Position  string     `gorm:"not null"`
 	Gender    GenderType `gorm:"not null"`
 	AgencyID  uint       `gorm:"not null"`
+}
+
+func (s *Staff) From(staff *pb.Staff) {
+	if staff == nil {
+		return
+	}
+
+	s.ID = uint(staff.Id)
+	s.FirstName = staff.FirstName
+	s.LastName = staff.LastName
+	s.Position = staff.Position
+	s.Gender = GenderType(staff.Gender)
 }
 
 type Boat struct {

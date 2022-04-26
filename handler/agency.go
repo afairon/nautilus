@@ -691,7 +691,10 @@ func (handler *AgencyHandler) UpdateDiveMaster(ctx context.Context, req *pb.Upda
 }
 
 func (handler *AgencyHandler) UpdateStaff(ctx context.Context, req *pb.UpdateStaffRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateStaff(ctx, req.GetStaff())
+	staff := model.Staff{}
+	staff.From(req.Staff)
+
+	err := handler.agencyService.UpdateStaff(ctx, &staff)
 
 	if err != nil {
 		return nil, err

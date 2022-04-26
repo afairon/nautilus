@@ -1685,13 +1685,13 @@ class SearchTripsResponse extends $pb.GeneratedMessage {
 
 class UpdateTripRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Trip>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.Trip.create)
+    ..aOM<$13.TripWithTemplate>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   UpdateTripRequest._() : super();
   factory UpdateTripRequest({
-    $13.Trip? trip,
+    $13.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -1721,15 +1721,15 @@ class UpdateTripRequest extends $pb.GeneratedMessage {
   static UpdateTripRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Trip get trip => $_getN(0);
+  $13.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(10)
-  set trip($13.Trip v) { setField(10, v); }
+  set trip($13.TripWithTemplate v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(10)
   void clearTrip() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Trip ensureTrip() => $_ensure(0);
+  $13.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
 class UpdateHotelRequest extends $pb.GeneratedMessage {

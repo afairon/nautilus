@@ -13,7 +13,7 @@ import (
 // with the staff repository.
 type StaffRepository interface {
 	Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
-	Get(ctx context.Context, id uint64) (*entity.Staff, error)
+	Get(ctx context.Context, id uint64) (*model.Staff, error)
 
 	UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
 
@@ -50,20 +50,13 @@ func (repo *staffRepository) Create(ctx context.Context, staff *entity.Staff) (*
 }
 
 // Get retrieves the staff record by its id.
-func (repo *staffRepository) Get(ctx context.Context, id uint64) (*entity.Staff, error) {
-	// var result entity.Staff
+func (repo *staffRepository) Get(ctx context.Context, id uint64) (*model.Staff, error) {
+	var staff model.Staff
 
-	// err := repo.db.GetContext(ctx, result, `
-	// 	SELECT
-	// 		id, first_name, last_name, position, gender, agency_id, created_on, updated_on
-	// 	FROM
-	// 		public.staff
-	// 	WHERE
-	// 		id = $1
-	// `, id)
-
-	// return &result, err
-	return nil, errors.New("Unimplemented")
+	if err := repo.db.First(&staff, id).Error; err != nil {
+		return nil, err
+	}
+	return &staff, nil
 }
 
 // ListStaffsByAgency returns list of staffs by agency id.
@@ -110,7 +103,7 @@ func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, 
 }
 
 func (repo *staffRepository) UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error) {
-	if err := repo.db.Model(staff).Omit("AgencyID").Updates(staff).Error; err != nil {
+	if err := repo.db.Model(staff).Updates(staff).Error; err != nil {
 		return nil, err
 	}
 
