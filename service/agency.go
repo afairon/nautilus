@@ -29,8 +29,8 @@ type AgencyService interface {
 	UpdateTrip(ctx context.Context, trip *model.Trip) error
 	UpdateHotel(ctx context.Context, hotel *model.Hotel) error
 	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
-	UpdateBoat(ctx context.Context, boat *pb.Boat) error
-	UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error
+	UpdateBoat(ctx context.Context, boat *model.Boat) error
+	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
 	UpdateStaff(ctx context.Context, staff *pb.Staff) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
@@ -789,7 +789,7 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 
 	defer func() {
 		if err != nil {
-			// Delete hotels' and room types' files when save failed.
+			// Delete hotel's and room types' files when save failed.
 			for _, doc := range hotel.Images {
 				_, ok := oldHotelDocs[doc]
 				// skip old images
@@ -857,9 +857,9 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 		return err
 	}
 
-	// check if the hotel belongs to the agency called the service
+	// check if the liveaboard belongs to the agency called the service
 	if oldLiveaboard.AgencyID != agency.ID {
-		return status.Error(codes.InvalidArgument, "the hotel does not belong to this agency")
+		return status.Error(codes.InvalidArgument, "the liveaboard does not belong to this agency")
 	}
 
 	liveaboard.AgencyID = oldLiveaboard.AgencyID
@@ -923,7 +923,7 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 
 	defer func() {
 		if err != nil {
-			// Delete hotels' and room types' files when save failed.
+			// Delete liveaboard's and room types' files when save failed.
 			for _, doc := range liveaboard.Images {
 				_, ok := oldLiveaboardDocs[doc]
 				// skip old images
@@ -978,105 +978,125 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 	return err
 }
 
-func (service *agencyService) UpdateBoat(ctx context.Context, boat *pb.Boat) error {
+func (service *agencyService) UpdateBoat(ctx context.Context, boat *model.Boat) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	oldBoat, err := service.repo.Boat.GetBoat(ctx, uint(boat.GetId()))
+	oldBoat, err := service.repo.Boat.GetBoat(ctx, uint(boat.ID))
 
 	if err != nil {
 		return err
 	}
 
-	// remove the old images.
-	for _, image := range oldBoat.Images {
-		service.media.Delete(image)
+	// check if the boat belongs to the agency called the service
+	if oldBoat.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the boat does not belong to this agency")
 	}
 
-	newBoat := model.Boat{
-		Model: gorm.Model{
-			ID: uint(boat.GetId()),
-		},
-		Address: model.Address{
-			Model: gorm.Model{
-				ID: uint(boat.GetAddress().GetId()),
-			},
-			AddressLine_1: boat.GetAddress().GetAddressLine_1(),
-			AddressLine_2: boat.GetAddress().GetAddressLine_2(),
-			City:          boat.GetAddress().GetCity(),
-			Postcode:      boat.GetAddress().GetPostcode(),
-			Region:        boat.GetAddress().GetRegion(),
-			Country:       boat.GetAddress().GetCountry(),
-		},
-		Name:          boat.GetName(),
-		Description:   boat.GetDescription(),
-		TotalCapacity: boat.GetTotalCapacity(),
-		DiverCapacity: boat.GetDiverCapacity(),
-		StaffCapacity: boat.GetStaffCapacity(),
-		AgencyID:      agency.ID,
+	boat.AgencyID = oldBoat.AgencyID
+	boat.AddressID = oldBoat.AddressID
+	boat.Address.ID = oldBoat.AddressID
+
+	oldBoatDocs := map[string]struct{}{}
+	for _, doc := range oldBoat.Images {
+		oldBoatDocs[doc] = struct{}{}
 	}
 
-	newBoat.Images = make(pq.StringArray, 0, len(boat.GetImages()))
-
-	for _, image := range boat.GetImages() {
-		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
+	for _, f := range oldBoat.Files {
+		_, ok := oldBoatDocs[f.Filename]
+		// append old images
+		if ok && len(f.Buffer) == 0 {
+			oldBoat.Images = append(oldBoat.Images, f.Filename)
+			continue
 		}
 
-		newBoat.Images = append(newBoat.Images, objectID)
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			oldBoat.Images = append(oldBoat.Images, objectID)
+		}
 	}
 
-	_, err = service.repo.Boat.UpdateBoat(ctx, &newBoat)
+	defer func() {
+		if err != nil {
+			// Delete boat's files when save failed.
+			for _, doc := range boat.Images {
+				_, ok := oldBoatDocs[doc]
+				// skip old images
+				if ok {
+					continue
+				}
+				service.media.Delete(doc)
+			}
+		} else {
+			for _, doc := range boat.Images {
+				_, ok := oldBoatDocs[doc]
+				if ok {
+					// Remove files from list to delete
+					delete(oldBoatDocs, doc)
+				}
+			}
+
+			for doc := range oldBoatDocs {
+				service.media.Delete(doc)
+			}
+		}
+	}()
+
+	_, err = service.repo.Boat.UpdateBoat(ctx, boat)
 
 	return err
 }
 
-func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error {
+func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	oldDiveMaster, err := service.repo.DiveMaster.GetDiveMaster(ctx, uint(diveMaster.GetId()))
+	oldDiveMaster, err := service.repo.DiveMaster.GetDiveMaster(ctx, uint(diveMaster.ID))
 
 	if err != nil {
 		return err
 	}
 
-	// remove the old images.
-	for _, image := range oldDiveMaster.Documents {
-		service.media.Delete(image)
+	if oldDiveMaster.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the diveMaster does not belong to this agency")
 	}
 
-	newDiveMaster := model.DiveMaster{
-		Model:     gorm.Model{ID: uint(diveMaster.GetId())},
-		FirstName: diveMaster.GetFirstName(),
-		LastName:  diveMaster.GetLastName(),
-		Level:     model.LevelType(diveMaster.GetLevel()),
-		AgencyID:  agency.ID,
+	diveMaster.AgencyID = oldDiveMaster.AgencyID
+
+	oldDiveMasterDocs := map[string]struct{}{}
+	for _, doc := range oldDiveMaster.Documents {
+		oldDiveMasterDocs[doc] = struct{}{}
 	}
 
-	newDiveMaster.Documents = make(pq.StringArray, 0, len(diveMaster.GetDocuments()))
-
-	for _, document := range diveMaster.GetDocuments() {
-		reader := bytes.NewReader(document.GetFile())
-		objectID, err := service.media.Put(document.GetFilename(), media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
+	for _, f := range diveMaster.Files {
+		_, ok := oldDiveMasterDocs[f.Filename]
+		// append old images
+		if ok && len(f.Buffer) == 0 {
+			diveMaster.Documents = append(diveMaster.Documents, f.Filename)
+			continue
 		}
 
-		newDiveMaster.Documents = append(newDiveMaster.Documents, objectID)
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			diveMaster.Documents = append(diveMaster.Documents, objectID)
+		}
 	}
 
-	_, err = service.repo.DiveMaster.UpdateDiveMaster(ctx, &newDiveMaster)
+	_, err = service.repo.DiveMaster.UpdateDiveMaster(ctx, diveMaster)
 
 	return err
 }

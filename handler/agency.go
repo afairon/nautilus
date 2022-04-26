@@ -665,7 +665,10 @@ func (handler *AgencyHandler) UpdateLiveaboard(ctx context.Context, req *pb.Upda
 }
 
 func (handler *AgencyHandler) UpdateBoat(ctx context.Context, req *pb.UpdateBoatRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateBoat(ctx, req.GetBoat())
+	boat := model.Boat{}
+	boat.From(req.Boat)
+
+	err := handler.agencyService.UpdateBoat(ctx, &boat)
 
 	if err != nil {
 		return nil, err
@@ -675,7 +678,10 @@ func (handler *AgencyHandler) UpdateBoat(ctx context.Context, req *pb.UpdateBoat
 }
 
 func (handler *AgencyHandler) UpdateDiveMaster(ctx context.Context, req *pb.UpdateDiveMasterRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateDiveMaster(ctx, req.GetDiveMaster())
+	diveMaster := model.DiveMaster{}
+	diveMaster.From(req.DiveMaster)
+
+	err := handler.agencyService.UpdateDiveMaster(ctx, &diveMaster)
 
 	if err != nil {
 		return nil, err

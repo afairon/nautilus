@@ -79,7 +79,7 @@ func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, i
 }
 
 func (repo *diveMasterRepository) UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error) {
-	if err := repo.db.Model(diveMaster).Omit("AgencyID").Updates(diveMaster).Error; err != nil {
+	if err := repo.db.Model(diveMaster).Updates(diveMaster).Error; err != nil {
 		return nil, err
 	}
 

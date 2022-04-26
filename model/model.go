@@ -422,10 +422,10 @@ func (dm *DiveMaster) From(diveMaster *pb.DiveMaster) {
 	dm.LastName = diveMaster.GetLastName()
 	dm.Level = LevelType(diveMaster.GetLevel())
 
-	if len(diveMaster.GetDocuments()) > 0 {
-		dm.Files = make([]*File, 0, len(diveMaster.GetDocuments()))
+	if diveMaster.Documents != nil && len(diveMaster.Documents) > 0 {
+		dm.Files = make([]*File, 0, len(diveMaster.Documents))
 
-		for _, doc := range diveMaster.GetDocuments() {
+		for _, doc := range diveMaster.Documents {
 			file := File{}
 			file.From(doc)
 			dm.Files = append(dm.Files, &file)
@@ -469,22 +469,24 @@ type Boat struct {
 }
 
 func (b *Boat) From(boat *pb.Boat) {
-	b.ID = uint(boat.GetId())
-	b.AddressID = uint(boat.Address.GetId())
-	b.Name = boat.GetName()
-	b.Description = boat.GetDescription()
-	b.TotalCapacity = boat.GetTotalCapacity()
-	b.DiverCapacity = boat.GetDiverCapacity()
-	b.StaffCapacity = boat.GetStaffCapacity()
+	b.ID = uint(boat.Id)
+	b.Name = boat.Name
+	b.Description = boat.Description
+	b.TotalCapacity = boat.TotalCapacity
+	b.DiverCapacity = boat.DiverCapacity
+	b.StaffCapacity = boat.StaffCapacity
 
-	addr := Address{}
-	addr.From(boat.GetAddress())
-	b.Address = addr
+	if boat.Address != nil {
+		b.AddressID = uint(boat.Address.GetId())
+		addr := Address{}
+		addr.From(boat.Address)
+		b.Address = addr
+	}
 
-	if len(boat.GetImages()) > 0 {
-		b.Files = make([]*File, 0, len(boat.GetImages()))
+	if boat.Images != nil && len(boat.Images) > 0 {
+		b.Files = make([]*File, 0, len(boat.Images))
 
-		for _, doc := range boat.GetImages() {
+		for _, doc := range boat.Images {
 			file := File{}
 			file.From(doc)
 			b.Files = append(b.Files, &file)
