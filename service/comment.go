@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/repo"
@@ -12,6 +13,10 @@ type CommentService interface {
 	CreateTripComment(ctx context.Context, comment *model.TripComment) (*model.TripComment, error)
 	CreateHotelComment(ctx context.Context, comment *model.HotelComment) (*model.HotelComment, error)
 	CreateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) (*model.LiveaboardComment, error)
+
+	DeleteTripComment(ctx context.Context, comment *model.TripComment) error
+	DeleteHotelComment(ctx context.Context, comment *model.HotelComment) error
+	DeleteLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) error
 }
 
 // commentService implements CommentService.
@@ -75,4 +80,61 @@ func (service *commentService) CreateLiveaboardComment(ctx context.Context, comm
 	}
 
 	return newComment, nil
+}
+
+// DeleteTripComment deletes trip comment.
+func (service *commentService) DeleteTripComment(ctx context.Context, comment *model.TripComment) error {
+	diver, err := getDiverInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Comment.FindTripComment(ctx, uint64(comment.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.Reservation == nil || diver.ID != old.Reservation.DiverID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Comment.DeleteTripComment(ctx, comment)
+}
+
+// DeleteHotelComment deletes hotel comment.
+func (service *commentService) DeleteHotelComment(ctx context.Context, comment *model.HotelComment) error {
+	diver, err := getDiverInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Comment.FindHotelComment(ctx, uint64(comment.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.Reservation == nil || diver.ID != old.Reservation.DiverID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Comment.DeleteHotelComment(ctx, comment)
+}
+
+// DeleteLiveaboardComment deletes liveaboard comment
+func (service *commentService) DeleteLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) error {
+	diver, err := getDiverInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Comment.FindLiveaboardComment(ctx, uint64(comment.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.Reservation == nil || diver.ID != old.Reservation.DiverID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Comment.DeleteLiveaboardComment(ctx, comment)
 }

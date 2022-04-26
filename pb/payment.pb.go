@@ -7,10 +7,10 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -480,10 +480,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PaymentServiceClient interface {
-	MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	GetPaymentByReservation(ctx context.Context, in *GetPaymentByReservationRequest, opts ...grpc.CallOption) (*GetPaymentByReservationResponse, error)
-	UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type paymentServiceClient struct {
@@ -494,8 +494,8 @@ func NewPaymentServiceClient(cc *grpc.ClientConn) PaymentServiceClient {
 	return &paymentServiceClient{cc}
 }
 
-func (c *paymentServiceClient) MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *paymentServiceClient) MakePayment(ctx context.Context, in *MakePaymentRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/payment.PaymentService/MakePayment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -512,8 +512,8 @@ func (c *paymentServiceClient) GetPaymentByReservation(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *paymentServiceClient) UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *paymentServiceClient) UpdatePaymentSlip(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/payment.PaymentService/UpdatePaymentSlip", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -521,8 +521,8 @@ func (c *paymentServiceClient) UpdatePaymentSlip(ctx context.Context, in *Update
 	return out, nil
 }
 
-func (c *paymentServiceClient) UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *paymentServiceClient) UpdatePaymentStatus(ctx context.Context, in *UpdatePaymentStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/payment.PaymentService/UpdatePaymentStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -532,26 +532,26 @@ func (c *paymentServiceClient) UpdatePaymentStatus(ctx context.Context, in *Upda
 
 // PaymentServiceServer is the server API for PaymentService service.
 type PaymentServiceServer interface {
-	MakePayment(context.Context, *MakePaymentRequest) (*emptypb.Empty, error)
+	MakePayment(context.Context, *MakePaymentRequest) (*empty.Empty, error)
 	GetPaymentByReservation(context.Context, *GetPaymentByReservationRequest) (*GetPaymentByReservationResponse, error)
-	UpdatePaymentSlip(context.Context, *UpdatePaymentRequest) (*emptypb.Empty, error)
-	UpdatePaymentStatus(context.Context, *UpdatePaymentStatusRequest) (*emptypb.Empty, error)
+	UpdatePaymentSlip(context.Context, *UpdatePaymentRequest) (*empty.Empty, error)
+	UpdatePaymentStatus(context.Context, *UpdatePaymentStatusRequest) (*empty.Empty, error)
 }
 
 // UnimplementedPaymentServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedPaymentServiceServer struct {
 }
 
-func (*UnimplementedPaymentServiceServer) MakePayment(ctx context.Context, req *MakePaymentRequest) (*emptypb.Empty, error) {
+func (*UnimplementedPaymentServiceServer) MakePayment(ctx context.Context, req *MakePaymentRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakePayment not implemented")
 }
 func (*UnimplementedPaymentServiceServer) GetPaymentByReservation(ctx context.Context, req *GetPaymentByReservationRequest) (*GetPaymentByReservationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentByReservation not implemented")
 }
-func (*UnimplementedPaymentServiceServer) UpdatePaymentSlip(ctx context.Context, req *UpdatePaymentRequest) (*emptypb.Empty, error) {
+func (*UnimplementedPaymentServiceServer) UpdatePaymentSlip(ctx context.Context, req *UpdatePaymentRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentSlip not implemented")
 }
-func (*UnimplementedPaymentServiceServer) UpdatePaymentStatus(ctx context.Context, req *UpdatePaymentStatusRequest) (*emptypb.Empty, error) {
+func (*UnimplementedPaymentServiceServer) UpdatePaymentStatus(ctx context.Context, req *UpdatePaymentStatusRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentStatus not implemented")
 }
 

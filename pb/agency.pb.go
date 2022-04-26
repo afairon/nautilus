@@ -9,11 +9,11 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	empty "github.com/golang/protobuf/ptypes/empty"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -3902,19 +3902,19 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type AgencyServiceClient interface {
-	AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	ListBoats(ctx context.Context, in *ListBoatsRequest, opts ...grpc.CallOption) (AgencyService_ListBoatsClient, error)
 	ListDiveMasters(ctx context.Context, in *ListDiveMastersRequest, opts ...grpc.CallOption) (AgencyService_ListDiveMastersClient, error)
 	ListHotels(ctx context.Context, in *ListHotelsRequest, opts ...grpc.CallOption) (AgencyService_ListHotelsClient, error)
@@ -3939,8 +3939,8 @@ func NewAgencyServiceClient(cc *grpc.ClientConn) AgencyServiceClient {
 	return &agencyServiceClient{cc}
 }
 
-func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDiveMaster", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3948,8 +3948,8 @@ func (c *agencyServiceClient) AddDiveMaster(ctx context.Context, in *AddDiveMast
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddStaff", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3957,8 +3957,8 @@ func (c *agencyServiceClient) AddStaff(ctx context.Context, in *AddStaffRequest,
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTripTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3966,8 +3966,8 @@ func (c *agencyServiceClient) AddTripTemplate(ctx context.Context, in *AddTripTe
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddTrip", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3975,8 +3975,8 @@ func (c *agencyServiceClient) AddTrip(ctx context.Context, in *AddTripRequest, o
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddDivingBoat", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3984,8 +3984,8 @@ func (c *agencyServiceClient) AddDivingBoat(ctx context.Context, in *AddDivingBo
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddHotel", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -3993,8 +3993,8 @@ func (c *agencyServiceClient) AddHotel(ctx context.Context, in *AddHotelRequest,
 	return out, nil
 }
 
-func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/AddLiveaboard", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4002,8 +4002,8 @@ func (c *agencyServiceClient) AddLiveaboard(ctx context.Context, in *AddLiveaboa
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateTrip", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4011,8 +4011,8 @@ func (c *agencyServiceClient) UpdateTrip(ctx context.Context, in *UpdateTripRequ
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateHotel", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4020,8 +4020,8 @@ func (c *agencyServiceClient) UpdateHotel(ctx context.Context, in *UpdateHotelRe
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateLiveaboard", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4029,8 +4029,8 @@ func (c *agencyServiceClient) UpdateLiveaboard(ctx context.Context, in *UpdateLi
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateBoat", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4038,8 +4038,8 @@ func (c *agencyServiceClient) UpdateBoat(ctx context.Context, in *UpdateBoatRequ
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateDiveMaster", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4047,8 +4047,8 @@ func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDi
 	return out, nil
 }
 
-func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateStaff", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4474,19 +4474,19 @@ func (x *agencyServiceGenerateIncomingTripsReportClient) Recv() (*GenerateIncomi
 
 // AgencyServiceServer is the server API for AgencyService service.
 type AgencyServiceServer interface {
-	AddDiveMaster(context.Context, *AddDiveMasterRequest) (*emptypb.Empty, error)
-	AddStaff(context.Context, *AddStaffRequest) (*emptypb.Empty, error)
-	AddTripTemplate(context.Context, *AddTripTemplateRequest) (*emptypb.Empty, error)
-	AddTrip(context.Context, *AddTripRequest) (*emptypb.Empty, error)
-	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*emptypb.Empty, error)
-	AddHotel(context.Context, *AddHotelRequest) (*emptypb.Empty, error)
-	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*emptypb.Empty, error)
-	UpdateTrip(context.Context, *UpdateTripRequest) (*emptypb.Empty, error)
-	UpdateHotel(context.Context, *UpdateHotelRequest) (*emptypb.Empty, error)
-	UpdateLiveaboard(context.Context, *UpdateLiveaboardRequest) (*emptypb.Empty, error)
-	UpdateBoat(context.Context, *UpdateBoatRequest) (*emptypb.Empty, error)
-	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*emptypb.Empty, error)
-	UpdateStaff(context.Context, *UpdateStaffRequest) (*emptypb.Empty, error)
+	AddDiveMaster(context.Context, *AddDiveMasterRequest) (*empty.Empty, error)
+	AddStaff(context.Context, *AddStaffRequest) (*empty.Empty, error)
+	AddTripTemplate(context.Context, *AddTripTemplateRequest) (*empty.Empty, error)
+	AddTrip(context.Context, *AddTripRequest) (*empty.Empty, error)
+	AddDivingBoat(context.Context, *AddDivingBoatRequest) (*empty.Empty, error)
+	AddHotel(context.Context, *AddHotelRequest) (*empty.Empty, error)
+	AddLiveaboard(context.Context, *AddLiveaboardRequest) (*empty.Empty, error)
+	UpdateTrip(context.Context, *UpdateTripRequest) (*empty.Empty, error)
+	UpdateHotel(context.Context, *UpdateHotelRequest) (*empty.Empty, error)
+	UpdateLiveaboard(context.Context, *UpdateLiveaboardRequest) (*empty.Empty, error)
+	UpdateBoat(context.Context, *UpdateBoatRequest) (*empty.Empty, error)
+	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*empty.Empty, error)
+	UpdateStaff(context.Context, *UpdateStaffRequest) (*empty.Empty, error)
 	ListBoats(*ListBoatsRequest, AgencyService_ListBoatsServer) error
 	ListDiveMasters(*ListDiveMastersRequest, AgencyService_ListDiveMastersServer) error
 	ListHotels(*ListHotelsRequest, AgencyService_ListHotelsServer) error
@@ -4507,43 +4507,43 @@ type AgencyServiceServer interface {
 type UnimplementedAgencyServiceServer struct {
 }
 
-func (*UnimplementedAgencyServiceServer) AddDiveMaster(ctx context.Context, req *AddDiveMasterRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddDiveMaster(ctx context.Context, req *AddDiveMasterRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddDiveMaster not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddStaff(ctx context.Context, req *AddStaffRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddStaff(ctx context.Context, req *AddStaffRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStaff not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddTripTemplate(ctx context.Context, req *AddTripTemplateRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddTripTemplate(ctx context.Context, req *AddTripTemplateRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddTripTemplate not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddTrip(ctx context.Context, req *AddTripRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddTrip(ctx context.Context, req *AddTripRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddTrip not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddDivingBoat(ctx context.Context, req *AddDivingBoatRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddDivingBoat(ctx context.Context, req *AddDivingBoatRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddDivingBoat not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddHotelRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddHotel(ctx context.Context, req *AddHotelRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddHotel not implemented")
 }
-func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) AddLiveaboard(ctx context.Context, req *AddLiveaboardRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLiveaboard not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateTrip(ctx context.Context, req *UpdateTripRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateTrip(ctx context.Context, req *UpdateTripRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTrip not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateHotel(ctx context.Context, req *UpdateHotelRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateHotel(ctx context.Context, req *UpdateHotelRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHotel not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateLiveaboard(ctx context.Context, req *UpdateLiveaboardRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateLiveaboard(ctx context.Context, req *UpdateLiveaboardRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLiveaboard not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateBoat(ctx context.Context, req *UpdateBoatRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateBoat(ctx context.Context, req *UpdateBoatRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBoat not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, req *UpdateDiveMasterRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, req *UpdateDiveMasterRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiveMaster not implemented")
 }
-func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*emptypb.Empty, error) {
+func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStaff not implemented")
 }
 func (*UnimplementedAgencyServiceServer) ListBoats(req *ListBoatsRequest, srv AgencyService_ListBoatsServer) error {
@@ -7668,8 +7668,8 @@ func (this *SearchTripsOptions) String() string {
 		`LocationFilter:` + fmt.Sprintf("%v", this.LocationFilter) + `,`,
 		`Divers:` + fmt.Sprintf("%v", this.Divers) + `,`,
 		`TripType:` + fmt.Sprintf("%v", this.TripType) + `,`,
-		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s

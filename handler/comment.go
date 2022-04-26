@@ -6,6 +6,7 @@ import (
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
+	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -30,59 +31,35 @@ func (handler *CommentHandler) CreateComment(ctx context.Context, req *pb.Create
 	// Get comment request type.
 	switch t := req.GetType().(type) {
 	case *pb.CreateCommentRequest_Trip:
-		c := model.TripComment{
-			Comment:       t.Trip.GetComment(),
-			Stars:         t.Trip.GetStars(),
-			ReservationID: uint(t.Trip.GetReservationId()),
-		}
+		c := model.TripComment{}
+		c.From(t.Trip)
 		comment, err := handler.service.CreateTripComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Trip{Trip: &pb.TripComment{
-			Id:            uint64(comment.ID),
-			Comment:       comment.Comment,
-			Stars:         comment.Stars,
-			ReservationId: uint64(comment.ReservationID),
-			CreatedAt:     &comment.CreatedAt,
-			UpdatedAt:     &comment.UpdatedAt,
-		}}
-	case *pb.CreateCommentRequest_Hotel:
-		c := model.HotelComment{
-			Comment:       t.Hotel.GetComment(),
-			Stars:         t.Hotel.GetStars(),
-			ReservationID: uint(t.Hotel.GetReservationId()),
+		resp.Type = &pb.CreateCommentResponse_Trip{
+			Trip: comment.GetProto(),
 		}
+	case *pb.CreateCommentRequest_Hotel:
+		c := model.HotelComment{}
+		c.From(t.Hotel)
 		comment, err := handler.service.CreateHotelComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Hotel{Hotel: &pb.HotelComment{
-			Id:            uint64(comment.ID),
-			Comment:       comment.Comment,
-			Stars:         comment.Stars,
-			ReservationId: uint64(comment.ReservationID),
-			CreatedAt:     &comment.CreatedAt,
-			UpdatedAt:     &comment.UpdatedAt,
-		}}
-	case *pb.CreateCommentRequest_Liveaboard:
-		c := model.LiveaboardComment{
-			Comment:       t.Liveaboard.GetComment(),
-			Stars:         t.Liveaboard.GetStars(),
-			ReservationID: uint(t.Liveaboard.GetReservationId()),
+		resp.Type = &pb.CreateCommentResponse_Hotel{
+			Hotel: comment.GetProto(),
 		}
+	case *pb.CreateCommentRequest_Liveaboard:
+		c := model.LiveaboardComment{}
+		c.From(t.Liveaboard)
 		comment, err := handler.service.CreateLiveaboardComment(ctx, &c)
 		if err != nil {
 			return nil, err
 		}
-		resp.Type = &pb.CreateCommentResponse_Liveaboard{Liveaboard: &pb.LiveaboardComment{
-			Id:            uint64(comment.ID),
-			Comment:       comment.Comment,
-			Stars:         comment.Stars,
-			ReservationId: uint64(comment.ReservationID),
-			CreatedAt:     &comment.CreatedAt,
-			UpdatedAt:     &comment.UpdatedAt,
-		}}
+		resp.Type = &pb.CreateCommentResponse_Liveaboard{
+			Liveaboard: comment.GetProto(),
+		}
 	default:
 		// Cannot determine type of comment
 		return nil, status.Error(codes.InvalidArgument, "comment: invalid request")
@@ -91,7 +68,31 @@ func (handler *CommentHandler) CreateComment(ctx context.Context, req *pb.Create
 	return &resp, nil
 }
 
-// GetComment retrieves comment by id.
-func (handler *CommentHandler) GetComment(ctx context.Context, req *pb.GetCommentRequest) (*pb.GetCommentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "GetComment unimplemented")
+// DeleteComment deletes comment by id.
+func (handler *CommentHandler) DeleteComment(ctx context.Context, req *pb.DeleteCommentRequest) (*empty.Empty, error) {
+	switch t := req.GetType().(type) {
+	case *pb.DeleteCommentRequest_Trip:
+		c := model.TripComment{}
+		c.From(t.Trip)
+		if err := handler.service.DeleteTripComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	case *pb.DeleteCommentRequest_Hotel:
+		c := model.HotelComment{}
+		c.From(t.Hotel)
+		if err := handler.service.DeleteHotelComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	case *pb.DeleteCommentRequest_Liveaboard:
+		c := model.LiveaboardComment{}
+		c.From(t.Liveaboard)
+		if err := handler.service.DeleteLiveaboardComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	default:
+		// Cannot determine type of comment
+		return nil, status.Error(codes.InvalidArgument, "comment: invalid request")
+	}
+
+	return &empty.Empty{}, nil
 }

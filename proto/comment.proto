@@ -4,11 +4,13 @@ package comment;
 
 import "model.proto";
 
+import "google/protobuf/empty.proto";
+
 option go_package = "./pb";
 
 service CommentService {
     rpc CreateComment (CreateCommentRequest) returns (CreateCommentResponse) {}
-    rpc GetComment (GetCommentRequest) returns (GetCommentResponse) {}
+    rpc DeleteComment (DeleteCommentRequest) returns (google.protobuf.Empty) {}
 }
 
 // CreateCommentRequest
@@ -31,31 +33,8 @@ message CreateCommentResponse {
     }
 }
 
-// GetCommentRequest
-message GetCommentRequest {
-    // type defines type of comment
-    oneof type {
-        Trip trip = 1;
-        Hotel hotel = 5;
-        Liveaboard liveaboard = 10;
-    }
-
-    message Trip {
-        uint64 id = 1;
-    }
-
-    message Hotel {
-        uint64 id = 1;
-    }
-
-    message Liveaboard {
-        uint64 id = 1;
-    }
-}
-
-// GetCommentResponse
-message GetCommentResponse {
-    // type defines type of comment
+// DeleteCommentRequest
+message DeleteCommentRequest {
     oneof type {
         model.TripComment trip = 1;
         model.HotelComment hotel = 5;

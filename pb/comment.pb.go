@@ -7,6 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -230,28 +231,26 @@ func (*CreateCommentResponse) XXX_OneofWrappers() []interface{} {
 	}
 }
 
-// GetCommentRequest
-type GetCommentRequest struct {
-	// type defines type of comment
-	//
+// DeleteCommentRequest
+type DeleteCommentRequest struct {
 	// Types that are valid to be assigned to Type:
-	//	*GetCommentRequest_Trip_
-	//	*GetCommentRequest_Hotel_
-	//	*GetCommentRequest_Liveaboard_
-	Type isGetCommentRequest_Type `protobuf_oneof:"type"`
+	//	*DeleteCommentRequest_Trip
+	//	*DeleteCommentRequest_Hotel
+	//	*DeleteCommentRequest_Liveaboard
+	Type isDeleteCommentRequest_Type `protobuf_oneof:"type"`
 }
 
-func (m *GetCommentRequest) Reset()      { *m = GetCommentRequest{} }
-func (*GetCommentRequest) ProtoMessage() {}
-func (*GetCommentRequest) Descriptor() ([]byte, []int) {
+func (m *DeleteCommentRequest) Reset()      { *m = DeleteCommentRequest{} }
+func (*DeleteCommentRequest) ProtoMessage() {}
+func (*DeleteCommentRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_749aee09ea917828, []int{2}
 }
-func (m *GetCommentRequest) XXX_Unmarshal(b []byte) error {
+func (m *DeleteCommentRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *GetCommentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeleteCommentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_GetCommentRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DeleteCommentRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -261,345 +260,108 @@ func (m *GetCommentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return b[:n], nil
 	}
 }
-func (m *GetCommentRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCommentRequest.Merge(m, src)
+func (m *DeleteCommentRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteCommentRequest.Merge(m, src)
 }
-func (m *GetCommentRequest) XXX_Size() int {
+func (m *DeleteCommentRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *GetCommentRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCommentRequest.DiscardUnknown(m)
+func (m *DeleteCommentRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteCommentRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetCommentRequest proto.InternalMessageInfo
+var xxx_messageInfo_DeleteCommentRequest proto.InternalMessageInfo
 
-type isGetCommentRequest_Type interface {
-	isGetCommentRequest_Type()
+type isDeleteCommentRequest_Type interface {
+	isDeleteCommentRequest_Type()
 	Equal(interface{}) bool
 	MarshalTo([]byte) (int, error)
 	Size() int
 }
 
-type GetCommentRequest_Trip_ struct {
-	Trip *GetCommentRequest_Trip `protobuf:"bytes,1,opt,name=trip,proto3,oneof" json:"trip,omitempty"`
-}
-type GetCommentRequest_Hotel_ struct {
-	Hotel *GetCommentRequest_Hotel `protobuf:"bytes,5,opt,name=hotel,proto3,oneof" json:"hotel,omitempty"`
-}
-type GetCommentRequest_Liveaboard_ struct {
-	Liveaboard *GetCommentRequest_Liveaboard `protobuf:"bytes,10,opt,name=liveaboard,proto3,oneof" json:"liveaboard,omitempty"`
-}
-
-func (*GetCommentRequest_Trip_) isGetCommentRequest_Type()       {}
-func (*GetCommentRequest_Hotel_) isGetCommentRequest_Type()      {}
-func (*GetCommentRequest_Liveaboard_) isGetCommentRequest_Type() {}
-
-func (m *GetCommentRequest) GetType() isGetCommentRequest_Type {
-	if m != nil {
-		return m.Type
-	}
-	return nil
-}
-
-func (m *GetCommentRequest) GetTrip() *GetCommentRequest_Trip {
-	if x, ok := m.GetType().(*GetCommentRequest_Trip_); ok {
-		return x.Trip
-	}
-	return nil
-}
-
-func (m *GetCommentRequest) GetHotel() *GetCommentRequest_Hotel {
-	if x, ok := m.GetType().(*GetCommentRequest_Hotel_); ok {
-		return x.Hotel
-	}
-	return nil
-}
-
-func (m *GetCommentRequest) GetLiveaboard() *GetCommentRequest_Liveaboard {
-	if x, ok := m.GetType().(*GetCommentRequest_Liveaboard_); ok {
-		return x.Liveaboard
-	}
-	return nil
-}
-
-// XXX_OneofWrappers is for the internal use of the proto package.
-func (*GetCommentRequest) XXX_OneofWrappers() []interface{} {
-	return []interface{}{
-		(*GetCommentRequest_Trip_)(nil),
-		(*GetCommentRequest_Hotel_)(nil),
-		(*GetCommentRequest_Liveaboard_)(nil),
-	}
-}
-
-type GetCommentRequest_Trip struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *GetCommentRequest_Trip) Reset()      { *m = GetCommentRequest_Trip{} }
-func (*GetCommentRequest_Trip) ProtoMessage() {}
-func (*GetCommentRequest_Trip) Descriptor() ([]byte, []int) {
-	return fileDescriptor_749aee09ea917828, []int{2, 0}
-}
-func (m *GetCommentRequest_Trip) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetCommentRequest_Trip) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetCommentRequest_Trip.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetCommentRequest_Trip) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCommentRequest_Trip.Merge(m, src)
-}
-func (m *GetCommentRequest_Trip) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetCommentRequest_Trip) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCommentRequest_Trip.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetCommentRequest_Trip proto.InternalMessageInfo
-
-func (m *GetCommentRequest_Trip) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type GetCommentRequest_Hotel struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *GetCommentRequest_Hotel) Reset()      { *m = GetCommentRequest_Hotel{} }
-func (*GetCommentRequest_Hotel) ProtoMessage() {}
-func (*GetCommentRequest_Hotel) Descriptor() ([]byte, []int) {
-	return fileDescriptor_749aee09ea917828, []int{2, 1}
-}
-func (m *GetCommentRequest_Hotel) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetCommentRequest_Hotel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetCommentRequest_Hotel.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetCommentRequest_Hotel) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCommentRequest_Hotel.Merge(m, src)
-}
-func (m *GetCommentRequest_Hotel) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetCommentRequest_Hotel) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCommentRequest_Hotel.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetCommentRequest_Hotel proto.InternalMessageInfo
-
-func (m *GetCommentRequest_Hotel) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type GetCommentRequest_Liveaboard struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *GetCommentRequest_Liveaboard) Reset()      { *m = GetCommentRequest_Liveaboard{} }
-func (*GetCommentRequest_Liveaboard) ProtoMessage() {}
-func (*GetCommentRequest_Liveaboard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_749aee09ea917828, []int{2, 2}
-}
-func (m *GetCommentRequest_Liveaboard) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetCommentRequest_Liveaboard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetCommentRequest_Liveaboard.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetCommentRequest_Liveaboard) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCommentRequest_Liveaboard.Merge(m, src)
-}
-func (m *GetCommentRequest_Liveaboard) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetCommentRequest_Liveaboard) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCommentRequest_Liveaboard.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetCommentRequest_Liveaboard proto.InternalMessageInfo
-
-func (m *GetCommentRequest_Liveaboard) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-// GetCommentResponse
-type GetCommentResponse struct {
-	// type defines type of comment
-	//
-	// Types that are valid to be assigned to Type:
-	//	*GetCommentResponse_Trip
-	//	*GetCommentResponse_Hotel
-	//	*GetCommentResponse_Liveaboard
-	Type isGetCommentResponse_Type `protobuf_oneof:"type"`
-}
-
-func (m *GetCommentResponse) Reset()      { *m = GetCommentResponse{} }
-func (*GetCommentResponse) ProtoMessage() {}
-func (*GetCommentResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_749aee09ea917828, []int{3}
-}
-func (m *GetCommentResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetCommentResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetCommentResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetCommentResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetCommentResponse.Merge(m, src)
-}
-func (m *GetCommentResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetCommentResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetCommentResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetCommentResponse proto.InternalMessageInfo
-
-type isGetCommentResponse_Type interface {
-	isGetCommentResponse_Type()
-	Equal(interface{}) bool
-	MarshalTo([]byte) (int, error)
-	Size() int
-}
-
-type GetCommentResponse_Trip struct {
+type DeleteCommentRequest_Trip struct {
 	Trip *TripComment `protobuf:"bytes,1,opt,name=trip,proto3,oneof" json:"trip,omitempty"`
 }
-type GetCommentResponse_Hotel struct {
+type DeleteCommentRequest_Hotel struct {
 	Hotel *HotelComment `protobuf:"bytes,5,opt,name=hotel,proto3,oneof" json:"hotel,omitempty"`
 }
-type GetCommentResponse_Liveaboard struct {
+type DeleteCommentRequest_Liveaboard struct {
 	Liveaboard *LiveaboardComment `protobuf:"bytes,10,opt,name=liveaboard,proto3,oneof" json:"liveaboard,omitempty"`
 }
 
-func (*GetCommentResponse_Trip) isGetCommentResponse_Type()       {}
-func (*GetCommentResponse_Hotel) isGetCommentResponse_Type()      {}
-func (*GetCommentResponse_Liveaboard) isGetCommentResponse_Type() {}
+func (*DeleteCommentRequest_Trip) isDeleteCommentRequest_Type()       {}
+func (*DeleteCommentRequest_Hotel) isDeleteCommentRequest_Type()      {}
+func (*DeleteCommentRequest_Liveaboard) isDeleteCommentRequest_Type() {}
 
-func (m *GetCommentResponse) GetType() isGetCommentResponse_Type {
+func (m *DeleteCommentRequest) GetType() isDeleteCommentRequest_Type {
 	if m != nil {
 		return m.Type
 	}
 	return nil
 }
 
-func (m *GetCommentResponse) GetTrip() *TripComment {
-	if x, ok := m.GetType().(*GetCommentResponse_Trip); ok {
+func (m *DeleteCommentRequest) GetTrip() *TripComment {
+	if x, ok := m.GetType().(*DeleteCommentRequest_Trip); ok {
 		return x.Trip
 	}
 	return nil
 }
 
-func (m *GetCommentResponse) GetHotel() *HotelComment {
-	if x, ok := m.GetType().(*GetCommentResponse_Hotel); ok {
+func (m *DeleteCommentRequest) GetHotel() *HotelComment {
+	if x, ok := m.GetType().(*DeleteCommentRequest_Hotel); ok {
 		return x.Hotel
 	}
 	return nil
 }
 
-func (m *GetCommentResponse) GetLiveaboard() *LiveaboardComment {
-	if x, ok := m.GetType().(*GetCommentResponse_Liveaboard); ok {
+func (m *DeleteCommentRequest) GetLiveaboard() *LiveaboardComment {
+	if x, ok := m.GetType().(*DeleteCommentRequest_Liveaboard); ok {
 		return x.Liveaboard
 	}
 	return nil
 }
 
 // XXX_OneofWrappers is for the internal use of the proto package.
-func (*GetCommentResponse) XXX_OneofWrappers() []interface{} {
+func (*DeleteCommentRequest) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
-		(*GetCommentResponse_Trip)(nil),
-		(*GetCommentResponse_Hotel)(nil),
-		(*GetCommentResponse_Liveaboard)(nil),
+		(*DeleteCommentRequest_Trip)(nil),
+		(*DeleteCommentRequest_Hotel)(nil),
+		(*DeleteCommentRequest_Liveaboard)(nil),
 	}
 }
 
 func init() {
 	proto.RegisterType((*CreateCommentRequest)(nil), "comment.CreateCommentRequest")
 	proto.RegisterType((*CreateCommentResponse)(nil), "comment.CreateCommentResponse")
-	proto.RegisterType((*GetCommentRequest)(nil), "comment.GetCommentRequest")
-	proto.RegisterType((*GetCommentRequest_Trip)(nil), "comment.GetCommentRequest.Trip")
-	proto.RegisterType((*GetCommentRequest_Hotel)(nil), "comment.GetCommentRequest.Hotel")
-	proto.RegisterType((*GetCommentRequest_Liveaboard)(nil), "comment.GetCommentRequest.Liveaboard")
-	proto.RegisterType((*GetCommentResponse)(nil), "comment.GetCommentResponse")
+	proto.RegisterType((*DeleteCommentRequest)(nil), "comment.DeleteCommentRequest")
 }
 
 func init() { proto.RegisterFile("comment.proto", fileDescriptor_749aee09ea917828) }
 
 var fileDescriptor_749aee09ea917828 = []byte{
-	// 392 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4d, 0xce, 0xcf, 0xcd,
-	0x4d, 0xcd, 0x2b, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x87, 0x72, 0xa5, 0xb8, 0x73,
-	0xf3, 0x53, 0x52, 0x73, 0x20, 0xa2, 0x4a, 0x1b, 0x19, 0xb9, 0x44, 0x9c, 0x8b, 0x52, 0x13, 0x4b,
-	0x52, 0x9d, 0x21, 0xd2, 0x41, 0xa9, 0x85, 0xa5, 0xa9, 0xc5, 0x25, 0x42, 0x1a, 0x5c, 0x2c, 0x25,
-	0x45, 0x99, 0x05, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0xdc, 0x46, 0x42, 0x7a, 0x10, 0x4d, 0x21, 0x45,
-	0x99, 0x05, 0x50, 0x85, 0x1e, 0x0c, 0x41, 0x60, 0x15, 0x42, 0xda, 0x5c, 0xac, 0x19, 0xf9, 0x25,
-	0xa9, 0x39, 0x12, 0xac, 0x60, 0xa5, 0xc2, 0x50, 0xa5, 0x1e, 0x20, 0x31, 0x84, 0x5a, 0x88, 0x1a,
-	0x21, 0x2b, 0x2e, 0xae, 0x9c, 0xcc, 0xb2, 0xd4, 0xc4, 0xa4, 0xfc, 0xc4, 0xa2, 0x14, 0x09, 0x2e,
-	0xb0, 0x0e, 0x09, 0xa8, 0x0e, 0x1f, 0xb8, 0x04, 0x42, 0x1b, 0x92, 0x6a, 0x27, 0x36, 0x2e, 0x96,
-	0x92, 0xca, 0x82, 0x54, 0xa5, 0x4d, 0x8c, 0x5c, 0xa2, 0x68, 0x6e, 0x2e, 0x2e, 0xc8, 0xcf, 0x2b,
-	0x4e, 0x1d, 0xcc, 0x8e, 0x5e, 0xc2, 0xc4, 0x25, 0xe8, 0x9e, 0x5a, 0x82, 0x16, 0xca, 0xa6, 0x28,
-	0x0e, 0x96, 0xd7, 0x83, 0x45, 0x19, 0x86, 0x4a, 0xb0, 0x27, 0xe0, 0xae, 0xb7, 0x40, 0x75, 0xbd,
-	0x02, 0x1e, 0x7d, 0x60, 0x1f, 0x21, 0xbc, 0xe2, 0x8e, 0xc5, 0x2b, 0xaa, 0x78, 0xb4, 0x23, 0xbc,
-	0x87, 0xea, 0x2f, 0x29, 0x31, 0x2e, 0x16, 0x90, 0x93, 0x84, 0xf8, 0xb8, 0x98, 0x32, 0x53, 0xc0,
-	0xee, 0x67, 0x09, 0x62, 0xca, 0x4c, 0x91, 0x12, 0xe7, 0x62, 0x05, 0x5b, 0x89, 0x21, 0x21, 0xc3,
-	0xc5, 0x85, 0x30, 0x0c, 0x5d, 0x16, 0x1e, 0x4c, 0xeb, 0x19, 0xb9, 0x84, 0x90, 0x5d, 0x31, 0xe8,
-	0x23, 0xd6, 0x68, 0x35, 0x23, 0x17, 0x1f, 0x54, 0x45, 0x70, 0x6a, 0x51, 0x59, 0x66, 0x72, 0xaa,
-	0x50, 0x00, 0x17, 0x2f, 0x4a, 0xfa, 0x14, 0x92, 0x85, 0x87, 0x30, 0xb6, 0xbc, 0x26, 0x25, 0x87,
-	0x4b, 0x1a, 0xe2, 0x7b, 0x25, 0x06, 0x50, 0xb4, 0x21, 0x42, 0x45, 0x48, 0x0a, 0x77, 0x84, 0x49,
-	0x49, 0x63, 0x95, 0x83, 0x19, 0xe4, 0x64, 0x75, 0xe1, 0xa1, 0x1c, 0xc3, 0x8d, 0x87, 0x72, 0x0c,
-	0x1f, 0x1e, 0xca, 0x31, 0x36, 0x3c, 0x92, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39,
-	0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x7c, 0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23,
-	0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x2e, 0x3c, 0x96, 0x63, 0xb8, 0xf1, 0x58, 0x8e, 0x21, 0x8a,
-	0x45, 0x4f, 0xbf, 0x20, 0x29, 0x89, 0x0d, 0x5c, 0x64, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0x1e, 0x7b, 0xb0, 0x6b, 0x59, 0x04, 0x00, 0x00,
+	// 339 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x92, 0xbd, 0x4e, 0x02, 0x41,
+	0x14, 0x85, 0x67, 0x12, 0xc0, 0x64, 0x08, 0x16, 0xe3, 0x4f, 0x36, 0x6b, 0xbc, 0x31, 0x5b, 0x91,
+	0x98, 0x0c, 0x09, 0x76, 0x94, 0xa0, 0x09, 0x85, 0x85, 0x41, 0x2b, 0x3b, 0x16, 0xae, 0xb8, 0xc9,
+	0x2e, 0x33, 0x2e, 0x03, 0x09, 0x9d, 0x8f, 0xe0, 0x63, 0x58, 0xd8, 0xe8, 0x53, 0x58, 0x52, 0x52,
+	0xca, 0xd0, 0x58, 0xf2, 0x08, 0x66, 0x77, 0x16, 0x01, 0x83, 0xbd, 0x96, 0x73, 0xef, 0x77, 0x4e,
+	0x6e, 0xce, 0x1c, 0x56, 0xea, 0xc8, 0x28, 0xc2, 0xbe, 0x16, 0x2a, 0x96, 0x5a, 0xf2, 0x9d, 0xec,
+	0xe9, 0x16, 0x23, 0xd9, 0xc5, 0xd0, 0x4e, 0xdd, 0xa3, 0x9e, 0x94, 0xbd, 0x10, 0x2b, 0xe9, 0xcb,
+	0x1f, 0xde, 0x55, 0x30, 0x52, 0x7a, 0x6c, 0x97, 0xde, 0x2b, 0x65, 0xfb, 0x8d, 0x18, 0xdb, 0x1a,
+	0x1b, 0x56, 0xdb, 0xc2, 0x87, 0x21, 0x0e, 0x34, 0x2f, 0xb3, 0x9c, 0x8e, 0x03, 0xe5, 0xd0, 0x13,
+	0x5a, 0x2e, 0x56, 0xb9, 0xb0, 0x8e, 0x37, 0x71, 0xa0, 0x32, 0xb0, 0x49, 0x5a, 0x29, 0xc1, 0x4f,
+	0x59, 0xfe, 0x5e, 0x6a, 0x0c, 0x9d, 0x7c, 0x8a, 0xee, 0x65, 0x68, 0x33, 0x99, 0xad, 0x58, 0xcb,
+	0xf0, 0x1a, 0x63, 0x61, 0x30, 0xc2, 0xb6, 0x2f, 0xdb, 0x71, 0xd7, 0x61, 0xa9, 0xc2, 0xc9, 0x14,
+	0x97, 0xdf, 0x8b, 0x95, 0x6c, 0x8d, 0xae, 0x17, 0x58, 0x4e, 0x8f, 0x15, 0x7a, 0x6f, 0x94, 0x1d,
+	0xfc, 0xb8, 0x79, 0xa0, 0x64, 0x7f, 0x80, 0x7f, 0xf9, 0xe8, 0x24, 0xe8, 0x73, 0x0c, 0xf1, 0x1f,
+	0x05, 0x5d, 0x7d, 0xa1, 0x6c, 0x37, 0x23, 0xae, 0x31, 0x1e, 0x05, 0x1d, 0xe4, 0x57, 0xac, 0xb4,
+	0x11, 0x3d, 0x3f, 0x16, 0xcb, 0x0e, 0x6e, 0xab, 0x91, 0x0b, 0xbf, 0xad, 0xed, 0x8f, 0x79, 0x84,
+	0x37, 0x59, 0x69, 0x23, 0x97, 0x35, 0xc7, 0x6d, 0x79, 0xb9, 0x87, 0xc2, 0xf6, 0x59, 0x2c, 0xfb,
+	0x2c, 0x2e, 0x92, 0x3e, 0x7b, 0xa4, 0x5e, 0x9b, 0xcc, 0x80, 0x4c, 0x67, 0x40, 0x16, 0x33, 0xa0,
+	0x8f, 0x06, 0xe8, 0xb3, 0x01, 0xfa, 0x6e, 0x80, 0x4e, 0x0c, 0xd0, 0x0f, 0x03, 0xf4, 0xd3, 0x00,
+	0x59, 0x18, 0xa0, 0x4f, 0x73, 0x20, 0x93, 0x39, 0x90, 0xe9, 0x1c, 0xc8, 0x6d, 0x4e, 0x54, 0x94,
+	0xef, 0x17, 0x52, 0xb7, 0xb3, 0xaf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x31, 0xb5, 0xc4, 0x08, 0x52,
+	0x03, 0x00, 0x00,
 }
 
 func (this *CreateCommentRequest) Equal(that interface{}) bool {
@@ -806,14 +568,14 @@ func (this *CreateCommentResponse_Liveaboard) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *GetCommentRequest) Equal(that interface{}) bool {
+func (this *DeleteCommentRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*GetCommentRequest)
+	that1, ok := that.(*DeleteCommentRequest)
 	if !ok {
-		that2, ok := that.(GetCommentRequest)
+		that2, ok := that.(DeleteCommentRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -836,14 +598,14 @@ func (this *GetCommentRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *GetCommentRequest_Trip_) Equal(that interface{}) bool {
+func (this *DeleteCommentRequest_Trip) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*GetCommentRequest_Trip_)
+	that1, ok := that.(*DeleteCommentRequest_Trip)
 	if !ok {
-		that2, ok := that.(GetCommentRequest_Trip_)
+		that2, ok := that.(DeleteCommentRequest_Trip)
 		if ok {
 			that1 = &that2
 		} else {
@@ -860,14 +622,14 @@ func (this *GetCommentRequest_Trip_) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *GetCommentRequest_Hotel_) Equal(that interface{}) bool {
+func (this *DeleteCommentRequest_Hotel) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*GetCommentRequest_Hotel_)
+	that1, ok := that.(*DeleteCommentRequest_Hotel)
 	if !ok {
-		that2, ok := that.(GetCommentRequest_Hotel_)
+		that2, ok := that.(DeleteCommentRequest_Hotel)
 		if ok {
 			that1 = &that2
 		} else {
@@ -884,188 +646,14 @@ func (this *GetCommentRequest_Hotel_) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *GetCommentRequest_Liveaboard_) Equal(that interface{}) bool {
+func (this *DeleteCommentRequest_Liveaboard) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*GetCommentRequest_Liveaboard_)
+	that1, ok := that.(*DeleteCommentRequest_Liveaboard)
 	if !ok {
-		that2, ok := that.(GetCommentRequest_Liveaboard_)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.Liveaboard.Equal(that1.Liveaboard) {
-		return false
-	}
-	return true
-}
-func (this *GetCommentRequest_Trip) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentRequest_Trip)
-	if !ok {
-		that2, ok := that.(GetCommentRequest_Trip)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	return true
-}
-func (this *GetCommentRequest_Hotel) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentRequest_Hotel)
-	if !ok {
-		that2, ok := that.(GetCommentRequest_Hotel)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	return true
-}
-func (this *GetCommentRequest_Liveaboard) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentRequest_Liveaboard)
-	if !ok {
-		that2, ok := that.(GetCommentRequest_Liveaboard)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Id != that1.Id {
-		return false
-	}
-	return true
-}
-func (this *GetCommentResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentResponse)
-	if !ok {
-		that2, ok := that.(GetCommentResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if that1.Type == nil {
-		if this.Type != nil {
-			return false
-		}
-	} else if this.Type == nil {
-		return false
-	} else if !this.Type.Equal(that1.Type) {
-		return false
-	}
-	return true
-}
-func (this *GetCommentResponse_Trip) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentResponse_Trip)
-	if !ok {
-		that2, ok := that.(GetCommentResponse_Trip)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.Trip.Equal(that1.Trip) {
-		return false
-	}
-	return true
-}
-func (this *GetCommentResponse_Hotel) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentResponse_Hotel)
-	if !ok {
-		that2, ok := that.(GetCommentResponse_Hotel)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !this.Hotel.Equal(that1.Hotel) {
-		return false
-	}
-	return true
-}
-func (this *GetCommentResponse_Liveaboard) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetCommentResponse_Liveaboard)
-	if !ok {
-		that2, ok := that.(GetCommentResponse_Liveaboard)
+		that2, ok := that.(DeleteCommentRequest_Liveaboard)
 		if ok {
 			that1 = &that2
 		} else {
@@ -1154,105 +742,39 @@ func (this *CreateCommentResponse_Liveaboard) GoString() string {
 		`Liveaboard:` + fmt.Sprintf("%#v", this.Liveaboard) + `}`}, ", ")
 	return s
 }
-func (this *GetCommentRequest) GoString() string {
+func (this *DeleteCommentRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 7)
-	s = append(s, "&pb.GetCommentRequest{")
+	s = append(s, "&pb.DeleteCommentRequest{")
 	if this.Type != nil {
 		s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *GetCommentRequest_Trip_) GoString() string {
+func (this *DeleteCommentRequest_Trip) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&pb.GetCommentRequest_Trip_{` +
+	s := strings.Join([]string{`&pb.DeleteCommentRequest_Trip{` +
 		`Trip:` + fmt.Sprintf("%#v", this.Trip) + `}`}, ", ")
 	return s
 }
-func (this *GetCommentRequest_Hotel_) GoString() string {
+func (this *DeleteCommentRequest_Hotel) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&pb.GetCommentRequest_Hotel_{` +
+	s := strings.Join([]string{`&pb.DeleteCommentRequest_Hotel{` +
 		`Hotel:` + fmt.Sprintf("%#v", this.Hotel) + `}`}, ", ")
 	return s
 }
-func (this *GetCommentRequest_Liveaboard_) GoString() string {
+func (this *DeleteCommentRequest_Liveaboard) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&pb.GetCommentRequest_Liveaboard_{` +
-		`Liveaboard:` + fmt.Sprintf("%#v", this.Liveaboard) + `}`}, ", ")
-	return s
-}
-func (this *GetCommentRequest_Trip) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.GetCommentRequest_Trip{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *GetCommentRequest_Hotel) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.GetCommentRequest_Hotel{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *GetCommentRequest_Liveaboard) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.GetCommentRequest_Liveaboard{")
-	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *GetCommentResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.GetCommentResponse{")
-	if this.Type != nil {
-		s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *GetCommentResponse_Trip) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.GetCommentResponse_Trip{` +
-		`Trip:` + fmt.Sprintf("%#v", this.Trip) + `}`}, ", ")
-	return s
-}
-func (this *GetCommentResponse_Hotel) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.GetCommentResponse_Hotel{` +
-		`Hotel:` + fmt.Sprintf("%#v", this.Hotel) + `}`}, ", ")
-	return s
-}
-func (this *GetCommentResponse_Liveaboard) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&pb.GetCommentResponse_Liveaboard{` +
+	s := strings.Join([]string{`&pb.DeleteCommentRequest_Liveaboard{` +
 		`Liveaboard:` + fmt.Sprintf("%#v", this.Liveaboard) + `}`}, ", ")
 	return s
 }
@@ -1278,7 +800,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CommentServiceClient interface {
 	CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
-	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
+	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type commentServiceClient struct {
@@ -1298,9 +820,9 @@ func (c *commentServiceClient) CreateComment(ctx context.Context, in *CreateComm
 	return out, nil
 }
 
-func (c *commentServiceClient) GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error) {
-	out := new(GetCommentResponse)
-	err := c.cc.Invoke(ctx, "/comment.CommentService/GetComment", in, out, opts...)
+func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/comment.CommentService/DeleteComment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1310,7 +832,7 @@ func (c *commentServiceClient) GetComment(ctx context.Context, in *GetCommentReq
 // CommentServiceServer is the server API for CommentService service.
 type CommentServiceServer interface {
 	CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error)
-	GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error)
+	DeleteComment(context.Context, *DeleteCommentRequest) (*empty.Empty, error)
 }
 
 // UnimplementedCommentServiceServer can be embedded to have forward compatible implementations.
@@ -1320,8 +842,8 @@ type UnimplementedCommentServiceServer struct {
 func (*UnimplementedCommentServiceServer) CreateComment(ctx context.Context, req *CreateCommentRequest) (*CreateCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateComment not implemented")
 }
-func (*UnimplementedCommentServiceServer) GetComment(ctx context.Context, req *GetCommentRequest) (*GetCommentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetComment not implemented")
+func (*UnimplementedCommentServiceServer) DeleteComment(ctx context.Context, req *DeleteCommentRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
 }
 
 func RegisterCommentServiceServer(s *grpc.Server, srv CommentServiceServer) {
@@ -1346,20 +868,20 @@ func _CommentService_CreateComment_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CommentService_GetComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCommentRequest)
+func _CommentService_DeleteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCommentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommentServiceServer).GetComment(ctx, in)
+		return srv.(CommentServiceServer).DeleteComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/comment.CommentService/GetComment",
+		FullMethod: "/comment.CommentService/DeleteComment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).GetComment(ctx, req.(*GetCommentRequest))
+		return srv.(CommentServiceServer).DeleteComment(ctx, req.(*DeleteCommentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1373,8 +895,8 @@ var _CommentService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _CommentService_CreateComment_Handler,
 		},
 		{
-			MethodName: "GetComment",
-			Handler:    _CommentService_GetComment_Handler,
+			MethodName: "DeleteComment",
+			Handler:    _CommentService_DeleteComment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1571,7 +1093,7 @@ func (m *CreateCommentResponse_Liveaboard) MarshalToSizedBuffer(dAtA []byte) (in
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetCommentRequest) Marshal() (dAtA []byte, err error) {
+func (m *DeleteCommentRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1581,12 +1103,12 @@ func (m *GetCommentRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetCommentRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetCommentRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1603,12 +1125,12 @@ func (m *GetCommentRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *GetCommentRequest_Trip_) MarshalTo(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Trip) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetCommentRequest_Trip_) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Trip != nil {
 		{
@@ -1624,12 +1146,12 @@ func (m *GetCommentRequest_Trip_) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetCommentRequest_Hotel_) MarshalTo(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Hotel) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetCommentRequest_Hotel_) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Hotel != nil {
 		{
@@ -1645,191 +1167,12 @@ func (m *GetCommentRequest_Hotel_) MarshalToSizedBuffer(dAtA []byte) (int, error
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetCommentRequest_Liveaboard_) MarshalTo(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Liveaboard) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetCommentRequest_Liveaboard_) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.Liveaboard != nil {
-		{
-			size, err := m.Liveaboard.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintComment(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x52
-	}
-	return len(dAtA) - i, nil
-}
-func (m *GetCommentRequest_Trip) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetCommentRequest_Trip) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentRequest_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintComment(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetCommentRequest_Hotel) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetCommentRequest_Hotel) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentRequest_Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintComment(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetCommentRequest_Liveaboard) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetCommentRequest_Liveaboard) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentRequest_Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintComment(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetCommentResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetCommentResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Type != nil {
-		{
-			size := m.Type.Size()
-			i -= size
-			if _, err := m.Type.MarshalTo(dAtA[i:]); err != nil {
-				return 0, err
-			}
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetCommentResponse_Trip) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentResponse_Trip) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.Trip != nil {
-		{
-			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintComment(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-func (m *GetCommentResponse_Hotel) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentResponse_Hotel) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.Hotel != nil {
-		{
-			size, err := m.Hotel.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintComment(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x2a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *GetCommentResponse_Liveaboard) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetCommentResponse_Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DeleteCommentRequest_Liveaboard) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Liveaboard != nil {
 		{
@@ -1952,7 +1295,7 @@ func (m *CreateCommentResponse_Liveaboard) Size() (n int) {
 	}
 	return n
 }
-func (m *GetCommentRequest) Size() (n int) {
+func (m *DeleteCommentRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1964,7 +1307,7 @@ func (m *GetCommentRequest) Size() (n int) {
 	return n
 }
 
-func (m *GetCommentRequest_Trip_) Size() (n int) {
+func (m *DeleteCommentRequest_Trip) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1976,7 +1319,7 @@ func (m *GetCommentRequest_Trip_) Size() (n int) {
 	}
 	return n
 }
-func (m *GetCommentRequest_Hotel_) Size() (n int) {
+func (m *DeleteCommentRequest_Hotel) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1988,91 +1331,7 @@ func (m *GetCommentRequest_Hotel_) Size() (n int) {
 	}
 	return n
 }
-func (m *GetCommentRequest_Liveaboard_) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Liveaboard != nil {
-		l = m.Liveaboard.Size()
-		n += 1 + l + sovComment(uint64(l))
-	}
-	return n
-}
-func (m *GetCommentRequest_Trip) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovComment(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *GetCommentRequest_Hotel) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovComment(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *GetCommentRequest_Liveaboard) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovComment(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *GetCommentResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Type != nil {
-		n += m.Type.Size()
-	}
-	return n
-}
-
-func (m *GetCommentResponse_Trip) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Trip != nil {
-		l = m.Trip.Size()
-		n += 1 + l + sovComment(uint64(l))
-	}
-	return n
-}
-func (m *GetCommentResponse_Hotel) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Hotel != nil {
-		l = m.Hotel.Size()
-		n += 1 + l + sovComment(uint64(l))
-	}
-	return n
-}
-func (m *GetCommentResponse_Liveaboard) Size() (n int) {
+func (m *DeleteCommentRequest_Liveaboard) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2171,111 +1430,41 @@ func (this *CreateCommentResponse_Liveaboard) String() string {
 	}, "")
 	return s
 }
-func (this *GetCommentRequest) String() string {
+func (this *DeleteCommentRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&GetCommentRequest{`,
+	s := strings.Join([]string{`&DeleteCommentRequest{`,
 		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *GetCommentRequest_Trip_) String() string {
+func (this *DeleteCommentRequest_Trip) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&GetCommentRequest_Trip_{`,
-		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "GetCommentRequest_Trip", "GetCommentRequest_Trip", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentRequest_Hotel_) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentRequest_Hotel_{`,
-		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "GetCommentRequest_Hotel", "GetCommentRequest_Hotel", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentRequest_Liveaboard_) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentRequest_Liveaboard_{`,
-		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "GetCommentRequest_Liveaboard", "GetCommentRequest_Liveaboard", 1) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentRequest_Trip) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentRequest_Trip{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentRequest_Hotel) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentRequest_Hotel{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentRequest_Liveaboard) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentRequest_Liveaboard{`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentResponse{`,
-		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetCommentResponse_Trip) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetCommentResponse_Trip{`,
+	s := strings.Join([]string{`&DeleteCommentRequest_Trip{`,
 		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "TripComment", "TripComment", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *GetCommentResponse_Hotel) String() string {
+func (this *DeleteCommentRequest_Hotel) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&GetCommentResponse_Hotel{`,
+	s := strings.Join([]string{`&DeleteCommentRequest_Hotel{`,
 		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "HotelComment", "HotelComment", 1) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *GetCommentResponse_Liveaboard) String() string {
+func (this *DeleteCommentRequest_Liveaboard) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&GetCommentResponse_Liveaboard{`,
+	s := strings.Join([]string{`&DeleteCommentRequest_Liveaboard{`,
 		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "LiveaboardComment", "LiveaboardComment", 1) + `,`,
 		`}`,
 	}, "")
@@ -2599,7 +1788,7 @@ func (m *CreateCommentResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetCommentRequest) Unmarshal(dAtA []byte) error {
+func (m *DeleteCommentRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2622,372 +1811,10 @@ func (m *GetCommentRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetCommentRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: DeleteCommentRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetCommentRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthComment
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthComment
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			v := &GetCommentRequest_Trip{}
-			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			m.Type = &GetCommentRequest_Trip_{v}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hotel", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthComment
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthComment
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			v := &GetCommentRequest_Hotel{}
-			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			m.Type = &GetCommentRequest_Hotel_{v}
-			iNdEx = postIndex
-		case 10:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Liveaboard", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthComment
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthComment
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			v := &GetCommentRequest_Liveaboard{}
-			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			m.Type = &GetCommentRequest_Liveaboard_{v}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipComment(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthComment
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetCommentRequest_Trip) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowComment
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Trip: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Trip: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipComment(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthComment
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetCommentRequest_Hotel) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowComment
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Hotel: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Hotel: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipComment(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthComment
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetCommentRequest_Liveaboard) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowComment
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Liveaboard: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Liveaboard: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowComment
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipComment(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthComment
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetCommentResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowComment
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: GetCommentResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetCommentResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DeleteCommentRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3023,7 +1850,7 @@ func (m *GetCommentResponse) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Type = &GetCommentResponse_Trip{v}
+			m.Type = &DeleteCommentRequest_Trip{v}
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
@@ -3058,7 +1885,7 @@ func (m *GetCommentResponse) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Type = &GetCommentResponse_Hotel{v}
+			m.Type = &DeleteCommentRequest_Hotel{v}
 			iNdEx = postIndex
 		case 10:
 			if wireType != 2 {
@@ -3093,7 +1920,7 @@ func (m *GetCommentResponse) Unmarshal(dAtA []byte) error {
 			if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			m.Type = &GetCommentResponse_Liveaboard{v}
+			m.Type = &DeleteCommentRequest_Liveaboard{v}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
