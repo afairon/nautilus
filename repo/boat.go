@@ -74,7 +74,8 @@ func (repo *boatRepository) ListBoatsByAgency(ctx context.Context, id, limit, of
 	// return results, nil
 	var boats []*model.Boat
 
-	result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&boats)
+	result := repo.db.Preload("Address").Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&boats)
+
 	return boats, result.Error
 }
 

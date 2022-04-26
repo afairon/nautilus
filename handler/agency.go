@@ -116,22 +116,14 @@ func (handler *AgencyHandler) AddLiveaboard(ctx context.Context, req *pb.AddLive
 func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyService_ListBoatsServer) error {
 	ctx := srv.Context()
 
-	boats, err := handler.agencyService.ListBoats(ctx, req.GetLimit(), req.GetOffset())
+	boats, err := handler.agencyService.ListBoats(ctx, req.Limit, req.Offset)
 	if err != nil {
 		return err
 	}
 
 	for _, boat := range boats {
 		resp := &pb.ListBoatsResponse{
-			Boat: &pb.Boat{
-				Id:            uint64(boat.ID),
-				Name:          boat.Name,
-				TotalCapacity: boat.TotalCapacity,
-				DiverCapacity: boat.DiverCapacity,
-				StaffCapacity: boat.StaffCapacity,
-				CreatedAt:     &boat.CreatedAt,
-				UpdatedAt:     &boat.UpdatedAt,
-			},
+			Boat: boat.GetProto(),
 		}
 
 		if len(boat.Images) > 0 {

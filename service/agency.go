@@ -435,8 +435,12 @@ func (service *agencyService) ListBoats(ctx context.Context, limit, offset uint6
 	}
 
 	for _, boat := range boats {
-		for idx, id := range boat.Images {
-			boat.Images[idx] = service.media.Get(id, false)
+		for _, doc := range boat.Images {
+			file := model.File{
+				Filename: doc,
+				URL:      service.media.Get(doc, true),
+			}
+			boat.Files = append(boat.Files, &file)
 		}
 	}
 
@@ -708,6 +712,8 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *model.Trip) 
 	if oldTrip.AgencyID != agency.ID {
 		return status.Error(codes.InvalidArgument, "this trip does not belong to this agency")
 	}
+
+	trip.AgencyID = oldTrip.AgencyID
 
 	_, err = service.repo.Trip.UpdateTrip(ctx, trip)
 

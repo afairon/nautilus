@@ -506,6 +506,33 @@ func (b *Boat) From(boat *pb.Boat) {
 	}
 }
 
+func (b *Boat) GetProto() *pb.Boat {
+	boat := pb.Boat{
+		Id:            uint64(b.ID),
+		Name:          b.Name,
+		Description:   b.Description,
+		TotalCapacity: b.TotalCapacity,
+		DiverCapacity: b.DiverCapacity,
+		StaffCapacity: b.StaffCapacity,
+		Address:       b.Address.GetProto(),
+		CreatedAt:     &b.CreatedAt,
+		UpdatedAt:     &b.UpdatedAt,
+	}
+
+	if len(b.Files) > 0 {
+		boat.Images = make([]*pb.File, 0, len(b.Files))
+		for _, f := range b.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			boat.Images = append(boat.Images, &file)
+		}
+	}
+
+	return &boat
+}
+
 type TripTemplate struct {
 	gorm.Model
 	Name         string         `gorm:"not null"`

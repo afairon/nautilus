@@ -401,7 +401,7 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error) {
 
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Model(trip).Omit("ReservationRoomTypes", "AgencyID").Updates(trip).Error; err != nil {
+		if err := tx.Model(trip).Omit("ReservationRoomTypes").Updates(trip).Error; err != nil {
 			return err
 		}
 
