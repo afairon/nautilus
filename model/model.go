@@ -728,7 +728,7 @@ func (d *DiveSite) GetProto() *pb.DiveSite {
 
 type Reservation struct {
 	*gorm.Model
-	Price             float32 `gorm:"not null"`
+	Price             float32 `gorm:"not null" json:"price,omitempty"`
 	TotalDivers       uint    `gorm:"not null;default:0"`
 	LiveaboardComment *LiveaboardComment
 	HotelComment      *HotelComment
@@ -975,7 +975,7 @@ func (h *Hotel) From(hotel *pb.Hotel) {
 		h.Address = addr
 	}
 
-	if h.RoomTypes != nil && len(hotel.RoomTypes) > 0 {
+	if hotel.RoomTypes != nil && len(hotel.RoomTypes) > 0 {
 		h.RoomTypes = make([]RoomType, 0, len(hotel.RoomTypes))
 
 		for _, roomType := range hotel.RoomTypes {

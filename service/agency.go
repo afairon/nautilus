@@ -733,6 +733,10 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 		return status.Error(codes.InvalidArgument, "the hotel does not belong to this agency")
 	}
 
+	hotel.AgencyID = oldHotel.AgencyID
+	hotel.AddressID = oldHotel.AddressID
+	hotel.Address.ID = oldHotel.AddressID
+
 	oldHotelDocs := map[string]struct{}{}
 	for _, doc := range oldHotel.Images {
 		oldHotelDocs[doc] = struct{}{}
@@ -744,7 +748,15 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 			oldRoomTypesDocs[doc] = struct{}{}
 		}
 	}
+
 	for _, f := range hotel.Files {
+		_, ok := oldHotelDocs[f.Filename]
+		// append old images
+		if ok && len(f.Buffer) == 0 {
+			hotel.Images = append(hotel.Images, f.Filename)
+			continue
+		}
+
 		if len(f.Buffer) > 0 {
 			reader := bytes.NewReader(f.Buffer)
 			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
@@ -752,13 +764,27 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 				return err
 			}
 			hotel.Images = append(hotel.Images, objectID)
-			continue
 		}
-		_, ok := oldHotelDocs[f.Filename]
-		if !ok {
-			continue
+	}
+
+	for _, roomType := range hotel.RoomTypes {
+		for _, f := range roomType.Files {
+			_, ok := oldRoomTypesDocs[f.Filename]
+			// append old images
+			if ok && len(f.Buffer) == 0 {
+				roomType.Images = append(roomType.Images, f.Filename)
+				continue
+			}
+
+			if len(f.Buffer) > 0 {
+				reader := bytes.NewReader(f.Buffer)
+				objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+				if err != nil {
+					return err
+				}
+				roomType.Images = append(roomType.Images, objectID)
+			}
 		}
-		agency.Documents = append(agency.Documents, f.Filename)
 	}
 
 	defer func() {
@@ -772,6 +798,17 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 				}
 				service.media.Delete(doc)
 			}
+
+			for _, roomType := range hotel.RoomTypes {
+				for _, doc := range roomType.Images {
+					_, ok := oldRoomTypesDocs[doc]
+					// skip old images
+					if ok {
+						continue
+					}
+					service.media.Delete(doc)
+				}
+			}
 		} else {
 			for _, doc := range hotel.Images {
 				_, ok := oldHotelDocs[doc]
@@ -781,8 +818,22 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 				}
 			}
 
+			for _, roomType := range hotel.RoomTypes {
+				for _, doc := range roomType.Images {
+					_, ok := oldRoomTypesDocs[doc]
+					if ok {
+						// Remove files from list to delete
+						delete(oldRoomTypesDocs, doc)
+					}
+				}
+			}
+
 			for doc := range oldHotelDocs {
 				// Delete files that are no longer needed
+				service.media.Delete(doc)
+			}
+
+			for doc := range oldRoomTypesDocs {
 				service.media.Delete(doc)
 			}
 		}

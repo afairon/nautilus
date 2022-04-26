@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -89,7 +90,7 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hotel, error) {
 	var hotel model.Hotel
 
-	if err := repo.db.Preload("Address").First(&hotel, id).Error; err != nil {
+	if err := repo.db.Preload("Address").Preload("RoomTypes.Amenities").First(&hotel, id).Error; err != nil {
 		return nil, err
 	}
 
@@ -98,12 +99,44 @@ func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hote
 
 func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Model(hotel).Omit("Coordinate", "AddressID", "RoomTypes").Updates(hotel).Error; err != nil {
+		if err := tx.Model(hotel).Omit("Coordinate").Updates(hotel).Error; err != nil {
 			return err
 		}
 
-		if err := tx.Model(hotel).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&hotel.Address); err != nil {
+		// Update address of Hotel
+		if err := tx.Model(&hotel.Address).Updates(&hotel.Address).Error; err != nil {
 			return err
+		}
+
+		// Update room types of hotel
+		if len(hotel.RoomTypes) > 0 {
+			// TODO refactor
+
+			for _, roomType := range hotel.RoomTypes {
+				if err := tx.Model(&roomType).Updates(&roomType).Error; err != nil {
+					return err
+				}
+
+				// if err := tx.Model(&roomType).Association("Amenities").Clear(); err != nil {
+				// 	return err
+				// }
+
+				fmt.Printf("%+v\n", hotel.RoomTypes)
+
+				if err := tx.Model(&roomType).Association("Amenities").Replace(roomType.Amenities); err != nil {
+					return err
+				}
+
+				fmt.Printf("%+v\n", hotel.RoomTypes)
+			}
+
+			// if err := tx.Model(hotel).Association("RoomTypes").Clear(); err != nil {
+			// 	return err
+			// }
+
+			// if err := tx.Model(hotel).Session(&gorm.Session{FullSaveAssociations: true}).Association("RoomTypes").Replace(&hotel.RoomTypes); err != nil {
+			// 	return err
+			// }
 		}
 
 		return nil
