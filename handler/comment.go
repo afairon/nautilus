@@ -68,6 +68,79 @@ func (handler *CommentHandler) CreateComment(ctx context.Context, req *pb.Create
 	return &resp, nil
 }
 
+// GetComment retrieves comment by id.
+func (handler *CommentHandler) GetComment(ctx context.Context, req *pb.GetCommentRequest) (*pb.GetCommentResponse, error) {
+	// newly created comment
+	resp := pb.GetCommentResponse{}
+
+	switch t := req.GetType().(type) {
+	case *pb.GetCommentRequest_Trip:
+		c := model.TripComment{}
+		c.From(t.Trip)
+		comment, err := handler.service.GetTripComment(ctx, &c)
+		if err != nil {
+			return nil, err
+		}
+		resp.Type = &pb.GetCommentResponse_Trip{
+			Trip: comment.GetProto(),
+		}
+	case *pb.GetCommentRequest_Hotel:
+		c := model.HotelComment{}
+		c.From(t.Hotel)
+		comment, err := handler.service.GetHotelComment(ctx, &c)
+		if err != nil {
+			return nil, err
+		}
+		resp.Type = &pb.GetCommentResponse_Hotel{
+			Hotel: comment.GetProto(),
+		}
+	case *pb.GetCommentRequest_Liveaboard:
+		c := model.LiveaboardComment{}
+		c.From(t.Liveaboard)
+		comment, err := handler.service.GetLiveaboardComment(ctx, &c)
+		if err != nil {
+			return nil, err
+		}
+		resp.Type = &pb.GetCommentResponse_Liveaboard{
+			Liveaboard: comment.GetProto(),
+		}
+	default:
+		// Cannot determine type of comment
+		return nil, status.Error(codes.InvalidArgument, "comment: invalid request")
+	}
+
+	return &resp, nil
+}
+
+// UpdateComment update comment by id.
+func (handler *CommentHandler) UpdateComment(ctx context.Context, req *pb.UpdateCommentRequest) (*empty.Empty, error) {
+	switch t := req.GetType().(type) {
+	case *pb.UpdateCommentRequest_Trip:
+		c := model.TripComment{}
+		c.From(t.Trip)
+		if err := handler.service.UpdateTripComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	case *pb.UpdateCommentRequest_Hotel:
+		c := model.HotelComment{}
+		c.From(t.Hotel)
+		if err := handler.service.UpdateHotelComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	case *pb.UpdateCommentRequest_Liveaboard:
+		c := model.LiveaboardComment{}
+		c.From(t.Liveaboard)
+		if err := handler.service.UpdateLiveaboardComment(ctx, &c); err != nil {
+			return nil, err
+		}
+	default:
+		// Cannot determine type of comment
+		return nil, status.Error(codes.InvalidArgument, "comment: invalid request")
+	}
+
+	return &empty.Empty{}, nil
+}
+
 // DeleteComment deletes comment by id.
 func (handler *CommentHandler) DeleteComment(ctx context.Context, req *pb.DeleteCommentRequest) (*empty.Empty, error) {
 	switch t := req.GetType().(type) {

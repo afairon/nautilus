@@ -1749,6 +1749,314 @@ func (m *UpdateStaffRequest) GetStaff() *Staff {
 	return nil
 }
 
+// DeleteDiveMasterRequest
+type DeleteDiveMasterRequest struct {
+	DiveMaster *DiveMaster `protobuf:"bytes,1,opt,name=dive_master,json=diveMaster,proto3" json:"dive_master,omitempty"`
+}
+
+func (m *DeleteDiveMasterRequest) Reset()      { *m = DeleteDiveMasterRequest{} }
+func (*DeleteDiveMasterRequest) ProtoMessage() {}
+func (*DeleteDiveMasterRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{34}
+}
+func (m *DeleteDiveMasterRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteDiveMasterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteDiveMasterRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteDiveMasterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteDiveMasterRequest.Merge(m, src)
+}
+func (m *DeleteDiveMasterRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteDiveMasterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteDiveMasterRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteDiveMasterRequest proto.InternalMessageInfo
+
+func (m *DeleteDiveMasterRequest) GetDiveMaster() *DiveMaster {
+	if m != nil {
+		return m.DiveMaster
+	}
+	return nil
+}
+
+// DeleteDivingBoatRequest
+type DeleteDivingBoatRequest struct {
+	DivingBoat *Boat `protobuf:"bytes,1,opt,name=diving_boat,json=divingBoat,proto3" json:"diving_boat,omitempty"`
+}
+
+func (m *DeleteDivingBoatRequest) Reset()      { *m = DeleteDivingBoatRequest{} }
+func (*DeleteDivingBoatRequest) ProtoMessage() {}
+func (*DeleteDivingBoatRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{35}
+}
+func (m *DeleteDivingBoatRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteDivingBoatRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteDivingBoatRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteDivingBoatRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteDivingBoatRequest.Merge(m, src)
+}
+func (m *DeleteDivingBoatRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteDivingBoatRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteDivingBoatRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteDivingBoatRequest proto.InternalMessageInfo
+
+func (m *DeleteDivingBoatRequest) GetDivingBoat() *Boat {
+	if m != nil {
+		return m.DivingBoat
+	}
+	return nil
+}
+
+// DeleteHotelRequest
+type DeleteHotelRequest struct {
+	Hotel *Hotel `protobuf:"bytes,1,opt,name=hotel,proto3" json:"hotel,omitempty"`
+}
+
+func (m *DeleteHotelRequest) Reset()      { *m = DeleteHotelRequest{} }
+func (*DeleteHotelRequest) ProtoMessage() {}
+func (*DeleteHotelRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{36}
+}
+func (m *DeleteHotelRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteHotelRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteHotelRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteHotelRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteHotelRequest.Merge(m, src)
+}
+func (m *DeleteHotelRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteHotelRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteHotelRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteHotelRequest proto.InternalMessageInfo
+
+func (m *DeleteHotelRequest) GetHotel() *Hotel {
+	if m != nil {
+		return m.Hotel
+	}
+	return nil
+}
+
+// DeleteLiveaboardRequest
+type DeleteLiveaboardRequest struct {
+	Liveaboard *Liveaboard `protobuf:"bytes,1,opt,name=liveaboard,proto3" json:"liveaboard,omitempty"`
+}
+
+func (m *DeleteLiveaboardRequest) Reset()      { *m = DeleteLiveaboardRequest{} }
+func (*DeleteLiveaboardRequest) ProtoMessage() {}
+func (*DeleteLiveaboardRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{37}
+}
+func (m *DeleteLiveaboardRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteLiveaboardRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteLiveaboardRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteLiveaboardRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteLiveaboardRequest.Merge(m, src)
+}
+func (m *DeleteLiveaboardRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteLiveaboardRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteLiveaboardRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteLiveaboardRequest proto.InternalMessageInfo
+
+func (m *DeleteLiveaboardRequest) GetLiveaboard() *Liveaboard {
+	if m != nil {
+		return m.Liveaboard
+	}
+	return nil
+}
+
+// DeleteStaffRequest
+type DeleteStaffRequest struct {
+	Staff *Staff `protobuf:"bytes,1,opt,name=staff,proto3" json:"staff,omitempty"`
+}
+
+func (m *DeleteStaffRequest) Reset()      { *m = DeleteStaffRequest{} }
+func (*DeleteStaffRequest) ProtoMessage() {}
+func (*DeleteStaffRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{38}
+}
+func (m *DeleteStaffRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteStaffRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteStaffRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteStaffRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteStaffRequest.Merge(m, src)
+}
+func (m *DeleteStaffRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteStaffRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteStaffRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteStaffRequest proto.InternalMessageInfo
+
+func (m *DeleteStaffRequest) GetStaff() *Staff {
+	if m != nil {
+		return m.Staff
+	}
+	return nil
+}
+
+// DeleteTripTemplateRequest
+type DeleteTripTemplateRequest struct {
+	TripTemplate *TripTemplate `protobuf:"bytes,1,opt,name=trip_template,json=tripTemplate,proto3" json:"trip_template,omitempty"`
+}
+
+func (m *DeleteTripTemplateRequest) Reset()      { *m = DeleteTripTemplateRequest{} }
+func (*DeleteTripTemplateRequest) ProtoMessage() {}
+func (*DeleteTripTemplateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{39}
+}
+func (m *DeleteTripTemplateRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteTripTemplateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteTripTemplateRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteTripTemplateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteTripTemplateRequest.Merge(m, src)
+}
+func (m *DeleteTripTemplateRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteTripTemplateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteTripTemplateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteTripTemplateRequest proto.InternalMessageInfo
+
+func (m *DeleteTripTemplateRequest) GetTripTemplate() *TripTemplate {
+	if m != nil {
+		return m.TripTemplate
+	}
+	return nil
+}
+
+// DeleteTripRequest
+type DeleteTripRequest struct {
+	Trip *Trip `protobuf:"bytes,1,opt,name=trip,proto3" json:"trip,omitempty"`
+}
+
+func (m *DeleteTripRequest) Reset()      { *m = DeleteTripRequest{} }
+func (*DeleteTripRequest) ProtoMessage() {}
+func (*DeleteTripRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_614a4be5fd9deed0, []int{40}
+}
+func (m *DeleteTripRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DeleteTripRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DeleteTripRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DeleteTripRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteTripRequest.Merge(m, src)
+}
+func (m *DeleteTripRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *DeleteTripRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteTripRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteTripRequest proto.InternalMessageInfo
+
+func (m *DeleteTripRequest) GetTrip() *Trip {
+	if m != nil {
+		return m.Trip
+	}
+	return nil
+}
+
 type GenerateCurrentTripsReportRequest struct {
 	Limit  uint64 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	Offset uint64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
@@ -1757,7 +2065,7 @@ type GenerateCurrentTripsReportRequest struct {
 func (m *GenerateCurrentTripsReportRequest) Reset()      { *m = GenerateCurrentTripsReportRequest{} }
 func (*GenerateCurrentTripsReportRequest) ProtoMessage() {}
 func (*GenerateCurrentTripsReportRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{34}
+	return fileDescriptor_614a4be5fd9deed0, []int{41}
 }
 func (m *GenerateCurrentTripsReportRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1807,7 +2115,7 @@ type GenerateCurrentTripsReportResponse struct {
 func (m *GenerateCurrentTripsReportResponse) Reset()      { *m = GenerateCurrentTripsReportResponse{} }
 func (*GenerateCurrentTripsReportResponse) ProtoMessage() {}
 func (*GenerateCurrentTripsReportResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{35}
+	return fileDescriptor_614a4be5fd9deed0, []int{42}
 }
 func (m *GenerateCurrentTripsReportResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1852,7 +2160,7 @@ type GenerateYearlyEndedTripsReportRequest struct {
 func (m *GenerateYearlyEndedTripsReportRequest) Reset()      { *m = GenerateYearlyEndedTripsReportRequest{} }
 func (*GenerateYearlyEndedTripsReportRequest) ProtoMessage() {}
 func (*GenerateYearlyEndedTripsReportRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{36}
+	return fileDescriptor_614a4be5fd9deed0, []int{43}
 }
 func (m *GenerateYearlyEndedTripsReportRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1911,7 +2219,7 @@ func (m *GenerateYearlyEndedTripsReportResponse) Reset() {
 }
 func (*GenerateYearlyEndedTripsReportResponse) ProtoMessage() {}
 func (*GenerateYearlyEndedTripsReportResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{37}
+	return fileDescriptor_614a4be5fd9deed0, []int{44}
 }
 func (m *GenerateYearlyEndedTripsReportResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1956,7 +2264,7 @@ type GenerateIncomingTripsReportRequest struct {
 func (m *GenerateIncomingTripsReportRequest) Reset()      { *m = GenerateIncomingTripsReportRequest{} }
 func (*GenerateIncomingTripsReportRequest) ProtoMessage() {}
 func (*GenerateIncomingTripsReportRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{38}
+	return fileDescriptor_614a4be5fd9deed0, []int{45}
 }
 func (m *GenerateIncomingTripsReportRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2013,7 +2321,7 @@ type GenerateIncomingTripsReportResponse struct {
 func (m *GenerateIncomingTripsReportResponse) Reset()      { *m = GenerateIncomingTripsReportResponse{} }
 func (*GenerateIncomingTripsReportResponse) ProtoMessage() {}
 func (*GenerateIncomingTripsReportResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_614a4be5fd9deed0, []int{39}
+	return fileDescriptor_614a4be5fd9deed0, []int{46}
 }
 func (m *GenerateIncomingTripsReportResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2084,6 +2392,13 @@ func init() {
 	proto.RegisterType((*UpdateBoatRequest)(nil), "agency.UpdateBoatRequest")
 	proto.RegisterType((*UpdateDiveMasterRequest)(nil), "agency.UpdateDiveMasterRequest")
 	proto.RegisterType((*UpdateStaffRequest)(nil), "agency.UpdateStaffRequest")
+	proto.RegisterType((*DeleteDiveMasterRequest)(nil), "agency.DeleteDiveMasterRequest")
+	proto.RegisterType((*DeleteDivingBoatRequest)(nil), "agency.DeleteDivingBoatRequest")
+	proto.RegisterType((*DeleteHotelRequest)(nil), "agency.DeleteHotelRequest")
+	proto.RegisterType((*DeleteLiveaboardRequest)(nil), "agency.DeleteLiveaboardRequest")
+	proto.RegisterType((*DeleteStaffRequest)(nil), "agency.DeleteStaffRequest")
+	proto.RegisterType((*DeleteTripTemplateRequest)(nil), "agency.DeleteTripTemplateRequest")
+	proto.RegisterType((*DeleteTripRequest)(nil), "agency.DeleteTripRequest")
 	proto.RegisterType((*GenerateCurrentTripsReportRequest)(nil), "agency.GenerateCurrentTripsReportRequest")
 	proto.RegisterType((*GenerateCurrentTripsReportResponse)(nil), "agency.GenerateCurrentTripsReportResponse")
 	proto.RegisterType((*GenerateYearlyEndedTripsReportRequest)(nil), "agency.GenerateYearlyEndedTripsReportRequest")
@@ -3197,6 +3512,174 @@ func (this *UpdateStaffRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *DeleteDiveMasterRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteDiveMasterRequest)
+	if !ok {
+		that2, ok := that.(DeleteDiveMasterRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.DiveMaster.Equal(that1.DiveMaster) {
+		return false
+	}
+	return true
+}
+func (this *DeleteDivingBoatRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteDivingBoatRequest)
+	if !ok {
+		that2, ok := that.(DeleteDivingBoatRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.DivingBoat.Equal(that1.DivingBoat) {
+		return false
+	}
+	return true
+}
+func (this *DeleteHotelRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteHotelRequest)
+	if !ok {
+		that2, ok := that.(DeleteHotelRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Hotel.Equal(that1.Hotel) {
+		return false
+	}
+	return true
+}
+func (this *DeleteLiveaboardRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteLiveaboardRequest)
+	if !ok {
+		that2, ok := that.(DeleteLiveaboardRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Liveaboard.Equal(that1.Liveaboard) {
+		return false
+	}
+	return true
+}
+func (this *DeleteStaffRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteStaffRequest)
+	if !ok {
+		that2, ok := that.(DeleteStaffRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Staff.Equal(that1.Staff) {
+		return false
+	}
+	return true
+}
+func (this *DeleteTripTemplateRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteTripTemplateRequest)
+	if !ok {
+		that2, ok := that.(DeleteTripTemplateRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.TripTemplate.Equal(that1.TripTemplate) {
+		return false
+	}
+	return true
+}
+func (this *DeleteTripRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*DeleteTripRequest)
+	if !ok {
+		that2, ok := that.(DeleteTripRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if !this.Trip.Equal(that1.Trip) {
+		return false
+	}
+	return true
+}
 func (this *GenerateCurrentTripsReportRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -3810,6 +4293,90 @@ func (this *UpdateStaffRequest) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *DeleteDiveMasterRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteDiveMasterRequest{")
+	if this.DiveMaster != nil {
+		s = append(s, "DiveMaster: "+fmt.Sprintf("%#v", this.DiveMaster)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteDivingBoatRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteDivingBoatRequest{")
+	if this.DivingBoat != nil {
+		s = append(s, "DivingBoat: "+fmt.Sprintf("%#v", this.DivingBoat)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteHotelRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteHotelRequest{")
+	if this.Hotel != nil {
+		s = append(s, "Hotel: "+fmt.Sprintf("%#v", this.Hotel)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteLiveaboardRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteLiveaboardRequest{")
+	if this.Liveaboard != nil {
+		s = append(s, "Liveaboard: "+fmt.Sprintf("%#v", this.Liveaboard)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteStaffRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteStaffRequest{")
+	if this.Staff != nil {
+		s = append(s, "Staff: "+fmt.Sprintf("%#v", this.Staff)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteTripTemplateRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteTripTemplateRequest{")
+	if this.TripTemplate != nil {
+		s = append(s, "TripTemplate: "+fmt.Sprintf("%#v", this.TripTemplate)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *DeleteTripRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.DeleteTripRequest{")
+	if this.Trip != nil {
+		s = append(s, "Trip: "+fmt.Sprintf("%#v", this.Trip)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *GenerateCurrentTripsReportRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -3915,6 +4482,13 @@ type AgencyServiceClient interface {
 	UpdateBoat(ctx context.Context, in *UpdateBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	UpdateDiveMaster(ctx context.Context, in *UpdateDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteDiveMaster(ctx context.Context, in *DeleteDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteDivingBoat(ctx context.Context, in *DeleteDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteHotel(ctx context.Context, in *DeleteHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteLiveaboard(ctx context.Context, in *DeleteLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteStaff(ctx context.Context, in *DeleteStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteTripTemplate(ctx context.Context, in *DeleteTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteTrip(ctx context.Context, in *DeleteTripRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	ListBoats(ctx context.Context, in *ListBoatsRequest, opts ...grpc.CallOption) (AgencyService_ListBoatsClient, error)
 	ListDiveMasters(ctx context.Context, in *ListDiveMastersRequest, opts ...grpc.CallOption) (AgencyService_ListDiveMastersClient, error)
 	ListHotels(ctx context.Context, in *ListHotelsRequest, opts ...grpc.CallOption) (AgencyService_ListHotelsClient, error)
@@ -4050,6 +4624,69 @@ func (c *agencyServiceClient) UpdateDiveMaster(ctx context.Context, in *UpdateDi
 func (c *agencyServiceClient) UpdateStaff(ctx context.Context, in *UpdateStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/agency.AgencyService/UpdateStaff", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteDiveMaster(ctx context.Context, in *DeleteDiveMasterRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteDiveMaster", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteDivingBoat(ctx context.Context, in *DeleteDivingBoatRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteDivingBoat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteHotel(ctx context.Context, in *DeleteHotelRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteHotel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteLiveaboard(ctx context.Context, in *DeleteLiveaboardRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteLiveaboard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteStaff(ctx context.Context, in *DeleteStaffRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteStaff", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteTripTemplate(ctx context.Context, in *DeleteTripTemplateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteTripTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agencyServiceClient) DeleteTrip(ctx context.Context, in *DeleteTripRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/agency.AgencyService/DeleteTrip", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4487,6 +5124,13 @@ type AgencyServiceServer interface {
 	UpdateBoat(context.Context, *UpdateBoatRequest) (*empty.Empty, error)
 	UpdateDiveMaster(context.Context, *UpdateDiveMasterRequest) (*empty.Empty, error)
 	UpdateStaff(context.Context, *UpdateStaffRequest) (*empty.Empty, error)
+	DeleteDiveMaster(context.Context, *DeleteDiveMasterRequest) (*empty.Empty, error)
+	DeleteDivingBoat(context.Context, *DeleteDivingBoatRequest) (*empty.Empty, error)
+	DeleteHotel(context.Context, *DeleteHotelRequest) (*empty.Empty, error)
+	DeleteLiveaboard(context.Context, *DeleteLiveaboardRequest) (*empty.Empty, error)
+	DeleteStaff(context.Context, *DeleteStaffRequest) (*empty.Empty, error)
+	DeleteTripTemplate(context.Context, *DeleteTripTemplateRequest) (*empty.Empty, error)
+	DeleteTrip(context.Context, *DeleteTripRequest) (*empty.Empty, error)
 	ListBoats(*ListBoatsRequest, AgencyService_ListBoatsServer) error
 	ListDiveMasters(*ListDiveMastersRequest, AgencyService_ListDiveMastersServer) error
 	ListHotels(*ListHotelsRequest, AgencyService_ListHotelsServer) error
@@ -4545,6 +5189,27 @@ func (*UnimplementedAgencyServiceServer) UpdateDiveMaster(ctx context.Context, r
 }
 func (*UnimplementedAgencyServiceServer) UpdateStaff(ctx context.Context, req *UpdateStaffRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStaff not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteDiveMaster(ctx context.Context, req *DeleteDiveMasterRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDiveMaster not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteDivingBoat(ctx context.Context, req *DeleteDivingBoatRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDivingBoat not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteHotel(ctx context.Context, req *DeleteHotelRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHotel not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteLiveaboard(ctx context.Context, req *DeleteLiveaboardRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteLiveaboard not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteStaff(ctx context.Context, req *DeleteStaffRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteStaff not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteTripTemplate(ctx context.Context, req *DeleteTripTemplateRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTripTemplate not implemented")
+}
+func (*UnimplementedAgencyServiceServer) DeleteTrip(ctx context.Context, req *DeleteTripRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTrip not implemented")
 }
 func (*UnimplementedAgencyServiceServer) ListBoats(req *ListBoatsRequest, srv AgencyService_ListBoatsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListBoats not implemented")
@@ -4820,6 +5485,132 @@ func _AgencyService_UpdateStaff_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgencyServiceServer).UpdateStaff(ctx, req.(*UpdateStaffRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteDiveMaster_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDiveMasterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteDiveMaster(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteDiveMaster",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteDiveMaster(ctx, req.(*DeleteDiveMasterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteDivingBoat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDivingBoatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteDivingBoat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteDivingBoat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteDivingBoat(ctx, req.(*DeleteDivingBoatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteHotel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteHotelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteHotel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteHotel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteHotel(ctx, req.(*DeleteHotelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteLiveaboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLiveaboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteLiveaboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteLiveaboard",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteLiveaboard(ctx, req.(*DeleteLiveaboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteStaff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteStaffRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteStaff(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteStaff",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteStaff(ctx, req.(*DeleteStaffRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteTripTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTripTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteTripTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteTripTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteTripTemplate(ctx, req.(*DeleteTripTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgencyService_DeleteTrip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTripRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgencyServiceServer).DeleteTrip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/agency.AgencyService/DeleteTrip",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgencyServiceServer).DeleteTrip(ctx, req.(*DeleteTripRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5152,6 +5943,34 @@ var _AgencyService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateStaff",
 			Handler:    _AgencyService_UpdateStaff_Handler,
+		},
+		{
+			MethodName: "DeleteDiveMaster",
+			Handler:    _AgencyService_DeleteDiveMaster_Handler,
+		},
+		{
+			MethodName: "DeleteDivingBoat",
+			Handler:    _AgencyService_DeleteDivingBoat_Handler,
+		},
+		{
+			MethodName: "DeleteHotel",
+			Handler:    _AgencyService_DeleteHotel_Handler,
+		},
+		{
+			MethodName: "DeleteLiveaboard",
+			Handler:    _AgencyService_DeleteLiveaboard_Handler,
+		},
+		{
+			MethodName: "DeleteStaff",
+			Handler:    _AgencyService_DeleteStaff_Handler,
+		},
+		{
+			MethodName: "DeleteTripTemplate",
+			Handler:    _AgencyService_DeleteTripTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTrip",
+			Handler:    _AgencyService_DeleteTrip_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -6521,6 +7340,251 @@ func (m *UpdateStaffRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *DeleteDiveMasterRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteDiveMasterRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteDiveMasterRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.DiveMaster != nil {
+		{
+			size, err := m.DiveMaster.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteDivingBoatRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteDivingBoatRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteDivingBoatRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.DivingBoat != nil {
+		{
+			size, err := m.DivingBoat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteHotelRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteHotelRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteHotelRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Hotel != nil {
+		{
+			size, err := m.Hotel.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteLiveaboardRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteLiveaboardRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteLiveaboardRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Liveaboard != nil {
+		{
+			size, err := m.Liveaboard.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteStaffRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteStaffRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteStaffRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Staff != nil {
+		{
+			size, err := m.Staff.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteTripTemplateRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteTripTemplateRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteTripTemplateRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.TripTemplate != nil {
+		{
+			size, err := m.TripTemplate.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DeleteTripRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DeleteTripRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DeleteTripRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Trip != nil {
+		{
+			size, err := m.Trip.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAgency(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *GenerateCurrentTripsReportRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -7281,6 +8345,97 @@ func (m *UpdateStaffRequest) Size() (n int) {
 	return n
 }
 
+func (m *DeleteDiveMasterRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DiveMaster != nil {
+		l = m.DiveMaster.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteDivingBoatRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DivingBoat != nil {
+		l = m.DivingBoat.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteHotelRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Hotel != nil {
+		l = m.Hotel.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteLiveaboardRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Liveaboard != nil {
+		l = m.Liveaboard.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteStaffRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Staff != nil {
+		l = m.Staff.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteTripTemplateRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.TripTemplate != nil {
+		l = m.TripTemplate.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
+func (m *DeleteTripRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Trip != nil {
+		l = m.Trip.Size()
+		n += 1 + l + sovAgency(uint64(l))
+	}
+	return n
+}
+
 func (m *GenerateCurrentTripsReportRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -7782,6 +8937,76 @@ func (this *UpdateStaffRequest) String() string {
 	}
 	s := strings.Join([]string{`&UpdateStaffRequest{`,
 		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "Staff", "Staff", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteDiveMasterRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteDiveMasterRequest{`,
+		`DiveMaster:` + strings.Replace(fmt.Sprintf("%v", this.DiveMaster), "DiveMaster", "DiveMaster", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteDivingBoatRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteDivingBoatRequest{`,
+		`DivingBoat:` + strings.Replace(fmt.Sprintf("%v", this.DivingBoat), "Boat", "Boat", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteHotelRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteHotelRequest{`,
+		`Hotel:` + strings.Replace(fmt.Sprintf("%v", this.Hotel), "Hotel", "Hotel", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteLiveaboardRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteLiveaboardRequest{`,
+		`Liveaboard:` + strings.Replace(fmt.Sprintf("%v", this.Liveaboard), "Liveaboard", "Liveaboard", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteStaffRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteStaffRequest{`,
+		`Staff:` + strings.Replace(fmt.Sprintf("%v", this.Staff), "Staff", "Staff", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteTripTemplateRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteTripTemplateRequest{`,
+		`TripTemplate:` + strings.Replace(fmt.Sprintf("%v", this.TripTemplate), "TripTemplate", "TripTemplate", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *DeleteTripRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&DeleteTripRequest{`,
+		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "Trip", "Trip", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -11049,6 +12274,608 @@ func (m *UpdateStaffRequest) Unmarshal(dAtA []byte) error {
 				m.Staff = &Staff{}
 			}
 			if err := m.Staff.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteDiveMasterRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteDiveMasterRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteDiveMasterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DiveMaster", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DiveMaster == nil {
+				m.DiveMaster = &DiveMaster{}
+			}
+			if err := m.DiveMaster.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteDivingBoatRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteDivingBoatRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteDivingBoatRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DivingBoat", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DivingBoat == nil {
+				m.DivingBoat = &Boat{}
+			}
+			if err := m.DivingBoat.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteHotelRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteHotelRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteHotelRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hotel", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Hotel == nil {
+				m.Hotel = &Hotel{}
+			}
+			if err := m.Hotel.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteLiveaboardRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteLiveaboardRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteLiveaboardRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Liveaboard", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Liveaboard == nil {
+				m.Liveaboard = &Liveaboard{}
+			}
+			if err := m.Liveaboard.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteStaffRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteStaffRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteStaffRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Staff", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Staff == nil {
+				m.Staff = &Staff{}
+			}
+			if err := m.Staff.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteTripTemplateRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteTripTemplateRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteTripTemplateRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripTemplate", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.TripTemplate == nil {
+				m.TripTemplate = &TripTemplate{}
+			}
+			if err := m.TripTemplate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAgency(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DeleteTripRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAgency
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DeleteTripRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DeleteTripRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Trip", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAgency
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAgency
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAgency
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Trip == nil {
+				m.Trip = &Trip{}
+			}
+			if err := m.Trip.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

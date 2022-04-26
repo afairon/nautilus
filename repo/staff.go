@@ -16,6 +16,7 @@ type StaffRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Staff, error)
 
 	UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
+	DeleteStaff(ctx context.Context, staff *model.Staff) error
 
 	ListStaffsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Staff, error)
 }
@@ -108,4 +109,8 @@ func (repo *staffRepository) UpdateStaff(ctx context.Context, staff *model.Staff
 	}
 
 	return staff, nil
+}
+
+func (repo *staffRepository) DeleteStaff(ctx context.Context, staff *model.Staff) error {
+	return repo.db.Delete(staff).Error
 }

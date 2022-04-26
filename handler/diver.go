@@ -32,7 +32,7 @@ func (handler *DiverHandler) ListReservationsWithTrips(req *pb.ListReservationsW
 
 	for _, reservation := range reservations {
 		resp := &pb.ListReservationsWithTripsResponse{
-			Trip:        reservation.Trip.GetProto(),
+			Trip:        reservation.Trip.GetProtoWithTemplate(),
 			Reservation: reservation.GetProto(),
 		}
 

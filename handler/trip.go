@@ -33,7 +33,7 @@ func (handler *TripHandler) ListValidTrips(req *pb.ListValidTripsRequest, srv pb
 
 	for _, trip := range trips {
 		resp := &pb.ListValidTripsResponse{
-			Trip: trip.GetProto(),
+			Trip: trip.GetProtoWithTemplate(),
 		}
 
 		srv.Send(resp)

@@ -10,6 +10,8 @@ option go_package = "./pb";
 
 service CommentService {
     rpc CreateComment (CreateCommentRequest) returns (CreateCommentResponse) {}
+    rpc GetComment (GetCommentRequest) returns (GetCommentResponse) {}
+    rpc UpdateComment (UpdateCommentRequest) returns (google.protobuf.Empty) {}
     rpc DeleteComment (DeleteCommentRequest) returns (google.protobuf.Empty) {}
 }
 
@@ -33,8 +35,39 @@ message CreateCommentResponse {
     }
 }
 
+// GetCommentRequest
+message GetCommentRequest {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}
+
+// GetCommentResponse
+message GetCommentResponse {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}
+
+// UpdateCommentRequest
+message UpdateCommentRequest {
+    // type defines type of comment
+    oneof type {
+        model.TripComment trip = 1;
+        model.HotelComment hotel = 5;
+        model.LiveaboardComment liveaboard = 10;
+    }
+}
+
 // DeleteCommentRequest
 message DeleteCommentRequest {
+    // type defines type of comment
     oneof type {
         model.TripComment trip = 1;
         model.HotelComment hotel = 5;

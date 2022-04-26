@@ -226,14 +226,14 @@ type Agency struct {
 	Account       *Account       `json:"account,omitempty"`
 	Name          string         `gorm:"not null" json:"name,omitempty"`
 	Phone         string         `gorm:"not null" json:"phone,omitempty"`
-	Documents     pq.StringArray `gorm:"type:text" json:"documents,omitempty"`
-	DiveMasters   []DiveMaster   `json:"dive_masters,omitempty"`
-	Staffs        []Staff        `json:"staffs,omitempty"`
-	Boats         []Boat         `json:"boats,omitempty"`
-	TripTemplates []TripTemplate `json:"trip_templates,omitempty"`
-	Liveaboards   []Liveaboard   `json:"liveaboards,omitempty"`
-	Hotels        []Hotel        `json:"hotels,omitempty"`
-	Trips         []Trip         `json:"trips,omitempty"`
+	Documents     pq.StringArray `gorm:"type:text" json:"-"`
+	DiveMasters   []DiveMaster   `json:"-"`
+	Staffs        []Staff        `json:"-"`
+	Boats         []Boat         `json:"-"`
+	TripTemplates []TripTemplate `json:"-"`
+	Liveaboards   []Liveaboard   `json:"-"`
+	Hotels        []Hotel        `json:"-"`
+	Trips         []Trip         `json:"-"`
 	Files         []*File        `gorm:"-" json:"-"`
 }
 
@@ -603,7 +603,41 @@ type Trip struct {
 	AgencyID                     uint `gorm:"not null"`
 }
 
-func (t *Trip) From(trip *pb.TripWithTemplate) {
+func (t *Trip) From(trip *pb.Trip) {
+	if trip == nil {
+		return
+	}
+
+	t.ID = uint(trip.Id)
+	t.MaxGuest = trip.MaxGuest
+	t.CurrentGuest = trip.CurentGuest
+	t.Price = trip.Price
+	t.StartDate = trip.StartDate
+	t.EndDate = trip.EndDate
+	t.LastReservationDate = trip.LastReservationDate
+	t.TripTemplateID = uint(trip.TripTemplateId)
+
+	if len(trip.DiveMasters) > 0 {
+		t.DiveMasters = make([]DiveMaster, 0, len(trip.DiveMasters))
+
+		for _, diveMaster := range trip.DiveMasters {
+			dm := DiveMaster{}
+			dm.From(diveMaster)
+			t.DiveMasters = append(t.DiveMasters, dm)
+		}
+	}
+
+	if len(trip.DiveSites) > 0 {
+		t.DiveSites = make([]DiveSite, 0, len(trip.DiveSites))
+
+		for _, diveSite := range trip.DiveSites {
+			ds := DiveSite{}
+			ds.From(diveSite)
+		}
+	}
+}
+
+func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	if trip == nil {
 		return
 	}
@@ -672,7 +706,39 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 	}
 }
 
-func (t *Trip) GetProto() *pb.TripWithTemplate {
+func (t *Trip) GetProto() *pb.Trip {
+	trip := pb.Trip{
+		Id:                  uint64(t.ID),
+		TripTemplateId:      uint64(t.TripTemplateID),
+		MaxGuest:            t.MaxGuest,
+		CurentGuest:         t.CurrentGuest,
+		Price:               t.Price,
+		StartDate:           t.StartDate,
+		EndDate:             t.EndDate,
+		LastReservationDate: t.LastReservationDate,
+		CreatedAt:           &t.CreatedAt,
+		UpdatedAt:           &t.UpdatedAt,
+	}
+
+	if len(t.DiveSites) > 0 {
+		trip.DiveSites = make([]*pb.DiveSite, 0, len(t.DiveSites))
+
+		for _, ds := range t.DiveSites {
+			trip.DiveSites = append(trip.DiveSites, ds.GetProto())
+		}
+	}
+
+	if len(t.DiveMasters) > 0 {
+		trip.DiveMasters = make([]*pb.DiveMaster, 0, len(t.DiveMasters))
+		for _, diveMaster := range t.DiveMasters {
+			trip.DiveMasters = append(trip.DiveMasters, diveMaster.GetProto())
+		}
+	}
+
+	return &trip
+}
+
+func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 	trip := pb.TripWithTemplate{
 		Id:                  uint64(t.ID),
 		TripTemplateId:      uint64(t.TripTemplateID),

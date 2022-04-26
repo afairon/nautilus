@@ -13,9 +13,15 @@ type CommentRepository interface {
 	CreateTripComment(ctx context.Context, comment *model.TripComment) (*model.TripComment, error)
 	CreateHotelComment(ctx context.Context, comment *model.HotelComment) (*model.HotelComment, error)
 	CreateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) (*model.LiveaboardComment, error)
+
 	FindTripComment(ctx context.Context, id uint64) (*model.TripComment, error)
 	FindHotelComment(ctx context.Context, id uint64) (*model.HotelComment, error)
 	FindLiveaboardComment(ctx context.Context, id uint64) (*model.LiveaboardComment, error)
+
+	UpdateTripComment(ctx context.Context, comment *model.TripComment) error
+	UpdateHotelComment(ctx context.Context, comment *model.HotelComment) error
+	UpdateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) error
+
 	DeleteTripComment(ctx context.Context, comment *model.TripComment) error
 	DeleteHotelComment(ctx context.Context, comment *model.HotelComment) error
 	DeleteLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) error
@@ -84,6 +90,60 @@ func (repo *commentRepository) FindLiveaboardComment(ctx context.Context, id uin
 	}
 
 	return &comment, nil
+}
+
+// UpdateTripComment updates trip comment.
+func (repo *commentRepository) UpdateTripComment(ctx context.Context, comment *model.TripComment) error {
+	columns := []string{}
+
+	if comment.Comment == "" {
+		columns = append(columns, "Comment")
+	}
+
+	if err := repo.db.Model(comment).Omit(columns...).Updates(map[string]interface{}{
+		"Stars":   comment.Stars,
+		"Comment": comment.Comment,
+	}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// UpdateHotelComment updates hotel comment.
+func (repo *commentRepository) UpdateHotelComment(ctx context.Context, comment *model.HotelComment) error {
+	columns := []string{}
+
+	if comment.Comment == "" {
+		columns = append(columns, "Comment")
+	}
+
+	if err := repo.db.Model(comment).Omit(columns...).Updates(map[string]interface{}{
+		"Stars":   comment.Stars,
+		"Comment": comment.Comment,
+	}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// UpdateLiveaboardComment updates liveaboard comment.
+func (repo *commentRepository) UpdateLiveaboardComment(ctx context.Context, comment *model.LiveaboardComment) error {
+	columns := []string{}
+
+	if comment.Comment == "" {
+		columns = append(columns, "Comment")
+	}
+
+	if err := repo.db.Model(comment).Omit(columns...).Updates(map[string]interface{}{
+		"Stars":   comment.Stars,
+		"Comment": comment.Comment,
+	}).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // DeleteTripComment deletes trip comment.

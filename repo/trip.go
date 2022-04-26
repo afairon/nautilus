@@ -13,6 +13,7 @@ import (
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
 	UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
+	DeleteTrip(ctx context.Context, trip *model.Trip) error
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTrips(ctx context.Context, lastReservationDate *time.Time, limit, offset uint64) ([]*model.Trip, error)
@@ -417,4 +418,8 @@ func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip) (*
 	}
 
 	return trip, nil
+}
+
+func (repo *tripRepository) DeleteTrip(ctx context.Context, trip *model.Trip) error {
+	return repo.db.Delete(trip).Error
 }

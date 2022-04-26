@@ -38,6 +38,51 @@ const CreateCommentResponse$json = const {
 
 /// Descriptor for `CreateCommentResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createCommentResponseDescriptor = $convert.base64Decode('ChVDcmVhdGVDb21tZW50UmVzcG9uc2USKAoEdHJpcBgBIAEoCzISLm1vZGVsLlRyaXBDb21tZW50SABSBHRyaXASKwoFaG90ZWwYBSABKAsyEy5tb2RlbC5Ib3RlbENvbW1lbnRIAFIFaG90ZWwSOgoKbGl2ZWFib2FyZBgKIAEoCzIYLm1vZGVsLkxpdmVhYm9hcmRDb21tZW50SABSCmxpdmVhYm9hcmRCBgoEdHlwZQ==');
+@$core.Deprecated('Use getCommentRequestDescriptor instead')
+const GetCommentRequest$json = const {
+  '1': 'GetCommentRequest',
+  '2': const [
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripComment', '9': 0, '10': 'trip'},
+    const {'1': 'hotel', '3': 5, '4': 1, '5': 11, '6': '.model.HotelComment', '9': 0, '10': 'hotel'},
+    const {'1': 'liveaboard', '3': 10, '4': 1, '5': 11, '6': '.model.LiveaboardComment', '9': 0, '10': 'liveaboard'},
+  ],
+  '8': const [
+    const {'1': 'type'},
+  ],
+};
+
+/// Descriptor for `GetCommentRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCommentRequestDescriptor = $convert.base64Decode('ChFHZXRDb21tZW50UmVxdWVzdBIoCgR0cmlwGAEgASgLMhIubW9kZWwuVHJpcENvbW1lbnRIAFIEdHJpcBIrCgVob3RlbBgFIAEoCzITLm1vZGVsLkhvdGVsQ29tbWVudEgAUgVob3RlbBI6CgpsaXZlYWJvYXJkGAogASgLMhgubW9kZWwuTGl2ZWFib2FyZENvbW1lbnRIAFIKbGl2ZWFib2FyZEIGCgR0eXBl');
+@$core.Deprecated('Use getCommentResponseDescriptor instead')
+const GetCommentResponse$json = const {
+  '1': 'GetCommentResponse',
+  '2': const [
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripComment', '9': 0, '10': 'trip'},
+    const {'1': 'hotel', '3': 5, '4': 1, '5': 11, '6': '.model.HotelComment', '9': 0, '10': 'hotel'},
+    const {'1': 'liveaboard', '3': 10, '4': 1, '5': 11, '6': '.model.LiveaboardComment', '9': 0, '10': 'liveaboard'},
+  ],
+  '8': const [
+    const {'1': 'type'},
+  ],
+};
+
+/// Descriptor for `GetCommentResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCommentResponseDescriptor = $convert.base64Decode('ChJHZXRDb21tZW50UmVzcG9uc2USKAoEdHJpcBgBIAEoCzISLm1vZGVsLlRyaXBDb21tZW50SABSBHRyaXASKwoFaG90ZWwYBSABKAsyEy5tb2RlbC5Ib3RlbENvbW1lbnRIAFIFaG90ZWwSOgoKbGl2ZWFib2FyZBgKIAEoCzIYLm1vZGVsLkxpdmVhYm9hcmRDb21tZW50SABSCmxpdmVhYm9hcmRCBgoEdHlwZQ==');
+@$core.Deprecated('Use updateCommentRequestDescriptor instead')
+const UpdateCommentRequest$json = const {
+  '1': 'UpdateCommentRequest',
+  '2': const [
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.TripComment', '9': 0, '10': 'trip'},
+    const {'1': 'hotel', '3': 5, '4': 1, '5': 11, '6': '.model.HotelComment', '9': 0, '10': 'hotel'},
+    const {'1': 'liveaboard', '3': 10, '4': 1, '5': 11, '6': '.model.LiveaboardComment', '9': 0, '10': 'liveaboard'},
+  ],
+  '8': const [
+    const {'1': 'type'},
+  ],
+};
+
+/// Descriptor for `UpdateCommentRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateCommentRequestDescriptor = $convert.base64Decode('ChRVcGRhdGVDb21tZW50UmVxdWVzdBIoCgR0cmlwGAEgASgLMhIubW9kZWwuVHJpcENvbW1lbnRIAFIEdHJpcBIrCgVob3RlbBgFIAEoCzITLm1vZGVsLkhvdGVsQ29tbWVudEgAUgVob3RlbBI6CgpsaXZlYWJvYXJkGAogASgLMhgubW9kZWwuTGl2ZWFib2FyZENvbW1lbnRIAFIKbGl2ZWFib2FyZEIGCgR0eXBl');
 @$core.Deprecated('Use deleteCommentRequestDescriptor instead')
 const DeleteCommentRequest$json = const {
   '1': 'DeleteCommentRequest',

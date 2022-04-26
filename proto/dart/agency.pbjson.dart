@@ -374,6 +374,76 @@ const UpdateStaffRequest$json = const {
 
 /// Descriptor for `UpdateStaffRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStaffRequestDescriptor = $convert.base64Decode('ChJVcGRhdGVTdGFmZlJlcXVlc3QSIgoFc3RhZmYYCiABKAsyDC5tb2RlbC5TdGFmZlIFc3RhZmY=');
+@$core.Deprecated('Use deleteDiveMasterRequestDescriptor instead')
+const DeleteDiveMasterRequest$json = const {
+  '1': 'DeleteDiveMasterRequest',
+  '2': const [
+    const {'1': 'dive_master', '3': 1, '4': 1, '5': 11, '6': '.model.DiveMaster', '10': 'diveMaster'},
+  ],
+};
+
+/// Descriptor for `DeleteDiveMasterRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteDiveMasterRequestDescriptor = $convert.base64Decode('ChdEZWxldGVEaXZlTWFzdGVyUmVxdWVzdBIyCgtkaXZlX21hc3RlchgBIAEoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSCmRpdmVNYXN0ZXI=');
+@$core.Deprecated('Use deleteDivingBoatRequestDescriptor instead')
+const DeleteDivingBoatRequest$json = const {
+  '1': 'DeleteDivingBoatRequest',
+  '2': const [
+    const {'1': 'diving_boat', '3': 1, '4': 1, '5': 11, '6': '.model.Boat', '10': 'divingBoat'},
+  ],
+};
+
+/// Descriptor for `DeleteDivingBoatRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteDivingBoatRequestDescriptor = $convert.base64Decode('ChdEZWxldGVEaXZpbmdCb2F0UmVxdWVzdBIsCgtkaXZpbmdfYm9hdBgBIAEoCzILLm1vZGVsLkJvYXRSCmRpdmluZ0JvYXQ=');
+@$core.Deprecated('Use deleteHotelRequestDescriptor instead')
+const DeleteHotelRequest$json = const {
+  '1': 'DeleteHotelRequest',
+  '2': const [
+    const {'1': 'hotel', '3': 1, '4': 1, '5': 11, '6': '.model.Hotel', '10': 'hotel'},
+  ],
+};
+
+/// Descriptor for `DeleteHotelRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteHotelRequestDescriptor = $convert.base64Decode('ChJEZWxldGVIb3RlbFJlcXVlc3QSIgoFaG90ZWwYASABKAsyDC5tb2RlbC5Ib3RlbFIFaG90ZWw=');
+@$core.Deprecated('Use deleteLiveaboardRequestDescriptor instead')
+const DeleteLiveaboardRequest$json = const {
+  '1': 'DeleteLiveaboardRequest',
+  '2': const [
+    const {'1': 'liveaboard', '3': 1, '4': 1, '5': 11, '6': '.model.Liveaboard', '10': 'liveaboard'},
+  ],
+};
+
+/// Descriptor for `DeleteLiveaboardRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteLiveaboardRequestDescriptor = $convert.base64Decode('ChdEZWxldGVMaXZlYWJvYXJkUmVxdWVzdBIxCgpsaXZlYWJvYXJkGAEgASgLMhEubW9kZWwuTGl2ZWFib2FyZFIKbGl2ZWFib2FyZA==');
+@$core.Deprecated('Use deleteStaffRequestDescriptor instead')
+const DeleteStaffRequest$json = const {
+  '1': 'DeleteStaffRequest',
+  '2': const [
+    const {'1': 'staff', '3': 1, '4': 1, '5': 11, '6': '.model.Staff', '10': 'staff'},
+  ],
+};
+
+/// Descriptor for `DeleteStaffRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteStaffRequestDescriptor = $convert.base64Decode('ChJEZWxldGVTdGFmZlJlcXVlc3QSIgoFc3RhZmYYASABKAsyDC5tb2RlbC5TdGFmZlIFc3RhZmY=');
+@$core.Deprecated('Use deleteTripTemplateRequestDescriptor instead')
+const DeleteTripTemplateRequest$json = const {
+  '1': 'DeleteTripTemplateRequest',
+  '2': const [
+    const {'1': 'trip_template', '3': 1, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+  ],
+};
+
+/// Descriptor for `DeleteTripTemplateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteTripTemplateRequestDescriptor = $convert.base64Decode('ChlEZWxldGVUcmlwVGVtcGxhdGVSZXF1ZXN0EjgKDXRyaXBfdGVtcGxhdGUYASABKAsyEy5tb2RlbC5UcmlwVGVtcGxhdGVSDHRyaXBUZW1wbGF0ZQ==');
+@$core.Deprecated('Use deleteTripRequestDescriptor instead')
+const DeleteTripRequest$json = const {
+  '1': 'DeleteTripRequest',
+  '2': const [
+    const {'1': 'trip', '3': 1, '4': 1, '5': 11, '6': '.model.Trip', '10': 'trip'},
+  ],
+};
+
+/// Descriptor for `DeleteTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteTripRequestDescriptor = $convert.base64Decode('ChFEZWxldGVUcmlwUmVxdWVzdBIfCgR0cmlwGAEgASgLMgsubW9kZWwuVHJpcFIEdHJpcA==');
 @$core.Deprecated('Use generateCurrentTripsReportRequestDescriptor instead')
 const GenerateCurrentTripsReportRequest$json = const {
   '1': 'GenerateCurrentTripsReportRequest',

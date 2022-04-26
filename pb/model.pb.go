@@ -9098,11 +9098,11 @@ func (this *TripWithTemplate) String() string {
 		`DiveMasters:` + repeatedStringForDiveMasters + `,`,
 		`DiveSites:` + repeatedStringForDiveSites + `,`,
 		`TripRoomTypePrices:` + repeatedStringForTripRoomTypePrices + `,`,
-		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -9191,11 +9191,11 @@ func (this *ReportTrip) String() string {
 		`Price:` + fmt.Sprintf("%v", this.Price) + `,`,
 		`Divers:` + repeatedStringForDivers + `,`,
 		`Reservations:` + repeatedStringForReservations + `,`,
-		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
-		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamppb.Timestamp", 1) + `,`,
+		`StartDate:` + strings.Replace(fmt.Sprintf("%v", this.StartDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`EndDate:` + strings.Replace(fmt.Sprintf("%v", this.EndDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`LastReservationDate:` + strings.Replace(fmt.Sprintf("%v", this.LastReservationDate), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`CreatedAt:` + strings.Replace(fmt.Sprintf("%v", this.CreatedAt), "Timestamp", "timestamp.Timestamp", 1) + `,`,
+		`UpdatedAt:` + strings.Replace(fmt.Sprintf("%v", this.UpdatedAt), "Timestamp", "timestamp.Timestamp", 1) + `,`,
 		`}`,
 	}, "")
 	return s
