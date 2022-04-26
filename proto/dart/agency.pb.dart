@@ -1977,6 +1977,55 @@ class UpdateStaffRequest extends $pb.GeneratedMessage {
   $13.Staff ensureStaff() => $_ensure(0);
 }
 
+class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $13.TripTemplate.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateTripTemplateRequest._() : super();
+  factory UpdateTripTemplateRequest({
+    $13.TripTemplate? tripTemplate,
+  }) {
+    final _result = create();
+    if (tripTemplate != null) {
+      _result.tripTemplate = tripTemplate;
+    }
+    return _result;
+  }
+  factory UpdateTripTemplateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateTripTemplateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateTripTemplateRequest clone() => UpdateTripTemplateRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateTripTemplateRequest copyWith(void Function(UpdateTripTemplateRequest) updates) => super.copyWith((message) => updates(message as UpdateTripTemplateRequest)) as UpdateTripTemplateRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateTripTemplateRequest create() => UpdateTripTemplateRequest._();
+  UpdateTripTemplateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateTripTemplateRequest> createRepeated() => $pb.PbList<UpdateTripTemplateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateTripTemplateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateTripTemplateRequest>(create);
+  static UpdateTripTemplateRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.TripTemplate get tripTemplate => $_getN(0);
+  @$pb.TagNumber(1)
+  set tripTemplate($13.TripTemplate v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTripTemplate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTripTemplate() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.TripTemplate ensureTripTemplate() => $_ensure(0);
+}
+
 class GenerateCurrentTripsReportRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateCurrentTripsReportRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)

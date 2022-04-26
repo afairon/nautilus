@@ -77,6 +77,11 @@ class AgencyServiceClient extends $grpc.Client {
           '/agency.AgencyService/UpdateStaff',
           ($2.UpdateStaffRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
+  static final _$updateTripTemplate =
+      $grpc.ClientMethod<$2.UpdateTripTemplateRequest, $1.Empty>(
+          '/agency.AgencyService/UpdateTripTemplate',
+          ($2.UpdateTripTemplateRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
   static final _$listBoats =
       $grpc.ClientMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
           '/agency.AgencyService/ListBoats',
@@ -230,6 +235,12 @@ class AgencyServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Empty> updateStaff($2.UpdateStaffRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateStaff, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.Empty> updateTripTemplate(
+      $2.UpdateTripTemplateRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateTripTemplate, request, options: options);
   }
 
   $grpc.ResponseStream<$2.ListBoatsResponse> listBoats(
@@ -441,6 +452,14 @@ abstract class AgencyServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.UpdateStaffRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateTripTemplateRequest, $1.Empty>(
+        'UpdateTripTemplate',
+        updateTripTemplate_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateTripTemplateRequest.fromBuffer(value),
+        ($1.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
         'ListBoats',
         listBoats_Pre,
@@ -620,6 +639,11 @@ abstract class AgencyServiceBase extends $grpc.Service {
     return updateStaff(call, await request);
   }
 
+  $async.Future<$1.Empty> updateTripTemplate_Pre($grpc.ServiceCall call,
+      $async.Future<$2.UpdateTripTemplateRequest> request) async {
+    return updateTripTemplate(call, await request);
+  }
+
   $async.Stream<$2.ListBoatsResponse> listBoats_Pre($grpc.ServiceCall call,
       $async.Future<$2.ListBoatsRequest> request) async* {
     yield* listBoats(call, await request);
@@ -721,6 +745,8 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.UpdateDiveMasterRequest request);
   $async.Future<$1.Empty> updateStaff(
       $grpc.ServiceCall call, $2.UpdateStaffRequest request);
+  $async.Future<$1.Empty> updateTripTemplate(
+      $grpc.ServiceCall call, $2.UpdateTripTemplateRequest request);
   $async.Stream<$2.ListBoatsResponse> listBoats(
       $grpc.ServiceCall call, $2.ListBoatsRequest request);
   $async.Stream<$2.ListDiveMastersResponse> listDiveMasters(

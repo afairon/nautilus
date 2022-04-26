@@ -31,6 +31,7 @@ type AgencyService interface {
 	UpdateBoat(ctx context.Context, boat *model.Boat) error
 	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
 	UpdateStaff(ctx context.Context, staff *model.Staff) error
+	UpdateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
@@ -1126,6 +1127,83 @@ func (service *agencyService) UpdateStaff(ctx context.Context, staff *model.Staf
 	staff.AgencyID = oldStaff.AgencyID
 
 	_, err = service.repo.Staff.UpdateStaff(ctx, staff)
+
+	return err
+}
+
+func (service *agencyService) UpdateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	oldTripTemplate, err := service.repo.TripTemplate.Get(ctx, uint64(tripTemplate.ID))
+
+	if err != nil {
+		return err
+	}
+
+	// check if the trip template belongs to the agency called the service
+	if oldTripTemplate.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the trip template does not belong to this agency")
+	}
+
+	tripTemplate.AgencyID = oldTripTemplate.AgencyID
+	tripTemplate.AddressID = oldTripTemplate.AddressID
+	tripTemplate.Address.ID = oldTripTemplate.AddressID
+
+	oldDocs := map[string]struct{}{}
+	for _, doc := range oldTripTemplate.Images {
+		oldDocs[doc] = struct{}{}
+	}
+
+	for _, f := range tripTemplate.Files {
+		_, ok := oldDocs[f.Filename]
+		// append old images
+		if ok && len(f.Buffer) == 0 {
+			tripTemplate.Images = append(tripTemplate.Images, f.Filename)
+			continue
+		}
+
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			tripTemplate.Images = append(tripTemplate.Images, objectID)
+		}
+	}
+
+	defer func() {
+		if err != nil {
+			// Delete hotel's and room types' files when save failed.
+			for _, doc := range tripTemplate.Images {
+				_, ok := oldDocs[doc]
+				// skip old images
+				if ok {
+					continue
+				}
+				service.media.Delete(doc)
+			}
+		} else {
+			for _, doc := range tripTemplate.Images {
+				_, ok := oldDocs[doc]
+				if ok {
+					// Remove files from list to delete
+					delete(oldDocs, doc)
+				}
+			}
+
+			for doc := range oldDocs {
+				// Delete files that are no longer needed
+				service.media.Delete(doc)
+			}
+		}
+	}()
+
+	_, err = service.repo.TripTemplate.Update(ctx, tripTemplate)
 
 	return err
 }

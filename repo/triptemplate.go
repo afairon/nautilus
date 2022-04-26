@@ -10,6 +10,8 @@ import (
 // TripTemplateRepository defines interface for interaction
 // with the trip template repository.
 type TripTemplateRepository interface {
+	Get(ctx context.Context, id uint64) (*model.TripTemplate, error)
+	Update(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
 	ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.TripTemplate, error)
 }
 
@@ -23,6 +25,37 @@ func NewTripTemplateRepository(db *gorm.DB) *tripTemplateRepository {
 	return &tripTemplateRepository{
 		db: db,
 	}
+}
+
+func (repo *tripTemplateRepository) Get(ctx context.Context, id uint64) (*model.TripTemplate, error) {
+	var tripTemplate model.TripTemplate
+
+	if err := repo.db.Preload("Address").First(&tripTemplate, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &tripTemplate, nil
+}
+
+func (repo *tripTemplateRepository) Update(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error) {
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Model(tripTemplate).Updates(tripTemplate).Error; err != nil {
+			return err
+		}
+
+		// Update address of Hotel
+		if err := tx.Model(&tripTemplate.Address).Updates(&tripTemplate.Address).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return tripTemplate, nil
 }
 
 // ListTripsByAgency returns list of trips by agency id.

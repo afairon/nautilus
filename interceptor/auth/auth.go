@@ -30,6 +30,7 @@ var accessRoles = map[string][]model.AccountType{
 	"/agency.AgencyService/UpdateBoat":                     {model.AGENCY},
 	"/agency.AgencyService/UpdateDiveMaster":               {model.AGENCY},
 	"/agency.AgencyService/UpdateStaff":                    {model.AGENCY},
+	"/agency.AgencyService/UpdateTripTemplate":             {model.AGENCY},
 	"/agency.AgencyService/ListBoats":                      {model.AGENCY},
 	"/agency.AgencyService/ListDiveMasters":                {model.AGENCY},
 	"/agency.AgencyService/ListHotels":                     {model.AGENCY},

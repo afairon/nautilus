@@ -695,6 +695,19 @@ func (handler *AgencyHandler) UpdateStaff(ctx context.Context, req *pb.UpdateSta
 	return &empty.Empty{}, nil
 }
 
+func (handler *AgencyHandler) UpdateTripTemplate(ctx context.Context, req *pb.UpdateTripTemplateRequest) (*emptypb.Empty, error) {
+	tripTemplate := model.TripTemplate{}
+	tripTemplate.From(req.TripTemplate)
+
+	err := handler.agencyService.UpdateTripTemplate(ctx, &tripTemplate)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &empty.Empty{}, nil
+}
+
 func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrentTripsReportRequest, srv pb.AgencyService_GenerateCurrentTripsReportServer) error {
 	ctx := srv.Context()
 	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx, req.GetLimit(), req.GetOffset())

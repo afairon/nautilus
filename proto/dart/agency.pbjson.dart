@@ -374,6 +374,16 @@ const UpdateStaffRequest$json = const {
 
 /// Descriptor for `UpdateStaffRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStaffRequestDescriptor = $convert.base64Decode('ChJVcGRhdGVTdGFmZlJlcXVlc3QSIgoFc3RhZmYYCiABKAsyDC5tb2RlbC5TdGFmZlIFc3RhZmY=');
+@$core.Deprecated('Use updateTripTemplateRequestDescriptor instead')
+const UpdateTripTemplateRequest$json = const {
+  '1': 'UpdateTripTemplateRequest',
+  '2': const [
+    const {'1': 'trip_template', '3': 1, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+  ],
+};
+
+/// Descriptor for `UpdateTripTemplateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateTripTemplateRequestDescriptor = $convert.base64Decode('ChlVcGRhdGVUcmlwVGVtcGxhdGVSZXF1ZXN0EjgKDXRyaXBfdGVtcGxhdGUYASABKAsyEy5tb2RlbC5UcmlwVGVtcGxhdGVSDHRyaXBUZW1wbGF0ZQ==');
 @$core.Deprecated('Use generateCurrentTripsReportRequestDescriptor instead')
 const GenerateCurrentTripsReportRequest$json = const {
   '1': 'GenerateCurrentTripsReportRequest',

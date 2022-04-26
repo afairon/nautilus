@@ -25,6 +25,7 @@ service AgencyService {
     rpc UpdateBoat(UpdateBoatRequest) returns (google.protobuf.Empty);
     rpc UpdateDiveMaster(UpdateDiveMasterRequest) returns (google.protobuf.Empty);
     rpc UpdateStaff(UpdateStaffRequest) returns (google.protobuf.Empty);
+    rpc UpdateTripTemplate(UpdateTripTemplateRequest) returns (google.protobuf.Empty);
 
     rpc ListBoats (ListBoatsRequest) returns (stream ListBoatsResponse);
     rpc ListDiveMasters (ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
@@ -221,6 +222,10 @@ message UpdateDiveMasterRequest {
 
 message UpdateStaffRequest {
     model.Staff staff = 10;
+}
+
+message UpdateTripTemplateRequest {
+    model.TripTemplate trip_template = 1;
 }
 
 message GenerateCurrentTripsReportRequest {
