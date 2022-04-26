@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -90,12 +91,32 @@ func (repo *liveaboardRepository) GetLiveaboard(ctx context.Context, id uint64) 
 
 func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Model(liveaboard).Omit("Coordinate", "AddressID", "RoomTypes").Updates(liveaboard).Error; err != nil {
+		if err := tx.Model(liveaboard).Omit("Coordinate").Updates(liveaboard).Error; err != nil {
 			return err
 		}
 
-		if err := tx.Model(liveaboard).Session(&gorm.Session{FullSaveAssociations: true}).Association("Address").Replace(&liveaboard.Address); err != nil {
+		// Update address of Hotel
+		if err := tx.Model(&liveaboard.Address).Updates(&liveaboard.Address).Error; err != nil {
 			return err
+		}
+
+		// Update room types of liveaboard
+		if len(liveaboard.RoomTypes) > 0 {
+			// TODO refactor
+
+			for _, roomType := range liveaboard.RoomTypes {
+				if err := tx.Model(&roomType).Updates(&roomType).Error; err != nil {
+					return err
+				}
+
+				fmt.Printf("%+v\n", liveaboard.RoomTypes)
+
+				if err := tx.Model(&roomType).Association("Amenities").Replace(roomType.Amenities); err != nil {
+					return err
+				}
+
+				fmt.Printf("%+v\n", liveaboard.RoomTypes)
+			}
 		}
 
 		return nil

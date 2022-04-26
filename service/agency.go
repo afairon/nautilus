@@ -28,7 +28,7 @@ type AgencyService interface {
 
 	UpdateTrip(ctx context.Context, trip *model.Trip) error
 	UpdateHotel(ctx context.Context, hotel *model.Hotel) error
-	UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error
+	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
 	UpdateBoat(ctx context.Context, boat *pb.Boat) error
 	UpdateDiveMaster(ctx context.Context, diveMaster *pb.DiveMaster) error
 	UpdateStaff(ctx context.Context, staff *pb.Staff) error
@@ -844,61 +844,136 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 	return err
 }
 
-func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *pb.Liveaboard) error {
+func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
 	if err != nil {
 		return err
 	}
 
-	oldLiveaboard, err := service.repo.Liveaboard.GetLiveaboard(ctx, liveaboard.GetId())
+	oldLiveaboard, err := service.repo.Liveaboard.GetLiveaboard(ctx, uint64(liveaboard.ID))
 
 	if err != nil {
 		return err
 	}
+
+	// check if the hotel belongs to the agency called the service
+	if oldLiveaboard.AgencyID != agency.ID {
+		return status.Error(codes.InvalidArgument, "the hotel does not belong to this agency")
+	}
+
+	liveaboard.AgencyID = oldLiveaboard.AgencyID
+	liveaboard.AddressID = oldLiveaboard.AddressID
+	liveaboard.Address.ID = oldLiveaboard.AddressID
 
 	// remove the old images.
 	for _, image := range oldLiveaboard.Images {
 		service.media.Delete(image)
 	}
 
-	newLiveaboard := model.Liveaboard{
-		Model: gorm.Model{ID: uint(liveaboard.GetId())},
-		Address: model.Address{
-			Model: gorm.Model{
-				ID: uint(liveaboard.GetAddress().GetId()),
-			},
-			AddressLine_1: liveaboard.GetAddress().GetAddressLine_1(),
-			AddressLine_2: liveaboard.GetAddress().GetAddressLine_2(),
-			City:          liveaboard.GetAddress().GetCity(),
-			Postcode:      liveaboard.GetAddress().GetPostcode(),
-			Region:        liveaboard.GetAddress().GetRegion(),
-			Country:       liveaboard.GetAddress().GetCountry(),
-		},
-		Name:          liveaboard.GetName(),
-		Description:   liveaboard.GetDescription(),
-		Length:        uint32(liveaboard.GetLength()),
-		Width:         uint32(liveaboard.GetWidth()),
-		TotalCapacity: liveaboard.GetTotalCapacity(),
-		DiverRooms:    liveaboard.GetDiverRooms(),
-		StaffRooms:    liveaboard.GetStaffRooms(),
-		AgencyID:      agency.ID,
+	oldLiveaboardDocs := map[string]struct{}{}
+	for _, doc := range oldLiveaboard.Images {
+		oldLiveaboardDocs[doc] = struct{}{}
 	}
 
-	newLiveaboard.Images = make(pq.StringArray, 0, len(liveaboard.GetImages()))
+	oldRoomTypesDocs := map[string]struct{}{}
+	for _, roomType := range oldLiveaboard.RoomTypes {
+		for _, doc := range roomType.Images {
+			oldRoomTypesDocs[doc] = struct{}{}
+		}
+	}
 
-	for _, image := range liveaboard.GetImages() {
-		reader := bytes.NewReader(image.GetFile())
-		objectID, err := service.media.Put(image.GetFilename(), media.PUBLIC_READ, reader)
-
-		if err != nil {
-			return err
+	for _, f := range liveaboard.Files {
+		_, ok := oldLiveaboardDocs[f.Filename]
+		// append old images
+		if ok && len(f.Buffer) == 0 {
+			liveaboard.Images = append(liveaboard.Images, f.Filename)
+			continue
 		}
 
-		newLiveaboard.Images = append(newLiveaboard.Images, objectID)
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			liveaboard.Images = append(liveaboard.Images, objectID)
+		}
 	}
 
-	_, err = service.repo.Liveaboard.UpdateLiveaboard(ctx, &newLiveaboard)
+	for _, roomType := range liveaboard.RoomTypes {
+		for _, f := range roomType.Files {
+			_, ok := oldRoomTypesDocs[f.Filename]
+			// append old images
+			if ok && len(f.Buffer) == 0 {
+				roomType.Images = append(roomType.Images, f.Filename)
+				continue
+			}
+
+			if len(f.Buffer) > 0 {
+				reader := bytes.NewReader(f.Buffer)
+				objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+				if err != nil {
+					return err
+				}
+				roomType.Images = append(roomType.Images, objectID)
+			}
+		}
+	}
+
+	defer func() {
+		if err != nil {
+			// Delete hotels' and room types' files when save failed.
+			for _, doc := range liveaboard.Images {
+				_, ok := oldLiveaboardDocs[doc]
+				// skip old images
+				if ok {
+					continue
+				}
+				service.media.Delete(doc)
+			}
+
+			for _, roomType := range liveaboard.RoomTypes {
+				for _, doc := range roomType.Images {
+					_, ok := oldRoomTypesDocs[doc]
+					// skip old images
+					if ok {
+						continue
+					}
+					service.media.Delete(doc)
+				}
+			}
+		} else {
+			for _, doc := range liveaboard.Images {
+				_, ok := oldLiveaboardDocs[doc]
+				if ok {
+					// Remove files from list to delete
+					delete(oldLiveaboardDocs, doc)
+				}
+			}
+
+			for _, roomType := range liveaboard.RoomTypes {
+				for _, doc := range roomType.Images {
+					_, ok := oldRoomTypesDocs[doc]
+					if ok {
+						// Remove files from list to delete
+						delete(oldRoomTypesDocs, doc)
+					}
+				}
+			}
+
+			for doc := range oldLiveaboardDocs {
+				// Delete files that are no longer needed
+				service.media.Delete(doc)
+			}
+
+			for doc := range oldRoomTypesDocs {
+				service.media.Delete(doc)
+			}
+		}
+	}()
+
+	_, err = service.repo.Liveaboard.UpdateLiveaboard(ctx, liveaboard)
 
 	return err
 }

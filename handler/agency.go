@@ -653,7 +653,9 @@ func (handler *AgencyHandler) UpdateHotel(ctx context.Context, req *pb.UpdateHot
 }
 
 func (handler *AgencyHandler) UpdateLiveaboard(ctx context.Context, req *pb.UpdateLiveaboardRequest) (*emptypb.Empty, error) {
-	err := handler.agencyService.UpdateLiveaboard(ctx, req.GetLiveaboard())
+	liveaboard := model.Liveaboard{}
+	liveaboard.From(req.Liveaboard)
+	err := handler.agencyService.UpdateLiveaboard(ctx, &liveaboard)
 
 	if err != nil {
 		return nil, err

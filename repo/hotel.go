@@ -117,10 +117,6 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 					return err
 				}
 
-				// if err := tx.Model(&roomType).Association("Amenities").Clear(); err != nil {
-				// 	return err
-				// }
-
 				fmt.Printf("%+v\n", hotel.RoomTypes)
 
 				if err := tx.Model(&roomType).Association("Amenities").Replace(roomType.Amenities); err != nil {
@@ -129,14 +125,6 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 
 				fmt.Printf("%+v\n", hotel.RoomTypes)
 			}
-
-			// if err := tx.Model(hotel).Association("RoomTypes").Clear(); err != nil {
-			// 	return err
-			// }
-
-			// if err := tx.Model(hotel).Session(&gorm.Session{FullSaveAssociations: true}).Association("RoomTypes").Replace(&hotel.RoomTypes); err != nil {
-			// 	return err
-			// }
 		}
 
 		return nil
