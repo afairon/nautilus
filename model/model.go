@@ -590,7 +590,7 @@ type Trip struct {
 }
 
 func (t *Trip) From(trip *pb.TripWithTemplate) {
-	if t == nil {
+	if trip == nil {
 		return
 	}
 
@@ -827,38 +827,40 @@ type Liveaboard struct {
 }
 
 func (l *Liveaboard) From(liveaboard *pb.Liveaboard) {
-	if l == nil {
+	if liveaboard == nil {
 		return
 	}
 
-	l.ID = uint(liveaboard.GetId())
-	l.AddressID = uint(liveaboard.Address.GetId())
-	l.Name = liveaboard.GetName()
-	l.Description = liveaboard.GetDescription()
-	l.Length = uint32(liveaboard.GetLength())
-	l.Width = uint32(liveaboard.GetWidth())
-	l.TotalCapacity = liveaboard.GetTotalCapacity()
-	l.DiverRooms = liveaboard.GetDiverRooms()
-	l.StaffRooms = liveaboard.GetStaffRooms()
+	l.ID = uint(liveaboard.Id)
+	l.Name = liveaboard.Name
+	l.Description = liveaboard.Description
+	l.Length = uint32(liveaboard.Length)
+	l.Width = uint32(liveaboard.Width)
+	l.TotalCapacity = liveaboard.TotalCapacity
+	l.DiverRooms = liveaboard.DiverRooms
+	l.StaffRooms = liveaboard.StaffRooms
 
-	addr := Address{}
-	addr.From(liveaboard.GetAddress())
-	l.Address = addr
+	if liveaboard.Address != nil {
+		l.AddressID = uint(liveaboard.Address.Id)
+		addr := Address{}
+		addr.From(liveaboard.Address)
+		l.Address = addr
+	}
 
-	if len(liveaboard.GetRoomTypes()) > 0 {
-		l.RoomTypes = make([]RoomType, 0, len(liveaboard.GetRoomTypes()))
+	if liveaboard.RoomTypes != nil && len(liveaboard.RoomTypes) > 0 {
+		l.RoomTypes = make([]RoomType, 0, len(liveaboard.RoomTypes))
 
-		for _, roomType := range liveaboard.GetRoomTypes() {
+		for _, roomType := range liveaboard.RoomTypes {
 			rt := RoomType{}
 			rt.From(roomType)
 			l.RoomTypes = append(l.RoomTypes, rt)
 		}
 	}
 
-	if len(liveaboard.GetImages()) > 0 {
-		l.Files = make([]*File, 0, len(liveaboard.GetImages()))
+	if liveaboard.Images != nil && len(liveaboard.Images) > 0 {
+		l.Files = make([]*File, 0, len(liveaboard.Images))
 
-		for _, doc := range liveaboard.GetImages() {
+		for _, doc := range liveaboard.Images {
 			file := File{}
 			file.From(doc)
 			l.Files = append(l.Files, &file)
@@ -958,7 +960,7 @@ type Hotel struct {
 }
 
 func (h *Hotel) From(hotel *pb.Hotel) {
-	if h == nil {
+	if hotel == nil {
 		return
 	}
 
@@ -985,7 +987,7 @@ func (h *Hotel) From(hotel *pb.Hotel) {
 		}
 	}
 
-	if len(hotel.Images) > 0 {
+	if hotel.Images != nil && len(hotel.Images) > 0 {
 		h.Files = make([]*File, 0, len(hotel.Images))
 
 		for _, doc := range hotel.Images {
