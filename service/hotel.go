@@ -33,8 +33,30 @@ func (service *hotelService) GetHotel(ctx context.Context, id uint64) (*model.Ho
 		return nil, err
 	}
 
-	for idx, id := range hotel.Images {
-		hotel.Images[idx] = service.media.Get(id, false)
+	if len(hotel.Images) > 0 {
+		hotel.Files = make([]*model.File, 0, len(hotel.Images))
+
+		for _, doc := range hotel.Images {
+			file := model.File{
+				Filename: doc,
+				URL:      service.media.Get(doc, true),
+			}
+			hotel.Files = append(hotel.Files, &file)
+		}
+	}
+
+	for _, roomType := range hotel.RoomTypes {
+		if len(roomType.Images) > 0 {
+			roomType.Files = make([]*model.File, 0, len(roomType.Images))
+
+			for _, doc := range roomType.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+				roomType.Files = append(roomType.Files, &file)
+			}
+		}
 	}
 
 	return hotel, nil

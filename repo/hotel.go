@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -117,13 +116,9 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 					return err
 				}
 
-				fmt.Printf("%+v\n", hotel.RoomTypes)
-
 				if err := tx.Model(&roomType).Association("Amenities").Replace(roomType.Amenities); err != nil {
 					return err
 				}
-
-				fmt.Printf("%+v\n", hotel.RoomTypes)
 			}
 		}
 

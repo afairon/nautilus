@@ -910,6 +910,44 @@ func (l *Liveaboard) From(liveaboard *pb.Liveaboard) {
 	}
 }
 
+func (l *Liveaboard) GetProto() *pb.Liveaboard {
+	liveaboard := pb.Liveaboard{
+		Id:            uint64(l.ID),
+		Name:          l.Name,
+		Description:   l.Description,
+		Length:        float32(l.Length),
+		Width:         float32(l.Width),
+		TotalCapacity: l.TotalCapacity,
+		DiverRooms:    l.DiverRooms,
+		StaffRooms:    l.StaffRooms,
+		Address:       l.Address.GetProto(),
+		CreatedAt:     &l.CreatedAt,
+		UpdatedAt:     &l.UpdatedAt,
+	}
+
+	if len(l.Files) > 0 {
+		liveaboard.Images = make([]*pb.File, 0, len(l.Files))
+
+		for _, f := range l.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			liveaboard.Images = append(liveaboard.Images, &file)
+		}
+	}
+
+	if len(l.RoomTypes) > 0 {
+		liveaboard.RoomTypes = make([]*pb.RoomType, 0, len(l.RoomTypes))
+
+		for _, roomType := range l.RoomTypes {
+			liveaboard.RoomTypes = append(liveaboard.RoomTypes, roomType.GetProto())
+		}
+	}
+
+	return &liveaboard
+}
+
 type RoomType struct {
 	gorm.Model
 	Name         string         `gorm:"not null"`
@@ -995,9 +1033,9 @@ type Hotel struct {
 	Stars       uint32
 	Phone       string         `gorm:"not null"`
 	Images      pq.StringArray `gorm:"type:text"`
-	RoomTypes   []RoomType
-	AgencyID    uint    `gorm:"not null"`
-	Files       []*File `gorm:"-" json:"-"`
+	RoomTypes   []RoomType     `gorm:"foreignKey:HotelID"`
+	AgencyID    uint           `gorm:"not null"`
+	Files       []*File        `gorm:"-" json:"-"`
 }
 
 func (h *Hotel) From(hotel *pb.Hotel) {
@@ -1038,6 +1076,41 @@ func (h *Hotel) From(hotel *pb.Hotel) {
 		}
 
 	}
+}
+
+func (h *Hotel) GetProto() *pb.Hotel {
+	hotel := pb.Hotel{
+		Id:          uint64(h.ID),
+		Name:        h.Name,
+		Description: h.Description,
+		Stars:       h.Stars,
+		Phone:       h.Phone,
+		Address:     h.Address.GetProto(),
+		CreatedAt:   &h.CreatedAt,
+		UpdatedAt:   &h.UpdatedAt,
+	}
+
+	if len(h.Files) > 0 {
+		hotel.Images = make([]*pb.File, 0, len(h.Files))
+
+		for _, f := range h.Files {
+			file := pb.File{
+				Filename: f.Filename,
+				Link:     f.URL,
+			}
+			hotel.Images = append(hotel.Images, &file)
+		}
+	}
+
+	if len(h.RoomTypes) > 0 {
+		hotel.RoomTypes = make([]*pb.RoomType, 0, len(h.RoomTypes))
+
+		for _, roomType := range h.RoomTypes {
+			hotel.RoomTypes = append(hotel.RoomTypes, roomType.GetProto())
+		}
+	}
+
+	return &hotel
 }
 
 type Payment struct {
