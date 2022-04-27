@@ -103,7 +103,19 @@ func (repo *staffRepository) ListStaffsByAgency(ctx context.Context, id, limit, 
 }
 
 func (repo *staffRepository) UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error) {
-	if err := repo.db.Model(staff).Updates(staff).Error; err != nil {
+	err := repo.db.Transaction(func(tx *gorm.DB) error {
+		if err := repo.db.Model(staff).Omit("Gender").Updates(staff).Error; err != nil {
+			return err
+		}
+
+		if err := repo.db.Model(staff).Select("Gender").Updates(staff).Error; err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
 		return nil, err
 	}
 
