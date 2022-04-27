@@ -862,7 +862,7 @@ type Liveaboard struct {
 	DiverRooms    uint32         `gorm:"not null"`
 	StaffRooms    uint32         `gorm:"not null"`
 	Images        pq.StringArray `gorm:"type:text"`
-	RoomTypes     []RoomType
+	RoomTypes     []*RoomType
 	AgencyID      uint    `gorm:"not null"`
 	Files         []*File `gorm:"-" json:"-"`
 }
@@ -889,12 +889,12 @@ func (l *Liveaboard) From(liveaboard *pb.Liveaboard) {
 	}
 
 	if liveaboard.RoomTypes != nil && len(liveaboard.RoomTypes) > 0 {
-		l.RoomTypes = make([]RoomType, 0, len(liveaboard.RoomTypes))
+		l.RoomTypes = make([]*RoomType, 0, len(liveaboard.RoomTypes))
 
 		for _, roomType := range liveaboard.RoomTypes {
 			rt := RoomType{}
 			rt.From(roomType)
-			l.RoomTypes = append(l.RoomTypes, rt)
+			l.RoomTypes = append(l.RoomTypes, &rt)
 		}
 	}
 
@@ -1033,7 +1033,7 @@ type Hotel struct {
 	Stars       uint32
 	Phone       string         `gorm:"not null"`
 	Images      pq.StringArray `gorm:"type:text"`
-	RoomTypes   []RoomType     `gorm:"foreignKey:HotelID"`
+	RoomTypes   []*RoomType    `gorm:"foreignKey:HotelID"`
 	AgencyID    uint           `gorm:"not null"`
 	Files       []*File        `gorm:"-" json:"-"`
 }
@@ -1057,12 +1057,12 @@ func (h *Hotel) From(hotel *pb.Hotel) {
 	}
 
 	if hotel.RoomTypes != nil && len(hotel.RoomTypes) > 0 {
-		h.RoomTypes = make([]RoomType, 0, len(hotel.RoomTypes))
+		h.RoomTypes = make([]*RoomType, 0, len(hotel.RoomTypes))
 
 		for _, roomType := range hotel.RoomTypes {
 			rt := RoomType{}
 			rt.From(roomType)
-			h.RoomTypes = append(h.RoomTypes, rt)
+			h.RoomTypes = append(h.RoomTypes, &rt)
 		}
 	}
 

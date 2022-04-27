@@ -157,7 +157,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 	}
 
 	pbRoomTypes := hotel.GetRoomTypes()
-	roomTypes := make([]model.RoomType, 0, len(pbRoomTypes))
+	roomTypes := make([]*model.RoomType, 0, len(pbRoomTypes))
 
 	// Copy room types information
 	for _, rt := range pbRoomTypes {
@@ -190,7 +190,7 @@ func (service *agencyService) AddHotel(ctx context.Context, hotel *pb.Hotel) err
 		}
 
 		roomType.Amenities = amenities
-		roomTypes = append(roomTypes, roomType)
+		roomTypes = append(roomTypes, &roomType)
 	}
 
 	// set room types of hotel
@@ -375,7 +375,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 	}
 
 	pbRoomTypes := liveaboard.GetRoomTypes()
-	roomTypes := make([]model.RoomType, 0, len(pbRoomTypes))
+	roomTypes := make([]*model.RoomType, 0, len(pbRoomTypes))
 
 	// Copy room types information
 	for _, rt := range pbRoomTypes {
@@ -408,7 +408,7 @@ func (service *agencyService) AddLiveaboard(ctx context.Context, liveaboard *pb.
 		}
 
 		roomType.Amenities = amenities
-		roomTypes = append(roomTypes, roomType)
+		roomTypes = append(roomTypes, &roomType)
 	}
 
 	// set room types of hotel
