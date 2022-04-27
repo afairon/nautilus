@@ -478,14 +478,14 @@ func (handler *AgencyHandler) ListRoomTypes(req *pb.ListRoomTypesRequest, srv pb
 	var roomTypes []*model.RoomType
 	var err error
 
-	switch t := req.GetId().(type) {
+	switch t := req.Id.(type) {
 	case *pb.ListRoomTypesRequest_HotelId:
-		roomTypes, err = handler.agencyService.ListRoomTypesByHotelID(ctx, t.HotelId, req.GetLimit(), req.GetOffset())
+		roomTypes, err = handler.agencyService.ListRoomTypesByHotelID(ctx, t.HotelId, req.Limit, req.Offset)
 		if err != nil {
 			return err
 		}
 	case *pb.ListRoomTypesRequest_LiveaboardId:
-		roomTypes, err = handler.agencyService.ListRoomTypesByHotelID(ctx, t.LiveaboardId, req.GetLimit(), req.GetOffset())
+		roomTypes, err = handler.agencyService.ListRoomTypesByLiveaboardID(ctx, t.LiveaboardId, req.Limit, req.Offset)
 		if err != nil {
 			return err
 		}
@@ -496,26 +496,7 @@ func (handler *AgencyHandler) ListRoomTypes(req *pb.ListRoomTypesRequest, srv pb
 
 	for _, roomType := range roomTypes {
 		resp := &pb.ListRoomTypesResponse{
-			RoomType: &pb.RoomType{
-				Id:          uint64(roomType.ID),
-				Name:        roomType.Name,
-				Description: roomType.Description,
-				MaxGuest:    roomType.MaxGuest,
-				Price:       roomType.Price,
-				Quantity:    roomType.Quantity,
-				CreatedAt:   &roomType.CreatedAt,
-				UpdatedAt:   &roomType.UpdatedAt,
-			},
-		}
-
-		if len(roomType.Images) > 0 {
-			resp.RoomType.RoomImages = make([]*pb.File, 0, len(roomType.Images))
-			for _, link := range roomType.Images {
-				file := &pb.File{
-					Link: link,
-				}
-				resp.RoomType.RoomImages = append(resp.RoomType.RoomImages, file)
-			}
+			RoomType: roomType.GetProto(),
 		}
 
 		srv.Send(resp)

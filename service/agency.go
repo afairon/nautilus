@@ -630,8 +630,17 @@ func (service *agencyService) ListRoomTypesByHotelID(ctx context.Context, id, li
 	}
 
 	for _, roomType := range roomTypes {
-		for idx, id := range roomType.Images {
-			roomType.Images[idx] = service.media.Get(id, false)
+		if len(roomType.Images) > 0 {
+			roomType.Files = make([]*model.File, 0, len(roomType.Images))
+
+			for _, doc := range roomType.Images {
+
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+				roomType.Files = append(roomType.Files, &file)
+			}
 		}
 	}
 
@@ -649,8 +658,17 @@ func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, i
 	}
 
 	for _, roomType := range roomTypes {
-		for idx, id := range roomType.Images {
-			roomType.Images[idx] = service.media.Get(id, false)
+		if len(roomType.Images) > 0 {
+			roomType.Files = make([]*model.File, 0, len(roomType.Images))
+
+			for _, doc := range roomType.Images {
+
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+				roomType.Files = append(roomType.Files, &file)
+			}
 		}
 	}
 
