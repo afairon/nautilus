@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -11,7 +10,7 @@ import (
 // LiveaboardRepository defines interface for interaction
 // with the liveaboard repository.
 type LiveaboardRepository interface {
-	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error)
+	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard, unUsedRoomTypes []*model.RoomType) (*model.Liveaboard, error)
 	ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Liveaboard, error)
 	GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error)
 	DeleteLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
@@ -90,7 +89,7 @@ func (repo *liveaboardRepository) GetLiveaboard(ctx context.Context, id uint64) 
 	return &liveaboard, nil
 }
 
-func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error) {
+func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard, unUsedRoomTypes []*model.RoomType) (*model.Liveaboard, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Model(liveaboard).Omit("Coordinate").Updates(liveaboard).Error; err != nil {
 			return err
@@ -110,13 +109,17 @@ func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboa
 					return err
 				}
 
-				fmt.Printf("%+v\n", liveaboard.RoomTypes)
-
 				if err := tx.Model(&roomType).Association("Amenities").Replace(roomType.Amenities); err != nil {
 					return err
 				}
 
-				fmt.Printf("%+v\n", liveaboard.RoomTypes)
+				if len(unUsedRoomTypes) > 0 {
+					for _, roomType := range unUsedRoomTypes {
+						if err := repo.db.Delete(roomType).Error; err != nil {
+							return err
+						}
+					}
+				}
 			}
 		}
 

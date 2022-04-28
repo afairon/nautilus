@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -124,7 +123,6 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 
 		if len(unUsedRoomTypes) > 0 {
 			for _, roomType := range unUsedRoomTypes {
-				fmt.Printf("deleting %+v\n", roomType)
 				if err := repo.db.Delete(roomType).Error; err != nil {
 					return err
 				}

@@ -936,6 +936,9 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 		}
 	}
 
+	oldRoomTypes := map[uint]struct{}{}
+	unUsedRoomTypes := make([]*model.RoomType, 0)
+
 	for _, f := range liveaboard.Files {
 		_, ok := oldLiveaboardDocs[f.Filename]
 		// append old images
@@ -971,6 +974,23 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 				}
 				roomType.Images = append(roomType.Images, objectID)
 			}
+		}
+	}
+
+	for _, roomType := range oldLiveaboard.RoomTypes {
+		oldRoomTypes[roomType.ID] = struct{}{}
+	}
+
+	for _, roomType := range liveaboard.RoomTypes {
+		_, ok := oldRoomTypes[roomType.ID]
+		if ok {
+			delete(oldRoomTypes, roomType.ID)
+		}
+	}
+
+	for _, roomType := range oldLiveaboard.RoomTypes {
+		if _, ok := oldRoomTypes[roomType.ID]; ok {
+			unUsedRoomTypes = append(unUsedRoomTypes, roomType)
 		}
 	}
 
@@ -1026,7 +1046,7 @@ func (service *agencyService) UpdateLiveaboard(ctx context.Context, liveaboard *
 		}
 	}()
 
-	_, err = service.repo.Liveaboard.UpdateLiveaboard(ctx, liveaboard)
+	_, err = service.repo.Liveaboard.UpdateLiveaboard(ctx, liveaboard, unUsedRoomTypes)
 
 	return err
 }
