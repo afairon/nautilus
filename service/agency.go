@@ -773,6 +773,9 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 		}
 	}
 
+	oldRoomTypes := map[uint]struct{}{}
+	unUsedRoomTypes := make([]*model.RoomType, 0)
+
 	for _, f := range hotel.Files {
 		_, ok := oldHotelDocs[f.Filename]
 		// append old images
@@ -809,6 +812,18 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 				roomType.Images = append(roomType.Images, objectID)
 			}
 		}
+	}
+
+	for _, roomType := range oldHotel.RoomTypes {
+		oldRoomTypes[roomType.ID] = struct{}{}
+	}
+
+	for _, roomType := range hotel.RoomTypes {
+		if _, ok := oldRoomTypes[roomType.ID]; ok {
+			continue
+		}
+
+		unUsedRoomTypes = append(unUsedRoomTypes, roomType)
 	}
 
 	defer func() {

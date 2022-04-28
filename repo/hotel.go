@@ -109,8 +109,6 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 
 		// Update room types of hotel
 		if len(hotel.RoomTypes) > 0 {
-			// TODO refactor
-
 			for _, roomType := range hotel.RoomTypes {
 				if err := tx.Model(&roomType).Updates(&roomType).Error; err != nil {
 					return err
@@ -121,7 +119,6 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 				}
 			}
 		}
-
 		return nil
 	})
 
