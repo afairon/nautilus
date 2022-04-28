@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
@@ -10,7 +11,7 @@ import (
 // HotelRepository defines interface for interaction
 // with the hotel repository.
 type HotelRepository interface {
-	UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
+	UpdateHotel(ctx context.Context, hotel *model.Hotel, unUsedRoomTypes []*model.RoomType) (*model.Hotel, error)
 	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error)
 	GetHotel(ctx context.Context, id uint) (*model.Hotel, error)
 	DeleteHotel(ctx context.Context, hotel *model.Hotel) error
@@ -97,7 +98,7 @@ func (repo *hotelRepository) GetHotel(ctx context.Context, id uint) (*model.Hote
 	return &hotel, nil
 }
 
-func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error) {
+func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel, unUsedRoomTypes []*model.RoomType) (*model.Hotel, error) {
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Model(hotel).Omit("Coordinate").Updates(hotel).Error; err != nil {
 			return err
@@ -120,6 +121,16 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 				}
 			}
 		}
+
+		if len(unUsedRoomTypes) > 0 {
+			for _, roomType := range unUsedRoomTypes {
+				fmt.Printf("deleting %+v\n", roomType)
+				if err := repo.db.Delete(roomType).Error; err != nil {
+					return err
+				}
+			}
+		}
+
 		return nil
 	})
 

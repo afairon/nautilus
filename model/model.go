@@ -1091,7 +1091,7 @@ type RoomType struct {
 	Price        float32        `gorm:"not null;check:price_checker,price > 0"`
 	Quantity     uint32         `gorm:"not null;check:quantity_checker,quantity > 0"`
 	Images       pq.StringArray `gorm:"type:text"`
-	Amenities    []Amenity      `gorm:"many2many:room_amenity_link;"`
+	Amenities    []Amenity      `gorm:"many2many:room_amenity_link;constraint:OnDelete:CASCADE;"`
 	LiveaboardID uint           `gorm:"default:null"`
 	HotelID      uint           `gorm:"default:null"`
 	Files        []*File        `gorm:"-" json:"-"`

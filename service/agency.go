@@ -828,11 +828,16 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 	}
 
 	for _, roomType := range hotel.RoomTypes {
-		if _, ok := oldRoomTypes[roomType.ID]; ok {
-			continue
+		_, ok := oldRoomTypes[roomType.ID]
+		if ok {
+			delete(oldRoomTypes, roomType.ID)
 		}
+	}
 
-		unUsedRoomTypes = append(unUsedRoomTypes, roomType)
+	for _, roomType := range oldHotel.RoomTypes {
+		if _, ok := oldRoomTypes[roomType.ID]; ok {
+			unUsedRoomTypes = append(unUsedRoomTypes, roomType)
+		}
 	}
 
 	defer func() {
@@ -887,7 +892,7 @@ func (service *agencyService) UpdateHotel(ctx context.Context, hotel *model.Hote
 		}
 	}()
 
-	_, err = service.repo.Hotel.UpdateHotel(ctx, hotel)
+	_, err = service.repo.Hotel.UpdateHotel(ctx, hotel, unUsedRoomTypes)
 
 	return err
 }
