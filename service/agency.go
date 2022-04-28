@@ -268,7 +268,7 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip, roo
 			if len(roomTypePrices) > 0 {
 				for _, roomTypePrice := range roomTypePrices {
 					if v, ok := roomTypePrice.(*model.HotelRoomTypeTripPrice); ok {
-						v.TripID = uint64(trip.ID)
+						v.TripID = trip.ID
 						_, err = query.HotelRoomTypeTripPrice.Create(ctx, v)
 
 						if err != nil {
@@ -282,7 +282,7 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip, roo
 
 				for _, roomTypePrice := range roomTypePrices {
 					if v, ok := roomTypePrice.(*model.LiveaboardRoomTypeTripPrice); ok {
-						v.TripID = uint64(trip.ID)
+						v.TripID = trip.ID
 						_, err = query.LiveaboardRoomTypeTripPrice.Create(ctx, v)
 					}
 
@@ -743,7 +743,50 @@ func (service *agencyService) UpdateTrip(ctx context.Context, trip *model.Trip) 
 
 	trip.AgencyID = oldTrip.AgencyID
 
-	_, err = service.repo.Trip.UpdateTrip(ctx, trip)
+	oldRoomTypePrices := map[uint]struct{}{}
+	unUsedRoomTypePrices := make([]model.RoomTypeTripPrice, 0, len(trip.HotelRoomTypeTripPrices))
+
+	// remove unused roomtype prices
+	switch trip.TripTemplate.Type {
+	case model.ONSHORE:
+		for _, roomTypePrice := range oldTrip.HotelRoomTypeTripPrices {
+			oldRoomTypePrices[roomTypePrice.RoomTypeID] = struct{}{}
+		}
+
+		for _, roomTypePrice := range trip.HotelRoomTypeTripPrices {
+			_, ok := oldRoomTypePrices[roomTypePrice.RoomTypeID]
+			if ok {
+				delete(oldRoomTypePrices, roomTypePrice.RoomTypeID)
+			}
+		}
+
+		for _, roomTypePrice := range oldTrip.HotelRoomTypeTripPrices {
+			if _, ok := oldRoomTypePrices[roomTypePrice.RoomTypeID]; ok {
+				unUsedRoomTypePrices = append(unUsedRoomTypePrices, &roomTypePrice)
+			}
+		}
+
+	case model.OFFSHORE:
+
+		for _, roomTypePrice := range oldTrip.LiveaboardRoomTypeTripPrices {
+			oldRoomTypePrices[roomTypePrice.RoomTypeID] = struct{}{}
+		}
+
+		for _, roomTypePrice := range trip.LiveaboardRoomTypeTripPrices {
+			_, ok := oldRoomTypePrices[roomTypePrice.RoomTypeID]
+			if ok {
+				delete(oldRoomTypePrices, roomTypePrice.RoomTypeID)
+			}
+		}
+
+		for _, roomTypePrice := range oldTrip.LiveaboardRoomTypeTripPrices {
+			if _, ok := oldRoomTypePrices[roomTypePrice.RoomTypeID]; ok {
+				unUsedRoomTypePrices = append(unUsedRoomTypePrices, &roomTypePrice)
+			}
+		}
+	}
+
+	_, err = service.repo.Trip.UpdateTrip(ctx, trip, unUsedRoomTypePrices)
 
 	return err
 }

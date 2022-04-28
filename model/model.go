@@ -717,7 +717,7 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 			for _, roomTypePrice := range trip.TripRoomTypePrices {
 				rtp := HotelRoomTypeTripPrice{}
 				rtp.From(roomTypePrice)
-				rtp.TripID = uint64(t.ID)
+				rtp.TripID = t.ID
 				t.HotelRoomTypeTripPrices = append(t.HotelRoomTypeTripPrices, rtp)
 			}
 		case OFFSHORE:
@@ -726,7 +726,7 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 			for _, roomTypePrice := range trip.TripRoomTypePrices {
 				rtp := LiveaboardRoomTypeTripPrice{}
 				rtp.From(roomTypePrice)
-				rtp.TripID = uint64(t.ID)
+				rtp.TripID = t.ID
 				t.LiveaboardRoomTypeTripPrices = append(t.LiveaboardRoomTypeTripPrices, rtp)
 			}
 		}
@@ -1088,7 +1088,7 @@ type RoomType struct {
 	Name         string         `gorm:"not null"`
 	Description  string         `gorm:"not null"`
 	MaxGuest     uint32         `gorm:"not null;check:max_guest_checker,max_guest > 0"`
-	Price        float32        `gorm:"not null;check:price_checker,price > 0"`
+	Price        float32        `gorm:"not null;"`
 	Quantity     uint32         `gorm:"not null;check:quantity_checker,quantity > 0"`
 	Images       pq.StringArray `gorm:"type:text"`
 	Amenities    []Amenity      `gorm:"many2many:room_amenity_link;constraint:OnDelete:CASCADE;"`
@@ -1371,12 +1371,13 @@ type RoomTypeTripPrice interface {
 }
 
 type HotelRoomTypeTripPrice struct {
-	HotelID    uint64
+	HotelID    uint
 	Hotel      Hotel
-	RoomTypeID uint64 `gorm:"uniqueIndex:hotel_room_type_trip_index"`
+	RoomTypeID uint `gorm:"uniqueIndex:hotel_room_type_trip_index"`
 	RoomType   RoomType
-	TripID     uint64 `gorm:"uniqueIndex:hotel_room_type_trip_index"`
+	TripID     uint `gorm:"uniqueIndex:hotel_room_type_trip_index"`
 	Price      float32
+	Deleted    gorm.DeletedAt
 }
 
 func (h *HotelRoomTypeTripPrice) Type() TripType {
@@ -1388,25 +1389,26 @@ func (l *HotelRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
 		return
 	}
 
-	l.HotelID = link.GetHotelId()
-	l.RoomTypeID = link.GetRoomTypeId()
-	l.Price = link.GetPrice()
+	l.HotelID = uint(link.HotelId)
+	l.RoomTypeID = uint(link.RoomTypeId)
+	l.Price = link.Price
 }
 
 func (l *HotelRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 	return &pb.RoomTypeTripPrice{
-		RoomTypeId: l.RoomTypeID,
+		RoomTypeId: uint64(l.RoomTypeID),
 		Price:      l.Price,
 	}
 }
 
 type LiveaboardRoomTypeTripPrice struct {
-	LiveaboardID uint64
+	LiveaboardID uint
 	Liveaboard   Liveaboard
-	RoomTypeID   uint64 `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
+	RoomTypeID   uint `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
 	RoomType     RoomType
-	TripID       uint64 `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
+	TripID       uint `gorm:"uniqueIndex:liveaboard_room_type_trip_index"`
 	Price        float32
+	Deleted      gorm.DeletedAt
 }
 
 func (l *LiveaboardRoomTypeTripPrice) Type() TripType {
@@ -1418,14 +1420,14 @@ func (l *LiveaboardRoomTypeTripPrice) From(link *pb.RoomTypeTripPrice) {
 		return
 	}
 
-	l.LiveaboardID = link.GetLiveaboardId()
-	l.RoomTypeID = link.GetRoomTypeId()
+	l.LiveaboardID = uint(link.LiveaboardId)
+	l.RoomTypeID = uint(link.RoomTypeId)
 	l.Price = link.GetPrice()
 }
 
 func (l *LiveaboardRoomTypeTripPrice) GetProto() *pb.RoomTypeTripPrice {
 	return &pb.RoomTypeTripPrice{
-		RoomTypeId: l.RoomTypeID,
+		RoomTypeId: uint64(l.RoomTypeID),
 		Price:      l.Price,
 	}
 }

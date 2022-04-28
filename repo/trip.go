@@ -12,7 +12,7 @@ import (
 // with the trip repository.
 type TripRepository interface {
 	Get(ctx context.Context, id uint64) (*model.Trip, error)
-	UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
+	UpdateTrip(ctx context.Context, trip *model.Trip, unUsedRoomTypePrices []model.RoomTypeTripPrice) (*model.Trip, error)
 	DeleteTrip(ctx context.Context, trip *model.Trip) error
 	ListTripsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
 	ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error)
@@ -399,15 +399,46 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	return trips, nil
 }
 
-func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error) {
+func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip, unUsedRoomTypePrices []model.RoomTypeTripPrice) (*model.Trip, error) {
 
 	err := repo.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Model(trip).Omit("ReservationRoomTypes").Updates(trip).Error; err != nil {
+		if err := tx.Model(trip).Omit("ReservationRoomTypes", "HotelRoomTypeTripPrices", "LiveaboardRoomTypeTripPrices").Updates(trip).Error; err != nil {
 			return err
 		}
 
 		if err := tx.Model(trip).Association("DiveMasters").Replace(trip.DiveMasters); err != nil {
 			return err
+		}
+
+		switch trip.TripTemplate.Type {
+		case model.ONSHORE:
+			for _, roomTypePrice := range trip.HotelRoomTypeTripPrices {
+				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Updates(&roomTypePrice).Error; err != nil {
+					return err
+				}
+			}
+
+			for _, roomTypePrice := range unUsedRoomTypePrices {
+				if v, ok := roomTypePrice.(*model.HotelRoomTypeTripPrice); ok {
+					if err := tx.Where("room_type_id = ? AND trip_id = ?", v.RoomTypeID, v.TripID).Delete(v).Error; err != nil {
+						return err
+					}
+				}
+			}
+		case model.OFFSHORE:
+			for _, roomTypePrice := range trip.LiveaboardRoomTypeTripPrices {
+				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Updates(&roomTypePrice).Error; err != nil {
+					return err
+				}
+			}
+
+			for _, roomTypePrice := range unUsedRoomTypePrices {
+				if v, ok := roomTypePrice.(*model.LiveaboardRoomTypeTripPrice); ok {
+					if err := tx.Where("room_type_id = ? AND trip_id = ?", v.RoomTypeID, v.TripID).Delete(v).Error; err != nil {
+						return err
+					}
+				}
+			}
 		}
 
 		return nil
