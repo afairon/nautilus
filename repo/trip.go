@@ -413,7 +413,7 @@ func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip, un
 		switch trip.TripTemplate.Type {
 		case model.ONSHORE:
 			for _, roomTypePrice := range trip.HotelRoomTypeTripPrices {
-				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Updates(&roomTypePrice).Error; err != nil {
+				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Save(&roomTypePrice).Error; err != nil {
 					return err
 				}
 			}
@@ -427,7 +427,7 @@ func (repo *tripRepository) UpdateTrip(ctx context.Context, trip *model.Trip, un
 			}
 		case model.OFFSHORE:
 			for _, roomTypePrice := range trip.LiveaboardRoomTypeTripPrices {
-				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Updates(&roomTypePrice).Error; err != nil {
+				if err := tx.Model(&roomTypePrice).Where("room_type_id = ? AND trip_id = ?", roomTypePrice.RoomTypeID, roomTypePrice.TripID).Save(&roomTypePrice).Error; err != nil {
 					return err
 				}
 			}
