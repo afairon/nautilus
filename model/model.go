@@ -673,13 +673,13 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
 	t.Price = trip.Price
-	if t.StartDate != nil {
+	if trip.StartDate != nil {
 		t.StartDate = trip.StartDate
 	}
-	if t.EndDate != nil {
+	if trip.EndDate != nil {
 		t.EndDate = trip.EndDate
 	}
-	if t.LastReservationDate != nil {
+	if trip.LastReservationDate != nil {
 		t.LastReservationDate = trip.LastReservationDate
 	}
 	if trip.TripTemplate != nil {
