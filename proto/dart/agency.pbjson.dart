@@ -374,11 +374,16 @@ const UpdateStaffRequest$json = const {
 
 /// Descriptor for `UpdateStaffRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateStaffRequestDescriptor = $convert.base64Decode('ChJVcGRhdGVTdGFmZlJlcXVlc3QSIgoFc3RhZmYYCiABKAsyDC5tb2RlbC5TdGFmZlIFc3RhZmY=');
-<<<<<<< HEAD
 @$core.Deprecated('Use updateTripTemplateRequestDescriptor instead')
 const UpdateTripTemplateRequest$json = const {
   '1': 'UpdateTripTemplateRequest',
-=======
+  '2': const [
+    const {'1': 'trip_template', '3': 1, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
+  ],
+};
+
+/// Descriptor for `UpdateTripTemplateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateTripTemplateRequestDescriptor = $convert.base64Decode('ChlVcGRhdGVUcmlwVGVtcGxhdGVSZXF1ZXN0EjgKDXRyaXBfdGVtcGxhdGUYASABKAsyEy5tb2RlbC5UcmlwVGVtcGxhdGVSDHRyaXBUZW1wbGF0ZQ==');
 @$core.Deprecated('Use deleteDiveMasterRequestDescriptor instead')
 const DeleteDiveMasterRequest$json = const {
   '1': 'DeleteDiveMasterRequest',
@@ -432,16 +437,11 @@ final $typed_data.Uint8List deleteStaffRequestDescriptor = $convert.base64Decode
 @$core.Deprecated('Use deleteTripTemplateRequestDescriptor instead')
 const DeleteTripTemplateRequest$json = const {
   '1': 'DeleteTripTemplateRequest',
->>>>>>> main
   '2': const [
     const {'1': 'trip_template', '3': 1, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
   ],
 };
 
-<<<<<<< HEAD
-/// Descriptor for `UpdateTripTemplateRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateTripTemplateRequestDescriptor = $convert.base64Decode('ChlVcGRhdGVUcmlwVGVtcGxhdGVSZXF1ZXN0EjgKDXRyaXBfdGVtcGxhdGUYASABKAsyEy5tb2RlbC5UcmlwVGVtcGxhdGVSDHRyaXBUZW1wbGF0ZQ==');
-=======
 /// Descriptor for `DeleteTripTemplateRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteTripTemplateRequestDescriptor = $convert.base64Decode('ChlEZWxldGVUcmlwVGVtcGxhdGVSZXF1ZXN0EjgKDXRyaXBfdGVtcGxhdGUYASABKAsyEy5tb2RlbC5UcmlwVGVtcGxhdGVSDHRyaXBUZW1wbGF0ZQ==');
 @$core.Deprecated('Use deleteTripRequestDescriptor instead')
@@ -454,7 +454,6 @@ const DeleteTripRequest$json = const {
 
 /// Descriptor for `DeleteTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteTripRequestDescriptor = $convert.base64Decode('ChFEZWxldGVUcmlwUmVxdWVzdBIfCgR0cmlwGAEgASgLMgsubW9kZWwuVHJpcFIEdHJpcA==');
->>>>>>> main
 @$core.Deprecated('Use generateCurrentTripsReportRequestDescriptor instead')
 const GenerateCurrentTripsReportRequest$json = const {
   '1': 'GenerateCurrentTripsReportRequest',

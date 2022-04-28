@@ -77,12 +77,11 @@ class AgencyServiceClient extends $grpc.Client {
           '/agency.AgencyService/UpdateStaff',
           ($2.UpdateStaffRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
-<<<<<<< HEAD
   static final _$updateTripTemplate =
       $grpc.ClientMethod<$2.UpdateTripTemplateRequest, $1.Empty>(
           '/agency.AgencyService/UpdateTripTemplate',
           ($2.UpdateTripTemplateRequest value) => value.writeToBuffer(),
-=======
+          ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
   static final _$deleteDiveMaster =
       $grpc.ClientMethod<$2.DeleteDiveMasterRequest, $1.Empty>(
           '/agency.AgencyService/DeleteDiveMaster',
@@ -117,7 +116,6 @@ class AgencyServiceClient extends $grpc.Client {
       $grpc.ClientMethod<$2.DeleteTripRequest, $1.Empty>(
           '/agency.AgencyService/DeleteTrip',
           ($2.DeleteTripRequest value) => value.writeToBuffer(),
->>>>>>> main
           ($core.List<$core.int> value) => $1.Empty.fromBuffer(value));
   static final _$listBoats =
       $grpc.ClientMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
@@ -274,12 +272,12 @@ class AgencyServiceClient extends $grpc.Client {
     return $createUnaryCall(_$updateStaff, request, options: options);
   }
 
-<<<<<<< HEAD
   $grpc.ResponseFuture<$1.Empty> updateTripTemplate(
       $2.UpdateTripTemplateRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateTripTemplate, request, options: options);
-=======
+  }
+
   $grpc.ResponseFuture<$1.Empty> deleteDiveMaster(
       $2.DeleteDiveMasterRequest request,
       {$grpc.CallOptions? options}) {
@@ -317,7 +315,6 @@ class AgencyServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$1.Empty> deleteTrip($2.DeleteTripRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteTrip, request, options: options);
->>>>>>> main
   }
 
   $grpc.ResponseStream<$2.ListBoatsResponse> listBoats(
@@ -529,7 +526,6 @@ abstract class AgencyServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.UpdateStaffRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
-<<<<<<< HEAD
     $addMethod($grpc.ServiceMethod<$2.UpdateTripTemplateRequest, $1.Empty>(
         'UpdateTripTemplate',
         updateTripTemplate_Pre,
@@ -537,7 +533,7 @@ abstract class AgencyServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) =>
             $2.UpdateTripTemplateRequest.fromBuffer(value),
-=======
+        ($1.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.DeleteDiveMasterRequest, $1.Empty>(
         'DeleteDiveMaster',
         deleteDiveMaster_Pre,
@@ -592,7 +588,6 @@ abstract class AgencyServiceBase extends $grpc.Service {
         false,
         false,
         ($core.List<$core.int> value) => $2.DeleteTripRequest.fromBuffer(value),
->>>>>>> main
         ($1.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.ListBoatsRequest, $2.ListBoatsResponse>(
         'ListBoats',
@@ -773,11 +768,11 @@ abstract class AgencyServiceBase extends $grpc.Service {
     return updateStaff(call, await request);
   }
 
-<<<<<<< HEAD
   $async.Future<$1.Empty> updateTripTemplate_Pre($grpc.ServiceCall call,
       $async.Future<$2.UpdateTripTemplateRequest> request) async {
     return updateTripTemplate(call, await request);
-=======
+  }
+
   $async.Future<$1.Empty> deleteDiveMaster_Pre($grpc.ServiceCall call,
       $async.Future<$2.DeleteDiveMasterRequest> request) async {
     return deleteDiveMaster(call, await request);
@@ -811,7 +806,6 @@ abstract class AgencyServiceBase extends $grpc.Service {
   $async.Future<$1.Empty> deleteTrip_Pre($grpc.ServiceCall call,
       $async.Future<$2.DeleteTripRequest> request) async {
     return deleteTrip(call, await request);
->>>>>>> main
   }
 
   $async.Stream<$2.ListBoatsResponse> listBoats_Pre($grpc.ServiceCall call,
@@ -915,10 +909,8 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.UpdateDiveMasterRequest request);
   $async.Future<$1.Empty> updateStaff(
       $grpc.ServiceCall call, $2.UpdateStaffRequest request);
-<<<<<<< HEAD
   $async.Future<$1.Empty> updateTripTemplate(
       $grpc.ServiceCall call, $2.UpdateTripTemplateRequest request);
-=======
   $async.Future<$1.Empty> deleteDiveMaster(
       $grpc.ServiceCall call, $2.DeleteDiveMasterRequest request);
   $async.Future<$1.Empty> deleteDivingBoat(
@@ -933,7 +925,6 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.DeleteTripTemplateRequest request);
   $async.Future<$1.Empty> deleteTrip(
       $grpc.ServiceCall call, $2.DeleteTripRequest request);
->>>>>>> main
   $async.Stream<$2.ListBoatsResponse> listBoats(
       $grpc.ServiceCall call, $2.ListBoatsRequest request);
   $async.Stream<$2.ListDiveMastersResponse> listDiveMasters(
