@@ -30,7 +30,17 @@ var accessRoles = map[string][]model.AccountType{
 	"/agency.AgencyService/UpdateBoat":                     {model.AGENCY},
 	"/agency.AgencyService/UpdateDiveMaster":               {model.AGENCY},
 	"/agency.AgencyService/UpdateStaff":                    {model.AGENCY},
+<<<<<<< HEAD
 	"/agency.AgencyService/UpdateTripTemplate":             {model.AGENCY},
+=======
+	"/agency.AgencyService/DeleteDiveMaster":               {model.AGENCY},
+	"/agency.AgencyService/DeleteDivingBoat":               {model.AGENCY},
+	"/agency.AgencyService/DeleteHotel":                    {model.AGENCY},
+	"/agency.AgencyService/DeleteLiveaboard":               {model.AGENCY},
+	"/agency.AgencyService/DeleteStaff":                    {model.AGENCY},
+	"/agency.AgencyService/DeleteTripTemplate":             {model.AGENCY},
+	"/agency.AgencyService/DeleteTrip":                     {model.AGENCY},
+>>>>>>> main
 	"/agency.AgencyService/ListBoats":                      {model.AGENCY},
 	"/agency.AgencyService/ListDiveMasters":                {model.AGENCY},
 	"/agency.AgencyService/ListHotels":                     {model.AGENCY},
@@ -44,6 +54,7 @@ var accessRoles = map[string][]model.AccountType{
 	"/agency.AgencyService/GenerateYearlyEndedTripsReport": {model.AGENCY},
 	"/agency.AgencyService/GenerateIncomingTripsReport":    {model.AGENCY},
 	"/comment.CommentService/CreateComment":                {model.DIVER},
+	"/comment.CommentService/DeleteComment":                {model.DIVER},
 	"/reservation.ReservationService/CreateReservation":    {model.DIVER},
 	"/reservation.ReservationService/GetReservation":       {model.AGENCY, model.DIVER},
 	"/hotel.HotelService/GetHotel":                         {model.AGENCY, model.DIVER},

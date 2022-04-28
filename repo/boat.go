@@ -13,6 +13,7 @@ type BoatRepository interface {
 	UpdateBoat(ctx context.Context, boat *model.Boat) (*model.Boat, error)
 	ListBoatsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Boat, error)
 	GetBoat(ctx context.Context, id uint) (*model.Boat, error)
+	DeleteBoat(ctx context.Context, boat *model.Boat) error
 }
 
 // boatRepository implements BoatRepository interface.
@@ -105,4 +106,8 @@ func (repo *boatRepository) UpdateBoat(ctx context.Context, boat *model.Boat) (*
 	}
 
 	return boat, nil
+}
+
+func (repo *boatRepository) DeleteBoat(ctx context.Context, boat *model.Boat) error {
+	return repo.db.Delete(boat).Error
 }

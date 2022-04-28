@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"errors"
 	"time"
 
 	"github.com/afairon/nautilus/internal/media"
@@ -32,6 +33,14 @@ type AgencyService interface {
 	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
 	UpdateStaff(ctx context.Context, staff *model.Staff) error
 	UpdateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error
+
+	DeleteDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
+	DeleteDivingBoat(ctx context.Context, divingBoat *model.Boat) error
+	DeleteHotel(ctx context.Context, hotel *model.Hotel) error
+	DeleteLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
+	DeleteStaff(ctx context.Context, staff *model.Staff) error
+	DeleteTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error
+	DeleteTrip(ctx context.Context, trip *model.Trip) error
 
 	ListBoats(ctx context.Context, limit, offset uint64) ([]*model.Boat, error)
 	ListDiveMasters(ctx context.Context, limit, offset uint64) ([]*model.DiveMaster, error)
@@ -1167,15 +1176,7 @@ func (service *agencyService) UpdateStaff(ctx context.Context, staff *model.Staf
 func (service *agencyService) UpdateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error {
 	agency, err := getAgencyInformationFromContext(ctx)
 
-	if err != nil {
-		return err
-	}
-
-	oldTripTemplate, err := service.repo.TripTemplate.Get(ctx, uint64(tripTemplate.ID))
-
-	if err != nil {
-		return err
-	}
+	oldTripTemplate, err := service.repo.TripTemplate.GetTripTemplate(ctx, tripTemplate.ID)
 
 	// check if the trip template belongs to the agency called the service
 	if oldTripTemplate.AgencyID != agency.ID {
@@ -1239,6 +1240,132 @@ func (service *agencyService) UpdateTripTemplate(ctx context.Context, tripTempla
 	_, err = service.repo.TripTemplate.Update(ctx, tripTemplate)
 
 	return err
+}
+
+func (service *agencyService) DeleteDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.DiveMaster.GetDiveMaster(ctx, diveMaster.ID)
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.DiveMaster.DeleteDiveMaster(ctx, diveMaster)
+}
+
+func (service *agencyService) DeleteDivingBoat(ctx context.Context, divingBoat *model.Boat) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Boat.GetBoat(ctx, divingBoat.ID)
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Boat.DeleteBoat(ctx, divingBoat)
+}
+
+func (service *agencyService) DeleteHotel(ctx context.Context, hotel *model.Hotel) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Hotel.GetHotel(ctx, hotel.ID)
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Hotel.DeleteHotel(ctx, hotel)
+}
+
+func (service *agencyService) DeleteLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Liveaboard.GetLiveaboard(ctx, uint64(liveaboard.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Liveaboard.DeleteLiveaboard(ctx, liveaboard)
+}
+
+func (service *agencyService) DeleteStaff(ctx context.Context, staff *model.Staff) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Staff.Get(ctx, uint64(staff.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Staff.DeleteStaff(ctx, staff)
+}
+
+func (service *agencyService) DeleteTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.TripTemplate.GetTripTemplate(ctx, tripTemplate.ID)
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.TripTemplate.DeleteTripTemplate(ctx, tripTemplate)
+}
+
+func (service *agencyService) DeleteTrip(ctx context.Context, trip *model.Trip) error {
+	agency, err := getAgencyInformationFromContext(ctx)
+	if err != nil {
+		return err
+	}
+
+	old, err := service.repo.Trip.Get(ctx, uint64(trip.ID))
+	if err != nil {
+		return err
+	}
+
+	if old.AgencyID != agency.ID {
+		return errors.New("operation not authorized")
+	}
+
+	return service.repo.Trip.DeleteTrip(ctx, trip)
 }
 
 func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, limit, offset uint64) ([]*model.ReportTrip, error) {

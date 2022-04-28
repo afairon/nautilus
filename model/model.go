@@ -226,14 +226,14 @@ type Agency struct {
 	Account       *Account       `json:"account,omitempty"`
 	Name          string         `gorm:"not null" json:"name,omitempty"`
 	Phone         string         `gorm:"not null" json:"phone,omitempty"`
-	Documents     pq.StringArray `gorm:"type:text" json:"documents,omitempty"`
-	DiveMasters   []DiveMaster   `json:"dive_masters,omitempty"`
-	Staffs        []Staff        `json:"staffs,omitempty"`
-	Boats         []Boat         `json:"boats,omitempty"`
-	TripTemplates []TripTemplate `json:"trip_templates,omitempty"`
-	Liveaboards   []Liveaboard   `json:"liveaboards,omitempty"`
-	Hotels        []Hotel        `json:"hotels,omitempty"`
-	Trips         []Trip         `json:"trips,omitempty"`
+	Documents     pq.StringArray `gorm:"type:text" json:"-"`
+	DiveMasters   []DiveMaster   `json:"-"`
+	Staffs        []Staff        `json:"-"`
+	Boats         []Boat         `json:"-"`
+	TripTemplates []TripTemplate `json:"-"`
+	Liveaboards   []Liveaboard   `json:"-"`
+	Hotels        []Hotel        `json:"-"`
+	Trips         []Trip         `json:"-"`
 	Files         []*File        `gorm:"-" json:"-"`
 }
 
@@ -343,8 +343,8 @@ type Diver struct {
 	LastName     string         `gorm:"not null" json:"lastname,omitempty"`
 	Phone        string         `gorm:"not null" json:"phone,omitempty"`
 	BirthDate    time.Time      `gorm:"not null" json:"birthdate,omitempty"`
-	Documents    pq.StringArray `gorm:"type:text" json:"documents,omitempty"`
-	Reservations []Reservation  `json:"reservations,omitempty"`
+	Documents    pq.StringArray `gorm:"type:text" json:"-"`
+	Reservations []Reservation  `json:"-"`
 	Files        []*File        `gorm:"-" json:"-"`
 }
 
@@ -630,7 +630,41 @@ type Trip struct {
 	AgencyID                     uint `gorm:"not null"`
 }
 
-func (t *Trip) From(trip *pb.TripWithTemplate) {
+func (t *Trip) From(trip *pb.Trip) {
+	if trip == nil {
+		return
+	}
+
+	t.ID = uint(trip.Id)
+	t.MaxGuest = trip.MaxGuest
+	t.CurrentGuest = trip.CurentGuest
+	t.Price = trip.Price
+	t.StartDate = trip.StartDate
+	t.EndDate = trip.EndDate
+	t.LastReservationDate = trip.LastReservationDate
+	t.TripTemplateID = uint(trip.TripTemplateId)
+
+	if len(trip.DiveMasters) > 0 {
+		t.DiveMasters = make([]DiveMaster, 0, len(trip.DiveMasters))
+
+		for _, diveMaster := range trip.DiveMasters {
+			dm := DiveMaster{}
+			dm.From(diveMaster)
+			t.DiveMasters = append(t.DiveMasters, dm)
+		}
+	}
+
+	if len(trip.DiveSites) > 0 {
+		t.DiveSites = make([]DiveSite, 0, len(trip.DiveSites))
+
+		for _, diveSite := range trip.DiveSites {
+			ds := DiveSite{}
+			ds.From(diveSite)
+		}
+	}
+}
+
+func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	if trip == nil {
 		return
 	}
@@ -699,7 +733,39 @@ func (t *Trip) From(trip *pb.TripWithTemplate) {
 	}
 }
 
-func (t *Trip) GetProto() *pb.TripWithTemplate {
+func (t *Trip) GetProto() *pb.Trip {
+	trip := pb.Trip{
+		Id:                  uint64(t.ID),
+		TripTemplateId:      uint64(t.TripTemplateID),
+		MaxGuest:            t.MaxGuest,
+		CurentGuest:         t.CurrentGuest,
+		Price:               t.Price,
+		StartDate:           t.StartDate,
+		EndDate:             t.EndDate,
+		LastReservationDate: t.LastReservationDate,
+		CreatedAt:           &t.CreatedAt,
+		UpdatedAt:           &t.UpdatedAt,
+	}
+
+	if len(t.DiveSites) > 0 {
+		trip.DiveSites = make([]*pb.DiveSite, 0, len(t.DiveSites))
+
+		for _, ds := range t.DiveSites {
+			trip.DiveSites = append(trip.DiveSites, ds.GetProto())
+		}
+	}
+
+	if len(t.DiveMasters) > 0 {
+		trip.DiveMasters = make([]*pb.DiveMaster, 0, len(t.DiveMasters))
+		for _, diveMaster := range t.DiveMasters {
+			trip.DiveMasters = append(trip.DiveMasters, diveMaster.GetProto())
+		}
+	}
+
+	return &trip
+}
+
+func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 	trip := pb.TripWithTemplate{
 		Id:                  uint64(t.ID),
 		TripTemplateId:      uint64(t.TripTemplateID),
@@ -796,30 +862,99 @@ func (r *Reservation) GetProto() *pb.Reservation {
 }
 
 type LiveaboardComment struct {
-	*gorm.Model
-	DiverID       uint
-	Diver         *Diver
+	gorm.Model
+	DiverID       uint   `gorm:"-"`
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
+	Reservation   *Reservation
+}
+
+func (l *LiveaboardComment) From(comment *pb.LiveaboardComment) {
+	if comment == nil {
+		return
+	}
+	l.ID = uint(comment.Id)
+	l.Comment = comment.Comment
+	l.Stars = comment.Stars
+	l.ReservationID = uint(comment.ReservationId)
+}
+
+func (l *LiveaboardComment) GetProto() *pb.LiveaboardComment {
+	comment := pb.LiveaboardComment{
+		Id:            uint64(l.ID),
+		Comment:       l.Comment,
+		Stars:         l.Stars,
+		ReservationId: uint64(l.ReservationID),
+		CreatedAt:     &l.CreatedAt,
+		UpdatedAt:     &l.UpdatedAt,
+	}
+
+	return &comment
 }
 
 type HotelComment struct {
-	*gorm.Model
-	DiverID       uint
-	Diver         *Diver
+	gorm.Model
+	DiverID       uint   `gorm:"-"`
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
+	Reservation   *Reservation
+}
+
+func (h *HotelComment) From(comment *pb.HotelComment) {
+	if comment == nil {
+		return
+	}
+	h.ID = uint(comment.Id)
+	h.Comment = comment.Comment
+	h.Stars = comment.Stars
+	h.ReservationID = uint(comment.ReservationId)
+}
+
+func (h *HotelComment) GetProto() *pb.HotelComment {
+	comment := pb.HotelComment{
+		Id:            uint64(h.ID),
+		Comment:       h.Comment,
+		Stars:         h.Stars,
+		ReservationId: uint64(h.ReservationID),
+		CreatedAt:     &h.CreatedAt,
+		UpdatedAt:     &h.UpdatedAt,
+	}
+
+	return &comment
 }
 
 type TripComment struct {
-	*gorm.Model
-	DiverID       uint
-	Diver         *Diver
+	gorm.Model
+	DiverID       uint   `gorm:"-"`
 	Comment       string `gorm:"not null"`
 	Stars         uint32 `gorm:"not null"`
 	ReservationID uint   `gorm:"not null"`
+	Reservation   *Reservation
+}
+
+func (t *TripComment) From(comment *pb.TripComment) {
+	if comment == nil {
+		return
+	}
+	t.ID = uint(comment.Id)
+	t.Comment = comment.Comment
+	t.Stars = comment.Stars
+	t.ReservationID = uint(comment.ReservationId)
+}
+
+func (t *TripComment) GetProto() *pb.TripComment {
+	comment := pb.TripComment{
+		Id:            uint64(t.ID),
+		Comment:       t.Comment,
+		Stars:         t.Stars,
+		ReservationId: uint64(t.ReservationID),
+		CreatedAt:     &t.CreatedAt,
+		UpdatedAt:     &t.UpdatedAt,
+	}
+
+	return &comment
 }
 
 type Amenity struct {

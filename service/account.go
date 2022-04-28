@@ -51,9 +51,11 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 	}
 
 	defer func() {
-		// Delete files if could not save agency.
-		for _, doc := range agency.Documents {
-			service.media.Delete(doc)
+		if err != nil {
+			// Delete files if could not save agency.
+			for _, doc := range agency.Documents {
+				service.media.Delete(doc)
+			}
 		}
 	}()
 
@@ -276,9 +278,26 @@ func (service *accountService) UpdateAgencyAccount(ctx context.Context, agency *
 		}
 	}
 
+	// Create a set of old documents.
 	oldDocs := map[string]struct{}{}
 	for _, doc := range Old.Documents {
 		oldDocs[doc] = struct{}{}
+	}
+
+	for _, f := range agency.Files {
+		_, ok := oldDocs[f.Filename]
+		if ok && len(f.Buffer) == 0 {
+			agency.Documents = append(agency.Documents, f.Filename)
+			continue
+		}
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			agency.Documents = append(agency.Documents, objectID)
+		}
 	}
 
 	defer func() {
@@ -291,37 +310,25 @@ func (service *accountService) UpdateAgencyAccount(ctx context.Context, agency *
 				}
 				service.media.Delete(doc)
 			}
+		} else {
+			for _, doc := range agency.Documents {
+				_, ok := oldDocs[doc]
+				if ok {
+					// Remove file from list to delete.
+					delete(oldDocs, doc)
+				}
+			}
+
+			for doc := range oldDocs {
+				// Delete files that are no longer needed.
+				service.media.Delete(doc)
+			}
 		}
 	}()
-
-	for _, f := range agency.Files {
-		if len(f.Buffer) > 0 {
-			reader := bytes.NewReader(f.Buffer)
-			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
-			if err != nil {
-				return err
-			}
-			agency.Documents = append(agency.Documents, objectID)
-			continue
-		}
-		_, ok := oldDocs[f.Filename]
-		if !ok {
-			continue
-		}
-		agency.Documents = append(agency.Documents, f.Filename)
-	}
 
 	err = service.repo.Agency.Update(ctx, agency)
 	if err != nil {
 		return err
-	}
-
-	for _, doc := range agency.Documents {
-		_, ok := oldDocs[doc]
-		if ok {
-			continue
-		}
-		service.media.Delete(doc)
 	}
 
 	return nil
@@ -380,9 +387,26 @@ func (service *accountService) UpdateDiverAccount(ctx context.Context, diver *mo
 		}
 	}
 
+	// Create a set of old documents.
 	oldDocs := map[string]struct{}{}
 	for _, doc := range diver.Documents {
 		oldDocs[doc] = struct{}{}
+	}
+
+	for _, f := range diver.Files {
+		_, ok := oldDocs[f.Filename]
+		if ok && len(f.Buffer) == 0 {
+			diver.Documents = append(diver.Documents, f.Filename)
+			continue
+		}
+		if len(f.Buffer) > 0 {
+			reader := bytes.NewReader(f.Buffer)
+			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
+			if err != nil {
+				return err
+			}
+			diver.Documents = append(diver.Documents, objectID)
+		}
 	}
 
 	defer func() {
@@ -395,37 +419,25 @@ func (service *accountService) UpdateDiverAccount(ctx context.Context, diver *mo
 				}
 				service.media.Delete(doc)
 			}
+		} else {
+			for _, doc := range diver.Documents {
+				_, ok := oldDocs[doc]
+				if ok {
+					// Remove file from list to delete.
+					delete(oldDocs, doc)
+				}
+			}
+
+			for doc := range oldDocs {
+				// Delete files that are no longer needed.
+				service.media.Delete(doc)
+			}
 		}
 	}()
-
-	for _, f := range diver.Files {
-		if len(f.Buffer) > 0 {
-			reader := bytes.NewReader(f.Buffer)
-			objectID, err := service.media.Put(f.Filename, media.PRIVATE, reader)
-			if err != nil {
-				return err
-			}
-			diver.Documents = append(diver.Documents, objectID)
-			continue
-		}
-		_, ok := oldDocs[f.Filename]
-		if !ok {
-			continue
-		}
-		diver.Documents = append(diver.Documents, f.Filename)
-	}
 
 	err = service.repo.Diver.Update(ctx, diver)
 	if err != nil {
 		return err
-	}
-
-	for _, doc := range diver.Documents {
-		_, ok := oldDocs[doc]
-		if ok {
-			continue
-		}
-		service.media.Delete(doc)
 	}
 
 	return nil

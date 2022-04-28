@@ -27,6 +27,14 @@ service AgencyService {
     rpc UpdateStaff(UpdateStaffRequest) returns (google.protobuf.Empty);
     rpc UpdateTripTemplate(UpdateTripTemplateRequest) returns (google.protobuf.Empty);
 
+    rpc DeleteDiveMaster (DeleteDiveMasterRequest) returns (google.protobuf.Empty);
+    rpc DeleteDivingBoat (DeleteDivingBoatRequest) returns (google.protobuf.Empty);
+    rpc DeleteHotel (DeleteHotelRequest) returns (google.protobuf.Empty);
+    rpc DeleteLiveaboard (DeleteLiveaboardRequest) returns (google.protobuf.Empty);
+    rpc DeleteStaff (DeleteStaffRequest) returns (google.protobuf.Empty);
+    rpc DeleteTripTemplate (DeleteTripTemplateRequest) returns (google.protobuf.Empty);
+    rpc DeleteTrip (DeleteTripRequest) returns (google.protobuf.Empty);
+
     rpc ListBoats (ListBoatsRequest) returns (stream ListBoatsResponse);
     rpc ListDiveMasters (ListDiveMastersRequest) returns (stream ListDiveMastersResponse);
     rpc ListHotels (ListHotelsRequest) returns (stream ListHotelsResponse);
@@ -226,6 +234,41 @@ message UpdateStaffRequest {
 
 message UpdateTripTemplateRequest {
     model.TripTemplate trip_template = 1;
+}
+
+// DeleteDiveMasterRequest
+message DeleteDiveMasterRequest {
+    model.DiveMaster dive_master = 1;
+}
+
+// DeleteDivingBoatRequest
+message DeleteDivingBoatRequest {
+    model.Boat diving_boat = 1;
+}
+
+// DeleteHotelRequest
+message DeleteHotelRequest {
+    model.Hotel hotel = 1;
+}
+
+// DeleteLiveaboardRequest
+message DeleteLiveaboardRequest {
+    model.Liveaboard liveaboard = 1;
+}
+
+// DeleteStaffRequest
+message DeleteStaffRequest {
+    model.Staff staff = 1;
+}
+
+// DeleteTripTemplateRequest
+message DeleteTripTemplateRequest {
+    model.TripTemplate trip_template = 1;
+}
+
+// DeleteTripRequest
+message DeleteTripRequest {
+    model.Trip trip = 1;
 }
 
 message GenerateCurrentTripsReportRequest {

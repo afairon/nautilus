@@ -60,7 +60,7 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
 	trip := model.Trip{}
-	trip.From(req.Trip)
+	trip.FromWithTemplate(req.Trip)
 	var roomTypePrices []model.RoomTypeTripPrice
 
 	switch req.Trip.TripTemplate.TripType {
@@ -602,7 +602,7 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 
 func (handler *AgencyHandler) UpdateTrip(ctx context.Context, req *pb.UpdateTripRequest) (*emptypb.Empty, error) {
 	trip := model.Trip{}
-	trip.From(req.Trip)
+	trip.FromWithTemplate(req.Trip)
 	err := handler.agencyService.UpdateTrip(ctx, &trip)
 
 	if err != nil {
@@ -687,6 +687,83 @@ func (handler *AgencyHandler) UpdateTripTemplate(ctx context.Context, req *pb.Up
 	}
 
 	return &empty.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteDiveMaster(ctx context.Context, req *pb.DeleteDiveMasterRequest) (*empty.Empty, error) {
+	diveMaster := model.DiveMaster{}
+	diveMaster.From(req.DiveMaster)
+
+	if err := handler.agencyService.DeleteDiveMaster(ctx, &diveMaster); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteDivingBoat(ctx context.Context, req *pb.DeleteDivingBoatRequest) (*empty.Empty, error) {
+	divingBoat := model.Boat{}
+	divingBoat.From(req.DivingBoat)
+
+	if err := handler.agencyService.DeleteDivingBoat(ctx, &divingBoat); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteHotel(ctx context.Context, req *pb.DeleteHotelRequest) (*empty.Empty, error) {
+	hotel := model.Hotel{}
+	hotel.From(req.Hotel)
+
+	if err := handler.agencyService.DeleteHotel(ctx, &hotel); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteLiveaboard(ctx context.Context, req *pb.DeleteLiveaboardRequest) (*empty.Empty, error) {
+	liveaboard := model.Liveaboard{}
+	liveaboard.From(req.Liveaboard)
+
+	if err := handler.agencyService.DeleteLiveaboard(ctx, &liveaboard); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteStaff(ctx context.Context, req *pb.DeleteStaffRequest) (*empty.Empty, error) {
+	staff := model.Staff{}
+	staff.From(req.Staff)
+
+	if err := handler.agencyService.DeleteStaff(ctx, &staff); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteTripTemplate(ctx context.Context, req *pb.DeleteTripTemplateRequest) (*empty.Empty, error) {
+	tripTemplate := model.TripTemplate{}
+	tripTemplate.From(req.TripTemplate)
+
+	if err := handler.agencyService.DeleteTripTemplate(ctx, &tripTemplate); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
+}
+
+func (handler *AgencyHandler) DeleteTrip(ctx context.Context, req *pb.DeleteTripRequest) (*empty.Empty, error) {
+	trip := model.Trip{}
+	trip.From(req.Trip)
+
+	if err := handler.agencyService.DeleteTrip(ctx, &trip); err != nil {
+		return nil, err
+	}
+
+	return &emptypb.Empty{}, nil
 }
 
 func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrentTripsReportRequest, srv pb.AgencyService_GenerateCurrentTripsReportServer) error {

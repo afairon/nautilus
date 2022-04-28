@@ -13,6 +13,7 @@ type HotelRepository interface {
 	UpdateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
 	ListHotelsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Hotel, error)
 	GetHotel(ctx context.Context, id uint) (*model.Hotel, error)
+	DeleteHotel(ctx context.Context, hotel *model.Hotel) error
 }
 
 // hotelRepository implements HotelRepository interface.
@@ -127,4 +128,8 @@ func (repo *hotelRepository) UpdateHotel(ctx context.Context, hotel *model.Hotel
 	}
 
 	return hotel, nil
+}
+
+func (repo *hotelRepository) DeleteHotel(ctx context.Context, hotel *model.Hotel) error {
+	return repo.db.Delete(hotel).Error
 }

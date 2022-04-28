@@ -12,6 +12,7 @@ import (
 type DiveMasterRepository interface {
 	GetDiveMaster(ctx context.Context, id uint) (*model.DiveMaster, error)
 	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
+	DeleteDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
 	ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
 }
 
@@ -106,4 +107,8 @@ func (repo *diveMasterRepository) GetDiveMaster(ctx context.Context, id uint) (*
 	}
 
 	return &diveMaster, nil
+}
+
+func (repo *diveMasterRepository) DeleteDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error {
+	return repo.db.Delete(diveMaster).Error
 }

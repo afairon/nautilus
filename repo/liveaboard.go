@@ -14,6 +14,7 @@ type LiveaboardRepository interface {
 	UpdateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error)
 	ListLiveaboardsByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Liveaboard, error)
 	GetLiveaboard(ctx context.Context, id uint64) (*model.Liveaboard, error)
+	DeleteLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error
 }
 
 // liveaboardRepository implements LiveaboardRepository interface.
@@ -127,4 +128,8 @@ func (repo *liveaboardRepository) UpdateLiveaboard(ctx context.Context, liveaboa
 	}
 
 	return liveaboard, nil
+}
+
+func (repo *liveaboardRepository) DeleteLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) error {
+	return repo.db.Delete(liveaboard).Error
 }

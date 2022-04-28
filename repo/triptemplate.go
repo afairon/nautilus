@@ -10,9 +10,10 @@ import (
 // TripTemplateRepository defines interface for interaction
 // with the trip template repository.
 type TripTemplateRepository interface {
-	Get(ctx context.Context, id uint64) (*model.TripTemplate, error)
+	GetTripTemplate(ctx context.Context, id uint) (*model.TripTemplate, error)
 	Update(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
 	ListTripTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.TripTemplate, error)
+	DeleteTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error
 }
 
 // tripTemplateRepository implements TripTemplateRepository interface.
@@ -27,7 +28,7 @@ func NewTripTemplateRepository(db *gorm.DB) *tripTemplateRepository {
 	}
 }
 
-func (repo *tripTemplateRepository) Get(ctx context.Context, id uint64) (*model.TripTemplate, error) {
+func (repo *tripTemplateRepository) GetTripTemplate(ctx context.Context, id uint) (*model.TripTemplate, error) {
 	var tripTemplate model.TripTemplate
 
 	if err := repo.db.Preload("Address").First(&tripTemplate, id).Error; err != nil {
@@ -129,4 +130,8 @@ func (repo *tripTemplateRepository) ListTripTemplatesByAgency(ctx context.Contex
 	}
 
 	return templates, nil
+}
+
+func (repo *tripTemplateRepository) DeleteTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) error {
+	return repo.db.Delete(tripTemplate).Error
 }

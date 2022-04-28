@@ -1977,14 +1977,269 @@ class UpdateStaffRequest extends $pb.GeneratedMessage {
   $13.Staff ensureStaff() => $_ensure(0);
 }
 
+<<<<<<< HEAD
 class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+=======
+class DeleteDiveMasterRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteDiveMasterRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $13.DiveMaster.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteDiveMasterRequest._() : super();
+  factory DeleteDiveMasterRequest({
+    $13.DiveMaster? diveMaster,
+  }) {
+    final _result = create();
+    if (diveMaster != null) {
+      _result.diveMaster = diveMaster;
+    }
+    return _result;
+  }
+  factory DeleteDiveMasterRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteDiveMasterRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteDiveMasterRequest clone() => DeleteDiveMasterRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteDiveMasterRequest copyWith(void Function(DeleteDiveMasterRequest) updates) => super.copyWith((message) => updates(message as DeleteDiveMasterRequest)) as DeleteDiveMasterRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteDiveMasterRequest create() => DeleteDiveMasterRequest._();
+  DeleteDiveMasterRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteDiveMasterRequest> createRepeated() => $pb.PbList<DeleteDiveMasterRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteDiveMasterRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteDiveMasterRequest>(create);
+  static DeleteDiveMasterRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.DiveMaster get diveMaster => $_getN(0);
+  @$pb.TagNumber(1)
+  set diveMaster($13.DiveMaster v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDiveMaster() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDiveMaster() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.DiveMaster ensureDiveMaster() => $_ensure(0);
+}
+
+class DeleteDivingBoatRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteDivingBoatRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: $13.Boat.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteDivingBoatRequest._() : super();
+  factory DeleteDivingBoatRequest({
+    $13.Boat? divingBoat,
+  }) {
+    final _result = create();
+    if (divingBoat != null) {
+      _result.divingBoat = divingBoat;
+    }
+    return _result;
+  }
+  factory DeleteDivingBoatRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteDivingBoatRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteDivingBoatRequest clone() => DeleteDivingBoatRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteDivingBoatRequest copyWith(void Function(DeleteDivingBoatRequest) updates) => super.copyWith((message) => updates(message as DeleteDivingBoatRequest)) as DeleteDivingBoatRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteDivingBoatRequest create() => DeleteDivingBoatRequest._();
+  DeleteDivingBoatRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteDivingBoatRequest> createRepeated() => $pb.PbList<DeleteDivingBoatRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteDivingBoatRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteDivingBoatRequest>(create);
+  static DeleteDivingBoatRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.Boat get divingBoat => $_getN(0);
+  @$pb.TagNumber(1)
+  set divingBoat($13.Boat v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDivingBoat() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDivingBoat() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.Boat ensureDivingBoat() => $_ensure(0);
+}
+
+class DeleteHotelRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.Hotel.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteHotelRequest._() : super();
+  factory DeleteHotelRequest({
+    $13.Hotel? hotel,
+  }) {
+    final _result = create();
+    if (hotel != null) {
+      _result.hotel = hotel;
+    }
+    return _result;
+  }
+  factory DeleteHotelRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteHotelRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteHotelRequest clone() => DeleteHotelRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteHotelRequest copyWith(void Function(DeleteHotelRequest) updates) => super.copyWith((message) => updates(message as DeleteHotelRequest)) as DeleteHotelRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteHotelRequest create() => DeleteHotelRequest._();
+  DeleteHotelRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteHotelRequest> createRepeated() => $pb.PbList<DeleteHotelRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteHotelRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteHotelRequest>(create);
+  static DeleteHotelRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.Hotel get hotel => $_getN(0);
+  @$pb.TagNumber(1)
+  set hotel($13.Hotel v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasHotel() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearHotel() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.Hotel ensureHotel() => $_ensure(0);
+}
+
+class DeleteLiveaboardRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteLiveaboardRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.Liveaboard.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteLiveaboardRequest._() : super();
+  factory DeleteLiveaboardRequest({
+    $13.Liveaboard? liveaboard,
+  }) {
+    final _result = create();
+    if (liveaboard != null) {
+      _result.liveaboard = liveaboard;
+    }
+    return _result;
+  }
+  factory DeleteLiveaboardRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteLiveaboardRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteLiveaboardRequest clone() => DeleteLiveaboardRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteLiveaboardRequest copyWith(void Function(DeleteLiveaboardRequest) updates) => super.copyWith((message) => updates(message as DeleteLiveaboardRequest)) as DeleteLiveaboardRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteLiveaboardRequest create() => DeleteLiveaboardRequest._();
+  DeleteLiveaboardRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteLiveaboardRequest> createRepeated() => $pb.PbList<DeleteLiveaboardRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteLiveaboardRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteLiveaboardRequest>(create);
+  static DeleteLiveaboardRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.Liveaboard get liveaboard => $_getN(0);
+  @$pb.TagNumber(1)
+  set liveaboard($13.Liveaboard v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasLiveaboard() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLiveaboard() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.Liveaboard ensureLiveaboard() => $_ensure(0);
+}
+
+class DeleteStaffRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteStaffRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $13.Staff.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteStaffRequest._() : super();
+  factory DeleteStaffRequest({
+    $13.Staff? staff,
+  }) {
+    final _result = create();
+    if (staff != null) {
+      _result.staff = staff;
+    }
+    return _result;
+  }
+  factory DeleteStaffRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteStaffRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteStaffRequest clone() => DeleteStaffRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteStaffRequest copyWith(void Function(DeleteStaffRequest) updates) => super.copyWith((message) => updates(message as DeleteStaffRequest)) as DeleteStaffRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteStaffRequest create() => DeleteStaffRequest._();
+  DeleteStaffRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteStaffRequest> createRepeated() => $pb.PbList<DeleteStaffRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteStaffRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteStaffRequest>(create);
+  static DeleteStaffRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.Staff get staff => $_getN(0);
+  @$pb.TagNumber(1)
+  set staff($13.Staff v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStaff() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStaff() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.Staff ensureStaff() => $_ensure(0);
+}
+
+class DeleteTripTemplateRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+>>>>>>> main
     ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $13.TripTemplate.create)
     ..hasRequiredFields = false
   ;
 
+<<<<<<< HEAD
   UpdateTripTemplateRequest._() : super();
   factory UpdateTripTemplateRequest({
+=======
+  DeleteTripTemplateRequest._() : super();
+  factory DeleteTripTemplateRequest({
+>>>>>>> main
     $13.TripTemplate? tripTemplate,
   }) {
     final _result = create();
@@ -1993,17 +2248,27 @@ class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
     }
     return _result;
   }
+<<<<<<< HEAD
   factory UpdateTripTemplateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UpdateTripTemplateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+=======
+  factory DeleteTripTemplateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteTripTemplateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+>>>>>>> main
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
+<<<<<<< HEAD
   UpdateTripTemplateRequest clone() => UpdateTripTemplateRequest()..mergeFromMessage(this);
+=======
+  DeleteTripTemplateRequest clone() => DeleteTripTemplateRequest()..mergeFromMessage(this);
+>>>>>>> main
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
+<<<<<<< HEAD
   UpdateTripTemplateRequest copyWith(void Function(UpdateTripTemplateRequest) updates) => super.copyWith((message) => updates(message as UpdateTripTemplateRequest)) as UpdateTripTemplateRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
@@ -2013,6 +2278,17 @@ class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateTripTemplateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateTripTemplateRequest>(create);
   static UpdateTripTemplateRequest? _defaultInstance;
+=======
+  DeleteTripTemplateRequest copyWith(void Function(DeleteTripTemplateRequest) updates) => super.copyWith((message) => updates(message as DeleteTripTemplateRequest)) as DeleteTripTemplateRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteTripTemplateRequest create() => DeleteTripTemplateRequest._();
+  DeleteTripTemplateRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteTripTemplateRequest> createRepeated() => $pb.PbList<DeleteTripTemplateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteTripTemplateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteTripTemplateRequest>(create);
+  static DeleteTripTemplateRequest? _defaultInstance;
+>>>>>>> main
 
   @$pb.TagNumber(1)
   $13.TripTemplate get tripTemplate => $_getN(0);
@@ -2026,6 +2302,58 @@ class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
   $13.TripTemplate ensureTripTemplate() => $_ensure(0);
 }
 
+<<<<<<< HEAD
+=======
+class DeleteTripRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$13.Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.Trip.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteTripRequest._() : super();
+  factory DeleteTripRequest({
+    $13.Trip? trip,
+  }) {
+    final _result = create();
+    if (trip != null) {
+      _result.trip = trip;
+    }
+    return _result;
+  }
+  factory DeleteTripRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteTripRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteTripRequest clone() => DeleteTripRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteTripRequest copyWith(void Function(DeleteTripRequest) updates) => super.copyWith((message) => updates(message as DeleteTripRequest)) as DeleteTripRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteTripRequest create() => DeleteTripRequest._();
+  DeleteTripRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteTripRequest> createRepeated() => $pb.PbList<DeleteTripRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteTripRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteTripRequest>(create);
+  static DeleteTripRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $13.Trip get trip => $_getN(0);
+  @$pb.TagNumber(1)
+  set trip($13.Trip v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTrip() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTrip() => clearField(1);
+  @$pb.TagNumber(1)
+  $13.Trip ensureTrip() => $_ensure(0);
+}
+
+>>>>>>> main
 class GenerateCurrentTripsReportRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateCurrentTripsReportRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
