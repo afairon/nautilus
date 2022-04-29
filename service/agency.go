@@ -1212,6 +1212,32 @@ func (service *agencyService) UpdateDiveMaster(ctx context.Context, diveMaster *
 		}
 	}
 
+	defer func() {
+		if err != nil {
+			// Delete files when save failed.
+			for _, doc := range diveMaster.Documents {
+				_, ok := oldDiveMasterDocs[doc]
+				if ok {
+					continue
+				}
+				service.media.Delete(doc)
+			}
+		} else {
+			for _, doc := range diveMaster.Documents {
+				_, ok := oldDiveMasterDocs[doc]
+				if ok {
+					// Remove file from list to delete.
+					delete(oldDiveMasterDocs, doc)
+				}
+			}
+
+			for doc := range oldDiveMasterDocs {
+				// Delete files that are no longer needed.
+				service.media.Delete(doc)
+			}
+		}
+	}()
+
 	_, err = service.repo.DiveMaster.UpdateDiveMaster(ctx, diveMaster)
 
 	return err
