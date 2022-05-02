@@ -616,7 +616,7 @@ type Trip struct {
 	gorm.Model
 	MaxGuest                     uint32                `gorm:"not null"`
 	CurrentGuest                 uint32                `gorm:"not null;default:0"`
-	Price                        float32               `gorm:"not null;check:price_checker,price > 0"`
+	Price                        float32               `gorm:"not null"`
 	StartDate                    *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
 	EndDate                      *time.Time            `gorm:"not null"`
 	LastReservationDate          *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`

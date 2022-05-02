@@ -620,8 +620,13 @@ func (service *agencyService) ListTripsWithTemplates(ctx context.Context, limit,
 	}
 
 	for _, trip := range trips {
-		for idx, id := range trip.TripTemplate.Images {
-			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		for _, doc := range trip.TripTemplate.Images {
+			file := model.File{
+				Filename: doc,
+				URL:      service.media.Get(doc, true),
+			}
+
+			trip.TripTemplate.Files = append(trip.TripTemplate.Files, &file)
 		}
 	}
 

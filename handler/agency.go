@@ -398,73 +398,19 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 func (handler *AgencyHandler) ListTripsWithTemplates(req *pb.ListTripsWithTemplatesRequest, srv pb.AgencyService_ListTripsWithTemplatesServer) error {
 	ctx := srv.Context()
 
-	trips, err := handler.agencyService.ListTripsWithTemplates(ctx, req.GetLimit(), req.GetOffset())
+	trips, err := handler.agencyService.ListTripsWithTemplates(ctx, req.Limit, req.Offset)
 
 	if err != nil {
 		return err
 	}
 
 	if len(trips) == 0 {
-		return status.Error(codes.NotFound, "SearchTrips: not found")
+		return status.Error(codes.NotFound, "ListTripsWithTemplates: not found")
 	}
 
 	for _, trip := range trips {
 		resp := &pb.ListTripsWithTemplatesResponse{
-			Trip: &pb.TripWithTemplate{
-				Id:                  uint64(trip.ID),
-				TripTemplateId:      uint64(trip.TripTemplateID),
-				MaxGuest:            trip.MaxGuest,
-				Price:               trip.Price,
-				StartDate:           trip.StartDate,
-				EndDate:             trip.EndDate,
-				LastReservationDate: trip.LastReservationDate,
-				CreatedAt:           &trip.CreatedAt,
-				UpdatedAt:           &trip.UpdatedAt,
-				TripTemplate: &pb.TripTemplate{
-					Id:           uint64(trip.TripTemplate.ID),
-					Name:         trip.TripTemplate.Name,
-					Description:  trip.TripTemplate.Description,
-					TripType:     pb.TripType(trip.TripTemplate.Type),
-					HotelId:      uint64(trip.TripTemplate.HotelID),
-					BoatId:       uint64(trip.TripTemplate.BoatID),
-					LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
-					Address: &pb.Address{
-						Id:            uint64(trip.TripTemplate.Address.ID),
-						AddressLine_1: trip.TripTemplate.Address.AddressLine_1,
-						AddressLine_2: trip.TripTemplate.Address.AddressLine_2,
-						City:          trip.TripTemplate.Address.City,
-						Postcode:      trip.TripTemplate.Address.Postcode,
-						Region:        trip.TripTemplate.Address.Region,
-						Country:       trip.TripTemplate.Address.Country,
-						CreatedAt:     &trip.TripTemplate.Address.CreatedAt,
-						UpdatedAt:     &trip.TripTemplate.Address.UpdatedAt,
-					},
-					CreatedAt: &trip.TripTemplate.CreatedAt,
-					UpdatedAt: &trip.TripTemplate.UpdatedAt,
-				},
-			},
-		}
-
-		if len(trip.DiveMasters) > 0 {
-			resp.Trip.DiveMasters = make([]*pb.DiveMaster, 0, len(trip.DiveMasters))
-			for _, dive_master := range trip.DiveMasters {
-				resp.Trip.DiveMasters = append(resp.Trip.DiveMasters, &pb.DiveMaster{
-					FirstName: dive_master.FirstName,
-					LastName:  dive_master.LastName,
-					Level:     pb.LevelType(dive_master.Level),
-				},
-				)
-			}
-		}
-
-		if len(trip.TripTemplate.Images) > 0 {
-			resp.Trip.TripTemplate.Images = make([]*pb.File, 0, len(trip.TripTemplate.Images))
-			for _, link := range trip.TripTemplate.Images {
-				file := &pb.File{
-					Link: link,
-				}
-				resp.Trip.TripTemplate.Images = append(resp.Trip.TripTemplate.Images, file)
-			}
+			Trip: trip.GetProtoWithTemplate(),
 		}
 
 		srv.Send(resp)
