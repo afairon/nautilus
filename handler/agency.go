@@ -233,40 +233,7 @@ func (handler *AgencyHandler) ListLiveaboards(req *pb.ListLiveaboardsRequest, sr
 
 	for _, liveaboard := range liveaboards {
 		resp := &pb.ListLiveaboardsResponse{
-			Liveaboard: &pb.Liveaboard{
-				Id:            uint64(liveaboard.ID),
-				Name:          liveaboard.Name,
-				Description:   liveaboard.Description,
-				Length:        float32(liveaboard.Length),
-				Width:         float32(liveaboard.Width),
-				TotalCapacity: liveaboard.TotalCapacity,
-				DiverRooms:    liveaboard.DiverRooms,
-				StaffRooms:    liveaboard.StaffRooms,
-				Address: &pb.Address{
-					AddressLine_1: liveaboard.Address.AddressLine_1,
-					AddressLine_2: liveaboard.Address.AddressLine_2,
-					City:          liveaboard.Address.City,
-					Postcode:      liveaboard.Address.Postcode,
-					Region:        liveaboard.Address.Region,
-					Country:       liveaboard.Address.Country,
-					CreatedAt:     &liveaboard.Address.CreatedAt,
-					UpdatedAt:     &liveaboard.Address.UpdatedAt,
-				},
-				CreatedAt: &liveaboard.CreatedAt,
-				UpdatedAt: &liveaboard.UpdatedAt,
-			},
-		}
-
-		if len(liveaboard.Images) > 0 {
-			resp.Liveaboard.Images = make([]*pb.File, 0, len(liveaboard.Images))
-
-			for _, link := range liveaboard.Images {
-				file := &pb.File{
-					Link: link,
-				}
-
-				resp.Liveaboard.Images = append(resp.Liveaboard.Images, file)
-			}
+			Liveaboard: liveaboard.GetProto(),
 		}
 
 		srv.Send(resp)
