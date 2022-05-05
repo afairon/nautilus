@@ -1126,11 +1126,11 @@ func (service *agencyService) UpdateBoat(ctx context.Context, boat *model.Boat) 
 		oldBoatDocs[doc] = struct{}{}
 	}
 
-	for _, f := range oldBoat.Files {
+	for _, f := range boat.Files {
 		_, ok := oldBoatDocs[f.Filename]
 		// append old images
 		if ok && len(f.Buffer) == 0 {
-			oldBoat.Images = append(oldBoat.Images, f.Filename)
+			boat.Images = append(boat.Images, f.Filename)
 			continue
 		}
 
@@ -1140,7 +1140,7 @@ func (service *agencyService) UpdateBoat(ctx context.Context, boat *model.Boat) 
 			if err != nil {
 				return err
 			}
-			oldBoat.Images = append(oldBoat.Images, objectID)
+			boat.Images = append(boat.Images, objectID)
 		}
 	}
 

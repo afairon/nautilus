@@ -126,18 +126,6 @@ func (handler *AgencyHandler) ListBoats(req *pb.ListBoatsRequest, srv pb.AgencyS
 			Boat: boat.GetProto(),
 		}
 
-		if len(boat.Images) > 0 {
-			resp.Boat.Images = make([]*pb.File, 0, len(boat.Images))
-
-			for _, link := range boat.Images {
-				file := &pb.File{
-					Link: link,
-				}
-
-				resp.Boat.Images = append(resp.Boat.Images, file)
-			}
-		}
-
 		srv.Send(resp)
 	}
 
