@@ -434,8 +434,7 @@ func (dm *DiveMaster) From(diveMaster *pb.DiveMaster) {
 }
 
 func (dm *DiveMaster) GetProto() *pb.DiveMaster {
-	// might have to add documents to the returning object
-	return &pb.DiveMaster{
+	diveMaster := pb.DiveMaster{
 		Id:        uint64(dm.ID),
 		FirstName: dm.FirstName,
 		LastName:  dm.LastName,
@@ -443,6 +442,14 @@ func (dm *DiveMaster) GetProto() *pb.DiveMaster {
 		CreatedAt: &dm.CreatedAt,
 		UpdatedAt: &dm.UpdatedAt,
 	}
+
+	if len(dm.Files) > 0 {
+		diveMaster.Documents = make([]*pb.File, 0, len(dm.Files))
+		for _, f := range dm.Files {
+			diveMaster.Documents = append(diveMaster.Documents, f.GetProto())
+		}
+	}
+	return &diveMaster
 }
 
 type Staff struct {

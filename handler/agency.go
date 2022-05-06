@@ -143,26 +143,7 @@ func (handler *AgencyHandler) ListDiveMasters(req *pb.ListDiveMastersRequest, sr
 
 	for _, diveMaster := range diveMasters {
 		resp := &pb.ListDiveMastersResponse{
-			DiveMaster: &pb.DiveMaster{
-				Id:        uint64(diveMaster.ID),
-				FirstName: diveMaster.FirstName,
-				LastName:  diveMaster.LastName,
-				Level:     pb.LevelType(diveMaster.Level),
-				CreatedAt: &diveMaster.CreatedAt,
-				UpdatedAt: &diveMaster.UpdatedAt,
-			},
-		}
-
-		if len(diveMaster.Documents) > 0 {
-			resp.DiveMaster.Documents = make([]*pb.File, 0, len(diveMaster.Documents))
-
-			for _, link := range diveMaster.Documents {
-				file := &pb.File{
-					Link: link,
-				}
-
-				resp.DiveMaster.Documents = append(resp.DiveMaster.Documents, file)
-			}
+			DiveMaster: diveMaster.GetProto(),
 		}
 
 		srv.Send(resp)

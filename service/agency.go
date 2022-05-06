@@ -475,8 +475,16 @@ func (service *agencyService) ListDiveMasters(ctx context.Context, limit, offset
 	}
 
 	for _, diveMaster := range diveMasters {
-		for idx, id := range diveMaster.Documents {
-			diveMaster.Documents[idx] = service.media.Get(id, false)
+		if len(diveMaster.Documents) == 0 {
+			continue
+		}
+		diveMaster.Files = make([]*model.File, 0, len(diveMaster.Documents))
+		for _, id := range diveMaster.Documents {
+			file := model.File{
+				Filename: id,
+				URL:      service.media.Get(id, false),
+			}
+			diveMaster.Files = append(diveMaster.Files, &file)
 		}
 	}
 
