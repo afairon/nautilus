@@ -83,7 +83,7 @@ func (repo *hotelRepository) ListHotelsByAgency(ctx context.Context, id, limit, 
 	// return results, nil
 	var hotels []*model.Hotel
 
-	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Where("agency_id = ?", id).Find(&hotels)
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Preload("RoomTypes").Where("agency_id = ?", id).Find(&hotels)
 	return hotels, result.Error
 }
 

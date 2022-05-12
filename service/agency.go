@@ -509,8 +509,17 @@ func (service *agencyService) ListHotels(ctx context.Context, limit, offset uint
 	}
 
 	for _, hotel := range hotels {
-		for idx, id := range hotel.Images {
-			hotel.Images[idx] = service.media.Get(id, false)
+		if len(hotel.Images) > 0 {
+			hotel.Files = make([]*model.File, 0, len(hotel.Images))
+
+			for _, doc := range hotel.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+
+				hotel.Files = append(hotel.Files, &file)
+			}
 		}
 	}
 

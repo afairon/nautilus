@@ -679,7 +679,6 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	t.ID = uint(trip.Id)
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
-	t.Price = trip.Price
 	if trip.StartDate != nil {
 		t.StartDate = trip.StartDate
 	}
@@ -780,7 +779,6 @@ func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 		TripTemplate:        t.TripTemplate.GetProto(),
 		MaxGuest:            t.MaxGuest,
 		CurentGuest:         t.CurrentGuest,
-		Price:               t.Price,
 		StartDate:           t.StartDate,
 		EndDate:             t.EndDate,
 		LastReservationDate: t.LastReservationDate,

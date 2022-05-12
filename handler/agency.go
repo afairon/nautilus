@@ -406,7 +406,6 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
-				Price:               trip.Price,
 				StartDate:           trip.StartDate,
 				EndDate:             trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,

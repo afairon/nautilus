@@ -28,6 +28,10 @@ func (t *Trip) BeforeSave(tx *gorm.DB) error {
 	result.Preload("TripTemplate.Liveaboard")
 	result.Where("start_date BETWEEN ? AND ? OR end_date BETWEEN ? AND ?", t.StartDate, t.EndDate, t.StartDate, t.EndDate)
 
+	if t.ID != 0 {
+		result.Where("id <> ?", t.ID)
+	}
+
 	switch t.TripTemplate.Type {
 	case ONSHORE:
 		result.Where("trip_templates.boat_id = ?", t.TripTemplate.BoatID)

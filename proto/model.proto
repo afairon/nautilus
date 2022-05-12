@@ -243,7 +243,6 @@ message TripWithTemplate {
     TripTemplate trip_template = 25;
     uint32 max_guest = 30;
     uint32 curent_guest = 35;
-    float price = 40;
     repeated DiveMaster dive_masters = 50;
     repeated DiveSite dive_sites = 56;
     repeated model.RoomTypeTripPrice trip_room_type_prices = 57;

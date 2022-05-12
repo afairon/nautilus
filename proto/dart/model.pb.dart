@@ -2456,7 +2456,6 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     ..aOM<TripTemplate>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: TripTemplate.create)
     ..a<$core.int>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'maxGuest', $pb.PbFieldType.OU3)
     ..a<$core.int>(35, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'curentGuest', $pb.PbFieldType.OU3)
-    ..a<$core.double>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'price', $pb.PbFieldType.OF)
     ..pc<DiveMaster>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMasters', $pb.PbFieldType.PM, subBuilder: DiveMaster.create)
     ..pc<DiveSite>(56, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveSites', $pb.PbFieldType.PM, subBuilder: DiveSite.create)
     ..pc<RoomTypeTripPrice>(57, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripRoomTypePrices', $pb.PbFieldType.PM, subBuilder: RoomTypeTripPrice.create)
@@ -2475,7 +2474,6 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     TripTemplate? tripTemplate,
     $core.int? maxGuest,
     $core.int? curentGuest,
-    $core.double? price,
     $core.Iterable<DiveMaster>? diveMasters,
     $core.Iterable<DiveSite>? diveSites,
     $core.Iterable<RoomTypeTripPrice>? tripRoomTypePrices,
@@ -2500,9 +2498,6 @@ class TripWithTemplate extends $pb.GeneratedMessage {
     }
     if (curentGuest != null) {
       _result.curentGuest = curentGuest;
-    }
-    if (price != null) {
-      _result.price = price;
     }
     if (diveMasters != null) {
       _result.diveMasters.addAll(diveMasters);
@@ -2598,78 +2593,69 @@ class TripWithTemplate extends $pb.GeneratedMessage {
   @$pb.TagNumber(35)
   void clearCurentGuest() => clearField(35);
 
-  @$pb.TagNumber(40)
-  $core.double get price => $_getN(5);
-  @$pb.TagNumber(40)
-  set price($core.double v) { $_setFloat(5, v); }
-  @$pb.TagNumber(40)
-  $core.bool hasPrice() => $_has(5);
-  @$pb.TagNumber(40)
-  void clearPrice() => clearField(40);
-
   @$pb.TagNumber(50)
-  $core.List<DiveMaster> get diveMasters => $_getList(6);
+  $core.List<DiveMaster> get diveMasters => $_getList(5);
 
   @$pb.TagNumber(56)
-  $core.List<DiveSite> get diveSites => $_getList(7);
+  $core.List<DiveSite> get diveSites => $_getList(6);
 
   @$pb.TagNumber(57)
-  $core.List<RoomTypeTripPrice> get tripRoomTypePrices => $_getList(8);
+  $core.List<RoomTypeTripPrice> get tripRoomTypePrices => $_getList(7);
 
   @$pb.TagNumber(60)
-  $12.Timestamp get startDate => $_getN(9);
+  $12.Timestamp get startDate => $_getN(8);
   @$pb.TagNumber(60)
   set startDate($12.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasStartDate() => $_has(9);
+  $core.bool hasStartDate() => $_has(8);
   @$pb.TagNumber(60)
   void clearStartDate() => clearField(60);
   @$pb.TagNumber(60)
-  $12.Timestamp ensureStartDate() => $_ensure(9);
+  $12.Timestamp ensureStartDate() => $_ensure(8);
 
   @$pb.TagNumber(70)
-  $12.Timestamp get endDate => $_getN(10);
+  $12.Timestamp get endDate => $_getN(9);
   @$pb.TagNumber(70)
   set endDate($12.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasEndDate() => $_has(10);
+  $core.bool hasEndDate() => $_has(9);
   @$pb.TagNumber(70)
   void clearEndDate() => clearField(70);
   @$pb.TagNumber(70)
-  $12.Timestamp ensureEndDate() => $_ensure(10);
+  $12.Timestamp ensureEndDate() => $_ensure(9);
 
   @$pb.TagNumber(80)
-  $12.Timestamp get lastReservationDate => $_getN(11);
+  $12.Timestamp get lastReservationDate => $_getN(10);
   @$pb.TagNumber(80)
   set lastReservationDate($12.Timestamp v) { setField(80, v); }
   @$pb.TagNumber(80)
-  $core.bool hasLastReservationDate() => $_has(11);
+  $core.bool hasLastReservationDate() => $_has(10);
   @$pb.TagNumber(80)
   void clearLastReservationDate() => clearField(80);
   @$pb.TagNumber(80)
-  $12.Timestamp ensureLastReservationDate() => $_ensure(11);
+  $12.Timestamp ensureLastReservationDate() => $_ensure(10);
 
   @$pb.TagNumber(90)
-  $12.Timestamp get createdAt => $_getN(12);
+  $12.Timestamp get createdAt => $_getN(11);
   @$pb.TagNumber(90)
   set createdAt($12.Timestamp v) { setField(90, v); }
   @$pb.TagNumber(90)
-  $core.bool hasCreatedAt() => $_has(12);
+  $core.bool hasCreatedAt() => $_has(11);
   @$pb.TagNumber(90)
   void clearCreatedAt() => clearField(90);
   @$pb.TagNumber(90)
-  $12.Timestamp ensureCreatedAt() => $_ensure(12);
+  $12.Timestamp ensureCreatedAt() => $_ensure(11);
 
   @$pb.TagNumber(100)
-  $12.Timestamp get updatedAt => $_getN(13);
+  $12.Timestamp get updatedAt => $_getN(12);
   @$pb.TagNumber(100)
   set updatedAt($12.Timestamp v) { setField(100, v); }
   @$pb.TagNumber(100)
-  $core.bool hasUpdatedAt() => $_has(13);
+  $core.bool hasUpdatedAt() => $_has(12);
   @$pb.TagNumber(100)
   void clearUpdatedAt() => clearField(100);
   @$pb.TagNumber(100)
-  $12.Timestamp ensureUpdatedAt() => $_ensure(13);
+  $12.Timestamp ensureUpdatedAt() => $_ensure(12);
 }
 
 class Amenity extends $pb.GeneratedMessage {
