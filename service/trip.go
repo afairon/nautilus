@@ -39,8 +39,17 @@ func (service *tripService) ListValidTrips(ctx context.Context, limit, offset ui
 	}
 
 	for _, trip := range trips {
-		for idx, id := range trip.TripTemplate.Images {
-			trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		if len(trip.TripTemplate.Images) > 0 {
+			trip.TripTemplate.Files = make([]*model.File, 0, len(trip.TripTemplate.Images))
+
+			for _, doc := range trip.TripTemplate.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+
+				trip.TripTemplate.Files = append(trip.TripTemplate.Files, &file)
+			}
 		}
 	}
 
