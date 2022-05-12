@@ -160,6 +160,8 @@ func (repo *tripRepository) ListUnfullTripsByAgency(ctx context.Context, lastRes
 	result.Preload("TripTemplate.Liveaboard")
 	result.Preload("TripTemplate.Boat")
 	result.Preload("DiveSites")
+	result.Preload("HotelRoomTypeTripPrices")
+	result.Preload("LiveaboardRoomTypeTripPrices")
 	result.Where("agency_id = ?", id)
 	result.Where("trips.current_guest < trips.max_guest")
 	result.Where("trips.last_reservation_date >= ?", *lastReservationDate)

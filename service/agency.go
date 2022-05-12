@@ -559,8 +559,32 @@ func (service *agencyService) ListLiveaboards(ctx context.Context, limit, offset
 	}
 
 	for _, liveaboard := range liveaboards {
-		for idx, id := range liveaboard.Images {
-			liveaboard.Images[idx] = service.media.Get(id, false)
+		if len(liveaboard.Images) > 0 {
+			liveaboard.Files = make([]*model.File, 0, len(liveaboard.Images))
+
+			for _, doc := range liveaboard.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+
+				liveaboard.Files = append(liveaboard.Files, &file)
+			}
+		}
+
+		for _, roomType := range liveaboard.RoomTypes {
+			if len(roomType.Images) > 0 {
+				roomType.Files = make([]*model.File, 0, len(roomType.Images))
+
+				for _, doc := range roomType.Images {
+					file := model.File{
+						Filename: doc,
+						URL:      service.media.Get(doc, true),
+					}
+
+					roomType.Files = append(roomType.Files, &file)
+				}
+			}
 		}
 	}
 
@@ -1527,14 +1551,18 @@ func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, li
 
 		for _, trip := range trips {
 
-			for idx, id := range trip.TripTemplate.Images {
-				trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+			for _, doc := range trip.TripTemplate.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+
+				trip.TripTemplate.Files = append(trip.TripTemplate.Files, &file)
 			}
 
 			// create a new trip which will be inside the report
 			rt := &model.ReportTrip{
-				Trip:           *trip,
-				TripTemplateID: uint64(trip.TripTemplateID),
+				Trip: *trip,
 			}
 
 			placesLeft := trip.MaxGuest - trip.CurrentGuest
@@ -1615,8 +1643,7 @@ func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context
 
 				// create a new trip which will be inside the report
 				rt := &model.ReportTrip{
-					Trip:           *trip,
-					TripTemplateID: uint64(trip.TripTemplateID),
+					Trip: *trip,
 				}
 
 				placesLeft := trip.MaxGuest - trip.CurrentGuest
@@ -1702,8 +1729,7 @@ func (service *agencyService) GenerateIncomingTripsReport(ctx context.Context, w
 
 			// create a new trip which will be inside the report
 			rt := &model.ReportTrip{
-				Trip:           *trip,
-				TripTemplateID: uint64(trip.TripTemplateID),
+				Trip: *trip,
 			}
 
 			placesLeft := trip.MaxGuest - trip.CurrentGuest

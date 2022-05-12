@@ -1347,27 +1347,17 @@ func (rrt *ReservationRoomType) GetProto() *pb.ReservationRoom {
 
 // This type will not be a table in the database
 type ReportTrip struct {
-	Trip           Trip
-	TripTemplateID uint64
-	PlacesLeft     uint32
-	Divers         []*Diver
-	Reservations   []*Reservation
+	Trip         Trip
+	PlacesLeft   uint32
+	Divers       []*Diver
+	Reservations []*Reservation
 }
 
 func (rt *ReportTrip) GetProto() *pb.ReportTrip {
 	reportTrip := pb.ReportTrip{
-		Id:                  uint64(rt.Trip.ID),
-		TripTemplateId:      uint64(rt.Trip.TripTemplate.ID),
-		TripTemplate:        rt.Trip.TripTemplate.GetProto(),
-		MaxGuest:            rt.Trip.MaxGuest,
-		CurentGuest:         rt.Trip.CurrentGuest,
-		PlacesLeft:          rt.PlacesLeft,
-		Divers:              []*pb.Diver{},
-		StartDate:           rt.Trip.StartDate,
-		EndDate:             rt.Trip.EndDate,
-		LastReservationDate: rt.Trip.LastReservationDate,
-		CreatedAt:           &rt.Trip.CreatedAt,
-		UpdatedAt:           &rt.Trip.UpdatedAt,
+		Trip:       rt.Trip.GetProtoWithTemplate(),
+		PlacesLeft: rt.PlacesLeft,
+		Divers:     []*pb.Diver{},
 	}
 
 	if len(rt.Reservations) > 0 {

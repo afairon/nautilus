@@ -75,7 +75,7 @@ func (repo *liveaboardRepository) ListLiveaboardsByAgency(ctx context.Context, i
 	// return results, nil
 	var liveaboards []*model.Liveaboard
 
-	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Where("agency_id = ?", id).Find(&liveaboards)
+	result := repo.db.Limit(int(limit)).Offset(int(offset)).Preload("Address").Preload("RoomTypes").Preload("RoomTypes.Amenities").Where("agency_id = ?", id).Find(&liveaboards)
 	return liveaboards, result.Error
 }
 
