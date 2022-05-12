@@ -163,38 +163,7 @@ func (handler *AgencyHandler) ListHotels(req *pb.ListHotelsRequest, srv pb.Agenc
 
 	for _, hotel := range hotels {
 		resp := &pb.ListHotelsResponse{
-			Hotel: &pb.Hotel{
-				Id:          uint64(hotel.ID),
-				Name:        hotel.Name,
-				Description: hotel.Description,
-				Stars:       hotel.Stars,
-				Phone:       hotel.Phone,
-				Address: &pb.Address{
-					Id:            uint64(hotel.ID),
-					AddressLine_1: hotel.Address.AddressLine_1,
-					AddressLine_2: hotel.Address.AddressLine_2,
-					City:          hotel.Address.City,
-					Postcode:      hotel.Address.Postcode,
-					Region:        hotel.Address.Region,
-					Country:       hotel.Address.Country,
-					CreatedAt:     &hotel.Address.CreatedAt,
-					UpdatedAt:     &hotel.Address.UpdatedAt,
-				},
-				CreatedAt: &hotel.CreatedAt,
-				UpdatedAt: &hotel.UpdatedAt,
-			},
-		}
-
-		if len(hotel.Images) > 0 {
-			resp.Hotel.Images = make([]*pb.File, 0, len(hotel.Images))
-
-			for _, link := range hotel.Images {
-				file := &pb.File{
-					Link: link,
-				}
-
-				resp.Hotel.Images = append(resp.Hotel.Images, file)
-			}
+			Hotel: hotel.GetProto(),
 		}
 
 		srv.Send(resp)
@@ -317,7 +286,6 @@ func (handler *AgencyHandler) ListTrips(req *pb.ListTripsRequest, srv pb.AgencyS
 				Id:                  uint64(trip.ID),
 				TripTemplateId:      uint64(trip.TripTemplateID),
 				MaxGuest:            trip.MaxGuest,
-				Price:               trip.Price,
 				StartDate:           trip.StartDate,
 				EndDate:             trip.EndDate,
 				LastReservationDate: trip.LastReservationDate,

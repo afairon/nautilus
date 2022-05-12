@@ -623,7 +623,6 @@ type Trip struct {
 	gorm.Model
 	MaxGuest                     uint32                `gorm:"not null"`
 	CurrentGuest                 uint32                `gorm:"not null;default:0"`
-	Price                        float32               `gorm:"not null"`
 	StartDate                    *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
 	EndDate                      *time.Time            `gorm:"not null"`
 	LastReservationDate          *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
@@ -645,7 +644,6 @@ func (t *Trip) From(trip *pb.Trip) {
 	t.ID = uint(trip.Id)
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
-	t.Price = trip.Price
 	t.StartDate = trip.StartDate
 	t.EndDate = trip.EndDate
 	t.LastReservationDate = trip.LastReservationDate
@@ -746,7 +744,6 @@ func (t *Trip) GetProto() *pb.Trip {
 		TripTemplateId:      uint64(t.TripTemplateID),
 		MaxGuest:            t.MaxGuest,
 		CurentGuest:         t.CurrentGuest,
-		Price:               t.Price,
 		StartDate:           t.StartDate,
 		EndDate:             t.EndDate,
 		LastReservationDate: t.LastReservationDate,
@@ -1365,7 +1362,6 @@ func (rt *ReportTrip) GetProto() *pb.ReportTrip {
 		MaxGuest:            rt.Trip.MaxGuest,
 		CurentGuest:         rt.Trip.CurrentGuest,
 		PlacesLeft:          rt.PlacesLeft,
-		Price:               rt.Trip.Price,
 		Divers:              []*pb.Diver{},
 		StartDate:           rt.Trip.StartDate,
 		EndDate:             rt.Trip.EndDate,
