@@ -707,12 +707,13 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 		}
 	}
 
-	if trip.DiveMasters != nil && len(trip.DiveSites) > 0 {
+	if trip.DiveSites != nil && len(trip.DiveSites) > 0 {
 		t.DiveSites = make([]DiveSite, 0, len(trip.DiveSites))
 
 		for _, diveSite := range trip.DiveSites {
 			ds := DiveSite{}
 			ds.From(diveSite)
+			t.DiveSites = append(t.DiveSites, ds)
 		}
 	}
 
@@ -799,6 +800,25 @@ func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 		trip.DiveMasters = make([]*pb.DiveMaster, 0, len(t.DiveMasters))
 		for _, diveMaster := range t.DiveMasters {
 			trip.DiveMasters = append(trip.DiveMasters, diveMaster.GetProto())
+		}
+	}
+
+	switch t.TripTemplate.Type {
+	case ONSHORE:
+		if len(t.HotelRoomTypeTripPrices) > 0 {
+			trip.TripRoomTypePrices = make([]*pb.RoomTypeTripPrice, 0, len(t.HotelRoomTypeTripPrices))
+
+			for _, roomTypePrice := range t.HotelRoomTypeTripPrices {
+				trip.TripRoomTypePrices = append(trip.TripRoomTypePrices, roomTypePrice.GetProto())
+			}
+		}
+	case OFFSHORE:
+		if len(t.LiveaboardRoomTypeTripPrices) > 0 {
+			trip.TripRoomTypePrices = make([]*pb.RoomTypeTripPrice, 0, len(t.LiveaboardRoomTypeTripPrices))
+
+			for _, roomTypePrice := range t.LiveaboardRoomTypeTripPrices {
+				trip.TripRoomTypePrices = append(trip.TripRoomTypePrices, roomTypePrice.GetProto())
+			}
 		}
 	}
 

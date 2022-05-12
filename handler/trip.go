@@ -21,7 +21,7 @@ func NewTripHandler(tripService service.TripService) *TripHandler {
 func (handler *TripHandler) ListValidTrips(req *pb.ListValidTripsRequest, srv pb.TripService_ListValidTripsServer) error {
 	ctx := srv.Context()
 
-	trips, err := handler.tripService.ListValidTrips(ctx, req.GetLimit(), req.GetOffset())
+	trips, err := handler.tripService.ListValidTrips(ctx, req.Limit, req.Offset)
 
 	if err != nil {
 		return err
