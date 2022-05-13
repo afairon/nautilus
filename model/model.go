@@ -606,11 +606,12 @@ func (tt *TripTemplate) GetProto() *pb.TripTemplate {
 		UpdatedAt:    &tt.UpdatedAt,
 	}
 
-	if len(tt.Images) > 0 {
+	if len(tt.Files) > 0 {
 		tripTemplate.Images = make([]*pb.File, 0, len(tt.Images))
-		for _, link := range tt.Images {
+		for _, f := range tt.Files {
 			file := &pb.File{
-				Link: link,
+				Filename: f.Filename,
+				Link:     f.URL,
 			}
 			tripTemplate.Images = append(tripTemplate.Images, file)
 		}
