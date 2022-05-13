@@ -106,6 +106,7 @@ func registerServices(server *grpc.Server, db *gorm.DB, session session.Session,
 	amenityService := service.NewAmenityService(repo)
 	paymentservice := service.NewPaymentService(repo, media)
 	roomTypeService := service.NewRoomTypeService(repo, media)
+	boatService := service.NewBoatService(repo, media)
 
 	pb.RegisterAccountServer(server, handler.NewAccountHandler(accountService))
 	pb.RegisterAgencyServiceServer(server, handler.NewAgencyHandler(agencyService))
@@ -118,4 +119,5 @@ func registerServices(server *grpc.Server, db *gorm.DB, session session.Session,
 	pb.RegisterAmenityServiceServer(server, handler.NewAmenityHandler(amenityService))
 	pb.RegisterPaymentServiceServer(server, handler.NewPaymentHandler(paymentservice))
 	pb.RegisterRoomTypeServiceServer(server, handler.NewRoomTypeHandler(roomTypeService))
+	pb.RegisterBoatServiceServer(server, handler.NewBoatHandler(boatService))
 }

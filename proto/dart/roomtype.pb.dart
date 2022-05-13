@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $13;
+import 'model.pb.dart' as $14;
 
 enum ListRoomTypesByTripRequest_Id {
   hotelId, 
@@ -132,13 +132,13 @@ class ListRoomTypesByTripRequest extends $pb.GeneratedMessage {
 
 class ListRoomTypesByTripResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomTypesByTripResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
-    ..aOM<$13.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $13.RoomType.create)
+    ..aOM<$14.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $14.RoomType.create)
     ..hasRequiredFields = false
   ;
 
   ListRoomTypesByTripResponse._() : super();
   factory ListRoomTypesByTripResponse({
-    $13.RoomType? roomType,
+    $14.RoomType? roomType,
   }) {
     final _result = create();
     if (roomType != null) {
@@ -168,15 +168,15 @@ class ListRoomTypesByTripResponse extends $pb.GeneratedMessage {
   static ListRoomTypesByTripResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.RoomType get roomType => $_getN(0);
+  $14.RoomType get roomType => $_getN(0);
   @$pb.TagNumber(1)
-  set roomType($13.RoomType v) { setField(1, v); }
+  set roomType($14.RoomType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRoomType() => $_has(0);
   @$pb.TagNumber(1)
   void clearRoomType() => clearField(1);
   @$pb.TagNumber(1)
-  $13.RoomType ensureRoomType() => $_ensure(0);
+  $14.RoomType ensureRoomType() => $_ensure(0);
 }
 
 class ListRoomsOfReservationRequest extends $pb.GeneratedMessage {
@@ -228,13 +228,13 @@ class ListRoomsOfReservationRequest extends $pb.GeneratedMessage {
 
 class ListRoomsOfReservationResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomsOfReservationResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
-    ..aOM<$13.ReservationRoom>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'room', subBuilder: $13.ReservationRoom.create)
+    ..aOM<$14.ReservationRoom>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'room', subBuilder: $14.ReservationRoom.create)
     ..hasRequiredFields = false
   ;
 
   ListRoomsOfReservationResponse._() : super();
   factory ListRoomsOfReservationResponse({
-    $13.ReservationRoom? room,
+    $14.ReservationRoom? room,
   }) {
     final _result = create();
     if (room != null) {
@@ -264,15 +264,15 @@ class ListRoomsOfReservationResponse extends $pb.GeneratedMessage {
   static ListRoomsOfReservationResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.ReservationRoom get room => $_getN(0);
+  $14.ReservationRoom get room => $_getN(0);
   @$pb.TagNumber(1)
-  set room($13.ReservationRoom v) { setField(1, v); }
+  set room($14.ReservationRoom v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRoom() => $_has(0);
   @$pb.TagNumber(1)
   void clearRoom() => clearField(1);
   @$pb.TagNumber(1)
-  $13.ReservationRoom ensureRoom() => $_ensure(0);
+  $14.ReservationRoom ensureRoom() => $_ensure(0);
 }
 
 class GetRoomTypeRequest extends $pb.GeneratedMessage {
@@ -324,13 +324,13 @@ class GetRoomTypeRequest extends $pb.GeneratedMessage {
 
 class GetRoomTypeResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetRoomTypeResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'roomtype'), createEmptyInstance: create)
-    ..aOM<$13.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $13.RoomType.create)
+    ..aOM<$14.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $14.RoomType.create)
     ..hasRequiredFields = false
   ;
 
   GetRoomTypeResponse._() : super();
   factory GetRoomTypeResponse({
-    $13.RoomType? roomType,
+    $14.RoomType? roomType,
   }) {
     final _result = create();
     if (roomType != null) {
@@ -360,14 +360,14 @@ class GetRoomTypeResponse extends $pb.GeneratedMessage {
   static GetRoomTypeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.RoomType get roomType => $_getN(0);
+  $14.RoomType get roomType => $_getN(0);
   @$pb.TagNumber(1)
-  set roomType($13.RoomType v) { setField(1, v); }
+  set roomType($14.RoomType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRoomType() => $_has(0);
   @$pb.TagNumber(1)
   void clearRoomType() => clearField(1);
   @$pb.TagNumber(1)
-  $13.RoomType ensureRoomType() => $_ensure(0);
+  $14.RoomType ensureRoomType() => $_ensure(0);
 }
 

@@ -10,24 +10,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'liveaboard.pb.dart' as $7;
+import 'liveaboard.pb.dart' as $8;
 export 'liveaboard.pb.dart';
 
 class LiveaboardServiceClient extends $grpc.Client {
   static final _$getLiveaboard =
-      $grpc.ClientMethod<$7.GetLiveaboardRequest, $7.GetLiveaboardResponse>(
+      $grpc.ClientMethod<$8.GetLiveaboardRequest, $8.GetLiveaboardResponse>(
           '/liveaboard.LiveaboardService/GetLiveaboard',
-          ($7.GetLiveaboardRequest value) => value.writeToBuffer(),
+          ($8.GetLiveaboardRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $7.GetLiveaboardResponse.fromBuffer(value));
+              $8.GetLiveaboardResponse.fromBuffer(value));
 
   LiveaboardServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$7.GetLiveaboardResponse> getLiveaboard(
-      $7.GetLiveaboardRequest request,
+  $grpc.ResponseFuture<$8.GetLiveaboardResponse> getLiveaboard(
+      $8.GetLiveaboardRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getLiveaboard, request, options: options);
   }
@@ -38,22 +38,22 @@ abstract class LiveaboardServiceBase extends $grpc.Service {
 
   LiveaboardServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$7.GetLiveaboardRequest, $7.GetLiveaboardResponse>(
+        $grpc.ServiceMethod<$8.GetLiveaboardRequest, $8.GetLiveaboardResponse>(
             'GetLiveaboard',
             getLiveaboard_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $7.GetLiveaboardRequest.fromBuffer(value),
-            ($7.GetLiveaboardResponse value) => value.writeToBuffer()));
+                $8.GetLiveaboardRequest.fromBuffer(value),
+            ($8.GetLiveaboardResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$7.GetLiveaboardResponse> getLiveaboard_Pre(
+  $async.Future<$8.GetLiveaboardResponse> getLiveaboard_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$7.GetLiveaboardRequest> request) async {
+      $async.Future<$8.GetLiveaboardRequest> request) async {
     return getLiveaboard(call, await request);
   }
 
-  $async.Future<$7.GetLiveaboardResponse> getLiveaboard(
-      $grpc.ServiceCall call, $7.GetLiveaboardRequest request);
+  $async.Future<$8.GetLiveaboardResponse> getLiveaboard(
+      $grpc.ServiceCall call, $8.GetLiveaboardRequest request);
 }

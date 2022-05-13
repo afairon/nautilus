@@ -10,20 +10,20 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $13;
-import 'google/protobuf/timestamp.pb.dart' as $12;
+import 'model.pb.dart' as $14;
+import 'google/protobuf/timestamp.pb.dart' as $13;
 
-import 'model.pbenum.dart' as $13;
+import 'model.pbenum.dart' as $14;
 
 class AddDiveMasterRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddDiveMasterRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $13.DiveMaster.create)
+    ..aOM<$14.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $14.DiveMaster.create)
     ..hasRequiredFields = false
   ;
 
   AddDiveMasterRequest._() : super();
   factory AddDiveMasterRequest({
-    $13.DiveMaster? diveMaster,
+    $14.DiveMaster? diveMaster,
   }) {
     final _result = create();
     if (diveMaster != null) {
@@ -53,26 +53,26 @@ class AddDiveMasterRequest extends $pb.GeneratedMessage {
   static AddDiveMasterRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.DiveMaster get diveMaster => $_getN(0);
+  $14.DiveMaster get diveMaster => $_getN(0);
   @$pb.TagNumber(1)
-  set diveMaster($13.DiveMaster v) { setField(1, v); }
+  set diveMaster($14.DiveMaster v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDiveMaster() => $_has(0);
   @$pb.TagNumber(1)
   void clearDiveMaster() => clearField(1);
   @$pb.TagNumber(1)
-  $13.DiveMaster ensureDiveMaster() => $_ensure(0);
+  $14.DiveMaster ensureDiveMaster() => $_ensure(0);
 }
 
 class AddStaffRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddStaffRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $13.Staff.create)
+    ..aOM<$14.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $14.Staff.create)
     ..hasRequiredFields = false
   ;
 
   AddStaffRequest._() : super();
   factory AddStaffRequest({
-    $13.Staff? staff,
+    $14.Staff? staff,
   }) {
     final _result = create();
     if (staff != null) {
@@ -102,27 +102,27 @@ class AddStaffRequest extends $pb.GeneratedMessage {
   static AddStaffRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Staff get staff => $_getN(0);
+  $14.Staff get staff => $_getN(0);
   @$pb.TagNumber(1)
-  set staff($13.Staff v) { setField(1, v); }
+  set staff($14.Staff v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStaff() => $_has(0);
   @$pb.TagNumber(1)
   void clearStaff() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Staff ensureStaff() => $_ensure(0);
+  $14.Staff ensureStaff() => $_ensure(0);
 }
 
 class AddTripTemplateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $13.TripTemplate.create)
+    ..aOM<$14.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $14.TripTemplate.create)
     ..a<$fixnum.Int64>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'agencyId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
   AddTripTemplateRequest._() : super();
   factory AddTripTemplateRequest({
-    $13.TripTemplate? tripTemplate,
+    $14.TripTemplate? tripTemplate,
     $fixnum.Int64? agencyId,
   }) {
     final _result = create();
@@ -156,15 +156,15 @@ class AddTripTemplateRequest extends $pb.GeneratedMessage {
   static AddTripTemplateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripTemplate get tripTemplate => $_getN(0);
+  $14.TripTemplate get tripTemplate => $_getN(0);
   @$pb.TagNumber(1)
-  set tripTemplate($13.TripTemplate v) { setField(1, v); }
+  set tripTemplate($14.TripTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTripTemplate() => $_has(0);
   @$pb.TagNumber(1)
   void clearTripTemplate() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripTemplate ensureTripTemplate() => $_ensure(0);
+  $14.TripTemplate ensureTripTemplate() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get agencyId => $_getI64(1);
@@ -178,13 +178,13 @@ class AddTripTemplateRequest extends $pb.GeneratedMessage {
 
 class AddTripRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
+    ..aOM<$14.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   AddTripRequest._() : super();
   factory AddTripRequest({
-    $13.TripWithTemplate? trip,
+    $14.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -214,26 +214,26 @@ class AddTripRequest extends $pb.GeneratedMessage {
   static AddTripRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripWithTemplate get trip => $_getN(0);
+  $14.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($13.TripWithTemplate v) { setField(1, v); }
+  set trip($14.TripWithTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripWithTemplate ensureTrip() => $_ensure(0);
+  $14.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
 class AddDivingBoatRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddDivingBoatRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: $13.Boat.create)
+    ..aOM<$14.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: $14.Boat.create)
     ..hasRequiredFields = false
   ;
 
   AddDivingBoatRequest._() : super();
   factory AddDivingBoatRequest({
-    $13.Boat? divingBoat,
+    $14.Boat? divingBoat,
   }) {
     final _result = create();
     if (divingBoat != null) {
@@ -263,26 +263,26 @@ class AddDivingBoatRequest extends $pb.GeneratedMessage {
   static AddDivingBoatRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Boat get divingBoat => $_getN(0);
+  $14.Boat get divingBoat => $_getN(0);
   @$pb.TagNumber(1)
-  set divingBoat($13.Boat v) { setField(1, v); }
+  set divingBoat($14.Boat v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDivingBoat() => $_has(0);
   @$pb.TagNumber(1)
   void clearDivingBoat() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Boat ensureDivingBoat() => $_ensure(0);
+  $14.Boat ensureDivingBoat() => $_ensure(0);
 }
 
 class AddHotelRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.Hotel.create)
+    ..aOM<$14.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $14.Hotel.create)
     ..hasRequiredFields = false
   ;
 
   AddHotelRequest._() : super();
   factory AddHotelRequest({
-    $13.Hotel? hotel,
+    $14.Hotel? hotel,
   }) {
     final _result = create();
     if (hotel != null) {
@@ -312,26 +312,26 @@ class AddHotelRequest extends $pb.GeneratedMessage {
   static AddHotelRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Hotel get hotel => $_getN(0);
+  $14.Hotel get hotel => $_getN(0);
   @$pb.TagNumber(1)
-  set hotel($13.Hotel v) { setField(1, v); }
+  set hotel($14.Hotel v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasHotel() => $_has(0);
   @$pb.TagNumber(1)
   void clearHotel() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Hotel ensureHotel() => $_ensure(0);
+  $14.Hotel ensureHotel() => $_ensure(0);
 }
 
 class AddLiveaboardRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddLiveaboardRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.Liveaboard.create)
+    ..aOM<$14.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $14.Liveaboard.create)
     ..hasRequiredFields = false
   ;
 
   AddLiveaboardRequest._() : super();
   factory AddLiveaboardRequest({
-    $13.Liveaboard? liveaboard,
+    $14.Liveaboard? liveaboard,
   }) {
     final _result = create();
     if (liveaboard != null) {
@@ -361,15 +361,15 @@ class AddLiveaboardRequest extends $pb.GeneratedMessage {
   static AddLiveaboardRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Liveaboard get liveaboard => $_getN(0);
+  $14.Liveaboard get liveaboard => $_getN(0);
   @$pb.TagNumber(1)
-  set liveaboard($13.Liveaboard v) { setField(1, v); }
+  set liveaboard($14.Liveaboard v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLiveaboard() => $_has(0);
   @$pb.TagNumber(1)
   void clearLiveaboard() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Liveaboard ensureLiveaboard() => $_ensure(0);
+  $14.Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
 class ListBoatsRequest extends $pb.GeneratedMessage {
@@ -435,13 +435,13 @@ class ListBoatsRequest extends $pb.GeneratedMessage {
 
 class ListBoatsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListBoatsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boat', subBuilder: $13.Boat.create)
+    ..aOM<$14.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boat', subBuilder: $14.Boat.create)
     ..hasRequiredFields = false
   ;
 
   ListBoatsResponse._() : super();
   factory ListBoatsResponse({
-    $13.Boat? boat,
+    $14.Boat? boat,
   }) {
     final _result = create();
     if (boat != null) {
@@ -471,15 +471,15 @@ class ListBoatsResponse extends $pb.GeneratedMessage {
   static ListBoatsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Boat get boat => $_getN(0);
+  $14.Boat get boat => $_getN(0);
   @$pb.TagNumber(1)
-  set boat($13.Boat v) { setField(1, v); }
+  set boat($14.Boat v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasBoat() => $_has(0);
   @$pb.TagNumber(1)
   void clearBoat() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Boat ensureBoat() => $_ensure(0);
+  $14.Boat ensureBoat() => $_ensure(0);
 }
 
 class ListDiveMastersRequest extends $pb.GeneratedMessage {
@@ -545,13 +545,13 @@ class ListDiveMastersRequest extends $pb.GeneratedMessage {
 
 class ListDiveMastersResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $13.DiveMaster.create)
+    ..aOM<$14.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $14.DiveMaster.create)
     ..hasRequiredFields = false
   ;
 
   ListDiveMastersResponse._() : super();
   factory ListDiveMastersResponse({
-    $13.DiveMaster? diveMaster,
+    $14.DiveMaster? diveMaster,
   }) {
     final _result = create();
     if (diveMaster != null) {
@@ -581,15 +581,15 @@ class ListDiveMastersResponse extends $pb.GeneratedMessage {
   static ListDiveMastersResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.DiveMaster get diveMaster => $_getN(0);
+  $14.DiveMaster get diveMaster => $_getN(0);
   @$pb.TagNumber(1)
-  set diveMaster($13.DiveMaster v) { setField(1, v); }
+  set diveMaster($14.DiveMaster v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDiveMaster() => $_has(0);
   @$pb.TagNumber(1)
   void clearDiveMaster() => clearField(1);
   @$pb.TagNumber(1)
-  $13.DiveMaster ensureDiveMaster() => $_ensure(0);
+  $14.DiveMaster ensureDiveMaster() => $_ensure(0);
 }
 
 class ListHotelsRequest extends $pb.GeneratedMessage {
@@ -655,13 +655,13 @@ class ListHotelsRequest extends $pb.GeneratedMessage {
 
 class ListHotelsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListHotelsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.Hotel.create)
+    ..aOM<$14.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $14.Hotel.create)
     ..hasRequiredFields = false
   ;
 
   ListHotelsResponse._() : super();
   factory ListHotelsResponse({
-    $13.Hotel? hotel,
+    $14.Hotel? hotel,
   }) {
     final _result = create();
     if (hotel != null) {
@@ -691,15 +691,15 @@ class ListHotelsResponse extends $pb.GeneratedMessage {
   static ListHotelsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Hotel get hotel => $_getN(0);
+  $14.Hotel get hotel => $_getN(0);
   @$pb.TagNumber(1)
-  set hotel($13.Hotel v) { setField(1, v); }
+  set hotel($14.Hotel v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasHotel() => $_has(0);
   @$pb.TagNumber(1)
   void clearHotel() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Hotel ensureHotel() => $_ensure(0);
+  $14.Hotel ensureHotel() => $_ensure(0);
 }
 
 class ListLiveaboardsRequest extends $pb.GeneratedMessage {
@@ -765,13 +765,13 @@ class ListLiveaboardsRequest extends $pb.GeneratedMessage {
 
 class ListLiveaboardsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLiveaboardsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.Liveaboard.create)
+    ..aOM<$14.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $14.Liveaboard.create)
     ..hasRequiredFields = false
   ;
 
   ListLiveaboardsResponse._() : super();
   factory ListLiveaboardsResponse({
-    $13.Liveaboard? liveaboard,
+    $14.Liveaboard? liveaboard,
   }) {
     final _result = create();
     if (liveaboard != null) {
@@ -801,15 +801,15 @@ class ListLiveaboardsResponse extends $pb.GeneratedMessage {
   static ListLiveaboardsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Liveaboard get liveaboard => $_getN(0);
+  $14.Liveaboard get liveaboard => $_getN(0);
   @$pb.TagNumber(1)
-  set liveaboard($13.Liveaboard v) { setField(1, v); }
+  set liveaboard($14.Liveaboard v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLiveaboard() => $_has(0);
   @$pb.TagNumber(1)
   void clearLiveaboard() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Liveaboard ensureLiveaboard() => $_ensure(0);
+  $14.Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
 class ListStaffsRequest extends $pb.GeneratedMessage {
@@ -875,13 +875,13 @@ class ListStaffsRequest extends $pb.GeneratedMessage {
 
 class ListStaffsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListStaffsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $13.Staff.create)
+    ..aOM<$14.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $14.Staff.create)
     ..hasRequiredFields = false
   ;
 
   ListStaffsResponse._() : super();
   factory ListStaffsResponse({
-    $13.Staff? staff,
+    $14.Staff? staff,
   }) {
     final _result = create();
     if (staff != null) {
@@ -911,15 +911,15 @@ class ListStaffsResponse extends $pb.GeneratedMessage {
   static ListStaffsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Staff get staff => $_getN(0);
+  $14.Staff get staff => $_getN(0);
   @$pb.TagNumber(1)
-  set staff($13.Staff v) { setField(1, v); }
+  set staff($14.Staff v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStaff() => $_has(0);
   @$pb.TagNumber(1)
   void clearStaff() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Staff ensureStaff() => $_ensure(0);
+  $14.Staff ensureStaff() => $_ensure(0);
 }
 
 class ListTripTemplatesRequest extends $pb.GeneratedMessage {
@@ -985,13 +985,13 @@ class ListTripTemplatesRequest extends $pb.GeneratedMessage {
 
 class ListTripTemplatesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripTemplatesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'template', subBuilder: $13.TripTemplate.create)
+    ..aOM<$14.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'template', subBuilder: $14.TripTemplate.create)
     ..hasRequiredFields = false
   ;
 
   ListTripTemplatesResponse._() : super();
   factory ListTripTemplatesResponse({
-    $13.TripTemplate? template,
+    $14.TripTemplate? template,
   }) {
     final _result = create();
     if (template != null) {
@@ -1021,15 +1021,15 @@ class ListTripTemplatesResponse extends $pb.GeneratedMessage {
   static ListTripTemplatesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripTemplate get template => $_getN(0);
+  $14.TripTemplate get template => $_getN(0);
   @$pb.TagNumber(1)
-  set template($13.TripTemplate v) { setField(1, v); }
+  set template($14.TripTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTemplate() => $_has(0);
   @$pb.TagNumber(1)
   void clearTemplate() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripTemplate ensureTemplate() => $_ensure(0);
+  $14.TripTemplate ensureTemplate() => $_ensure(0);
 }
 
 class ListTripsRequest extends $pb.GeneratedMessage {
@@ -1095,13 +1095,13 @@ class ListTripsRequest extends $pb.GeneratedMessage {
 
 class ListTripsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.Trip.create)
+    ..aOM<$14.Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.Trip.create)
     ..hasRequiredFields = false
   ;
 
   ListTripsResponse._() : super();
   factory ListTripsResponse({
-    $13.Trip? trip,
+    $14.Trip? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -1131,15 +1131,15 @@ class ListTripsResponse extends $pb.GeneratedMessage {
   static ListTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Trip get trip => $_getN(0);
+  $14.Trip get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($13.Trip v) { setField(1, v); }
+  set trip($14.Trip v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Trip ensureTrip() => $_ensure(0);
+  $14.Trip ensureTrip() => $_ensure(0);
 }
 
 class ListTripsWithTemplatesRequest extends $pb.GeneratedMessage {
@@ -1205,13 +1205,13 @@ class ListTripsWithTemplatesRequest extends $pb.GeneratedMessage {
 
 class ListTripsWithTemplatesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListTripsWithTemplatesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
+    ..aOM<$14.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   ListTripsWithTemplatesResponse._() : super();
   factory ListTripsWithTemplatesResponse({
-    $13.TripWithTemplate? trip,
+    $14.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -1241,15 +1241,15 @@ class ListTripsWithTemplatesResponse extends $pb.GeneratedMessage {
   static ListTripsWithTemplatesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripWithTemplate get trip => $_getN(0);
+  $14.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($13.TripWithTemplate v) { setField(1, v); }
+  set trip($14.TripWithTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripWithTemplate ensureTrip() => $_ensure(0);
+  $14.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
 enum ListRoomTypesRequest_Id {
@@ -1358,13 +1358,13 @@ class ListRoomTypesRequest extends $pb.GeneratedMessage {
 
 class ListRoomTypesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListRoomTypesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $13.RoomType.create)
+    ..aOM<$14.RoomType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roomType', subBuilder: $14.RoomType.create)
     ..hasRequiredFields = false
   ;
 
   ListRoomTypesResponse._() : super();
   factory ListRoomTypesResponse({
-    $13.RoomType? roomType,
+    $14.RoomType? roomType,
   }) {
     final _result = create();
     if (roomType != null) {
@@ -1394,15 +1394,15 @@ class ListRoomTypesResponse extends $pb.GeneratedMessage {
   static ListRoomTypesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.RoomType get roomType => $_getN(0);
+  $14.RoomType get roomType => $_getN(0);
   @$pb.TagNumber(1)
-  set roomType($13.RoomType v) { setField(1, v); }
+  set roomType($14.RoomType v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasRoomType() => $_has(0);
   @$pb.TagNumber(1)
   void clearRoomType() => clearField(1);
   @$pb.TagNumber(1)
-  $13.RoomType ensureRoomType() => $_ensure(0);
+  $14.RoomType ensureRoomType() => $_ensure(0);
 }
 
 enum SearchTripsOptions_LocationFilter {
@@ -1425,9 +1425,9 @@ class SearchTripsOptions extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'city')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'region')
     ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divers', $pb.PbFieldType.OU3)
-    ..e<$13.TripType>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $13.TripType.ONSHORE, valueOf: $13.TripType.valueOf, enumValues: $13.TripType.values)
-    ..aOM<$12.Timestamp>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $12.Timestamp.create)
-    ..aOM<$12.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $12.Timestamp.create)
+    ..e<$14.TripType>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripType', $pb.PbFieldType.OE, defaultOrMaker: $14.TripType.ONSHORE, valueOf: $14.TripType.valueOf, enumValues: $14.TripType.values)
+    ..aOM<$13.Timestamp>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', subBuilder: $13.Timestamp.create)
+    ..aOM<$13.Timestamp>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', subBuilder: $13.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1437,9 +1437,9 @@ class SearchTripsOptions extends $pb.GeneratedMessage {
     $core.String? city,
     $core.String? region,
     $core.int? divers,
-    $13.TripType? tripType,
-    $12.Timestamp? startDate,
-    $12.Timestamp? endDate,
+    $14.TripType? tripType,
+    $13.Timestamp? startDate,
+    $13.Timestamp? endDate,
   }) {
     final _result = create();
     if (country != null) {
@@ -1526,35 +1526,35 @@ class SearchTripsOptions extends $pb.GeneratedMessage {
   void clearDivers() => clearField(10);
 
   @$pb.TagNumber(15)
-  $13.TripType get tripType => $_getN(4);
+  $14.TripType get tripType => $_getN(4);
   @$pb.TagNumber(15)
-  set tripType($13.TripType v) { setField(15, v); }
+  set tripType($14.TripType v) { setField(15, v); }
   @$pb.TagNumber(15)
   $core.bool hasTripType() => $_has(4);
   @$pb.TagNumber(15)
   void clearTripType() => clearField(15);
 
   @$pb.TagNumber(20)
-  $12.Timestamp get startDate => $_getN(5);
+  $13.Timestamp get startDate => $_getN(5);
   @$pb.TagNumber(20)
-  set startDate($12.Timestamp v) { setField(20, v); }
+  set startDate($13.Timestamp v) { setField(20, v); }
   @$pb.TagNumber(20)
   $core.bool hasStartDate() => $_has(5);
   @$pb.TagNumber(20)
   void clearStartDate() => clearField(20);
   @$pb.TagNumber(20)
-  $12.Timestamp ensureStartDate() => $_ensure(5);
+  $13.Timestamp ensureStartDate() => $_ensure(5);
 
   @$pb.TagNumber(30)
-  $12.Timestamp get endDate => $_getN(6);
+  $13.Timestamp get endDate => $_getN(6);
   @$pb.TagNumber(30)
-  set endDate($12.Timestamp v) { setField(30, v); }
+  set endDate($13.Timestamp v) { setField(30, v); }
   @$pb.TagNumber(30)
   $core.bool hasEndDate() => $_has(6);
   @$pb.TagNumber(30)
   void clearEndDate() => clearField(30);
   @$pb.TagNumber(30)
-  $12.Timestamp ensureEndDate() => $_ensure(6);
+  $13.Timestamp ensureEndDate() => $_ensure(6);
 }
 
 class SearchTripsRequest extends $pb.GeneratedMessage {
@@ -1636,13 +1636,13 @@ class SearchTripsRequest extends $pb.GeneratedMessage {
 
 class SearchTripsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SearchTripsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
+    ..aOM<$14.TripWithTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   SearchTripsResponse._() : super();
   factory SearchTripsResponse({
-    $13.TripWithTemplate? trip,
+    $14.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -1672,26 +1672,26 @@ class SearchTripsResponse extends $pb.GeneratedMessage {
   static SearchTripsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripWithTemplate get trip => $_getN(0);
+  $14.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($13.TripWithTemplate v) { setField(1, v); }
+  set trip($14.TripWithTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripWithTemplate ensureTrip() => $_ensure(0);
+  $14.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
 class UpdateTripRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripWithTemplate>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.TripWithTemplate.create)
+    ..aOM<$14.TripWithTemplate>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.TripWithTemplate.create)
     ..hasRequiredFields = false
   ;
 
   UpdateTripRequest._() : super();
   factory UpdateTripRequest({
-    $13.TripWithTemplate? trip,
+    $14.TripWithTemplate? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -1721,26 +1721,26 @@ class UpdateTripRequest extends $pb.GeneratedMessage {
   static UpdateTripRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.TripWithTemplate get trip => $_getN(0);
+  $14.TripWithTemplate get trip => $_getN(0);
   @$pb.TagNumber(10)
-  set trip($13.TripWithTemplate v) { setField(10, v); }
+  set trip($14.TripWithTemplate v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(10)
   void clearTrip() => clearField(10);
   @$pb.TagNumber(10)
-  $13.TripWithTemplate ensureTrip() => $_ensure(0);
+  $14.TripWithTemplate ensureTrip() => $_ensure(0);
 }
 
 class UpdateHotelRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Hotel>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.Hotel.create)
+    ..aOM<$14.Hotel>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $14.Hotel.create)
     ..hasRequiredFields = false
   ;
 
   UpdateHotelRequest._() : super();
   factory UpdateHotelRequest({
-    $13.Hotel? hotel,
+    $14.Hotel? hotel,
   }) {
     final _result = create();
     if (hotel != null) {
@@ -1770,26 +1770,26 @@ class UpdateHotelRequest extends $pb.GeneratedMessage {
   static UpdateHotelRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Hotel get hotel => $_getN(0);
+  $14.Hotel get hotel => $_getN(0);
   @$pb.TagNumber(10)
-  set hotel($13.Hotel v) { setField(10, v); }
+  set hotel($14.Hotel v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasHotel() => $_has(0);
   @$pb.TagNumber(10)
   void clearHotel() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Hotel ensureHotel() => $_ensure(0);
+  $14.Hotel ensureHotel() => $_ensure(0);
 }
 
 class UpdateLiveaboardRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateLiveaboardRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Liveaboard>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.Liveaboard.create)
+    ..aOM<$14.Liveaboard>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $14.Liveaboard.create)
     ..hasRequiredFields = false
   ;
 
   UpdateLiveaboardRequest._() : super();
   factory UpdateLiveaboardRequest({
-    $13.Liveaboard? liveaboard,
+    $14.Liveaboard? liveaboard,
   }) {
     final _result = create();
     if (liveaboard != null) {
@@ -1819,26 +1819,26 @@ class UpdateLiveaboardRequest extends $pb.GeneratedMessage {
   static UpdateLiveaboardRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Liveaboard get liveaboard => $_getN(0);
+  $14.Liveaboard get liveaboard => $_getN(0);
   @$pb.TagNumber(10)
-  set liveaboard($13.Liveaboard v) { setField(10, v); }
+  set liveaboard($14.Liveaboard v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasLiveaboard() => $_has(0);
   @$pb.TagNumber(10)
   void clearLiveaboard() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Liveaboard ensureLiveaboard() => $_ensure(0);
+  $14.Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
 class UpdateBoatRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateBoatRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Boat>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boat', subBuilder: $13.Boat.create)
+    ..aOM<$14.Boat>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boat', subBuilder: $14.Boat.create)
     ..hasRequiredFields = false
   ;
 
   UpdateBoatRequest._() : super();
   factory UpdateBoatRequest({
-    $13.Boat? boat,
+    $14.Boat? boat,
   }) {
     final _result = create();
     if (boat != null) {
@@ -1868,26 +1868,26 @@ class UpdateBoatRequest extends $pb.GeneratedMessage {
   static UpdateBoatRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Boat get boat => $_getN(0);
+  $14.Boat get boat => $_getN(0);
   @$pb.TagNumber(10)
-  set boat($13.Boat v) { setField(10, v); }
+  set boat($14.Boat v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasBoat() => $_has(0);
   @$pb.TagNumber(10)
   void clearBoat() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Boat ensureBoat() => $_ensure(0);
+  $14.Boat ensureBoat() => $_ensure(0);
 }
 
 class UpdateDiveMasterRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateDiveMasterRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.DiveMaster>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $13.DiveMaster.create)
+    ..aOM<$14.DiveMaster>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $14.DiveMaster.create)
     ..hasRequiredFields = false
   ;
 
   UpdateDiveMasterRequest._() : super();
   factory UpdateDiveMasterRequest({
-    $13.DiveMaster? diveMaster,
+    $14.DiveMaster? diveMaster,
   }) {
     final _result = create();
     if (diveMaster != null) {
@@ -1917,26 +1917,26 @@ class UpdateDiveMasterRequest extends $pb.GeneratedMessage {
   static UpdateDiveMasterRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.DiveMaster get diveMaster => $_getN(0);
+  $14.DiveMaster get diveMaster => $_getN(0);
   @$pb.TagNumber(10)
-  set diveMaster($13.DiveMaster v) { setField(10, v); }
+  set diveMaster($14.DiveMaster v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasDiveMaster() => $_has(0);
   @$pb.TagNumber(10)
   void clearDiveMaster() => clearField(10);
   @$pb.TagNumber(10)
-  $13.DiveMaster ensureDiveMaster() => $_ensure(0);
+  $14.DiveMaster ensureDiveMaster() => $_ensure(0);
 }
 
 class UpdateStaffRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateStaffRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Staff>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $13.Staff.create)
+    ..aOM<$14.Staff>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $14.Staff.create)
     ..hasRequiredFields = false
   ;
 
   UpdateStaffRequest._() : super();
   factory UpdateStaffRequest({
-    $13.Staff? staff,
+    $14.Staff? staff,
   }) {
     final _result = create();
     if (staff != null) {
@@ -1966,26 +1966,26 @@ class UpdateStaffRequest extends $pb.GeneratedMessage {
   static UpdateStaffRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Staff get staff => $_getN(0);
+  $14.Staff get staff => $_getN(0);
   @$pb.TagNumber(10)
-  set staff($13.Staff v) { setField(10, v); }
+  set staff($14.Staff v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasStaff() => $_has(0);
   @$pb.TagNumber(10)
   void clearStaff() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Staff ensureStaff() => $_ensure(0);
+  $14.Staff ensureStaff() => $_ensure(0);
 }
 
 class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $13.TripTemplate.create)
+    ..aOM<$14.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $14.TripTemplate.create)
     ..hasRequiredFields = false
   ;
 
   UpdateTripTemplateRequest._() : super();
   factory UpdateTripTemplateRequest({
-    $13.TripTemplate? tripTemplate,
+    $14.TripTemplate? tripTemplate,
   }) {
     final _result = create();
     if (tripTemplate != null) {
@@ -2015,26 +2015,26 @@ class UpdateTripTemplateRequest extends $pb.GeneratedMessage {
   static UpdateTripTemplateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripTemplate get tripTemplate => $_getN(0);
+  $14.TripTemplate get tripTemplate => $_getN(0);
   @$pb.TagNumber(1)
-  set tripTemplate($13.TripTemplate v) { setField(1, v); }
+  set tripTemplate($14.TripTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTripTemplate() => $_has(0);
   @$pb.TagNumber(1)
   void clearTripTemplate() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripTemplate ensureTripTemplate() => $_ensure(0);
+  $14.TripTemplate ensureTripTemplate() => $_ensure(0);
 }
 
 class DeleteDiveMasterRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteDiveMasterRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $13.DiveMaster.create)
+    ..aOM<$14.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $14.DiveMaster.create)
     ..hasRequiredFields = false
   ;
 
   DeleteDiveMasterRequest._() : super();
   factory DeleteDiveMasterRequest({
-    $13.DiveMaster? diveMaster,
+    $14.DiveMaster? diveMaster,
   }) {
     final _result = create();
     if (diveMaster != null) {
@@ -2064,26 +2064,26 @@ class DeleteDiveMasterRequest extends $pb.GeneratedMessage {
   static DeleteDiveMasterRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.DiveMaster get diveMaster => $_getN(0);
+  $14.DiveMaster get diveMaster => $_getN(0);
   @$pb.TagNumber(1)
-  set diveMaster($13.DiveMaster v) { setField(1, v); }
+  set diveMaster($14.DiveMaster v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDiveMaster() => $_has(0);
   @$pb.TagNumber(1)
   void clearDiveMaster() => clearField(1);
   @$pb.TagNumber(1)
-  $13.DiveMaster ensureDiveMaster() => $_ensure(0);
+  $14.DiveMaster ensureDiveMaster() => $_ensure(0);
 }
 
 class DeleteDivingBoatRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteDivingBoatRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: $13.Boat.create)
+    ..aOM<$14.Boat>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'divingBoat', subBuilder: $14.Boat.create)
     ..hasRequiredFields = false
   ;
 
   DeleteDivingBoatRequest._() : super();
   factory DeleteDivingBoatRequest({
-    $13.Boat? divingBoat,
+    $14.Boat? divingBoat,
   }) {
     final _result = create();
     if (divingBoat != null) {
@@ -2113,26 +2113,26 @@ class DeleteDivingBoatRequest extends $pb.GeneratedMessage {
   static DeleteDivingBoatRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Boat get divingBoat => $_getN(0);
+  $14.Boat get divingBoat => $_getN(0);
   @$pb.TagNumber(1)
-  set divingBoat($13.Boat v) { setField(1, v); }
+  set divingBoat($14.Boat v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasDivingBoat() => $_has(0);
   @$pb.TagNumber(1)
   void clearDivingBoat() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Boat ensureDivingBoat() => $_ensure(0);
+  $14.Boat ensureDivingBoat() => $_ensure(0);
 }
 
 class DeleteHotelRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteHotelRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $13.Hotel.create)
+    ..aOM<$14.Hotel>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hotel', subBuilder: $14.Hotel.create)
     ..hasRequiredFields = false
   ;
 
   DeleteHotelRequest._() : super();
   factory DeleteHotelRequest({
-    $13.Hotel? hotel,
+    $14.Hotel? hotel,
   }) {
     final _result = create();
     if (hotel != null) {
@@ -2162,26 +2162,26 @@ class DeleteHotelRequest extends $pb.GeneratedMessage {
   static DeleteHotelRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Hotel get hotel => $_getN(0);
+  $14.Hotel get hotel => $_getN(0);
   @$pb.TagNumber(1)
-  set hotel($13.Hotel v) { setField(1, v); }
+  set hotel($14.Hotel v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasHotel() => $_has(0);
   @$pb.TagNumber(1)
   void clearHotel() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Hotel ensureHotel() => $_ensure(0);
+  $14.Hotel ensureHotel() => $_ensure(0);
 }
 
 class DeleteLiveaboardRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteLiveaboardRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $13.Liveaboard.create)
+    ..aOM<$14.Liveaboard>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liveaboard', subBuilder: $14.Liveaboard.create)
     ..hasRequiredFields = false
   ;
 
   DeleteLiveaboardRequest._() : super();
   factory DeleteLiveaboardRequest({
-    $13.Liveaboard? liveaboard,
+    $14.Liveaboard? liveaboard,
   }) {
     final _result = create();
     if (liveaboard != null) {
@@ -2211,26 +2211,26 @@ class DeleteLiveaboardRequest extends $pb.GeneratedMessage {
   static DeleteLiveaboardRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Liveaboard get liveaboard => $_getN(0);
+  $14.Liveaboard get liveaboard => $_getN(0);
   @$pb.TagNumber(1)
-  set liveaboard($13.Liveaboard v) { setField(1, v); }
+  set liveaboard($14.Liveaboard v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasLiveaboard() => $_has(0);
   @$pb.TagNumber(1)
   void clearLiveaboard() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Liveaboard ensureLiveaboard() => $_ensure(0);
+  $14.Liveaboard ensureLiveaboard() => $_ensure(0);
 }
 
 class DeleteStaffRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteStaffRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $13.Staff.create)
+    ..aOM<$14.Staff>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'staff', subBuilder: $14.Staff.create)
     ..hasRequiredFields = false
   ;
 
   DeleteStaffRequest._() : super();
   factory DeleteStaffRequest({
-    $13.Staff? staff,
+    $14.Staff? staff,
   }) {
     final _result = create();
     if (staff != null) {
@@ -2260,26 +2260,26 @@ class DeleteStaffRequest extends $pb.GeneratedMessage {
   static DeleteStaffRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Staff get staff => $_getN(0);
+  $14.Staff get staff => $_getN(0);
   @$pb.TagNumber(1)
-  set staff($13.Staff v) { setField(1, v); }
+  set staff($14.Staff v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasStaff() => $_has(0);
   @$pb.TagNumber(1)
   void clearStaff() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Staff ensureStaff() => $_ensure(0);
+  $14.Staff ensureStaff() => $_ensure(0);
 }
 
 class DeleteTripTemplateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteTripTemplateRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $13.TripTemplate.create)
+    ..aOM<$14.TripTemplate>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripTemplate', subBuilder: $14.TripTemplate.create)
     ..hasRequiredFields = false
   ;
 
   DeleteTripTemplateRequest._() : super();
   factory DeleteTripTemplateRequest({
-    $13.TripTemplate? tripTemplate,
+    $14.TripTemplate? tripTemplate,
   }) {
     final _result = create();
     if (tripTemplate != null) {
@@ -2309,26 +2309,26 @@ class DeleteTripTemplateRequest extends $pb.GeneratedMessage {
   static DeleteTripTemplateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.TripTemplate get tripTemplate => $_getN(0);
+  $14.TripTemplate get tripTemplate => $_getN(0);
   @$pb.TagNumber(1)
-  set tripTemplate($13.TripTemplate v) { setField(1, v); }
+  set tripTemplate($14.TripTemplate v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTripTemplate() => $_has(0);
   @$pb.TagNumber(1)
   void clearTripTemplate() => clearField(1);
   @$pb.TagNumber(1)
-  $13.TripTemplate ensureTripTemplate() => $_ensure(0);
+  $14.TripTemplate ensureTripTemplate() => $_ensure(0);
 }
 
 class DeleteTripRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $13.Trip.create)
+    ..aOM<$14.Trip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'trip', subBuilder: $14.Trip.create)
     ..hasRequiredFields = false
   ;
 
   DeleteTripRequest._() : super();
   factory DeleteTripRequest({
-    $13.Trip? trip,
+    $14.Trip? trip,
   }) {
     final _result = create();
     if (trip != null) {
@@ -2358,15 +2358,15 @@ class DeleteTripRequest extends $pb.GeneratedMessage {
   static DeleteTripRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Trip get trip => $_getN(0);
+  $14.Trip get trip => $_getN(0);
   @$pb.TagNumber(1)
-  set trip($13.Trip v) { setField(1, v); }
+  set trip($14.Trip v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTrip() => $_has(0);
   @$pb.TagNumber(1)
   void clearTrip() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Trip ensureTrip() => $_ensure(0);
+  $14.Trip ensureTrip() => $_ensure(0);
 }
 
 class GenerateCurrentTripsReportRequest extends $pb.GeneratedMessage {
@@ -2432,13 +2432,13 @@ class GenerateCurrentTripsReportRequest extends $pb.GeneratedMessage {
 
 class GenerateCurrentTripsReportResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateCurrentTripsReportResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'report', subBuilder: $13.ReportTrip.create)
+    ..aOM<$14.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'report', subBuilder: $14.ReportTrip.create)
     ..hasRequiredFields = false
   ;
 
   GenerateCurrentTripsReportResponse._() : super();
   factory GenerateCurrentTripsReportResponse({
-    $13.ReportTrip? report,
+    $14.ReportTrip? report,
   }) {
     final _result = create();
     if (report != null) {
@@ -2468,15 +2468,15 @@ class GenerateCurrentTripsReportResponse extends $pb.GeneratedMessage {
   static GenerateCurrentTripsReportResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.ReportTrip get report => $_getN(0);
+  $14.ReportTrip get report => $_getN(0);
   @$pb.TagNumber(1)
-  set report($13.ReportTrip v) { setField(1, v); }
+  set report($14.ReportTrip v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReport() => $_has(0);
   @$pb.TagNumber(1)
   void clearReport() => clearField(1);
   @$pb.TagNumber(1)
-  $13.ReportTrip ensureReport() => $_ensure(0);
+  $14.ReportTrip ensureReport() => $_ensure(0);
 }
 
 class GenerateYearlyEndedTripsReportRequest extends $pb.GeneratedMessage {
@@ -2556,13 +2556,13 @@ class GenerateYearlyEndedTripsReportRequest extends $pb.GeneratedMessage {
 
 class GenerateYearlyEndedTripsReportResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateYearlyEndedTripsReportResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..pc<$13.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reports', $pb.PbFieldType.PM, subBuilder: $13.ReportTrip.create)
+    ..pc<$14.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reports', $pb.PbFieldType.PM, subBuilder: $14.ReportTrip.create)
     ..hasRequiredFields = false
   ;
 
   GenerateYearlyEndedTripsReportResponse._() : super();
   factory GenerateYearlyEndedTripsReportResponse({
-    $core.Iterable<$13.ReportTrip>? reports,
+    $core.Iterable<$14.ReportTrip>? reports,
   }) {
     final _result = create();
     if (reports != null) {
@@ -2592,7 +2592,7 @@ class GenerateYearlyEndedTripsReportResponse extends $pb.GeneratedMessage {
   static GenerateYearlyEndedTripsReportResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$13.ReportTrip> get reports => $_getList(0);
+  $core.List<$14.ReportTrip> get reports => $_getList(0);
 }
 
 class GenerateIncomingTripsReportRequest extends $pb.GeneratedMessage {
@@ -2672,13 +2672,13 @@ class GenerateIncomingTripsReportRequest extends $pb.GeneratedMessage {
 
 class GenerateIncomingTripsReportResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GenerateIncomingTripsReportResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
-    ..aOM<$13.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'report', subBuilder: $13.ReportTrip.create)
+    ..aOM<$14.ReportTrip>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'report', subBuilder: $14.ReportTrip.create)
     ..hasRequiredFields = false
   ;
 
   GenerateIncomingTripsReportResponse._() : super();
   factory GenerateIncomingTripsReportResponse({
-    $13.ReportTrip? report,
+    $14.ReportTrip? report,
   }) {
     final _result = create();
     if (report != null) {
@@ -2708,14 +2708,14 @@ class GenerateIncomingTripsReportResponse extends $pb.GeneratedMessage {
   static GenerateIncomingTripsReportResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.ReportTrip get report => $_getN(0);
+  $14.ReportTrip get report => $_getN(0);
   @$pb.TagNumber(1)
-  set report($13.ReportTrip v) { setField(1, v); }
+  set report($14.ReportTrip v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasReport() => $_has(0);
   @$pb.TagNumber(1)
   void clearReport() => clearField(1);
   @$pb.TagNumber(1)
-  $13.ReportTrip ensureReport() => $_ensure(0);
+  $14.ReportTrip ensureReport() => $_ensure(0);
 }
 

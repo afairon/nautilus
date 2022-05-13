@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package boat;
+
+import "model.proto";
+
+option go_package = "./pb";
+
+service BoatService {
+    rpc GetBoat(GetBoatRequest) returns (GetBoatResponse);
+}
+
+message GetBoatRequest {
+    uint64 id = 1;
+}
+
+message GetBoatResponse {
+    model.Boat boat = 1;
+}

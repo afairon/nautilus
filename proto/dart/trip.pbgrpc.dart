@@ -10,24 +10,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'trip.pb.dart' as $11;
+import 'trip.pb.dart' as $12;
 export 'trip.pb.dart';
 
 class TripServiceClient extends $grpc.Client {
   static final _$listValidTrips =
-      $grpc.ClientMethod<$11.ListValidTripsRequest, $11.ListValidTripsResponse>(
+      $grpc.ClientMethod<$12.ListValidTripsRequest, $12.ListValidTripsResponse>(
           '/trip.TripService/ListValidTrips',
-          ($11.ListValidTripsRequest value) => value.writeToBuffer(),
+          ($12.ListValidTripsRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $11.ListValidTripsResponse.fromBuffer(value));
+              $12.ListValidTripsResponse.fromBuffer(value));
 
   TripServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseStream<$11.ListValidTripsResponse> listValidTrips(
-      $11.ListValidTripsRequest request,
+  $grpc.ResponseStream<$12.ListValidTripsResponse> listValidTrips(
+      $12.ListValidTripsRequest request,
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listValidTrips, $async.Stream.fromIterable([request]),
@@ -39,23 +39,23 @@ abstract class TripServiceBase extends $grpc.Service {
   $core.String get $name => 'trip.TripService';
 
   TripServiceBase() {
-    $addMethod($grpc.ServiceMethod<$11.ListValidTripsRequest,
-            $11.ListValidTripsResponse>(
+    $addMethod($grpc.ServiceMethod<$12.ListValidTripsRequest,
+            $12.ListValidTripsResponse>(
         'ListValidTrips',
         listValidTrips_Pre,
         false,
         true,
         ($core.List<$core.int> value) =>
-            $11.ListValidTripsRequest.fromBuffer(value),
-        ($11.ListValidTripsResponse value) => value.writeToBuffer()));
+            $12.ListValidTripsRequest.fromBuffer(value),
+        ($12.ListValidTripsResponse value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$11.ListValidTripsResponse> listValidTrips_Pre(
+  $async.Stream<$12.ListValidTripsResponse> listValidTrips_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$11.ListValidTripsRequest> request) async* {
+      $async.Future<$12.ListValidTripsRequest> request) async* {
     yield* listValidTrips(call, await request);
   }
 
-  $async.Stream<$11.ListValidTripsResponse> listValidTrips(
-      $grpc.ServiceCall call, $11.ListValidTripsRequest request);
+  $async.Stream<$12.ListValidTripsResponse> listValidTrips(
+      $grpc.ServiceCall call, $12.ListValidTripsRequest request);
 }

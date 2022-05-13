@@ -10,17 +10,17 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'model.pb.dart' as $13;
+import 'model.pb.dart' as $14;
 
 class MakePaymentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MakePaymentRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
-    ..aOM<$13.Payment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $13.Payment.create)
+    ..aOM<$14.Payment>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $14.Payment.create)
     ..hasRequiredFields = false
   ;
 
   MakePaymentRequest._() : super();
   factory MakePaymentRequest({
-    $13.Payment? payment,
+    $14.Payment? payment,
   }) {
     final _result = create();
     if (payment != null) {
@@ -50,26 +50,26 @@ class MakePaymentRequest extends $pb.GeneratedMessage {
   static MakePaymentRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.Payment get payment => $_getN(0);
+  $14.Payment get payment => $_getN(0);
   @$pb.TagNumber(1)
-  set payment($13.Payment v) { setField(1, v); }
+  set payment($14.Payment v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPayment() => $_has(0);
   @$pb.TagNumber(1)
   void clearPayment() => clearField(1);
   @$pb.TagNumber(1)
-  $13.Payment ensurePayment() => $_ensure(0);
+  $14.Payment ensurePayment() => $_ensure(0);
 }
 
 class UpdatePaymentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdatePaymentRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
-    ..aOM<$13.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $13.Payment.create)
+    ..aOM<$14.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $14.Payment.create)
     ..hasRequiredFields = false
   ;
 
   UpdatePaymentRequest._() : super();
   factory UpdatePaymentRequest({
-    $13.Payment? payment,
+    $14.Payment? payment,
   }) {
     final _result = create();
     if (payment != null) {
@@ -99,26 +99,26 @@ class UpdatePaymentRequest extends $pb.GeneratedMessage {
   static UpdatePaymentRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Payment get payment => $_getN(0);
+  $14.Payment get payment => $_getN(0);
   @$pb.TagNumber(10)
-  set payment($13.Payment v) { setField(10, v); }
+  set payment($14.Payment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasPayment() => $_has(0);
   @$pb.TagNumber(10)
   void clearPayment() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Payment ensurePayment() => $_ensure(0);
+  $14.Payment ensurePayment() => $_ensure(0);
 }
 
 class UpdatePaymentStatusRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdatePaymentStatusRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
-    ..aOM<$13.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $13.Payment.create)
+    ..aOM<$14.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $14.Payment.create)
     ..hasRequiredFields = false
   ;
 
   UpdatePaymentStatusRequest._() : super();
   factory UpdatePaymentStatusRequest({
-    $13.Payment? payment,
+    $14.Payment? payment,
   }) {
     final _result = create();
     if (payment != null) {
@@ -148,15 +148,15 @@ class UpdatePaymentStatusRequest extends $pb.GeneratedMessage {
   static UpdatePaymentStatusRequest? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Payment get payment => $_getN(0);
+  $14.Payment get payment => $_getN(0);
   @$pb.TagNumber(10)
-  set payment($13.Payment v) { setField(10, v); }
+  set payment($14.Payment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasPayment() => $_has(0);
   @$pb.TagNumber(10)
   void clearPayment() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Payment ensurePayment() => $_ensure(0);
+  $14.Payment ensurePayment() => $_ensure(0);
 }
 
 class GetPaymentByReservationRequest extends $pb.GeneratedMessage {
@@ -208,13 +208,13 @@ class GetPaymentByReservationRequest extends $pb.GeneratedMessage {
 
 class GetPaymentByReservationResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetPaymentByReservationResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'payment'), createEmptyInstance: create)
-    ..aOM<$13.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $13.Payment.create)
+    ..aOM<$14.Payment>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payment', subBuilder: $14.Payment.create)
     ..hasRequiredFields = false
   ;
 
   GetPaymentByReservationResponse._() : super();
   factory GetPaymentByReservationResponse({
-    $13.Payment? payment,
+    $14.Payment? payment,
   }) {
     final _result = create();
     if (payment != null) {
@@ -244,14 +244,14 @@ class GetPaymentByReservationResponse extends $pb.GeneratedMessage {
   static GetPaymentByReservationResponse? _defaultInstance;
 
   @$pb.TagNumber(10)
-  $13.Payment get payment => $_getN(0);
+  $14.Payment get payment => $_getN(0);
   @$pb.TagNumber(10)
-  set payment($13.Payment v) { setField(10, v); }
+  set payment($14.Payment v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasPayment() => $_has(0);
   @$pb.TagNumber(10)
   void clearPayment() => clearField(10);
   @$pb.TagNumber(10)
-  $13.Payment ensurePayment() => $_ensure(0);
+  $14.Payment ensurePayment() => $_ensure(0);
 }
 
