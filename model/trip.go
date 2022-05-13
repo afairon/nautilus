@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"google.golang.org/grpc/codes"
@@ -50,8 +51,10 @@ func (t *Trip) BeforeSave(tx *gorm.DB) error {
 		result2 := tx.Preload("TripTemplate.Hotel")
 		result2.Joins("JOIN trip_templates ON trip_templates.id = trips.trip_template_id")
 		result2.Preload("TripTemplate.Boat")
-		result2.Preload("TripTemplate.Liveaboard")
 		result2.Where("start_date BETWEEN ? AND ? OR end_date BETWEEN ? AND ?", t.StartDate, t.EndDate, t.StartDate, t.EndDate)
+		if t.ID != 0 {
+			result2.Where("trips.id <> ?", t.ID)
+		}
 		result2.Where("trip_templates.hotel_id = ?", t.TripTemplate.HotelID)
 		result2.Find(&trips)
 
@@ -61,6 +64,10 @@ func (t *Trip) BeforeSave(tx *gorm.DB) error {
 
 		// trips that use t.TripTemplate.HotelID during t.StartDate and t.EndDate exists
 		if len(trips) != 0 {
+			fmt.Printf("%+v\n", trips)
+			for _, trip := range trips {
+				fmt.Printf("%+v\n", trip)
+			}
 			return ErrHotelInUse
 		}
 
