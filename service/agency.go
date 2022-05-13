@@ -1550,7 +1550,6 @@ func (service *agencyService) GenerateCurrentTripsReport(ctx context.Context, li
 		reportTrips = make([]*model.ReportTrip, 0, len(trips))
 
 		for _, trip := range trips {
-
 			for _, doc := range trip.TripTemplate.Images {
 				file := model.File{
 					Filename: doc,
@@ -1637,8 +1636,13 @@ func (service *agencyService) GenerateYearlyEndedTripsReport(ctx context.Context
 
 			for _, trip := range trips {
 
-				for idx, id := range trip.TripTemplate.Images {
-					trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+				for _, doc := range trip.TripTemplate.Images {
+					file := model.File{
+						Filename: doc,
+						URL:      service.media.Get(doc, true),
+					}
+
+					trip.TripTemplate.Files = append(trip.TripTemplate.Files, &file)
 				}
 
 				// create a new trip which will be inside the report
@@ -1723,8 +1727,13 @@ func (service *agencyService) GenerateIncomingTripsReport(ctx context.Context, w
 
 		for _, trip := range trips {
 
-			for idx, id := range trip.TripTemplate.Images {
-				trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+			for _, doc := range trip.TripTemplate.Images {
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+
+				trip.TripTemplate.Files = append(trip.TripTemplate.Files, &file)
 			}
 
 			// create a new trip which will be inside the report

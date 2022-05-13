@@ -184,6 +184,8 @@ func (repo *tripRepository) ListEndedTripsOverPeriod(ctx context.Context, startD
 	result.Preload("TripTemplate.Liveaboard")
 	result.Preload("TripTemplate.Boat")
 	result.Preload("DiveSites")
+	result.Preload("HotelRoomTypeTripPrices")
+	result.Preload("LiveaboardRoomTypeTripPrices")
 	result.Where("agency_id = ?", id)
 	result.Where("trips.last_reservation_date BETWEEN ? AND ?", *startDate, *endDate)
 
@@ -205,6 +207,8 @@ func (repo *tripRepository) ListIncomingTripsOverPeriod(ctx context.Context, sta
 	result.Preload("TripTemplate.Liveaboard")
 	result.Preload("TripTemplate.Boat")
 	result.Preload("DiveSites")
+	result.Preload("HotelRoomTypeTripPrices")
+	result.Preload("LiveaboardRoomTypeTripPrices")
 	result.Where("agency_id = ?", id)
 
 	if startDate != nil {

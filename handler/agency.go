@@ -617,7 +617,7 @@ func (handler *AgencyHandler) DeleteTrip(ctx context.Context, req *pb.DeleteTrip
 
 func (handler *AgencyHandler) GenerateCurrentTripsReport(req *pb.GenerateCurrentTripsReportRequest, srv pb.AgencyService_GenerateCurrentTripsReportServer) error {
 	ctx := srv.Context()
-	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx, req.GetLimit(), req.GetOffset())
+	reportTrips, err := handler.agencyService.GenerateCurrentTripsReport(ctx, req.Limit, req.Offset)
 
 	if err != nil {
 		return err

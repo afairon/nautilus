@@ -292,7 +292,6 @@ message ReportTrip {
     uint32 places_left = 20;
     repeated model.Diver divers = 45;
     repeated model.Reservation reservations = 50;
-    repeated model.RoomTypeTripPrice trip_room_type_prices = 55;
 }
 
 message Payment {
