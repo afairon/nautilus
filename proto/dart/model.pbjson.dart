@@ -418,25 +418,15 @@ final $typed_data.Uint8List diveSiteDescriptor = $convert.base64Decode('CghEaXZl
 const ReportTrip$json = const {
   '1': 'ReportTrip',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
-    const {'1': 'trip_template', '3': 25, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
-    const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
-    const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
-    const {'1': 'places_left', '3': 36, '4': 1, '5': 13, '10': 'placesLeft'},
-    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'trip', '3': 10, '4': 1, '5': 11, '6': '.model.TripWithTemplate', '10': 'trip'},
+    const {'1': 'places_left', '3': 20, '4': 1, '5': 13, '10': 'placesLeft'},
     const {'1': 'divers', '3': 45, '4': 3, '5': 11, '6': '.model.Diver', '10': 'divers'},
     const {'1': 'reservations', '3': 50, '4': 3, '5': 11, '6': '.model.Reservation', '10': 'reservations'},
-    const {'1': 'start_date', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'startDate'},
-    const {'1': 'end_date', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'endDate'},
-    const {'1': 'last_reservation_date', '3': 80, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'lastReservationDate'},
-    const {'1': 'created_at', '3': 90, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
-    const {'1': 'updated_at', '3': 100, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
   ],
 };
 
 /// Descriptor for `ReportTrip`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reportTripDescriptor = $convert.base64Decode('CgpSZXBvcnRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0Eh8KC3BsYWNlc19sZWZ0GCQgASgNUgpwbGFjZXNMZWZ0EhQKBXByaWNlGCggASgCUgVwcmljZRIkCgZkaXZlcnMYLSADKAsyDC5tb2RlbC5EaXZlclIGZGl2ZXJzEjYKDHJlc2VydmF0aW9ucxgyIAMoCzISLm1vZGVsLlJlc2VydmF0aW9uUgxyZXNlcnZhdGlvbnMSPwoKc3RhcnRfZGF0ZRg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXN0YXJ0RGF0ZRI7CghlbmRfZGF0ZRhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSB2VuZERhdGUSVAoVbGFzdF9yZXNlcnZhdGlvbl9kYXRlGFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVITbGFzdFJlc2VydmF0aW9uRGF0ZRI/CgpjcmVhdGVkX2F0GFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYZCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+final $typed_data.Uint8List reportTripDescriptor = $convert.base64Decode('CgpSZXBvcnRUcmlwEisKBHRyaXAYCiABKAsyFy5tb2RlbC5UcmlwV2l0aFRlbXBsYXRlUgR0cmlwEh8KC3BsYWNlc19sZWZ0GBQgASgNUgpwbGFjZXNMZWZ0EiQKBmRpdmVycxgtIAMoCzIMLm1vZGVsLkRpdmVyUgZkaXZlcnMSNgoMcmVzZXJ2YXRpb25zGDIgAygLMhIubW9kZWwuUmVzZXJ2YXRpb25SDHJlc2VydmF0aW9ucw==');
 @$core.Deprecated('Use paymentDescriptor instead')
 const Payment$json = const {
   '1': 'Payment',
