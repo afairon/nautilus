@@ -24,3 +24,8 @@ make update     # Update dependencies and vendor
 make clean      # Remove binaries and generated protobuf files for golang
 make clean-all  # Remove every generated files
 ```
+
+### Test
+```bash
+go test github.com/afairon/nautilus/repo # for testing tests in repository package
+```
