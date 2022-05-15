@@ -45,7 +45,7 @@ func NewAgencyRepository(db *gorm.DB) *agencyRepository {
 
 // Create creates an agency record and returns the newly created record.
 func (repo *agencyRepository) Create(ctx context.Context, agency *model.Agency) (*model.Agency, error) {
-	result := repo.db.Create(agency)
+	result := repo.db.Debug().Create(agency)
 
 	return agency, result.Error
 }
