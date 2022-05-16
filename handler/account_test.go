@@ -200,7 +200,7 @@ func TestAccountUpdate(t *testing.T) {
 	}
 }
 
-func TestUpdateAccount(t *testing.T) {
+func TestAccountUpdateAccount(t *testing.T) {
 	type updateAccountTestCase struct {
 		name          string
 		account       *pb.Account
@@ -252,6 +252,46 @@ func TestUpdateAccount(t *testing.T) {
 		_, err := accountHandler.UpdateAccount(ctx, account)
 
 		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAccountLogin(t *testing.T) {
+	t.Run("Login successfully", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		loginRequest := &pb.LoginRequest{
+			Email:    "pokin67890@gmail.com",
+			Password: "P@ssword123",
+		}
+		accountService := service.NewAccountServiceMock()
+		accountService.On("Login", ctx, "pokin67890@gmail.com", "P@ssword123").Return("token", nil)
+		accountHandler := handler.NewAccountHandler(accountService)
+
+		//Act
+		response, err := accountHandler.Login(ctx, loginRequest)
+
+		//Assert
+		assert.True(t, len(response.Token) > 0)
+		assert.NoError(t, err)
+	})
+
+	t.Run("Login failed", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		loginRequest := &pb.LoginRequest{
+			Email:    "pokin67890@gmail.com",
+			Password: "P@ssword123",
+		}
+		accountService := service.NewAccountServiceMock()
+		accountService.On("Login", ctx, "pokin67890@gmail.com", "P@ssword123").Return("", errors.New(""))
+		accountHandler := handler.NewAccountHandler(accountService)
+
+		//Act
+		response, err := accountHandler.Login(ctx, loginRequest)
+
+		//Assert
+		assert.Nil(t, response)
 		assert.Error(t, err)
 	})
 }
