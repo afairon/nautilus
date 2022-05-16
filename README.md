@@ -28,4 +28,5 @@ make clean-all  # Remove every generated files
 ### Test
 ```bash
 go test github.com/afairon/nautilus/repo # for testing tests in repository package
+go test github.com/afairon/nautilus/handler # for testing tests in handler package
 ```
