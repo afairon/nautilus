@@ -9,6 +9,7 @@ import (
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestAgencyAddDiveMaster(t *testing.T) {
@@ -79,6 +80,113 @@ func TestAgencyAddHotel(t *testing.T) {
 		_, err := agencyHandler.AddHotel(ctx, req)
 
 		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyAddStaff(t *testing.T) {
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddStaffRequest{
+			Staff: &pb.Staff{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddStaff", ctx, req.Staff).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddStaff(ctx, req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddStaffRequest{
+			Staff: &pb.Staff{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddStaff", ctx, req.Staff).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddStaff(ctx, req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyAddTrip(t *testing.T) {
+	type agencyAddTripTestCase struct {
+		name string
+		req  *pb.AddTripRequest
+	}
+
+	testCases := []agencyAddTripTestCase{
+		{
+			name: "successfully add ONSHORE trip",
+			req: &pb.AddTripRequest{
+				Trip: &pb.TripWithTemplate{
+					TripTemplate: &pb.TripTemplate{
+						TripType: pb.ONSHORE,
+					},
+					TripRoomTypePrices: []*pb.RoomTypeTripPrice{
+						{}, {},
+					},
+				},
+			},
+		},
+		{
+			name: "successfully add OFFSHORE trip",
+			req: &pb.AddTripRequest{
+				Trip: &pb.TripWithTemplate{
+					TripTemplate: &pb.TripTemplate{
+						TripType: pb.OFFSHORE,
+					},
+					TripRoomTypePrices: []*pb.RoomTypeTripPrice{
+						{}, {},
+					},
+				},
+			},
+		},
+	}
+
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Assert
+			ctx := context.Background()
+			agencyService := service.NewAgencyServiceMock()
+			agencyService.On("AddTrip", ctx, mock.AnythingOfType("*model.Trip"), mock.AnythingOfType("[]model.RoomTypeTripPrice")).Return(nil)
+			agencyHandler := handler.NewAgencyHandler(agencyService)
+
+			//Act
+			_, err := agencyHandler.AddTrip(ctx, c.req)
+
+			//Assert
+			assert.NoError(t, err)
+		})
+	}
+
+	t.Run("fail", func(t *testing.T) {
+		//Assert
+		ctx := context.Background()
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddTrip", ctx, mock.AnythingOfType("*model.Trip"), mock.AnythingOfType("[]model.RoomTypeTripPrice")).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		req := &pb.AddTripRequest{
+			Trip: &pb.TripWithTemplate{
+				TripTemplate: &pb.TripTemplate{},
+			},
+		}
+
+		//Act
+		_, err := agencyHandler.AddTrip(ctx, req)
+
+		// //Assert
 		assert.Error(t, err)
 	})
 }

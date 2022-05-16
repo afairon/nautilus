@@ -62,7 +62,6 @@ func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripReques
 	trip := model.Trip{}
 	trip.FromWithTemplate(req.Trip)
 	var roomTypePrices []model.RoomTypeTripPrice
-
 	switch req.Trip.TripTemplate.TripType {
 	case pb.ONSHORE:
 		roomTypePrices = make([]model.RoomTypeTripPrice, 0, len(req.Trip.TripRoomTypePrices))
