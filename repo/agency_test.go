@@ -78,3 +78,7 @@ func TestAgencyCreate(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(t, expectedId, int(agency.ID))
 }
+
+func TestAgencyUpdate(t *testing.T) {
+
+}
