@@ -46,3 +46,39 @@ func TestAgencyAddDiveMaster(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyAddHotel(t *testing.T) {
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddHotelRequest{
+			Hotel: &pb.Hotel{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddHotel", ctx, req.Hotel).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddHotel(ctx, req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddHotelRequest{
+			Hotel: &pb.Hotel{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddHotel", ctx, req.Hotel).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddHotel(ctx, req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
