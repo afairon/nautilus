@@ -51,5 +51,8 @@ func (m *accountServiceMock) Login(ctx context.Context, email, password string) 
 
 func (m *accountServiceMock) GetProfile(ctx context.Context) (session.Account, error) {
 	args := m.Called(ctx)
-	return args.Get(0).(session.Account), args.Error(1)
+	if v, ok := args.Get(0).(session.Account); ok {
+		return v, args.Error(1)
+	}
+	return nil, args.Error(1)
 }

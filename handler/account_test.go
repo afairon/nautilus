@@ -12,6 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func TestAccountCreate(t *testing.T) {
@@ -259,20 +260,21 @@ func TestAccountUpdateAccount(t *testing.T) {
 func TestAccountLogin(t *testing.T) {
 	t.Run("Login successfully", func(t *testing.T) {
 		//Arrange
+		expectedToken := "tokenString"
 		ctx := context.Background()
 		loginRequest := &pb.LoginRequest{
 			Email:    "pokin67890@gmail.com",
 			Password: "P@ssword123",
 		}
 		accountService := service.NewAccountServiceMock()
-		accountService.On("Login", ctx, "pokin67890@gmail.com", "P@ssword123").Return("token", nil)
+		accountService.On("Login", ctx, "pokin67890@gmail.com", "P@ssword123").Return(expectedToken, nil)
 		accountHandler := handler.NewAccountHandler(accountService)
 
 		//Act
 		response, err := accountHandler.Login(ctx, loginRequest)
 
 		//Assert
-		assert.True(t, len(response.Token) > 0)
+		assert.Equal(t, expectedToken, response.Token)
 		assert.NoError(t, err)
 	})
 
@@ -289,6 +291,57 @@ func TestAccountLogin(t *testing.T) {
 
 		//Act
 		response, err := accountHandler.Login(ctx, loginRequest)
+
+		//Assert
+		assert.Nil(t, response)
+		assert.Error(t, err)
+	})
+}
+
+func TestAccountGetProfile(t *testing.T) {
+	t.Run("get agency profile", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		accountService := service.NewAccountServiceMock()
+		agencyAccount := &model.Agency{}
+		expected := agencyAccount.GetProto()
+		accountService.On("GetProfile", ctx).Return(agencyAccount, nil)
+		accountHandler := handler.NewAccountHandler(accountService)
+
+		//Act
+		response, err := accountHandler.GetProfile(ctx, &emptypb.Empty{})
+
+		//Assert
+		assert.Equal(t, expected, response.GetAgency())
+		assert.NoError(t, err)
+	})
+
+	t.Run("get diver profile", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		accountService := service.NewAccountServiceMock()
+		diverAccount := &model.Diver{}
+		expected := diverAccount.GetProto()
+		accountService.On("GetProfile", ctx).Return(diverAccount, nil)
+		accountHandler := handler.NewAccountHandler(accountService)
+
+		//Act
+		response, err := accountHandler.GetProfile(ctx, &emptypb.Empty{})
+
+		//Assert
+		assert.Equal(t, expected, response.GetDiver())
+		assert.NoError(t, err)
+	})
+
+	t.Run("get profile service fail", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		accountService := service.NewAccountServiceMock()
+		accountService.On("GetProfile", ctx).Return(nil, errors.New("service error"))
+		accountHandler := handler.NewAccountHandler(accountService)
+
+		//Act
+		response, err := accountHandler.GetProfile(ctx, &emptypb.Empty{})
 
 		//Assert
 		assert.Nil(t, response)
