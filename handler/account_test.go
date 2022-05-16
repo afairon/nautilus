@@ -30,33 +30,35 @@ func TestAccountCreate(t *testing.T) {
 	}
 
 	for _, c := range testCases {
-		//Arrange
-		ctx := context.Background()
-		accountRequest := &pb.AccountRequest{
-			Type: &pb.AccountRequest_Agency{
-				Agency: &pb.Agency{},
-			},
-		}
-		accountService := service.NewAccountServiceMock()
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			ctx := context.Background()
+			accountRequest := &pb.AccountRequest{
+				Type: &pb.AccountRequest_Agency{
+					Agency: &pb.Agency{},
+				},
+			}
+			accountService := service.NewAccountServiceMock()
 
-		err := errors.New("")
-		if !c.expectError {
-			err = nil
-		}
+			err := errors.New("")
+			if !c.expectError {
+				err = nil
+			}
 
-		accountService.On("CreateAgencyAccount", ctx, &model.Agency{}).Return(err)
+			accountService.On("CreateAgencyAccount", ctx, &model.Agency{}).Return(err)
 
-		accountHandler := handler.NewAccountHandler(accountService)
+			accountHandler := handler.NewAccountHandler(accountService)
 
-		//Act
-		_, err = accountHandler.Create(ctx, accountRequest)
+			//Act
+			_, err = accountHandler.Create(ctx, accountRequest)
 
-		//Assert
-		if !c.expectError {
-			assert.NoError(t, err)
-		} else {
-			assert.Error(t, err)
-		}
+			//Assert
+			if !c.expectError {
+				assert.NoError(t, err)
+			} else {
+				assert.Error(t, err)
+			}
+		})
 	}
 
 	testCases = []accountCreateTestCase{
@@ -71,33 +73,35 @@ func TestAccountCreate(t *testing.T) {
 	}
 
 	for _, c := range testCases {
-		//Arrange
-		ctx := context.Background()
-		accountRequest := &pb.AccountRequest{
-			Type: &pb.AccountRequest_Diver{
-				Diver: &pb.Diver{},
-			},
-		}
-		accountService := service.NewAccountServiceMock()
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			ctx := context.Background()
+			accountRequest := &pb.AccountRequest{
+				Type: &pb.AccountRequest_Diver{
+					Diver: &pb.Diver{},
+				},
+			}
+			accountService := service.NewAccountServiceMock()
 
-		err := errors.New("")
-		if !c.expectError {
-			err = nil
-		}
+			err := errors.New("")
+			if !c.expectError {
+				err = nil
+			}
 
-		accountService.On("CreateDiverAccount", ctx, &model.Diver{}).Return(err)
+			accountService.On("CreateDiverAccount", ctx, &model.Diver{}).Return(err)
 
-		accountHandler := handler.NewAccountHandler(accountService)
+			accountHandler := handler.NewAccountHandler(accountService)
 
-		//Act
-		_, err = accountHandler.Create(ctx, accountRequest)
+			//Act
+			_, err = accountHandler.Create(ctx, accountRequest)
 
-		//Assert
-		if !c.expectError {
-			assert.NoError(t, err)
-		} else {
-			assert.Error(t, err)
-		}
+			//Assert
+			if !c.expectError {
+				assert.NoError(t, err)
+			} else {
+				assert.Error(t, err)
+			}
+		})
 	}
 }
 
@@ -119,33 +123,35 @@ func TestAccountUpdate(t *testing.T) {
 	}
 
 	for _, c := range testCases {
-		//Arrange
-		ctx := context.Background()
-		updateRequest := &pb.UpdateRequest{
-			Type: &pb.UpdateRequest_Agency{
-				Agency: &pb.Agency{},
-			},
-		}
-		accountService := service.NewAccountServiceMock()
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			ctx := context.Background()
+			updateRequest := &pb.UpdateRequest{
+				Type: &pb.UpdateRequest_Agency{
+					Agency: &pb.Agency{},
+				},
+			}
+			accountService := service.NewAccountServiceMock()
 
-		err := errors.New("")
-		if !c.expectError {
-			err = nil
-		}
+			err := errors.New("")
+			if !c.expectError {
+				err = nil
+			}
 
-		accountService.On("UpdateAgencyAccount", ctx, &model.Agency{}).Return(err)
+			accountService.On("UpdateAgencyAccount", ctx, &model.Agency{}).Return(err)
 
-		accountHandler := handler.NewAccountHandler(accountService)
+			accountHandler := handler.NewAccountHandler(accountService)
 
-		//Act
-		_, err = accountHandler.Update(ctx, updateRequest)
+			//Act
+			_, err = accountHandler.Update(ctx, updateRequest)
 
-		//Assert
-		if !c.expectError {
-			assert.NoError(t, err)
-		} else {
-			assert.Error(t, err)
-		}
+			//Assert
+			if !c.expectError {
+				assert.NoError(t, err)
+			} else {
+				assert.Error(t, err)
+			}
+		})
 	}
 
 	testCases = []accountUpdateTestCase{
@@ -160,32 +166,40 @@ func TestAccountUpdate(t *testing.T) {
 	}
 
 	for _, c := range testCases {
-		//Arrange
-		ctx := context.Background()
-		updateRequest := &pb.UpdateRequest{
-			Type: &pb.UpdateRequest_Diver{
-				Diver: &pb.Diver{},
-			},
-		}
-		accountService := service.NewAccountServiceMock()
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			ctx := context.Background()
+			updateRequest := &pb.UpdateRequest{
+				Type: &pb.UpdateRequest_Diver{
+					Diver: &pb.Diver{},
+				},
+			}
+			accountService := service.NewAccountServiceMock()
 
-		err := errors.New("")
-		if !c.expectError {
-			err = nil
-		}
+			err := errors.New("")
+			if !c.expectError {
+				err = nil
+			}
 
-		accountService.On("UpdateDiverAccount", ctx, &model.Diver{}).Return(err)
+			accountService.On("UpdateDiverAccount", ctx, &model.Diver{}).Return(err)
 
-		accountHandler := handler.NewAccountHandler(accountService)
+			accountHandler := handler.NewAccountHandler(accountService)
 
-		//Act
-		_, err = accountHandler.Update(ctx, updateRequest)
+			//Act
+			_, err = accountHandler.Update(ctx, updateRequest)
 
-		//Assert
-		if !c.expectError {
-			assert.NoError(t, err)
-		} else {
-			assert.Error(t, err)
-		}
+			//Assert
+			if !c.expectError {
+				assert.NoError(t, err)
+			} else {
+				assert.Error(t, err)
+			}
+		})
+	}
+}
+
+func TestUpdateAccount(t *testing.T) {
+	type updateAccountTestCase struct {
+		name string
 	}
 }
