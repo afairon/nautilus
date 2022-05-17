@@ -600,7 +600,12 @@ func TestAgencyListTripTemplates(t *testing.T) {
 		Offset: 0,
 	}
 	tripTemplates := []*model.TripTemplate{
-		{}, {},
+		{
+			Name:        "",
+			Description: "",
+			Type:        0,
+			Images:      []string{"id1", "id2"},
+		}, {},
 	}
 
 	t.Run("successful", func(t *testing.T) {
