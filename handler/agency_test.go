@@ -6,10 +6,12 @@ import (
 	"testing"
 
 	"github.com/afairon/nautilus/handler"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"google.golang.org/grpc"
 )
 
 func TestAgencyAddDiveMaster(t *testing.T) {
@@ -257,6 +259,65 @@ func TestAgencyAddLiveaboard(t *testing.T) {
 
 		//Act
 		_, err := agencyHandler.AddLiveaboard(ctx, req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+type mockAgencyService_ListBoatsServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListBoatsServer) Send(boat *pb.ListBoatsResponse) error {
+	args := m.Called(boat)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListBoatsServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestListBoats(t *testing.T) {
+	//Arrange
+	req := &pb.ListBoatsRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+	boats := []*model.Boat{
+		{}, {},
+	}
+
+	t.Run("successful", func(t *testing.T) {
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListBoats", context.Background(), req.Limit, req.Offset).Return(boats, nil)
+		srv := &mockAgencyService_ListBoatsServer{}
+		srv.On("Send", mock.AnythingOfType("*pb.ListBoatsResponse")).Return(nil).Twice()
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListBoats(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListBoats", context.Background(), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_ListBoatsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListBoats(req, srv)
 
 		//Assert
 		assert.Error(t, err)
