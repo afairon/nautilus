@@ -1405,6 +1405,254 @@ class ListRoomTypesResponse extends $pb.GeneratedMessage {
   $14.RoomType ensureRoomType() => $_ensure(0);
 }
 
+class ListDiveSitesByTripRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveSitesByTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveSitesByTripRequest._() : super();
+  factory ListDiveSitesByTripRequest({
+    $fixnum.Int64? tripId,
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (tripId != null) {
+      _result.tripId = tripId;
+    }
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListDiveSitesByTripRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveSitesByTripRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveSitesByTripRequest clone() => ListDiveSitesByTripRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveSitesByTripRequest copyWith(void Function(ListDiveSitesByTripRequest) updates) => super.copyWith((message) => updates(message as ListDiveSitesByTripRequest)) as ListDiveSitesByTripRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveSitesByTripRequest create() => ListDiveSitesByTripRequest._();
+  ListDiveSitesByTripRequest createEmptyInstance() => create();
+  static $pb.PbList<ListDiveSitesByTripRequest> createRepeated() => $pb.PbList<ListDiveSitesByTripRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveSitesByTripRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveSitesByTripRequest>(create);
+  static ListDiveSitesByTripRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get tripId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set tripId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTripId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTripId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(10)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearLimit() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get offset => $_getI64(2);
+  @$pb.TagNumber(20)
+  set offset($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasOffset() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearOffset() => clearField(20);
+}
+
+class ListDiveSitesByTripResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveSitesByTripResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$14.DiveSite>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveSite', protoName: 'diveSite', subBuilder: $14.DiveSite.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveSitesByTripResponse._() : super();
+  factory ListDiveSitesByTripResponse({
+    $14.DiveSite? diveSite,
+  }) {
+    final _result = create();
+    if (diveSite != null) {
+      _result.diveSite = diveSite;
+    }
+    return _result;
+  }
+  factory ListDiveSitesByTripResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveSitesByTripResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveSitesByTripResponse clone() => ListDiveSitesByTripResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveSitesByTripResponse copyWith(void Function(ListDiveSitesByTripResponse) updates) => super.copyWith((message) => updates(message as ListDiveSitesByTripResponse)) as ListDiveSitesByTripResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveSitesByTripResponse create() => ListDiveSitesByTripResponse._();
+  ListDiveSitesByTripResponse createEmptyInstance() => create();
+  static $pb.PbList<ListDiveSitesByTripResponse> createRepeated() => $pb.PbList<ListDiveSitesByTripResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveSitesByTripResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveSitesByTripResponse>(create);
+  static ListDiveSitesByTripResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $14.DiveSite get diveSite => $_getN(0);
+  @$pb.TagNumber(1)
+  set diveSite($14.DiveSite v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDiveSite() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDiveSite() => clearField(1);
+  @$pb.TagNumber(1)
+  $14.DiveSite ensureDiveSite() => $_ensure(0);
+}
+
+class ListDiveMastersByTripRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersByTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'limit', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveMastersByTripRequest._() : super();
+  factory ListDiveMastersByTripRequest({
+    $fixnum.Int64? tripId,
+    $fixnum.Int64? limit,
+    $fixnum.Int64? offset,
+  }) {
+    final _result = create();
+    if (tripId != null) {
+      _result.tripId = tripId;
+    }
+    if (limit != null) {
+      _result.limit = limit;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
+    return _result;
+  }
+  factory ListDiveMastersByTripRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveMastersByTripRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersByTripRequest clone() => ListDiveMastersByTripRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersByTripRequest copyWith(void Function(ListDiveMastersByTripRequest) updates) => super.copyWith((message) => updates(message as ListDiveMastersByTripRequest)) as ListDiveMastersByTripRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersByTripRequest create() => ListDiveMastersByTripRequest._();
+  ListDiveMastersByTripRequest createEmptyInstance() => create();
+  static $pb.PbList<ListDiveMastersByTripRequest> createRepeated() => $pb.PbList<ListDiveMastersByTripRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersByTripRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveMastersByTripRequest>(create);
+  static ListDiveMastersByTripRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get tripId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set tripId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTripId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTripId() => clearField(1);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get limit => $_getI64(1);
+  @$pb.TagNumber(10)
+  set limit($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearLimit() => clearField(10);
+
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get offset => $_getI64(2);
+  @$pb.TagNumber(20)
+  set offset($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasOffset() => $_has(2);
+  @$pb.TagNumber(20)
+  void clearOffset() => clearField(20);
+}
+
+class ListDiveMastersByTripResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListDiveMastersByTripResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'agency'), createEmptyInstance: create)
+    ..aOM<$14.DiveMaster>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'diveMaster', subBuilder: $14.DiveMaster.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListDiveMastersByTripResponse._() : super();
+  factory ListDiveMastersByTripResponse({
+    $14.DiveMaster? diveMaster,
+  }) {
+    final _result = create();
+    if (diveMaster != null) {
+      _result.diveMaster = diveMaster;
+    }
+    return _result;
+  }
+  factory ListDiveMastersByTripResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListDiveMastersByTripResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersByTripResponse clone() => ListDiveMastersByTripResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListDiveMastersByTripResponse copyWith(void Function(ListDiveMastersByTripResponse) updates) => super.copyWith((message) => updates(message as ListDiveMastersByTripResponse)) as ListDiveMastersByTripResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersByTripResponse create() => ListDiveMastersByTripResponse._();
+  ListDiveMastersByTripResponse createEmptyInstance() => create();
+  static $pb.PbList<ListDiveMastersByTripResponse> createRepeated() => $pb.PbList<ListDiveMastersByTripResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListDiveMastersByTripResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListDiveMastersByTripResponse>(create);
+  static ListDiveMastersByTripResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $14.DiveMaster get diveMaster => $_getN(0);
+  @$pb.TagNumber(1)
+  set diveMaster($14.DiveMaster v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDiveMaster() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDiveMaster() => clearField(1);
+  @$pb.TagNumber(1)
+  $14.DiveMaster ensureDiveMaster() => $_ensure(0);
+}
+
 enum SearchTripsOptions_LocationFilter {
   country, 
   city, 

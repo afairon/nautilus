@@ -171,6 +171,18 @@ class AgencyServiceClient extends $grpc.Client {
           ($2.ListRoomTypesRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $2.ListRoomTypesResponse.fromBuffer(value));
+  static final _$listDiveSitesByTrip = $grpc.ClientMethod<
+          $2.ListDiveSitesByTripRequest, $2.ListDiveSitesByTripResponse>(
+      '/agency.AgencyService/ListDiveSitesByTrip',
+      ($2.ListDiveSitesByTripRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ListDiveSitesByTripResponse.fromBuffer(value));
+  static final _$listDiveMastersByTrip = $grpc.ClientMethod<
+          $2.ListDiveMastersByTripRequest, $2.ListDiveMastersByTripResponse>(
+      '/agency.AgencyService/ListDiveMastersByTrip',
+      ($2.ListDiveMastersByTripRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ListDiveMastersByTripResponse.fromBuffer(value));
   static final _$searchTrips =
       $grpc.ClientMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
           '/agency.AgencyService/SearchTrips',
@@ -386,6 +398,22 @@ class AgencyServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listRoomTypes, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListDiveSitesByTripResponse> listDiveSitesByTrip(
+      $2.ListDiveSitesByTripRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listDiveSitesByTrip, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<$2.ListDiveMastersByTripResponse> listDiveMastersByTrip(
+      $2.ListDiveMastersByTripRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listDiveMastersByTrip, $async.Stream.fromIterable([request]),
         options: options);
   }
 
@@ -662,6 +690,24 @@ abstract class AgencyServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $2.ListRoomTypesRequest.fromBuffer(value),
             ($2.ListRoomTypesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListDiveSitesByTripRequest,
+            $2.ListDiveSitesByTripResponse>(
+        'ListDiveSitesByTrip',
+        listDiveSitesByTrip_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.ListDiveSitesByTripRequest.fromBuffer(value),
+        ($2.ListDiveSitesByTripResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListDiveMastersByTripRequest,
+            $2.ListDiveMastersByTripResponse>(
+        'ListDiveMastersByTrip',
+        listDiveMastersByTrip_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.ListDiveMastersByTripRequest.fromBuffer(value),
+        ($2.ListDiveMastersByTripResponse value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$2.SearchTripsRequest, $2.SearchTripsResponse>(
             'SearchTrips',
@@ -858,6 +904,18 @@ abstract class AgencyServiceBase extends $grpc.Service {
     yield* listRoomTypes(call, await request);
   }
 
+  $async.Stream<$2.ListDiveSitesByTripResponse> listDiveSitesByTrip_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.ListDiveSitesByTripRequest> request) async* {
+    yield* listDiveSitesByTrip(call, await request);
+  }
+
+  $async.Stream<$2.ListDiveMastersByTripResponse> listDiveMastersByTrip_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.ListDiveMastersByTripRequest> request) async* {
+    yield* listDiveMastersByTrip(call, await request);
+  }
+
   $async.Stream<$2.SearchTripsResponse> searchTrips_Pre($grpc.ServiceCall call,
       $async.Future<$2.SearchTripsRequest> request) async* {
     yield* searchTrips(call, await request);
@@ -943,6 +1001,10 @@ abstract class AgencyServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.ListTripsWithTemplatesRequest request);
   $async.Stream<$2.ListRoomTypesResponse> listRoomTypes(
       $grpc.ServiceCall call, $2.ListRoomTypesRequest request);
+  $async.Stream<$2.ListDiveSitesByTripResponse> listDiveSitesByTrip(
+      $grpc.ServiceCall call, $2.ListDiveSitesByTripRequest request);
+  $async.Stream<$2.ListDiveMastersByTripResponse> listDiveMastersByTrip(
+      $grpc.ServiceCall call, $2.ListDiveMastersByTripRequest request);
   $async.Stream<$2.SearchTripsResponse> searchTrips(
       $grpc.ServiceCall call, $2.SearchTripsRequest request);
   $async.Stream<$2.GenerateCurrentTripsReportResponse>

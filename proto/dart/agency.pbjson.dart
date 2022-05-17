@@ -273,6 +273,50 @@ const ListRoomTypesResponse$json = const {
 
 /// Descriptor for `ListRoomTypesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listRoomTypesResponseDescriptor = $convert.base64Decode('ChVMaXN0Um9vbVR5cGVzUmVzcG9uc2USLAoJcm9vbV90eXBlGAEgASgLMg8ubW9kZWwuUm9vbVR5cGVSCHJvb21UeXBl');
+@$core.Deprecated('Use listDiveSitesByTripRequestDescriptor instead')
+const ListDiveSitesByTripRequest$json = const {
+  '1': 'ListDiveSitesByTripRequest',
+  '2': const [
+    const {'1': 'trip_id', '3': 1, '4': 1, '5': 4, '10': 'tripId'},
+    const {'1': 'limit', '3': 10, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 20, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListDiveSitesByTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveSitesByTripRequestDescriptor = $convert.base64Decode('ChpMaXN0RGl2ZVNpdGVzQnlUcmlwUmVxdWVzdBIXCgd0cmlwX2lkGAEgASgEUgZ0cmlwSWQSFAoFbGltaXQYCiABKARSBWxpbWl0EhYKBm9mZnNldBgUIAEoBFIGb2Zmc2V0');
+@$core.Deprecated('Use listDiveSitesByTripResponseDescriptor instead')
+const ListDiveSitesByTripResponse$json = const {
+  '1': 'ListDiveSitesByTripResponse',
+  '2': const [
+    const {'1': 'diveSite', '3': 1, '4': 1, '5': 11, '6': '.model.DiveSite', '10': 'diveSite'},
+  ],
+};
+
+/// Descriptor for `ListDiveSitesByTripResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveSitesByTripResponseDescriptor = $convert.base64Decode('ChtMaXN0RGl2ZVNpdGVzQnlUcmlwUmVzcG9uc2USKwoIZGl2ZVNpdGUYASABKAsyDy5tb2RlbC5EaXZlU2l0ZVIIZGl2ZVNpdGU=');
+@$core.Deprecated('Use listDiveMastersByTripRequestDescriptor instead')
+const ListDiveMastersByTripRequest$json = const {
+  '1': 'ListDiveMastersByTripRequest',
+  '2': const [
+    const {'1': 'trip_id', '3': 1, '4': 1, '5': 4, '10': 'tripId'},
+    const {'1': 'limit', '3': 10, '4': 1, '5': 4, '10': 'limit'},
+    const {'1': 'offset', '3': 20, '4': 1, '5': 4, '10': 'offset'},
+  ],
+};
+
+/// Descriptor for `ListDiveMastersByTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveMastersByTripRequestDescriptor = $convert.base64Decode('ChxMaXN0RGl2ZU1hc3RlcnNCeVRyaXBSZXF1ZXN0EhcKB3RyaXBfaWQYASABKARSBnRyaXBJZBIUCgVsaW1pdBgKIAEoBFIFbGltaXQSFgoGb2Zmc2V0GBQgASgEUgZvZmZzZXQ=');
+@$core.Deprecated('Use listDiveMastersByTripResponseDescriptor instead')
+const ListDiveMastersByTripResponse$json = const {
+  '1': 'ListDiveMastersByTripResponse',
+  '2': const [
+    const {'1': 'dive_master', '3': 1, '4': 1, '5': 11, '6': '.model.DiveMaster', '10': 'diveMaster'},
+  ],
+};
+
+/// Descriptor for `ListDiveMastersByTripResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listDiveMastersByTripResponseDescriptor = $convert.base64Decode('Ch1MaXN0RGl2ZU1hc3RlcnNCeVRyaXBSZXNwb25zZRIyCgtkaXZlX21hc3RlchgBIAEoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSCmRpdmVNYXN0ZXI=');
 @$core.Deprecated('Use searchTripsOptionsDescriptor instead')
 const SearchTripsOptions$json = const {
   '1': 'SearchTripsOptions',
