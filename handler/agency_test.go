@@ -190,3 +190,39 @@ func TestAgencyAddTrip(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyAddDivingBoat(t *testing.T) {
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddDivingBoatRequest{
+			DivingBoat: &pb.Boat{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddDivingBoat", ctx, &pb.Boat{}).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddDivingBoat(ctx, req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddDivingBoatRequest{
+			DivingBoat: &pb.Boat{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddDivingBoat", ctx, &pb.Boat{}).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddDivingBoat(ctx, req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
