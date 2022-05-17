@@ -12,6 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func TestAgencyAddDiveMaster(t *testing.T) {
@@ -329,8 +331,8 @@ type mockAgencyService_ListDiveMastersServer struct {
 	mock.Mock
 }
 
-func (m *mockAgencyService_ListDiveMastersServer) Send(boat *pb.ListDiveMastersResponse) error {
-	args := m.Called(boat)
+func (m *mockAgencyService_ListDiveMastersServer) Send(diveMaster *pb.ListDiveMastersResponse) error {
+	args := m.Called(diveMaster)
 	return args.Error(0)
 }
 
@@ -388,8 +390,8 @@ type mockAgencyService_ListHotelsServer struct {
 	mock.Mock
 }
 
-func (m *mockAgencyService_ListHotelsServer) Send(boat *pb.ListHotelsResponse) error {
-	args := m.Called(boat)
+func (m *mockAgencyService_ListHotelsServer) Send(hotel *pb.ListHotelsResponse) error {
+	args := m.Called(hotel)
 	return args.Error(0)
 }
 
@@ -447,8 +449,8 @@ type mockAgencyService_ListLiveaboardsServer struct {
 	mock.Mock
 }
 
-func (m *mockAgencyService_ListLiveaboardsServer) Send(boat *pb.ListLiveaboardsResponse) error {
-	args := m.Called(boat)
+func (m *mockAgencyService_ListLiveaboardsServer) Send(liveaboard *pb.ListLiveaboardsResponse) error {
+	args := m.Called(liveaboard)
 	return args.Error(0)
 }
 
@@ -497,5 +499,79 @@ func TestAgencyListLiveaboards(t *testing.T) {
 
 		//Assert
 		assert.Error(t, err)
+	})
+}
+
+type mockAgencyService_ListStaffsServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListStaffsServer) Send(staff *pb.ListStaffsResponse) error {
+	args := m.Called(staff)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListStaffsServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+func TestAgencyListStaffs(t *testing.T) {
+	req := &pb.ListStaffsRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+	staffs := []*model.Staff{
+		{}, {},
+	}
+
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListStaffs", context.Background(), req.Limit, req.Offset).Return(staffs, nil)
+		srv := &mockAgencyService_ListStaffsServer{}
+		srv.On("Send", mock.AnythingOfType("*pb.ListStaffsResponse")).Return(nil).Twice()
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListStaffs(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListStaffs", context.Background(), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_ListStaffsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListStaffs(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+	})
+
+	t.Run("no staffs", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListStaffs", context.Background(), req.Limit, req.Offset).Return(nil, nil)
+		srv := &mockAgencyService_ListStaffsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListStaffs(req, srv)
+
+		//Assert
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListStaffs: not found"))
+		srv.AssertNotCalled(t, "Send")
 	})
 }
