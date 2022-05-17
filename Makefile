@@ -47,7 +47,7 @@ JWT_SECRET ?= secret
 
 # Generate every files
 .PHONY: all
-all: proto-go proto-dart server
+all: proto-go proto-dart server test
 
 # Generate server binary
 .PHONY: server
@@ -112,6 +112,11 @@ run: server
 update:
 	$(GO) mod tidy
 	$(GO) mod vendor
+
+# Run unit testing
+.PHONY: test
+test:
+	$(GO) test -v -cover ./...
 
 # Remove binaries and Protocol Buffers files generated for Golang
 .PHONY: clean
