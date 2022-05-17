@@ -209,7 +209,7 @@ func TestAgencyAddDivingBoat(t *testing.T) {
 		assert.NoError(t, err)
 	})
 
-	t.Run("successful", func(t *testing.T) {
+	t.Run("fail", func(t *testing.T) {
 		//Arrange
 		ctx := context.Background()
 		req := &pb.AddDivingBoatRequest{
@@ -221,6 +221,42 @@ func TestAgencyAddDivingBoat(t *testing.T) {
 
 		//Act
 		_, err := agencyHandler.AddDivingBoat(ctx, req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyAddLiveaboard(t *testing.T) {
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddLiveaboardRequest{
+			Liveaboard: &pb.Liveaboard{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddLiveaboard", ctx, &pb.Liveaboard{}).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddLiveaboard(ctx, req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		//Arrange
+		ctx := context.Background()
+		req := &pb.AddLiveaboardRequest{
+			Liveaboard: &pb.Liveaboard{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("AddLiveaboard", ctx, &pb.Liveaboard{}).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.AddLiveaboard(ctx, req)
 
 		//Assert
 		assert.Error(t, err)
