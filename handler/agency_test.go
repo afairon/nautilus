@@ -575,3 +575,79 @@ func TestAgencyListStaffs(t *testing.T) {
 		srv.AssertNotCalled(t, "Send")
 	})
 }
+
+type mockAgencyService_ListTripTemplatesServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListTripTemplatesServer) Send(staff *pb.ListTripTemplatesResponse) error {
+	args := m.Called(staff)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListTripTemplatesServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyListTripTemplates(t *testing.T) {
+	req := &pb.ListTripTemplatesRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+	tripTemplates := []*model.TripTemplate{
+		{}, {},
+	}
+
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListTripTemplates", context.Background(), req.Limit, req.Offset).Return(tripTemplates, nil)
+		srv := &mockAgencyService_ListTripTemplatesServer{}
+		srv.On("Send", mock.AnythingOfType("*pb.ListTripTemplatesResponse")).Return(nil).Twice()
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListTripTemplates(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListTripTemplates", context.Background(), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_ListTripTemplatesServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListTripTemplates(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+	})
+
+	t.Run("no trip templates", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListTripTemplates", context.Background(), req.Limit, req.Offset).Return(nil, nil)
+		srv := &mockAgencyService_ListTripTemplatesServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListTripTemplates(req, srv)
+
+		//Assert
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListTripTemplates: not found"))
+		srv.AssertNotCalled(t, "Send")
+	})
+}
