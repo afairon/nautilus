@@ -883,20 +883,43 @@ func TestAgencyListRoomTypes(t *testing.T) {
 		})
 	}
 
-	t.Run("fail", func(t *testing.T) {
-		//Arrange
-		agencyService := service.NewAgencyServiceMock()
-		req.Id = &pb.ListRoomTypesRequest_HotelId{}
-		agencyService.On("ListRoomTypesByHotelID", context.Background(), req.Id.(*pb.ListRoomTypesRequest_HotelId).HotelId, req.Limit, req.Offset).Return(nil, errors.New(""))
-		agencyHandler := handler.NewAgencyHandler(agencyService)
-		srv := &mockAgencyService_ListRoomTypesServer{}
-		srv.On("Context").Return(context.Background())
+	testCases = []agencyListRoomTypesTestCase{
+		{
+			name: "list roomtypes by hotel fail",
+			Id: &pb.ListRoomTypesRequest_HotelId{
+				HotelId: 0,
+			},
+		},
+		{
+			name: "list roomtypes by liveaboard fail",
+			Id: &pb.ListRoomTypesRequest_LiveaboardId{
+				LiveaboardId: 0,
+			},
+		},
+	}
 
-		//Act
-		err := agencyHandler.ListRoomTypes(req, srv)
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			agencyService := service.NewAgencyServiceMock()
+			switch t := c.Id.(type) {
+			case *pb.ListRoomTypesRequest_HotelId:
+				req.Id = t
+				agencyService.On("ListRoomTypesByHotelID", context.Background(), t.HotelId, req.Limit, req.Offset).Return(nil, errors.New(""))
+			case *pb.ListRoomTypesRequest_LiveaboardId:
+				req.Id = t
+				agencyService.On("ListRoomTypesByLiveaboardID", context.Background(), t.LiveaboardId, req.Limit, req.Offset).Return(nil, errors.New(""))
+			}
+			agencyHandler := handler.NewAgencyHandler(agencyService)
+			srv := &mockAgencyService_ListRoomTypesServer{}
+			srv.On("Context").Return(context.Background())
 
-		//Assert
-		assert.Error(t, err)
-		srv.AssertNotCalled(t, "Send")
-	})
+			//Act
+			err := agencyHandler.ListRoomTypes(req, srv)
+
+			//Assert
+			assert.Error(t, err)
+			srv.AssertNotCalled(t, "Send")
+		})
+	}
 }
