@@ -382,3 +382,62 @@ func TestAgencyListDiveMasters(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+type mockAgencyService_ListHotelsServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListHotelsServer) Send(boat *pb.ListHotelsResponse) error {
+	args := m.Called(boat)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListHotelsServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyListHotels(t *testing.T) {
+	req := &pb.ListHotelsRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+	hotels := []*model.Hotel{
+		{}, {},
+	}
+
+	t.Run("successful", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListHotels", context.Background(), req.Limit, req.Offset).Return(hotels, nil)
+		srv := &mockAgencyService_ListHotelsServer{}
+		srv.On("Send", mock.AnythingOfType("*pb.ListHotelsResponse")).Return(nil).Twice()
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListHotels(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail", func(t *testing.T) {
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListHotels", context.Background(), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_ListHotelsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.ListHotels(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
