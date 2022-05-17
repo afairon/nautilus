@@ -44,6 +44,8 @@ service AgencyService {
     rpc ListTrips (ListTripsRequest) returns (stream ListTripsResponse);
     rpc ListTripsWithTemplates(ListTripsWithTemplatesRequest) returns (stream ListTripsWithTemplatesResponse);
     rpc ListRoomTypes(ListRoomTypesRequest) returns (stream ListRoomTypesResponse);
+    rpc ListDiveSitesByTrip(ListDiveSitesByTripRequest) returns (stream ListDiveSitesByTripResponse);
+    rpc ListDiveMastersByTrip(ListDiveMastersByTripRequest) returns (stream ListDiveMastersByTripResponse);
 
     rpc SearchTrips(SearchTripsRequest) returns (stream SearchTripsResponse);
 
@@ -183,6 +185,27 @@ message ListRoomTypesRequest {
 // ListRoomTypesResponse
 message ListRoomTypesResponse {
     model.RoomType room_type = 1;
+}
+
+
+message ListDiveSitesByTripRequest {
+    uint64 trip_id = 1;
+    uint64 limit = 10;
+    uint64 offset = 20;
+}
+
+message ListDiveSitesByTripResponse {
+    model.DiveSite diveSite = 1;
+}
+
+message ListDiveMastersByTripRequest {
+    uint64 trip_id = 1;
+    uint64 limit = 10;
+    uint64 offset = 20;
+}
+
+message ListDiveMastersByTripResponse {
+    model.DiveMaster dive_master = 1;
 }
 
 message SearchTripsOptions {

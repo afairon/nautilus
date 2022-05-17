@@ -353,6 +353,51 @@ func (handler *AgencyHandler) ListRoomTypes(req *pb.ListRoomTypesRequest, srv pb
 
 	return nil
 }
+func (handler *AgencyHandler) ListDiveSitesByTrip(req *pb.ListDiveSitesByTripRequest, srv pb.AgencyService_ListDiveSitesByTripServer) error {
+	ctx := srv.Context()
+
+	diveSites, err := handler.agencyService.ListDiveSitesByTripID(ctx, req.TripId, req.Limit, req.Offset)
+	if err != nil {
+		return err
+	}
+
+	if len(diveSites) == 0 {
+		return status.Error(codes.NotFound, "ListValidTrips: not found")
+	}
+
+	for _, diveSite := range diveSites {
+		resp := &pb.ListDiveSitesByTripResponse{
+			DiveSite: diveSite.GetProto(),
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
+}
+
+func (handler *AgencyHandler) ListDiveMastersByTrip(req *pb.ListDiveMastersByTripRequest, srv pb.AgencyService_ListDiveMastersByTripServer) error {
+	ctx := srv.Context()
+
+	diveMasters, err := handler.agencyService.ListDiveMastersByTripID(ctx, req.TripId, req.Limit, req.Offset)
+	if err != nil {
+		return err
+	}
+
+	if len(diveMasters) == 0 {
+		return status.Error(codes.NotFound, "ListValidTrips: not found")
+	}
+
+	for _, diveMaster := range diveMasters {
+		resp := &pb.ListDiveMastersByTripResponse{
+			DiveMaster: diveMaster.GetProto(),
+		}
+
+		srv.Send(resp)
+	}
+
+	return nil
+}
 
 func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.AgencyService_SearchTripsServer) error {
 	ctx := srv.Context()

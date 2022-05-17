@@ -52,6 +52,8 @@ type AgencyService interface {
 	ListTripsWithTemplates(ctx context.Context, limit, offset uint64) ([]*model.Trip, error)
 	ListRoomTypesByHotelID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
 	ListRoomTypesByLiveaboardID(ctx context.Context, id, limit, offset uint64) ([]*model.RoomType, error)
+	ListDiveSitesByTripID(ctx context.Context, id, limit, offset uint64) ([]*model.DiveSite, error)
+	ListDiveMastersByTripID(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
 
 	SearchTrips(ctx context.Context, searchOnShoreTrips *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error)
 
@@ -743,6 +745,47 @@ func (service *agencyService) ListRoomTypesByLiveaboardID(ctx context.Context, i
 	}
 
 	return roomTypes, nil
+}
+
+func (service *agencyService) ListDiveSitesByTripID(ctx context.Context, tripId, limit, offset uint64) ([]*model.DiveSite, error) {
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	diveSites, err := service.repo.DiveSite.ListDiveSitesByTrip(ctx, tripId, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	return diveSites, nil
+}
+
+func (service *agencyService) ListDiveMastersByTripID(ctx context.Context, tripId, limit, offset uint64) ([]*model.DiveMaster, error) {
+	if limit > 20 || limit == 0 {
+		limit = 20
+	}
+
+	diveMasters, err := service.repo.DiveMaster.ListDiveMastersByTrip(ctx, tripId, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, diveMaster := range diveMasters {
+		if len(diveMaster.Documents) > 0 {
+			diveMaster.Files = make([]*model.File, 0, len(diveMaster.Documents))
+
+			for _, doc := range diveMaster.Documents {
+
+				file := model.File{
+					Filename: doc,
+					URL:      service.media.Get(doc, true),
+				}
+				diveMaster.Files = append(diveMaster.Files, &file)
+			}
+		}
+	}
+
+	return diveMasters, nil
 }
 
 func (service *agencyService) SearchTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {

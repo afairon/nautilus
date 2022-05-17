@@ -47,6 +47,8 @@ var accessRoles = map[string][]model.AccountType{
 	"/agency.AgencyService/ListTrips":                      {model.AGENCY},
 	"/agency.AgencyService/ListTripsWithTemplates":         {model.AGENCY},
 	"/agency.AgencyService/ListRoomTypes":                  {model.AGENCY, model.DIVER},
+	"/agency.AgencyService/ListDiveSitesByTrip":            {model.AGENCY},
+	"/agency.AgencyService/ListDiveMastersByTrip":          {model.AGENCY},
 	"/agency.AgencyService/GenerateCurrentTripsReport":     {model.AGENCY},
 	"/agency.AgencyService/GenerateYearlyEndedTripsReport": {model.AGENCY},
 	"/agency.AgencyService/GenerateIncomingTripsReport":    {model.AGENCY},

@@ -14,6 +14,7 @@ type DiveMasterRepository interface {
 	UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
 	DeleteDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) error
 	ListDiveMastersByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
+	ListDiveMastersByTrip(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error)
 }
 
 // diveMasterRepository implements DiveMasterRepository interface.
@@ -77,6 +78,25 @@ func (repo *diveMasterRepository) ListDiveMastersByAgency(ctx context.Context, i
 
 	result := repo.db.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&diveMasters)
 	return diveMasters, result.Error
+}
+
+func (repo *diveMasterRepository) ListDiveMastersByTrip(ctx context.Context, tripId, limit, offset uint64) ([]*model.DiveMaster, error) {
+	var trip model.Trip
+	var diveMasters []*model.DiveMaster
+
+	if result := repo.db.Preload("DiveMasters").First(&trip, tripId); result.Error != nil {
+		return nil, result.Error
+	}
+
+	for i := int(offset); i < int(offset+limit); i++ {
+		if i >= len(trip.DiveMasters) {
+			break
+		}
+
+		diveMasters = append(diveMasters, &trip.DiveMasters[i])
+	}
+
+	return diveMasters, nil
 }
 
 func (repo *diveMasterRepository) UpdateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error) {

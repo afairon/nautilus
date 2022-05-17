@@ -201,6 +201,21 @@ func (m *agencyServiceMock) ListRoomTypesByLiveaboardID(ctx context.Context, id,
 	return nil, args.Error(1)
 }
 
+func (m *agencyServiceMock) ListDiveSitesByTripID(ctx context.Context, id, limit, offset uint64) ([]*model.DiveSite, error) {
+	args := m.Called(ctx, id, limit, offset)
+	if v, ok := args.Get(0).([]*model.DiveSite); ok {
+		return v, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+func (m *agencyServiceMock) ListDiveMastersByTripID(ctx context.Context, id, limit, offset uint64) ([]*model.DiveMaster, error) {
+	args := m.Called(ctx, id, limit, offset)
+	if v, ok := args.Get(0).([]*model.DiveMaster); ok {
+		return v, args.Error(1)
+	}
+	return nil, args.Error(1)
+}
+
 func (m *agencyServiceMock) SearchTrips(ctx context.Context, searchTripsOptions *pb.SearchTripsOptions, limit, offset uint64) ([]*model.Trip, error) {
 	args := m.Called(ctx, searchTripsOptions, limit, offset)
 	if v, ok := args.Get(0).([]*model.Trip); ok {

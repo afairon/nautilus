@@ -27,6 +27,7 @@ type Queries struct {
 	ReservationRoomType         ReservationRoomTypeRepository
 	HotelRoomTypeTripPrice      HotelRoomTypeTripPriceRepository
 	LiveaboardRoomTypeTripPrice LiveaboardRoomTypeTripPriceRepository
+	DiveSite                    DiveSiteRepository
 }
 
 // newQueries creates a new repository manager.
@@ -51,6 +52,7 @@ func newQueries(db *gorm.DB) *Queries {
 		ReservationRoomType:         NewReservationRoomTypeRepository(db),
 		HotelRoomTypeTripPrice:      NewHotelRoomTypeTripPriceRepository(db),
 		LiveaboardRoomTypeTripPrice: NewLiveaboardRoomTypeTripPriceRepository(db),
+		DiveSite:                    NewDiveSiteRepository(db),
 	}
 }
 
