@@ -1389,3 +1389,36 @@ func TestAgencyUpdateTripTemplate(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyDeleteDiveMaster(t *testing.T) {
+	req := &pb.DeleteDiveMasterRequest{
+		DiveMaster: &pb.DiveMaster{},
+	}
+	diveMaster := model.DiveMaster{}
+	diveMaster.From(req.DiveMaster)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteDiveMaster", context.Background(), &diveMaster).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteDiveMaster(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteDiveMaster", context.Background(), &diveMaster).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteDiveMaster(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
