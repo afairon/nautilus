@@ -1158,3 +1158,37 @@ func TestAgencySearchTrips(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyUpdateTrip(t *testing.T) {
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		req := &pb.UpdateTripRequest{
+			Trip: &pb.TripWithTemplate{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateTrip(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		req := &pb.UpdateTripRequest{
+			Trip: &pb.TripWithTemplate{},
+		}
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateTrip(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
