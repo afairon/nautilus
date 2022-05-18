@@ -1356,3 +1356,36 @@ func TestAgencyUpdateStaff(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyUpdateTripTemplate(t *testing.T) {
+	req := &pb.UpdateTripTemplateRequest{
+		TripTemplate: &pb.TripTemplate{},
+	}
+	tripTemplate := model.TripTemplate{}
+	tripTemplate.From(req.TripTemplate)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateTripTemplate", context.Background(), &tripTemplate).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateTripTemplate(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateTripTemplate", context.Background(), &tripTemplate).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateTripTemplate(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
