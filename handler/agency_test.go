@@ -1521,3 +1521,69 @@ func TestAgencyDeleteLiveaboard(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyDeleteStaff(t *testing.T) {
+	req := &pb.DeleteStaffRequest{
+		Staff: &pb.Staff{},
+	}
+	staff := model.Staff{}
+	staff.From(req.Staff)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteStaff", context.Background(), &staff).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteStaff(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteStaff", context.Background(), &staff).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteStaff(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyDeleteTripTemplate(t *testing.T) {
+	req := &pb.DeleteTripTemplateRequest{
+		TripTemplate: &pb.TripTemplate{},
+	}
+	tripTemplate := model.TripTemplate{}
+	tripTemplate.From(req.TripTemplate)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteTripTemplate", context.Background(), &tripTemplate).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteTripTemplate(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteTripTemplate", context.Background(), &tripTemplate).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteTripTemplate(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
