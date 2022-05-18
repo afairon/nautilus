@@ -1190,7 +1190,7 @@ func TestAgencyUpdateTrip(t *testing.T) {
 	})
 }
 
-func TestUpdateHotel(t *testing.T) {
+func TestAgencyUpdateHotel(t *testing.T) {
 	req := &pb.UpdateHotelRequest{
 		Hotel: &pb.Hotel{},
 	}
@@ -1215,6 +1215,37 @@ func TestUpdateHotel(t *testing.T) {
 
 		//Act
 		_, err := agencyHandler.UpdateHotel(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyUpdateLiveaboard(t *testing.T) {
+	req := &pb.UpdateLiveaboardRequest{
+		Liveaboard: &pb.Liveaboard{},
+	}
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateLiveaboard", context.Background(), &model.Liveaboard{}).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateLiveaboard(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateLiveaboard", context.Background(), &model.Liveaboard{}).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateLiveaboard(context.Background(), req)
 
 		//Assert
 		assert.Error(t, err)
