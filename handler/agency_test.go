@@ -1099,7 +1099,6 @@ func (m *mockAgencyService_SearchTripsServer) Context() context.Context {
 }
 
 func TestAgencySearchTrips(t *testing.T) {
-	//Arrange
 	req := &pb.SearchTripsRequest{
 		SearchTripsOptions: &pb.SearchTripsOptions{
 			LocationFilter: nil,
@@ -1109,16 +1108,53 @@ func TestAgencySearchTrips(t *testing.T) {
 		Limit:  0,
 		Offset: 0,
 	}
-	agencyService := service.NewAgencyServiceMock()
-	agencyService.On("SearchTrips", context.Background(), mock.AnythingOfType("pb.SearchTripsOptions"), req.Limit, req.Offset)
-	srv := &mockAgencyService_SearchTripsServer{}
-	srv.On("Context").Return(context.Background())
-	srv.On("Send", mock.AnythingOfType("*pb.SearchTripsResponse")).Return(nil).Twice()
-	agencyHandler := handler.NewAgencyHandler(agencyService)
+	trips := []*model.Trip{
+		{}, {},
+	}
 
-	//Act
-	err := agencyHandler.SearchTrips(req, srv)
+	t.Run("success", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("SearchTrips", context.Background(), mock.AnythingOfType("*pb.SearchTripsOptions"), req.Limit, req.Offset).Return(trips, nil)
+		srv := &mockAgencyService_SearchTripsServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.SearchTripsResponse")).Return(nil).Twice()
+		agencyHandler := handler.NewAgencyHandler(agencyService)
 
-	// Assert
-	assert.NoError(t, err)
+		//Act
+		err := agencyHandler.SearchTrips(req, srv)
+
+		// Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("fail no trips", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("SearchTrips", context.Background(), mock.AnythingOfType("*pb.SearchTripsOptions"), req.Limit, req.Offset).Return(nil, nil)
+		srv := &mockAgencyService_SearchTripsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.SearchTrips(req, srv)
+
+		// Assert
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "SearchTrips: not found"))
+	})
+
+	t.Run("service failed", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("SearchTrips", context.Background(), mock.AnythingOfType("*pb.SearchTripsOptions"), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_SearchTripsServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.SearchTrips(req, srv)
+
+		// Assert
+		assert.Error(t, err)
+	})
 }
