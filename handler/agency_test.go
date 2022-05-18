@@ -923,3 +923,159 @@ func TestAgencyListRoomTypes(t *testing.T) {
 		})
 	}
 }
+
+type mockAgencyService_ListDiveSitesByTripServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListDiveSitesByTripServer) Send(diveSite *pb.ListDiveSitesByTripResponse) error {
+	args := m.Called(diveSite)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListDiveSitesByTripServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyListDiveSitesByTrip(t *testing.T) {
+	diveSites := []*model.DiveSite{
+		{}, {},
+	}
+
+	req := &pb.ListDiveSitesByTripRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+
+	t.Run("success", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveSitesByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(diveSites, nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveSitesByTripServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.ListDiveSitesByTripResponse")).Return(nil).Twice()
+
+		//Act
+		err := agencyHandler.ListDiveSitesByTrip(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail service error", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveSitesByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(nil, errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveSitesByTripServer{}
+		srv.On("Context").Return(context.Background())
+
+		//Act
+		err := agencyHandler.ListDiveSitesByTrip(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+		srv.AssertNotCalled(t, "Send")
+	})
+
+	t.Run("dive sites not found", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveSitesByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(nil, nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveSitesByTripServer{}
+		srv.On("Context").Return(context.Background())
+
+		//Act
+		err := agencyHandler.ListDiveSitesByTrip(req, srv)
+
+		//Assert
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListValidTrips: not found"))
+		srv.AssertNotCalled(t, "Send")
+	})
+}
+
+type mockAgencyService_ListDiveMastersByTripServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_ListDiveMastersByTripServer) Send(diveMaster *pb.ListDiveMastersByTripResponse) error {
+	args := m.Called(diveMaster)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_ListDiveMastersByTripServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyListDiveMastersByTrip(t *testing.T) {
+	diveMasters := []*model.DiveMaster{
+		{}, {},
+	}
+
+	req := &pb.ListDiveMastersByTripRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+
+	t.Run("success", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveMastersByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(diveMasters, nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveMastersByTripServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.ListDiveMastersByTripResponse")).Return(nil).Twice()
+
+		//Act
+		err := agencyHandler.ListDiveMastersByTrip(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail service error", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveMastersByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(nil, errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveMastersByTripServer{}
+		srv.On("Context").Return(context.Background())
+
+		//Act
+		err := agencyHandler.ListDiveMastersByTrip(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+		srv.AssertNotCalled(t, "Send")
+	})
+
+	t.Run("dive masters not found", func(t *testing.T) {
+		//Arrange
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("ListDiveMastersByTripID", context.Background(), req.TripId, req.Limit, req.Offset).Return(nil, nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+		srv := &mockAgencyService_ListDiveMastersByTripServer{}
+		srv.On("Context").Return(context.Background())
+
+		//Act
+		err := agencyHandler.ListDiveMastersByTrip(req, srv)
+
+		//Assert
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListValidTrips: not found"))
+		srv.AssertNotCalled(t, "Send")
+	})
+}
