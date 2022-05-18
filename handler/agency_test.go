@@ -1422,3 +1422,69 @@ func TestAgencyDeleteDiveMaster(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyDeleteDivingBoat(t *testing.T) {
+	req := &pb.DeleteDivingBoatRequest{
+		DivingBoat: &pb.Boat{},
+	}
+	boat := model.Boat{}
+	boat.From(req.DivingBoat)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteDivingBoat", context.Background(), &boat).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteDivingBoat(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteDivingBoat", context.Background(), &boat).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteDivingBoat(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyDeleteHotel(t *testing.T) {
+	req := &pb.DeleteHotelRequest{
+		Hotel: &pb.Hotel{},
+	}
+	hotel := model.Hotel{}
+	hotel.From(req.Hotel)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteHotel", context.Background(), &hotel).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteHotel(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteHotel", context.Background(), &hotel).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteHotel(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
