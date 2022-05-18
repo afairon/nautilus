@@ -1163,10 +1163,12 @@ func TestAgencyUpdateTrip(t *testing.T) {
 	req := &pb.UpdateTripRequest{
 		Trip: &pb.TripWithTemplate{},
 	}
+	trip := model.Trip{}
+	trip.FromWithTemplate(req.Trip)
 	t.Run("success", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(nil)
+		agencyService.On("UpdateTrip", context.Background(), &trip).Return(nil)
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
@@ -1179,7 +1181,7 @@ func TestAgencyUpdateTrip(t *testing.T) {
 	t.Run("failed service", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(errors.New(""))
+		agencyService.On("UpdateTrip", context.Background(), &trip).Return(errors.New(""))
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
@@ -1194,10 +1196,12 @@ func TestAgencyUpdateHotel(t *testing.T) {
 	req := &pb.UpdateHotelRequest{
 		Hotel: &pb.Hotel{},
 	}
+	hotel := model.Hotel{}
+	hotel.From(req.Hotel)
 	t.Run("success", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateHotel", context.Background(), &model.Hotel{}).Return(nil)
+		agencyService.On("UpdateHotel", context.Background(), &hotel).Return(nil)
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
@@ -1210,7 +1214,7 @@ func TestAgencyUpdateHotel(t *testing.T) {
 	t.Run("failed service", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateHotel", context.Background(), &model.Hotel{}).Return(errors.New(""))
+		agencyService.On("UpdateHotel", context.Background(), &hotel).Return(errors.New(""))
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
@@ -1225,10 +1229,12 @@ func TestAgencyUpdateLiveaboard(t *testing.T) {
 	req := &pb.UpdateLiveaboardRequest{
 		Liveaboard: &pb.Liveaboard{},
 	}
+	liveaboard := model.Liveaboard{}
+	liveaboard.From(req.Liveaboard)
 	t.Run("success", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateLiveaboard", context.Background(), &model.Liveaboard{}).Return(nil)
+		agencyService.On("UpdateLiveaboard", context.Background(), &liveaboard).Return(nil)
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
@@ -1241,11 +1247,110 @@ func TestAgencyUpdateLiveaboard(t *testing.T) {
 	t.Run("failed service", func(t *testing.T) {
 		//Assert
 		agencyService := service.NewAgencyServiceMock()
-		agencyService.On("UpdateLiveaboard", context.Background(), &model.Liveaboard{}).Return(errors.New(""))
+		agencyService.On("UpdateLiveaboard", context.Background(), &liveaboard).Return(errors.New(""))
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
 		_, err := agencyHandler.UpdateLiveaboard(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyUpdateBoat(t *testing.T) {
+	req := &pb.UpdateBoatRequest{
+		Boat: &pb.Boat{},
+	}
+	boat := model.Boat{}
+	boat.From(req.Boat)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateBoat", context.Background(), &boat).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateBoat(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateBoat", context.Background(), &boat).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateBoat(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyUpdateDiveMaster(t *testing.T) {
+	req := &pb.UpdateDiveMasterRequest{
+		DiveMaster: &pb.DiveMaster{},
+	}
+	diveMaster := model.DiveMaster{}
+	diveMaster.From(req.DiveMaster)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateDiveMaster", context.Background(), &diveMaster).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateDiveMaster(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateDiveMaster", context.Background(), &diveMaster).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateDiveMaster(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestAgencyUpdateStaff(t *testing.T) {
+	req := &pb.UpdateStaffRequest{
+		Staff: &pb.Staff{},
+	}
+	staff := model.Staff{}
+	staff.From(req.Staff)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateStaff", context.Background(), &staff).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateStaff(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateStaff", context.Background(), &staff).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateStaff(context.Background(), req)
 
 		//Assert
 		assert.Error(t, err)
