@@ -1587,3 +1587,36 @@ func TestAgencyDeleteTripTemplate(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyDeleteTrip(t *testing.T) {
+	req := &pb.DeleteTripRequest{
+		Trip: &pb.Trip{},
+	}
+	trip := model.Trip{}
+	trip.From(req.Trip)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteTrip", context.Background(), &trip).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteTrip(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteTrip", context.Background(), &trip).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteTrip(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
