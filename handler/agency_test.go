@@ -1745,3 +1745,64 @@ func TestAgencyGenerateYearlyEndedTripsReport(t *testing.T) {
 		srv.AssertNotCalled(t, "Send")
 	})
 }
+
+type mockAgencyService_GenerateIncomingTripsReportServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_GenerateIncomingTripsReportServer) Send(reportTrip *pb.GenerateIncomingTripsReportResponse) error {
+	args := m.Called(reportTrip)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_GenerateIncomingTripsReportServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyGenerateIncomingTripsReport(t *testing.T) {
+	req := &pb.GenerateIncomingTripsReportRequest{
+		Limit:  20,
+		Offset: 0,
+		Weeks:  5,
+	}
+	reportTrips := []*model.ReportTrip{
+		{}, {},
+	}
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateIncomingTripsReport", context.Background(), req.Weeks, req.Limit, req.Offset).Return(reportTrips, nil)
+		srv := &mockAgencyService_GenerateIncomingTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.GenerateIncomingTripsReportResponse")).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateIncomingTripsReport(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateIncomingTripsReport", context.Background(), req.Weeks, req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_GenerateIncomingTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateIncomingTripsReport(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+		srv.AssertNotCalled(t, "Send")
+	})
+}
