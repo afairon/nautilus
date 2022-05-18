@@ -1680,3 +1680,68 @@ func TestAgencyGenerateCurrentTripsReport(t *testing.T) {
 		srv.AssertNotCalled(t, "Send")
 	})
 }
+
+type mockAgencyService_GenerateYearlyEndedTripsReportServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_GenerateYearlyEndedTripsReportServer) Send(reportTrips *pb.GenerateYearlyEndedTripsReportResponse) error {
+	args := m.Called(reportTrips)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_GenerateYearlyEndedTripsReportServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyGenerateYearlyEndedTripsReport(t *testing.T) {
+	req := &pb.GenerateYearlyEndedTripsReportRequest{
+		Limit:  20,
+		Offset: 0,
+		Years:  5,
+	}
+	yearlyReportTrips := [][]*model.ReportTrip{
+		{{}, {}},
+		{{}, {}},
+		{{}, {}},
+		{{}, {}},
+		{{}, {}},
+	}
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateYearlyEndedTripsReport", context.Background(), req.Years, req.Limit, req.Offset).Return(yearlyReportTrips, nil)
+		srv := &mockAgencyService_GenerateYearlyEndedTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.GenerateYearlyEndedTripsReportResponse")).Return(nil).Times(5)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateYearlyEndedTripsReport(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertExpectations(t)
+	})
+
+	t.Run("fail service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateYearlyEndedTripsReport", context.Background(), req.Years, req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_GenerateYearlyEndedTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateYearlyEndedTripsReport(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+		srv.AssertNotCalled(t, "Send")
+	})
+}
