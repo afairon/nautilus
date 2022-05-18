@@ -1079,3 +1079,46 @@ func TestAgencyListDiveMastersByTrip(t *testing.T) {
 		srv.AssertNotCalled(t, "Send")
 	})
 }
+
+type mockAgencyService_SearchTripsServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_SearchTripsServer) Send(trip *pb.SearchTripsResponse) error {
+	args := m.Called(trip)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_SearchTripsServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencySearchTrips(t *testing.T) {
+	//Arrange
+	req := &pb.SearchTripsRequest{
+		SearchTripsOptions: &pb.SearchTripsOptions{
+			LocationFilter: nil,
+			Divers:         0,
+			TripType:       0,
+		},
+		Limit:  0,
+		Offset: 0,
+	}
+	agencyService := service.NewAgencyServiceMock()
+	agencyService.On("SearchTrips", context.Background(), mock.AnythingOfType("pb.SearchTripsOptions"), req.Limit, req.Offset)
+	srv := &mockAgencyService_SearchTripsServer{}
+	srv.On("Context").Return(context.Background())
+	srv.On("Send", mock.AnythingOfType("*pb.SearchTripsResponse")).Return(nil).Twice()
+	agencyHandler := handler.NewAgencyHandler(agencyService)
+
+	//Act
+	err := agencyHandler.SearchTrips(req, srv)
+
+	// Assert
+	assert.NoError(t, err)
+}

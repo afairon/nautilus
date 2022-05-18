@@ -414,77 +414,7 @@ func (handler *AgencyHandler) SearchTrips(req *pb.SearchTripsRequest, srv pb.Age
 
 	for _, trip := range trips {
 		resp := &pb.SearchTripsResponse{
-			Trip: &pb.TripWithTemplate{
-				Id:                  uint64(trip.ID),
-				TripTemplateId:      uint64(trip.TripTemplateID),
-				MaxGuest:            trip.MaxGuest,
-				StartDate:           trip.StartDate,
-				EndDate:             trip.EndDate,
-				LastReservationDate: trip.LastReservationDate,
-				CreatedAt:           &trip.CreatedAt,
-				UpdatedAt:           &trip.UpdatedAt,
-				TripTemplate: &pb.TripTemplate{
-					Id:           uint64(trip.TripTemplate.ID),
-					Name:         trip.TripTemplate.Name,
-					Description:  trip.TripTemplate.Description,
-					TripType:     pb.TripType(trip.TripTemplate.Type),
-					HotelId:      uint64(trip.TripTemplate.HotelID),
-					BoatId:       uint64(trip.TripTemplate.BoatID),
-					LiveaboardId: uint64(trip.TripTemplate.LiveaboardID),
-					Address: &pb.Address{
-						Id:            uint64(trip.TripTemplate.Address.ID),
-						AddressLine_1: trip.TripTemplate.Address.AddressLine_1,
-						AddressLine_2: trip.TripTemplate.Address.AddressLine_2,
-						City:          trip.TripTemplate.Address.City,
-						Postcode:      trip.TripTemplate.Address.Postcode,
-						Region:        trip.TripTemplate.Address.Region,
-						Country:       trip.TripTemplate.Address.Country,
-						CreatedAt:     &trip.TripTemplate.Address.CreatedAt,
-						UpdatedAt:     &trip.TripTemplate.Address.UpdatedAt,
-					},
-					CreatedAt: &trip.TripTemplate.CreatedAt,
-					UpdatedAt: &trip.TripTemplate.UpdatedAt,
-				},
-			},
-		}
-
-		if len(trip.DiveSites) > 0 {
-			resp.Trip.DiveSites = make([]*pb.DiveSite, 0, len(trip.DiveSites))
-
-			for _, ds := range trip.DiveSites {
-				resp.Trip.DiveSites = append(resp.Trip.DiveSites, &pb.DiveSite{
-					Id:          uint64(ds.ID),
-					Name:        ds.Name,
-					Description: ds.Description,
-					MinDepth:    ds.MinDepth,
-					MaxDepth:    ds.MaxDepth,
-					TripId:      uint64(ds.TripID),
-					CreatedAt:   &ds.CreatedAt,
-					UpdatedAt:   &ds.UpdatedAt,
-				})
-			}
-		}
-
-		if len(trip.DiveMasters) > 0 {
-			resp.Trip.DiveMasters = make([]*pb.DiveMaster, 0, len(trip.DiveMasters))
-			for _, dive_master := range trip.DiveMasters {
-				resp.Trip.DiveMasters = append(resp.Trip.DiveMasters, &pb.DiveMaster{
-					FirstName: dive_master.FirstName,
-					LastName:  dive_master.LastName,
-					Level:     pb.LevelType(dive_master.Level),
-				},
-				)
-			}
-		}
-
-		if len(trip.TripTemplate.Images) > 0 {
-			resp.Trip.TripTemplate.Images = make([]*pb.File, 0, len(trip.TripTemplate.Images))
-			for _, link := range trip.TripTemplate.Images {
-				file := &pb.File{
-					Link: link,
-				}
-				resp.Trip.TripTemplate.Images = append(resp.Trip.TripTemplate.Images, file)
-			}
+			Trip: trip.GetProtoWithTemplate(),
 		}
 
 		srv.Send(resp)
