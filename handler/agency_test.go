@@ -1488,3 +1488,36 @@ func TestAgencyDeleteHotel(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestAgencyDeleteLiveaboard(t *testing.T) {
+	req := &pb.DeleteLiveaboardRequest{
+		Liveaboard: &pb.Liveaboard{},
+	}
+	liveaboard := model.Liveaboard{}
+	liveaboard.From(req.Liveaboard)
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteLiveaboard", context.Background(), &liveaboard).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteLiveaboard(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("DeleteLiveaboard", context.Background(), &liveaboard).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.DeleteLiveaboard(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
