@@ -1160,11 +1160,11 @@ func TestAgencySearchTrips(t *testing.T) {
 }
 
 func TestAgencyUpdateTrip(t *testing.T) {
+	req := &pb.UpdateTripRequest{
+		Trip: &pb.TripWithTemplate{},
+	}
 	t.Run("success", func(t *testing.T) {
 		//Assert
-		req := &pb.UpdateTripRequest{
-			Trip: &pb.TripWithTemplate{},
-		}
 		agencyService := service.NewAgencyServiceMock()
 		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(nil)
 		agencyHandler := handler.NewAgencyHandler(agencyService)
@@ -1178,15 +1178,43 @@ func TestAgencyUpdateTrip(t *testing.T) {
 
 	t.Run("failed service", func(t *testing.T) {
 		//Assert
-		req := &pb.UpdateTripRequest{
-			Trip: &pb.TripWithTemplate{},
-		}
 		agencyService := service.NewAgencyServiceMock()
 		agencyService.On("UpdateTrip", context.Background(), &model.Trip{}).Return(errors.New(""))
 		agencyHandler := handler.NewAgencyHandler(agencyService)
 
 		//Act
 		_, err := agencyHandler.UpdateTrip(context.Background(), req)
+
+		//Assert
+		assert.Error(t, err)
+	})
+}
+
+func TestUpdateHotel(t *testing.T) {
+	req := &pb.UpdateHotelRequest{
+		Hotel: &pb.Hotel{},
+	}
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateHotel", context.Background(), &model.Hotel{}).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateHotel(context.Background(), req)
+
+		//Assert
+		assert.NoError(t, err)
+	})
+
+	t.Run("failed service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("UpdateHotel", context.Background(), &model.Hotel{}).Return(errors.New(""))
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		_, err := agencyHandler.UpdateHotel(context.Background(), req)
 
 		//Assert
 		assert.Error(t, err)
