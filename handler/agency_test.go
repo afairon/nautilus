@@ -1620,3 +1620,63 @@ func TestAgencyDeleteTrip(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+type mockAgencyService_GenerateCurrentTripsReportServer struct {
+	grpc.ServerStream
+	mock.Mock
+}
+
+func (m *mockAgencyService_GenerateCurrentTripsReportServer) Send(reportTrip *pb.GenerateCurrentTripsReportResponse) error {
+	args := m.Called(reportTrip)
+	return args.Error(0)
+}
+
+func (m *mockAgencyService_GenerateCurrentTripsReportServer) Context() context.Context {
+	args := m.Called()
+	if v, ok := args.Get(0).(context.Context); ok {
+		return v
+	}
+	return nil
+}
+
+func TestAgencyGenerateCurrentTripsReport(t *testing.T) {
+	req := &pb.GenerateCurrentTripsReportRequest{
+		Limit:  20,
+		Offset: 0,
+	}
+	reportTrips := []*model.ReportTrip{
+		{}, {},
+	}
+	t.Run("success", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateCurrentTripsReport", context.Background(), req.Limit, req.Offset).Return(reportTrips, nil)
+		srv := &mockAgencyService_GenerateCurrentTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		srv.On("Send", mock.AnythingOfType("*pb.GenerateCurrentTripsReportResponse")).Return(nil)
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateCurrentTripsReport(req, srv)
+
+		//Assert
+		assert.NoError(t, err)
+		srv.AssertNumberOfCalls(t, "Send", 2)
+	})
+
+	t.Run("fail service", func(t *testing.T) {
+		//Assert
+		agencyService := service.NewAgencyServiceMock()
+		agencyService.On("GenerateCurrentTripsReport", context.Background(), req.Limit, req.Offset).Return(nil, errors.New(""))
+		srv := &mockAgencyService_GenerateCurrentTripsReportServer{}
+		srv.On("Context").Return(context.Background())
+		agencyHandler := handler.NewAgencyHandler(agencyService)
+
+		//Act
+		err := agencyHandler.GenerateCurrentTripsReport(req, srv)
+
+		//Assert
+		assert.Error(t, err)
+		srv.AssertNotCalled(t, "Send")
+	})
+}
