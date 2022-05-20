@@ -1,0 +1,31 @@
+name: Go CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+    
+    - name: Install Protoc
+      uses: arduino/setup-protoc@v1
+    
+    - name: Install gogoproto
+      run: go install github.com/gogo/protobuf/protoc-gen-gogoslick@latest
+
+    - name: Build
+      run: make server
+
+    - name: Test
+      run: make test
