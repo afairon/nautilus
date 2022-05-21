@@ -328,7 +328,7 @@ const Trip$json = const {
     const {'1': 'trip_template_id', '3': 20, '4': 1, '5': 4, '10': 'tripTemplateId'},
     const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
     const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
-    const {'1': 'price', '3': 40, '4': 1, '5': 2, '10': 'price'},
+    const {'1': 'schedule', '3': 45, '4': 1, '5': 9, '10': 'schedule'},
     const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.model.DiveMaster', '10': 'diveMasters'},
     const {'1': 'dive_master_ids', '3': 55, '4': 3, '5': 4, '10': 'diveMasterIds'},
     const {'1': 'dive_sites', '3': 56, '4': 3, '5': 11, '6': '.model.DiveSite', '10': 'diveSites'},
@@ -341,7 +341,7 @@ const Trip$json = const {
 };
 
 /// Descriptor for `Trip`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tripDescriptor = $convert.base64Decode('CgRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBIbCgltYXhfZ3Vlc3QYHiABKA1SCG1heEd1ZXN0EiEKDGN1cmVudF9ndWVzdBgjIAEoDVILY3VyZW50R3Vlc3QSFAoFcHJpY2UYKCABKAJSBXByaWNlEjQKDGRpdmVfbWFzdGVycxgyIAMoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSC2RpdmVNYXN0ZXJzEiYKD2RpdmVfbWFzdGVyX2lkcxg3IAMoBFINZGl2ZU1hc3RlcklkcxIuCgpkaXZlX3NpdGVzGDggAygLMg8ubW9kZWwuRGl2ZVNpdGVSCWRpdmVTaXRlcxI/CgpzdGFydF9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJc3RhcnREYXRlEjsKCGVuZF9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIHZW5kRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
+final $typed_data.Uint8List tripDescriptor = $convert.base64Decode('CgRUcmlwEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBIbCgltYXhfZ3Vlc3QYHiABKA1SCG1heEd1ZXN0EiEKDGN1cmVudF9ndWVzdBgjIAEoDVILY3VyZW50R3Vlc3QSGgoIc2NoZWR1bGUYLSABKAlSCHNjaGVkdWxlEjQKDGRpdmVfbWFzdGVycxgyIAMoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSC2RpdmVNYXN0ZXJzEiYKD2RpdmVfbWFzdGVyX2lkcxg3IAMoBFINZGl2ZU1hc3RlcklkcxIuCgpkaXZlX3NpdGVzGDggAygLMg8ubW9kZWwuRGl2ZVNpdGVSCWRpdmVTaXRlcxI/CgpzdGFydF9kYXRlGDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJc3RhcnREYXRlEjsKCGVuZF9kYXRlGEYgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIHZW5kRGF0ZRJUChVsYXN0X3Jlc2VydmF0aW9uX2RhdGUYUCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUhNsYXN0UmVzZXJ2YXRpb25EYXRlEj8KCmNyZWF0ZWRfYXQYWiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgljcmVhdGVkQXQSPwoKdXBkYXRlZF9hdBhkIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXVwZGF0ZWRBdA==');
 @$core.Deprecated('Use tripWithTemplateDescriptor instead')
 const TripWithTemplate$json = const {
   '1': 'TripWithTemplate',
@@ -351,6 +351,7 @@ const TripWithTemplate$json = const {
     const {'1': 'trip_template', '3': 25, '4': 1, '5': 11, '6': '.model.TripTemplate', '10': 'tripTemplate'},
     const {'1': 'max_guest', '3': 30, '4': 1, '5': 13, '10': 'maxGuest'},
     const {'1': 'curent_guest', '3': 35, '4': 1, '5': 13, '10': 'curentGuest'},
+    const {'1': 'schedule', '3': 45, '4': 1, '5': 9, '10': 'schedule'},
     const {'1': 'dive_masters', '3': 50, '4': 3, '5': 11, '6': '.model.DiveMaster', '10': 'diveMasters'},
     const {'1': 'dive_sites', '3': 56, '4': 3, '5': 11, '6': '.model.DiveSite', '10': 'diveSites'},
     const {'1': 'trip_room_type_prices', '3': 57, '4': 3, '5': 11, '6': '.model.RoomTypeTripPrice', '10': 'tripRoomTypePrices'},
@@ -363,7 +364,7 @@ const TripWithTemplate$json = const {
 };
 
 /// Descriptor for `TripWithTemplate`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('ChBUcmlwV2l0aFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0EjQKDGRpdmVfbWFzdGVycxgyIAMoCzIRLm1vZGVsLkRpdmVNYXN0ZXJSC2RpdmVNYXN0ZXJzEi4KCmRpdmVfc2l0ZXMYOCADKAsyDy5tb2RlbC5EaXZlU2l0ZVIJZGl2ZVNpdGVzEksKFXRyaXBfcm9vbV90eXBlX3ByaWNlcxg5IAMoCzIYLm1vZGVsLlJvb21UeXBlVHJpcFByaWNlUhJ0cmlwUm9vbVR5cGVQcmljZXMSPwoKc3RhcnRfZGF0ZRg8IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCXN0YXJ0RGF0ZRI7CghlbmRfZGF0ZRhGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSB2VuZERhdGUSVAoVbGFzdF9yZXNlcnZhdGlvbl9kYXRlGFAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVITbGFzdFJlc2VydmF0aW9uRGF0ZRI/CgpjcmVhdGVkX2F0GFogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYZCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+final $typed_data.Uint8List tripWithTemplateDescriptor = $convert.base64Decode('ChBUcmlwV2l0aFRlbXBsYXRlEg4KAmlkGAEgASgEUgJpZBIoChB0cmlwX3RlbXBsYXRlX2lkGBQgASgEUg50cmlwVGVtcGxhdGVJZBI4Cg10cmlwX3RlbXBsYXRlGBkgASgLMhMubW9kZWwuVHJpcFRlbXBsYXRlUgx0cmlwVGVtcGxhdGUSGwoJbWF4X2d1ZXN0GB4gASgNUghtYXhHdWVzdBIhCgxjdXJlbnRfZ3Vlc3QYIyABKA1SC2N1cmVudEd1ZXN0EhoKCHNjaGVkdWxlGC0gASgJUghzY2hlZHVsZRI0CgxkaXZlX21hc3RlcnMYMiADKAsyES5tb2RlbC5EaXZlTWFzdGVyUgtkaXZlTWFzdGVycxIuCgpkaXZlX3NpdGVzGDggAygLMg8ubW9kZWwuRGl2ZVNpdGVSCWRpdmVTaXRlcxJLChV0cmlwX3Jvb21fdHlwZV9wcmljZXMYOSADKAsyGC5tb2RlbC5Sb29tVHlwZVRyaXBQcmljZVISdHJpcFJvb21UeXBlUHJpY2VzEj8KCnN0YXJ0X2RhdGUYPCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUglzdGFydERhdGUSOwoIZW5kX2RhdGUYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgdlbmREYXRlElQKFWxhc3RfcmVzZXJ2YXRpb25fZGF0ZRhQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSE2xhc3RSZXNlcnZhdGlvbkRhdGUSPwoKY3JlYXRlZF9hdBhaIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBJDfHwFSCWNyZWF0ZWRBdBI/Cgp1cGRhdGVkX2F0GGQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJdXBkYXRlZEF0');
 @$core.Deprecated('Use amenityDescriptor instead')
 const Amenity$json = const {
   '1': 'Amenity',
