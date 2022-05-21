@@ -7,10 +7,10 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1526,8 +1526,8 @@ const _ = grpc.SupportPackageIsVersion4
 type CommentServiceClient interface {
 	CreateComment(ctx context.Context, in *CreateCommentRequest, opts ...grpc.CallOption) (*CreateCommentResponse, error)
 	GetComment(ctx context.Context, in *GetCommentRequest, opts ...grpc.CallOption) (*GetCommentResponse, error)
-	UpdateComment(ctx context.Context, in *UpdateCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateComment(ctx context.Context, in *UpdateCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type commentServiceClient struct {
@@ -1556,8 +1556,8 @@ func (c *commentServiceClient) GetComment(ctx context.Context, in *GetCommentReq
 	return out, nil
 }
 
-func (c *commentServiceClient) UpdateComment(ctx context.Context, in *UpdateCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *commentServiceClient) UpdateComment(ctx context.Context, in *UpdateCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/comment.CommentService/UpdateComment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1565,8 +1565,8 @@ func (c *commentServiceClient) UpdateComment(ctx context.Context, in *UpdateComm
 	return out, nil
 }
 
-func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/comment.CommentService/DeleteComment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1578,8 +1578,8 @@ func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteComm
 type CommentServiceServer interface {
 	CreateComment(context.Context, *CreateCommentRequest) (*CreateCommentResponse, error)
 	GetComment(context.Context, *GetCommentRequest) (*GetCommentResponse, error)
-	UpdateComment(context.Context, *UpdateCommentRequest) (*emptypb.Empty, error)
-	DeleteComment(context.Context, *DeleteCommentRequest) (*emptypb.Empty, error)
+	UpdateComment(context.Context, *UpdateCommentRequest) (*empty.Empty, error)
+	DeleteComment(context.Context, *DeleteCommentRequest) (*empty.Empty, error)
 }
 
 // UnimplementedCommentServiceServer can be embedded to have forward compatible implementations.
@@ -1592,10 +1592,10 @@ func (*UnimplementedCommentServiceServer) CreateComment(ctx context.Context, req
 func (*UnimplementedCommentServiceServer) GetComment(ctx context.Context, req *GetCommentRequest) (*GetCommentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetComment not implemented")
 }
-func (*UnimplementedCommentServiceServer) UpdateComment(ctx context.Context, req *UpdateCommentRequest) (*emptypb.Empty, error) {
+func (*UnimplementedCommentServiceServer) UpdateComment(ctx context.Context, req *UpdateCommentRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateComment not implemented")
 }
-func (*UnimplementedCommentServiceServer) DeleteComment(ctx context.Context, req *DeleteCommentRequest) (*emptypb.Empty, error) {
+func (*UnimplementedCommentServiceServer) DeleteComment(ctx context.Context, req *DeleteCommentRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
 }
 

@@ -18,8 +18,6 @@ BUILD_DIR = build
 PROTO_DIR = proto
 # Directory for Golang generated Protocol Buffers
 PB_GO_DIR = pb
-# Directory for Golang generated entities
-ENTITY_GO_DIR = entity
 # Directory for Dart generated Protocol Buffers
 PB_DART_DIR = $(PROTO_DIR)/dart
 # Directory for Golang dependencies
@@ -31,11 +29,9 @@ SERVER_BINARY = $(BUILD_DIR)/nautilus-server
 # Google Protocol Buffers definitions
 GOOGLE_PROTO := $(GOOGLE_PROTO_DIR)/google/protobuf/empty.proto $(GOOGLE_PROTO_DIR)/google/protobuf/timestamp.proto
 # Protocol Buffers definitions
-PROTO := $(filter-out $(PROTO_DIR)/entity.proto,$(wildcard $(PROTO_DIR)/*.proto))
-ENTITY := $(PROTO_DIR)/entity.proto
+PROTO := $(wildcard $(PROTO_DIR)/*.proto)
 # Generated Protocol Buffers files for Golang
 PB_GO := $(patsubst $(PROTO_DIR)/%.proto,$(PB_GO_DIR)/%.pb.go,$(PROTO))
-ENTITY_GO := $(patsubst $(PROTO_DIR)/%.proto,$(ENTITY_GO_DIR)/%.pb.go,$(ENTITY))
 
 # Postgres environment variable
 PG_HOST ?= 127.0.0.1
@@ -51,7 +47,7 @@ all: proto-go proto-dart server test
 
 # Generate server binary
 .PHONY: server
-server: cmd/main.go $(PB_GO) $(ENTITY_GO)
+server: cmd/main.go $(PB_GO)
 	$(GO) build -ldflags=$(LDFLAGS) -o $(SERVER_BINARY) $<
 
 # Generating go code for each protobuf definition
@@ -62,17 +58,9 @@ $(PB_GO_DIR)/%.pb.go: $(PROTO_DIR)/%.proto $(VENDOR_DIR)
 		--proto_path=$(GOOGLE_PROTO_DIR) \
 		$<
 
-# Generating go code for entities
-$(ENTITY_GO_DIR)/%.pb.go: $(PROTO_DIR)/%.proto $(VENDOR_DIR)
-	$(PROTOC) --$(PROTOC_GO_GEN)_out=Mmodel.proto=$(GO_PACKAGE)/$(PB_GO_DIR):. \
-		--proto_path=$(PROTO_DIR) \
-		--proto_path=$(VENDOR_DIR) \
-		--proto_path=$(GOOGLE_PROTO_DIR) \
-		$<
-
 # Generate Protocol Buffers files for Golang
 .PHONY: proto-go
-proto-go: $(PB_GO) $(ENTITY_GO)
+proto-go: $(PB_GO)
 
 # Create dart folder and check for vendor folder
 .PHONY: proto-dart
@@ -92,7 +80,7 @@ $(PB_DART_DIR):
 	@mkdir $@
 
 # Create vendor folder with all related dependencies
-$(VENDOR_DIR): go.mod go.sum tools.go
+$(VENDOR_DIR): go.mod go.sum
 	$(GO) mod vendor
 
 # Run the generated executable
@@ -121,7 +109,7 @@ test:
 # Remove binaries and Protocol Buffers files generated for Golang
 .PHONY: clean
 clean:
-	rm -f $(SERVER_BINARY) $(PB_GO) $(ENTITY_GO)
+	rm -f $(SERVER_BINARY) $(PB_GO)
 
 # Remove every files that can be generated
 .PHONY: clean-all

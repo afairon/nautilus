@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/afairon/nautilus/entity"
+	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
@@ -12,8 +12,8 @@ import (
 // AddressRepository defines interface for interaction
 // with the address repository.
 type AddressRepository interface {
-	Create(ctx context.Context, address *entity.Address) (*entity.Address, error)
-	Get(ctx context.Context, id uint64) (*entity.Address, error)
+	Create(ctx context.Context, address *model.Address) (*model.Address, error)
+	Get(ctx context.Context, id uint64) (*model.Address, error)
 	List(ctx context.Context, limit, offset uint64) ([]pb.Address, error)
 }
 
@@ -30,7 +30,7 @@ func NewAddressRepository(db *gorm.DB) *addressRepository {
 }
 
 // Create creates an address record and returns the newly created record.
-func (repo *addressRepository) Create(ctx context.Context, address *entity.Address) (*entity.Address, error) {
+func (repo *addressRepository) Create(ctx context.Context, address *model.Address) (*model.Address, error) {
 	// var result entity.Address
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -47,7 +47,7 @@ func (repo *addressRepository) Create(ctx context.Context, address *entity.Addre
 }
 
 // Get retrieves the address record by its id.
-func (repo *addressRepository) Get(ctx context.Context, id uint64) (*entity.Address, error) {
+func (repo *addressRepository) Get(ctx context.Context, id uint64) (*model.Address, error) {
 	// var result entity.Address
 
 	// err := repo.db.GetContext(ctx, &result, `
