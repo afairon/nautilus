@@ -225,7 +225,7 @@ message Trip {
     uint64 trip_template_id = 20;
     uint32 max_guest = 30;
     uint32 curent_guest = 35;
-    float price = 40;
+    string schedule = 45;
     repeated DiveMaster dive_masters = 50;
     repeated uint64 dive_master_ids = 55;
     repeated DiveSite dive_sites = 56;
@@ -243,6 +243,7 @@ message TripWithTemplate {
     TripTemplate trip_template = 25;
     uint32 max_guest = 30;
     uint32 curent_guest = 35;
+    string schedule = 45;
     repeated DiveMaster dive_masters = 50;
     repeated DiveSite dive_sites = 56;
     repeated model.RoomTypeTripPrice trip_room_type_prices = 57;

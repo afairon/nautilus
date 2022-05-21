@@ -622,11 +622,12 @@ func (tt *TripTemplate) GetProto() *pb.TripTemplate {
 
 type Trip struct {
 	gorm.Model
-	MaxGuest                     uint32                `gorm:"not null"`
-	CurrentGuest                 uint32                `gorm:"not null;default:0"`
-	StartDate                    *time.Time            `gorm:"not null;check:trip_date_checker,start_date < end_date"`
-	EndDate                      *time.Time            `gorm:"not null"`
-	LastReservationDate          *time.Time            `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
+	MaxGuest                     uint32     `gorm:"not null"`
+	CurrentGuest                 uint32     `gorm:"not null;default:0"`
+	StartDate                    *time.Time `gorm:"not null;check:trip_date_checker,start_date < end_date"`
+	EndDate                      *time.Time `gorm:"not null"`
+	LastReservationDate          *time.Time `gorm:"not null;check:last_reservation_date_checker,last_reservation_date < start_date"`
+	Schedule                     string
 	DiveMasters                  []DiveMaster          `gorm:"many2many:dive_master_trips;"`
 	ReservationRoomTypes         []ReservationRoomType `gorm:"foreignKey:TripID"`
 	TripTemplateID               uint                  `gorm:"not null"`
@@ -648,6 +649,7 @@ func (t *Trip) From(trip *pb.Trip) {
 	t.StartDate = trip.StartDate
 	t.EndDate = trip.EndDate
 	t.LastReservationDate = trip.LastReservationDate
+	t.Schedule = trip.Schedule
 	t.TripTemplateID = uint(trip.TripTemplateId)
 
 	if len(trip.DiveMasters) > 0 {
@@ -678,6 +680,7 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	t.ID = uint(trip.Id)
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
+	t.Schedule = trip.Schedule
 	if trip.StartDate != nil {
 		t.StartDate = trip.StartDate
 	}
@@ -748,6 +751,7 @@ func (t *Trip) GetProto() *pb.Trip {
 		StartDate:           t.StartDate,
 		EndDate:             t.EndDate,
 		LastReservationDate: t.LastReservationDate,
+		Schedule:            t.Schedule,
 		CreatedAt:           &t.CreatedAt,
 		UpdatedAt:           &t.UpdatedAt,
 	}
@@ -780,6 +784,7 @@ func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 		StartDate:           t.StartDate,
 		EndDate:             t.EndDate,
 		LastReservationDate: t.LastReservationDate,
+		Schedule:            t.Schedule,
 		CreatedAt:           &t.CreatedAt,
 		UpdatedAt:           &t.UpdatedAt,
 	}
