@@ -121,7 +121,13 @@ func (repo *tripRepository) ListTripsByAgency(ctx context.Context, id, limit, of
 func (repo *tripRepository) ListTripsWithTemplatesByAgency(ctx context.Context, id, limit, offset uint64) ([]*model.Trip, error) {
 	var trips []*model.Trip
 
-	if result := repo.db.Preload("TripTemplate.Address").Preload("DiveMasters").Preload("DiveSites").Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
+	result := repo.db.Preload("TripTemplate.Address")
+	result.Preload("DiveMasters")
+	result.Preload("DiveSites")
+	result.Preload("HotelRoomTypeTripPrices")
+	result.Preload("LiveaboardRoomTypeTripPrices")
+
+	if result := result.Limit(int(limit)).Offset(int(offset)).Where("agency_id = ?", id).Find(&trips); result.Error != nil {
 		return nil, result.Error
 	}
 

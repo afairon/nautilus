@@ -42,8 +42,13 @@ func (service *diverService) ListReservationsWithTrips(ctx context.Context, limi
 	}
 
 	for _, reservation := range reservations {
-		for idx, id := range reservation.Trip.TripTemplate.Images {
-			reservation.Trip.TripTemplate.Images[idx] = service.media.Get(id, false)
+		for _, doc := range reservation.Trip.TripTemplate.Images {
+			file := model.File{
+				Filename: doc,
+				URL:      service.media.Get(doc, true),
+			}
+
+			reservation.Trip.TripTemplate.Files = append(reservation.Trip.TripTemplate.Files, &file)
 		}
 	}
 

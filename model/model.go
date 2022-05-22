@@ -870,7 +870,7 @@ type Reservation struct {
 	TripComment       *TripComment
 	DiverID           uint
 	TripID            uint
-	Trip              Trip
+	Trip              *Trip
 	RoomTypes         []RoomType `gorm:"many2many:reservation_room_types;"`
 	Payment           Payment
 }
