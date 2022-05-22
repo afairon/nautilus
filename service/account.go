@@ -389,7 +389,7 @@ func (service *accountService) UpdateDiverAccount(ctx context.Context, diver *mo
 
 	// Create a set of old documents.
 	oldDocs := map[string]struct{}{}
-	for _, doc := range diver.Documents {
+	for _, doc := range Old.Documents {
 		oldDocs[doc] = struct{}{}
 	}
 

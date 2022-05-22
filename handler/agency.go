@@ -3,6 +3,8 @@ package handler
 import (
 	"context"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
@@ -59,6 +61,8 @@ func (handler *AgencyHandler) AddTripTemplate(ctx context.Context, req *pb.AddTr
 }
 
 func (handler *AgencyHandler) AddTrip(ctx context.Context, req *pb.AddTripRequest) (*empty.Empty, error) {
+
+	log.Printf("Address is : %+v\n", req.Trip.TripTemplate.Address)
 	trip := model.Trip{}
 	trip.FromWithTemplate(req.Trip)
 	var roomTypePrices []model.RoomTypeTripPrice
