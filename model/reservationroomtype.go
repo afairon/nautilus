@@ -14,7 +14,7 @@ func (r *ReservationRoomType) BeforeSave(tx *gorm.DB) error {
 		return result.Error
 	}
 
-	if r.DiverNo > uint(roomType.MaxGuest) {
+	if r.DiverNo > uint(roomType.MaxGuest)*r.Quantity {
 		return status.Errorf(codes.PermissionDenied, "The number of divers exceeds the maximum number of max guests.")
 	}
 

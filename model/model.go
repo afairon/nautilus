@@ -622,6 +622,7 @@ func (tt *TripTemplate) GetProto() *pb.TripTemplate {
 
 type Trip struct {
 	gorm.Model
+	Name                         string     `gorm:"not null"`
 	MaxGuest                     uint32     `gorm:"not null"`
 	CurrentGuest                 uint32     `gorm:"not null;default:0"`
 	StartDate                    *time.Time `gorm:"not null;check:trip_date_checker,start_date < end_date"`
@@ -644,6 +645,7 @@ func (t *Trip) From(trip *pb.Trip) {
 	}
 
 	t.ID = uint(trip.Id)
+	t.Name = trip.Name
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
 	t.StartDate = trip.StartDate
@@ -678,6 +680,7 @@ func (t *Trip) FromWithTemplate(trip *pb.TripWithTemplate) {
 	}
 
 	t.ID = uint(trip.Id)
+	t.Name = trip.Name
 	t.MaxGuest = trip.MaxGuest
 	t.CurrentGuest = trip.CurentGuest
 	t.Schedule = trip.Schedule
@@ -746,6 +749,7 @@ func (t *Trip) GetProto() *pb.Trip {
 	trip := pb.Trip{
 		Id:                  uint64(t.ID),
 		TripTemplateId:      uint64(t.TripTemplateID),
+		Name:                t.Name,
 		MaxGuest:            t.MaxGuest,
 		CurentGuest:         t.CurrentGuest,
 		StartDate:           t.StartDate,
@@ -779,6 +783,7 @@ func (t *Trip) GetProtoWithTemplate() *pb.TripWithTemplate {
 		Id:                  uint64(t.ID),
 		TripTemplateId:      uint64(t.TripTemplateID),
 		TripTemplate:        t.TripTemplate.GetProto(),
+		Name:                t.Name,
 		MaxGuest:            t.MaxGuest,
 		CurentGuest:         t.CurrentGuest,
 		StartDate:           t.StartDate,

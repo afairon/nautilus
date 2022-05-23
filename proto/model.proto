@@ -222,6 +222,7 @@ message TripTemplate {
 // Trip
 message Trip {
     uint64 id = 1;
+    string name = 10;
     uint64 trip_template_id = 20;
     uint32 max_guest = 30;
     uint32 curent_guest = 35;
@@ -239,6 +240,7 @@ message Trip {
 // TripWithTemplate
 message TripWithTemplate {
     uint64 id = 1;
+    string name = 10;
     uint64 trip_template_id = 20;
     TripTemplate trip_template = 25;
     uint32 max_guest = 30;
