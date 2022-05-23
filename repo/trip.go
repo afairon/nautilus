@@ -193,7 +193,7 @@ func (repo *tripRepository) ListEndedTripsOverPeriod(ctx context.Context, startD
 	result.Preload("HotelRoomTypeTripPrices")
 	result.Preload("LiveaboardRoomTypeTripPrices")
 	result.Where("agency_id = ?", id)
-	result.Where("trips.last_reservation_date BETWEEN ? AND ?", *startDate, *endDate)
+	result.Where("trips.end_date BETWEEN ? AND ?", *startDate, *endDate)
 
 	result.Limit(int(limit)).Offset(int(offset)).Find(&trips)
 
@@ -283,7 +283,7 @@ func (repo *tripRepository) SearchTrips(ctx context.Context, country, city, regi
 	case model.OFFSHORE:
 		result.Where("trip_templates.type = ? AND trip_templates.hotel_id IS NULL AND trip_templates.boat_id IS NULL AND trip_templates.liveaboard_id IS NOT NULL", model.OFFSHORE)
 	}
-	result.Where("trips.max_guest >= ?", divers)
+	result.Where("trips.max_guest - trips.current_guest >= ?", divers)
 	result.Where("addresses.country ILIKE ? OR addresses.city ILIKE ? OR addresses.region ILIKE ?", country, city, region)
 	if endDate != nil {
 		result.Where("trips.start_date BETWEEN ? AND ?", *startDate, *endDate)
