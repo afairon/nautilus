@@ -8,6 +8,7 @@ import (
 	"github.com/afairon/nautilus/handler"
 	"github.com/afairon/nautilus/interceptor/auth"
 	"github.com/afairon/nautilus/interceptor/logger"
+	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
@@ -40,7 +41,7 @@ func loadTLSCredentials(conf *config.SSL) (credentials.TransportCredentials, err
 }
 
 // CreateGRPCServer returns a gRPC server with services.
-func CreateGRPCServer(conf *config.GRPC, db *gorm.DB, session session.Session, mediaStorage media.Store) (*grpc.Server, error) {
+func CreateGRPCServer(conf *config.GRPC, db *gorm.DB, session session.Session, mediaStorage media.Store, mailer mail.Mailer) (*grpc.Server, error) {
 	// gRPC options
 	var opts []grpc.ServerOption
 
@@ -86,16 +87,16 @@ func CreateGRPCServer(conf *config.GRPC, db *gorm.DB, session session.Session, m
 	server := grpc.NewServer(opts...)
 
 	// Registers services to server
-	registerServices(server, db, session, mediaStorage)
+	registerServices(server, db, session, mediaStorage, mailer)
 
 	return server, nil
 }
 
 // registerServices registers services to gRPC.
-func registerServices(server *grpc.Server, db *gorm.DB, session session.Session, media media.Store) {
+func registerServices(server *grpc.Server, db *gorm.DB, session session.Session, media media.Store, mailer mail.Mailer) {
 	repo := repo.NewRepo(db)
 
-	accountService := service.NewAccountService(repo, session, media)
+	accountService := service.NewAccountService(repo, session, media, mailer)
 	agencyService := service.NewAgencyService(repo, media)
 	reservationService := service.NewReservationService(repo)
 	commentService := service.NewCommentService(repo)

@@ -5,6 +5,7 @@ import (
 	"context"
 	"strings"
 
+	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/repo"
@@ -31,14 +32,16 @@ type accountService struct {
 	repo    *repo.Repo
 	session session.Session
 	media   media.Store
+	mailer  mail.Mailer
 }
 
 // NewAccountService creates new accountService.
-func NewAccountService(repo *repo.Repo, session session.Session, media media.Store) *accountService {
+func NewAccountService(repo *repo.Repo, session session.Session, media media.Store, mailer mail.Mailer) *accountService {
 	return &accountService{
 		repo:    repo,
 		session: session,
 		media:   media,
+		mailer:  mailer,
 	}
 }
 
@@ -77,6 +80,15 @@ func (service *accountService) CreateAgencyAccount(ctx context.Context, agency *
 		return err
 	}
 
+	m, err := mail.MailFromTemplate("templates/signup.html", agency)
+	if err != nil {
+		return nil
+	}
+
+	m.To = []string{agency.Account.Email}
+	m.Subject = "Account creation successful"
+	go service.mailer.Send(*m)
+
 	return nil
 }
 
@@ -114,6 +126,15 @@ func (service *accountService) CreateDiverAccount(ctx context.Context, diver *mo
 	if err != nil {
 		return err
 	}
+
+	m, err := mail.MailFromTemplate("templates/signup.html", diver)
+	if err != nil {
+		return nil
+	}
+
+	m.To = []string{diver.Account.Email}
+	m.Subject = "Account creation successful"
+	go service.mailer.Send(*m)
 
 	return nil
 }

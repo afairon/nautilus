@@ -1,7 +1,7 @@
 # Go compiler
 GO ?= go
 # Go compiler linker flags
-LDFLAGS ?= "-s -w -X 'main.Commit=$$(git rev-parse --short HEAD)' -X 'main.Time=$$(date)'"
+LDFLAGS ?= "-s -w -X 'main.Commit=$$(git rev-parse --short HEAD)' -X 'main.Time=$$(date)' -X 'main.Compiler=$$($(GO) version | cut --delimiter=' ' -f 3)'"
 # Protocol Buffers compiler
 PROTOC ?= protoc
 # Protocol Buffers go compiler

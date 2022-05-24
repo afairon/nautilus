@@ -9,6 +9,7 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.1.2
 	github.com/improbable-eng/grpc-web v0.14.1
+	github.com/knadh/smtppool v0.4.0
 	github.com/lib/pq v1.10.3
 	github.com/sirupsen/logrus v1.7.0
 	github.com/stretchr/testify v1.7.1

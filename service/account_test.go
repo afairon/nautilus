@@ -5,6 +5,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/internal/media/fs"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/repo"
@@ -38,8 +39,9 @@ func (suite *AccountTestSuite) SetupTest() {
 	suite.session = session.NewJWTManager("secret", 1*time.Hour)
 	media, err := fs.NewStore("test-fs", "")
 	suite.Nil(err)
+	mailer := mail.NewDummy()
 
-	suite.service = NewAccountService(repository, suite.session, media)
+	suite.service = NewAccountService(repository, suite.session, media, mailer)
 }
 
 func (suite *AccountTestSuite) TestCreateAdminAccount() {

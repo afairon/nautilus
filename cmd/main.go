@@ -13,6 +13,7 @@ import (
 
 	"github.com/afairon/nautilus/config"
 	"github.com/afairon/nautilus/db"
+	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/internal/media/fs"
 	"github.com/afairon/nautilus/internal/media/s3"
@@ -24,8 +25,9 @@ import (
 )
 
 var (
-	Commit string
-	Time   string
+	Commit   string
+	Time     string
+	Compiler string
 )
 
 // run configures and runs the server.
@@ -53,18 +55,18 @@ func run(conf *config.Config) error {
 	}
 
 	// Connect to postgres.
-	// db2, err := db.InitGormStore("", 2, "", "", "2", false)
 	db, err := db.InitGormStoreFromConfig(conf.GetPostgreSQL())
-
 	if err != nil {
 		return err
 	}
 
-	// db, err := db.ConnectFromConfig(conf.GetPostgreSQL())
-	// if err != nil {
-	// 	return err
-	// }
-	// defer db.Close()
+	// Get db connection from pool.
+	conn, err := db.DB()
+	if err != nil {
+		return err
+	}
+	// Close db connection.
+	defer conn.Close()
 
 	// Session manager
 	sessionManager := session.NewJWTManagerFromConfig(conf.GetSession())
@@ -87,8 +89,23 @@ func run(conf *config.Config) error {
 		}
 	}
 
+	var mailer mail.Mailer
+
+	if conf.GetSMTP() != nil {
+		log.Info("Email SMTP enabled.")
+		mailer, err = mail.NewMailerFromConfig(conf.GetSMTP())
+		if err != nil {
+			return err
+		}
+
+		defer mailer.Close()
+
+	} else {
+		log.Info("Email SMTP disabled.")
+		mailer = mail.NewDummy()
+	}
+
 	addr := fmt.Sprintf("%s:%d", conf.GetGRPC().Address, conf.GetGRPC().Port)
-	// lis, err := net.Listen("tcp", conf.GetGRPC().Address())
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		return err
@@ -99,7 +116,7 @@ func run(conf *config.Config) error {
 	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	// Create grpc server.
-	grpcServer, err := server.CreateGRPCServer(conf.GetGRPC(), db, sessionManager, mediaStorage)
+	grpcServer, err := server.CreateGRPCServer(conf.GetGRPC(), db, sessionManager, mediaStorage, mailer)
 	if err != nil {
 		return err
 	}
@@ -182,7 +199,7 @@ func main() {
 	var conf *config.Config
 	var err error
 
-	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\n", Commit, Time)
+	fmt.Printf("Nautilus Server\nCommit: %s\nBuilt Time: %s\nCompiler: %s\n", Commit, Time, Compiler)
 
 	// Application configuration
 	if *flagConfigFile == "" {
