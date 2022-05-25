@@ -218,7 +218,7 @@ func (repo *tripRepository) ListIncomingTripsOverPeriod(ctx context.Context, sta
 	result.Where("agency_id = ?", id)
 
 	if startDate != nil {
-		result.Where("trips.start_date >= ?", *startDate)
+		result.Where("? >= trips.start_date", *startDate)
 	}
 
 	if endDate != nil {

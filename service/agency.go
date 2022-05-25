@@ -1780,9 +1780,9 @@ func (service *agencyService) GenerateIncomingTripsReport(ctx context.Context, w
 	// This transaction generates report (model.ReportTrip) by returning trips with divers that went to each of these trips
 	err = service.repo.Transaction(ctx, func(query *repo.Queries) error {
 		start := time.Now()
-		end := start.AddDate(0, 0, int(7*weeks))
+		start = start.AddDate(0, 0, int(7*weeks))
 
-		trips, err := service.repo.Trip.ListIncomingTripsOverPeriod(ctx, &start, &end, uint64(agency.ID), limit, offset)
+		trips, err := service.repo.Trip.ListIncomingTripsOverPeriod(ctx, &start, nil, uint64(agency.ID), limit, offset)
 
 		if err != nil {
 			return err
