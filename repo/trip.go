@@ -40,6 +40,7 @@ func (repo *tripRepository) Get(ctx context.Context, id uint64) (*model.Trip, er
 
 	result := repo.db.Preload("DiveSites")
 	result.Preload("DiveMasters")
+	result.Preload("Agency")
 	result.Preload("HotelRoomTypeTripPrices")
 	result.Preload("LiveaboardRoomTypeTripPrices")
 

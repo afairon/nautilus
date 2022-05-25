@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"context"
+
 	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/service"
 	"google.golang.org/grpc/codes"
@@ -40,4 +42,18 @@ func (handler *DiverHandler) ListReservationsWithTrips(req *pb.ListReservationsW
 	}
 
 	return nil
+}
+
+func (handler *DiverHandler) GetAgencyAccountNumberByTrip(ctx context.Context, req *pb.GetAgencyAccountNumberByTripRequest) (*pb.GetAgencyAccountNumberByTripResponse, error) {
+	accountNumber, err := handler.diverService.GetAgencyAccountNumberByTrip(ctx, req.TripId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &pb.GetAgencyAccountNumberByTripResponse{
+		AccountNumber: accountNumber,
+	}
+
+	return resp, nil
 }

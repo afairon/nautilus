@@ -21,6 +21,13 @@ class DiverServiceClient extends $grpc.Client {
       ($6.ListReservationsWithTripsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $6.ListReservationsWithTripsResponse.fromBuffer(value));
+  static final _$getAgencyAccountNumberByTrip = $grpc.ClientMethod<
+          $6.GetAgencyAccountNumberByTripRequest,
+          $6.GetAgencyAccountNumberByTripResponse>(
+      '/diver.DiverService/GetAgencyAccountNumberByTrip',
+      ($6.GetAgencyAccountNumberByTripRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.GetAgencyAccountNumberByTripResponse.fromBuffer(value));
 
   DiverServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -32,6 +39,14 @@ class DiverServiceClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$listReservationsWithTrips, $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$6.GetAgencyAccountNumberByTripResponse>
+      getAgencyAccountNumberByTrip(
+          $6.GetAgencyAccountNumberByTripRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAgencyAccountNumberByTrip, request,
         options: options);
   }
 }
@@ -49,6 +64,16 @@ abstract class DiverServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $6.ListReservationsWithTripsRequest.fromBuffer(value),
         ($6.ListReservationsWithTripsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.GetAgencyAccountNumberByTripRequest,
+            $6.GetAgencyAccountNumberByTripResponse>(
+        'GetAgencyAccountNumberByTrip',
+        getAgencyAccountNumberByTrip_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.GetAgencyAccountNumberByTripRequest.fromBuffer(value),
+        ($6.GetAgencyAccountNumberByTripResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Stream<$6.ListReservationsWithTripsResponse>
@@ -57,6 +82,15 @@ abstract class DiverServiceBase extends $grpc.Service {
     yield* listReservationsWithTrips(call, await request);
   }
 
+  $async.Future<$6.GetAgencyAccountNumberByTripResponse>
+      getAgencyAccountNumberByTrip_Pre($grpc.ServiceCall call,
+          $async.Future<$6.GetAgencyAccountNumberByTripRequest> request) async {
+    return getAgencyAccountNumberByTrip(call, await request);
+  }
+
   $async.Stream<$6.ListReservationsWithTripsResponse> listReservationsWithTrips(
       $grpc.ServiceCall call, $6.ListReservationsWithTripsRequest request);
+  $async.Future<$6.GetAgencyAccountNumberByTripResponse>
+      getAgencyAccountNumberByTrip($grpc.ServiceCall call,
+          $6.GetAgencyAccountNumberByTripRequest request);
 }

@@ -12,6 +12,7 @@ service DiverService {
     // List the trips that the diver has made reservation for
     // This should be refactored to two endpoints?
     rpc ListReservationsWithTrips(ListReservationsWithTripsRequest) returns (stream ListReservationsWithTripsResponse);
+    rpc GetAgencyAccountNumberByTrip(GetAgencyAccountNumberByTripRequest) returns (GetAgencyAccountNumberByTripResponse);
 }
 
 message ListReservationsWithTripsRequest {
@@ -22,4 +23,12 @@ message ListReservationsWithTripsRequest {
 message ListReservationsWithTripsResponse {
     model.TripWithTemplate trip = 1;
     model.Reservation reservation = 10;
+}
+
+message GetAgencyAccountNumberByTripRequest {
+    uint64 trip_id = 1;
+}
+
+message GetAgencyAccountNumberByTripResponse {
+    string account_number = 1;
 }

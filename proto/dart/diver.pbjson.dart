@@ -30,3 +30,23 @@ const ListReservationsWithTripsResponse$json = const {
 
 /// Descriptor for `ListReservationsWithTripsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listReservationsWithTripsResponseDescriptor = $convert.base64Decode('CiFMaXN0UmVzZXJ2YXRpb25zV2l0aFRyaXBzUmVzcG9uc2USKwoEdHJpcBgBIAEoCzIXLm1vZGVsLlRyaXBXaXRoVGVtcGxhdGVSBHRyaXASNAoLcmVzZXJ2YXRpb24YCiABKAsyEi5tb2RlbC5SZXNlcnZhdGlvblILcmVzZXJ2YXRpb24=');
+@$core.Deprecated('Use getAgencyAccountNumberByTripRequestDescriptor instead')
+const GetAgencyAccountNumberByTripRequest$json = const {
+  '1': 'GetAgencyAccountNumberByTripRequest',
+  '2': const [
+    const {'1': 'trip_id', '3': 1, '4': 1, '5': 4, '10': 'tripId'},
+  ],
+};
+
+/// Descriptor for `GetAgencyAccountNumberByTripRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAgencyAccountNumberByTripRequestDescriptor = $convert.base64Decode('CiNHZXRBZ2VuY3lBY2NvdW50TnVtYmVyQnlUcmlwUmVxdWVzdBIXCgd0cmlwX2lkGAEgASgEUgZ0cmlwSWQ=');
+@$core.Deprecated('Use getAgencyAccountNumberByTripResponseDescriptor instead')
+const GetAgencyAccountNumberByTripResponse$json = const {
+  '1': 'GetAgencyAccountNumberByTripResponse',
+  '2': const [
+    const {'1': 'account_number', '3': 1, '4': 1, '5': 9, '10': 'accountNumber'},
+  ],
+};
+
+/// Descriptor for `GetAgencyAccountNumberByTripResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAgencyAccountNumberByTripResponseDescriptor = $convert.base64Decode('CiRHZXRBZ2VuY3lBY2NvdW50TnVtYmVyQnlUcmlwUmVzcG9uc2USJQoOYWNjb3VudF9udW1iZXIYASABKAlSDWFjY291bnROdW1iZXI=');

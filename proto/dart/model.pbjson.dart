@@ -136,6 +136,7 @@ const Agency$json = const {
     const {'1': 'account', '3': 30, '4': 1, '5': 11, '6': '.model.Account', '10': 'account'},
     const {'1': 'address', '3': 40, '4': 1, '5': 11, '6': '.model.Address', '8': const {}, '10': 'address'},
     const {'1': 'coordinate', '3': 45, '4': 1, '5': 11, '6': '.model.Coordinate', '10': 'coordinate'},
+    const {'1': 'account_number', '3': 46, '4': 1, '5': 9, '10': 'accountNumber'},
     const {'1': 'documents', '3': 50, '4': 3, '5': 11, '6': '.model.File', '8': const {}, '10': 'documents'},
     const {'1': 'created_at', '3': 60, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'createdAt'},
     const {'1': 'updated_at', '3': 70, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': const {}, '10': 'updatedAt'},
@@ -143,7 +144,7 @@ const Agency$json = const {
 };
 
 /// Descriptor for `Agency`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEigKB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50UgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEjEKCmNvb3JkaW5hdGUYLSABKAsyES5tb2RlbC5Db29yZGluYXRlUgpjb29yZGluYXRlEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
+final $typed_data.Uint8List agencyDescriptor = $convert.base64Decode('CgZBZ2VuY3kSDgoCaWQYASABKARSAmlkEhIKBG5hbWUYCiABKAlSBG5hbWUSFAoFcGhvbmUYFCABKAlSBXBob25lEigKB2FjY291bnQYHiABKAsyDi5tb2RlbC5BY2NvdW50UgdhY2NvdW50Ei4KB2FkZHJlc3MYKCABKAsyDi5tb2RlbC5BZGRyZXNzQgTI3h8AUgdhZGRyZXNzEjEKCmNvb3JkaW5hdGUYLSABKAsyES5tb2RlbC5Db29yZGluYXRlUgpjb29yZGluYXRlEiUKDmFjY291bnRfbnVtYmVyGC4gASgJUg1hY2NvdW50TnVtYmVyEi8KCWRvY3VtZW50cxgyIAMoCzILLm1vZGVsLkZpbGVCBMjeHwBSCWRvY3VtZW50cxI/CgpjcmVhdGVkX2F0GDwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIEkN8fAVIJY3JlYXRlZEF0Ej8KCnVwZGF0ZWRfYXQYRiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgSQ3x8BUgl1cGRhdGVkQXQ=');
 @$core.Deprecated('Use diverDescriptor instead')
 const Diver$json = const {
   '1': 'Diver',

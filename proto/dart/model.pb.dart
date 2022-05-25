@@ -549,6 +549,7 @@ class Agency extends $pb.GeneratedMessage {
     ..aOM<Account>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: Account.create)
     ..aOM<Address>(40, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'address', subBuilder: Address.create)
     ..aOM<Coordinate>(45, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'coordinate', subBuilder: Coordinate.create)
+    ..aOS(46, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountNumber')
     ..pc<File>(50, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'documents', $pb.PbFieldType.PM, subBuilder: File.create)
     ..aOM<$13.Timestamp>(60, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $13.Timestamp.create)
     ..aOM<$13.Timestamp>(70, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'updatedAt', subBuilder: $13.Timestamp.create)
@@ -563,6 +564,7 @@ class Agency extends $pb.GeneratedMessage {
     Account? account,
     Address? address,
     Coordinate? coordinate,
+    $core.String? accountNumber,
     $core.Iterable<File>? documents,
     $13.Timestamp? createdAt,
     $13.Timestamp? updatedAt,
@@ -585,6 +587,9 @@ class Agency extends $pb.GeneratedMessage {
     }
     if (coordinate != null) {
       _result.coordinate = coordinate;
+    }
+    if (accountNumber != null) {
+      _result.accountNumber = accountNumber;
     }
     if (documents != null) {
       _result.documents.addAll(documents);
@@ -678,30 +683,39 @@ class Agency extends $pb.GeneratedMessage {
   @$pb.TagNumber(45)
   Coordinate ensureCoordinate() => $_ensure(5);
 
+  @$pb.TagNumber(46)
+  $core.String get accountNumber => $_getSZ(6);
+  @$pb.TagNumber(46)
+  set accountNumber($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(46)
+  $core.bool hasAccountNumber() => $_has(6);
+  @$pb.TagNumber(46)
+  void clearAccountNumber() => clearField(46);
+
   @$pb.TagNumber(50)
-  $core.List<File> get documents => $_getList(6);
+  $core.List<File> get documents => $_getList(7);
 
   @$pb.TagNumber(60)
-  $13.Timestamp get createdAt => $_getN(7);
+  $13.Timestamp get createdAt => $_getN(8);
   @$pb.TagNumber(60)
   set createdAt($13.Timestamp v) { setField(60, v); }
   @$pb.TagNumber(60)
-  $core.bool hasCreatedAt() => $_has(7);
+  $core.bool hasCreatedAt() => $_has(8);
   @$pb.TagNumber(60)
   void clearCreatedAt() => clearField(60);
   @$pb.TagNumber(60)
-  $13.Timestamp ensureCreatedAt() => $_ensure(7);
+  $13.Timestamp ensureCreatedAt() => $_ensure(8);
 
   @$pb.TagNumber(70)
-  $13.Timestamp get updatedAt => $_getN(8);
+  $13.Timestamp get updatedAt => $_getN(9);
   @$pb.TagNumber(70)
   set updatedAt($13.Timestamp v) { setField(70, v); }
   @$pb.TagNumber(70)
-  $core.bool hasUpdatedAt() => $_has(8);
+  $core.bool hasUpdatedAt() => $_has(9);
   @$pb.TagNumber(70)
   void clearUpdatedAt() => clearField(70);
   @$pb.TagNumber(70)
-  $13.Timestamp ensureUpdatedAt() => $_ensure(8);
+  $13.Timestamp ensureUpdatedAt() => $_ensure(9);
 }
 
 class Diver extends $pb.GeneratedMessage {

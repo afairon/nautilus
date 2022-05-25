@@ -60,6 +60,7 @@ var accessRoles = map[string][]model.AccountType{
 	"/liveaboard.LiveaboardService/GetLiveaboard":          {model.AGENCY, model.DIVER},
 	"/trip.TripService/ListValidTrips":                     {model.DIVER},
 	"/diver.DiverService/ListReservationsWithTrips":        {model.DIVER},
+	"/diver.DiverService/GetAgencyAccountNumberByTrip":     {model.DIVER},
 	"/amenity.AmenityService/ListAmenities":                {model.AGENCY},
 	"/payment.PaymentService/MakePayment":                  {model.DIVER},
 	"/payment.PaymentService/UpdatePaymentSlip":            {model.DIVER},

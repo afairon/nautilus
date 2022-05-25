@@ -221,11 +221,12 @@ func (a *Account) GetProto() *pb.Account {
 type Agency struct {
 	gorm.Model
 	*Coordinate   `gorm:"embedded"`
-	AddressID     uint           `json:"-"`
-	Address       Address        `json:"address,omitempty"`
-	Account       *Account       `json:"account,omitempty"`
-	Name          string         `gorm:"not null" json:"name,omitempty"`
-	Phone         string         `gorm:"not null" json:"phone,omitempty"`
+	AddressID     uint     `json:"-"`
+	Address       Address  `json:"address,omitempty"`
+	Account       *Account `json:"account,omitempty"`
+	Name          string   `gorm:"not null" json:"name,omitempty"`
+	Phone         string   `gorm:"not null" json:"phone,omitempty"`
+	AccountNumber string
 	Documents     pq.StringArray `gorm:"type:text" json:"-"`
 	DiveMasters   []DiveMaster   `json:"-"`
 	Staffs        []Staff        `json:"-"`
@@ -249,6 +250,7 @@ func (a *Agency) From(agency *pb.Agency) {
 	a.Address.From(&agency.Address)
 	a.Name = agency.Name
 	a.Phone = agency.Phone
+	a.AccountNumber = agency.AccountNumber
 	if agency.Coordinate != nil {
 		if a.Coordinate == nil {
 			a.Coordinate = &Coordinate{}
@@ -273,12 +275,13 @@ func (a *Agency) From(agency *pb.Agency) {
 
 func (a *Agency) GetProto() *pb.Agency {
 	agency := pb.Agency{
-		Id:        uint64(a.ID),
-		Address:   *a.Address.GetProto(),
-		Name:      a.Name,
-		Phone:     a.Phone,
-		CreatedAt: &a.CreatedAt,
-		UpdatedAt: &a.UpdatedAt,
+		Id:            uint64(a.ID),
+		Address:       *a.Address.GetProto(),
+		Name:          a.Name,
+		Phone:         a.Phone,
+		AccountNumber: a.AccountNumber,
+		CreatedAt:     &a.CreatedAt,
+		UpdatedAt:     &a.UpdatedAt,
 	}
 	if a.Coordinate != nil {
 		agency.Coordinate = a.Coordinate.GetProto()
@@ -637,6 +640,7 @@ type Trip struct {
 	HotelRoomTypeTripPrices      []HotelRoomTypeTripPrice
 	LiveaboardRoomTypeTripPrices []LiveaboardRoomTypeTripPrice
 	AgencyID                     uint `gorm:"not null"`
+	Agency                       Agency
 }
 
 func (t *Trip) From(trip *pb.Trip) {

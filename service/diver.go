@@ -6,10 +6,13 @@ import (
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/repo"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type DiverService interface {
 	ListReservationsWithTrips(ctx context.Context, limit, offset uint64) ([]*model.Reservation, error)
+	GetAgencyAccountNumberByTrip(ctx context.Context, tripId uint64) (string, error)
 }
 
 type diverService struct {
@@ -53,4 +56,18 @@ func (service *diverService) ListReservationsWithTrips(ctx context.Context, limi
 	}
 
 	return reservations, nil
+}
+
+func (service *diverService) GetAgencyAccountNumberByTrip(ctx context.Context, tripId uint64) (string, error) {
+	trip, err := service.repo.Trip.Get(ctx, tripId)
+
+	if err != nil {
+		return "", err
+	}
+
+	if trip.Agency.AccountNumber == "" {
+		return "", status.Error(codes.Internal, "account number is empty")
+	}
+
+	return trip.Agency.AccountNumber, nil
 }

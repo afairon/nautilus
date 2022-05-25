@@ -131,34 +131,128 @@ func (m *ListReservationsWithTripsResponse) GetReservation() *Reservation {
 	return nil
 }
 
+type GetAgencyAccountNumberByTripRequest struct {
+	TripId uint64 `protobuf:"varint,1,opt,name=trip_id,json=tripId,proto3" json:"trip_id,omitempty"`
+}
+
+func (m *GetAgencyAccountNumberByTripRequest) Reset()      { *m = GetAgencyAccountNumberByTripRequest{} }
+func (*GetAgencyAccountNumberByTripRequest) ProtoMessage() {}
+func (*GetAgencyAccountNumberByTripRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_765ae613bf716c8b, []int{2}
+}
+func (m *GetAgencyAccountNumberByTripRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetAgencyAccountNumberByTripRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetAgencyAccountNumberByTripRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetAgencyAccountNumberByTripRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetAgencyAccountNumberByTripRequest.Merge(m, src)
+}
+func (m *GetAgencyAccountNumberByTripRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetAgencyAccountNumberByTripRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetAgencyAccountNumberByTripRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetAgencyAccountNumberByTripRequest proto.InternalMessageInfo
+
+func (m *GetAgencyAccountNumberByTripRequest) GetTripId() uint64 {
+	if m != nil {
+		return m.TripId
+	}
+	return 0
+}
+
+type GetAgencyAccountNumberByTripResponse struct {
+	AccountNumber string `protobuf:"bytes,1,opt,name=account_number,json=accountNumber,proto3" json:"account_number,omitempty"`
+}
+
+func (m *GetAgencyAccountNumberByTripResponse) Reset()      { *m = GetAgencyAccountNumberByTripResponse{} }
+func (*GetAgencyAccountNumberByTripResponse) ProtoMessage() {}
+func (*GetAgencyAccountNumberByTripResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_765ae613bf716c8b, []int{3}
+}
+func (m *GetAgencyAccountNumberByTripResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetAgencyAccountNumberByTripResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetAgencyAccountNumberByTripResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetAgencyAccountNumberByTripResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetAgencyAccountNumberByTripResponse.Merge(m, src)
+}
+func (m *GetAgencyAccountNumberByTripResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetAgencyAccountNumberByTripResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetAgencyAccountNumberByTripResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetAgencyAccountNumberByTripResponse proto.InternalMessageInfo
+
+func (m *GetAgencyAccountNumberByTripResponse) GetAccountNumber() string {
+	if m != nil {
+		return m.AccountNumber
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*ListReservationsWithTripsRequest)(nil), "diver.ListReservationsWithTripsRequest")
 	proto.RegisterType((*ListReservationsWithTripsResponse)(nil), "diver.ListReservationsWithTripsResponse")
+	proto.RegisterType((*GetAgencyAccountNumberByTripRequest)(nil), "diver.GetAgencyAccountNumberByTripRequest")
+	proto.RegisterType((*GetAgencyAccountNumberByTripResponse)(nil), "diver.GetAgencyAccountNumberByTripResponse")
 }
 
 func init() { proto.RegisterFile("diver.proto", fileDescriptor_765ae613bf716c8b) }
 
 var fileDescriptor_765ae613bf716c8b = []byte{
-	// 304 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0x31, 0x4f, 0x42, 0x31,
-	0x14, 0x85, 0x7b, 0x0d, 0x30, 0xf4, 0x39, 0x35, 0x46, 0x11, 0x93, 0x1b, 0x64, 0x91, 0xc4, 0xe4,
-	0x61, 0xd0, 0xc9, 0xd1, 0x38, 0x3a, 0x98, 0xa7, 0x89, 0x89, 0x1b, 0xc8, 0x05, 0x9b, 0xbc, 0x47,
-	0x6b, 0x5b, 0x48, 0xdc, 0x98, 0x9c, 0xfd, 0x19, 0xfe, 0x14, 0x47, 0x46, 0x46, 0x29, 0x8b, 0x23,
-	0x3f, 0xc1, 0xd0, 0x92, 0xc8, 0xa2, 0x8c, 0xe7, 0xf6, 0xbb, 0xa7, 0xa7, 0xa7, 0x3c, 0xe9, 0xc9,
-	0x31, 0x99, 0x54, 0x1b, 0xe5, 0x94, 0x28, 0x07, 0x51, 0x4b, 0x0a, 0xd5, 0xa3, 0x3c, 0xce, 0x6a,
-	0x47, 0x03, 0xa5, 0x06, 0x39, 0xb5, 0x82, 0xea, 0x8e, 0xfa, 0x2d, 0x2a, 0xb4, 0x7b, 0x8d, 0x87,
-	0x8d, 0x5b, 0x5e, 0xbf, 0x91, 0xd6, 0x65, 0x64, 0xc9, 0x8c, 0x3b, 0x4e, 0xaa, 0xa1, 0x7d, 0x90,
-	0xee, 0xf9, 0xde, 0x48, 0x6d, 0x33, 0x7a, 0x19, 0x91, 0x75, 0x62, 0x8f, 0x97, 0x73, 0x59, 0x48,
-	0x57, 0x85, 0x3a, 0x34, 0x4b, 0x59, 0x14, 0x62, 0x9f, 0x57, 0x54, 0xbf, 0x6f, 0xc9, 0x55, 0x77,
-	0xc2, 0x78, 0xad, 0x1a, 0x6f, 0xc0, 0x8f, 0xff, 0xb1, 0xb4, 0x5a, 0x0d, 0x2d, 0x89, 0x53, 0x5e,
-	0x72, 0x46, 0xea, 0x60, 0x99, 0xb4, 0x0f, 0xd2, 0x18, 0x78, 0xc5, 0x04, 0x96, 0x0a, 0x9d, 0x77,
-	0x1c, 0x65, 0x01, 0x12, 0x17, 0x3c, 0x31, 0xbf, 0x6e, 0x55, 0x1e, 0x76, 0xc4, 0x7a, 0x67, 0xe3,
-	0x9e, 0x6c, 0x13, 0x6b, 0x4f, 0x80, 0xef, 0x5e, 0xaf, 0xea, 0xb8, 0x23, 0x33, 0x96, 0x4f, 0x24,
-	0x34, 0x3f, 0xfc, 0x33, 0x98, 0x38, 0x49, 0x63, 0x8f, 0xdb, 0xda, 0xa8, 0x35, 0xb7, 0x83, 0xf1,
-	0x8d, 0x67, 0x70, 0x75, 0x39, 0x9d, 0x23, 0x9b, 0xcd, 0x91, 0x2d, 0xe7, 0x08, 0x13, 0x8f, 0xf0,
-	0xe1, 0x11, 0x3e, 0x3d, 0xc2, 0xd4, 0x23, 0x7c, 0x79, 0x84, 0x6f, 0x8f, 0x6c, 0xe9, 0x11, 0xde,
-	0x17, 0xc8, 0xa6, 0x0b, 0x64, 0xb3, 0x05, 0xb2, 0xc7, 0x52, 0xda, 0xd2, 0xdd, 0x6e, 0x25, 0x7c,
-	0xd0, 0xf9, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xed, 0x9f, 0xa7, 0xd1, 0xe0, 0x01, 0x00, 0x00,
+	// 394 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x3d, 0x0b, 0x13, 0x31,
+	0x18, 0xbe, 0x48, 0x5b, 0x31, 0xa7, 0x0e, 0x41, 0x6c, 0x3d, 0x25, 0xd4, 0x53, 0xb1, 0x58, 0xb8,
+	0x4a, 0x75, 0x72, 0x10, 0x5a, 0x04, 0x11, 0x54, 0xe4, 0x14, 0x04, 0x97, 0x72, 0x1f, 0x6f, 0x6b,
+	0xe0, 0xee, 0x12, 0x93, 0x5c, 0xa5, 0x9b, 0x93, 0xb3, 0x3f, 0xc3, 0x9f, 0xe2, 0xd8, 0xb1, 0xa3,
+	0xbd, 0x2e, 0x8e, 0x5d, 0xdd, 0xe4, 0x92, 0x13, 0xbb, 0xd8, 0x76, 0x7c, 0xf2, 0x3e, 0x1f, 0x79,
+	0xf2, 0x06, 0xbb, 0x29, 0x5b, 0x82, 0x0c, 0x84, 0xe4, 0x9a, 0x93, 0xb6, 0x01, 0x9e, 0x9b, 0xf3,
+	0x14, 0x32, 0x7b, 0xe6, 0xdd, 0x5c, 0x70, 0xbe, 0xc8, 0x60, 0x64, 0x50, 0x5c, 0xce, 0x47, 0x90,
+	0x0b, 0xbd, 0xb2, 0x43, 0xff, 0x0d, 0xee, 0xbf, 0x64, 0x4a, 0x87, 0xa0, 0x40, 0x2e, 0x23, 0xcd,
+	0x78, 0xa1, 0xde, 0x33, 0xfd, 0xf1, 0x9d, 0x64, 0x42, 0x85, 0xf0, 0xa9, 0x04, 0xa5, 0xc9, 0x35,
+	0xdc, 0xce, 0x58, 0xce, 0x74, 0x0f, 0xf5, 0xd1, 0xa0, 0x15, 0x5a, 0x40, 0xae, 0xe3, 0x0e, 0x9f,
+	0xcf, 0x15, 0xe8, 0xde, 0x05, 0x73, 0xdc, 0x20, 0xff, 0x2b, 0xc2, 0xb7, 0x8f, 0x58, 0x2a, 0xc1,
+	0x0b, 0x05, 0x64, 0x88, 0x5b, 0x5a, 0x32, 0x61, 0x2c, 0xdd, 0x71, 0x37, 0xb0, 0x17, 0xae, 0x39,
+	0x86, 0x0b, 0xb9, 0xc8, 0x22, 0x0d, 0xa1, 0x21, 0x91, 0xc7, 0xd8, 0x95, 0xff, 0xdc, 0x7a, 0xd8,
+	0x68, 0x48, 0xa3, 0x39, 0xc8, 0x09, 0x0f, 0x69, 0xfe, 0x53, 0x7c, 0xe7, 0x39, 0xe8, 0xc9, 0x02,
+	0x8a, 0x64, 0x35, 0x49, 0x12, 0x5e, 0x16, 0xfa, 0x75, 0x99, 0xc7, 0x20, 0xa7, 0xab, 0x3a, 0xe7,
+	0x6f, 0xbb, 0x2e, 0xbe, 0x58, 0x87, 0xcc, 0x58, 0xda, 0xf4, 0xeb, 0xd4, 0xf0, 0x45, 0xea, 0xbf,
+	0xc2, 0x77, 0x8f, 0xeb, 0x9b, 0x2a, 0xf7, 0xf0, 0xd5, 0xc8, 0x8e, 0x67, 0x85, 0x99, 0x1b, 0x9f,
+	0x4b, 0xe1, 0x95, 0xe8, 0x50, 0x34, 0xfe, 0x8d, 0xf0, 0xe5, 0x67, 0xf5, 0x76, 0xde, 0x82, 0x5c,
+	0xb2, 0x04, 0x88, 0xc0, 0x37, 0xfe, 0xfb, 0x4e, 0xe4, 0x7e, 0x60, 0xd7, 0x7a, 0x6a, 0x39, 0xde,
+	0xe0, 0x34, 0xd1, 0xde, 0xf3, 0x21, 0x22, 0x9f, 0xf1, 0xad, 0x63, 0x8d, 0xc8, 0x83, 0xc6, 0xeb,
+	0x8c, 0x67, 0xf3, 0x86, 0x67, 0x71, 0x6d, 0xf4, 0xf4, 0xc9, 0x7a, 0x4b, 0x9d, 0xcd, 0x96, 0x3a,
+	0xfb, 0x2d, 0x45, 0x5f, 0x2a, 0x8a, 0xbe, 0x57, 0x14, 0xfd, 0xa8, 0x28, 0x5a, 0x57, 0x14, 0xfd,
+	0xac, 0x28, 0xfa, 0x55, 0x51, 0x67, 0x5f, 0x51, 0xf4, 0x6d, 0x47, 0x9d, 0xf5, 0x8e, 0x3a, 0x9b,
+	0x1d, 0x75, 0x3e, 0xb4, 0x82, 0x91, 0x88, 0xe3, 0x8e, 0xf9, 0xa8, 0x8f, 0xfe, 0x04, 0x00, 0x00,
+	0xff, 0xff, 0x35, 0x58, 0x05, 0x0d, 0xe8, 0x02, 0x00, 0x00,
 }
 
 func (this *ListReservationsWithTripsRequest) Equal(that interface{}) bool {
@@ -215,6 +309,54 @@ func (this *ListReservationsWithTripsResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *GetAgencyAccountNumberByTripRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetAgencyAccountNumberByTripRequest)
+	if !ok {
+		that2, ok := that.(GetAgencyAccountNumberByTripRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.TripId != that1.TripId {
+		return false
+	}
+	return true
+}
+func (this *GetAgencyAccountNumberByTripResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*GetAgencyAccountNumberByTripResponse)
+	if !ok {
+		that2, ok := that.(GetAgencyAccountNumberByTripResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.AccountNumber != that1.AccountNumber {
+		return false
+	}
+	return true
+}
 func (this *ListReservationsWithTripsRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -238,6 +380,26 @@ func (this *ListReservationsWithTripsResponse) GoString() string {
 	if this.Reservation != nil {
 		s = append(s, "Reservation: "+fmt.Sprintf("%#v", this.Reservation)+",\n")
 	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *GetAgencyAccountNumberByTripRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.GetAgencyAccountNumberByTripRequest{")
+	s = append(s, "TripId: "+fmt.Sprintf("%#v", this.TripId)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *GetAgencyAccountNumberByTripResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.GetAgencyAccountNumberByTripResponse{")
+	s = append(s, "AccountNumber: "+fmt.Sprintf("%#v", this.AccountNumber)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -265,6 +427,7 @@ type DiverServiceClient interface {
 	// List the trips that the diver has made reservation for
 	// This should be refactored to two endpoints?
 	ListReservationsWithTrips(ctx context.Context, in *ListReservationsWithTripsRequest, opts ...grpc.CallOption) (DiverService_ListReservationsWithTripsClient, error)
+	GetAgencyAccountNumberByTrip(ctx context.Context, in *GetAgencyAccountNumberByTripRequest, opts ...grpc.CallOption) (*GetAgencyAccountNumberByTripResponse, error)
 }
 
 type diverServiceClient struct {
@@ -307,11 +470,21 @@ func (x *diverServiceListReservationsWithTripsClient) Recv() (*ListReservationsW
 	return m, nil
 }
 
+func (c *diverServiceClient) GetAgencyAccountNumberByTrip(ctx context.Context, in *GetAgencyAccountNumberByTripRequest, opts ...grpc.CallOption) (*GetAgencyAccountNumberByTripResponse, error) {
+	out := new(GetAgencyAccountNumberByTripResponse)
+	err := c.cc.Invoke(ctx, "/diver.DiverService/GetAgencyAccountNumberByTrip", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DiverServiceServer is the server API for DiverService service.
 type DiverServiceServer interface {
 	// List the trips that the diver has made reservation for
 	// This should be refactored to two endpoints?
 	ListReservationsWithTrips(*ListReservationsWithTripsRequest, DiverService_ListReservationsWithTripsServer) error
+	GetAgencyAccountNumberByTrip(context.Context, *GetAgencyAccountNumberByTripRequest) (*GetAgencyAccountNumberByTripResponse, error)
 }
 
 // UnimplementedDiverServiceServer can be embedded to have forward compatible implementations.
@@ -320,6 +493,9 @@ type UnimplementedDiverServiceServer struct {
 
 func (*UnimplementedDiverServiceServer) ListReservationsWithTrips(req *ListReservationsWithTripsRequest, srv DiverService_ListReservationsWithTripsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListReservationsWithTrips not implemented")
+}
+func (*UnimplementedDiverServiceServer) GetAgencyAccountNumberByTrip(ctx context.Context, req *GetAgencyAccountNumberByTripRequest) (*GetAgencyAccountNumberByTripResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAgencyAccountNumberByTrip not implemented")
 }
 
 func RegisterDiverServiceServer(s *grpc.Server, srv DiverServiceServer) {
@@ -347,10 +523,33 @@ func (x *diverServiceListReservationsWithTripsServer) Send(m *ListReservationsWi
 	return x.ServerStream.SendMsg(m)
 }
 
+func _DiverService_GetAgencyAccountNumberByTrip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgencyAccountNumberByTripRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DiverServiceServer).GetAgencyAccountNumberByTrip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/diver.DiverService/GetAgencyAccountNumberByTrip",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DiverServiceServer).GetAgencyAccountNumberByTrip(ctx, req.(*GetAgencyAccountNumberByTripRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _DiverService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "diver.DiverService",
 	HandlerType: (*DiverServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAgencyAccountNumberByTrip",
+			Handler:    _DiverService_GetAgencyAccountNumberByTrip_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ListReservationsWithTrips",
@@ -441,6 +640,64 @@ func (m *ListReservationsWithTripsResponse) MarshalToSizedBuffer(dAtA []byte) (i
 	return len(dAtA) - i, nil
 }
 
+func (m *GetAgencyAccountNumberByTripRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetAgencyAccountNumberByTripRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetAgencyAccountNumberByTripRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.TripId != 0 {
+		i = encodeVarintDiver(dAtA, i, uint64(m.TripId))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetAgencyAccountNumberByTripResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetAgencyAccountNumberByTripResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetAgencyAccountNumberByTripResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.AccountNumber) > 0 {
+		i -= len(m.AccountNumber)
+		copy(dAtA[i:], m.AccountNumber)
+		i = encodeVarintDiver(dAtA, i, uint64(len(m.AccountNumber)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintDiver(dAtA []byte, offset int, v uint64) int {
 	offset -= sovDiver(v)
 	base := offset
@@ -484,6 +741,31 @@ func (m *ListReservationsWithTripsResponse) Size() (n int) {
 	return n
 }
 
+func (m *GetAgencyAccountNumberByTripRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.TripId != 0 {
+		n += 1 + sovDiver(uint64(m.TripId))
+	}
+	return n
+}
+
+func (m *GetAgencyAccountNumberByTripResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.AccountNumber)
+	if l > 0 {
+		n += 1 + l + sovDiver(uint64(l))
+	}
+	return n
+}
+
 func sovDiver(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -508,6 +790,26 @@ func (this *ListReservationsWithTripsResponse) String() string {
 	s := strings.Join([]string{`&ListReservationsWithTripsResponse{`,
 		`Trip:` + strings.Replace(fmt.Sprintf("%v", this.Trip), "TripWithTemplate", "TripWithTemplate", 1) + `,`,
 		`Reservation:` + strings.Replace(fmt.Sprintf("%v", this.Reservation), "Reservation", "Reservation", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetAgencyAccountNumberByTripRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetAgencyAccountNumberByTripRequest{`,
+		`TripId:` + fmt.Sprintf("%v", this.TripId) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *GetAgencyAccountNumberByTripResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&GetAgencyAccountNumberByTripResponse{`,
+		`AccountNumber:` + fmt.Sprintf("%v", this.AccountNumber) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -708,6 +1010,157 @@ func (m *ListReservationsWithTripsResponse) Unmarshal(dAtA []byte) error {
 			if err := m.Reservation.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipDiver(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetAgencyAccountNumberByTripRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowDiver
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetAgencyAccountNumberByTripRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetAgencyAccountNumberByTripRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TripId", wireType)
+			}
+			m.TripId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TripId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipDiver(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetAgencyAccountNumberByTripResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowDiver
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetAgencyAccountNumberByTripResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetAgencyAccountNumberByTripResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccountNumber", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiver
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDiver
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiver
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AccountNumber = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

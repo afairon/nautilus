@@ -138,3 +138,97 @@ class ListReservationsWithTripsResponse extends $pb.GeneratedMessage {
   $14.Reservation ensureReservation() => $_ensure(1);
 }
 
+class GetAgencyAccountNumberByTripRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAgencyAccountNumberByTripRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tripId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  GetAgencyAccountNumberByTripRequest._() : super();
+  factory GetAgencyAccountNumberByTripRequest({
+    $fixnum.Int64? tripId,
+  }) {
+    final _result = create();
+    if (tripId != null) {
+      _result.tripId = tripId;
+    }
+    return _result;
+  }
+  factory GetAgencyAccountNumberByTripRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAgencyAccountNumberByTripRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAgencyAccountNumberByTripRequest clone() => GetAgencyAccountNumberByTripRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAgencyAccountNumberByTripRequest copyWith(void Function(GetAgencyAccountNumberByTripRequest) updates) => super.copyWith((message) => updates(message as GetAgencyAccountNumberByTripRequest)) as GetAgencyAccountNumberByTripRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAgencyAccountNumberByTripRequest create() => GetAgencyAccountNumberByTripRequest._();
+  GetAgencyAccountNumberByTripRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAgencyAccountNumberByTripRequest> createRepeated() => $pb.PbList<GetAgencyAccountNumberByTripRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAgencyAccountNumberByTripRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAgencyAccountNumberByTripRequest>(create);
+  static GetAgencyAccountNumberByTripRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get tripId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set tripId($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTripId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTripId() => clearField(1);
+}
+
+class GetAgencyAccountNumberByTripResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAgencyAccountNumberByTripResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'diver'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountNumber')
+    ..hasRequiredFields = false
+  ;
+
+  GetAgencyAccountNumberByTripResponse._() : super();
+  factory GetAgencyAccountNumberByTripResponse({
+    $core.String? accountNumber,
+  }) {
+    final _result = create();
+    if (accountNumber != null) {
+      _result.accountNumber = accountNumber;
+    }
+    return _result;
+  }
+  factory GetAgencyAccountNumberByTripResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAgencyAccountNumberByTripResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAgencyAccountNumberByTripResponse clone() => GetAgencyAccountNumberByTripResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAgencyAccountNumberByTripResponse copyWith(void Function(GetAgencyAccountNumberByTripResponse) updates) => super.copyWith((message) => updates(message as GetAgencyAccountNumberByTripResponse)) as GetAgencyAccountNumberByTripResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAgencyAccountNumberByTripResponse create() => GetAgencyAccountNumberByTripResponse._();
+  GetAgencyAccountNumberByTripResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAgencyAccountNumberByTripResponse> createRepeated() => $pb.PbList<GetAgencyAccountNumberByTripResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAgencyAccountNumberByTripResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAgencyAccountNumberByTripResponse>(create);
+  static GetAgencyAccountNumberByTripResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accountNumber => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accountNumber($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccountNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountNumber() => clearField(1);
+}
+

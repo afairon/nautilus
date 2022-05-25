@@ -88,6 +88,7 @@ message Agency {
     Account account = 30;
     Address address = 40 [(gogoproto.nullable) = false];
     Coordinate coordinate = 45;
+    string account_number = 46;
     repeated File documents = 50 [(gogoproto.nullable) = false];
     google.protobuf.Timestamp created_at = 60 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp updated_at = 70 [(gogoproto.stdtime) = true];
