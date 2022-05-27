@@ -99,3 +99,47 @@ func TestPaymentUpdatePaymentSlip(t *testing.T) {
 		})
 	}
 }
+
+func TestPaymentUpdatePaymentStatus(t *testing.T) {
+	type paymentUpdatePaymentStatusTestCase struct {
+		name          string
+		expectedError error
+	}
+
+	ctx := context.Background()
+	req := &pb.UpdatePaymentStatusRequest{
+		Payment: &pb.Payment{},
+	}
+	modelPayment := model.Payment{}
+	modelPayment.From(req.Payment)
+
+	testCases := []paymentUpdatePaymentStatusTestCase{
+		{
+			name:          "successful",
+			expectedError: nil,
+		},
+		{
+			name:          "fail",
+			expectedError: errors.New(""),
+		},
+	}
+
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			paymentService := service.NewPaymentServiceMock()
+			paymentService.On("UpdatePaymentStatus", ctx, &modelPayment).Return(c.expectedError)
+			paymentHandler := handler.NewPaymentHandler(paymentService)
+
+			//Act
+			_, err := paymentHandler.UpdatePaymentStatus(ctx, req)
+
+			//Assert
+			if c.expectedError != nil {
+				assert.ErrorIs(t, err, c.expectedError)
+			} else {
+				assert.NoError(t, err)
+			}
+		})
+	}
+}
