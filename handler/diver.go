@@ -29,7 +29,7 @@ func (handler *DiverHandler) ListReservationsWithTrips(req *pb.ListReservationsW
 	}
 
 	if len(reservations) == 0 {
-		return status.Error(codes.NotFound, "ListTrips: not found")
+		return status.Error(codes.NotFound, "ListReservationsWithTrips: not found")
 	}
 
 	for _, reservation := range reservations {
