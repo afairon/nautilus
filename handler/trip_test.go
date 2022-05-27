@@ -65,14 +65,14 @@ func TestTripListValidTrips(t *testing.T) {
 		t.Run(c.name, func(t *testing.T) {
 			//Arrange
 			tripService := service.NewTripServiceMock()
-			tripService.On("ListReservationsWithTrips", ctx, req.Limit, req.Offset).Return(c.serviceResponse, c.expectedError)
+			tripService.On("ListValidTrips", ctx, req.Limit, req.Offset).Return(c.serviceResponse, c.expectedError)
 			srv := &mockTripService_ListValidTripsServer{}
 			srv.On("Send", mock.AnythingOfType("*pb.ListValidTripsResponse")).Return(nil)
 			srv.On("Context").Return(context.Background())
-			handler := handler.NewDiverHandler(tripService)
+			handler := handler.NewTripHandler(tripService)
 
 			//Act
-			err := handler.ListReservationsWithTrips(req, srv)
+			err := handler.ListValidTrips(req, srv)
 
 			//Assert
 			if c.expectedError != nil {
@@ -84,19 +84,18 @@ func TestTripListValidTrips(t *testing.T) {
 		})
 	}
 
-	t.Run("reservation not found", func(t *testing.T) {
+	t.Run("trip not found", func(t *testing.T) {
 		//Arrange
-		diverService := service.NewDiverServiceMock()
-		diverService.On("ListReservationsWithTrips", ctx, req.Limit, req.Offset).Return(nil, nil)
-		srv := &mockDiverService_ListReservationsWithTripsServer{}
-		srv.On("Send", mock.AnythingOfType("*pb.ListReservationsWithTripsResponse")).Return(nil)
+		tripService := service.NewTripServiceMock()
+		tripService.On("ListValidTrips", ctx, req.Limit, req.Offset).Return(nil, nil)
+		srv := &mockTripService_ListValidTripsServer{}
 		srv.On("Context").Return(context.Background())
-		handler := handler.NewDiverHandler(diverService)
+		handler := handler.NewTripHandler(tripService)
 
 		//Act
-		err := handler.ListReservationsWithTrips(req, srv)
+		err := handler.ListValidTrips(req, srv)
 
 		//Assert
-		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListReservationsWithTrips: not found"))
+		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListValidTrips: not found"))
 	})
 }
