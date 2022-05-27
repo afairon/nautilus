@@ -143,3 +143,46 @@ func TestPaymentUpdatePaymentStatus(t *testing.T) {
 		})
 	}
 }
+
+func TestPaymentGetPaymentByReservation(t *testing.T) {
+	type paymentUpdatePaymentStatusTestCase struct {
+		name          string
+		expectedError error
+	}
+
+	ctx := context.Background()
+	req := &pb.GetPaymentByReservationRequest{
+		ReservationId: 2,
+	}
+
+	testCases := []paymentUpdatePaymentStatusTestCase{
+		{
+			name:          "successful",
+			expectedError: nil,
+		},
+		{
+			name:          "fail",
+			expectedError: errors.New(""),
+		},
+	}
+
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			paymentService := service.NewPaymentServiceMock()
+			paymentService.On("GetPaymentByReservation", ctx, req.ReservationId).Return(&model.Payment{}, c.expectedError)
+			paymentHandler := handler.NewPaymentHandler(paymentService)
+
+			//Act
+			resp, err := paymentHandler.GetPaymentByReservation(ctx, req)
+
+			//Assert
+			if c.expectedError != nil {
+				assert.ErrorIs(t, err, c.expectedError)
+			} else {
+				assert.NoError(t, err)
+				assert.NotNil(t, resp)
+			}
+		})
+	}
+}
