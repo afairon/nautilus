@@ -43,7 +43,6 @@ func (handler *RoomTypeHandler) ListRoomTypesByTrip(req *pb.ListRoomTypesByTripR
 	}
 
 	for _, roomType := range roomTypes {
-		fmt.Printf("%+v\n", roomType)
 		resp := &pb.ListRoomTypesByTripResponse{
 			RoomType: roomType.GetProto(),
 		}
@@ -66,6 +65,7 @@ func (handler *RoomTypeHandler) ListRoomsOfReservation(req *pb.ListRoomsOfReserv
 	}
 
 	for _, reservationRoom := range reservationRooms {
+		fmt.Println("OK")
 		resp := &pb.ListRoomsOfReservationResponse{
 			Room: reservationRoom.GetProto(),
 		}
