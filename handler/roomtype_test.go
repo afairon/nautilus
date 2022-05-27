@@ -225,3 +225,49 @@ func TestRoomTypeListRoomsOfReservation(t *testing.T) {
 		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListRoomsOfReservation: not found"))
 	})
 }
+
+func TestRoomTypeGetRoomType(t *testing.T) {
+	type roomTypeGetRoomTypeTestCase struct {
+		name           string
+		expectedError  error
+		expectedOutput *model.RoomType
+	}
+
+	testCases := []roomTypeGetRoomTypeTestCase{
+		{
+			name:           "successful",
+			expectedError:  nil,
+			expectedOutput: &model.RoomType{},
+		},
+		{
+			name:          "fail",
+			expectedError: errors.New(""),
+		},
+	}
+
+	req := &pb.GetRoomTypeRequest{
+		RoomTypeId: 1,
+	}
+	ctx := context.Background()
+
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			roomTypeService := service.NewRoomTypeServiceMock()
+			roomTypeService.On("GetRoomType", ctx, req.RoomTypeId).Return(c.expectedOutput, c.expectedError)
+			hotelHandler := handler.NewRoomTypeHandler(roomTypeService)
+
+			//Act
+			resp, err := hotelHandler.GetRoomType(ctx, req)
+
+			//Assert
+			if c.expectedError != nil {
+				assert.ErrorIs(t, err, c.expectedError)
+				assert.Nil(t, resp)
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, int(c.expectedOutput.ID), int(resp.RoomType.Id))
+			}
+		})
+	}
+}
