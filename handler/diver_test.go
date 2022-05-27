@@ -115,3 +115,47 @@ func TestDiverListReservationsWithTrips(t *testing.T) {
 		assert.ErrorIs(t, err, status.Error(codes.NotFound, "ListReservationsWithTrips: not found"))
 	})
 }
+
+func TestDiverGetAgencyAccountNumberByTrip(t *testing.T) {
+	type diverGetAgencyAccountNumberByTripTestCase struct {
+		name           string
+		expectedOutput string
+		expectedError  error
+	}
+
+	testCases := []diverGetAgencyAccountNumberByTripTestCase{
+		{
+			name:           "successful",
+			expectedOutput: "12345",
+			expectedError:  nil,
+		},
+		{
+			name:           "fail",
+			expectedOutput: "",
+			expectedError:  errors.New(""),
+		},
+	}
+
+	req := &pb.GetAgencyAccountNumberByTripRequest{
+		TripId: 1,
+	}
+	ctx := context.Background()
+
+	for _, c := range testCases {
+		t.Run(c.name, func(t *testing.T) {
+			//Arrange
+			diverService := service.NewDiverServiceMock()
+			diverService.On("GetAgencyAccountNumberByTrip", ctx, req.TripId).Return(c.expectedOutput, c.expectedError)
+			diverHandler := handler.NewDiverHandler(diverService)
+
+			//Act
+			resp, err := diverHandler.GetAgencyAccountNumberByTrip(ctx, req)
+
+			//Assert
+			assert.ErrorIs(t, err, c.expectedError)
+			if c.expectedError == nil && c.expectedOutput != "" {
+				assert.Equal(t, c.expectedOutput, resp.AccountNumber)
+			}
+		})
+	}
+}
