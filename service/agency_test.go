@@ -36,9 +36,10 @@ func (suite *AgencySuite) SetupSuite() {
 }
 
 func (suite *AgencySuite) SetupTest() {
+	fmt.Println("Set up test")
 	var err error
 
-	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+	suite.db, err = gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
 	suite.Nil(err)
 
 	err = suite.db.AutoMigrate(&model.Agency{}, &model.Diver{}, &model.Account{},
@@ -72,6 +73,12 @@ func (suite *AgencySuite) SetupTest() {
 			Type:     model.AGENCY,
 		},
 	}
+}
+
+func (suite *AgencySuite) TearDownTest() {
+	fmt.Println("Tearing down")
+	suite.repository = nil
+	suite.db = nil
 }
 
 func TestAgencySuite(t *testing.T) {
@@ -368,7 +375,7 @@ func (suite *AgencySuite) TestAgencyAddStaffFailRetrievingAccountFromContext() {
 	suite.Equal(oldCount, newCount)
 }
 
-func (suite *AgencySuite) TestAgencyAddTripSuccessful() {
+func (suite *AgencySuite) TestAgencyAddTripOnshoreSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
@@ -398,19 +405,11 @@ func (suite *AgencySuite) TestAgencyAddTripSuccessful() {
 		Schedule:            "schedule",
 		DiveMasters:         []model.DiveMaster{},
 		TripTemplate: model.TripTemplate{
-			Name:         "",
-			Description:  "",
-			Type:         0,
-			AddressID:    0,
-			Address:      model.Address{},
-			Trips:        []model.Trip{},
-			AgencyID:     0,
-			HotelID:      0,
-			Hotel:        model.Hotel{},
-			LiveaboardID: 0,
-			Liveaboard:   model.Liveaboard{},
-			BoatID:       0,
-			Boat:         model.Boat{},
+			Name:        "",
+			Description: "",
+			Type:        model.ONSHORE,
+			HotelID:     1,
+			BoatID:      1,
 			Files: []*model.File{
 				{
 					Filename: "image.jpg",
@@ -421,7 +420,88 @@ func (suite *AgencySuite) TestAgencyAddTripSuccessful() {
 		},
 		DiveSites: []model.DiveSite{},
 	}
-	roomTypePrices := []model.RoomTypeTripPrice{}
+
+	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
+		{
+			HotelID:    1,
+			RoomTypeID: 1,
+			Price:      500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
+	for _, roomTypePrice := range hotelRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
+
+	//Act
+	err := suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	//Assert
+	var newCount int64
+	suite.NoError(err)
+	suite.db.Model(&model.Trip{}).Count(&newCount)
+	suite.Equal(oldCount+1, newCount)
+}
+
+func (suite *AgencySuite) TestAgencyAddTripOffshoreSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Trip{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	lastReservationDate := time.Now()
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		DiveMasters:         []model.DiveMaster{},
+		TripTemplate: model.TripTemplate{
+			Name:        "",
+			Description: "",
+			Type:        model.OFFSHORE,
+			HotelID:     1,
+			BoatID:      1,
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+
+	hotelRoomTypePrices := []model.LiveaboardRoomTypeTripPrice{
+		{
+			LiveaboardID: 1,
+			RoomTypeID:   1,
+			Price:        500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
+	for _, roomTypePrice := range hotelRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
 
 	//Act
 	err := suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
