@@ -301,3 +301,66 @@ func (suite *AgencySuite) TestAgencyAddHotelFailRetrievingAccountFromContext() {
 	suite.db.Model(&model.Hotel{}).Count(&newCount)
 	suite.Equal(oldCount, newCount)
 }
+
+func (suite *AgencySuite) TestAgencyAddStaffSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Staff{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	staff := &pb.Staff{
+		FirstName: "Miyuki",
+		LastName:  "Shirogane",
+		Position:  "President",
+		Gender:    1,
+	}
+
+	//Act
+	err := suite.agencyService.AddStaff(ctx, staff)
+
+	//Assert
+	var newCount int64
+	suite.NoError(err)
+	suite.db.Model(&model.Staff{}).Count(&newCount)
+	suite.Equal(oldCount+1, newCount)
+}
+
+func (suite *AgencySuite) TestAgencyAddStaffFailRetrievingAccountFromContext() {
+	//Arrange
+	med := media.NewStoreMock()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Staff{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	staff := &pb.Staff{
+		FirstName: "Miyuki",
+		LastName:  "Shirogane",
+		Position:  "President",
+		Gender:    1,
+	}
+
+	//Act
+	err := suite.agencyService.AddStaff(ctx, staff)
+
+	//Assert
+	var newCount int64
+	suite.Error(err)
+	suite.db.Model(&model.Staff{}).Count(&newCount)
+	suite.Equal(oldCount, newCount)
+}
