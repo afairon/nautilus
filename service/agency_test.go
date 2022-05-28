@@ -512,3 +512,137 @@ func (suite *AgencySuite) TestAgencyAddTripOffshoreSuccessful() {
 	suite.db.Model(&model.Trip{}).Count(&newCount)
 	suite.Equal(oldCount+1, newCount)
 }
+
+func (suite *AgencySuite) TestAgencyAddDivingBoatSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Boat{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	boat := &pb.Boat{
+		Name:        "",
+		Description: "",
+		Images: []*pb.File{
+			{
+				Filename: "boat.jpg",
+				File:     []byte{1, 2, 3},
+			},
+		},
+		TotalCapacity: 20,
+		DiverCapacity: 10,
+		StaffCapacity: 10,
+	}
+
+	//Act
+	err := suite.agencyService.AddDivingBoat(ctx, boat)
+
+	//Assert
+	var newCount int64
+	suite.NoError(err)
+	suite.db.Model(&model.Boat{}).Count(&newCount)
+	suite.Equal(oldCount+1, newCount)
+}
+
+func (suite *AgencySuite) TestAgencyAddLiveaboardSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Liveaboard{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	liveaboard := &pb.Liveaboard{
+		Name:          "",
+		Description:   "",
+		Length:        2,
+		Width:         3,
+		TotalCapacity: 2,
+		DiverRooms:    2,
+		StaffRooms:    3,
+		Address:       &pb.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Images:        []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+		RoomTypes: []*pb.RoomType{{
+			Id:          0,
+			Name:        "single",
+			Description: "",
+			MaxGuest:    5,
+			Quantity:    5,
+			RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+			Amenities:   []*pb.Amenity{{Id: 1}},
+		}},
+	}
+
+	//Act
+	err := suite.agencyService.AddLiveaboard(ctx, liveaboard)
+
+	//Assert
+	var newCount int64
+	suite.NoError(err)
+	suite.db.Model(&model.Liveaboard{}).Count(&newCount)
+	suite.Equal(oldCount+1, newCount)
+}
+
+func (suite *AgencySuite) TestAgencyAddLiveaboardFailRetrievingAccountFromContext() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Liveaboard{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	liveaboard := &pb.Liveaboard{
+		Name:          "",
+		Description:   "",
+		Length:        2,
+		Width:         3,
+		TotalCapacity: 2,
+		DiverRooms:    2,
+		StaffRooms:    3,
+		Address:       &pb.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Images:        []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+		RoomTypes: []*pb.RoomType{{
+			Id:          0,
+			Name:        "single",
+			Description: "",
+			MaxGuest:    5,
+			Quantity:    5,
+			RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+			Amenities:   []*pb.Amenity{{Id: 1}},
+		}},
+	}
+
+	//Act
+	err := suite.agencyService.AddLiveaboard(ctx, liveaboard)
+
+	//Assert
+	var newCount int64
+	suite.Error(err)
+	suite.db.Model(&model.Liveaboard{}).Count(&newCount)
+	suite.Equal(oldCount, newCount)
+}
