@@ -2,7 +2,9 @@ package s3
 
 import (
 	"io"
+	"mime"
 	"path"
+	"path/filepath"
 	"time"
 
 	"github.com/afairon/nautilus/config"
@@ -66,9 +68,10 @@ func (c *Client) Put(filename string, perm media.Permission, reader io.ReadSeeke
 
 	// Create input object
 	putObjectInput := &s3.PutObjectInput{
-		Body:   reader,
-		Bucket: aws.String(c.Bucket),
-		Key:    aws.String(file),
+		Body:        reader,
+		Bucket:      aws.String(c.Bucket),
+		Key:         aws.String(file),
+		ContentType: aws.String(mime.TypeByExtension(filepath.Ext(filename))),
 	}
 
 	// Set ACL

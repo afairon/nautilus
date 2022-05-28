@@ -80,10 +80,12 @@ type Storage struct {
 }
 
 type SMTP struct {
-	Host     string `yaml:"host"`
-	Port     int    `yaml:"port"`
-	Email    string `yaml:"email"`
-	Password string `yaml:"password"`
+	Host      string `yaml:"host"`
+	Port      int    `yaml:"port"`
+	Username  string `yaml:"username"`
+	Password  string `yaml:"password"`
+	AuthProto string `yaml:"auth"`
+	TLS       bool   `yaml:"tls"`
 }
 
 type Log struct {
@@ -133,6 +135,15 @@ func LoadConfig(filename string) (*Config, error) {
 		},
 	}
 	err = config.read(data)
+
+	if config.Storage.S3 != nil {
+		if config.Storage.S3.Region == "" {
+			config.Storage.S3.Region = "us-west-2"
+		}
+		if config.Storage.S3.Duration == 0 {
+			config.Storage.S3.Duration = 15
+		}
+	}
 
 	return config, err
 }
@@ -228,14 +239,16 @@ func (c *Config) GetSMTP() *SMTP {
 	return c.SMTP
 }
 
-func (c *Config) SetSMTP(host string, port int, email, password string) {
+func (c *Config) SetSMTP(host string, port int, username, password, auth string, tls bool) {
 	if c.SMTP == nil {
 		c.SMTP = &SMTP{}
 	}
 	c.SMTP.Host = host
 	c.SMTP.Port = port
-	c.SMTP.Email = email
+	c.SMTP.Username = username
 	c.SMTP.Password = password
+	c.SMTP.AuthProto = auth
+	c.SMTP.TLS = tls
 }
 
 func (c *Config) GetLog() *Log {

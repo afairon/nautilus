@@ -4,9 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/model"
-	"github.com/afairon/nautilus/pb"
 	"gorm.io/gorm"
 )
 
@@ -18,17 +16,17 @@ type AgencyRepository interface {
 	CreateDiveMaster(ctx context.Context, diveMaster *model.DiveMaster) (*model.DiveMaster, error)
 	CreateHotel(ctx context.Context, hotel *model.Hotel) (*model.Hotel, error)
 	CreateRoomType(ctx context.Context, roomType *model.RoomType, isHotel bool) (*model.RoomType, error)
-	CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error)
-	CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
+	CreateAmenity(ctx context.Context, amenity *model.Amenity) (*model.Amenity, error)
+	// CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error)
 	CreateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error)
 	CreateTrip(ctx context.Context, trip *model.Trip) (*model.Trip, error)
 	CreateDiveMasterTripLink(ctx context.Context, diveMasterTripLink *model.DiveMasterTrip) (*model.DiveMasterTrip, error)
 	CreateBoat(ctx context.Context, divingBoat *model.Boat) (*model.Boat, error)
 	CreateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
 	CreateLiveaboard(ctx context.Context, liveaboard *model.Liveaboard) (*model.Liveaboard, error)
-	CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error)
-	Get(ctx context.Context, id uint64) (*entity.Agency, error)
-	List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error)
+	CreateAddress(ctx context.Context, address *model.Address) (*model.Address, error)
+	Get(ctx context.Context, id uint64) (*model.Agency, error)
+	List(ctx context.Context, limit, offset uint64) ([]*model.Agency, error)
 }
 
 // agencyRepository implements AgencyRepository interface.
@@ -144,7 +142,7 @@ func (repo *agencyRepository) CreateRoomType(ctx context.Context, roomType *mode
 	return nil, errors.New("Unimplemented")
 }
 
-func (repo *agencyRepository) CreateAmenity(ctx context.Context, amenity *entity.Amenity) (*entity.Amenity, error) {
+func (repo *agencyRepository) CreateAmenity(ctx context.Context, amenity *model.Amenity) (*model.Amenity, error) {
 	// 	var result entity.Amenity
 
 	// 	err := repo.db.GetContext(ctx, &result, `
@@ -160,21 +158,21 @@ func (repo *agencyRepository) CreateAmenity(ctx context.Context, amenity *entity
 	return nil, errors.New("Unimplemented")
 }
 
-func (repo *agencyRepository) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error) {
-	// var result entity.RoomAmenity
+// func (repo *agencyRepository) CreateRoomAmenity(ctx context.Context, roomAmenity *entity.RoomAmenity) (*entity.RoomAmenity, error) {
+// var result entity.RoomAmenity
 
-	// err := repo.db.GetContext(ctx, &result, `
-	// 	INSERT INTO
-	// 		public.room_amenity_link
-	// 		(room_type_id, amenity_id)
-	// 	VALUES
-	// 		($1, $2)
-	// 	RETURNING id, room_type_id, amenity_id
-	// 	`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
+// err := repo.db.GetContext(ctx, &result, `
+// 	INSERT INTO
+// 		public.room_amenity_link
+// 		(room_type_id, amenity_id)
+// 	VALUES
+// 		($1, $2)
+// 	RETURNING id, room_type_id, amenity_id
+// 	`, roomAmenity.RoomTypeId, roomAmenity.AmenityId)
 
-	// return &result, err
-	return nil, errors.New("Unimplemented")
-}
+// return &result, err
+// return nil, errors.New("Unimplemented")
+// }
 
 func (repo *agencyRepository) CreateTripTemplate(ctx context.Context, tripTemplate *model.TripTemplate) (*model.TripTemplate, error) {
 	result := repo.db.Create(tripTemplate)
@@ -224,7 +222,7 @@ func (repo *agencyRepository) CreateLiveaboard(ctx context.Context, liveaboard *
 	return liveaboard, result.Error
 }
 
-func (repo *agencyRepository) CreateAddress(ctx context.Context, address *entity.Address) (*entity.Address, error) {
+func (repo *agencyRepository) CreateAddress(ctx context.Context, address *model.Address) (*model.Address, error) {
 	// var result entity.Address
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -241,7 +239,7 @@ func (repo *agencyRepository) CreateAddress(ctx context.Context, address *entity
 }
 
 // Get retrieves the agency record by its id.
-func (repo *agencyRepository) Get(ctx context.Context, id uint64) (*entity.Agency, error) {
+func (repo *agencyRepository) Get(ctx context.Context, id uint64) (*model.Agency, error) {
 	// var result entity.Agency
 
 	// err := repo.db.GetContext(ctx, &result, `
@@ -258,7 +256,7 @@ func (repo *agencyRepository) Get(ctx context.Context, id uint64) (*entity.Agenc
 }
 
 // List returns list of agencies.
-func (repo *agencyRepository) List(ctx context.Context, limit, offset uint64) ([]pb.Agency, error) {
+func (repo *agencyRepository) List(ctx context.Context, limit, offset uint64) ([]*model.Agency, error) {
 	// rows, err := repo.db.Queryx(`
 	// 	SELECT
 	// 		agency.id, agency.name, agency.phone, agency.documents, agency.created_on, agency.updated_on,

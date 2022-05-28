@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/afairon/nautilus/entity"
 	"github.com/afairon/nautilus/model"
 	"gorm.io/gorm"
 )
@@ -12,7 +11,7 @@ import (
 // StaffRepository defines interface for interaction
 // with the staff repository.
 type StaffRepository interface {
-	Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error)
+	Create(ctx context.Context, staff *model.Staff) (*model.Staff, error)
 	Get(ctx context.Context, id uint64) (*model.Staff, error)
 
 	UpdateStaff(ctx context.Context, staff *model.Staff) (*model.Staff, error)
@@ -34,7 +33,7 @@ func NewStaffRepository(db *gorm.DB) *staffRepository {
 }
 
 // Create creates an staff record and returns the newly created record.
-func (repo *staffRepository) Create(ctx context.Context, staff *entity.Staff) (*entity.Staff, error) {
+func (repo *staffRepository) Create(ctx context.Context, staff *model.Staff) (*model.Staff, error) {
 	// var result entity.Staff
 
 	// err := repo.db.GetContext(ctx, &result, `

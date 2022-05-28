@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up successful</title>
+</head>
+<body>
+    {{ if eq .Account.Type 1 }}
+    <p>Welcome, {{ .Name }}!</p>
+    <p>You have successfully created an agency account.</p>
+    {{ else if eq .Account.Type 2 }}
+    <p>Welcome, {{ .FirstName }} {{ .LastName }}!</p>
+    <p>You have successfully created a diver account.</p>
+    {{ end }}
+</body>
+</html>

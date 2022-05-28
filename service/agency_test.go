@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/pb"
@@ -27,6 +28,7 @@ type AgencySuite struct {
 	db             *gorm.DB
 	agency         *model.Agency
 	session        session.Session
+	mailer         mail.Mailer
 }
 
 func (suite *AgencySuite) SetupSuite() {
@@ -48,6 +50,7 @@ func (suite *AgencySuite) SetupTest() {
 
 	suite.repository = repo.NewRepo(suite.db)
 	suite.session = session.NewJWTManager("secret", 1*time.Hour)
+	suite.mailer = mail.NewDummy()
 
 	suite.agency = &model.Agency{
 		Coordinate: &model.Coordinate{
@@ -79,7 +82,7 @@ func (suite *AgencySuite) TestAgencyAddDiveMasterSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.DiveMaster{}).Count(&oldCount)
@@ -119,7 +122,7 @@ func (suite *AgencySuite) TestAgencyAddDiveMasterMediaFail() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("", errors.New(""))
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.DiveMaster{}).Count(&oldCount)
@@ -163,7 +166,7 @@ func (suite *AgencySuite) TestAgencyAddDiveMasterFailRetrievingAccountFromContex
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 
 	var oldCount int64
@@ -190,7 +193,7 @@ func (suite *AgencySuite) TestAgencyAddDiveMasterFailSettingDiveMaster() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.DiveMaster{}).Count(&oldCount)
@@ -219,7 +222,7 @@ func (suite *AgencySuite) TestAgencyAddHotelSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.Hotel{}).Count(&oldCount)
@@ -264,7 +267,7 @@ func (suite *AgencySuite) TestAgencyAddHotelFailRetrievingAccountFromContext() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.Hotel{}).Count(&oldCount)
@@ -305,7 +308,7 @@ func (suite *AgencySuite) TestAgencyAddHotelFailRetrievingAccountFromContext() {
 func (suite *AgencySuite) TestAgencyAddStaffSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.Staff{}).Count(&oldCount)
@@ -338,7 +341,7 @@ func (suite *AgencySuite) TestAgencyAddStaffSuccessful() {
 func (suite *AgencySuite) TestAgencyAddStaffFailRetrievingAccountFromContext() {
 	//Arrange
 	med := media.NewStoreMock()
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	var oldCount int64
 	suite.db.Model(&model.Staff{}).Count(&oldCount)
@@ -363,4 +366,69 @@ func (suite *AgencySuite) TestAgencyAddStaffFailRetrievingAccountFromContext() {
 	suite.Error(err)
 	suite.db.Model(&model.Staff{}).Count(&newCount)
 	suite.Equal(oldCount, newCount)
+}
+
+func (suite *AgencySuite) TestAgencyAddTripSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Trip{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	lastReservationDate := time.Now()
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		DiveMasters:         []model.DiveMaster{},
+		TripTemplate: model.TripTemplate{
+			Name:         "",
+			Description:  "",
+			Type:         0,
+			AddressID:    0,
+			Address:      model.Address{},
+			Trips:        []model.Trip{},
+			AgencyID:     0,
+			HotelID:      0,
+			Hotel:        model.Hotel{},
+			LiveaboardID: 0,
+			Liveaboard:   model.Liveaboard{},
+			BoatID:       0,
+			Boat:         model.Boat{},
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+	roomTypePrices := []model.RoomTypeTripPrice{}
+
+	//Act
+	err := suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	//Assert
+	var newCount int64
+	suite.NoError(err)
+	suite.db.Model(&model.Trip{}).Count(&newCount)
+	suite.Equal(oldCount+1, newCount)
 }

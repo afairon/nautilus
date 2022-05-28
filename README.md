@@ -12,12 +12,18 @@ Nautilus is a self-hosted marketplace for diving trip agencies. It uses a Postgr
 - dart protoc_plugin (optional)
 - GNU make
 
+#### Install gogoproto
+```bash
+go install github.com/gogo/protobuf/protoc-gen-gogoslick@latest
+```
+
 ### Build
 
 ```bash
 make            # Build everything
 make server     # Build server
 make run        # Build server and run server
+make test       # Run all tests
 make proto-go   # Generate protobuf files for golang
 make proto-dart # Generate protobuf files for dart
 make update     # Update dependencies and vendor

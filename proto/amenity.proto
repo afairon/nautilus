@@ -4,8 +4,6 @@ package amenity;
 
 import "model.proto";
 
-import "google/protobuf/empty.proto";
-
 option go_package = "./pb";
 
 service AmenityService {
