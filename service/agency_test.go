@@ -1762,3 +1762,43 @@ func (suite *AgencySuite) TestAgencyUpdateDiveMasterSuccessful() {
 	suite.db.First(&updatedDiveMaster, 1)
 	suite.Equal(newDiveMasterInfo.FirstName, updatedDiveMaster.FirstName)
 }
+
+func (suite *AgencySuite) TestAgencyUpdateStaffSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	staff := &pb.Staff{
+		FirstName: "First",
+		LastName:  "Last",
+	}
+
+	suite.agencyService.AddStaff(ctx, staff)
+	newStaffInfo := &model.Staff{
+		Model: gorm.Model{
+			ID: 1,
+		},
+		FirstName: "FirstName2",
+	}
+
+	//Act
+	err := suite.agencyService.UpdateStaff(ctx, newStaffInfo)
+
+	// Assert
+	suite.Nil(err)
+	var updatedStaff model.Staff
+	suite.db.First(&updatedStaff, 1)
+	suite.Equal(newStaffInfo.FirstName, updatedStaff.FirstName)
+}
