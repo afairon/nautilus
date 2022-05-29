@@ -39,7 +39,7 @@ func (suite *AgencySuite) SetupTest() {
 	fmt.Println("Set up test")
 	var err error
 
-	suite.db, err = gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
+	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 	suite.Nil(err)
 
 	err = suite.db.AutoMigrate(&model.Agency{}, &model.Diver{}, &model.Account{},
@@ -1609,4 +1609,110 @@ func (suite *AgencySuite) TestAgencyUpdateTripOffshoreSuccessful() {
 	suite.db.First(&updatedTrip, 1)
 	suite.Equal(trip.Name, updatedTrip.Name)
 	suite.Equal(trip.MaxGuest, updatedTrip.MaxGuest)
+}
+
+func (suite *AgencySuite) TestAgencyUpdateHotelSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	hotel := &pb.Hotel{
+		Name:        "Hotel",
+		Description: "",
+		Stars:       5,
+		Phone:       "0923613883",
+		Address:     &pb.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Images:      []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+		RoomTypes: []*pb.RoomType{{
+			Id:          0,
+			Name:        "single",
+			Description: "",
+			MaxGuest:    5,
+			Quantity:    5,
+			RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+			Amenities:   []*pb.Amenity{{Id: 1}},
+		}},
+	}
+
+	suite.agencyService.AddHotel(ctx, hotel)
+	newHotelInfo := &model.Hotel{
+		Model: gorm.Model{
+			ID: 1,
+		},
+		Coordinate:  model.Coordinate{},
+		AddressID:   0,
+		Address:     model.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Name:        "NewHotel",
+		Description: "",
+		Stars:       5,
+		Phone:       "0923613883",
+		Files:       []*model.File{},
+	}
+
+	//Act
+	err := suite.agencyService.UpdateHotel(ctx, newHotelInfo)
+
+	// Assert
+	suite.Nil(err)
+	var updatedHotel model.Hotel
+	suite.db.First(&updatedHotel, 1)
+	suite.Equal(newHotelInfo.Name, updatedHotel.Name)
+}
+
+func (suite *AgencySuite) TestAgencyUpdateBoatSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	boat := &pb.Boat{}
+
+	suite.agencyService.AddDivingBoat(ctx, boat)
+	newBoatInfo := &model.Boat{
+		Model: gorm.Model{
+			ID: 1,
+		},
+		AddressID:   0,
+		Address:     model.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Name:        "NewBoat",
+		Description: "",
+		Files: []*model.File{
+			{
+				Filename: "boat.jpg",
+				Buffer:   []byte{1, 2, 3},
+			},
+		},
+	}
+
+	//Act
+	err := suite.agencyService.UpdateBoat(ctx, newBoatInfo)
+
+	// Assert
+	suite.Nil(err)
+	var updatedBoat model.Boat
+	suite.db.First(&updatedBoat, 1)
+	suite.Equal(newBoatInfo.Name, updatedBoat.Name)
 }
