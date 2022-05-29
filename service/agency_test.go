@@ -873,3 +873,76 @@ func (suite *AgencySuite) TestAgencyListStaffsSuccessful() {
 	suite.NoError(err)
 	suite.Equal(2, len(staffs))
 }
+
+func (suite *AgencySuite) TestAgencyListTripTemplatesSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	lastReservationDate := time.Now()
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		TripTemplate: model.TripTemplate{
+			Name:        "",
+			Description: "",
+			Type:        model.ONSHORE,
+			HotelID:     1,
+			BoatID:      1,
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
+		{
+			HotelID:    1,
+			RoomTypeID: 1,
+			Price:      500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
+	for _, roomTypePrice := range hotelRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
+
+	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+	trip.ID = 2
+	startDate = trip.StartDate.AddDate(0, 1, 0)
+	endDate = trip.StartDate.AddDate(0, 1, 2)
+	trip.StartDate = &startDate
+	trip.EndDate = &endDate
+	trip.TripTemplate.ID = 2
+	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	//Act
+	tripTemplates, err := suite.agencyService.ListTripTemplates(ctx, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(tripTemplates))
+}
