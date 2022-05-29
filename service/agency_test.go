@@ -1841,3 +1841,41 @@ func (suite *AgencySuite) TestAgencyDeleteDiveMasterSuccessful() {
 	suite.db.Model(&model.DiveMaster{}).Count(&count)
 	suite.Equal(int64(0), count)
 }
+
+func (suite *AgencySuite) TestAgencyDeleteDivingBoatSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	boat := &pb.Boat{
+		Name: "Boat Model",
+	}
+
+	suite.agencyService.AddDivingBoat(ctx, boat)
+	deletingBoat := &model.Boat{
+		Model: gorm.Model{
+			ID: 1,
+		},
+	}
+
+	//Act
+	err := suite.agencyService.DeleteDivingBoat(ctx, deletingBoat)
+
+	// Assert
+	suite.Nil(err)
+	var count int64
+	suite.db.Model(&model.Boat{}).Count(&count)
+	suite.Equal(int64(0), count)
+}
