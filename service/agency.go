@@ -253,6 +253,7 @@ func (service *agencyService) AddTrip(ctx context.Context, trip *model.Trip, roo
 			if err != nil {
 				return err
 			}
+
 			trip.TripTemplate.Images = append(trip.TripTemplate.Images, objectID)
 		}
 	}
