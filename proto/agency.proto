@@ -25,7 +25,6 @@ service AgencyService {
     rpc UpdateBoat(UpdateBoatRequest) returns (google.protobuf.Empty);
     rpc UpdateDiveMaster(UpdateDiveMasterRequest) returns (google.protobuf.Empty);
     rpc UpdateStaff(UpdateStaffRequest) returns (google.protobuf.Empty);
-    rpc UpdateTripTemplate(UpdateTripTemplateRequest) returns (google.protobuf.Empty);
 
     rpc DeleteDiveMaster (DeleteDiveMasterRequest) returns (google.protobuf.Empty);
     rpc DeleteDivingBoat (DeleteDivingBoatRequest) returns (google.protobuf.Empty);

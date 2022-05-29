@@ -503,19 +503,6 @@ func (handler *AgencyHandler) UpdateStaff(ctx context.Context, req *pb.UpdateSta
 	return &empty.Empty{}, nil
 }
 
-func (handler *AgencyHandler) UpdateTripTemplate(ctx context.Context, req *pb.UpdateTripTemplateRequest) (*emptypb.Empty, error) {
-	tripTemplate := model.TripTemplate{}
-	tripTemplate.From(req.TripTemplate)
-
-	err := handler.agencyService.UpdateTripTemplate(ctx, &tripTemplate)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &empty.Empty{}, nil
-}
-
 func (handler *AgencyHandler) DeleteDiveMaster(ctx context.Context, req *pb.DeleteDiveMasterRequest) (*empty.Empty, error) {
 	diveMaster := model.DiveMaster{}
 	diveMaster.From(req.DiveMaster)
