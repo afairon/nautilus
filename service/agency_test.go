@@ -1716,3 +1716,49 @@ func (suite *AgencySuite) TestAgencyUpdateBoatSuccessful() {
 	suite.db.First(&updatedBoat, 1)
 	suite.Equal(newBoatInfo.Name, updatedBoat.Name)
 }
+
+func (suite *AgencySuite) TestAgencyUpdateDiveMasterSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	diveMaster := &pb.DiveMaster{
+		FirstName: "First",
+		LastName:  "Last",
+	}
+
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+	newDiveMasterInfo := &model.DiveMaster{
+		Model: gorm.Model{
+			ID: 1,
+		},
+		FirstName: "FirstName2",
+		Files: []*model.File{
+			{
+				Filename: "boat.jpg",
+				Buffer:   []byte{1, 2, 3},
+			},
+		},
+	}
+
+	//Act
+	err := suite.agencyService.UpdateDiveMaster(ctx, newDiveMasterInfo)
+
+	// Assert
+	suite.Nil(err)
+	var updatedDiveMaster model.DiveMaster
+	suite.db.First(&updatedDiveMaster, 1)
+	suite.Equal(newDiveMasterInfo.FirstName, updatedDiveMaster.FirstName)
+}
