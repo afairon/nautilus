@@ -1802,3 +1802,42 @@ func (suite *AgencySuite) TestAgencyUpdateStaffSuccessful() {
 	suite.db.First(&updatedStaff, 1)
 	suite.Equal(newStaffInfo.FirstName, updatedStaff.FirstName)
 }
+
+func (suite *AgencySuite) TestAgencyDeleteDiveMasterSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	diveMaster := &pb.DiveMaster{
+		FirstName: "First",
+		LastName:  "Last",
+	}
+
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+	deletingDiveMaster := &model.DiveMaster{
+		Model: gorm.Model{
+			ID: 1,
+		},
+	}
+
+	//Act
+	err := suite.agencyService.DeleteDiveMaster(ctx, deletingDiveMaster)
+
+	// Assert
+	suite.Nil(err)
+	var count int64
+	suite.db.Model(&model.DiveMaster{}).Count(&count)
+	suite.Equal(int64(0), count)
+}
