@@ -68,45 +68,6 @@ func (service *reservationService) CreateReservation(ctx context.Context, reserv
 		TotalDivers: uint(reservation.TotalDivers),
 	}
 
-	// Execute transaction
-	// err := service.repo.ExecTx(ctx, func(query *repo.Queries) error {
-	// 	newReservationRecord, err := query.Reservation.CreateReservation(ctx, &reservationRecord)
-	// 	if err != nil {
-	// 		return err
-	// 	}
-
-	// 	newReservation.Id = newReservationRecord.Id
-	// 	newReservation.CreatedOn = newReservationRecord.CreatedOn
-	// 	newReservation.UpdatedOn = newReservationRecord.UpdatedOn
-
-	// 	length := len(reservation.GetRooms())
-	// 	// Allocate memory space for rooms
-	// 	newReservation.Rooms = make([]*pb.Reservation_Room, length)
-	// 	for i := 0; i < length; i++ {
-	// 		newReservation.Rooms[i] = &pb.Reservation_Room{}
-	// 	}
-
-	// 	for i, room := range reservation.GetRooms() {
-	// 		roomRecord := entity.BookedRoom{
-	// 			RoomTypeId:    room.GetRoomTypeId(),
-	// 			ReservationId: newReservationRecord.Id,
-	// 			NoAdults:      room.GetNoAdults(),
-	// 			NoKids:        room.GetNoKids(),
-	// 			Quantity:      room.GetQuantity(),
-	// 		}
-	// 		bookedRoom, err := query.Reservation.BookRoom(ctx, &roomRecord)
-	// 		if err != nil {
-	// 			return err
-	// 		}
-
-	// 		// Copy room information from reservation to newly created reservation
-	// 		(*newReservation.Rooms[i]) = *room
-	// 		newReservation.Rooms[i].Id = bookedRoom.Id
-	// 	}
-
-	// 	return nil
-	// })
-
 	err := service.repo.Transaction(ctx, func(query *repo.Queries) error {
 		diverReservation, err := query.Reservation.GetReservationByDiverAndTrip(ctx, reservation.GetDiverId(), reservation.GetTripId())
 
