@@ -1091,3 +1091,106 @@ func (suite *AgencySuite) TestAgencyListTripsWithTemplatesSuccessful() {
 	suite.NoError(err)
 	suite.Equal(2, len(trips))
 }
+
+func (suite *AgencySuite) TestAgencyListRoomTypesByHotelIDSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Hotel{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	hotel := &pb.Hotel{
+		Name:        "Hotel",
+		Description: "",
+		Stars:       5,
+		Phone:       "0923613883",
+		Address:     &pb.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Images:      []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+		RoomTypes: []*pb.RoomType{
+			{
+				Name:        "single",
+				Description: "",
+				MaxGuest:    5,
+				Quantity:    5,
+				RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+				Amenities:   []*pb.Amenity{{Id: 1}},
+			},
+			{
+				Name:        "double",
+				Description: "",
+				MaxGuest:    5,
+				Quantity:    5,
+				RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+				Amenities:   []*pb.Amenity{{Id: 1}},
+			}},
+	}
+	err := suite.agencyService.AddHotel(ctx, hotel)
+
+	//Act
+	rooms, err := suite.agencyService.ListRoomTypesByHotelID(ctx, 1, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(rooms))
+}
+
+func (suite *AgencySuite) TestAgencyListRoomTypesByLiveaboardIDSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	var oldCount int64
+	suite.db.Model(&model.Hotel{}).Count(&oldCount)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	liveaboard := &pb.Liveaboard{
+		Name:    "Hotel",
+		Address: &pb.Address{AddressLine_1: "Street 1", AddressLine_2: "Street 2", City: "London", Postcode: "SE1", Region: "London", Country: "England"},
+		Images:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+		RoomTypes: []*pb.RoomType{
+			{
+				Name:        "single",
+				Description: "",
+				MaxGuest:    5,
+				Quantity:    5,
+				RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+				Amenities:   []*pb.Amenity{{Id: 1}},
+			},
+			{
+				Name:        "double",
+				Description: "",
+				MaxGuest:    5,
+				Quantity:    5,
+				RoomImages:  []*pb.File{{Filename: "image", File: []byte{1, 2, 3}}},
+				Amenities:   []*pb.Amenity{{Id: 1}},
+			}},
+	}
+	err := suite.agencyService.AddLiveaboard(ctx, liveaboard)
+
+	//Act
+	rooms, err := suite.agencyService.ListRoomTypesByLiveaboardID(ctx, 1, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(rooms))
+}
