@@ -6,11 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/afairon/nautilus/internal/mail"
 	"github.com/afairon/nautilus/model"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/service"
-	"github.com/afairon/nautilus/session"
 	"github.com/stretchr/testify/suite"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -21,9 +19,12 @@ type AmenitySuite struct {
 	amenityService service.AmenityService
 	repository     *repo.Repo
 	db             *gorm.DB
-	agency         *model.Agency
-	session        session.Session
-	mailer         mail.Mailer
+}
+
+func (suite *AmenitySuite) TearDownTest() {
+	fmt.Println("Tearing down")
+	db, _ := suite.db.DB()
+	db.Close()
 }
 
 func (suite *AmenitySuite) SetupTest() {
@@ -41,30 +42,7 @@ func (suite *AmenitySuite) SetupTest() {
 	suite.Nil(err)
 
 	suite.repository = repo.NewRepo(suite.db)
-	suite.session = session.NewJWTManager("secret", 1*time.Hour)
-	suite.mailer = mail.NewDummy()
 	suite.amenityService = service.NewAmenityService(suite.repository)
-
-	suite.agency = &model.Agency{
-		Coordinate: &model.Coordinate{
-			Lat:  50.0,
-			Long: 0.0,
-		},
-		Address: model.Address{
-			AddressLine_1: "Street 1",
-			AddressLine_2: "Street 2",
-			City:          "London",
-			Postcode:      "SE1",
-			Region:        "London",
-			Country:       "England",
-		},
-		Account: &model.Account{
-			Email:    "agency@agency.com",
-			Username: "agency1",
-			Password: "P@ssword123",
-			Type:     model.AGENCY,
-		},
-	}
 }
 
 func TestAmenitySuite(t *testing.T) {

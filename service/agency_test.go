@@ -114,8 +114,8 @@ func (suite *AgencySuite) SetupTest() {
 
 func (suite *AgencySuite) TearDownTest() {
 	fmt.Println("Tearing down")
-	suite.repository = nil
-	suite.db = nil
+	db, _ := suite.db.DB()
+	db.Close()
 }
 
 func TestAgencySuite(t *testing.T) {
