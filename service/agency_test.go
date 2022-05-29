@@ -750,7 +750,7 @@ func (suite *AgencySuite) TestAgencyListDiveMastersNoDocumentsSuccessful() {
 	suite.Equal(2, len(diveMasters))
 }
 
-func (suite *AgencySuite) TestAgencyListHotelSuccessful() {
+func (suite *AgencySuite) TestAgencyListHotelsSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
@@ -790,9 +790,56 @@ func (suite *AgencySuite) TestAgencyListHotelSuccessful() {
 	suite.agencyService.AddHotel(ctx, hotel)
 
 	//Act
-	diveMasters, err := suite.agencyService.ListHotels(ctx, 25, 0)
+	hotels, err := suite.agencyService.ListHotels(ctx, 25, 0)
 
 	//Assert
 	suite.NoError(err)
-	suite.Equal(2, len(diveMasters))
+	suite.Equal(2, len(hotels))
+}
+
+func (suite *AgencySuite) TestAgencyListLiveaboardsSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	liveaboard := &pb.Liveaboard{
+		Images: []*pb.File{
+			{
+				Filename: "random.jpg",
+				File:     []byte{1, 2, 3},
+			},
+		},
+		RoomTypes: []*pb.RoomType{
+			{
+				RoomImages: []*pb.File{
+					{
+						Filename: "room.jpg",
+						File:     []byte{1, 2, 3},
+					},
+				},
+				Quantity: 2,
+				MaxGuest: 2,
+			},
+		},
+	}
+	suite.agencyService.AddLiveaboard(ctx, liveaboard)
+	suite.agencyService.AddLiveaboard(ctx, liveaboard)
+
+	//Act
+	liveaboards, err := suite.agencyService.ListLiveaboards(ctx, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(liveaboards))
 }
