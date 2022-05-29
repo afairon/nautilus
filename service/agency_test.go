@@ -72,10 +72,6 @@ func (suite *AgencySuite) dropTables() error {
 		&model.DiveMasterTrip{}, &model.ReservationRoomType{})
 }
 
-func (suite *AgencySuite) SetupSuite() {
-	fmt.Println("Set up suite")
-}
-
 func (suite *AgencySuite) SetupTest() {
 	fmt.Println("Set up test")
 	var err error
