@@ -106,7 +106,7 @@ func TestReservationSuite(t *testing.T) {
 
 func (suite *ReservationSuite) TestReservationCreateReservation() {
 	//Arrange
-	med := media.NewStoreMock()
+	med := &media.StoreMock{}
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
 	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)

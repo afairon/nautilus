@@ -82,7 +82,7 @@ func TestBoatSuite(t *testing.T) {
 
 func (suite *BoatSuite) TestBoatGetBoatSuccessful() {
 	//Arrange
-	med := media.NewStoreMock()
+	med := &media.StoreMock{}
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
 	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
 	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
