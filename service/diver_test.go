@@ -19,10 +19,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type ReservationSuite struct {
+type DiverSuite struct {
 	suite.Suite
 	agencyService      service.AgencyService
 	accountService     service.AccountService
+	diverService       service.DiverService
 	reservationService service.ReservationService
 	repository         *repo.Repo
 	db                 *gorm.DB
@@ -32,11 +33,11 @@ type ReservationSuite struct {
 	mailer             mail.Mailer
 }
 
-func (suite *ReservationSuite) SetupTest() {
+func (suite *DiverSuite) SetupTest() {
 	fmt.Println("Set up test")
 	var err error
 
-	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+	suite.db, err = gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
 	suite.Nil(err)
 
 	err = suite.db.AutoMigrate(&model.Agency{}, &model.Diver{}, &model.Account{},
@@ -44,8 +45,7 @@ func (suite *ReservationSuite) SetupTest() {
 		&model.Liveaboard{}, &model.Hotel{}, &model.Reservation{}, &model.HotelComment{},
 		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
 		&model.RoomType{}, &model.DiveSite{}, &model.Payment{}, &model.HotelRoomTypeTripPrice{}, &model.LiveaboardRoomTypeTripPrice{},
-		&model.ReservationRoomType{},
-	)
+		&model.DiveMasterTrip{}, &model.ReservationRoomType{})
 	suite.Nil(err)
 
 	err = suite.db.SetupJoinTable(&model.Trip{}, "DiveMasters", &model.DiveMasterTrip{})
@@ -94,29 +94,24 @@ func (suite *ReservationSuite) SetupTest() {
 	}
 }
 
-func (suite *ReservationSuite) TearDownTest() {
-	fmt.Println("Tearing down")
-	db, _ := suite.db.DB()
-	db.Close()
+func TestDiverSuite(t *testing.T) {
+	suite.Run(t, new(DiverSuite))
 }
 
-func TestReservationSuite(t *testing.T) {
-	suite.Run(t, new(ReservationSuite))
-}
-
-func (suite *ReservationSuite) TestReservationCreateReservation() {
+func (suite *DiverSuite) TestDiverListReservationsWithTrips() {
 	//Arrange
 	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
 	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	suite.diverService = service.NewDiverService(suite.repository, med)
 	suite.reservationService = service.NewReservationService(suite.repository)
-	// var oldCount int64
-	// suite.db.Model(&model.DiveMaster{}).Count(&oldCount)
 
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
+
 	lastReservationDate := time.Now().AddDate(0, 0, 5)
 	startDate := lastReservationDate.AddDate(0, 0, 1)
 	endDate := startDate.AddDate(0, 0, 1)
@@ -176,7 +171,6 @@ func (suite *ReservationSuite) TestReservationCreateReservation() {
 	}
 
 	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-
 	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
 	s, _ := suite.session.Get(token)
 	ctx = context.WithValue(ctx, session.User, s)
@@ -203,11 +197,12 @@ func (suite *ReservationSuite) TestReservationCreateReservation() {
 		},
 	}
 
+	suite.reservationService.CreateReservation(ctx, reservation)
+
 	//Act
-	res, err := suite.reservationService.CreateReservation(ctx, reservation)
+	reservations, err := suite.diverService.ListReservationsWithTrips(ctx, 25, 0)
 
 	//Assert
-	fmt.Println(err)
+	suite.Equal(1, len(reservations))
 	suite.Nil(err)
-	suite.NotNil(res)
 }
