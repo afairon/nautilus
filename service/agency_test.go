@@ -681,3 +681,71 @@ func (suite *AgencySuite) TestAgencyListBoatsSuccessful() {
 	suite.NoError(err)
 	suite.Equal(2, len(boats))
 }
+
+func (suite *AgencySuite) TestAgencyListDiveMastersSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	diveMaster := &pb.DiveMaster{
+		FirstName: "Random",
+		LastName:  "Random",
+		Documents: []*pb.File{
+			{
+				Filename: "boat.jpg",
+				File:     []byte{1, 2, 3},
+			},
+		},
+	}
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+
+	//Act
+	diveMasters, err := suite.agencyService.ListDiveMasters(ctx, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(diveMasters))
+}
+
+func (suite *AgencySuite) TestAgencyListDiveMastersNoDocumentsSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+	diveMaster := &pb.DiveMaster{
+		FirstName: "Random",
+		LastName:  "Random",
+	}
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+	suite.agencyService.AddDiveMaster(ctx, diveMaster)
+
+	//Act
+	diveMasters, err := suite.agencyService.ListDiveMasters(ctx, 25, 0)
+
+	//Assert
+	suite.NoError(err)
+	suite.Equal(2, len(diveMasters))
+}
