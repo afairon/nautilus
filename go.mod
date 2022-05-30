@@ -11,6 +11,7 @@ require (
 	github.com/improbable-eng/grpc-web v0.14.1
 	github.com/knadh/smtppool v0.4.0
 	github.com/lib/pq v1.10.3
+	github.com/mattn/go-sqlite3 v1.14.12
 	github.com/sirupsen/logrus v1.7.0
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/crypto v0.0.0-20220131195533-30dcbda58838
@@ -38,7 +39,6 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
-	github.com/mattn/go-sqlite3 v1.14.12 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rs/cors v1.8.0 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
