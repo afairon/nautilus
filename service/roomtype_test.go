@@ -206,7 +206,271 @@ func (suite *RoomTypeSuite) TestRoomTypeListRoomsOfReservationSuccessful() {
 
 	//Act
 	rooms, err := suite.roomtypeService.ListRoomsOfReservation(ctx, 1)
-	fmt.Printf("%+v\n", rooms[0])
+
+	//Assert
+	suite.Nil(err)
+	suite.Equal(1, len(rooms))
+}
+
+func (suite *RoomTypeSuite) TestRoomTypeGetRoomTypeSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	suite.reservationService = service.NewReservationService(suite.repository)
+	suite.roomtypeService = service.NewRoomTypeService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	hotel := &pb.Hotel{
+		Name:  "Testing",
+		Stars: 5,
+		Phone: "0923613883",
+		RoomTypes: []*pb.RoomType{
+			{
+				Name:        "Single",
+				Description: "",
+				MaxGuest:    1,
+				Price:       100,
+				Quantity:    1,
+			},
+		},
+	}
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	suite.agencyService.AddHotel(ctx, hotel)
+
+	//Act
+	room, err := suite.roomtypeService.GetRoomType(ctx, 1)
+
+	//Assert
+	suite.Nil(err)
+	suite.Equal(1, int(room.ID))
+}
+
+func (suite *RoomTypeSuite) TestRoomTypeListRoomTypesByHotelAndTripSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	suite.reservationService = service.NewReservationService(suite.repository)
+	suite.roomtypeService = service.NewRoomTypeService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+	lastReservationDate := time.Now().AddDate(0, 0, 5)
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		DiveMasters:         []model.DiveMaster{},
+		TripTemplate: model.TripTemplate{
+			Name:        "",
+			Description: "",
+			Type:        model.ONSHORE,
+			HotelID:     1,
+			BoatID:      1,
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+
+	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
+		{
+			HotelID:    1,
+			RoomTypeID: 1,
+			Price:      500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
+	for _, roomTypePrice := range hotelRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
+
+	hotel := &pb.Hotel{
+		Name:  "Testing",
+		Stars: 5,
+		Phone: "0923613883",
+		RoomTypes: []*pb.RoomType{
+			{
+				Name:        "Single",
+				Description: "",
+				MaxGuest:    1,
+				Price:       100,
+				Quantity:    1,
+				RoomImages: []*pb.File{
+					{
+						Filename: "room.jpg",
+						File:     []byte{1, 2, 3},
+					},
+				},
+			},
+		},
+	}
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	suite.agencyService.AddHotel(ctx, hotel)
+	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	suite.accountService.CreateDiverAccount(ctx, suite.diver)
+	token, _ = suite.accountService.Login(ctx, "janedoe@example.com", "P@ssword123")
+	s, _ = suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	// reservation := &pb.Reservation{
+	// 	TripId:      1,
+	// 	DiverId:     1,
+	// 	Price:       500,
+	// 	TotalDivers: 1,
+	// 	Rooms: []*pb.Reservation_Room{
+	// 		{
+	// 			RoomTypeId: 1,
+	// 			NoDivers:   1,
+	// 			Quantity:   1,
+	// 		},
+	// 	},
+	// }
+
+	//Act
+	rooms, err := suite.roomtypeService.ListRoomTypesByHotelAndTrip(ctx, 1, 1, 25, 0)
+
+	//Assert
+	suite.Nil(err)
+	suite.Equal(1, len(rooms))
+}
+
+func (suite *RoomTypeSuite) TestRoomTypeListRoomTypesByLiveaboardAndTripSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Twice()
+	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	suite.reservationService = service.NewReservationService(suite.repository)
+	suite.roomtypeService = service.NewRoomTypeService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+	lastReservationDate := time.Now().AddDate(0, 0, 5)
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		DiveMasters:         []model.DiveMaster{},
+		TripTemplate: model.TripTemplate{
+			Name:         "",
+			Description:  "",
+			Type:         model.OFFSHORE,
+			LiveaboardID: 1,
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+
+	liveaboardRoomTypePrices := []model.LiveaboardRoomTypeTripPrice{
+		{
+			LiveaboardID: 1,
+			RoomTypeID:   1,
+			Price:        500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(liveaboardRoomTypePrices))
+	for _, roomTypePrice := range liveaboardRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
+
+	liveaboard := &pb.Liveaboard{
+		Name: "Testing",
+		RoomTypes: []*pb.RoomType{
+			{
+				Name:        "Single",
+				Description: "",
+				MaxGuest:    1,
+				Price:       100,
+				Quantity:    1,
+				RoomImages: []*pb.File{
+					{
+						Filename: "room.jpg",
+						File:     []byte{1, 2, 3},
+					},
+				},
+			},
+		},
+	}
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	suite.agencyService.AddLiveaboard(ctx, liveaboard)
+	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	suite.accountService.CreateDiverAccount(ctx, suite.diver)
+	token, _ = suite.accountService.Login(ctx, "janedoe@example.com", "P@ssword123")
+	s, _ = suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	// reservation := &pb.Reservation{
+	// 	TripId:      1,
+	// 	DiverId:     1,
+	// 	Price:       500,
+	// 	TotalDivers: 1,
+	// 	Rooms: []*pb.Reservation_Room{
+	// 		{
+	// 			RoomTypeId: 1,
+	// 			NoDivers:   1,
+	// 			Quantity:   1,
+	// 		},
+	// 	},
+	// }
+
+	//Act
+	rooms, err := suite.roomtypeService.ListRoomTypesByLiveaboardAndTrip(ctx, 1, 1, 25, 0)
 
 	//Assert
 	suite.Nil(err)
