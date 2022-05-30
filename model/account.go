@@ -1,20 +1,11 @@
 package model
 
 import (
-	"errors"
 	"net/mail"
 	"strings"
 
 	pass "github.com/afairon/nautilus/internal/password"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 	"gorm.io/gorm"
-)
-
-var (
-	ErrEmptyUsername        = errors.New("username: empty")
-	ErrUsernameContainSpace = errors.New("username: contains space")
-	ErrMissingAccount       = status.Error(codes.InvalidArgument, "missing account")
 )
 
 // CheckPassword compares the password and the hash.
@@ -163,6 +154,14 @@ func (d *Diver) Verify() error {
 		return ErrMissingAccount
 	}
 
+	if strings.TrimSpace(d.FirstName) == "" {
+		return ErrEmptyFirstName
+	}
+
+	if strings.TrimSpace(d.LastName) == "" {
+		return ErrEmptyLastName
+	}
+
 	return d.Account.Verify()
 }
 
@@ -173,7 +172,31 @@ func (d *Diver) BeforeCreate(tx *gorm.DB) error {
 		return err
 	}
 
+	if strings.TrimSpace(d.FirstName) == "" {
+		return ErrEmptyFirstName
+	}
+
+	if strings.TrimSpace(d.LastName) == "" {
+		return ErrEmptyLastName
+	}
+
 	d.Account.Type = DIVER
+
+	return nil
+}
+
+func (d *Diver) BeforeUpdate(tx *gorm.DB) error {
+	if strings.TrimSpace(d.FirstName) == "" {
+		return ErrEmptyFirstName
+	}
+
+	if strings.TrimSpace(d.LastName) == "" {
+		return ErrEmptyLastName
+	}
+
+	if d.Account != nil {
+		d.Account.Type = DIVER
+	}
 
 	return nil
 }

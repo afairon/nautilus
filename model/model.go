@@ -172,7 +172,7 @@ func (c *Coordinate) GetProto() *pb.Coordinate {
 type Account struct {
 	gorm.Model
 	Email       string      `gorm:"unique;not null;" json:"email,omitempty"`
-	Username    string      `gorm:"not null" json:"username,omitempty"`
+	Username    string      `gorm:"unique;not null" json:"username,omitempty"`
 	Password    string      `gorm:"not null" json:"-"`
 	OldPassword string      `gorm:"-" json:"-"`
 	Verified    bool        `gorm:"default:false;not null" json:"verified,omitempty"`
