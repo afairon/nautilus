@@ -346,7 +346,10 @@ func (suite *PaymentSuite) TestPaymentUpdatePaymentSlipSuccessful() {
 
 	//Assert
 	var updatedPayment model.Payment
+	newFileName := "id2"
 	suite.db.First(&updatedPayment, 1)
+	updatedFileName := updatedPayment.PaymentSlip[0]
+
 	suite.Nil(err)
-	suite.Equal("id2", updatedPayment.PaymentSlip[0])
+	suite.Equal(newFileName, updatedFileName)
 }
