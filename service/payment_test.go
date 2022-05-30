@@ -23,7 +23,6 @@ type PaymentSuite struct {
 	suite.Suite
 	agencyService      service.AgencyService
 	accountService     service.AccountService
-	diverService       service.DiverService
 	reservationService service.ReservationService
 	paymentService     service.PaymentService
 	repository         *repo.Repo
