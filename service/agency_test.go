@@ -3,7 +3,6 @@ package service_test
 import (
 	"context"
 	"errors"
-	"fmt"
 	"testing"
 	"time"
 
@@ -45,7 +44,8 @@ func (suite *AgencySuite) setUpPostgresDBConnection() error {
 		&model.DiveMaster{}, &model.Staff{}, &model.Boat{}, &model.TripTemplate{},
 		&model.Liveaboard{}, &model.Hotel{}, &model.Reservation{}, &model.HotelComment{},
 		&model.LiveaboardComment{}, &model.TripComment{}, &model.Amenity{}, &model.Trip{},
-		&model.RoomType{}, &model.DiveSite{}, &model.Payment{}, &model.HotelRoomTypeTripPrice{}, &model.LiveaboardRoomTypeTripPrice{})
+		&model.RoomType{}, &model.DiveSite{}, &model.Payment{}, &model.HotelRoomTypeTripPrice{}, &model.LiveaboardRoomTypeTripPrice{},
+		&model.ReservationRoomType{})
 	if err != nil {
 		return err
 	}
@@ -73,10 +73,9 @@ func (suite *AgencySuite) dropTables() error {
 }
 
 func (suite *AgencySuite) SetupTest() {
-	fmt.Println("Set up test")
 	var err error
 
-	suite.db, err = gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
+	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cahced=shared"), &gorm.Config{})
 	suite.Nil(err)
 
 	err = suite.db.AutoMigrate(&model.Agency{}, &model.Diver{}, &model.Account{},
@@ -113,7 +112,6 @@ func (suite *AgencySuite) SetupTest() {
 }
 
 func (suite *AgencySuite) TearDownTest() {
-	fmt.Println("Tearing down")
 	db, _ := suite.db.DB()
 	db.Close()
 }
@@ -1383,125 +1381,6 @@ func (suite *AgencySuite) TestAgencyListDiveMastersByTripIDSuccessful() {
 	suite.Equal(2, len(trips))
 }
 
-// Failing Test Case
-// func (suite *AgencySuite) TestAgencySearchTripsSuccessful() {
-// 	//Arrange
-// 	med := media.NewStoreMock()
-// 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Times(4)
-// 	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-// 	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-// 	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-// 	ctx := context.Background()
-// 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-// 	defer cancel()
-
-// 	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-// 	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-// 	s, _ := suite.session.Get(token)
-// 	ctx = context.WithValue(ctx, session.User, s)
-
-// 	diveMaster := &pb.DiveMaster{
-// 		Id:        0,
-// 		FirstName: "John",
-// 		LastName:  "Doe",
-// 	}
-
-// 	suite.agencyService.AddDiveMaster(ctx, diveMaster)
-
-// 	lastReservationDate := time.Now().AddDate(0, 0, 1)
-// 	startDate := lastReservationDate.AddDate(0, 0, 1)
-// 	endDate := startDate.AddDate(0, 0, 1)
-// 	trip1 := &model.Trip{
-// 		Name:                "Thailand",
-// 		MaxGuest:            50,
-// 		StartDate:           &startDate,
-// 		EndDate:             &endDate,
-// 		LastReservationDate: &lastReservationDate,
-// 		Schedule:            "schedule",
-// 		TripTemplate: model.TripTemplate{
-// 			Name:        "",
-// 			Description: "",
-// 			Type:        model.ONSHORE,
-// 			HotelID:     1,
-// 			BoatID:      1,
-// 			Address: model.Address{
-// 				City:    "Bangkok",
-// 				Region:  "South-East asia",
-// 				Country: "Thailand",
-// 			},
-// 			Files: []*model.File{
-// 				{
-// 					Filename: "image.jpg",
-// 					Buffer:   []byte{1, 2, 3},
-// 					Private:  false,
-// 				},
-// 			},
-// 		},
-// 		DiveMasters: []model.DiveMaster{{Model: gorm.Model{ID: 1}}},
-// 	}
-
-// 	lastReservationDate2 := time.Now().AddDate(0, 1, 0)
-// 	startDate2 := lastReservationDate2.AddDate(0, 0, 1)
-// 	endDate2 := startDate2.AddDate(0, 0, 1)
-// 	trip2 := &model.Trip{
-// 		Name:                "US",
-// 		MaxGuest:            50,
-// 		StartDate:           &startDate2,
-// 		EndDate:             &endDate2,
-// 		LastReservationDate: &lastReservationDate2,
-// 		Schedule:            "schedule",
-// 		TripTemplate: model.TripTemplate{
-// 			Name:        "",
-// 			Description: "",
-// 			Type:        model.ONSHORE,
-// 			HotelID:     1,
-// 			BoatID:      1,
-// 			Address: model.Address{
-// 				City:    "Malidives City",
-// 				Region:  "South Asia",
-// 				Country: "Malidives",
-// 			},
-// 			Files: []*model.File{
-// 				{
-// 					Filename: "image.jpg",
-// 					Buffer:   []byte{1, 2, 3},
-// 					Private:  false,
-// 				},
-// 			},
-// 		},
-// 		DiveMasters: []model.DiveMaster{{Model: gorm.Model{ID: 1}}},
-// 	}
-
-// 	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
-// 		{
-// 			HotelID:    1,
-// 			RoomTypeID: 1,
-// 			Price:      500,
-// 		},
-// 	}
-
-// 	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
-// 	for _, roomTypePrice := range hotelRoomTypePrices {
-// 		roomTypePrices = append(roomTypePrices, &roomTypePrice)
-// 	}
-
-// 	suite.agencyService.AddTrip(ctx, trip1, roomTypePrices)
-// 	suite.agencyService.AddTrip(ctx, trip2, roomTypePrices)
-// 	trips, _ := suite.agencyService.ListTrips(ctx, 25, 0)
-// 	for _, trip := range trips {
-// 		fmt.Println(*trip.StartDate)
-// 		fmt.Println(*trip.EndDate)
-// 	}
-
-// 	//Act
-// 	tripsByCityOption, err := suite.agencyService.SearchTrips(ctx, nil, 25, 0)
-
-// 	//Assert
-// 	suite.NoError(err)
-// 	suite.Equal(1, len(tripsByCityOption))
-// }
-
 func (suite *AgencySuite) TestAgencyUpdateTripOnshoreSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
@@ -1752,92 +1631,6 @@ func (suite *AgencySuite) TestAgencyUpdateBoatSuccessful() {
 	var updatedBoat model.Boat
 	suite.db.First(&updatedBoat, 1)
 	suite.Equal(newBoatInfo.Name, updatedBoat.Name)
-}
-
-func (suite *AgencySuite) TestAgencyUpdateDiveMasterSuccessful() {
-	//Arrange
-	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-	s, _ := suite.session.Get(token)
-	ctx = context.WithValue(ctx, session.User, s)
-
-	diveMaster := &pb.DiveMaster{
-		FirstName: "First",
-		LastName:  "Last",
-	}
-
-	suite.agencyService.AddDiveMaster(ctx, diveMaster)
-	newDiveMasterInfo := &model.DiveMaster{
-		Model: gorm.Model{
-			ID: 1,
-		},
-		FirstName: "FirstName2",
-		Files: []*model.File{
-			{
-				Filename: "boat.jpg",
-				Buffer:   []byte{1, 2, 3},
-			},
-		},
-	}
-
-	//Act
-	err := suite.agencyService.UpdateDiveMaster(ctx, newDiveMasterInfo)
-
-	// Assert
-	suite.Nil(err)
-	var updatedDiveMaster model.DiveMaster
-	suite.db.First(&updatedDiveMaster, 1)
-	suite.Equal(newDiveMasterInfo.FirstName, updatedDiveMaster.FirstName)
-}
-
-func (suite *AgencySuite) TestAgencyUpdateStaffSuccessful() {
-	//Arrange
-	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-	s, _ := suite.session.Get(token)
-	ctx = context.WithValue(ctx, session.User, s)
-
-	staff := &pb.Staff{
-		FirstName: "First",
-		LastName:  "Last",
-	}
-
-	suite.agencyService.AddStaff(ctx, staff)
-	newStaffInfo := &model.Staff{
-		Model: gorm.Model{
-			ID: 1,
-		},
-		FirstName: "FirstName2",
-	}
-
-	//Act
-	err := suite.agencyService.UpdateStaff(ctx, newStaffInfo)
-
-	// Assert
-	suite.Nil(err)
-	var updatedStaff model.Staff
-	suite.db.First(&updatedStaff, 1)
-	suite.Equal(newStaffInfo.FirstName, updatedStaff.FirstName)
 }
 
 func (suite *AgencySuite) TestAgencyDeleteDiveMasterSuccessful() {
@@ -2179,217 +1972,4 @@ func (suite *AgencySuite) TestAgencyDeleteTripSuccessful() {
 	var count int64
 	suite.db.Model(&model.Trip{}).Count(&count)
 	suite.Equal(int64(0), count)
-}
-
-func (suite *AgencySuite) TestAgencyGenerateCurrentTripsReport() {
-	//Arrange
-	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-	suite.repository = repo.NewRepo(suite.db)
-
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-	s, _ := suite.session.Get(token)
-	ctx = context.WithValue(ctx, session.User, s)
-
-	lastReservationDate := time.Now()
-	startDate := lastReservationDate.AddDate(0, 0, 1)
-	endDate := startDate.AddDate(0, 0, 1)
-
-	trip := &model.Trip{
-		Name:                "Thailand",
-		MaxGuest:            50,
-		StartDate:           &startDate,
-		EndDate:             &endDate,
-		LastReservationDate: &lastReservationDate,
-		Schedule:            "schedule",
-		DiveMasters:         []model.DiveMaster{},
-		TripTemplate: model.TripTemplate{
-			Name:        "",
-			Description: "",
-			Type:        model.ONSHORE,
-			HotelID:     1,
-			BoatID:      1,
-			Files: []*model.File{
-				{
-					Filename: "image.jpg",
-					Buffer:   []byte{1, 2, 3},
-					Private:  false,
-				},
-			},
-		},
-		DiveSites: []model.DiveSite{},
-	}
-
-	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
-		{
-			HotelID:    1,
-			RoomTypeID: 1,
-			Price:      500,
-		},
-	}
-
-	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
-	for _, roomTypePrice := range hotelRoomTypePrices {
-		roomTypePrices = append(roomTypePrices, &roomTypePrice)
-	}
-
-	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
-
-	//Act
-	report, err := suite.agencyService.GenerateCurrentTripsReport(ctx, 25, 0)
-
-	// Assert
-	suite.Nil(err)
-	suite.Equal(1, len(report))
-}
-
-func (suite *AgencySuite) TestAgencyGenerateYearlyEndedTripsReport() {
-	//Arrange
-	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-	suite.repository = repo.NewRepo(suite.db)
-
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-	s, _ := suite.session.Get(token)
-	ctx = context.WithValue(ctx, session.User, s)
-
-	lastReservationDate := time.Now()
-	startDate := lastReservationDate.AddDate(0, 0, 1)
-	endDate := startDate.AddDate(0, 0, 1)
-
-	trip := &model.Trip{
-		Name:                "Thailand",
-		MaxGuest:            50,
-		StartDate:           &startDate,
-		EndDate:             &endDate,
-		LastReservationDate: &lastReservationDate,
-		Schedule:            "schedule",
-		DiveMasters:         []model.DiveMaster{},
-		TripTemplate: model.TripTemplate{
-			Name:        "",
-			Description: "",
-			Type:        model.ONSHORE,
-			HotelID:     1,
-			BoatID:      1,
-			Files: []*model.File{
-				{
-					Filename: "image.jpg",
-					Buffer:   []byte{1, 2, 3},
-					Private:  false,
-				},
-			},
-		},
-		DiveSites: []model.DiveSite{},
-	}
-
-	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
-		{
-			HotelID:    1,
-			RoomTypeID: 1,
-			Price:      500,
-		},
-	}
-
-	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
-	for _, roomTypePrice := range hotelRoomTypePrices {
-		roomTypePrices = append(roomTypePrices, &roomTypePrice)
-	}
-
-	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
-
-	//Act
-	report, err := suite.agencyService.GenerateYearlyEndedTripsReport(ctx, 2, 25, 0)
-
-	// Assert
-	suite.Nil(err)
-	suite.Equal(0, len(report))
-}
-
-func (suite *AgencySuite) TestAgencyGenerateIncomingTripsReport() {
-	//Arrange
-	med := media.NewStoreMock()
-	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
-	med.On("Get", mock.AnythingOfType("string"), mock.AnythingOfType("bool")).Return("URL")
-	suite.repository = repo.NewRepo(suite.db)
-
-	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
-	suite.agencyService = service.NewAgencyService(suite.repository, med)
-
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
-	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
-	s, _ := suite.session.Get(token)
-	ctx = context.WithValue(ctx, session.User, s)
-
-	lastReservationDate := time.Now()
-	startDate := lastReservationDate.AddDate(0, 0, 1)
-	endDate := startDate.AddDate(0, 0, 1)
-
-	trip := &model.Trip{
-		Name:                "Thailand",
-		MaxGuest:            50,
-		StartDate:           &startDate,
-		EndDate:             &endDate,
-		LastReservationDate: &lastReservationDate,
-		Schedule:            "schedule",
-		DiveMasters:         []model.DiveMaster{},
-		TripTemplate: model.TripTemplate{
-			Name:        "",
-			Description: "",
-			Type:        model.ONSHORE,
-			HotelID:     1,
-			BoatID:      1,
-			Files: []*model.File{
-				{
-					Filename: "image.jpg",
-					Buffer:   []byte{1, 2, 3},
-					Private:  false,
-				},
-			},
-		},
-		DiveSites: []model.DiveSite{},
-	}
-
-	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
-		{
-			HotelID:    1,
-			RoomTypeID: 1,
-			Price:      500,
-		},
-	}
-
-	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
-	for _, roomTypePrice := range hotelRoomTypePrices {
-		roomTypePrices = append(roomTypePrices, &roomTypePrice)
-	}
-
-	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
-
-	//Act
-	report, err := suite.agencyService.GenerateIncomingTripsReport(ctx, 1, 25, 0)
-
-	// Assert
-	suite.Nil(err)
-	suite.Equal(0, len(report))
 }

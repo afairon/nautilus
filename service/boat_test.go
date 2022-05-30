@@ -2,7 +2,6 @@ package service_test
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -32,7 +31,6 @@ type BoatSuite struct {
 }
 
 func (suite *BoatSuite) SetupTest() {
-	fmt.Println("Set up test")
 	var err error
 
 	suite.db, err = gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})

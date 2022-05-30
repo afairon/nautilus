@@ -2,7 +2,6 @@ package service_test
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -33,7 +32,6 @@ type ReservationSuite struct {
 }
 
 func (suite *ReservationSuite) SetupTest() {
-	fmt.Println("Set up test")
 	var err error
 
 	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
@@ -95,7 +93,6 @@ func (suite *ReservationSuite) SetupTest() {
 }
 
 func (suite *ReservationSuite) TearDownTest() {
-	fmt.Println("Tearing down")
 	db, _ := suite.db.DB()
 	db.Close()
 }

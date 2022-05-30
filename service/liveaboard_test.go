@@ -2,7 +2,6 @@ package service_test
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -32,7 +31,6 @@ type LiveaboardSuite struct {
 }
 
 func (suite *LiveaboardSuite) SetupTest() {
-	fmt.Println("Set up test")
 	var err error
 
 	suite.db, err = gorm.Open(sqlite.Open("file::memory:?cached=share"), &gorm.Config{})
@@ -80,7 +78,6 @@ func (suite *LiveaboardSuite) SetupTest() {
 }
 
 func (suite *LiveaboardSuite) TearDownTest() {
-	fmt.Println("Tearing down")
 	db, _ := suite.db.DB()
 	db.Close()
 }
