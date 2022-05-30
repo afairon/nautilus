@@ -19,11 +19,12 @@ import (
 	"gorm.io/gorm"
 )
 
-type ReservationSuite struct {
+type RoomTypeSuite struct {
 	suite.Suite
 	agencyService      service.AgencyService
 	accountService     service.AccountService
 	reservationService service.ReservationService
+	roomtypeService    service.RoomTypeService
 	repository         *repo.Repo
 	db                 *gorm.DB
 	agency             *model.Agency
@@ -32,7 +33,7 @@ type ReservationSuite struct {
 	mailer             mail.Mailer
 }
 
-func (suite *ReservationSuite) SetupTest() {
+func (suite *RoomTypeSuite) SetupTest() {
 	fmt.Println("Set up test")
 	var err error
 
@@ -94,25 +95,24 @@ func (suite *ReservationSuite) SetupTest() {
 	}
 }
 
-func (suite *ReservationSuite) TearDownTest() {
+func (suite *RoomTypeSuite) TearDownTest() {
 	fmt.Println("Tearing down")
 	db, _ := suite.db.DB()
 	db.Close()
 }
 
-func TestReservationSuite(t *testing.T) {
-	suite.Run(t, new(ReservationSuite))
+func TestRoomTypeSuite(t *testing.T) {
+	suite.Run(t, new(RoomTypeSuite))
 }
 
-func (suite *ReservationSuite) TestReservationCreateReservation() {
+func (suite *RoomTypeSuite) TestRoomTypeListRoomsOfReservationSuccessful() {
 	//Arrange
 	med := media.NewStoreMock()
 	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil).Once()
 	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
 	suite.agencyService = service.NewAgencyService(suite.repository, med)
 	suite.reservationService = service.NewReservationService(suite.repository)
-	// var oldCount int64
-	// suite.db.Model(&model.DiveMaster{}).Count(&oldCount)
+	suite.roomtypeService = service.NewRoomTypeService(suite.repository, med)
 
 	ctx := context.Background()
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
@@ -165,7 +165,6 @@ func (suite *ReservationSuite) TestReservationCreateReservation() {
 		Phone: "0923613883",
 		RoomTypes: []*pb.RoomType{
 			{
-				Id:          0,
 				Name:        "Single",
 				Description: "",
 				MaxGuest:    1,
@@ -203,10 +202,13 @@ func (suite *ReservationSuite) TestReservationCreateReservation() {
 		},
 	}
 
+	suite.reservationService.CreateReservation(ctx, reservation)
+
 	//Act
-	res, err := suite.reservationService.CreateReservation(ctx, reservation)
+	rooms, err := suite.roomtypeService.ListRoomsOfReservation(ctx, 1)
+	fmt.Printf("%+v\n", rooms[0])
 
 	//Assert
 	suite.Nil(err)
-	suite.NotNil(res)
+	suite.Equal(1, len(rooms))
 }
