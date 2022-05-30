@@ -1,15 +1,19 @@
 package service_test
 
 import (
+	"context"
 	"fmt"
 	"testing"
 	"time"
 
 	"github.com/afairon/nautilus/internal/mail"
+	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
+	"github.com/afairon/nautilus/pb"
 	"github.com/afairon/nautilus/repo"
 	"github.com/afairon/nautilus/service"
 	"github.com/afairon/nautilus/session"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -102,6 +106,120 @@ func TestPaymentSuite(t *testing.T) {
 	suite.Run(t, new(PaymentSuite))
 }
 
-func (suite *PaymentSuite) TestPaymentMakePaymen() {
+func (suite *PaymentSuite) TestPaymentMakePaymentSuccessful() {
+	//Arrange
+	med := media.NewStoreMock()
+	med.On("Put", mock.AnythingOfType("string"), mock.AnythingOfType("media.Permission"), mock.AnythingOfTypeArgument("*bytes.Reader")).Return("id", nil)
+	suite.accountService = service.NewAccountService(suite.repository, suite.session, med, suite.mailer)
+	suite.agencyService = service.NewAgencyService(suite.repository, med)
+	suite.reservationService = service.NewReservationService(suite.repository)
+	suite.paymentService = service.NewPaymentService(suite.repository, med)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	lastReservationDate := time.Now().AddDate(0, 0, 5)
+	startDate := lastReservationDate.AddDate(0, 0, 1)
+	endDate := startDate.AddDate(0, 0, 1)
+
+	trip := &model.Trip{
+		Name:                "Thailand",
+		MaxGuest:            50,
+		StartDate:           &startDate,
+		EndDate:             &endDate,
+		LastReservationDate: &lastReservationDate,
+		Schedule:            "schedule",
+		DiveMasters:         []model.DiveMaster{},
+		TripTemplate: model.TripTemplate{
+			Name:        "",
+			Description: "",
+			Type:        model.ONSHORE,
+			HotelID:     1,
+			BoatID:      1,
+			Files: []*model.File{
+				{
+					Filename: "image.jpg",
+					Buffer:   []byte{1, 2, 3},
+					Private:  false,
+				},
+			},
+		},
+		DiveSites: []model.DiveSite{},
+	}
+
+	hotelRoomTypePrices := []model.HotelRoomTypeTripPrice{
+		{
+			HotelID:    1,
+			RoomTypeID: 1,
+			Price:      500,
+		},
+	}
+
+	roomTypePrices := make([]model.RoomTypeTripPrice, 0, len(hotelRoomTypePrices))
+	for _, roomTypePrice := range hotelRoomTypePrices {
+		roomTypePrices = append(roomTypePrices, &roomTypePrice)
+	}
+
+	hotel := &pb.Hotel{
+		Name:  "Testing",
+		Stars: 5,
+		Phone: "0923613883",
+		RoomTypes: []*pb.RoomType{
+			{
+				Id:          0,
+				Name:        "Single",
+				Description: "",
+				MaxGuest:    1,
+				Price:       100,
+				Quantity:    1,
+			},
+		},
+	}
+
+	suite.accountService.CreateAgencyAccount(ctx, suite.agency)
+
+	token, _ := suite.accountService.Login(ctx, "agency@agency.com", "P@ssword123")
+	s, _ := suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	suite.agencyService.AddHotel(ctx, hotel)
+	suite.agencyService.AddTrip(ctx, trip, roomTypePrices)
+
+	suite.accountService.CreateDiverAccount(ctx, suite.diver)
+	token, _ = suite.accountService.Login(ctx, "janedoe@example.com", "P@ssword123")
+	s, _ = suite.session.Get(token)
+	ctx = context.WithValue(ctx, session.User, s)
+
+	reservation := &pb.Reservation{
+		TripId:      1,
+		DiverId:     1,
+		Price:       500,
+		TotalDivers: 1,
+		Rooms: []*pb.Reservation_Room{
+			{
+				RoomTypeId: 1,
+				NoDivers:   1,
+				Quantity:   1,
+			},
+		},
+	}
+
+	suite.reservationService.CreateReservation(ctx, reservation)
+
+	payment := &model.Payment{
+		DiverID:       1,
+		ReservationID: 1,
+		File: &model.File{
+			Filename: "paymentSlip.jpg",
+			Buffer:   []byte{1, 2, 3},
+		},
+	}
+
+	//Act
+	err := suite.paymentService.MakePayment(ctx, payment)
+
+	//Assert
+	suite.Nil(err)
 
 }
