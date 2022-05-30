@@ -48,10 +48,12 @@ func (suite *AgencySuite) SetupTest() {
 	suite.media = &media.StoreMock{}
 	suite.agencyService = service.NewAgencyService(repository, suite.media)
 }
+
 func (suite *AgencySuite) TearDownTest() {
 	db, _ := suite.db.DB()
 	db.Close()
 }
+
 func TestAgencySuite(t *testing.T) {
 	suite.Run(t, new(AgencySuite))
 }
