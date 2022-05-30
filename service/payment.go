@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"context"
+	"fmt"
 
 	"github.com/afairon/nautilus/internal/media"
 	"github.com/afairon/nautilus/model"
@@ -77,6 +78,7 @@ func (service *paymentService) UpdatePaymentSlip(ctx context.Context, payment *m
 			return err
 		}
 
+		fmt.Println(objectID)
 		payment.PaymentSlip = append(payment.PaymentSlip, objectID)
 	}
 
